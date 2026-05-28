@@ -1,0 +1,13 @@
+{
+  "url": "s3://tl-data-training-pegasus-us-west-2/raw_media/private/tl_gemini_sports_soccer_h16/00276801_9min_01687_02244.mp4",
+  "pipelineId": "vllm-direct",
+  "priority": 5,
+  "params": {
+    "worker_type": "lia-test-27b",
+    "segment_definition": "Find every foul in the video. Debug v15.",
+    "max_tokens": 4096,
+    "temperature": 0.0,
+    "metadata_schema": "",
+    "chat_template_kwargs": {"enable_thinking": true, "supports_thinking": true}
+  }
+}

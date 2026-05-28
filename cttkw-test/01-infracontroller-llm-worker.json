@@ -1,0 +1,32 @@
+{
+  "name": "lia-test-27b",
+  "kind": "llm",
+  "nodePool": "b300-pegasus",
+  "image": "219219941196.dkr.ecr.us-west-2.amazonaws.com/pegasus-vllm-video:575a27f",
+  "modelUri": "hf://Qwen/Qwen3-VL-32B-Instruct",
+  "replicas": 1,
+  "gpu": 4,
+  "shmSize": "10Gi",
+  "port": 8000,
+  "command": ["sh","-c","exec python server.py --model \"$MODEL\" --tp \"$TP\" --dp \"$DP\" --gpu-mem \"$GPU_MEM\" --dtype \"$DTYPE\" --host 0.0.0.0 --port 8000 ${EXTRA_ARGS:-}"],
+  "env": {
+    "DP": "1",
+    "DTYPE": "bfloat16",
+    "EXTRA_ARGS": "--guided-decoding-backend guidance",
+    "GPU_MEM": "0.85",
+    "MODEL": "s3://tl-data-training-pegasus-us-west-2/checkpoints/dylan/soce_rl_0414_r0330_a05160_reward50_w553510/",
+    "TP": "2",
+    "VLLM_WORKER_MULTIPROC_METHOD": "spawn"
+  },
+  "readinessProbe": {
+    "path": "/v2/health/ready",
+    "port": 8000,
+    "scheme": "HTTP",
+    "initialDelaySeconds": 10,
+    "periodSeconds": 5,
+    "timeoutSeconds": 30,
+    "successThreshold": 1,
+    "failureThreshold": 12
+  },
+  "exposure": "internal"
+}

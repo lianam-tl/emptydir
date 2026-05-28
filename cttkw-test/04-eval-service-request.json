@@ -1,0 +1,20 @@
+{
+  "name": "lia-cttkw-smoke",
+  "experimentName": "lia-cttkw-smoke",
+  "batchNamePrefix": "lia-cttkw-smoke",
+  "dataset": "twelvelabs/sme_eval_v3.1_fast",
+  "maxSamples": 1,
+  "pipelineId": "vllm-direct",
+  "workerType": "vllm-video-v1",
+  "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/dylan/soce_rl_0414_r0330_a05160_reward50_w553510/",
+  "imageUrl": "476114115052.dkr.ecr.us-west-2.amazonaws.com/tl-data-training-pegasus-vllm-video:lia-vllm-chat-template-kwargs-c51c8df",
+  "imageDigest": "sha256:e45cf38508292e038c6c51f1704b3bf35364467a3cd6e7c5029814257e5f3fb6",
+  "nodePool": "b300-pegasus",
+  "minReplicas": 1,
+  "maxReplicas": 1,
+  "concurrency": 4,
+  "maxTokens": 16384,
+  "temperature": 0.0,
+  "chatTemplateKwargs": {"enable_thinking": true, "supports_thinking": true},
+  "pollTimeoutSeconds": 3600
+}
