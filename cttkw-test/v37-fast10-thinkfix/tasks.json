@@ -1,0 +1,72 @@
+[
+  {
+    "request_key": "CK7P5R5QDRIMKBET",
+    "sample_id": "d62536fc-d66c-47e6-aedb-388b154a1fa3_dup1",
+    "video": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/A0_OTHERS/MSDWILD_02909.mp4",
+    "segment_definition": "Identify all speech segments per speaker with consistent IDs, assigning them in the order they first appear (spk00, spk01, etc.). Keep non-adjacent turns separate even for the same speaker. For simultaneous speech, use a comma-separated speaker_id (e.g., spk00,spk01) in a single segment. Segments must not overlap in time.",
+    "metadata_schema": "{\"name\": \"speaker_segment\", \"strict\": true, \"schema\": {\"type\": \"object\", \"properties\": {\"start_time\": {\"type\": \"number\", \"description\": \"Start time of the segment in seconds.\"}, \"end_time\": {\"type\": \"number\", \"description\": \"End time of the segment in seconds.\"}, \"speaker_id\": {\"type\": \"string\", \"description\": \"Unique speaker labels assigned in the order of their first appearance (spk00, spk01, etc.). Use comma-separated values (e.g., spk00,spk01) for simultaneous speech.\"}}, \"required\": [\"start_time\", \"end_time\", \"speaker_id\"], \"additionalProperties\": false}}"
+  },
+  {
+    "request_key": "F6ZXFN6S72QE23B5",
+    "sample_id": "fa8a7cee-3000-4f3a-a015-2fbff0c33950",
+    "video": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/A0_OTHERS/MSDWILD_01278.mp4",
+    "segment_definition": "Identify all speech segments per speaker with consistent IDs, assigning them in the order they first appear (spk00, spk01, etc.). Keep non-adjacent turns separate even for the same speaker. For simultaneous speech, use a comma-separated speaker_id (e.g., spk00,spk01) in a single segment. Segments must not overlap in time.",
+    "metadata_schema": "{\"name\": \"speaker_segment\", \"strict\": true, \"schema\": {\"type\": \"object\", \"properties\": {\"start_time\": {\"type\": \"number\", \"description\": \"Start time of the segment in seconds.\"}, \"end_time\": {\"type\": \"number\", \"description\": \"End time of the segment in seconds.\"}, \"speaker_id\": {\"type\": \"string\", \"description\": \"Unique speaker labels assigned in the order of their first appearance (spk00, spk01, etc.). Use comma-separated values (e.g., spk00,spk01) for simultaneous speech.\"}}, \"required\": [\"start_time\", \"end_time\", \"speaker_id\"], \"additionalProperties\": false}}"
+  },
+  {
+    "request_key": "HWH2DJXGWIU2DT7F",
+    "sample_id": "b03e6650-743e-4050-affd-aeca4140f8ba",
+    "video": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/A0_OTHERS/MSDWILD_02527.mp4",
+    "segment_definition": "Identify all speech segments per speaker with consistent IDs, assigning them in the order they first appear (spk00, spk01, etc.). Keep non-adjacent turns separate even for the same speaker. For simultaneous speech, use a comma-separated speaker_id (e.g., spk00,spk01) in a single segment. Segments must not overlap in time.",
+    "metadata_schema": "{\"name\": \"speaker_segment\", \"strict\": true, \"schema\": {\"type\": \"object\", \"properties\": {\"start_time\": {\"type\": \"number\", \"description\": \"Start time of the segment in seconds.\"}, \"end_time\": {\"type\": \"number\", \"description\": \"End time of the segment in seconds.\"}, \"speaker_id\": {\"type\": \"string\", \"description\": \"Unique speaker labels assigned in the order of their first appearance (spk00, spk01, etc.). Use comma-separated values (e.g., spk00,spk01) for simultaneous speech.\"}}, \"required\": [\"start_time\", \"end_time\", \"speaker_id\"], \"additionalProperties\": false}}"
+  },
+  {
+    "request_key": "DOGGUVBHCTFCJA7I",
+    "sample_id": "b7385355-8821-4cf7-8953-2d8434209372",
+    "video": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/A0_OTHERS/MSDWILD_02791.mp4",
+    "segment_definition": "Identify all speech segments per speaker with consistent IDs, assigning them in the order they first appear (spk00, spk01, etc.). Keep non-adjacent turns separate even for the same speaker. For simultaneous speech, use a comma-separated speaker_id (e.g., spk00,spk01) in a single segment. Segments must not overlap in time.",
+    "metadata_schema": "{\"name\": \"speaker_segment\", \"strict\": true, \"schema\": {\"type\": \"object\", \"properties\": {\"start_time\": {\"type\": \"number\", \"description\": \"Start time of the segment in seconds.\"}, \"end_time\": {\"type\": \"number\", \"description\": \"End time of the segment in seconds.\"}, \"speaker_id\": {\"type\": \"string\", \"description\": \"Unique speaker labels assigned in the order of their first appearance (spk00, spk01, etc.). Use comma-separated values (e.g., spk00,spk01) for simultaneous speech.\"}}, \"required\": [\"start_time\", \"end_time\", \"speaker_id\"], \"additionalProperties\": false}}"
+  },
+  {
+    "request_key": "ETG3GQOKHE7PBNHL",
+    "sample_id": "6f377c71-1c1f-4ef7-b8c4-4477f041f5d1",
+    "video": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/A0_OTHERS/MSDWILD_01479.mp4",
+    "segment_definition": "Identify all speech segments per speaker with consistent IDs, assigning them in the order they first appear (spk00, spk01, etc.). Keep non-adjacent turns separate even for the same speaker. For simultaneous speech, use a comma-separated speaker_id (e.g., spk00,spk01) in a single segment. Segments must not overlap in time.",
+    "metadata_schema": "{\"name\": \"speaker_segment\", \"strict\": true, \"schema\": {\"type\": \"object\", \"properties\": {\"start_time\": {\"type\": \"number\", \"description\": \"Start time of the segment in seconds.\"}, \"end_time\": {\"type\": \"number\", \"description\": \"End time of the segment in seconds.\"}, \"speaker_id\": {\"type\": \"string\", \"description\": \"Unique speaker labels assigned in the order of their first appearance (spk00, spk01, etc.). Use comma-separated values (e.g., spk00,spk01) for simultaneous speech.\"}}, \"required\": [\"start_time\", \"end_time\", \"speaker_id\"], \"additionalProperties\": false}}"
+  },
+  {
+    "request_key": "F44MKATKPTQM4WUT",
+    "sample_id": "e27e77f4-f306-453b-a53f-87f088c65b14",
+    "video": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/A0_OTHERS/MSDWILD_03095.mp4",
+    "segment_definition": "Identify all speech segments per speaker with consistent IDs, assigning them in the order they first appear (spk00, spk01, etc.). Keep non-adjacent turns separate even for the same speaker. For simultaneous speech, use a comma-separated speaker_id (e.g., spk00,spk01) in a single segment. Segments must not overlap in time.",
+    "metadata_schema": "{\"name\": \"speaker_segment\", \"strict\": true, \"schema\": {\"type\": \"object\", \"properties\": {\"start_time\": {\"type\": \"number\", \"description\": \"Start time of the segment in seconds.\"}, \"end_time\": {\"type\": \"number\", \"description\": \"End time of the segment in seconds.\"}, \"speaker_id\": {\"type\": \"string\", \"description\": \"Unique speaker labels assigned in the order of their first appearance (spk00, spk01, etc.). Use comma-separated values (e.g., spk00,spk01) for simultaneous speech.\"}}, \"required\": [\"start_time\", \"end_time\", \"speaker_id\"], \"additionalProperties\": false}}"
+  },
+  {
+    "request_key": "CNVB4KT4HXFZET2Z",
+    "sample_id": "76f03372-56ff-4f2e-97cb-12e2d0f848f1",
+    "video": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/A0_OTHERS/MSDWILD_00751.mp4",
+    "segment_definition": "Identify all speech segments per speaker with consistent IDs, assigning them in the order they first appear (spk00, spk01, etc.). Keep non-adjacent turns separate even for the same speaker. For simultaneous speech, use a comma-separated speaker_id (e.g., spk00,spk01) in a single segment. Segments must not overlap in time.",
+    "metadata_schema": "{\"name\": \"speaker_segment\", \"strict\": true, \"schema\": {\"type\": \"object\", \"properties\": {\"start_time\": {\"type\": \"number\", \"description\": \"Start time of the segment in seconds.\"}, \"end_time\": {\"type\": \"number\", \"description\": \"End time of the segment in seconds.\"}, \"speaker_id\": {\"type\": \"string\", \"description\": \"Unique speaker labels assigned in the order of their first appearance (spk00, spk01, etc.). Use comma-separated values (e.g., spk00,spk01) for simultaneous speech.\"}}, \"required\": [\"start_time\", \"end_time\", \"speaker_id\"], \"additionalProperties\": false}}"
+  },
+  {
+    "request_key": "OHAVNWHKZYVEJVN6",
+    "sample_id": "5caf6570-68e2-44b7-ae6b-318b63a32811",
+    "video": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/A0_OTHERS/MSDWILD_00843.mp4",
+    "segment_definition": "Identify all speech segments per speaker with consistent IDs, assigning them in the order they first appear (spk00, spk01, etc.). Keep non-adjacent turns separate even for the same speaker. For simultaneous speech, use a comma-separated speaker_id (e.g., spk00,spk01) in a single segment. Segments must not overlap in time.",
+    "metadata_schema": "{\"name\": \"speaker_segment\", \"strict\": true, \"schema\": {\"type\": \"object\", \"properties\": {\"start_time\": {\"type\": \"number\", \"description\": \"Start time of the segment in seconds.\"}, \"end_time\": {\"type\": \"number\", \"description\": \"End time of the segment in seconds.\"}, \"speaker_id\": {\"type\": \"string\", \"description\": \"Unique speaker labels assigned in the order of their first appearance (spk00, spk01, etc.). Use comma-separated values (e.g., spk00,spk01) for simultaneous speech.\"}}, \"required\": [\"start_time\", \"end_time\", \"speaker_id\"], \"additionalProperties\": false}}"
+  },
+  {
+    "request_key": "E2TP5UQRQV4VQWSO",
+    "sample_id": "53b72e91-aa0e-4c0b-b1f7-c2a2e2d89b55",
+    "video": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/A0_OTHERS/MSDWILD_02613.mp4",
+    "segment_definition": "Identify all speech segments per speaker with consistent IDs, assigning them in the order they first appear (spk00, spk01, etc.). Keep non-adjacent turns separate even for the same speaker. For simultaneous speech, use a comma-separated speaker_id (e.g., spk00,spk01) in a single segment. Segments must not overlap in time.",
+    "metadata_schema": "{\"name\": \"speaker_segment\", \"strict\": true, \"schema\": {\"type\": \"object\", \"properties\": {\"start_time\": {\"type\": \"number\", \"description\": \"Start time of the segment in seconds.\"}, \"end_time\": {\"type\": \"number\", \"description\": \"End time of the segment in seconds.\"}, \"speaker_id\": {\"type\": \"string\", \"description\": \"Unique speaker labels assigned in the order of their first appearance (spk00, spk01, etc.). Use comma-separated values (e.g., spk00,spk01) for simultaneous speech.\"}}, \"required\": [\"start_time\", \"end_time\", \"speaker_id\"], \"additionalProperties\": false}}"
+  },
+  {
+    "request_key": "EJ5ORDTPROAKY55G",
+    "sample_id": "f45c5ede-b35d-4a16-953d-30a12348b83f",
+    "video": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/A0_OTHERS/MSDWILD_02403.mp4",
+    "segment_definition": "Identify all speech segments per speaker with consistent IDs, assigning them in the order they first appear (spk00, spk01, etc.). Keep non-adjacent turns separate even for the same speaker. For simultaneous speech, use a comma-separated speaker_id (e.g., spk00,spk01) in a single segment. Segments must not overlap in time.",
+    "metadata_schema": "{\"name\": \"speaker_segment\", \"strict\": true, \"schema\": {\"type\": \"object\", \"properties\": {\"start_time\": {\"type\": \"number\", \"description\": \"Start time of the segment in seconds.\"}, \"end_time\": {\"type\": \"number\", \"description\": \"End time of the segment in seconds.\"}, \"speaker_id\": {\"type\": \"string\", \"description\": \"Unique speaker labels assigned in the order of their first appearance (spk00, spk01, etc.). Use comma-separated values (e.g., spk00,spk01) for simultaneous speech.\"}}, \"required\": [\"start_time\", \"end_time\", \"speaker_id\"], \"additionalProperties\": false}}"
+  }
+]
