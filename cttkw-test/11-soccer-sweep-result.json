@@ -1,0 +1,50 @@
+{
+  "budget=None": {
+    "elapsed_sec": 162.1,
+    "finish_reason": "length",
+    "usage": {
+      "prompt_tokens": 27512,
+      "completion_tokens": 4096,
+      "total_tokens": 31608,
+      "x_tl_video_shape": [
+        557,
+        224,
+        448,
+        3
+      ]
+    },
+    "text": ""
+  },
+  "budget=10": {
+    "elapsed_sec": 37.3,
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 27512,
+      "completion_tokens": 428,
+      "total_tokens": 27940,
+      "x_tl_video_shape": [
+        557,
+        224,
+        448,
+        3
+      ]
+    },
+    "text": "\n\nThe video shows a soccer match between Liverpool and Manchester United. I need to find every instance of a foul.\n\n1.  **00:15 - 00:21**: A Liverpool player (Sadio Man\u00e9) is dribbling the ball. A Manchester United player (Ashley Young) slides in and tackles him from behind, causing Man\u00e9 to fall. The referee blows the whistle for a foul.\n2.  **01:21 - 01:32**: A Manchester United player (Paul Pogba) is dribbling the ball. A Liverpool player (Jordan Henderson) slides in and tackles him, causing Pogba to fall. The referee blows the whistle for a foul.\n3.  **01:40 - 01:49**: A replay of the previous foul is shown. Paul Pogba is tackled by Jordan Henderson.\n4.  **04:33 - 04:44**: A Manchester United player (Marcus Rashford) is dribbling the ball. A Liverpool player (Joe Gomez) slides in and tackles him, causing Rashford to fall. The referee blows the whistle for a foul.\n\nSo, there are three distinct fouls shown in the video, with one being replayed. I will list the timestamps for each unique foul event.\n\n-   **Foul 1**: 00:15 - 00:21\n-   **Foul 2**: 01:21 - 01:32\n-   **Foul 3**: 04:33 - 04:44\n\nI will format the output as requested.\n</think>\n\nThe following start and end timestamps mark a foul in the video:\n- **00:15 - 00:21**\n- **01:21 - 01:32**\n- **04:33 - 04:44**"
+  },
+  "budget=100": {
+    "elapsed_sec": 36.5,
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 27512,
+      "completion_tokens": 508,
+      "total_tokens": 28020,
+      "x_tl_video_shape": [
+        557,
+        224,
+        448,
+        3
+      ]
+    },
+    "text": "\n\n1.  **00:15 - 00:21**: A foul occurs when a Manchester United player slides in and trips a Liverpool player who is dribbling down the right side of the field.\n2.  **01:21 - 01:32**: A foul is committed when a Manchester United player slides in from behind and trips a Liverpool player in the midfield.\n3.  **01:40 - 01:49**: A foul happens when a Manchester United player slides in and trips a Liverpool player near the sideline.\n4.  **05:25 - 05:32**: A foul occurs when a Manchester United player slides in and trips a Liverpool player inside the penalty area, leading to a penalty decision.\n5.  **07:15 - 07:21**: A foul is committed when a Manchester United player slides in and trips a Liverpool player near the sideline.\n6.  **07:41 - 07:49**: A foul occurs when a Manchester United player slides in and trips a Liverpool player near the sideline.\n7.  **09:06 - 09:12**: A foul happens when a Manchester United player slides in and trips a Liverpool player near the sideline.\n</think>\n\nThe following start and end timestamps mark a foul in the video:\n- **00:15 - 00:21**\n- **01:21 - 01:32**\n- **01:40 - 01:49**\n- **05:25 - 05:32**\n- **07:15 - 07:21**\n- **07:41 - 07:49**\n- **09:06 - 09:12**"
+  }
+}
