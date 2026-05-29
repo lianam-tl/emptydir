@@ -2,7 +2,7 @@
   "name": "lia-test-27b",
   "kind": "llm",
   "nodePool": "b300-pegasus",
-  "image": "476114115052.dkr.ecr.us-west-2.amazonaws.com/tl-data-training-pegasus-vllm-video:lia-vllm-chat-template-kwargs-a39bd70",
+  "image": "476114115052.dkr.ecr.us-west-2.amazonaws.com/tl-data-training-pegasus-vllm-video:lia-vllm-chat-template-kwargs-868f031",
   "modelUri": "hf://Qwen/Qwen3-VL-32B-Instruct",
   "replicas": 1,
   "gpu": 4,

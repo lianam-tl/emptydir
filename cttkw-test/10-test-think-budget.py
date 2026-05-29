@@ -33,6 +33,24 @@ import requests
 
 PROMPT_TEXT = "Find every foul in the video."
 BUDGETS: list[int | None] = [None, 10, 100]
+FOUL_SCHEMA: dict[str, Any] = {
+    "type": "object",
+    "properties": {
+        "fouls": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "start": {"type": "string"},
+                    "end": {"type": "string"},
+                    "description": {"type": "string"},
+                },
+                "required": ["start", "end", "description"],
+            },
+        }
+    },
+    "required": ["fouls"],
+}
 
 
 def load_or_synth_video(video_npy: str | None, synthetic_shape: str | None) -> np.ndarray:
@@ -54,6 +72,7 @@ def build_body(
     start: float,
     end: float,
     thinking_token_budget: int | None,
+    use_schema: bool = False,
 ) -> dict[str, Any]:
     body: dict[str, Any] = {
         "model": "vllm-video",
@@ -81,6 +100,11 @@ def build_body(
     }
     if thinking_token_budget is not None:
         body["thinking_token_budget"] = thinking_token_budget
+    if use_schema:
+        body["response_format"] = {
+            "type": "json_schema",
+            "json_schema": {"name": "fouls", "schema": FOUL_SCHEMA},
+        }
     return body
 
 
@@ -130,6 +154,7 @@ def main() -> None:
     p.add_argument("--start", type=float, default=0.0)
     p.add_argument("--end", type=float, default=4.0)
     p.add_argument("--out", default=None, help="optional path to dump full JSON results")
+    p.add_argument("--schema", action="store_true", help="attach response_format json_schema (FOUL_SCHEMA)")
     args = p.parse_args()
 
     arr = load_or_synth_video(args.video_npy, args.synthetic_shape)
@@ -139,7 +164,7 @@ def main() -> None:
     for budget in BUDGETS:
         label = f"budget={budget}" if budget is not None else "budget=None"
         print(f"\n=== {label} ===")
-        body = build_body(arr, args.video_fps, args.start, args.end, budget)
+        body = build_body(arr, args.video_fps, args.start, args.end, budget, use_schema=args.schema)
         result = run(args.host, body)
         usage = result["usage"] or {}
         text = result["text"]

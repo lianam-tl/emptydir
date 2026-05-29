@@ -1,0 +1,50 @@
+{
+  "budget=None": {
+    "elapsed_sec": 67.5,
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 27731,
+      "completion_tokens": 1378,
+      "total_tokens": 29109,
+      "x_tl_video_shape": [
+        557,
+        224,
+        448,
+        3
+      ]
+    },
+    "text": "{\n  \"fouls\": [\n    {\n      \"start\": \"00:16\",\n      \"end\": \"00:21\",\n      \"description\": \"Ashley Young commits a foul on Sadio Man\u00e9 by sliding in and taking him down.\"\n    },\n    {\n      \"start\": \"01:28\",\n      \"end\": \"01:32\",\n      \"description\": \"Fred commits a foul on Jordan Henderson with a sliding tackle.\"\n    },\n    {\n      \"start\": \"05:25\",\n      \"end\": \"05:30\",\n      \"description\": \"Chris Smalling commits a foul on Sadio Man\u00e9 inside the penalty area, resulting in a penalty kick.\"\n    }\n  ]\n}"
+  },
+  "budget=10": {
+    "elapsed_sec": 31.5,
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 27731,
+      "completion_tokens": 284,
+      "total_tokens": 28015,
+      "x_tl_video_shape": [
+        557,
+        224,
+        448,
+        3
+      ]
+    },
+    "text": "{\n  \"fouls\": [\n    {\n      \"start\": \"16.0\",\n      \"end\": \"21.0\",\n      \"description\": \"A Manchester United player, number 27, commits a foul by tripping a Liverpool player, number 8, who falls to the ground.\"\n    },\n    {\n      \"start\": \"81.0\",\n      \"end\": \"92.0\",\n      \"description\": \"A Manchester United player, number 23, commits a foul by tripping a Liverpool player, number 10, who falls to the ground.\"\n    },\n    {\n      \"start\": \"100.0\",\n      \"end\": \"106.0\",\n      \"description\": \"A replay shows a Manchester United player, number 23, committing a foul by tripping a Liverpool player, number 10.\"\n    },\n    {\n      \"start\": \"106.0\",\n      \"end\": \"110.0\",\n      \"description\": \"A wide shot shows a Manchester United player, number 23, committing a foul by tripping a Liverpool player, number 10.\"\n    }\n  ]\n}"
+  },
+  "budget=100": {
+    "elapsed_sec": 32.1,
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 27731,
+      "completion_tokens": 328,
+      "total_tokens": 28059,
+      "x_tl_video_shape": [
+        557,
+        224,
+        448,
+        3
+      ]
+    },
+    "text": "{\n    \"fouls\": [\n        {\n            \"start\": \"00:16\",\n            \"end\": \"00:21\",\n            \"description\": \"A Manchester United player tackles a Liverpool player from behind, causing him to fall.\"\n        },\n        {\n            \"start\": \"01:21\",\n            \"end\": \"01:32\",\n            \"description\": \"A Manchester United player slides in and trips a Liverpool player, leading to a free kick.\"\n        },\n        {\n            \"start\": \"01:40\",\n            \"end\": \"01:49\",\n            \"description\": \"A replay shows a Manchester United player tripping a Liverpool player near the sideline.\"\n        },\n        {\n            \"start\": \"07:15\",\n            \"end\": \"07:22\",\n            \"description\": \"A Manchester United player commits a foul on a Liverpool player, resulting in a free kick.\"\n        }\n    ]\n}"
+  }
+}
