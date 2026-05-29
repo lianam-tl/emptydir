@@ -1,0 +1,82 @@
+[
+  {
+    "sample": "H8_NEWS::1ca50022-0ebb-492a-8",
+    "cond": "think_off_asr_off",
+    "jobId": "da060573-3524-4808-ac4d-8b1cf483a208"
+  },
+  {
+    "sample": "H8_NEWS::1ca50022-0ebb-492a-8",
+    "cond": "think_off_asr_on",
+    "jobId": "a4e93f6d-8d87-40eb-bd32-81ac0ac64b48"
+  },
+  {
+    "sample": "H8_NEWS::1ca50022-0ebb-492a-8",
+    "cond": "think_on_asr_off",
+    "jobId": "2e0de03d-10c6-46ff-bc66-3b92a5e4eaab"
+  },
+  {
+    "sample": "H8_NEWS::1ca50022-0ebb-492a-8",
+    "cond": "think_on_asr_on",
+    "jobId": "6ecd3753-64bd-45bf-8bc8-e2d3a3333ec4"
+  },
+  {
+    "sample": "H16_SOCCER::1193d4fd46d0963a1923",
+    "cond": "think_off_asr_off",
+    "jobId": "9d109e63-4ff8-46a6-babe-cb4d57382260"
+  },
+  {
+    "sample": "H16_SOCCER::1193d4fd46d0963a1923",
+    "cond": "think_off_asr_on",
+    "jobId": "c6621fdd-2b38-41c0-bf52-1a5b38fd0526"
+  },
+  {
+    "sample": "H16_SOCCER::1193d4fd46d0963a1923",
+    "cond": "think_on_asr_off",
+    "jobId": "0b92570d-a45f-4e2c-a7be-e790f4a55953"
+  },
+  {
+    "sample": "H16_SOCCER::1193d4fd46d0963a1923",
+    "cond": "think_on_asr_on",
+    "jobId": "caaf53ce-9808-4e07-9ff4-b8cb58496ef2"
+  },
+  {
+    "sample": "H16_BASKETBALL_r2::eef3e281acc36c33b622",
+    "cond": "think_off_asr_off",
+    "jobId": "b84365fc-52ce-4dcc-9371-dd44cf2c8246"
+  },
+  {
+    "sample": "H16_BASKETBALL_r2::eef3e281acc36c33b622",
+    "cond": "think_off_asr_on",
+    "jobId": "29e28946-d988-43d9-952c-49b507b2c996"
+  },
+  {
+    "sample": "H16_BASKETBALL_r2::eef3e281acc36c33b622",
+    "cond": "think_on_asr_off",
+    "jobId": "993e8d93-524b-47b7-af3b-835ab1517f4d"
+  },
+  {
+    "sample": "H16_BASKETBALL_r2::eef3e281acc36c33b622",
+    "cond": "think_on_asr_on",
+    "jobId": "d1d6b160-c252-449a-8a48-a502d8dd7b38"
+  },
+  {
+    "sample": "A6_MOVIE::93e82995-849c-4e72-a",
+    "cond": "think_off_asr_off",
+    "jobId": "42748a6d-637e-4828-af5f-0c4de6c0c80c"
+  },
+  {
+    "sample": "A6_MOVIE::93e82995-849c-4e72-a",
+    "cond": "think_off_asr_on",
+    "jobId": "b841a0db-aa75-4a0c-b9f4-4846f89d4b41"
+  },
+  {
+    "sample": "A6_MOVIE::93e82995-849c-4e72-a",
+    "cond": "think_on_asr_off",
+    "jobId": "61f6ea2c-480d-4756-bf50-b13a5790bdd6"
+  },
+  {
+    "sample": "A6_MOVIE::93e82995-849c-4e72-a",
+    "cond": "think_on_asr_on",
+    "jobId": "927af6cc-4213-44f5-9adf-50727f9995e8"
+  }
+]
