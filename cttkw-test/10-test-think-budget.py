@@ -117,6 +117,7 @@ def run(host: str, body: dict[str, Any]) -> dict[str, Any]:
     text_parts: list[str] = []
     last_usage: dict[str, Any] | None = None
     finish_reason: str | None = None
+    think_blocks: list[str] = []
     for raw in resp.iter_lines():
         if not raw.startswith(b"data: "):
             continue
@@ -132,12 +133,16 @@ def run(host: str, body: dict[str, Any]) -> dict[str, Any]:
             finish_reason = choice["finish_reason"]
         if chunk.get("usage"):
             last_usage = chunk["usage"]
+        raw_tb = chunk.get("x_tl_think_blocks")
+        if isinstance(raw_tb, list) and raw_tb:
+            think_blocks = [str(item) for item in raw_tb]
     text = "".join(text_parts)
     return {
         "elapsed_sec": round(time.time() - t0, 1),
         "finish_reason": finish_reason,
         "usage": last_usage,
         "text": text,
+        "think_blocks": think_blocks,
     }
 
 
@@ -180,6 +185,9 @@ def main() -> None:
             f"</think>_present={close_idx >= 0} "
             f"</think>_char_idx={close_idx}"
         )
+        tb = result.get("think_blocks") or []
+        tb_chars = sum(len(b) for b in tb)
+        print(f"  think_blocks: {len(tb)} item(s), {tb_chars} total chars")
         print(f"  text_head: {text[:200]!r}")
         results[label] = result
 
