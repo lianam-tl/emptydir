@@ -1,0 +1,158 @@
+{
+  "by_segment_id": {
+    "A0_OTHERS": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.5435571847961523,
+          "f1_temporal": 0.9679136751633317,
+          "unified_score": 0.5435571847961523,
+          "segment_details": {
+            "precision": 0.6726492253563631,
+            "recall": 0.4677419522817618,
+            "f1": 0.5435571847961523,
+            "matched_iou_sum": 5.094011319114106
+          },
+          "temporal_details": {
+            "precision": 0.9405841155945682,
+            "recall": 0.997953583081301,
+            "f1": 0.9679136751633317,
+            "tp_duration": 22.838355999999997
+          }
+        },
+        "greedy_results": {
+          "precision": 0.7623376623376623,
+          "recall": 0.5178932178932178,
+          "f1_score": 0.60805356288857,
+          "mean_iou": 0.8043213647602148,
+          "num_matches": 6.0
+        },
+        "hungarian_results": {
+          "precision": 0.7623376623376623,
+          "recall": 0.5178932178932178,
+          "f1_score": 0.60805356288857,
+          "mean_iou": 0.8043213647602148,
+          "num_matches": 6.0
+        },
+        "one_to_many_metrics": {
+          "precision": 0.8532467532467531,
+          "recall": 0.5321789321789322,
+          "f1_score": 0.6445584172575021,
+          "mean_iou": 0.8101316029295615,
+          "num_matches": 6.2
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.7437575846343627,
+          "segment_coverage": 0.5178932178932178
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.8097462407355603,
+          "segment_coverage": 0.5321789321789321
+        }
+      },
+      "num_samples": 5
+    }
+  },
+  "macro_averaged": {
+    "one_to_many_metrics.precision": 0.8532467532467531,
+    "one_to_many_metrics.recall": 0.5321789321789322,
+    "one_to_many_metrics.f1_score": 0.6445584172575021,
+    "one_to_many_metrics.mean_iou": 0.8101316029295615,
+    "one_to_many_metrics.num_matches": 6.2,
+    "hungarian_results.precision": 0.7623376623376623,
+    "hungarian_results.recall": 0.5178932178932178,
+    "hungarian_results.f1_score": 0.60805356288857,
+    "hungarian_results.mean_iou": 0.8043213647602148,
+    "hungarian_results.num_matches": 6.0,
+    "greedy_results.precision": 0.7623376623376623,
+    "greedy_results.recall": 0.5178932178932178,
+    "greedy_results.f1_score": 0.60805356288857,
+    "greedy_results.mean_iou": 0.8043213647602148,
+    "greedy_results.num_matches": 6.0,
+    "coverage_metrics.temporal_coverage": 0.7437575846343627,
+    "coverage_metrics.segment_coverage": 0.5178932178932178,
+    "coverage_one_to_many_metrics.temporal_coverage": 0.8097462407355603,
+    "coverage_one_to_many_metrics.segment_coverage": 0.5321789321789321,
+    "f1_results.f1_segment": 0.5435571847961523,
+    "f1_results.f1_temporal": 0.9679136751633317,
+    "f1_results.unified_score": 0.5435571847961523
+  },
+  "global_averaged": {
+    "f1_results": {
+      "f1_segment": 0.5435571847961523,
+      "f1_temporal": 0.9679136751633317,
+      "unified_score": 0.5435571847961523,
+      "segment_details": {
+        "precision": 0.6726492253563631,
+        "recall": 0.4677419522817618,
+        "f1": 0.5435571847961523,
+        "matched_iou_sum": 5.094011319114106
+      },
+      "temporal_details": {
+        "precision": 0.9405841155945682,
+        "recall": 0.997953583081301,
+        "f1": 0.9679136751633317,
+        "tp_duration": 22.838355999999997
+      }
+    },
+    "greedy_results": {
+      "precision": 0.7623376623376623,
+      "recall": 0.5178932178932178,
+      "f1_score": 0.60805356288857,
+      "mean_iou": 0.8043213647602148,
+      "num_matches": 6.0
+    },
+    "hungarian_results": {
+      "precision": 0.7623376623376623,
+      "recall": 0.5178932178932178,
+      "f1_score": 0.60805356288857,
+      "mean_iou": 0.8043213647602148,
+      "num_matches": 6.0
+    },
+    "one_to_many_metrics": {
+      "precision": 0.8532467532467531,
+      "recall": 0.5321789321789322,
+      "f1_score": 0.6445584172575021,
+      "mean_iou": 0.8101316029295615,
+      "num_matches": 6.2
+    },
+    "coverage_metrics": {
+      "temporal_coverage": 0.7437575846343627,
+      "segment_coverage": 0.5178932178932178
+    },
+    "coverage_one_to_many_metrics": {
+      "temporal_coverage": 0.8097462407355603,
+      "segment_coverage": 0.5321789321789321
+    }
+  },
+  "summary": {
+    "total_samples": 5,
+    "valid_samples": 5,
+    "failed_samples": 0,
+    "segment_types": [
+      "A0_OTHERS"
+    ],
+    "samples_per_segment": {
+      "A0_OTHERS": 5
+    }
+  },
+  "segment_scores": {
+    "segment_score": 0.5435571847961523,
+    "subset_score": null,
+    "segment_score_f1_segment": 0.5435571847961523,
+    "subset_score_f1_segment": null,
+    "segment_score_f1_temporal": 0.9679136751633317,
+    "subset_score_f1_temporal": null,
+    "segment_score_unified": 0.5435571847961523,
+    "subset_score_unified": null,
+    "num_segments_f1": 1,
+    "num_subset_segments_f1": 0,
+    "segment_score_o2o": 0.6308254012637903,
+    "segment_score_o2m": 0.6709625864572462,
+    "subset_score_o2o": null,
+    "subset_score_o2m": null,
+    "num_segments_o2o": 1,
+    "num_segments_o2m": 1,
+    "num_subset_segments_o2o": 0,
+    "num_subset_segments_o2m": 0
+  }
+}

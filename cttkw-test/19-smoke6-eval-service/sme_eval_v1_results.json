@@ -1,0 +1,2646 @@
+{
+  "by_segment_id": {
+    "A0_OTHERS": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.5435571847961523,
+          "f1_temporal": 0.9679136751633317,
+          "unified_score": 0.5435571847961523,
+          "segment_details": {
+            "precision": 0.6726492253563631,
+            "recall": 0.4677419522817618,
+            "f1": 0.5435571847961523,
+            "matched_iou_sum": 5.094011319114106
+          },
+          "temporal_details": {
+            "precision": 0.9405841155945682,
+            "recall": 0.997953583081301,
+            "f1": 0.9679136751633317,
+            "tp_duration": 22.838355999999997
+          }
+        },
+        "greedy_results": {
+          "precision": 0.7623376623376623,
+          "recall": 0.5178932178932178,
+          "f1_score": 0.60805356288857,
+          "mean_iou": 0.8043213647602148,
+          "num_matches": 6.0
+        },
+        "hungarian_results": {
+          "precision": 0.7623376623376623,
+          "recall": 0.5178932178932178,
+          "f1_score": 0.60805356288857,
+          "mean_iou": 0.8043213647602148,
+          "num_matches": 6.0
+        },
+        "one_to_many_metrics": {
+          "precision": 0.8532467532467531,
+          "recall": 0.5321789321789322,
+          "f1_score": 0.6445584172575021,
+          "mean_iou": 0.8101316029295615,
+          "num_matches": 6.2
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.7437575846343627,
+          "segment_coverage": 0.5178932178932178
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.8097462407355603,
+          "segment_coverage": 0.5321789321789321
+        }
+      },
+      "num_samples": 5,
+      "sample_results": [
+        {
+          "greedy_results": {
+            "matches": [
+              {
+                "gt_index": 0,
+                "pred_index": [
+                  0
+                ],
+                "iou": 0.9634146341463415,
+                "gt_segment": [
+                  0.0,
+                  3.16
+                ],
+                "pred_segment": [
+                  [
+                    0.0,
+                    3.28
+                  ]
+                ]
+              },
+              {
+                "gt_index": 10,
+                "pred_index": [
+                  5
+                ],
+                "iou": 0.9498680738786286,
+                "gt_segment": [
+                  20.04,
+                  23.76
+                ],
+                "pred_segment": [
+                  [
+                    20.16,
+                    23.83
+                  ]
+                ]
+              },
+              {
+                "gt_index": 6,
+                "pred_index": [
+                  3
+                ],
+                "iou": 0.816326530612246,
+                "gt_segment": [
+                  11.32,
+                  12.96
+                ],
+                "pred_segment": [
+                  [
+                    11.36,
+                    13.28
+                  ]
+                ]
+              },
+              {
+                "gt_index": 3,
+                "pred_index": [
+                  2
+                ],
+                "iou": 0.7848101265822786,
+                "gt_segment": [
+                  5.04,
+                  10.08
+                ],
+                "pred_segment": [
+                  [
+                    5.12,
+                    11.36
+                  ]
+                ]
+              },
+              {
+                "gt_index": 1,
+                "pred_index": [
+                  1
+                ],
+                "iou": 0.5208333333333336,
+                "gt_segment": [
+                  3.2,
+                  4.28
+                ],
+                "pred_segment": [
+                  [
+                    3.28,
+                    5.12
+                  ]
+                ]
+              }
+            ],
+            "num_matches": 5,
+            "precision": 0.8333333333333334,
+            "recall": 0.45454545454545453,
+            "f1_score": 0.5882352941176471,
+            "mean_iou": 0.8070505397105657,
+            "unmatched_gt_indices": [
+              2,
+              4,
+              5,
+              7,
+              8,
+              9
+            ],
+            "unmatched_pred_indices": [
+              4
+            ]
+          },
+          "hungarian_results": {
+            "matches": [
+              {
+                "gt_index": 0,
+                "pred_index": [
+                  0
+                ],
+                "iou": 0.9634146341463415,
+                "gt_segment": [
+                  0.0,
+                  3.16
+                ],
+                "pred_segment": [
+                  [
+                    0.0,
+                    3.28
+                  ]
+                ]
+              },
+              {
+                "gt_index": 1,
+                "pred_index": [
+                  1
+                ],
+                "iou": 0.5208333333333336,
+                "gt_segment": [
+                  3.2,
+                  4.28
+                ],
+                "pred_segment": [
+                  [
+                    3.28,
+                    5.12
+                  ]
+                ]
+              },
+              {
+                "gt_index": 3,
+                "pred_index": [
+                  2
+                ],
+                "iou": 0.7848101265822786,
+                "gt_segment": [
+                  5.04,
+                  10.08
+                ],
+                "pred_segment": [
+                  [
+                    5.12,
+                    11.36
+                  ]
+                ]
+              },
+              {
+                "gt_index": 6,
+                "pred_index": [
+                  3
+                ],
+                "iou": 0.816326530612246,
+                "gt_segment": [
+                  11.32,
+                  12.96
+                ],
+                "pred_segment": [
+                  [
+                    11.36,
+                    13.28
+                  ]
+                ]
+              },
+              {
+                "gt_index": 10,
+                "pred_index": [
+                  5
+                ],
+                "iou": 0.9498680738786286,
+                "gt_segment": [
+                  20.04,
+                  23.76
+                ],
+                "pred_segment": [
+                  [
+                    20.16,
+                    23.83
+                  ]
+                ]
+              }
+            ],
+            "num_matches": 5,
+            "precision": 0.8333333333333334,
+            "recall": 0.45454545454545453,
+            "f1_score": 0.5882352941176471,
+            "mean_iou": 0.8070505397105657,
+            "unmatched_gt_indices": [
+              2,
+              4,
+              5,
+              7,
+              8,
+              9
+            ],
+            "unmatched_pred_indices": [
+              4
+            ]
+          },
+          "one_to_many_results": {
+            "matches": [
+              {
+                "gt_index": 0,
+                "pred_index": [
+                  0
+                ],
+                "iou": 0.9634146341463417,
+                "gt_segment": [
+                  0.0,
+                  3.16
+                ],
+                "pred_segment": [
+                  [
+                    0.0,
+                    3.28
+                  ]
+                ]
+              },
+              {
+                "gt_index": 1,
+                "pred_index": [
+                  1
+                ],
+                "iou": 0.5208333333333336,
+                "gt_segment": [
+                  3.2,
+                  4.28
+                ],
+                "pred_segment": [
+                  [
+                    3.28,
+                    5.12
+                  ]
+                ]
+              },
+              {
+                "gt_index": 3,
+                "pred_index": [
+                  2
+                ],
+                "iou": 0.7848101265822786,
+                "gt_segment": [
+                  5.04,
+                  10.08
+                ],
+                "pred_segment": [
+                  [
+                    5.12,
+                    11.36
+                  ]
+                ]
+              },
+              {
+                "gt_index": 6,
+                "pred_index": [
+                  3
+                ],
+                "iou": 0.816326530612246,
+                "gt_segment": [
+                  11.32,
+                  12.96
+                ],
+                "pred_segment": [
+                  [
+                    11.36,
+                    13.28
+                  ]
+                ]
+              },
+              {
+                "gt_index": 10,
+                "pred_index": [
+                  5
+                ],
+                "iou": 0.9498680738786286,
+                "gt_segment": [
+                  20.04,
+                  23.76
+                ],
+                "pred_segment": [
+                  [
+                    20.16,
+                    23.83
+                  ]
+                ]
+              }
+            ],
+            "num_matches": 5,
+            "precision": 0.8333333333333334,
+            "recall": 0.4545454545454546,
+            "f1_score": 0.5882352941176471,
+            "mean_iou": 0.8070505397105657,
+            "unmatched_gt_indices": [
+              2,
+              4,
+              5,
+              7,
+              8,
+              9
+            ],
+            "unmatched_pred_indices": [
+              4
+            ]
+          },
+          "coverage_metrics": {
+            "temporal_coverage": 0.7321063394683026,
+            "segment_coverage": 0.45454545454545453,
+            "covered_duration": 14.320000000000004,
+            "total_gt_duration": 19.560000000000006
+          },
+          "coverage_metrics_one_to_many": {
+            "temporal_coverage": 0.7321063394683026,
+            "segment_coverage": 0.45454545454545453,
+            "covered_duration": 14.320000000000004,
+            "total_gt_duration": 19.560000000000006
+          },
+          "f1_results": {
+            "f1_segment": 0.5233289619780821,
+            "f1_temporal": 0.9653453004238346,
+            "unified_score": 0.5233289619780821,
+            "segment_details": {
+              "precision": 0.7413826961356164,
+              "recall": 0.404390561528518,
+              "f1": 0.5233289619780821,
+              "matched_iou_sum": 4.448296176813698
+            },
+            "temporal_details": {
+              "precision": 0.9420924574209248,
+              "recall": 0.9897750511247443,
+              "f1": 0.9653453004238346,
+              "tp_duration": 19.360000000000003
+            }
+          },
+          "sample_id": "d62536fc-d66c-47e6-aedb-388b154a1fa3_dup1",
+          "gt_segments": [
+            [
+              0.0,
+              3.16
+            ],
+            [
+              3.2,
+              4.28
+            ],
+            [
+              4.32,
+              5.0
+            ],
+            [
+              5.04,
+              10.08
+            ],
+            [
+              10.12,
+              10.92
+            ],
+            [
+              10.96,
+              11.28
+            ],
+            [
+              11.32,
+              12.96
+            ],
+            [
+              13.76,
+              15.08
+            ],
+            [
+              15.12,
+              15.32
+            ],
+            [
+              15.36,
+              16.96
+            ],
+            [
+              20.04,
+              23.76
+            ]
+          ],
+          "pred_segments": [
+            [
+              0.0,
+              3.28
+            ],
+            [
+              3.28,
+              5.12
+            ],
+            [
+              5.12,
+              11.36
+            ],
+            [
+              11.36,
+              13.28
+            ],
+            [
+              13.28,
+              16.88
+            ],
+            [
+              20.16,
+              23.83
+            ]
+          ],
+          "case_type": "normal"
+        },
+        {
+          "greedy_results": {
+            "matches": [
+              {
+                "gt_index": 1,
+                "pred_index": [
+                  1
+                ],
+                "iou": 0.9760000000000002,
+                "gt_segment": [
+                  0.16,
+                  19.76
+                ],
+                "pred_segment": [
+                  [
+                    0.24,
+                    20.16
+                  ]
+                ]
+              },
+              {
+                "gt_index": 2,
+                "pred_index": [
+                  2
+                ],
+                "iou": 0.7887323943661945,
+                "gt_segment": [
+                  20.08,
+                  20.72
+                ],
+                "pred_segment": [
+                  [
+                    20.16,
+                    20.79
+                  ]
+                ]
+              }
+            ],
+            "num_matches": 2,
+            "precision": 0.6666666666666666,
+            "recall": 0.6666666666666666,
+            "f1_score": 0.6666666666666666,
+            "mean_iou": 0.8823661971830974,
+            "unmatched_gt_indices": [
+              0
+            ],
+            "unmatched_pred_indices": [
+              0
+            ]
+          },
+          "hungarian_results": {
+            "matches": [
+              {
+                "gt_index": 1,
+                "pred_index": [
+                  1
+                ],
+                "iou": 0.9760000000000002,
+                "gt_segment": [
+                  0.16,
+                  19.76
+                ],
+                "pred_segment": [
+                  [
+                    0.24,
+                    20.16
+                  ]
+                ]
+              },
+              {
+                "gt_index": 2,
+                "pred_index": [
+                  2
+                ],
+                "iou": 0.7887323943661945,
+                "gt_segment": [
+                  20.08,
+                  20.72
+                ],
+                "pred_segment": [
+                  [
+                    20.16,
+                    20.79
+                  ]
+                ]
+              }
+            ],
+            "num_matches": 2,
+            "precision": 0.6666666666666666,
+            "recall": 0.6666666666666666,
+            "f1_score": 0.6666666666666666,
+            "mean_iou": 0.8823661971830974,
+            "unmatched_gt_indices": [
+              0
+            ],
+            "unmatched_pred_indices": [
+              0
+            ]
+          },
+          "one_to_many_results": {
+            "matches": [
+              {
+                "gt_index": 1,
+                "pred_index": [
+                  1
+                ],
+                "iou": 0.9760000000000002,
+                "gt_segment": [
+                  0.16,
+                  19.76
+                ],
+                "pred_segment": [
+                  [
+                    0.24,
+                    20.16
+                  ]
+                ]
+              },
+              {
+                "gt_index": 2,
+                "pred_index": [
+                  2
+                ],
+                "iou": 0.7887323943661945,
+                "gt_segment": [
+                  20.08,
+                  20.72
+                ],
+                "pred_segment": [
+                  [
+                    20.16,
+                    20.79
+                  ]
+                ]
+              }
+            ],
+            "num_matches": 2,
+            "precision": 0.6666666666666667,
+            "recall": 0.6666666666666667,
+            "f1_score": 0.6666666666666667,
+            "mean_iou": 0.8823661971830974,
+            "unmatched_gt_indices": [
+              0
+            ],
+            "unmatched_pred_indices": [
+              0
+            ]
+          },
+          "coverage_metrics": {
+            "temporal_coverage": 0.9881889763779529,
+            "segment_coverage": 0.6666666666666666,
+            "covered_duration": 20.080000000000002,
+            "total_gt_duration": 20.32
+          },
+          "coverage_metrics_one_to_many": {
+            "temporal_coverage": 0.9881889763779529,
+            "segment_coverage": 0.6666666666666666,
+            "covered_duration": 20.080000000000002,
+            "total_gt_duration": 20.32
+          },
+          "f1_results": {
+            "f1_segment": 0.6993552425665093,
+            "f1_temporal": 0.9885672585745561,
+            "unified_score": 0.6993552425665093,
+            "segment_details": {
+              "precision": 0.6993552425665093,
+              "recall": 0.6993552425665093,
+              "f1": 0.6993552425665093,
+              "matched_iou_sum": 2.098065727699528
+            },
+            "temporal_details": {
+              "precision": 0.9773929773929775,
+              "recall": 1.0,
+              "f1": 0.9885672585745561,
+              "tp_duration": 20.32
+            }
+          },
+          "sample_id": "fa8a7cee-3000-4f3a-a015-2fbff0c33950",
+          "gt_segments": [
+            [
+              0.0,
+              0.08
+            ],
+            [
+              0.16,
+              19.76
+            ],
+            [
+              20.08,
+              20.72
+            ]
+          ],
+          "pred_segments": [
+            [
+              0.0,
+              0.24
+            ],
+            [
+              0.24,
+              20.16
+            ],
+            [
+              20.16,
+              20.79
+            ]
+          ],
+          "case_type": "normal"
+        },
+        {
+          "greedy_results": {
+            "matches": [
+              {
+                "gt_index": 13,
+                "pred_index": [
+                  10
+                ],
+                "iou": 0.9827566137566143,
+                "gt_segment": [
+                  24.8248,
+                  30.39703
+                ],
+                "pred_segment": [
+                  [
+                    24.8,
+                    30.47
+                  ]
+                ]
+              },
+              {
+                "gt_index": 5,
+                "pred_index": [
+                  7
+                ],
+                "iou": 0.9060388489241713,
+                "gt_segment": [
+                  12.37903,
+                  16.34967
+                ],
+                "pred_segment": [
+                  [
+                    12.0,
+                    16.32
+                  ]
+                ]
+              },
+              {
+                "gt_index": 1,
+                "pred_index": [
+                  5
+                ],
+                "iou": 0.8341749999999984,
+                "gt_segment": [
+                  10.17683,
+                  10.5105
+                ],
+                "pred_segment": [
+                  [
+                    10.16,
+                    10.56
+                  ]
+                ]
+              },
+              {
+                "gt_index": 3,
+                "pred_index": [
+                  6
+                ],
+                "iou": 0.6433615866753735,
+                "gt_segment": [
+                  11.04437,
+                  12.04537
+                ],
+                "pred_segment": [
+                  [
+                    10.56,
+                    12.0
+                  ]
+                ]
+              },
+              {
+                "gt_index": 11,
+                "pred_index": [
+                  9
+                ],
+                "iou": 0.5569501386276777,
+                "gt_segment": [
+                  20.98763,
+                  23.3233
+                ],
+                "pred_segment": [
+                  [
+                    21.2,
+                    24.8
+                  ]
+                ]
+              }
+            ],
+            "num_matches": 5,
+            "precision": 0.45454545454545453,
+            "recall": 0.35714285714285715,
+            "f1_score": 0.4,
+            "mean_iou": 0.7846564375967671,
+            "unmatched_gt_indices": [
+              0,
+              2,
+              4,
+              6,
+              7,
+              8,
+              9,
+              10,
+              12
+            ],
+            "unmatched_pred_indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              8
+            ]
+          },
+          "hungarian_results": {
+            "matches": [
+              {
+                "gt_index": 1,
+                "pred_index": [
+                  5
+                ],
+                "iou": 0.8341749999999984,
+                "gt_segment": [
+                  10.17683,
+                  10.5105
+                ],
+                "pred_segment": [
+                  [
+                    10.16,
+                    10.56
+                  ]
+                ]
+              },
+              {
+                "gt_index": 3,
+                "pred_index": [
+                  6
+                ],
+                "iou": 0.6433615866753735,
+                "gt_segment": [
+                  11.04437,
+                  12.04537
+                ],
+                "pred_segment": [
+                  [
+                    10.56,
+                    12.0
+                  ]
+                ]
+              },
+              {
+                "gt_index": 5,
+                "pred_index": [
+                  7
+                ],
+                "iou": 0.9060388489241713,
+                "gt_segment": [
+                  12.37903,
+                  16.34967
+                ],
+                "pred_segment": [
+                  [
+                    12.0,
+                    16.32
+                  ]
+                ]
+              },
+              {
+                "gt_index": 11,
+                "pred_index": [
+                  9
+                ],
+                "iou": 0.5569501386276777,
+                "gt_segment": [
+                  20.98763,
+                  23.3233
+                ],
+                "pred_segment": [
+                  [
+                    21.2,
+                    24.8
+                  ]
+                ]
+              },
+              {
+                "gt_index": 13,
+                "pred_index": [
+                  10
+                ],
+                "iou": 0.9827566137566143,
+                "gt_segment": [
+                  24.8248,
+                  30.39703
+                ],
+                "pred_segment": [
+                  [
+                    24.8,
+                    30.47
+                  ]
+                ]
+              }
+            ],
+            "num_matches": 5,
+            "precision": 0.45454545454545453,
+            "recall": 0.35714285714285715,
+            "f1_score": 0.4,
+            "mean_iou": 0.7846564375967671,
+            "unmatched_gt_indices": [
+              0,
+              2,
+              4,
+              6,
+              7,
+              8,
+              9,
+              10,
+              12
+            ],
+            "unmatched_pred_indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              8
+            ]
+          },
+          "one_to_many_results": {
+            "matches": [
+              {
+                "gt_index": 0,
+                "pred_index": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4
+                ],
+                "iou": 0.9589635826771653,
+                "gt_segment": [
+                  0.0,
+                  9.74307
+                ],
+                "pred_segment": [
+                  [
+                    0.0,
+                    4.08
+                  ],
+                  [
+                    4.08,
+                    4.4
+                  ],
+                  [
+                    4.4,
+                    5.52
+                  ],
+                  [
+                    5.52,
+                    5.84
+                  ],
+                  [
+                    5.84,
+                    10.16
+                  ]
+                ]
+              },
+              {
+                "gt_index": 1,
+                "pred_index": [
+                  5
+                ],
+                "iou": 0.8341749999999984,
+                "gt_segment": [
+                  10.17683,
+                  10.5105
+                ],
+                "pred_segment": [
+                  [
+                    10.16,
+                    10.56
+                  ]
+                ]
+              },
+              {
+                "gt_index": 3,
+                "pred_index": [
+                  6
+                ],
+                "iou": 0.6433615866753735,
+                "gt_segment": [
+                  11.04437,
+                  12.04537
+                ],
+                "pred_segment": [
+                  [
+                    10.56,
+                    12.0
+                  ]
+                ]
+              },
+              {
+                "gt_index": 5,
+                "pred_index": [
+                  7
+                ],
+                "iou": 0.9060388489241713,
+                "gt_segment": [
+                  12.37903,
+                  16.34967
+                ],
+                "pred_segment": [
+                  [
+                    12.0,
+                    16.32
+                  ]
+                ]
+              },
+              {
+                "gt_index": 11,
+                "pred_index": [
+                  9
+                ],
+                "iou": 0.5569501386276777,
+                "gt_segment": [
+                  20.98763,
+                  23.3233
+                ],
+                "pred_segment": [
+                  [
+                    21.2,
+                    24.8
+                  ]
+                ]
+              },
+              {
+                "gt_index": 13,
+                "pred_index": [
+                  10
+                ],
+                "iou": 0.9827566137566143,
+                "gt_segment": [
+                  24.8248,
+                  30.39703
+                ],
+                "pred_segment": [
+                  [
+                    24.8,
+                    30.47
+                  ]
+                ]
+              }
+            ],
+            "num_matches": 6,
+            "precision": 0.9090909090909091,
+            "recall": 0.4285714285714286,
+            "f1_score": 0.5825242718446603,
+            "mean_iou": 0.8137076284435002,
+            "unmatched_gt_indices": [
+              2,
+              4,
+              6,
+              7,
+              8,
+              9,
+              10,
+              12
+            ],
+            "unmatched_pred_indices": [
+              8
+            ]
+          },
+          "coverage_metrics": {
+            "temporal_coverage": 0.43772454217862605,
+            "segment_coverage": 0.35714285714285715,
+            "covered_duration": 12.9258,
+            "total_gt_duration": 29.529529999999994
+          },
+          "coverage_metrics_one_to_many": {
+            "temporal_coverage": 0.7676678226846145,
+            "segment_coverage": 0.42857142857142855,
+            "covered_duration": 22.668870000000002,
+            "total_gt_duration": 29.529529999999994
+          },
+          "f1_results": {
+            "f1_segment": 0.3747131454724008,
+            "f1_temporal": 0.9843253772154548,
+            "unified_score": 0.3747131454724008,
+            "segment_details": {
+              "precision": 0.4258103925822736,
+              "recall": 0.3345653084575007,
+              "f1": 0.3747131454724008,
+              "matched_iou_sum": 4.68391431840501
+            },
+            "temporal_details": {
+              "precision": 0.9691345585822119,
+              "recall": 1.0,
+              "f1": 0.9843253772154548,
+              "tp_duration": 29.529529999999994
+            }
+          },
+          "sample_id": "b03e6650-743e-4050-affd-aeca4140f8ba",
+          "gt_segments": [
+            [
+              0.0,
+              9.74307
+            ],
+            [
+              10.17683,
+              10.5105
+            ],
+            [
+              10.54387,
+              11.011
+            ],
+            [
+              11.04437,
+              12.04537
+            ],
+            [
+              12.07873,
+              12.34567
+            ],
+            [
+              12.37903,
+              16.34967
+            ],
+            [
+              16.38303,
+              17.4174
+            ],
+            [
+              17.45077,
+              17.8178
+            ],
+            [
+              17.85117,
+              18.65197
+            ],
+            [
+              18.68533,
+              19.25257
+            ],
+            [
+              19.28593,
+              20.95427
+            ],
+            [
+              20.98763,
+              23.3233
+            ],
+            [
+              23.35667,
+              24.75807
+            ],
+            [
+              24.8248,
+              30.39703
+            ]
+          ],
+          "pred_segments": [
+            [
+              0.0,
+              4.08
+            ],
+            [
+              4.08,
+              4.4
+            ],
+            [
+              4.4,
+              5.52
+            ],
+            [
+              5.52,
+              5.84
+            ],
+            [
+              5.84,
+              10.16
+            ],
+            [
+              10.16,
+              10.56
+            ],
+            [
+              10.56,
+              12.0
+            ],
+            [
+              12.0,
+              16.32
+            ],
+            [
+              16.32,
+              21.2
+            ],
+            [
+              21.2,
+              24.8
+            ],
+            [
+              24.8,
+              30.47
+            ]
+          ],
+          "case_type": "normal"
+        },
+        {
+          "greedy_results": {
+            "matches": [
+              {
+                "gt_index": 10,
+                "pred_index": [
+                  6
+                ],
+                "iou": 0.8833333333333336,
+                "gt_segment": [
+                  9.36,
+                  11.64
+                ],
+                "pred_segment": [
+                  [
+                    9.52,
+                    11.76
+                  ]
+                ]
+              },
+              {
+                "gt_index": 0,
+                "pred_index": [
+                  0
+                ],
+                "iou": 0.8611111111111112,
+                "gt_segment": [
+                  0.0,
+                  1.24
+                ],
+                "pred_segment": [
+                  [
+                    0.0,
+                    1.44
+                  ]
+                ]
+              },
+              {
+                "gt_index": 6,
+                "pred_index": [
+                  2
+                ],
+                "iou": 0.7812500000000001,
+                "gt_segment": [
+                  4.08,
+                  6.16
+                ],
+                "pred_segment": [
+                  [
+                    4.16,
+                    6.64
+                  ]
+                ]
+              },
+              {
+                "gt_index": 22,
+                "pred_index": [
+                  12
+                ],
+                "iou": 0.7777777777777783,
+                "gt_segment": [
+                  22.56,
+                  23.12
+                ],
+                "pred_segment": [
+                  [
+                    22.56,
+                    23.28
+                  ]
+                ]
+              },
+              {
+                "gt_index": 9,
+                "pred_index": [
+                  5
+                ],
+                "iou": 0.7352941176470591,
+                "gt_segment": [
+                  8.16,
+                  9.32
+                ],
+                "pred_segment": [
+                  [
+                    8.32,
+                    9.52
+                  ]
+                ]
+              },
+              {
+                "gt_index": 8,
+                "pred_index": [
+                  4
+                ],
+                "iou": 0.7307692307692297,
+                "gt_segment": [
+                  7.28,
+                  8.12
+                ],
+                "pred_segment": [
+                  [
+                    7.36,
+                    8.32
+                  ]
+                ]
+              },
+              {
+                "gt_index": 15,
+                "pred_index": [
+                  9
+                ],
+                "iou": 0.6923076923076917,
+                "gt_segment": [
+                  16.68,
+                  17.4
+                ],
+                "pred_segment": [
+                  [
+                    16.48,
+                    17.52
+                  ]
+                ]
+              },
+              {
+                "gt_index": 7,
+                "pred_index": [
+                  3
+                ],
+                "iou": 0.6818181818181825,
+                "gt_segment": [
+                  6.48,
+                  7.24
+                ],
+                "pred_segment": [
+                  [
+                    6.64,
+                    7.36
+                  ]
+                ]
+              },
+              {
+                "gt_index": 19,
+                "pred_index": [
+                  10
+                ],
+                "iou": 0.6228070175438606,
+                "gt_segment": [
+                  19.08,
+                  21.92
+                ],
+                "pred_segment": [
+                  [
+                    17.52,
+                    22.08
+                  ]
+                ]
+              },
+              {
+                "gt_index": 21,
+                "pred_index": [
+                  11
+                ],
+                "iou": 0.6153846153846164,
+                "gt_segment": [
+                  22.04,
+                  22.4
+                ],
+                "pred_segment": [
+                  [
+                    22.08,
+                    22.56
+                  ]
+                ]
+              },
+              {
+                "gt_index": 26,
+                "pred_index": [
+                  13
+                ],
+                "iou": 0.567567567567568,
+                "gt_segment": [
+                  24.28,
+                  25.96
+                ],
+                "pred_segment": [
+                  [
+                    23.28,
+                    26.24
+                  ]
+                ]
+              },
+              {
+                "gt_index": 14,
+                "pred_index": [
+                  8
+                ],
+                "iou": 0.5499999999999993,
+                "gt_segment": [
+                  14.88,
+                  16.2
+                ],
+                "pred_segment": [
+                  [
+                    14.08,
+                    16.48
+                  ]
+                ]
+              }
+            ],
+            "num_matches": 12,
+            "precision": 0.8571428571428571,
+            "recall": 0.4444444444444444,
+            "f1_score": 0.5853658536585367,
+            "mean_iou": 0.7082850537717026,
+            "unmatched_gt_indices": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              11,
+              12,
+              13,
+              16,
+              17,
+              18,
+              20,
+              23,
+              24,
+              25
+            ],
+            "unmatched_pred_indices": [
+              1,
+              7
+            ]
+          },
+          "hungarian_results": {
+            "matches": [
+              {
+                "gt_index": 0,
+                "pred_index": [
+                  0
+                ],
+                "iou": 0.8611111111111112,
+                "gt_segment": [
+                  0.0,
+                  1.24
+                ],
+                "pred_segment": [
+                  [
+                    0.0,
+                    1.44
+                  ]
+                ]
+              },
+              {
+                "gt_index": 6,
+                "pred_index": [
+                  2
+                ],
+                "iou": 0.7812500000000001,
+                "gt_segment": [
+                  4.08,
+                  6.16
+                ],
+                "pred_segment": [
+                  [
+                    4.16,
+                    6.64
+                  ]
+                ]
+              },
+              {
+                "gt_index": 7,
+                "pred_index": [
+                  3
+                ],
+                "iou": 0.6818181818181825,
+                "gt_segment": [
+                  6.48,
+                  7.24
+                ],
+                "pred_segment": [
+                  [
+                    6.64,
+                    7.36
+                  ]
+                ]
+              },
+              {
+                "gt_index": 8,
+                "pred_index": [
+                  4
+                ],
+                "iou": 0.7307692307692297,
+                "gt_segment": [
+                  7.28,
+                  8.12
+                ],
+                "pred_segment": [
+                  [
+                    7.36,
+                    8.32
+                  ]
+                ]
+              },
+              {
+                "gt_index": 9,
+                "pred_index": [
+                  5
+                ],
+                "iou": 0.7352941176470591,
+                "gt_segment": [
+                  8.16,
+                  9.32
+                ],
+                "pred_segment": [
+                  [
+                    8.32,
+                    9.52
+                  ]
+                ]
+              },
+              {
+                "gt_index": 10,
+                "pred_index": [
+                  6
+                ],
+                "iou": 0.8833333333333336,
+                "gt_segment": [
+                  9.36,
+                  11.64
+                ],
+                "pred_segment": [
+                  [
+                    9.52,
+                    11.76
+                  ]
+                ]
+              },
+              {
+                "gt_index": 14,
+                "pred_index": [
+                  8
+                ],
+                "iou": 0.5499999999999993,
+                "gt_segment": [
+                  14.88,
+                  16.2
+                ],
+                "pred_segment": [
+                  [
+                    14.08,
+                    16.48
+                  ]
+                ]
+              },
+              {
+                "gt_index": 15,
+                "pred_index": [
+                  9
+                ],
+                "iou": 0.6923076923076917,
+                "gt_segment": [
+                  16.68,
+                  17.4
+                ],
+                "pred_segment": [
+                  [
+                    16.48,
+                    17.52
+                  ]
+                ]
+              },
+              {
+                "gt_index": 19,
+                "pred_index": [
+                  10
+                ],
+                "iou": 0.6228070175438606,
+                "gt_segment": [
+                  19.08,
+                  21.92
+                ],
+                "pred_segment": [
+                  [
+                    17.52,
+                    22.08
+                  ]
+                ]
+              },
+              {
+                "gt_index": 21,
+                "pred_index": [
+                  11
+                ],
+                "iou": 0.6153846153846164,
+                "gt_segment": [
+                  22.04,
+                  22.4
+                ],
+                "pred_segment": [
+                  [
+                    22.08,
+                    22.56
+                  ]
+                ]
+              },
+              {
+                "gt_index": 22,
+                "pred_index": [
+                  12
+                ],
+                "iou": 0.7777777777777783,
+                "gt_segment": [
+                  22.56,
+                  23.12
+                ],
+                "pred_segment": [
+                  [
+                    22.56,
+                    23.28
+                  ]
+                ]
+              },
+              {
+                "gt_index": 26,
+                "pred_index": [
+                  13
+                ],
+                "iou": 0.567567567567568,
+                "gt_segment": [
+                  24.28,
+                  25.96
+                ],
+                "pred_segment": [
+                  [
+                    23.28,
+                    26.24
+                  ]
+                ]
+              }
+            ],
+            "num_matches": 12,
+            "precision": 0.8571428571428571,
+            "recall": 0.4444444444444444,
+            "f1_score": 0.5853658536585367,
+            "mean_iou": 0.7082850537717026,
+            "unmatched_gt_indices": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              11,
+              12,
+              13,
+              16,
+              17,
+              18,
+              20,
+              23,
+              24,
+              25
+            ],
+            "unmatched_pred_indices": [
+              1,
+              7
+            ]
+          },
+          "one_to_many_results": {
+            "matches": [
+              {
+                "gt_index": 0,
+                "pred_index": [
+                  0
+                ],
+                "iou": 0.8611111111111113,
+                "gt_segment": [
+                  0.0,
+                  1.24
+                ],
+                "pred_segment": [
+                  [
+                    0.0,
+                    1.44
+                  ]
+                ]
+              },
+              {
+                "gt_index": 6,
+                "pred_index": [
+                  2
+                ],
+                "iou": 0.7812500000000001,
+                "gt_segment": [
+                  4.08,
+                  6.16
+                ],
+                "pred_segment": [
+                  [
+                    4.16,
+                    6.64
+                  ]
+                ]
+              },
+              {
+                "gt_index": 7,
+                "pred_index": [
+                  3
+                ],
+                "iou": 0.6818181818181825,
+                "gt_segment": [
+                  6.48,
+                  7.24
+                ],
+                "pred_segment": [
+                  [
+                    6.64,
+                    7.36
+                  ]
+                ]
+              },
+              {
+                "gt_index": 8,
+                "pred_index": [
+                  4
+                ],
+                "iou": 0.7307692307692297,
+                "gt_segment": [
+                  7.28,
+                  8.12
+                ],
+                "pred_segment": [
+                  [
+                    7.36,
+                    8.32
+                  ]
+                ]
+              },
+              {
+                "gt_index": 9,
+                "pred_index": [
+                  5
+                ],
+                "iou": 0.7352941176470591,
+                "gt_segment": [
+                  8.16,
+                  9.32
+                ],
+                "pred_segment": [
+                  [
+                    8.32,
+                    9.52
+                  ]
+                ]
+              },
+              {
+                "gt_index": 10,
+                "pred_index": [
+                  6
+                ],
+                "iou": 0.8833333333333336,
+                "gt_segment": [
+                  9.36,
+                  11.64
+                ],
+                "pred_segment": [
+                  [
+                    9.52,
+                    11.76
+                  ]
+                ]
+              },
+              {
+                "gt_index": 14,
+                "pred_index": [
+                  8
+                ],
+                "iou": 0.5499999999999993,
+                "gt_segment": [
+                  14.88,
+                  16.2
+                ],
+                "pred_segment": [
+                  [
+                    14.08,
+                    16.48
+                  ]
+                ]
+              },
+              {
+                "gt_index": 15,
+                "pred_index": [
+                  9
+                ],
+                "iou": 0.6923076923076917,
+                "gt_segment": [
+                  16.68,
+                  17.4
+                ],
+                "pred_segment": [
+                  [
+                    16.48,
+                    17.52
+                  ]
+                ]
+              },
+              {
+                "gt_index": 19,
+                "pred_index": [
+                  10
+                ],
+                "iou": 0.6228070175438606,
+                "gt_segment": [
+                  19.08,
+                  21.92
+                ],
+                "pred_segment": [
+                  [
+                    17.52,
+                    22.08
+                  ]
+                ]
+              },
+              {
+                "gt_index": 21,
+                "pred_index": [
+                  11
+                ],
+                "iou": 0.6153846153846164,
+                "gt_segment": [
+                  22.04,
+                  22.4
+                ],
+                "pred_segment": [
+                  [
+                    22.08,
+                    22.56
+                  ]
+                ]
+              },
+              {
+                "gt_index": 22,
+                "pred_index": [
+                  12
+                ],
+                "iou": 0.7777777777777783,
+                "gt_segment": [
+                  22.56,
+                  23.12
+                ],
+                "pred_segment": [
+                  [
+                    22.56,
+                    23.28
+                  ]
+                ]
+              },
+              {
+                "gt_index": 26,
+                "pred_index": [
+                  13
+                ],
+                "iou": 0.567567567567568,
+                "gt_segment": [
+                  24.28,
+                  25.96
+                ],
+                "pred_segment": [
+                  [
+                    23.28,
+                    26.24
+                  ]
+                ]
+              }
+            ],
+            "num_matches": 12,
+            "precision": 0.8571428571428572,
+            "recall": 0.4444444444444444,
+            "f1_score": 0.5853658536585367,
+            "mean_iou": 0.7082850537717026,
+            "unmatched_gt_indices": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              11,
+              12,
+              13,
+              16,
+              17,
+              18,
+              20,
+              23,
+              24,
+              25
+            ],
+            "unmatched_pred_indices": [
+              1,
+              7
+            ]
+          },
+          "coverage_metrics": {
+            "temporal_coverage": 0.671985815602837,
+            "segment_coverage": 0.4444444444444444,
+            "covered_duration": 15.160000000000004,
+            "total_gt_duration": 22.560000000000002
+          },
+          "coverage_metrics_one_to_many": {
+            "temporal_coverage": 0.671985815602837,
+            "segment_coverage": 0.4444444444444444,
+            "covered_duration": 15.160000000000004,
+            "total_gt_duration": 22.560000000000002
+          },
+          "f1_results": {
+            "f1_segment": 0.4489896975326168,
+            "f1_temporal": 0.9245901639344263,
+            "unified_score": 0.4489896975326168,
+            "segment_details": {
+              "precision": 0.6574491999584746,
+              "recall": 0.34089958516365354,
+              "f1": 0.4489896975326168,
+              "matched_iou_sum": 9.204288799418645
+            },
+            "temporal_details": {
+              "precision": 0.8597560975609757,
+              "recall": 1.0,
+              "f1": 0.9245901639344263,
+              "tp_duration": 22.560000000000002
+            }
+          },
+          "sample_id": "b7385355-8821-4cf7-8953-2d8434209372",
+          "gt_segments": [
+            [
+              0.0,
+              1.24
+            ],
+            [
+              1.28,
+              1.68
+            ],
+            [
+              1.72,
+              2.84
+            ],
+            [
+              2.88,
+              3.16
+            ],
+            [
+              3.2,
+              3.8
+            ],
+            [
+              3.84,
+              4.04
+            ],
+            [
+              4.08,
+              6.16
+            ],
+            [
+              6.48,
+              7.24
+            ],
+            [
+              7.28,
+              8.12
+            ],
+            [
+              8.16,
+              9.32
+            ],
+            [
+              9.36,
+              11.64
+            ],
+            [
+              11.68,
+              11.96
+            ],
+            [
+              12.0,
+              12.68
+            ],
+            [
+              13.28,
+              13.92
+            ],
+            [
+              14.88,
+              16.2
+            ],
+            [
+              16.68,
+              17.4
+            ],
+            [
+              17.44,
+              18.0
+            ],
+            [
+              18.04,
+              18.44
+            ],
+            [
+              18.48,
+              19.04
+            ],
+            [
+              19.08,
+              21.92
+            ],
+            [
+              21.96,
+              22.0
+            ],
+            [
+              22.04,
+              22.4
+            ],
+            [
+              22.56,
+              23.12
+            ],
+            [
+              23.2,
+              23.6
+            ],
+            [
+              23.64,
+              23.96
+            ],
+            [
+              24.0,
+              24.24
+            ],
+            [
+              24.28,
+              25.96
+            ]
+          ],
+          "pred_segments": [
+            [
+              0.0,
+              1.44
+            ],
+            [
+              1.44,
+              4.16
+            ],
+            [
+              4.16,
+              6.64
+            ],
+            [
+              6.64,
+              7.36
+            ],
+            [
+              7.36,
+              8.32
+            ],
+            [
+              8.32,
+              9.52
+            ],
+            [
+              9.52,
+              11.76
+            ],
+            [
+              11.76,
+              14.08
+            ],
+            [
+              14.08,
+              16.48
+            ],
+            [
+              16.48,
+              17.52
+            ],
+            [
+              17.52,
+              22.08
+            ],
+            [
+              22.08,
+              22.56
+            ],
+            [
+              22.56,
+              23.28
+            ],
+            [
+              23.28,
+              26.24
+            ]
+          ],
+          "case_type": "normal"
+        },
+        {
+          "greedy_results": {
+            "matches": [
+              {
+                "gt_index": 8,
+                "pred_index": [
+                  5
+                ],
+                "iou": 0.9088774886023682,
+                "gt_segment": [
+                  15.88255,
+                  23.49016
+                ],
+                "pred_segment": [
+                  [
+                    15.12,
+                    23.49
+                  ]
+                ]
+              },
+              {
+                "gt_index": 0,
+                "pred_index": [
+                  0
+                ],
+                "iou": 0.907198457762622,
+                "gt_segment": [
+                  0.0,
+                  1.23457
+                ],
+                "pred_segment": [
+                  [
+                    0.0,
+                    1.12
+                  ]
+                ]
+              },
+              {
+                "gt_index": 4,
+                "pred_index": [
+                  2
+                ],
+                "iou": 0.86625,
+                "gt_segment": [
+                  9.80981,
+                  11.61161
+                ],
+                "pred_segment": [
+                  [
+                    9.6,
+                    11.68
+                  ]
+                ]
+              },
+              {
+                "gt_index": 5,
+                "pred_index": [
+                  3
+                ],
+                "iou": 0.8562926808383129,
+                "gt_segment": [
+                  11.67835,
+                  12.14548
+                ],
+                "pred_segment": [
+                  [
+                    11.68,
+                    12.08
+                  ]
+                ]
+              },
+              {
+                "gt_index": 2,
+                "pred_index": [
+                  1
+                ],
+                "iou": 0.8163696565566617,
+                "gt_segment": [
+                  2.66934,
+                  9.60961
+                ],
+                "pred_segment": [
+                  [
+                    1.12,
+                    9.6
+                  ]
+                ]
+              },
+              {
+                "gt_index": 6,
+                "pred_index": [
+                  4
+                ],
+                "iou": 0.680503289473684,
+                "gt_segment": [
+                  12.17885,
+                  14.24758
+                ],
+                "pred_segment": [
+                  [
+                    12.08,
+                    15.12
+                  ]
+                ]
+              }
+            ],
+            "num_matches": 6,
+            "precision": 1.0,
+            "recall": 0.6666666666666666,
+            "f1_score": 0.8,
+            "mean_iou": 0.8392485955389414,
+            "unmatched_gt_indices": [
+              1,
+              3,
+              7
+            ],
+            "unmatched_pred_indices": []
+          },
+          "hungarian_results": {
+            "matches": [
+              {
+                "gt_index": 0,
+                "pred_index": [
+                  0
+                ],
+                "iou": 0.907198457762622,
+                "gt_segment": [
+                  0.0,
+                  1.23457
+                ],
+                "pred_segment": [
+                  [
+                    0.0,
+                    1.12
+                  ]
+                ]
+              },
+              {
+                "gt_index": 2,
+                "pred_index": [
+                  1
+                ],
+                "iou": 0.8163696565566617,
+                "gt_segment": [
+                  2.66934,
+                  9.60961
+                ],
+                "pred_segment": [
+                  [
+                    1.12,
+                    9.6
+                  ]
+                ]
+              },
+              {
+                "gt_index": 4,
+                "pred_index": [
+                  2
+                ],
+                "iou": 0.86625,
+                "gt_segment": [
+                  9.80981,
+                  11.61161
+                ],
+                "pred_segment": [
+                  [
+                    9.6,
+                    11.68
+                  ]
+                ]
+              },
+              {
+                "gt_index": 5,
+                "pred_index": [
+                  3
+                ],
+                "iou": 0.8562926808383129,
+                "gt_segment": [
+                  11.67835,
+                  12.14548
+                ],
+                "pred_segment": [
+                  [
+                    11.68,
+                    12.08
+                  ]
+                ]
+              },
+              {
+                "gt_index": 6,
+                "pred_index": [
+                  4
+                ],
+                "iou": 0.680503289473684,
+                "gt_segment": [
+                  12.17885,
+                  14.24758
+                ],
+                "pred_segment": [
+                  [
+                    12.08,
+                    15.12
+                  ]
+                ]
+              },
+              {
+                "gt_index": 8,
+                "pred_index": [
+                  5
+                ],
+                "iou": 0.9088774886023682,
+                "gt_segment": [
+                  15.88255,
+                  23.49016
+                ],
+                "pred_segment": [
+                  [
+                    15.12,
+                    23.49
+                  ]
+                ]
+              }
+            ],
+            "num_matches": 6,
+            "precision": 1.0,
+            "recall": 0.6666666666666666,
+            "f1_score": 0.8,
+            "mean_iou": 0.8392485955389414,
+            "unmatched_gt_indices": [
+              1,
+              3,
+              7
+            ],
+            "unmatched_pred_indices": []
+          },
+          "one_to_many_results": {
+            "matches": [
+              {
+                "gt_index": 0,
+                "pred_index": [
+                  0
+                ],
+                "iou": 0.9071984577626221,
+                "gt_segment": [
+                  0.0,
+                  1.23457
+                ],
+                "pred_segment": [
+                  [
+                    0.0,
+                    1.12
+                  ]
+                ]
+              },
+              {
+                "gt_index": 2,
+                "pred_index": [
+                  1
+                ],
+                "iou": 0.8163696565566615,
+                "gt_segment": [
+                  2.66934,
+                  9.60961
+                ],
+                "pred_segment": [
+                  [
+                    1.12,
+                    9.6
+                  ]
+                ]
+              },
+              {
+                "gt_index": 4,
+                "pred_index": [
+                  2
+                ],
+                "iou": 0.86625,
+                "gt_segment": [
+                  9.80981,
+                  11.61161
+                ],
+                "pred_segment": [
+                  [
+                    9.6,
+                    11.68
+                  ]
+                ]
+              },
+              {
+                "gt_index": 5,
+                "pred_index": [
+                  3
+                ],
+                "iou": 0.8562926808383129,
+                "gt_segment": [
+                  11.67835,
+                  12.14548
+                ],
+                "pred_segment": [
+                  [
+                    11.68,
+                    12.08
+                  ]
+                ]
+              },
+              {
+                "gt_index": 6,
+                "pred_index": [
+                  4
+                ],
+                "iou": 0.680503289473684,
+                "gt_segment": [
+                  12.17885,
+                  14.24758
+                ],
+                "pred_segment": [
+                  [
+                    12.08,
+                    15.12
+                  ]
+                ]
+              },
+              {
+                "gt_index": 8,
+                "pred_index": [
+                  5
+                ],
+                "iou": 0.9088774886023682,
+                "gt_segment": [
+                  15.88255,
+                  23.49016
+                ],
+                "pred_segment": [
+                  [
+                    15.12,
+                    23.49
+                  ]
+                ]
+              }
+            ],
+            "num_matches": 6,
+            "precision": 1.0,
+            "recall": 0.6666666666666667,
+            "f1_score": 0.8,
+            "mean_iou": 0.8392485955389414,
+            "unmatched_gt_indices": [
+              1,
+              3,
+              7
+            ],
+            "unmatched_pred_indices": []
+          },
+          "coverage_metrics": {
+            "temporal_coverage": 0.8887822495440945,
+            "segment_coverage": 0.6666666666666666,
+            "covered_duration": 19.928639999999998,
+            "total_gt_duration": 22.42241
+          },
+          "coverage_metrics_one_to_many": {
+            "temporal_coverage": 0.8887822495440945,
+            "segment_coverage": 0.6666666666666666,
+            "covered_duration": 19.928639999999998,
+            "total_gt_duration": 22.42241
+          },
+          "f1_results": {
+            "f1_segment": 0.671398876431153,
+            "f1_temporal": 0.9767402756683868,
+            "unified_score": 0.671398876431153,
+            "segment_details": {
+              "precision": 0.8392485955389414,
+              "recall": 0.5594990636926276,
+              "f1": 0.671398876431153,
+              "matched_iou_sum": 5.0354915732336485
+            },
+            "temporal_details": {
+              "precision": 0.9545444870157513,
+              "recall": 0.9999928642817609,
+              "f1": 0.9767402756683868,
+              "tp_duration": 22.42225
+            }
+          },
+          "sample_id": "6f377c71-1c1f-4ef7-b8c4-4477f041f5d1",
+          "gt_segments": [
+            [
+              0.0,
+              1.23457
+            ],
+            [
+              1.26793,
+              2.63597
+            ],
+            [
+              2.66934,
+              9.60961
+            ],
+            [
+              9.64298,
+              9.77644
+            ],
+            [
+              9.80981,
+              11.61161
+            ],
+            [
+              11.67835,
+              12.14548
+            ],
+            [
+              12.17885,
+              14.24758
+            ],
+            [
+              15.04838,
+              15.84918
+            ],
+            [
+              15.88255,
+              23.49016
+            ]
+          ],
+          "pred_segments": [
+            [
+              0.0,
+              1.12
+            ],
+            [
+              1.12,
+              9.6
+            ],
+            [
+              9.6,
+              11.68
+            ],
+            [
+              11.68,
+              12.08
+            ],
+            [
+              12.08,
+              15.12
+            ],
+            [
+              15.12,
+              23.49
+            ]
+          ],
+          "case_type": "normal"
+        }
+      ]
+    }
+  },
+  "macro_averaged": {
+    "one_to_many_metrics.precision": 0.8532467532467531,
+    "one_to_many_metrics.recall": 0.5321789321789322,
+    "one_to_many_metrics.f1_score": 0.6445584172575021,
+    "one_to_many_metrics.mean_iou": 0.8101316029295615,
+    "one_to_many_metrics.num_matches": 6.2,
+    "hungarian_results.precision": 0.7623376623376623,
+    "hungarian_results.recall": 0.5178932178932178,
+    "hungarian_results.f1_score": 0.60805356288857,
+    "hungarian_results.mean_iou": 0.8043213647602148,
+    "hungarian_results.num_matches": 6.0,
+    "greedy_results.precision": 0.7623376623376623,
+    "greedy_results.recall": 0.5178932178932178,
+    "greedy_results.f1_score": 0.60805356288857,
+    "greedy_results.mean_iou": 0.8043213647602148,
+    "greedy_results.num_matches": 6.0,
+    "coverage_metrics.temporal_coverage": 0.7437575846343627,
+    "coverage_metrics.segment_coverage": 0.5178932178932178,
+    "coverage_one_to_many_metrics.temporal_coverage": 0.8097462407355603,
+    "coverage_one_to_many_metrics.segment_coverage": 0.5321789321789321,
+    "f1_results.f1_segment": 0.5435571847961523,
+    "f1_results.f1_temporal": 0.9679136751633317,
+    "f1_results.unified_score": 0.5435571847961523
+  },
+  "global_averaged": {
+    "f1_results": {
+      "f1_segment": 0.5435571847961523,
+      "f1_temporal": 0.9679136751633317,
+      "unified_score": 0.5435571847961523,
+      "segment_details": {
+        "precision": 0.6726492253563631,
+        "recall": 0.4677419522817618,
+        "f1": 0.5435571847961523,
+        "matched_iou_sum": 5.094011319114106
+      },
+      "temporal_details": {
+        "precision": 0.9405841155945682,
+        "recall": 0.997953583081301,
+        "f1": 0.9679136751633317,
+        "tp_duration": 22.838355999999997
+      }
+    },
+    "greedy_results": {
+      "precision": 0.7623376623376623,
+      "recall": 0.5178932178932178,
+      "f1_score": 0.60805356288857,
+      "mean_iou": 0.8043213647602148,
+      "num_matches": 6.0
+    },
+    "hungarian_results": {
+      "precision": 0.7623376623376623,
+      "recall": 0.5178932178932178,
+      "f1_score": 0.60805356288857,
+      "mean_iou": 0.8043213647602148,
+      "num_matches": 6.0
+    },
+    "one_to_many_metrics": {
+      "precision": 0.8532467532467531,
+      "recall": 0.5321789321789322,
+      "f1_score": 0.6445584172575021,
+      "mean_iou": 0.8101316029295615,
+      "num_matches": 6.2
+    },
+    "coverage_metrics": {
+      "temporal_coverage": 0.7437575846343627,
+      "segment_coverage": 0.5178932178932178
+    },
+    "coverage_one_to_many_metrics": {
+      "temporal_coverage": 0.8097462407355603,
+      "segment_coverage": 0.5321789321789321
+    }
+  },
+  "summary": {
+    "total_samples": 5,
+    "valid_samples": 5,
+    "failed_samples": 0,
+    "segment_types": [
+      "A0_OTHERS"
+    ],
+    "samples_per_segment": {
+      "A0_OTHERS": 5
+    }
+  },
+  "segment_scores": {
+    "segment_score": 0.5435571847961523,
+    "subset_score": null,
+    "segment_score_f1_segment": 0.5435571847961523,
+    "subset_score_f1_segment": null,
+    "segment_score_f1_temporal": 0.9679136751633317,
+    "subset_score_f1_temporal": null,
+    "segment_score_unified": 0.5435571847961523,
+    "subset_score_unified": null,
+    "num_segments_f1": 1,
+    "num_subset_segments_f1": 0,
+    "segment_score_o2o": 0.6308254012637903,
+    "segment_score_o2m": 0.6709625864572462,
+    "subset_score_o2o": null,
+    "subset_score_o2m": null,
+    "num_segments_o2o": 1,
+    "num_segments_o2m": 1,
+    "num_subset_segments_o2o": 0,
+    "num_subset_segments_o2m": 0
+  }
+}

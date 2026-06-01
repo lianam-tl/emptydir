@@ -1,0 +1,52 @@
+{
+  "d62536fc-d66c-47e6-aedb-388b154a1fa3_dup1": {
+    "score": 0.5233289619780821,
+    "score_type": "unified_score",
+    "coverage_score": 0.5933258970068785,
+    "unified_score": 0.5233289619780821,
+    "f1_segment_score": 0.5233289619780821,
+    "f1_temporal_score": 0.9653453004238346,
+    "temporal_coverage": 0.7321063394683026,
+    "segment_coverage": 0.45454545454545453
+  },
+  "fa8a7cee-3000-4f3a-a015-2fbff0c33950": {
+    "score": 0.6993552425665093,
+    "score_type": "unified_score",
+    "coverage_score": 0.8274278215223098,
+    "unified_score": 0.6993552425665093,
+    "f1_segment_score": 0.6993552425665093,
+    "f1_temporal_score": 0.9885672585745561,
+    "temporal_coverage": 0.9881889763779529,
+    "segment_coverage": 0.6666666666666666
+  },
+  "b03e6650-743e-4050-affd-aeca4140f8ba": {
+    "score": 0.3747131454724008,
+    "score_type": "unified_score",
+    "coverage_score": 0.3974336996607416,
+    "unified_score": 0.3747131454724008,
+    "f1_segment_score": 0.3747131454724008,
+    "f1_temporal_score": 0.9843253772154548,
+    "temporal_coverage": 0.43772454217862605,
+    "segment_coverage": 0.35714285714285715
+  },
+  "b7385355-8821-4cf7-8953-2d8434209372": {
+    "score": 0.4489896975326168,
+    "score_type": "unified_score",
+    "coverage_score": 0.5582151300236406,
+    "unified_score": 0.4489896975326168,
+    "f1_segment_score": 0.4489896975326168,
+    "f1_temporal_score": 0.9245901639344263,
+    "temporal_coverage": 0.671985815602837,
+    "segment_coverage": 0.4444444444444444
+  },
+  "6f377c71-1c1f-4ef7-b8c4-4477f041f5d1": {
+    "score": 0.671398876431153,
+    "score_type": "unified_score",
+    "coverage_score": 0.7777244581053806,
+    "unified_score": 0.671398876431153,
+    "f1_segment_score": 0.671398876431153,
+    "f1_temporal_score": 0.9767402756683868,
+    "temporal_coverage": 0.8887822495440945,
+    "segment_coverage": 0.6666666666666666
+  }
+}
