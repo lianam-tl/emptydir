@@ -9,6 +9,7 @@
 | `03-orchestrator-job-control.json` | `POST orchestrator:8080/jobs` | 02 와 동일 prompt, chat_template_kwargs 없이 (baseline) |
 | `04-eval-service-request.json` | `POST eval-service-long8v:8090/api/eval/runs` | 풀 파이프라인 eval-service 통한 1 sample 평가 |
 | `05-speccenter-active-spec.json` | `GET speccenter:8080/pipelines/vllm-direct` 응답 캡처 | 활성 spec 검증용 (`1.1.3-cttkw`, init_args.use_chat_completions=true 하드코딩) |
+| `20-local-build-direct-test/` | (dir) | **Lightweight regression playbook** — local colima build → InfraController deploy → direct `/v1/chat/completions` 5-scenario sweep (allowlist + normalize). Skips wf-engine entirely. Used 2026-06-02 for PR #80 sha `8428c34`. |
 
 ## port-forward (cluster `tl-data-training`)
 

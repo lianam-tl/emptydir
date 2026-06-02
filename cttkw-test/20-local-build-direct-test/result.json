@@ -1,0 +1,87 @@
+{
+  "A_both": {
+    "status": 200,
+    "elapsed": 24.6,
+    "finish": "stop",
+    "usage": {
+      "prompt_tokens": 225,
+      "completion_tokens": 226,
+      "total_tokens": 451,
+      "x_tl_video_shape": [
+        8,
+        160,
+        160,
+        3
+      ],
+      "x_tl_worker_elapsed_ms": 23153.472357429564,
+      "x_tl_vllm_generate_ms": 23153.33259291947,
+      "x_tl_retry_count": 0,
+      "x_tl_empty_result_retry": false
+    },
+    "text_chars": 336,
+    "text_head": "\n\nThe video displays a static screen filled with multi-colored digital noise, resembling television static or a corrupted video signal. The pattern consists of thousands of tiny, randomly colored pixe",
+    "tb_count": 1,
+    "tb_chars": 718,
+    "tb_head": "The user wants a brief description of the video content.\nThe video consists of a sequence of frames showing a static, noisy pattern.\nThe pattern is composed of many small, colorful dots or pixels.\nThe"
+  },
+  "B_enable_only": {
+    "status": 200,
+    "elapsed": 2.9,
+    "finish": "stop",
+    "usage": {
+      "prompt_tokens": 225,
+      "completion_tokens": 226,
+      "total_tokens": 451,
+      "x_tl_video_shape": [
+        8,
+        160,
+        160,
+        3
+      ],
+      "x_tl_worker_elapsed_ms": 2149.325966835022,
+      "x_tl_vllm_generate_ms": 2149.180382490158,
+      "x_tl_retry_count": 0,
+      "x_tl_empty_result_retry": false
+    },
+    "text_chars": 336,
+    "text_head": "\n\nThe video displays a static screen filled with multi-colored digital noise, resembling television static or a corrupted video signal. The pattern consists of thousands of tiny, randomly colored pixe",
+    "tb_count": 1,
+    "tb_chars": 718,
+    "tb_head": "The user wants a brief description of the video content.\nThe video consists of a sequence of frames showing a static, noisy pattern.\nThe pattern is composed of many small, colorful dots or pixels.\nThe"
+  },
+  "C_supports_only": {
+    "status": 200,
+    "elapsed": 2.7,
+    "finish": "stop",
+    "usage": {
+      "prompt_tokens": 225,
+      "completion_tokens": 226,
+      "total_tokens": 451,
+      "x_tl_video_shape": [
+        8,
+        160,
+        160,
+        3
+      ],
+      "x_tl_worker_elapsed_ms": 2135.211108252406,
+      "x_tl_vllm_generate_ms": 2135.099245235324,
+      "x_tl_retry_count": 0,
+      "x_tl_empty_result_retry": false
+    },
+    "text_chars": 336,
+    "text_head": "\n\nThe video displays a static screen filled with multi-colored digital noise, resembling television static or a corrupted video signal. The pattern consists of thousands of tiny, randomly colored pixe",
+    "tb_count": 1,
+    "tb_chars": 718,
+    "tb_head": "The user wants a brief description of the video content.\nThe video consists of a sequence of frames showing a static, noisy pattern.\nThe pattern is composed of many small, colorful dots or pixels.\nThe"
+  },
+  "D_reject_tokenize": {
+    "status": 400,
+    "body": "{\"detail\":\"chat_template_kwargs contains unsupported keys: ['tokenize']. Supported: ['enable_thinking', 'supports_thinking']\"}",
+    "elapsed": 0.6
+  },
+  "E_reject_tools": {
+    "status": 400,
+    "body": "{\"detail\":\"chat_template_kwargs contains unsupported keys: ['tools']. Supported: ['enable_thinking', 'supports_thinking']\"}",
+    "elapsed": 0.6
+  }
+}
