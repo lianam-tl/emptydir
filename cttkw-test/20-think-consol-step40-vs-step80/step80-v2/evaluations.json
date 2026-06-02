@@ -1,0 +1,1748 @@
+{
+  "by_segment_id": {
+    "A0_OTHERS": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.36640731395629034,
+          "f1_temporal": 0.9519427915261238,
+          "unified_score": 0.36640731395629034,
+          "segment_details": {
+            "precision": 0.565308737269777,
+            "recall": 0.2828322355740373,
+            "f1": 0.36640731395629034,
+            "matched_iou_sum": 4.913383664524934
+          },
+          "temporal_details": {
+            "precision": 0.9223661386621493,
+            "recall": 0.9862169589371393,
+            "f1": 0.9519427915261238,
+            "tp_duration": 56.103697857142855
+          }
+        },
+        "greedy_results": {
+          "precision": 0.5801324263236257,
+          "recall": 0.29471508417605313,
+          "f1_score": 0.38029648570897934,
+          "mean_iou": 0.7022780798004927,
+          "num_matches": 5.017857142857143
+        },
+        "hungarian_results": {
+          "precision": 0.5801324263236257,
+          "recall": 0.29471508417605313,
+          "f1_score": 0.38029648570897934,
+          "mean_iou": 0.7022780798004925,
+          "num_matches": 5.017857142857143
+        },
+        "one_to_many_metrics": {
+          "precision": 0.6412390924749347,
+          "recall": 0.30366260986465016,
+          "f1_score": 0.40171069020777994,
+          "mean_iou": 0.7078121693354911,
+          "num_matches": 5.142857142857143
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.5300530743701702,
+          "segment_coverage": 0.29471508417605313
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.5533655916767221,
+          "segment_coverage": 0.30366260986465016
+        }
+      },
+      "num_samples": 56
+    },
+    "A1_NEWS": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.7047355623335323,
+          "f1_temporal": 0.9974398694893757,
+          "unified_score": 0.7047355623335323,
+          "segment_details": {
+            "precision": 0.7144526098328048,
+            "recall": 0.7276002075371283,
+            "f1": 0.7047355623335323,
+            "matched_iou_sum": 6.718192568502726
+          },
+          "temporal_details": {
+            "precision": 0.9999702167341605,
+            "recall": 0.9951314672012105,
+            "f1": 0.9974398694893757,
+            "tp_duration": 1431.2543355555556
+          }
+        },
+        "greedy_results": {
+          "precision": 0.78111282269693,
+          "recall": 0.7961626028292695,
+          "f1_score": 0.7734639679142603,
+          "mean_iou": 0.8585515123683242,
+          "num_matches": 7.311111111111111
+        },
+        "hungarian_results": {
+          "precision": 0.78111282269693,
+          "recall": 0.7961626028292695,
+          "f1_score": 0.7734639679142603,
+          "mean_iou": 0.8585515123683242,
+          "num_matches": 7.311111111111111
+        },
+        "one_to_many_metrics": {
+          "precision": 0.9505368705368704,
+          "recall": 0.8305902122568788,
+          "f1_score": 0.8839427910828115,
+          "mean_iou": 0.8760772180064121,
+          "num_matches": 7.555555555555555
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.8176334256010656,
+          "segment_coverage": 0.7961626028292695
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.8795182574516214,
+          "segment_coverage": 0.8305902122568788
+        }
+      },
+      "num_samples": 45
+    },
+    "A6_MOVIE": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.1035556098518546,
+          "f1_temporal": 0.14748785021216695,
+          "unified_score": 0.1035556098518546,
+          "segment_details": {
+            "precision": 0.10984667423728983,
+            "recall": 0.21058862997950178,
+            "f1": 0.1035556098518546,
+            "matched_iou_sum": 0.32976065970881235
+          },
+          "temporal_details": {
+            "precision": 0.138766532267968,
+            "recall": 0.33323532403526707,
+            "f1": 0.14748785021216695,
+            "tp_duration": 1.4633333333333536
+          }
+        },
+        "greedy_results": {
+          "precision": 0.11767146776406036,
+          "recall": 0.20138888888888887,
+          "f1_score": 0.11145264116575591,
+          "mean_iou": 0.19908887892575444,
+          "num_matches": 0.3333333333333333
+        },
+        "hungarian_results": {
+          "precision": 0.11767146776406036,
+          "recall": 0.20138888888888887,
+          "f1_score": 0.11145264116575591,
+          "mean_iou": 0.19908887892575444,
+          "num_matches": 0.3333333333333333
+        },
+        "one_to_many_metrics": {
+          "precision": 0.11767146776406036,
+          "recall": 0.20138888888888892,
+          "f1_score": 0.11145264116575589,
+          "mean_iou": 0.19908887892575444,
+          "num_matches": 0.3333333333333333
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.1951991146563731,
+          "segment_coverage": 0.20138888888888887
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.1951991146563731,
+          "segment_coverage": 0.20138888888888887
+        }
+      },
+      "num_samples": 24
+    },
+    "A8_OTHERS": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.5137200847924096,
+          "f1_temporal": 0.7573255526509973,
+          "unified_score": 0.5137200847924096,
+          "segment_details": {
+            "precision": 0.5018779500898471,
+            "recall": 0.6377903883765185,
+            "f1": 0.5137200847924096,
+            "matched_iou_sum": 7.30895668875132
+          },
+          "temporal_details": {
+            "precision": 0.7595966572056628,
+            "recall": 0.870730221964593,
+            "f1": 0.7573255526509973,
+            "tp_duration": 342.0284166666667
+          }
+        },
+        "greedy_results": {
+          "precision": 0.5358716202586619,
+          "recall": 0.6617328510393139,
+          "f1_score": 0.5482183669809984,
+          "mean_iou": 0.7395361744217984,
+          "num_matches": 7.5
+        },
+        "hungarian_results": {
+          "precision": 0.5358716202586619,
+          "recall": 0.6617328510393139,
+          "f1_score": 0.5482183669809984,
+          "mean_iou": 0.7395361744217984,
+          "num_matches": 7.5
+        },
+        "one_to_many_metrics": {
+          "precision": 0.6683876925195035,
+          "recall": 0.772598190251335,
+          "f1_score": 0.6733570014997042,
+          "mean_iou": 0.809220277691212,
+          "num_matches": 8.375
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.6565792894932402,
+          "segment_coverage": 0.6617328510393139
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.7792528183228615,
+          "segment_coverage": 0.772598190251335
+        }
+      },
+      "num_samples": 48
+    },
+    "C0_MOVIE": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.46496700277648517,
+          "f1_temporal": 0.7576062133728473,
+          "unified_score": 0.46496700277648517,
+          "segment_details": {
+            "precision": 0.423379275282054,
+            "recall": 0.5436300506286222,
+            "f1": 0.46496700277648517,
+            "matched_iou_sum": 11.115441343375686
+          },
+          "temporal_details": {
+            "precision": 0.8139683264414858,
+            "recall": 0.7220464482574899,
+            "f1": 0.7576062133728473,
+            "tp_duration": 145.16243899999998
+          }
+        },
+        "greedy_results": {
+          "precision": 0.466509612911687,
+          "recall": 0.5858752311213613,
+          "f1_score": 0.5090492048995465,
+          "mean_iou": 0.7024610539006879,
+          "num_matches": 12.2
+        },
+        "hungarian_results": {
+          "precision": 0.466509612911687,
+          "recall": 0.5858752311213613,
+          "f1_score": 0.5090492048995465,
+          "mean_iou": 0.7024610539006879,
+          "num_matches": 12.2
+        },
+        "one_to_many_metrics": {
+          "precision": 0.7456920853918667,
+          "recall": 0.7105817295879217,
+          "f1_score": 0.7240723314783843,
+          "mean_iou": 0.7137655305519716,
+          "num_matches": 14.166666666666666
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.4545031459541961,
+          "segment_coverage": 0.5858752311213613
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.6653171751034518,
+          "segment_coverage": 0.7105817295879217
+        }
+      },
+      "num_samples": 30
+    },
+    "C0_NEWS": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.6142279683730227,
+          "f1_temporal": 0.886651132468248,
+          "unified_score": 0.6142279683730227,
+          "segment_details": {
+            "precision": 0.6003478889505154,
+            "recall": 0.6888931379323893,
+            "f1": 0.6142279683730227,
+            "matched_iou_sum": 4.55579754996926
+          },
+          "temporal_details": {
+            "precision": 0.8971392436426566,
+            "recall": 0.8925993169450498,
+            "f1": 0.886651132468248,
+            "tp_duration": 139.3516129032258
+          }
+        },
+        "greedy_results": {
+          "precision": 0.6683459994152431,
+          "recall": 0.7516051153147926,
+          "f1_score": 0.6790992335781,
+          "mean_iou": 0.7945553213956871,
+          "num_matches": 4.935483870967742
+        },
+        "hungarian_results": {
+          "precision": 0.6683459994152431,
+          "recall": 0.7516051153147926,
+          "f1_score": 0.6790992335781,
+          "mean_iou": 0.794555321395687,
+          "num_matches": 4.935483870967742
+        },
+        "one_to_many_metrics": {
+          "precision": 0.8828686589553737,
+          "recall": 0.8522029941384778,
+          "f1_score": 0.8525517436254616,
+          "mean_iou": 0.8501640711245814,
+          "num_matches": 5.5
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.6846497923809801,
+          "segment_coverage": 0.7516051153147926
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.8567042934222554,
+          "segment_coverage": 0.8522029941384778
+        }
+      },
+      "num_samples": 62
+    },
+    "C1_MOVIE": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.34869969070519174,
+          "f1_temporal": 0.7310360698406525,
+          "unified_score": 0.34869969070519174,
+          "segment_details": {
+            "precision": 0.43757289683587874,
+            "recall": 0.3427750780055199,
+            "f1": 0.34869969070519174,
+            "matched_iou_sum": 4.906639108614463
+          },
+          "temporal_details": {
+            "precision": 0.6869432449282039,
+            "recall": 0.8160299251074481,
+            "f1": 0.7310360698406525,
+            "tp_duration": 111.17639344262295
+          }
+        },
+        "greedy_results": {
+          "precision": 0.44714440342643363,
+          "recall": 0.35991590378393307,
+          "f1_score": 0.36824016945486204,
+          "mean_iou": 0.647692966148692,
+          "num_matches": 5.229508196721311
+        },
+        "hungarian_results": {
+          "precision": 0.44714440342643363,
+          "recall": 0.35991590378393307,
+          "f1_score": 0.36824016945486204,
+          "mean_iou": 0.647692966148692,
+          "num_matches": 5.229508196721311
+        },
+        "one_to_many_metrics": {
+          "precision": 0.5239034208714485,
+          "recall": 0.4039552310132873,
+          "f1_score": 0.43178092811254326,
+          "mean_iou": 0.6501922406581353,
+          "num_matches": 5.590163934426229
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.3823070584135243,
+          "segment_coverage": 0.35991590378393307
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.46242252177389487,
+          "segment_coverage": 0.4039552310132873
+        }
+      },
+      "num_samples": 61
+    },
+    "C1_NEWS": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.566487463760325,
+          "f1_temporal": 0.8493643339220922,
+          "unified_score": 0.566487463760325,
+          "segment_details": {
+            "precision": 0.5918663363184143,
+            "recall": 0.6381500860972065,
+            "f1": 0.566487463760325,
+            "matched_iou_sum": 2.536055649339632
+          },
+          "temporal_details": {
+            "precision": 0.8265984679786128,
+            "recall": 0.9147225523835328,
+            "f1": 0.8493643339220922,
+            "tp_duration": 167.6724637681159
+          }
+        },
+        "greedy_results": {
+          "precision": 0.6035516547094997,
+          "recall": 0.6771522618709319,
+          "f1_score": 0.5968828820068184,
+          "mean_iou": 0.763401864528133,
+          "num_matches": 2.710144927536232
+        },
+        "hungarian_results": {
+          "precision": 0.6035516547094997,
+          "recall": 0.6771522618709319,
+          "f1_score": 0.5968828820068184,
+          "mean_iou": 0.763401864528133,
+          "num_matches": 2.710144927536232
+        },
+        "one_to_many_metrics": {
+          "precision": 0.7320619597793511,
+          "recall": 0.7169268190367936,
+          "f1_score": 0.6819469772544047,
+          "mean_iou": 0.7853211626063719,
+          "num_matches": 2.927536231884058
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.6722636585277807,
+          "segment_coverage": 0.6771522618709319
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.7793283542288209,
+          "segment_coverage": 0.7169268190367935
+        }
+      },
+      "num_samples": 69
+    },
+    "CS0_BASEBALL": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.44809813229561063,
+          "f1_temporal": 0.7546451225194005,
+          "unified_score": 0.44809813229561063,
+          "segment_details": {
+            "precision": 0.4354971436361237,
+            "recall": 0.5234961384503773,
+            "f1": 0.44809813229561063,
+            "matched_iou_sum": 4.005085817490814
+          },
+          "temporal_details": {
+            "precision": 0.7246827822202639,
+            "recall": 0.8206408547347624,
+            "f1": 0.7546451225194005,
+            "tp_duration": 53.60294117647059
+          }
+        },
+        "greedy_results": {
+          "precision": 0.4629458849361009,
+          "recall": 0.5543992387850519,
+          "f1_score": 0.47772081348887563,
+          "mean_iou": 0.69231854627219,
+          "num_matches": 4.323529411764706
+        },
+        "hungarian_results": {
+          "precision": 0.4629458849361009,
+          "recall": 0.5543992387850519,
+          "f1_score": 0.47772081348887563,
+          "mean_iou": 0.69231854627219,
+          "num_matches": 4.323529411764706
+        },
+        "one_to_many_metrics": {
+          "precision": 0.6406104417480596,
+          "recall": 0.6405894434765542,
+          "f1_score": 0.6149741284703123,
+          "mean_iou": 0.7359106352051527,
+          "num_matches": 4.6911764705882355
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.5075669481369323,
+          "segment_coverage": 0.5543992387850519
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.6763981920472855,
+          "segment_coverage": 0.6405894434765542
+        }
+      },
+      "num_samples": 68
+    },
+    "CS0_BASEBALL_LOGO": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.5598495333453577,
+          "f1_temporal": 0.7437609051253716,
+          "unified_score": 0.5598495333453577,
+          "segment_details": {
+            "precision": 0.5562660147517433,
+            "recall": 0.6095473852940572,
+            "f1": 0.5598495333453577,
+            "matched_iou_sum": 10.769912236008011
+          },
+          "temporal_details": {
+            "precision": 0.7817535625571619,
+            "recall": 0.8007531084577866,
+            "f1": 0.7437609051253716,
+            "tp_duration": 123.03125000000003
+          }
+        },
+        "greedy_results": {
+          "precision": 0.625355346162185,
+          "recall": 0.6808235886342642,
+          "f1_score": 0.6301705213823642,
+          "mean_iou": 0.8010273584509695,
+          "num_matches": 12.0625
+        },
+        "hungarian_results": {
+          "precision": 0.625355346162185,
+          "recall": 0.6808235886342642,
+          "f1_score": 0.6301705213823642,
+          "mean_iou": 0.8010273584509695,
+          "num_matches": 12.0625
+        },
+        "one_to_many_metrics": {
+          "precision": 0.7209109269480911,
+          "recall": 0.728291752837964,
+          "f1_score": 0.7031648953095642,
+          "mean_iou": 0.8007893772785022,
+          "num_matches": 12.765625
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.6031570681787018,
+          "segment_coverage": 0.6808235886342642
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.6846459217943586,
+          "segment_coverage": 0.7282917528379639
+        }
+      },
+      "num_samples": 64
+    },
+    "CS0_BASKETBALL": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.35007733003911495,
+          "f1_temporal": 0.6059098036934305,
+          "unified_score": 0.35007733003911495,
+          "segment_details": {
+            "precision": 0.3499879183810208,
+            "recall": 0.46873650744080103,
+            "f1": 0.35007733003911495,
+            "matched_iou_sum": 5.591225096356301
+          },
+          "temporal_details": {
+            "precision": 0.5610464610020487,
+            "recall": 0.8694155123165671,
+            "f1": 0.6059098036934305,
+            "tp_duration": 106.6165
+          }
+        },
+        "greedy_results": {
+          "precision": 0.3558072179893512,
+          "recall": 0.4467961235266591,
+          "f1_score": 0.3474988509046932,
+          "mean_iou": 0.7263566446238232,
+          "num_matches": 5.514705882352941
+        },
+        "hungarian_results": {
+          "precision": 0.3541732310612466,
+          "recall": 0.4455706333305806,
+          "f1_score": 0.34609829068060355,
+          "mean_iou": 0.7273968288426721,
+          "num_matches": 5.5
+        },
+        "one_to_many_metrics": {
+          "precision": 0.4818051958201304,
+          "recall": 0.508990544639836,
+          "f1_score": 0.4495882605301566,
+          "mean_iou": 0.7415731179167064,
+          "num_matches": 6.661764705882353
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.47707643973860764,
+          "segment_coverage": 0.4455706333305806
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.6136683441886835,
+          "segment_coverage": 0.5089905446398358
+        }
+      },
+      "num_samples": 68
+    },
+    "CS0_FOOTBALL": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.363565698722936,
+          "f1_temporal": 0.5236798301493875,
+          "unified_score": 0.363565698722936,
+          "segment_details": {
+            "precision": 0.33029623669342517,
+            "recall": 0.44801473030687783,
+            "f1": 0.363565698722936,
+            "matched_iou_sum": 3.133426185959724
+          },
+          "temporal_details": {
+            "precision": 0.4812251144834889,
+            "recall": 0.6612917446677582,
+            "f1": 0.5236798301493875,
+            "tp_duration": 30.642031250000002
+          }
+        },
+        "greedy_results": {
+          "precision": 0.34650551541288943,
+          "recall": 0.4602386979340104,
+          "f1_score": 0.37786047686307767,
+          "mean_iou": 0.6387293840002028,
+          "num_matches": 3.140625
+        },
+        "hungarian_results": {
+          "precision": 0.34650551541288943,
+          "recall": 0.4602386979340104,
+          "f1_score": 0.37786047686307767,
+          "mean_iou": 0.6387293840002028,
+          "num_matches": 3.140625
+        },
+        "one_to_many_metrics": {
+          "precision": 0.44974728309232526,
+          "recall": 0.5105430810508936,
+          "f1_score": 0.45545555037348345,
+          "mean_iou": 0.6602682571130649,
+          "num_matches": 3.390625
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.4509179916230088,
+          "segment_coverage": 0.4602386979340104
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.5506274255130089,
+          "segment_coverage": 0.5105430810508935
+        }
+      },
+      "num_samples": 64
+    },
+    "CS1_BASEBALL": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.35575259422295447,
+          "f1_temporal": 0.7079498465116912,
+          "unified_score": 0.35575259422295447,
+          "segment_details": {
+            "precision": 0.41118575144071046,
+            "recall": 0.3375548186135246,
+            "f1": 0.35575259422295447,
+            "matched_iou_sum": 6.833034294569002
+          },
+          "temporal_details": {
+            "precision": 0.6424357019642383,
+            "recall": 0.8097184855822425,
+            "f1": 0.7079498465116912,
+            "tp_duration": 71.68760869565217
+          }
+        },
+        "greedy_results": {
+          "precision": 0.3792484941493272,
+          "recall": 0.323421250642486,
+          "f1_score": 0.3385022727085977,
+          "mean_iou": 0.6283919147799342,
+          "num_matches": 6.043478260869565
+        },
+        "hungarian_results": {
+          "precision": 0.3792484941493272,
+          "recall": 0.323421250642486,
+          "f1_score": 0.3385022727085977,
+          "mean_iou": 0.6283919147799343,
+          "num_matches": 6.043478260869565
+        },
+        "one_to_many_metrics": {
+          "precision": 0.45553756082067975,
+          "recall": 0.3660077606203003,
+          "f1_score": 0.3956261823678439,
+          "mean_iou": 0.6506059478192128,
+          "num_matches": 6.326086956521739
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.38848020851716586,
+          "segment_coverage": 0.323421250642486
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.4559664029054327,
+          "segment_coverage": 0.3660077606203003
+        }
+      },
+      "num_samples": 46
+    },
+    "CS1_BASKETBALL": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.1947906192718129,
+          "f1_temporal": 0.29113849375655515,
+          "unified_score": 0.1947906192718129,
+          "segment_details": {
+            "precision": 0.14566666697446135,
+            "recall": 0.47278291615672086,
+            "f1": 0.1947906192718129,
+            "matched_iou_sum": 4.890427972535816
+          },
+          "temporal_details": {
+            "precision": 0.20140520757463104,
+            "recall": 0.8683977056893759,
+            "f1": 0.29113849375655515,
+            "tp_duration": 35.37857142857143
+          }
+        },
+        "greedy_results": {
+          "precision": 0.12038708051885705,
+          "recall": 0.4193970711827856,
+          "f1_score": 0.16260919911607843,
+          "mean_iou": 0.7590880325194052,
+          "num_matches": 4.0476190476190474
+        },
+        "hungarian_results": {
+          "precision": 0.12038708051885705,
+          "recall": 0.4193970711827856,
+          "f1_score": 0.16260919911607843,
+          "mean_iou": 0.7590880325194052,
+          "num_matches": 4.0476190476190474
+        },
+        "one_to_many_metrics": {
+          "precision": 0.15462629846629355,
+          "recall": 0.4508499367521924,
+          "f1_score": 0.20363173701919485,
+          "mean_iou": 0.7754902990722318,
+          "num_matches": 4.523809523809524
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.43411890488600247,
+          "segment_coverage": 0.4193970711827856
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.515088264577012,
+          "segment_coverage": 0.4508499367521924
+        }
+      },
+      "num_samples": 21
+    },
+    "CS1_FOOTBALL": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.33027511392168196,
+          "f1_temporal": 0.4124008502267134,
+          "unified_score": 0.33027511392168196,
+          "segment_details": {
+            "precision": 0.2783989787518821,
+            "recall": 0.4865334388512095,
+            "f1": 0.33027511392168196,
+            "matched_iou_sum": 2.481591307084728
+          },
+          "temporal_details": {
+            "precision": 0.32351970260740304,
+            "recall": 0.7853706969397275,
+            "f1": 0.4124008502267134,
+            "tp_duration": 19.0
+          }
+        },
+        "greedy_results": {
+          "precision": 0.3013798610108014,
+          "recall": 0.4611505681818182,
+          "f1_score": 0.34633401707661293,
+          "mean_iou": 0.5935096500721501,
+          "num_matches": 2.4375
+        },
+        "hungarian_results": {
+          "precision": 0.3013798610108014,
+          "recall": 0.4611505681818182,
+          "f1_score": 0.34633401707661293,
+          "mean_iou": 0.5935096500721501,
+          "num_matches": 2.4375
+        },
+        "one_to_many_metrics": {
+          "precision": 0.3130258237437206,
+          "recall": 0.4611505681818182,
+          "f1_score": 0.3534916243592544,
+          "mean_iou": 0.5894348688592109,
+          "num_matches": 2.4375
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.5074134028268761,
+          "segment_coverage": 0.4611505681818182
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.5110168774355053,
+          "segment_coverage": 0.4611505681818182
+        }
+      },
+      "num_samples": 16
+    },
+    "H0_NEWS": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.7398783808282821,
+          "f1_temporal": 0.9954847592772706,
+          "unified_score": 0.7398783808282821,
+          "segment_details": {
+            "precision": 0.7733077137616735,
+            "recall": 0.7396340108529972,
+            "f1": 0.7398783808282821,
+            "matched_iou_sum": 7.0242789371560495
+          },
+          "temporal_details": {
+            "precision": 0.9999488602360251,
+            "recall": 0.9915265685694801,
+            "f1": 0.9954847592772706,
+            "tp_duration": 1464.2295785714286
+          }
+        },
+        "greedy_results": {
+          "precision": 0.8116310277024564,
+          "recall": 0.7718547325690184,
+          "f1_score": 0.7749641476023607,
+          "mean_iou": 0.9135776591736536,
+          "num_matches": 7.214285714285714
+        },
+        "hungarian_results": {
+          "precision": 0.8116310277024564,
+          "recall": 0.7718547325690184,
+          "f1_score": 0.7749641476023607,
+          "mean_iou": 0.9135776591736536,
+          "num_matches": 7.214285714285714
+        },
+        "one_to_many_metrics": {
+          "precision": 0.9154771815486101,
+          "recall": 0.7869340976483834,
+          "f1_score": 0.8412517391169575,
+          "mean_iou": 0.9225221700113658,
+          "num_matches": 7.357142857142857
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.8649634848636303,
+          "segment_coverage": 0.7718547325690184
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.8932650190697818,
+          "segment_coverage": 0.7869340976483834
+        }
+      },
+      "num_samples": 14
+    },
+    "H13_NEWS": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.9533303102493794,
+          "f1_temporal": 0.9999163133761537,
+          "unified_score": 0.9533303102493794,
+          "segment_details": {
+            "precision": 0.9516910302631852,
+            "recall": 0.9587815407818566,
+            "f1": 0.9533303102493794,
+            "matched_iou_sum": 5.507779326841465
+          },
+          "temporal_details": {
+            "precision": 0.9998326649068537,
+            "recall": 1.0,
+            "f1": 0.9999163133761537,
+            "tp_duration": 1378.0361954482757
+          }
+        },
+        "greedy_results": {
+          "precision": 0.9535809018567639,
+          "recall": 0.9609195402298851,
+          "f1_score": 0.9552741571797833,
+          "mean_iou": 0.9804403728099822,
+          "num_matches": 5.517241379310345
+        },
+        "hungarian_results": {
+          "precision": 0.9535809018567639,
+          "recall": 0.9609195402298851,
+          "f1_score": 0.9552741571797833,
+          "mean_iou": 0.9804403728099822,
+          "num_matches": 5.517241379310345
+        },
+        "one_to_many_metrics": {
+          "precision": 0.9948844259189087,
+          "recall": 0.9701149425287356,
+          "f1_score": 0.9799049548265849,
+          "mean_iou": 0.9883343749174426,
+          "num_matches": 5.586206896551724
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.9595725941617385,
+          "segment_coverage": 0.9609195402298851
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.9884821146082483,
+          "segment_coverage": 0.9701149425287356
+        }
+      },
+      "num_samples": 29
+    },
+    "H13_OTHERS": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.9868237902624114,
+          "f1_temporal": 0.9991511992132999,
+          "unified_score": 0.9868237902624114,
+          "segment_details": {
+            "precision": 0.9961651472878199,
+            "recall": 0.978741677956754,
+            "f1": 0.9868237902624114,
+            "matched_iou_sum": 5.173794754534654
+          },
+          "temporal_details": {
+            "precision": 0.9995257023966838,
+            "recall": 0.9987883253108263,
+            "f1": 0.9991511992132999,
+            "tp_duration": 755.4958789333334
+          }
+        },
+        "greedy_results": {
+          "precision": 1.0,
+          "recall": 0.9821428571428572,
+          "f1_score": 0.9904273504273504,
+          "mean_iou": 0.9961651472878199,
+          "num_matches": 5.2
+        },
+        "hungarian_results": {
+          "precision": 1.0,
+          "recall": 0.9821428571428572,
+          "f1_score": 0.9904273504273504,
+          "mean_iou": 0.9961651472878199,
+          "num_matches": 5.2
+        },
+        "one_to_many_metrics": {
+          "precision": 1.0,
+          "recall": 0.9821428571428572,
+          "f1_score": 0.9904273504273504,
+          "mean_iou": 0.9961651472878199,
+          "num_matches": 5.2
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.997217696074406,
+          "segment_coverage": 0.9821428571428572
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.997217696074406,
+          "segment_coverage": 0.9821428571428572
+        }
+      },
+      "num_samples": 15
+    },
+    "H14_NEWS": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.9710366680457846,
+          "f1_temporal": 0.972829292226559,
+          "unified_score": 0.9710366680457846,
+          "segment_details": {
+            "precision": 0.9982142686878368,
+            "recall": 0.9567062187202696,
+            "f1": 0.9710366680457846,
+            "matched_iou_sum": 20.334734696286933
+          },
+          "temporal_details": {
+            "precision": 0.9993298122946859,
+            "recall": 0.9583058115403255,
+            "f1": 0.972829292226559,
+            "tp_duration": 1462.219180448276
+          }
+        },
+        "greedy_results": {
+          "precision": 0.9988063660477453,
+          "recall": 0.9572983160801781,
+          "f1_score": 0.9716287654056931,
+          "mean_iou": 0.9994079026400915,
+          "num_matches": 20.344827586206897
+        },
+        "hungarian_results": {
+          "precision": 0.9988063660477453,
+          "recall": 0.9572983160801781,
+          "f1_score": 0.9716287654056931,
+          "mean_iou": 0.9994079026400915,
+          "num_matches": 20.344827586206897
+        },
+        "one_to_many_metrics": {
+          "precision": 0.9988063660477453,
+          "recall": 0.9572983160801781,
+          "f1_score": 0.9716287654056931,
+          "mean_iou": 0.9994079026400915,
+          "num_matches": 20.344827586206897
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.9583058115403255,
+          "segment_coverage": 0.9572983160801781
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.9583058115403255,
+          "segment_coverage": 0.9572983160801781
+        }
+      },
+      "num_samples": 29
+    },
+    "H14_OTHERS": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.9227098205208714,
+          "f1_temporal": 0.9344511214974625,
+          "unified_score": 0.9227098205208714,
+          "segment_details": {
+            "precision": 0.9976504810495427,
+            "recall": 0.887491067115619,
+            "f1": 0.9227098205208714,
+            "matched_iou_sum": 9.641635202297785
+          },
+          "temporal_details": {
+            "precision": 0.9999795375997546,
+            "recall": 0.906342827930401,
+            "f1": 0.9344511214974625,
+            "tp_duration": 749.9888889166667
+          }
+        },
+        "greedy_results": {
+          "precision": 1.0,
+          "recall": 0.8897222222222222,
+          "f1_score": 0.9249973826296346,
+          "mean_iou": 0.9976504810495427,
+          "num_matches": 9.666666666666666
+        },
+        "hungarian_results": {
+          "precision": 1.0,
+          "recall": 0.8897222222222222,
+          "f1_score": 0.9249973826296346,
+          "mean_iou": 0.9976504810495427,
+          "num_matches": 9.666666666666666
+        },
+        "one_to_many_metrics": {
+          "precision": 1.0,
+          "recall": 0.8897222222222222,
+          "f1_score": 0.9249973826296346,
+          "mean_iou": 0.9976504810495427,
+          "num_matches": 9.666666666666666
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.9048844187818471,
+          "segment_coverage": 0.8897222222222222
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.9048844187818471,
+          "segment_coverage": 0.8897222222222222
+        }
+      },
+      "num_samples": 12
+    },
+    "H16_BASKETBALL_r1": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.3096096381516763,
+          "f1_temporal": 0.42296734998193025,
+          "unified_score": 0.3096096381516763,
+          "segment_details": {
+            "precision": 0.3322290706258839,
+            "recall": 0.33226418405329644,
+            "f1": 0.3096096381516763,
+            "matched_iou_sum": 2.1004668858378395
+          },
+          "temporal_details": {
+            "precision": 0.45774175263996575,
+            "recall": 0.4744345467737623,
+            "f1": 0.42296734998193025,
+            "tp_duration": 29.338869565217404
+          }
+        },
+        "greedy_results": {
+          "precision": 0.3700156678417547,
+          "recall": 0.3655070372461676,
+          "f1_score": 0.34614815988217523,
+          "mean_iou": 0.4897044534896345,
+          "num_matches": 2.217391304347826
+        },
+        "hungarian_results": {
+          "precision": 0.3700156678417547,
+          "recall": 0.3655070372461676,
+          "f1_score": 0.34614815988217523,
+          "mean_iou": 0.4897044534896345,
+          "num_matches": 2.217391304347826
+        },
+        "one_to_many_metrics": {
+          "precision": 0.3965857161509335,
+          "recall": 0.3655070372461676,
+          "f1_score": 0.35428704068511224,
+          "mean_iou": 0.49614142750412743,
+          "num_matches": 2.217391304347826
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.33487413942459093,
+          "segment_coverage": 0.3655070372461676
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.3410837188310851,
+          "segment_coverage": 0.3655070372461676
+        }
+      },
+      "num_samples": 23
+    },
+    "H16_BASKETBALL_r2": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.25547147228287365,
+          "f1_temporal": 0.3306363232597835,
+          "unified_score": 0.25547147228287365,
+          "segment_details": {
+            "precision": 0.25204853447194847,
+            "recall": 0.3099631212334463,
+            "f1": 0.25547147228287365,
+            "matched_iou_sum": 1.7328406121951772
+          },
+          "temporal_details": {
+            "precision": 0.3328484578307679,
+            "recall": 0.4336513739480771,
+            "f1": 0.3306363232597835,
+            "tp_duration": 31.66526666666668
+          }
+        },
+        "greedy_results": {
+          "precision": 0.24677962266778056,
+          "recall": 0.32704812351153817,
+          "f1_score": 0.2592024057813532,
+          "mean_iou": 0.3523069253492658,
+          "num_matches": 2.0
+        },
+        "hungarian_results": {
+          "precision": 0.24677962266778056,
+          "recall": 0.32704812351153817,
+          "f1_score": 0.2592024057813532,
+          "mean_iou": 0.3523069253492658,
+          "num_matches": 2.0
+        },
+        "one_to_many_metrics": {
+          "precision": 0.24677962266778058,
+          "recall": 0.32704812351153817,
+          "f1_score": 0.2592024057813531,
+          "mean_iou": 0.3523069253492658,
+          "num_matches": 2.0
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.30745559656754223,
+          "segment_coverage": 0.32704812351153817
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.30745559656754223,
+          "segment_coverage": 0.32704812351153817
+        }
+      },
+      "num_samples": 30
+    },
+    "H16_FOOTBALL_r1": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.3975952116783857,
+          "f1_temporal": 0.5099476072704614,
+          "unified_score": 0.3975952116783857,
+          "segment_details": {
+            "precision": 0.41358101445788337,
+            "recall": 0.4336828617732858,
+            "f1": 0.3975952116783857,
+            "matched_iou_sum": 1.9818348934007615
+          },
+          "temporal_details": {
+            "precision": 0.5676591174507062,
+            "recall": 0.5293615022461426,
+            "f1": 0.5099476072704614,
+            "tp_duration": 42.79255999999997
+          }
+        },
+        "greedy_results": {
+          "precision": 0.4679761904761905,
+          "recall": 0.49336507936507934,
+          "f1_score": 0.45103386071161006,
+          "mean_iou": 0.5433292026707338,
+          "num_matches": 2.36
+        },
+        "hungarian_results": {
+          "precision": 0.4679761904761905,
+          "recall": 0.49336507936507934,
+          "f1_score": 0.45103386071161006,
+          "mean_iou": 0.5433292026707338,
+          "num_matches": 2.36
+        },
+        "one_to_many_metrics": {
+          "precision": 0.4679761904761905,
+          "recall": 0.49336507936507934,
+          "f1_score": 0.45103386071161006,
+          "mean_iou": 0.5433292026707338,
+          "num_matches": 2.36
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.42266749173730034,
+          "segment_coverage": 0.49336507936507934
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.42266749173730034,
+          "segment_coverage": 0.49336507936507934
+        }
+      },
+      "num_samples": 25
+    },
+    "H16_FOOTBALL_r2": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.3962790823556357,
+          "f1_temporal": 0.4962390886599082,
+          "unified_score": 0.3962790823556357,
+          "segment_details": {
+            "precision": 0.387416512558358,
+            "recall": 0.414994095806313,
+            "f1": 0.3962790823556357,
+            "matched_iou_sum": 1.4053988079401423
+          },
+          "temporal_details": {
+            "precision": 0.4960033674822214,
+            "recall": 0.5328725657701853,
+            "f1": 0.4962390886599082,
+            "tp_duration": 52.112700000000004
+          }
+        },
+        "greedy_results": {
+          "precision": 0.44225872249060655,
+          "recall": 0.4749762113892549,
+          "f1_score": 0.45394092786165957,
+          "mean_iou": 0.43600068107662293,
+          "num_matches": 1.2666666666666666
+        },
+        "hungarian_results": {
+          "precision": 0.44225872249060655,
+          "recall": 0.4749762113892549,
+          "f1_score": 0.45394092786165957,
+          "mean_iou": 0.43600068107662293,
+          "num_matches": 1.2666666666666666
+        },
+        "one_to_many_metrics": {
+          "precision": 0.4722587224906066,
+          "recall": 0.47914287805592154,
+          "f1_score": 0.47362903702345294,
+          "mean_iou": 0.4364254251495243,
+          "num_matches": 1.3
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.4022743017515163,
+          "segment_coverage": 0.4749762113892549
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.4222854719275731,
+          "segment_coverage": 0.47914287805592154
+        }
+      },
+      "num_samples": 30
+    },
+    "H16_SOCCER": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.31643188377213766,
+          "f1_temporal": 0.4145481579695929,
+          "unified_score": 0.31643188377213766,
+          "segment_details": {
+            "precision": 0.31697203162456783,
+            "recall": 0.36151330269143306,
+            "f1": 0.31643188377213766,
+            "matched_iou_sum": 1.1590592715052774
+          },
+          "temporal_details": {
+            "precision": 0.48329261163251414,
+            "recall": 0.4722962056774374,
+            "f1": 0.4145481579695929,
+            "tp_duration": 37.921299999999974
+          }
+        },
+        "greedy_results": {
+          "precision": 0.30247474747474745,
+          "recall": 0.3538888888888889,
+          "f1_score": 0.30617625259730524,
+          "mean_iou": 0.44612631172531586,
+          "num_matches": 1.0333333333333334
+        },
+        "hungarian_results": {
+          "precision": 0.30247474747474745,
+          "recall": 0.3538888888888889,
+          "f1_score": 0.30617625259730524,
+          "mean_iou": 0.44612631172531586,
+          "num_matches": 1.0333333333333334
+        },
+        "one_to_many_metrics": {
+          "precision": 0.3333838383838384,
+          "recall": 0.3788888888888889,
+          "f1_score": 0.33458081100186365,
+          "mean_iou": 0.44518214890640606,
+          "num_matches": 1.1333333333333333
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.32123670493983697,
+          "segment_coverage": 0.3538888888888889
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.34327909540110674,
+          "segment_coverage": 0.3788888888888889
+        }
+      },
+      "num_samples": 30
+    },
+    "H3_NEWS": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.6008560667545205,
+          "f1_temporal": 0.9914322977498531,
+          "unified_score": 0.6008560667545205,
+          "segment_details": {
+            "precision": 0.647136835758273,
+            "recall": 0.6289627487944058,
+            "f1": 0.6008560667545205,
+            "matched_iou_sum": 14.783575913997517
+          },
+          "temporal_details": {
+            "precision": 0.9976194053064594,
+            "recall": 0.9869870699133121,
+            "f1": 0.9914322977498531,
+            "tp_duration": 1756.8693053968257
+          }
+        },
+        "greedy_results": {
+          "precision": 0.718332957229771,
+          "recall": 0.6881746952143375,
+          "f1_score": 0.6632720504753389,
+          "mean_iou": 0.8678616394388241,
+          "num_matches": 16.22222222222222
+        },
+        "hungarian_results": {
+          "precision": 0.718332957229771,
+          "recall": 0.6881746952143375,
+          "f1_score": 0.6632720504753389,
+          "mean_iou": 0.8678616394388241,
+          "num_matches": 16.22222222222222
+        },
+        "one_to_many_metrics": {
+          "precision": 0.9607053946589977,
+          "recall": 0.7461115859697922,
+          "f1_score": 0.8272053932347927,
+          "mean_iou": 0.8961338461529426,
+          "num_matches": 17.41269841269841
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.7827965898297291,
+          "segment_coverage": 0.6881746952143375
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.903805069464882,
+          "segment_coverage": 0.7461115859697922
+        }
+      },
+      "num_samples": 63
+    },
+    "H8_MOVIE": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.9094960266185352,
+          "f1_temporal": 0.9637771711783611,
+          "unified_score": 0.9094960266185352,
+          "segment_details": {
+            "precision": 0.882835688815442,
+            "recall": 0.9628167022247217,
+            "f1": 0.9094960266185352,
+            "matched_iou_sum": 1.7695271896877067
+          },
+          "temporal_details": {
+            "precision": 0.961243697465862,
+            "recall": 0.969267064869782,
+            "f1": 0.9637771711783611,
+            "tp_duration": 110.28666666666665
+          }
+        },
+        "greedy_results": {
+          "precision": 0.9166666666666666,
+          "recall": 1.0,
+          "f1_score": 0.9444444444444443,
+          "mean_iou": 0.9628167022247217,
+          "num_matches": 1.8333333333333333
+        },
+        "hungarian_results": {
+          "precision": 0.9166666666666666,
+          "recall": 1.0,
+          "f1_score": 0.9444444444444443,
+          "mean_iou": 0.9628167022247217,
+          "num_matches": 1.8333333333333333
+        },
+        "one_to_many_metrics": {
+          "precision": 0.9166666666666666,
+          "recall": 1.0,
+          "f1_score": 0.9444444444444443,
+          "mean_iou": 0.9628167022247217,
+          "num_matches": 1.8333333333333333
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.969267064869782,
+          "segment_coverage": 1.0
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.969267064869782,
+          "segment_coverage": 1.0
+        }
+      },
+      "num_samples": 6
+    },
+    "H8_NEWS": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.7548347198608869,
+          "f1_temporal": 0.8085019147466266,
+          "unified_score": 0.7548347198608869,
+          "segment_details": {
+            "precision": 0.703436444204459,
+            "recall": 0.9273425412664479,
+            "f1": 0.7548347198608869,
+            "matched_iou_sum": 1.8093907097976305
+          },
+          "temporal_details": {
+            "precision": 0.7567219965340463,
+            "recall": 0.9417452299773491,
+            "f1": 0.8085019147466266,
+            "tp_duration": 98.96840909090908
+          }
+        },
+        "greedy_results": {
+          "precision": 0.7143023643023644,
+          "recall": 0.9431818181818182,
+          "f1_score": 0.766960186278368,
+          "mean_iou": 0.960927769000898,
+          "num_matches": 1.8409090909090908
+        },
+        "hungarian_results": {
+          "precision": 0.7143023643023644,
+          "recall": 0.9431818181818182,
+          "f1_score": 0.766960186278368,
+          "mean_iou": 0.960927769000898,
+          "num_matches": 1.8409090909090908
+        },
+        "one_to_many_metrics": {
+          "precision": 0.7143023643023644,
+          "recall": 0.9431818181818182,
+          "f1_score": 0.766960186278368,
+          "mean_iou": 0.960927769000898,
+          "num_matches": 1.8409090909090908
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.9417452299773491,
+          "segment_coverage": 0.9431818181818182
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.9417452299773491,
+          "segment_coverage": 0.9431818181818182
+        }
+      },
+      "num_samples": 44
+    },
+    "L0_MOVIE": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.025256347698177577,
+          "f1_temporal": 0.05133922830482088,
+          "unified_score": 0.025256347698177577,
+          "segment_details": {
+            "precision": 0.02562303443789948,
+            "recall": 0.026550913177902025,
+            "f1": 0.025256347698177577,
+            "matched_iou_sum": 0.27336901083608556
+          },
+          "temporal_details": {
+            "precision": 0.027433859016227576,
+            "recall": 0.5926173441970078,
+            "f1": 0.05133922830482088,
+            "tp_duration": 0.3776000000000012
+          }
+        },
+        "greedy_results": {
+          "precision": 0.0012121212121212121,
+          "recall": 0.002352941176470588,
+          "f1_score": 0.0016,
+          "mean_iou": 0.023399999999999997,
+          "num_matches": 0.04
+        },
+        "hungarian_results": {
+          "precision": 0.0012121212121212121,
+          "recall": 0.002352941176470588,
+          "f1_score": 0.0016,
+          "mean_iou": 0.023399999999999997,
+          "num_matches": 0.04
+        },
+        "one_to_many_metrics": {
+          "precision": 0.001212121212121211,
+          "recall": 0.002352941176470589,
+          "f1_score": 0.0015999999999999992,
+          "mean_iou": 0.023399999999999997,
+          "num_matches": 0.04
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.025714285714285693,
+          "segment_coverage": 0.002352941176470588
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.025714285714285693,
+          "segment_coverage": 0.002352941176470588
+        }
+      },
+      "num_samples": 25
+    },
+    "L0_NEWS": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.16253323450311266,
+          "f1_temporal": 0.26989616446769366,
+          "unified_score": 0.16253323450311266,
+          "segment_details": {
+            "precision": 0.16618967672619195,
+            "recall": 0.16181907141814544,
+            "f1": 0.16253323450311266,
+            "matched_iou_sum": 2.1454239291584702
+          },
+          "temporal_details": {
+            "precision": 0.1864644903613118,
+            "recall": 0.5697712504837077,
+            "f1": 0.26989616446769366,
+            "tp_duration": 2.6184000000000007
+          }
+        },
+        "greedy_results": {
+          "precision": 0.07512607567870726,
+          "recall": 0.07424217595270227,
+          "f1_score": 0.07375946928282857,
+          "mean_iou": 0.3636880900867667,
+          "num_matches": 1.0
+        },
+        "hungarian_results": {
+          "precision": 0.07512607567870726,
+          "recall": 0.07424217595270227,
+          "f1_score": 0.07375946928282857,
+          "mean_iou": 0.3636880900867667,
+          "num_matches": 1.0
+        },
+        "one_to_many_metrics": {
+          "precision": 0.07876243931507089,
+          "recall": 0.07424217595270229,
+          "f1_score": 0.07527671066213892,
+          "mean_iou": 0.3618249321920298,
+          "num_matches": 1.0
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.1288936340746987,
+          "segment_coverage": 0.07424217595270227
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.13134261366653543,
+          "segment_coverage": 0.07424217595270227
+        }
+      },
+      "num_samples": 25
+    },
+    "L0_SPORTS": {
+      "averaged_metrics": {
+        "f1_results": {
+          "f1_segment": 0.11058658950108705,
+          "f1_temporal": 0.1978454357298448,
+          "unified_score": 0.11058658950108705,
+          "segment_details": {
+            "precision": 0.10963526515395737,
+            "recall": 0.11323631532893076,
+            "f1": 0.11058658950108705,
+            "matched_iou_sum": 0.8111309860186846
+          },
+          "temporal_details": {
+            "precision": 0.1330082106782106,
+            "recall": 0.5384845025697267,
+            "f1": 0.1978454357298448,
+            "tp_duration": 0.9651999999999995
+          }
+        },
+        "greedy_results": {
+          "precision": 0.0853982683982684,
+          "recall": 0.08747763347763347,
+          "f1_score": 0.08588892153598035,
+          "mean_iou": 0.30494579651652076,
+          "num_matches": 0.6
+        },
+        "hungarian_results": {
+          "precision": 0.0853982683982684,
+          "recall": 0.08747763347763347,
+          "f1_score": 0.08588892153598035,
+          "mean_iou": 0.30494579651652076,
+          "num_matches": 0.6
+        },
+        "one_to_many_metrics": {
+          "precision": 0.0853982683982684,
+          "recall": 0.08747763347763347,
+          "f1_score": 0.08588892153598035,
+          "mean_iou": 0.30494579651652076,
+          "num_matches": 0.6
+        },
+        "coverage_metrics": {
+          "temporal_coverage": 0.2146004374941437,
+          "segment_coverage": 0.08747763347763347
+        },
+        "coverage_one_to_many_metrics": {
+          "temporal_coverage": 0.2146004374941437,
+          "segment_coverage": 0.08747763347763347
+        }
+      },
+      "num_samples": 25
+    }
+  },
+  "macro_averaged": {
+    "one_to_many_metrics.precision": 0.5826394870055102,
+    "one_to_many_metrics.recall": 0.5787696890337478,
+    "one_to_many_metrics.f1_score": 0.5554537576329673,
+    "one_to_many_metrics.mean_iou": 0.6849428485076593,
+    "one_to_many_metrics.num_matches": 5.49291000008758,
+    "hungarian_results.precision": 0.5127386168001127,
+    "hungarian_results.recall": 0.5498613309794708,
+    "hungarian_results.f1_score": 0.5037328072619812,
+    "hungarian_results.mean_iou": 0.6737540871279833,
+    "hungarian_results.num_matches": 5.198373148389106,
+    "greedy_results.precision": 0.512791326055858,
+    "greedy_results.recall": 0.5499008629212797,
+    "greedy_results.f1_score": 0.5037779866240486,
+    "greedy_results.mean_iou": 0.6737205327983431,
+    "greedy_results.num_matches": 5.198847531690813,
+    "coverage_metrics.temporal_coverage": 0.5580125485518501,
+    "coverage_metrics.segment_coverage": 0.5498613309794708,
+    "coverage_one_to_many_metrics.temporal_coverage": 0.6110942158330157,
+    "coverage_one_to_many_metrics.segment_coverage": 0.5787696890337478,
+    "f1_results.f1_segment": 0.48703028907910767,
+    "f1_results.f1_temporal": 0.6605581319475701,
+    "f1_results.unified_score": 0.48703028907910767
+  },
+  "global_averaged": {
+    "f1_results": {
+      "f1_segment": 0.4738720044186632,
+      "f1_temporal": 0.6955934172796324,
+      "unified_score": 0.4738720044186632,
+      "segment_details": {
+        "precision": 0.4885042631299245,
+        "recall": 0.5249914057598811,
+        "f1": 0.4738720044186632,
+        "matched_iou_sum": 5.480474147942675
+      },
+      "temporal_details": {
+        "precision": 0.6823292455202711,
+        "recall": 0.7986608867302059,
+        "f1": 0.6955934172796324,
+        "tp_duration": 329.74618546872324
+      }
+    },
+    "greedy_results": {
+      "precision": 0.5093161245863808,
+      "recall": 0.5451349804038191,
+      "f1_score": 0.49614769058584846,
+      "mean_iou": 0.6878741812542856,
+      "num_matches": 5.688946015424165
+    },
+    "hungarian_results": {
+      "precision": 0.5092209136942547,
+      "recall": 0.5450635722347246,
+      "f1_score": 0.4960660812497404,
+      "mean_iou": 0.6879347918171661,
+      "num_matches": 5.68808911739503
+    },
+    "one_to_many_metrics": {
+      "precision": 0.6043198612184509,
+      "recall": 0.5851956797234636,
+      "f1_score": 0.566655235842709,
+      "mean_iou": 0.7039664605017412,
+      "num_matches": 6.083976006855184
+    },
+    "coverage_metrics": {
+      "temporal_coverage": 0.554010744586164,
+      "segment_coverage": 0.5450635722347246
+    },
+    "coverage_one_to_many_metrics": {
+      "temporal_coverage": 0.6283865629201403,
+      "segment_coverage": 0.5851956797234636
+    }
+  },
+  "summary": {
+    "total_samples": 1167,
+    "valid_samples": 1167,
+    "failed_samples": 0,
+    "segment_types": [
+      "A0_OTHERS",
+      "A1_NEWS",
+      "A6_MOVIE",
+      "A8_OTHERS",
+      "C0_MOVIE",
+      "C0_NEWS",
+      "C1_MOVIE",
+      "C1_NEWS",
+      "CS0_BASEBALL",
+      "CS0_BASEBALL_LOGO",
+      "CS0_BASKETBALL",
+      "CS0_FOOTBALL",
+      "CS1_BASEBALL",
+      "CS1_BASKETBALL",
+      "CS1_FOOTBALL",
+      "H0_NEWS",
+      "H13_NEWS",
+      "H13_OTHERS",
+      "H14_NEWS",
+      "H14_OTHERS",
+      "H16_BASKETBALL_r1",
+      "H16_BASKETBALL_r2",
+      "H16_FOOTBALL_r1",
+      "H16_FOOTBALL_r2",
+      "H16_SOCCER",
+      "H3_NEWS",
+      "H8_MOVIE",
+      "H8_NEWS",
+      "L0_MOVIE",
+      "L0_NEWS",
+      "L0_SPORTS"
+    ],
+    "samples_per_segment": {
+      "A0_OTHERS": 56,
+      "A1_NEWS": 45,
+      "A6_MOVIE": 24,
+      "A8_OTHERS": 48,
+      "C0_MOVIE": 30,
+      "C0_NEWS": 62,
+      "C1_MOVIE": 61,
+      "C1_NEWS": 69,
+      "CS0_BASEBALL": 68,
+      "CS0_BASEBALL_LOGO": 64,
+      "CS0_BASKETBALL": 68,
+      "CS0_FOOTBALL": 64,
+      "CS1_BASEBALL": 46,
+      "CS1_BASKETBALL": 21,
+      "CS1_FOOTBALL": 16,
+      "H0_NEWS": 14,
+      "H13_NEWS": 29,
+      "H13_OTHERS": 15,
+      "H14_NEWS": 29,
+      "H14_OTHERS": 12,
+      "H16_BASKETBALL_r1": 23,
+      "H16_BASKETBALL_r2": 30,
+      "H16_FOOTBALL_r1": 25,
+      "H16_FOOTBALL_r2": 30,
+      "H16_SOCCER": 30,
+      "H3_NEWS": 63,
+      "H8_MOVIE": 6,
+      "H8_NEWS": 44,
+      "L0_MOVIE": 25,
+      "L0_NEWS": 25,
+      "L0_SPORTS": 25
+    }
+  },
+  "segment_scores": {
+    "segment_score": 0.48703028907910767,
+    "subset_score": null,
+    "segment_score_f1_segment": 0.48703028907910767,
+    "subset_score_f1_segment": null,
+    "segment_score_f1_temporal": 0.6605581319475701,
+    "subset_score_f1_temporal": null,
+    "segment_score_unified": 0.48703028907910767,
+    "subset_score_unified": null,
+    "num_segments_f1": 31,
+    "num_subset_segments_f1": 0,
+    "segment_score_o2o": 0.5539369397656602,
+    "segment_score_o2m": 0.5949319524333816,
+    "subset_score_o2o": null,
+    "subset_score_o2m": null,
+    "num_segments_o2o": 31,
+    "num_segments_o2m": 31,
+    "num_subset_segments_o2o": 0,
+    "num_subset_segments_o2m": 0
+  }
+}
