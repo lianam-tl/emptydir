@@ -1,0 +1,17 @@
+cp s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/ncoder-mtp-loss-scale-0p5-base-step200/sme_eval_v3.1_fast/evaluations.json vljh1yhk_step200.json
+cp s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/ncoder-mtp-loss-scale-0p5-base-step240/sme_eval_v3.1_fast/evaluations.json vljh1yhk_step240.json
+cp s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/ncoder-mtp-loss-scale-0p5-base-step280/sme_eval_v3.1_fast/evaluations.json vljh1yhk_step280.json
+cp s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/ncoder-mtp-loss-scale-0p5-base-step320/sme_eval_v3.1_fast/evaluations.json vljh1yhk_step320.json
+cp s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/ncoder-mtp-loss-scale-0p5-base-step360/sme_eval_v3.1_fast/evaluations.json vljh1yhk_step360.json
+cp s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/ncoder-mtp-loss-scale-0p5-base-step400/sme_eval_v3.1_fast/evaluations.json vljh1yhk_step400.json
+cp s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/mtp-loss-scale-0p5-think-base-step160/sme_eval_v3.1_fast/evaluations.json hgmkw8sg_step160.json
+cp s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/mtp-loss-scale-0p5-think-base-step200/sme_eval_v3.1_fast/evaluations.json hgmkw8sg_step200.json
+cp s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/mtp-loss-scale-0p5-think-base-step240/sme_eval_v3.1_fast/evaluations.json hgmkw8sg_step240.json
+cp s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/mtp-loss-scale-0p5-think-base-step280/sme_eval_v3.1_fast/evaluations.json hgmkw8sg_step280.json
+cp s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/mtp-loss-scale-0p5-think-base-step320/sme_eval_v3.1_fast/evaluations.json hgmkw8sg_step320.json
+cp s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/mtp-loss-scale-0p5-think-base-step360/sme_eval_v3.1_fast/evaluations.json hgmkw8sg_step360.json
+cp s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/er-mtp-loss-scale-0-think-base-step40/sme_eval_v3.1_fast/evaluations.json mtploss0think_step40.json
+cp s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/er-mtp-loss-scale-0-think-base-step80/sme_eval_v3.1_fast/evaluations.json mtploss0think_step80.json
+cp s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/er-mtp-loss-scale-0-think-base-step120/sme_eval_v3.1_fast/evaluations.json mtploss0think_step120.json
+cp s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/er-mtp-loss-scale-0-think-base-step160/sme_eval_v3.1_fast/evaluations.json mtploss0think_step160.json
+cp s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/er-mtp-loss-scale-0-think-base-step200/sme_eval_v3.1_fast/evaluations.json mtploss0think_step200.json

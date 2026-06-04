@@ -47,7 +47,7 @@ LIA_STEPS = {
     "oavdzqt3":      [40, 80, 120, 140],
     "0pc3mcur":      [40, 80, 120, 140],
     "vljh1yhk":      [40, 80, 200, 240, 280, 320, 360, 400],
-    "hgmkw8sg":      [40, 80, 160, 200, 240, 280, 360],
+    "hgmkw8sg":      [40, 80, 160, 200, 240, 280, 320, 360],
     "mtploss0think": [40, 80, 120, 160, 200],
     "759eaivu":      [140, 200, 240],
 }
@@ -527,7 +527,7 @@ def main():
 <body>
 <h1>RL: kian + lia combined (extended 260604) — sme_eval_v3.1_fast</h1>
 <p class='note'>Combined view of kian's <code>260516_rl_consol_no_mtp_sme_eval.html</code> (alpha05/alpha1 ablations + mtp_lr5e7 variants + merged runs + p15 baseline) and lia's 10 RL configs evaluated on <code>sme_eval_v3.1_fast</code>. 260604 extension adds lia's 4 newer families: <code>mtp_loss_scale_0p5</code> (vljh1yhk), <code>mtp_loss_scale_0p5+think</code> (hgmkw8sg), <code>mtp_loss_scale_0+think</code>, and <code>subsample_0p1</code> (759eaivu). Layout follows kian's 5-section template; all charts are Chart.js canvas.</p>
-<div class='warn'>⚠️ <b>Filter applied:</b> evals whose <code>predictions.jsonl</code> lost sample metadata (segment_dict, etc.) and dumped all 1167 samples into a single <code>Unknown</code> coverage bucket are <b>excluded</b>. This was an eval-service regression around 2026-06-02 ~17 UTC affecting <code>max_tokens=32000</code> runs; the model outputs themselves are valid. Aliases affected: <code>ncoder-mtp-loss-scale-0p5-base-step{{200..400}}</code>, <code>mtp-loss-scale-0p5-think-base-step{{160..360}}</code>, <code>er-mtp-loss-scale-0-think-base-step{{40..200}}</code>. The <code>mtp_loss_scale_0+think</code> family is fully dropped (no valid eval yet).</div>
+<div class='note'>ℹ️ <b>Update 2026-06-04 16 UTC:</b> the eval-service regression that previously zeroed out lia's late-step evals (<code>max_tokens=32000</code> runs writing predictions.jsonl without sample metadata) was fixed and the 17 affected (run, step) pairs have been re-evaluated. All lia runs now show valid 31-coverage scores. <code>hgmkw8sg step 320</code> shows macro f1_seg ≈ 0.022 — that's a <b>real</b> run collapse, not the previous eval bug. Any remaining <code>—</code> in tables means that (run, step) hasn't been evaluated yet (not a failure). The Unknown-only filter (<code>is_valid_eval</code>) is still active as a safety net.</div>
 {sec1}
 {sec2}
 {sec3}
