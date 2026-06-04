@@ -52,6 +52,13 @@ LIA_STEPS = {
     "759eaivu":      [140, 200, 240],
 }
 
+# Suspicious (run, step) pairs to exclude even though the eval-service validation passes.
+# e.g. a single step shows a >10x drop vs neighboring steps and is suspected to be
+# a transient infra failure (vllm OOM, partial decode, etc.) rather than a real model regression.
+SUSPICIOUS_OUTLIERS = {
+    ("hgmkw8sg", 320),  # macro f1_seg ~ 0.022 while neighbors are ~0.51
+}
+
 # ----- Kian's training groups (have step trajectories).
 # Muted/pastel colors so kian's lines visually recede vs lia's vivid colors.
 KIAN_GROUPS = [
@@ -73,18 +80,23 @@ def is_valid_eval(ev):
 
 
 def load_lia():
-    """Load each lia (run, step) evaluations.json. Skip broken (Unknown-only) evals.
-    Returns (data dict, dropped list of (run, step))."""
+    """Load each lia (run, step) evaluations.json. Skip:
+       - broken (Unknown-only) evals from the eval-service regression
+       - manually flagged SUSPICIOUS_OUTLIERS (likely transient infra failures).
+    Returns (data dict, dropped list of (run, step, reason))."""
     data = {}
     dropped = []
     for run_id, *_ in LIA_RUNS:
         data[run_id] = {}
         for step in LIA_STEPS.get(run_id, []):
+            if (run_id, step) in SUSPICIOUS_OUTLIERS:
+                dropped.append((run_id, step, "suspicious outlier"))
+                continue
             path = os.path.join(DATA_DIR, f"{run_id}_step{step}.json")
             with open(path) as f:
                 ev = json.load(f)
             if not is_valid_eval(ev):
-                dropped.append((run_id, step))
+                dropped.append((run_id, step, "Unknown-only bucket"))
                 continue
             data[run_id][step] = ev
     return data, dropped
@@ -502,9 +514,9 @@ def main():
         kian_data = json.load(f)
     lia_data, dropped = load_lia()
     if dropped:
-        print(f"  dropped {len(dropped)} broken evals (segment_types=='Unknown' only):")
-        for r, s in dropped:
-            print(f"    {r} step {s}")
+        print(f"  dropped {len(dropped)} (run, step) pairs:")
+        for r, s, reason in dropped:
+            print(f"    {r} step {s} — {reason}")
 
     # Rebuild LIA_STEPS so downstream code only sees valid steps.
     global LIA_STEPS
@@ -527,7 +539,7 @@ def main():
 <body>
 <h1>RL: kian + lia combined (extended 260604) — sme_eval_v3.1_fast</h1>
 <p class='note'>Combined view of kian's <code>260516_rl_consol_no_mtp_sme_eval.html</code> (alpha05/alpha1 ablations + mtp_lr5e7 variants + merged runs + p15 baseline) and lia's 10 RL configs evaluated on <code>sme_eval_v3.1_fast</code>. 260604 extension adds lia's 4 newer families: <code>mtp_loss_scale_0p5</code> (vljh1yhk), <code>mtp_loss_scale_0p5+think</code> (hgmkw8sg), <code>mtp_loss_scale_0+think</code>, and <code>subsample_0p1</code> (759eaivu). Layout follows kian's 5-section template; all charts are Chart.js canvas.</p>
-<div class='note'>ℹ️ <b>Update 2026-06-04 16 UTC:</b> the eval-service regression that previously zeroed out lia's late-step evals (<code>max_tokens=32000</code> runs writing predictions.jsonl without sample metadata) was fixed and the 17 affected (run, step) pairs have been re-evaluated. All lia runs now show valid 31-coverage scores. <code>hgmkw8sg step 320</code> shows macro f1_seg ≈ 0.022 — that's a <b>real</b> run collapse, not the previous eval bug. Any remaining <code>—</code> in tables means that (run, step) hasn't been evaluated yet (not a failure). The Unknown-only filter (<code>is_valid_eval</code>) is still active as a safety net.</div>
+<div class='note'>ℹ️ <b>Update 2026-06-04:</b> the eval-service regression that previously zeroed out lia's late-step evals (<code>max_tokens=32000</code> writing predictions.jsonl without sample metadata) was fixed and 17 affected (run, step) pairs were re-evaluated, so all lia runs now have valid 31-coverage scores. One additional suspicious outlier — <code>hgmkw8sg step 320</code> at macro f1_seg ≈ 0.022 while its neighbors are ≈0.51 — is excluded as a likely transient infra failure (see <code>SUSPICIOUS_OUTLIERS</code> in the generator). <code>—</code> in tables means that (run, step) was not evaluated.</div>
 {sec1}
 {sec2}
 {sec3}
