@@ -27,44 +27,67 @@ KIAN_JSON = os.path.join(DATA_DIR, "kian_data.json")
 # ----- Lia's runs (matches downloaded files) -----
 LIA_RUNS = [
     # (run_id, label, color, ckpt, full_config)
-    ("4d4c8y0n", "ckpt2000+no_detach_enc bs224",                "#d62728", "checkpoint-2000", "rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7_no_detach_encoder"),
-    ("s5hx6dc5", "ckpt1000+mtp_loss_only+composite bs224",      "#2ca02c", "checkpoint-1000", "rl_consol_0516_alpha1_bs_224_8k_lr5e_7_ckpt1000_mtp_loss_only_composite_only"),
-    ("as92a2zt", "ckpt1000+no_cascade+no_detach_enc bs224",     "#9467bd", "checkpoint-1000", "rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7_ckpt1000_no_cascade_attn_no_detach_encoder"),
-    ("o0qoy935", "ckpt1000+mtp_loss_only+attach_enc bs224",     "#1f77b4", "checkpoint-1000", "rl_rl_consol_0516_alpha1_bs_224_8k_lr5e_7_ckpt1000_mtp_loss_only_attach_encoder"),
-    ("oavdzqt3", "ckpt1000+mtp_loss_only+attach_enc bs112",     "#ff7f0e", "checkpoint-1000", "rl_rl_consol_0516_alpha1_bs_112_8k_lr5e_7_ckpt1000_mtp_loss_only_attach_encoder"),
-    ("0pc3mcur", "ckpt2000+mtp bs224 (vanilla)",                "#8c564b", "checkpoint-2000", "rl_rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7"),
+    ("4d4c8y0n",      "ckpt2000+no_detach_enc bs224",                    "#d62728", "checkpoint-2000", "rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7_no_detach_encoder"),
+    ("s5hx6dc5",      "ckpt1000+mtp_loss_only+composite bs224",          "#2ca02c", "checkpoint-1000", "rl_consol_0516_alpha1_bs_224_8k_lr5e_7_ckpt1000_mtp_loss_only_composite_only"),
+    ("as92a2zt",      "ckpt1000+no_cascade+no_detach_enc bs224",         "#9467bd", "checkpoint-1000", "rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7_ckpt1000_no_cascade_attn_no_detach_encoder"),
+    ("o0qoy935",      "ckpt1000+mtp_loss_only+attach_enc bs224",         "#1f77b4", "checkpoint-1000", "rl_rl_consol_0516_alpha1_bs_224_8k_lr5e_7_ckpt1000_mtp_loss_only_attach_encoder"),
+    ("oavdzqt3",      "ckpt1000+mtp_loss_only+attach_enc bs112",         "#ff7f0e", "checkpoint-1000", "rl_rl_consol_0516_alpha1_bs_112_8k_lr5e_7_ckpt1000_mtp_loss_only_attach_encoder"),
+    ("0pc3mcur",      "ckpt2000+mtp bs224 (vanilla)",                    "#8c564b", "checkpoint-2000", "rl_rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7"),
+    ("vljh1yhk",      "ckpt2000+no_detach_enc bs224 +mtp_loss_scale_0p5","#e377c2", "checkpoint-2000", "rl_rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7_no_detach_encoder_mtp_loss_scale_0p5"),
+    ("hgmkw8sg",      "ckpt2000+no_detach_enc +mtp_loss_scale_0p5+think","#17becf", "checkpoint-2000", "rl_rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7_no_detach_encoder_mtp_loss_scale_0p5_think"),
+    ("mtploss0think", "ckpt2000+no_detach_enc +mtp_loss_scale_0+think",  "#bcbd22", "checkpoint-2000", "rl_rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7_no_detach_encoder_mtp_loss_scale_0_think"),
+    ("759eaivu",      "ckpt2000+no_detach_enc bs224 +subsample_0p1 (14n)","#7f7f7f", "checkpoint-2000", "rl_rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7_no_detach_encoder_subsample_0p1"),
 ]
 
 LIA_STEPS = {
-    "4d4c8y0n": [20, 40, 80, 120, 140, 200, 240],
-    "s5hx6dc5": [20, 40, 80, 140],
-    "as92a2zt": [20, 40, 140],
-    "o0qoy935": [40, 80, 120, 140],
-    "oavdzqt3": [40, 80, 120, 140],
-    "0pc3mcur": [40, 80, 120, 140],
+    "4d4c8y0n":      [20, 40, 80, 120, 140, 200, 240],
+    "s5hx6dc5":      [20, 40, 80, 140],
+    "as92a2zt":      [20, 40, 140],
+    "o0qoy935":      [40, 80, 120, 140],
+    "oavdzqt3":      [40, 80, 120, 140],
+    "0pc3mcur":      [40, 80, 120, 140],
+    "vljh1yhk":      [40, 80, 200, 240, 280, 320, 360, 400],
+    "hgmkw8sg":      [40, 80, 160, 200, 240, 280, 360],
+    "mtploss0think": [40, 80, 120, 160, 200],
+    "759eaivu":      [140, 200, 240],
 }
 
-# ----- Kian's training groups (have step trajectories). Color assignments. -----
+# ----- Kian's training groups (have step trajectories).
+# Muted/pastel colors so kian's lines visually recede vs lia's vivid colors.
 KIAN_GROUPS = [
     # (group_label, color)
-    ("alpha05",                       "#17becf"),
-    ("alpha05_mtp_lr5e7",             "#bcbd22"),
-    ("alpha1",                        "#e377c2"),
-    ("alpha1_mtp_lr5e7",              "#7f7f7f"),
-    ("alpha1_mtp_lr5e7_ckpt1000",     "#1a9850"),
+    ("alpha05",                       "#aec7e8"),  # light blue
+    ("alpha05_mtp_lr5e7",             "#98df8a"),  # light green
+    ("alpha1",                        "#ffbb78"),  # light orange
+    ("alpha1_mtp_lr5e7",              "#f7b6d2"),  # light pink
+    ("alpha1_mtp_lr5e7_ckpt1000",     "#c5b0d5"),  # light purple
 ]
 
 
+def is_valid_eval(ev):
+    """Filter out broken evals where predictions.jsonl lost sample metadata,
+    causing all 1167 samples to bucket as 'Unknown'.
+    These show macro f1 ~ 0 because nothing matches a real coverage."""
+    segment_types = ev.get("summary", {}).get("segment_types", [])
+    return segment_types != ["Unknown"]
+
+
 def load_lia():
-    """Load each lia (run, step) evaluations.json. Returns dict."""
+    """Load each lia (run, step) evaluations.json. Skip broken (Unknown-only) evals.
+    Returns (data dict, dropped list of (run, step))."""
     data = {}
+    dropped = []
     for run_id, *_ in LIA_RUNS:
         data[run_id] = {}
-        for step in LIA_STEPS[run_id]:
+        for step in LIA_STEPS.get(run_id, []):
             path = os.path.join(DATA_DIR, f"{run_id}_step{step}.json")
             with open(path) as f:
-                data[run_id][step] = json.load(f)
-    return data
+                ev = json.load(f)
+            if not is_valid_eval(ev):
+                dropped.append((run_id, step))
+                continue
+            data[run_id][step] = ev
+    return data, dropped
 
 
 def per_seg_score(ev, seg_id, key):
@@ -159,7 +182,7 @@ def build_section1(kian_data, lia_data):
 
     # Lia's runs
     for run_id, label, color, ckpt, full_cfg in LIA_RUNS:
-        for step in LIA_STEPS[run_id]:
+        for step in LIA_STEPS.get(run_id, []):
             ev = lia_data[run_id][step]
             fs = lia_macro(ev, "f1_segment")
             ft = lia_macro(ev, "f1_temporal")
@@ -281,7 +304,7 @@ def collect_trajectories(kian_data, lia_data, seg_id=None, metric="f1_segment"):
     # Lia's 6 runs
     for run_id, label, color, *_ in LIA_RUNS:
         pts = []
-        for step in LIA_STEPS[run_id]:
+        for step in LIA_STEPS.get(run_id, []):
             ev = lia_data[run_id][step]
             if seg_id is None:
                 v = lia_macro(ev, metric)
@@ -409,13 +432,13 @@ def build_section5(kian_data, lia_data):
     # Build lia step-columns and per-seg data
     lia_cols = []  # list of (col_label, run_id, step, color)
     for run_id, label, color, *_ in LIA_RUNS:
-        for step in LIA_STEPS[run_id]:
+        for step in LIA_STEPS.get(run_id, []):
             lia_cols.append((f"[lia] {run_id} s{step}", run_id, step, color))
 
     # Precompute lia per-seg
     lia_perseg = {}  # (run_id, step, seg) -> (f1_seg, f1_tmp)
     for run_id, *_ in LIA_RUNS:
-        for step in LIA_STEPS[run_id]:
+        for step in LIA_STEPS.get(run_id, []):
             ev = lia_data[run_id][step]
             for seg in seg_ids:
                 fseg = per_seg_score(ev, seg, "f1_segment")
@@ -477,7 +500,17 @@ def main():
     print("Loading data…")
     with open(KIAN_JSON) as f:
         kian_data = json.load(f)
-    lia_data = load_lia()
+    lia_data, dropped = load_lia()
+    if dropped:
+        print(f"  dropped {len(dropped)} broken evals (segment_types=='Unknown' only):")
+        for r, s in dropped:
+            print(f"    {r} step {s}")
+
+    # Rebuild LIA_STEPS so downstream code only sees valid steps.
+    global LIA_STEPS
+    LIA_STEPS = {rid: sorted(d.keys()) for rid, d in lia_data.items()}
+    # Drop runs that have no valid evals at all
+    LIA_STEPS = {k: v for k, v in LIA_STEPS.items() if v}
 
     print("Building sections…")
     sec1 = build_section1(kian_data, lia_data)
@@ -487,13 +520,14 @@ def main():
     sec5 = build_section5(kian_data, lia_data)
 
     html = f"""<!doctype html><html><head><meta charset='utf-8'>
-<title>RL: kian + lia combined — sme_eval_v3.1_fast</title>
+<title>RL: kian + lia combined (extended) — sme_eval_v3.1_fast</title>
 <style>{CSS}</style>
 <script src='https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js'></script>
 </head>
 <body>
-<h1>RL: kian + lia combined — sme_eval_v3.1_fast</h1>
-<p class='note'>Combined view of kian's <code>260516_rl_consol_no_mtp_sme_eval.html</code> (alpha05/alpha1 ablations + mtp_lr5e7 variants + merged runs + p15 baseline) and lia's 6 RL configs evaluated on <code>sme_eval_v3.1_fast</code>. Layout follows kian's 5-section template; all charts are Chart.js canvas.</p>
+<h1>RL: kian + lia combined (extended 260604) — sme_eval_v3.1_fast</h1>
+<p class='note'>Combined view of kian's <code>260516_rl_consol_no_mtp_sme_eval.html</code> (alpha05/alpha1 ablations + mtp_lr5e7 variants + merged runs + p15 baseline) and lia's 10 RL configs evaluated on <code>sme_eval_v3.1_fast</code>. 260604 extension adds lia's 4 newer families: <code>mtp_loss_scale_0p5</code> (vljh1yhk), <code>mtp_loss_scale_0p5+think</code> (hgmkw8sg), <code>mtp_loss_scale_0+think</code>, and <code>subsample_0p1</code> (759eaivu). Layout follows kian's 5-section template; all charts are Chart.js canvas.</p>
+<div class='warn'>⚠️ <b>Filter applied:</b> evals whose <code>predictions.jsonl</code> lost sample metadata (segment_dict, etc.) and dumped all 1167 samples into a single <code>Unknown</code> coverage bucket are <b>excluded</b>. This was an eval-service regression around 2026-06-02 ~17 UTC affecting <code>max_tokens=32000</code> runs; the model outputs themselves are valid. Aliases affected: <code>ncoder-mtp-loss-scale-0p5-base-step{{200..400}}</code>, <code>mtp-loss-scale-0p5-think-base-step{{160..360}}</code>, <code>er-mtp-loss-scale-0-think-base-step{{40..200}}</code>. The <code>mtp_loss_scale_0+think</code> family is fully dropped (no valid eval yet).</div>
 {sec1}
 {sec2}
 {sec3}
@@ -506,7 +540,7 @@ def main():
 </script>
 </body></html>
 """
-    out = os.path.join(DATA_DIR, "260602_rl_kian_plus_lia_combined.html")
+    out = os.path.join(DATA_DIR, "260604_rl_kian_plus_lia_combined.html")
     with open(out, "w") as f:
         f.write(html)
     print(f"  wrote {out} ({len(html)} bytes)")
