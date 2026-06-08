@@ -75,9 +75,11 @@ def _load_video_to_numpy(
         else:
             out_h = max_side
             out_w = int(round(orig_w * max_side / orig_h))
-        # ffmpeg rawvideo needs even-aligned per plane on some pix_fmts; rgb24 is fine but be safe
-        out_w -= out_w % 2
-        out_h -= out_h % 2
+        # Qwen3VL needs dims divisible by patch_size * merge_size = 16 * 2 = 32.
+        # Otherwise the processor's reshape into spatial patch grids fails with
+        # `RuntimeError: shape '[...]' is invalid for input of size N`.
+        out_w -= out_w % 32
+        out_h -= out_h % 32
 
     vf = f"fps={fps},scale={out_w}:{out_h}"
     args_ = ["ffmpeg", "-v", "error", "-i", video_arg, "-vf", vf]
