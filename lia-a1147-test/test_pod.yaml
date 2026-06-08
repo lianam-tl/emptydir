@@ -1,0 +1,83 @@
+# [cc-generated] Smoke-test pod for xplatform A-1147 (vllm-direct n>1 support).
+# Standalone Pod (no Deployment/Service) so infracontroller doesn't reconcile it.
+# Image tag is patched after the local build completes (kubectl set image).
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lia-a1147-vllm-video-test
+  namespace: pegasus-platform
+  labels:
+    app: lia-a1147-smoke-test
+    owner: lianam-tl
+    ticket: A-1147
+spec:
+  serviceAccountName: xplatform
+  restartPolicy: Never
+  schedulerName: default-scheduler
+  terminationGracePeriodSeconds: 30
+  nodeSelector:
+    xplatform-nodepool: b300-pegasus
+  tolerations:
+  - effect: NoSchedule
+    key: pegasus
+    operator: Equal
+    value: "true"
+  - effect: NoSchedule
+    key: nvidia.com/gpu
+    operator: Equal
+    value: "true"
+  volumes:
+  - name: dshm
+    emptyDir:
+      medium: Memory
+      sizeLimit: 8Gi
+  - name: fsx
+    persistentVolumeClaim:
+      claimName: fsx-shared
+  containers:
+  - name: worker
+    image: 476114115052.dkr.ecr.us-west-2.amazonaws.com/tl-data-training-pegasus-vllm-video:lia-A-1147-vllm-direct-n-rollouts-fd221a6
+    imagePullPolicy: IfNotPresent
+    env:
+    - name: MODEL
+      value: s3://tl-data-training-pegasus-us-west-2/hf_models/Qwen/Qwen3.5-0.8B/
+    - name: TP
+      value: "1"
+    - name: DP
+      value: "1"
+    - name: DTYPE
+      value: bfloat16
+    - name: GPU_MEM
+      value: "0.85"
+    - name: VLLM_WORKER_MULTIPROC_METHOD
+      value: spawn
+    - name: PEGASUS_VLLM_VIDEO_REQUEST_SEMAPHORE_COUNT
+      value: "2"
+    - name: MODEL_ID
+      value: lia-a1147-smoke
+    - name: MODEL_VERSION
+      value: v1
+    - name: POD_IP
+      valueFrom:
+        fieldRef:
+          fieldPath: status.podIP
+    ports:
+    - containerPort: 8000
+      name: http
+      protocol: TCP
+    readinessProbe:
+      httpGet:
+        path: /health
+        port: 8000
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      timeoutSeconds: 3
+      failureThreshold: 60   # ~10 min for model load
+    resources:
+      limits:
+        nvidia.com/gpu: "1"
+    volumeMounts:
+    - mountPath: /dev/shm
+      name: dshm
+    - mountPath: /fsx
+      name: fsx

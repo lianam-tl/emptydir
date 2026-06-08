@@ -1,0 +1,57 @@
+# [cc-generated] Standalone vLLM offline probe — does vLLM 0.19 honor n>1?
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lia-a1147-vllm-n-probe
+  namespace: pegasus-platform
+  labels:
+    app: lia-a1147-smoke-test
+    owner: lianam-tl
+    ticket: A-1147
+spec:
+  serviceAccountName: xplatform
+  restartPolicy: Never
+  nodeSelector:
+    xplatform-nodepool: b300-pegasus
+  tolerations:
+  - effect: NoSchedule
+    key: pegasus
+    operator: Equal
+    value: "true"
+  - effect: NoSchedule
+    key: nvidia.com/gpu
+    operator: Equal
+    value: "true"
+  volumes:
+  - name: dshm
+    emptyDir:
+      medium: Memory
+      sizeLimit: 4Gi
+  - name: probe
+    configMap:
+      name: lia-a1147-vllm-n-probe-script
+  containers:
+  - name: probe
+    image: 476114115052.dkr.ecr.us-west-2.amazonaws.com/tl-data-training-pegasus-vllm-video:lia-A-1147-vllm-direct-n-rollouts-fd221a6
+    imagePullPolicy: IfNotPresent
+    command: ["bash", "-c"]
+    args:
+    - |
+      set -e
+      echo "[probe] starting..."
+      python /probe/probe.py
+      echo "[probe] done."
+    env:
+    - name: HF_HUB_OFFLINE
+      value: "1"
+    - name: TRANSFORMERS_OFFLINE
+      value: "1"
+    resources:
+      limits:
+        nvidia.com/gpu: "1"
+    volumeMounts:
+    - mountPath: /dev/shm
+      name: dshm
+    - mountPath: /probe
+      name: probe
+      readOnly: true
