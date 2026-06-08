@@ -45,11 +45,15 @@ def _load_video_to_numpy(
     if video_arg.startswith("s3://"):
         local = os.path.join(tempfile.gettempdir(), "a1147_" + os.path.basename(urlparse(video_arg).path))
         if not os.path.exists(local) or os.path.getsize(local) == 0:
-            print(f"[load] s5cmd cp {video_arg} -> {local}")
-            subprocess.run(
-                ["s5cmd", "--profile", "training", "cp", video_arg, local],
-                check=True,
-            )
+            # boto3 honors AWS SSO sessions; s5cmd does not on Mac in the common case.
+            import boto3  # local import so users without boto3 can still use --video <local-path>
+            parsed = urlparse(video_arg)
+            bucket = parsed.netloc
+            key = parsed.path.lstrip("/")
+            profile = os.environ.get("AWS_PROFILE", "training")
+            print(f"[load] boto3 download s3://{bucket}/{key} -> {local} (profile={profile})")
+            session = boto3.Session(profile_name=profile)
+            session.client("s3").download_file(bucket, key, local)
         video_arg = local
 
     probe = subprocess.check_output([
