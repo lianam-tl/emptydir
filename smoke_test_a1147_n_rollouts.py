@@ -139,7 +139,12 @@ def main() -> int:
         size = out["parameters"]["binary_data_size"]
         chunk = payload[offset : offset + size]
         if out["name"] == "text":
-            text_output = decode_bytes_tensor(chunk)
+            # vllm_video returns `text` as a UINT8 tensor (raw utf-8 bytes), not
+            # as a KServe BYTES tensor (which would have a 4-byte length prefix).
+            if out.get("datatype") == "UINT8":
+                text_output = chunk.decode("utf-8")
+            else:
+                text_output = decode_bytes_tensor(chunk)
         offset += size
 
     if text_output is None:
