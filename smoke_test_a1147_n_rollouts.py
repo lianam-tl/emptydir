@@ -20,11 +20,77 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import struct
+import subprocess
 import sys
+import tempfile
+from urllib.parse import urlparse
 
 import numpy as np
 import requests
+
+
+def _load_video_to_numpy(
+    video_arg: str,
+    fps: float,
+    duration: float | None,
+    max_side: int | None,
+) -> tuple[np.ndarray, dict]:
+    """Resolve --video (local path or s3://...) to a [T,H,W,3] uint8 ndarray.
+
+    ffprobe gives original WxH for the shape calc; ffmpeg does the actual
+    decode at the requested fps and (optional) duration / scale.
+    """
+    if video_arg.startswith("s3://"):
+        local = os.path.join(tempfile.gettempdir(), "a1147_" + os.path.basename(urlparse(video_arg).path))
+        if not os.path.exists(local) or os.path.getsize(local) == 0:
+            print(f"[load] s5cmd cp {video_arg} -> {local}")
+            subprocess.run(
+                ["s5cmd", "--profile", "training", "cp", video_arg, local],
+                check=True,
+            )
+        video_arg = local
+
+    probe = subprocess.check_output([
+        "ffprobe", "-v", "error",
+        "-select_streams", "v:0",
+        "-show_entries", "stream=width,height,r_frame_rate,duration",
+        "-of", "json",
+        video_arg,
+    ])
+    pmeta = json.loads(probe)["streams"][0]
+    orig_w, orig_h = int(pmeta["width"]), int(pmeta["height"])
+
+    # Decide output W,H
+    out_w, out_h = orig_w, orig_h
+    if max_side and max(orig_w, orig_h) > max_side:
+        if orig_w >= orig_h:
+            out_w = max_side
+            out_h = int(round(orig_h * max_side / orig_w))
+        else:
+            out_h = max_side
+            out_w = int(round(orig_w * max_side / orig_h))
+        # ffmpeg rawvideo needs even-aligned per plane on some pix_fmts; rgb24 is fine but be safe
+        out_w -= out_w % 2
+        out_h -= out_h % 2
+
+    vf = f"fps={fps},scale={out_w}:{out_h}"
+    args_ = ["ffmpeg", "-v", "error", "-i", video_arg, "-vf", vf]
+    if duration is not None:
+        args_ += ["-t", str(duration)]
+    args_ += ["-f", "rawvideo", "-pix_fmt", "rgb24", "-"]
+    print(f"[load] ffmpeg {' '.join(args_[3:])}")
+    raw = subprocess.check_output(args_)
+    frame_bytes = out_w * out_h * 3
+    if len(raw) % frame_bytes != 0:
+        raise RuntimeError(
+            f"ffmpeg returned {len(raw)} bytes, not a multiple of WxHx3={frame_bytes}"
+        )
+    n_frames = len(raw) // frame_bytes
+    video = np.frombuffer(raw, dtype=np.uint8).reshape(n_frames, out_h, out_w, 3).copy()
+    return video, {"orig_w": orig_w, "orig_h": orig_h, "out_w": out_w, "out_h": out_h,
+                   "n_frames": n_frames, "fps": fps}
 
 
 def encode_bytes_tensor(values: list[bytes]) -> bytes:
@@ -101,12 +167,24 @@ def main() -> int:
         help=">0 needed to get diverse n outputs (n=8 with temp=0 = 8 identical strings)",
     )
     parser.add_argument("--max-tokens", type=int, default=64)
-    parser.add_argument("--frames", type=int, default=4)
+    parser.add_argument("--frames", type=int, default=4,
+                        help="Frame count for the synthetic (zeros) fallback. Ignored when --video is given.")
     parser.add_argument("--fps", type=float, default=2.0)
     parser.add_argument("--timeout", type=float, default=300.0)
+    parser.add_argument("--video",
+                        help="s3://... or local path. Loads real frames via ffmpeg instead of zeros.")
+    parser.add_argument("--duration", type=float, default=10.0,
+                        help="Seconds of video to decode (from start). Default 10s.")
+    parser.add_argument("--max-side", type=int, default=512,
+                        help="Resize so max(W,H) <= this. Default 512 to keep request size small.")
     args = parser.parse_args()
 
-    video = np.zeros((args.frames, 64, 64, 3), dtype=np.uint8)
+    if args.video:
+        video, meta = _load_video_to_numpy(args.video, args.fps, args.duration, args.max_side)
+        print(f"[load] decoded {meta['n_frames']} frames at "
+              f"{meta['out_w']}x{meta['out_h']} (orig {meta['orig_w']}x{meta['orig_h']}), fps={meta['fps']}")
+    else:
+        video = np.zeros((args.frames, 64, 64, 3), dtype=np.uint8)
     headers, body = build_v2_request(
         video=video,
         prompt=args.prompt,
