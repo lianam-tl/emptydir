@@ -449,7 +449,7 @@ This page covers everything else.</p>"""
   <span>n-f1_seg={diff['f1_n']:.3f}, t-f1_seg={diff['f1_t']:.3f}</span>
   <span class='ds'>sample_id={html.escape(sid)}</span>
 </div>
-<details><summary>query &amp; GT chapters</summary>
+<details open><summary>query &amp; GT chapters</summary>
 <pre class='inp'>{html.escape(str(query))[:600]}</pre>
 <pre class='gt'>{html.escape(json.dumps(chapters, indent=2, ensure_ascii=False))[:6000]}</pre>
 </details>
@@ -463,8 +463,8 @@ This page covers everything else.</p>"""
 </div>
 </div>"""
 
-    parts.append("<h3>Think wins (top 3 by Δ)</h3>")
-    for d in winners[:3]:
+    parts.append("<h3>Think wins (top 10 by Δ)</h3>")
+    for d in winners[:10]:
         parts.append(example_card(d, "THINK WINS"))
 
     parts.append("<h3>No-think wins (top 3 by |Δ|)</h3>")
