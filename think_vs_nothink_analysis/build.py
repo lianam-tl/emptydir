@@ -33,6 +33,18 @@ DEEP_DIVE = ("run3 (mtp_loss_scale_0p5+think)", 200, "run3_mtp_loss_scale_0p5/st
 DURATION_BUCKETS = [(0, 60), (60, 180), (180, 600), (600, 100000)]
 BUCKET_LABELS = ["<60s", "60–180s", "180–600s", ">600s"]
 
+# FOCUS subsets (from 260609 HTML)
+FOCUS_SUBSETS = {
+    "A0_OTHERS", "A1_NEWS", "C0_MOVIE", "C0_NEWS", "C1_MOVIE", "C1_NEWS",
+    "CS0_BASEBALL", "CS0_BASEBALL_LOGO", "CS0_BASKETBALL", "CS0_FOOTBALL",
+    "CS1_BASEBALL", "CS1_BASKETBALL", "CS1_FOOTBALL",
+    "H16_BASKETBALL_r1", "H16_BASKETBALL_r2",
+    "H16_FOOTBALL_r1", "H16_FOOTBALL_r2", "H16_SOCCER",
+}
+
+META_SIMILAR_THRESHOLD = 0.05  # |Δ f1_segment| ≤ this counts as "similar segmentation"
+META_TOP_N = 20
+
 
 def load_pair(rel: str):
     base = DATA / rel
@@ -157,6 +169,44 @@ def compute_per_sample_diff(d):
     return out
 
 
+def _meta_tokens(item):
+    """Yield lowercase word tokens from non-time metadata fields of one segment dict."""
+    if not isinstance(item, dict):
+        return
+    for k, v in item.items():
+        if k in ("start_time", "end_time"):
+            continue
+        if v is None or v == "":
+            continue
+        s = str(v).lower()
+        for t in s.split():
+            yield t
+
+
+def _bag_of_tokens(items):
+    from collections import Counter
+
+    bag = Counter()
+    if not isinstance(items, list):
+        return bag
+    for it in items:
+        bag.update(_meta_tokens(it))
+    return bag
+
+
+def meta_f1(gt_items, pred_items):
+    gt_bag = _bag_of_tokens(gt_items)
+    pred_bag = _bag_of_tokens(pred_items)
+    if not gt_bag or not pred_bag:
+        return None
+    common = sum((gt_bag & pred_bag).values())
+    if common == 0:
+        return 0.0
+    prec = common / sum(pred_bag.values())
+    rec = common / sum(gt_bag.values())
+    return 2 * prec * rec / (prec + rec)
+
+
 def fmt_pct(x, signed=False):
     if x is None:
         return ""
@@ -216,6 +266,11 @@ code{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:11px}
 .hdr{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:12.5px;margin-bottom:6px}
 .badge{background:#222;color:#fff;padding:2px 8px;border-radius:4px;font-size:11px}
 details summary{cursor:pointer}
+.tabs{border-bottom:2px solid #ddd;margin:18px 0 12px}
+.tab-btn{background:none;border:none;padding:8px 14px;font-size:14px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;color:#555}
+.tab-btn.active{border-bottom-color:#1976d2;color:#1976d2;font-weight:600}
+.tab-content{display:none}
+.tab-content.active{display:block}
 </style></head><body>"""
     )
 
@@ -225,8 +280,16 @@ details summary{cursor:pointer}
 <a href='https://sturdy-adventure-l4jp4le.pages.github.io/lia/260609_lia_th_think_vs_nothink.html'>260609 Macro HTML</a>.
 Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code>.
 <b>think_blocks (raw &lt;think&gt; text) is NOT in current eval-service outputs</b> — see
-<a href='https://github.com/lianam-tl/emptydir/blob/main/think_blocks_drop_issue/README.md'>think_blocks_drop_issue</a>.
-This page covers everything else.</p>"""
+<a href='https://github.com/lianam-tl/emptydir/blob/main/think_blocks_drop_issue/README.md'>think_blocks_drop_issue</a>.</p>"""
+    )
+
+    # Tab navigation
+    parts.append(
+        """<div class='tabs'>
+<button class='tab-btn active' onclick="showTab('tab1', this)">1. Performance overview</button>
+<button class='tab-btn' onclick="showTab('tab2', this)">2. Meta-divergence (FOCUS, similar f1_seg)</button>
+</div>
+<div id='tab1' class='tab-content active'>"""
     )
 
     # ---------------- TL;DR ----------------
@@ -474,6 +537,157 @@ This page covers everything else.</p>"""
     parts.append("<h3>No-think wins (top 3 by |Δ|)</h3>")
     for d in losers[:3]:
         parts.append(example_card(d, "NOTHINK WINS"))
+
+    # Close Tab 1
+    parts.append("</div>")  # /#tab1
+
+    # ---------------- Tab 2: meta-divergence ----------------
+    parts.append("<div id='tab2' class='tab-content'>")
+    parts.append(
+        f"<h2>Meta-divergence — FOCUS group, similar f1_segment (|Δ| ≤ {META_SIMILAR_THRESHOLD}), <code>{html.escape(deep_run)}</code> step {deep_step}</h2>"
+    )
+    parts.append(
+        f"""<p class='note'>For each sample we compute a per-sample <b>meta_score</b> = token-level F1 between the
+bag of all non-time metadata field values in the GT chapters vs in the model's predicted segments
+(<code>transcript</code>, <code>summary</code>, <code>speaker_id</code>, <code>action_label</code>, …; everything except <code>start_time</code>/<code>end_time</code>).
+Then we filter to <b>FOCUS</b> ({len(FOCUS_SUBSETS)} subsets) and samples where think and no-think
+disagree on <b>meta</b> but agree on segmentation. Sorted by |Δ meta_score| descending, top {META_TOP_N}.</p>"""
+    )
+
+    # Compute meta_score per sample
+    def chapters_of(p):
+        ch = p.get("chapters")
+        if isinstance(ch, str):
+            try:
+                ch = json.loads(ch)
+            except Exception:
+                return None
+        return ch if isinstance(ch, list) else None
+
+    candidates = []
+    for sid in set(deep_data["think"]["per"]) & set(deep_data["nothink"]["per"]):
+        t_pred = think_preds_by_sid.get(sid)
+        n_pred = nothink_preds_by_sid.get(sid)
+        if t_pred is None or n_pred is None:
+            continue
+        cfg = sample_config(t_pred) or sample_config(n_pred)
+        if cfg not in FOCUS_SUBSETS:
+            continue
+        # GT chapters (prefer the rich record — n_pred after our swap)
+        gt = chapters_of(n_pred) or chapters_of(t_pred)
+        if gt is None:
+            continue
+        t_resp = t_pred.get("response")
+        n_resp = n_pred.get("response")
+        t_meta = meta_f1(gt, t_resp if isinstance(t_resp, list) else None)
+        n_meta = meta_f1(gt, n_resp if isinstance(n_resp, list) else None)
+        if t_meta is None or n_meta is None:
+            continue
+
+        t_seg = deep_data["think"]["per"][sid].get("f1_segment_score", 0)
+        n_seg = deep_data["nothink"]["per"][sid].get("f1_segment_score", 0)
+        d_seg = t_seg - n_seg
+        if abs(d_seg) > META_SIMILAR_THRESHOLD:
+            continue
+
+        d_meta = t_meta - n_meta
+        candidates.append(
+            {
+                "sid": sid,
+                "cfg": cfg,
+                "seg": sample_segment_id(n_pred) or sample_segment_id(t_pred),
+                "dur": sample_duration(n_pred) or sample_duration(t_pred),
+                "t_seg": t_seg,
+                "n_seg": n_seg,
+                "d_seg": d_seg,
+                "t_meta": t_meta,
+                "n_meta": n_meta,
+                "d_meta": d_meta,
+                "t_pred": t_pred,
+                "n_pred": n_pred,
+                "gt": gt,
+            }
+        )
+
+    candidates.sort(key=lambda x: -abs(x["d_meta"]))
+    total_focus = sum(1 for sid in set(deep_data["think"]["per"]) & set(deep_data["nothink"]["per"])
+                      if sample_config(think_preds_by_sid.get(sid, {})) in FOCUS_SUBSETS
+                      or sample_config(nothink_preds_by_sid.get(sid, {})) in FOCUS_SUBSETS)
+    parts.append(
+        f"<p class='note'>FOCUS samples in this step: {total_focus}. "
+        f"Passing similar-f1_seg filter (|Δ|≤{META_SIMILAR_THRESHOLD}): {len(candidates)}. "
+        f"Showing top {min(META_TOP_N, len(candidates))} by |Δ meta_score|.</p>"
+    )
+
+    # Summary table
+    parts.append("<table><thead><tr><th>#</th><th>_config</th><th>duration</th>"
+                 "<th>no-think f1_seg</th><th>think f1_seg</th><th>Δ f1_seg</th>"
+                 "<th>no-think meta</th><th>think meta</th><th>Δ meta</th></tr></thead><tbody>")
+    for i, c in enumerate(candidates[:META_TOP_N], 1):
+        dur = f"{c['dur']:.0f}s" if c['dur'] else "-"
+        parts.append(
+            f"<tr><td>{i}</td><td class='lbl'>{html.escape(str(c['cfg']))}</td><td>{dur}</td>"
+            f"<td>{c['n_seg']:.3f}</td><td>{c['t_seg']:.3f}</td>"
+            f"<td><span class='{color_for_delta(c['d_seg'])}'>{c['d_seg']:+.3f}</span></td>"
+            f"<td>{c['n_meta']:.3f}</td><td>{c['t_meta']:.3f}</td>"
+            f"<td><span class='{color_for_delta(c['d_meta'])}'>{c['d_meta']:+.3f}</span></td></tr>"
+        )
+    parts.append("</tbody></table>")
+
+    # Detailed cards
+    parts.append(f"<h3>Top {META_TOP_N} samples — full GT + predictions</h3>")
+    for i, c in enumerate(candidates[:META_TOP_N], 1):
+        winner = "THINK META WINS" if c["d_meta"] > 0 else "NOTHINK META WINS"
+        dur = f"{c['dur']:.0f}s" if c["dur"] else "-"
+        # Get query from whichever side has it
+        q = c["n_pred"].get("user_query_segment") or c["t_pred"].get("user_query_segment") or []
+        if isinstance(q, str):
+            try:
+                q = json.loads(q)
+            except Exception:
+                pass
+        query = q[0] if q else ""
+
+        parts.append(
+            f"""<div class='card'>
+<div class='hdr'>
+  <span class='badge'>#{i} · {winner}</span>
+  <span class='lbl'>Δ meta = <span class='{color_for_delta(c['d_meta'])}'>{c['d_meta']:+.3f}</span></span>
+  <span class='lbl'>Δ f1_seg = <span class='{color_for_delta(c['d_seg'])}'>{c['d_seg']:+.3f}</span></span>
+  <span>{html.escape(str(c['cfg']))}</span>
+  <span>seg={html.escape(str(c['seg']))}</span>
+  <span>dur={dur}</span>
+  <span class='ds'>n-meta={c['n_meta']:.3f}, t-meta={c['t_meta']:.3f}</span>
+  <span class='ds'>sample_id={html.escape(c['sid'])}</span>
+</div>
+<details open><summary>query &amp; GT chapters</summary>
+<pre class='inp'>{html.escape(str(query))[:600]}</pre>
+<pre class='gt'>{html.escape(json.dumps(c['gt'], indent=2, ensure_ascii=False))[:6000]}</pre>
+</details>
+<div class='cols'>
+<div class='col'><h4>no-think response</h4>
+<pre class='ans'>{html.escape(json.dumps(c['n_pred'].get('response'), indent=2, ensure_ascii=False))[:6000]}</pre>
+</div>
+<div class='col'><h4>think response</h4>
+<pre class='ans'>{html.escape(json.dumps(c['t_pred'].get('response'), indent=2, ensure_ascii=False))[:6000]}</pre>
+</div>
+</div>
+</div>"""
+        )
+
+    parts.append("</div>")  # /#tab2
+
+    # Tab switching JS
+    parts.append(
+        """<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>"""
+    )
 
     # ---------------- Chart JS at end ----------------
     parts.append(
