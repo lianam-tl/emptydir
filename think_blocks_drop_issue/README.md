@@ -129,3 +129,21 @@ the patch.
 - HTML built from these:
   https://sturdy-adventure-l4jp4le.pages.github.io/lia/260609_lia_th_think_vs_nothink.html
 - Related Linear ticket: [A-1615 — Analysis on think/no-think evaluation](https://linear.app/twelve-labs/issue/A-1615/analysis-on-thinkno-think-evaluation)
+
+## Naming-trap footnote — how to tell the eval mode from the alias
+
+The S3 aliases for the 260609 Macro pairs do NOT advertise their eval mode in
+their own name:
+
+| Alias prefix | What it actually is | Why the name misleads |
+|---|---|---|
+| `mtp-loss-scale-0p5-think-base-step{N}` | **no-think** eval | `-think-base` is part of the *checkpoint* name (the checkpoint was trained with thinking), not the eval mode |
+| `er-mtp-loss-scale-0-think-base-step{N}` | **no-think** eval | same |
+| `lia-th-mtp{0,05}-st{N}-p1` | **think** eval (newer; added to compare against the existing no-think runs above) | `lia-th-` here means "lia think-mode eval", but at a glance it looks like a checkpoint suffix |
+
+Cross-check by macro f1_segment against the 260609 chart, or by looking at the
+4 dict-shaped fallback samples (those only appear in think-mode eval, where
+the model can emit `<think>` and bail without an answer). File size on
+`predictions.jsonl` is NOT a reliable signal — older runs ship the full
+dataset (ASR, diarize_gt, refinement_info, etc.) inline and look much larger
+regardless of mode.
