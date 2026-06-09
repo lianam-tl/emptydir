@@ -417,19 +417,23 @@ This page covers everything else.</p>"""
         sid = diff["sid"]
         t_pred = think_preds_by_sid.get(sid, {})
         n_pred = nothink_preds_by_sid.get(sid, {})
-        # Source-rich record (think eval has metadata/GT)
-        src = t_pred if t_pred.get("chapters") or t_pred.get("metadata") else n_pred
 
-        # GT chapters
-        chapters = src.get("chapters")
+        # GT chapters / query: take from whichever record has the field
+        def _pick(field):
+            for p in (n_pred, t_pred):
+                v = p.get(field)
+                if v:
+                    return v
+            return None
+
+        chapters = _pick("chapters")
         if isinstance(chapters, str):
             try:
                 chapters = json.loads(chapters)
             except Exception:
                 pass
 
-        # Query
-        q = src.get("user_query_segment") or []
+        q = _pick("user_query_segment") or []
         if isinstance(q, str):
             try:
                 q = json.loads(q)
