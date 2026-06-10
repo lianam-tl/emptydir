@@ -864,45 +864,79 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
         "Log x-axis. Pooled across all 8 pairs (~9336 points per mode).</p>"
     )
 
-    # Collect points per mode
-    scatter_pts = {"nothink": [], "think": []}
+    # Per-side data for bin-mean lines (kept) + paired diff for the new scatter
     binned_means = {"nothink": defaultdict(list), "think": defaultdict(list)}
     log_bins = [10, 30, 100, 300, 1000, 3000, 10000, 30000, 100000, 300000]
-    for (run, step), pd in data.items():
-        for mode in ("nothink", "think"):
-            per = pd[mode]["per"]
-            for p in pd[mode]["preds"]:
-                sid = p["sample_id"]
-                if sid not in per:
-                    continue
-                r = p.get("response")
-                if isinstance(r, list):
-                    chars = len(json.dumps(r))
-                elif isinstance(r, dict):
-                    chars = len(r.get("text", "") or "")
-                else:
-                    continue
-                if chars <= 0:
-                    continue
-                f1 = per[sid].get("f1_segment_score", 0)
-                scatter_pts[mode].append({"x": chars, "y": f1})
-                # bin
-                for i in range(len(log_bins) - 1):
-                    if log_bins[i] <= chars < log_bins[i + 1]:
-                        binned_means[mode][i].append(f1)
-                        break
 
-    # Compute trend (geo-mean x, arithmetic mean y) per bin per side
+    def chars_of(p):
+        r = p.get("response")
+        if isinstance(r, list):
+            return len(json.dumps(r))
+        if isinstance(r, dict):
+            return len(r.get("text", "") or "")
+        return 0
+
+    diff_pts_pos = []  # think wins
+    diff_pts_neg = []  # nothink wins
+    diff_binned = defaultdict(list)
+    for (run, step), pd in data.items():
+        t_idx = {p["sample_id"]: p for p in pd["think"]["preds"]}
+        n_idx = {p["sample_id"]: p for p in pd["nothink"]["preds"]}
+        per_t = pd["think"]["per"]
+        per_n = pd["nothink"]["per"]
+        for sid in set(per_t) & set(per_n) & set(t_idx) & set(n_idx):
+            t_chars = chars_of(t_idx[sid])
+            n_chars = chars_of(n_idx[sid])
+            t_f1 = per_t[sid].get("f1_segment_score", 0)
+            n_f1 = per_n[sid].get("f1_segment_score", 0)
+            # bin-mean lines: use each mode's own chars
+            for i in range(len(log_bins) - 1):
+                if log_bins[i] <= t_chars < log_bins[i + 1]:
+                    binned_means["think"][i].append(t_f1)
+                    break
+            for i in range(len(log_bins) - 1):
+                if log_bins[i] <= n_chars < log_bins[i + 1]:
+                    binned_means["nothink"][i].append(n_f1)
+                    break
+            # diff scatter: x = mean of think/nothink chars; y = Δ
+            if t_chars <= 0 and n_chars <= 0:
+                continue
+            x_mean = (t_chars + n_chars) / 2 if (t_chars > 0 and n_chars > 0) else max(t_chars, n_chars)
+            delta = t_f1 - n_f1
+            (diff_pts_pos if delta > 0 else diff_pts_neg).append({"x": x_mean, "y": delta})
+            # bin Δ by mean chars
+            for i in range(len(log_bins) - 1):
+                if log_bins[i] <= x_mean < log_bins[i + 1]:
+                    diff_binned[i].append(delta)
+                    break
+
+    # Bin-mean lines (kept)
     trend = {"nothink": [], "think": []}
     for mode in trend:
         for i in range(len(log_bins) - 1):
             vals = binned_means[mode][i]
             if len(vals) >= 5:
-                # geometric center of bin
                 gm = (log_bins[i] * log_bins[i + 1]) ** 0.5
                 trend[mode].append({"x": gm, "y": statistics.mean(vals)})
 
-    parts.append("<div class='chart-wrap' style='width:1100px;height:520px'><canvas id='resp_len_scatter'></canvas></div>")
+    # Diff bin-mean line
+    diff_trend = []
+    for i in range(len(log_bins) - 1):
+        vals = diff_binned[i]
+        if len(vals) >= 5:
+            gm = (log_bins[i] * log_bins[i + 1]) ** 0.5
+            diff_trend.append({"x": gm, "y": statistics.mean(vals)})
+
+    parts.append("<h3>9a. Per-side mean f1_segment by response length (line plot)</h3>")
+    parts.append("<div class='chart-wrap' style='width:1100px;height:420px'><canvas id='resp_len_lines'></canvas></div>")
+
+    parts.append("<h3>9b. Per-sample Δ f1_segment (think − no-think) vs response length</h3>")
+    parts.append(
+        "<p class='note'>x = mean of think and no-think response char lengths for that sample (log). "
+        "y = Δ f1_segment per sample. Green dots = think wins, red dots = no-think wins. "
+        "Dark line = bin mean Δ.</p>"
+    )
+    parts.append("<div class='chart-wrap' style='width:1100px;height:520px'><canvas id='resp_len_diff_scatter'></canvas></div>")
 
     # ---------------- Tab 2: meta-divergence ----------------
     parts.append("<div id='tab2' class='tab-content'>")
@@ -1663,25 +1697,40 @@ new Chart(document.getElementById('soccer_nseg_chart').getContext('2d'), {{
     plugins:{{title:{{display:true, text:'SOCCER — Δ (think − no-think) by # GT segments'}}, legend:{{position:'bottom'}}}},
     scales:{{y:{{title:{{display:true, text:'Δ'}}}}}}}}
 }});
-new Chart(document.getElementById('resp_len_scatter').getContext('2d'), {{
-  type:'scatter',
+new Chart(document.getElementById('resp_len_lines').getContext('2d'), {{
+  type:'line',
   data:{{datasets:[
-    {{label:'no-think (raw)', data: {json.dumps(scatter_pts['nothink'])},
-      backgroundColor:'rgba(25,118,210,0.18)', pointRadius:1.3, pointHoverRadius:3, borderColor:'rgba(25,118,210,0)' }},
-    {{label:'think (raw)', data: {json.dumps(scatter_pts['think'])},
-      backgroundColor:'rgba(198,40,40,0.18)', pointRadius:1.3, pointHoverRadius:3, borderColor:'rgba(198,40,40,0)' }},
-    {{label:'no-think (bin mean)', type:'line', data: {json.dumps(trend['nothink'])},
+    {{label:'no-think (bin mean)', data: {json.dumps(trend['nothink'])},
       borderColor:'#1976d2', backgroundColor:'#1976d2', borderWidth:2.5, pointRadius:5, showLine:true, fill:false, tension:0.2 }},
-    {{label:'think (bin mean)', type:'line', data: {json.dumps(trend['think'])},
+    {{label:'think (bin mean)', data: {json.dumps(trend['think'])},
       borderColor:'#c62828', backgroundColor:'#c62828', borderWidth:2.5, pointRadius:5, showLine:true, fill:false, tension:0.2 }}
   ]}},
   options:{{responsive:true, maintainAspectRatio:false,
-    plugins:{{title:{{display:true, text:'response char length vs f1_segment (log x; bin means overlaid)'}},
+    plugins:{{title:{{display:true, text:'mean f1_segment by response char length bucket (log x)'}},
               legend:{{position:'bottom', labels:{{boxWidth:10, font:{{size:11}}}}}}}},
     scales:{{
-      x:{{type:'logarithmic', title:{{display:true, text:'response JSON char length (log scale)'}},
-          min:10, max:300000}},
-      y:{{title:{{display:true, text:'f1_segment'}}, min:0, max:1}}
+      x:{{type:'logarithmic', title:{{display:true, text:'response JSON char length (log)'}}, min:10, max:300000}},
+      y:{{title:{{display:true, text:'mean f1_segment'}}, min:0, max:1}}
+    }}
+  }}
+}});
+new Chart(document.getElementById('resp_len_diff_scatter').getContext('2d'), {{
+  type:'scatter',
+  data:{{datasets:[
+    {{label:'think wins (Δ > 0)', data: {json.dumps(diff_pts_pos)},
+      backgroundColor:'rgba(46,125,50,0.22)', pointRadius:1.4, pointHoverRadius:3, borderColor:'rgba(46,125,50,0)' }},
+    {{label:'no-think wins (Δ < 0)', data: {json.dumps(diff_pts_neg)},
+      backgroundColor:'rgba(198,40,40,0.22)', pointRadius:1.4, pointHoverRadius:3, borderColor:'rgba(198,40,40,0)' }},
+    {{label:'bin mean Δ', type:'line', data: {json.dumps(diff_trend)},
+      borderColor:'#000', backgroundColor:'#000', borderWidth:2.5, pointRadius:5, showLine:true, fill:false, tension:0.2 }}
+  ]}},
+  options:{{responsive:true, maintainAspectRatio:false,
+    plugins:{{title:{{display:true, text:'Δ f1_segment (think − no-think) vs paired response length'}},
+              legend:{{position:'bottom', labels:{{boxWidth:10, font:{{size:11}}}}}},
+              annotation:null}},
+    scales:{{
+      x:{{type:'logarithmic', title:{{display:true, text:'mean response char length per sample (log)'}}, min:10, max:300000}},
+      y:{{title:{{display:true, text:'Δ f1_segment (think − no-think)'}}, min:-1, max:1}}
     }}
   }}
 }});
