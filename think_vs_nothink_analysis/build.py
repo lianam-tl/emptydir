@@ -928,6 +928,9 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
     )
     parts.append("<div class='chart-wrap' style='width:1100px;height:260px'><canvas id='resp_len_hist'></canvas></div>")
 
+    # Close Tab 1
+    parts.append("</div>")  # /#tab1
+
     # ---------------- Tab 2: meta-divergence ----------------
     parts.append("<div id='tab2' class='tab-content'>")
     parts.append(
