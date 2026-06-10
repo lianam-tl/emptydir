@@ -487,6 +487,7 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
 <button class='tab-btn active' onclick="showTab('tab1', this)">1. Performance overview</button>
 <button class='tab-btn' onclick="showTab('tab2', this)">2. Meta-divergence (FOCUS, similar f1_seg)</button>
 <button class='tab-btn' onclick="showTab('tab3', this)">3. SOCCER deep dive</button>
+<button class='tab-btn' onclick="showTab('tab4', this)">4. SOCCER long+dense — timeline bars</button>
 </div>
 <div id='tab1' class='tab-content active'>"""
     )
@@ -1349,6 +1350,151 @@ over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levens
         parts.append(f"<div class='chart-wrap' style='width:760px;height:380px'><canvas id='{canvas_id}'></canvas></div>")
 
     parts.append("</div>")  # /#tab3
+
+    # ---------------- Tab 4: SOCCER long+dense timeline bars ----------------
+    parts.append("<div id='tab4' class='tab-content'>")
+    parts.append("<h2>SOCCER ≥45min &amp; ≥11 GT segments — predicted vs GT timeline bars</h2>")
+    parts.append(
+        f"<p class='note'>Predictions from <code>{html.escape(deep_run)}</code> step {deep_step}. "
+        "Each card = one sample. Three horizontal bars per sample: GT (green), no-think (blue), think (red). "
+        "X-axis = video duration (s). Inside each bar, a rectangle marks each predicted/GT segment at its "
+        "[start_time, end_time].</p>"
+    )
+
+    TAB4_TARGET_SIDS = [
+        "ef85541d5d41c9b889a9eaf78f9ea99b89fa256495748762127de790dd130629",
+        "70f9fed3d7b5f08e1875290ee9862115dcb3070b825a12feef396896f8bd4d13",
+        "1193d4fd46d0963a1923ead8334a3948504863b82dd110efec96df5af9a0bab7",
+        "8630eb18e74c4fc3f460201835aa97eb14292f9b392809486797e7481c8abf2e",
+    ]
+
+    SVG_W = 1180
+    BAR_H = 22
+    ROW_GAP = 6
+    LABEL_W = 90
+    AXIS_H = 24
+    TRACK_W = SVG_W - LABEL_W - 8  # bar drawable width
+
+    def time_to_x(t, dur):
+        if not dur:
+            return LABEL_W
+        return LABEL_W + (t / dur) * TRACK_W
+
+    def render_track(y, label, segs, dur, color):
+        out = []
+        # label
+        out.append(
+            f'<text x="0" y="{y + BAR_H/2 + 4}" font-size="11" font-family="Menlo,monospace" fill="#333">{html.escape(label)}</text>'
+        )
+        # background track
+        out.append(
+            f'<rect x="{LABEL_W}" y="{y}" width="{TRACK_W}" height="{BAR_H}" fill="#f0f0f0" stroke="#ccc" stroke-width="0.5"/>'
+        )
+        for seg in segs:
+            if not isinstance(seg, dict):
+                continue
+            try:
+                s = float(seg.get("start_time", 0))
+                e = float(seg.get("end_time", 0))
+            except (TypeError, ValueError):
+                continue
+            x1 = time_to_x(s, dur)
+            x2 = time_to_x(e, dur)
+            w = max(1, x2 - x1)  # ensure visible
+            out.append(
+                f'<rect x="{x1:.1f}" y="{y+1}" width="{w:.1f}" height="{BAR_H-2}" '
+                f'fill="{color}" fill-opacity="0.65" stroke="{color}" stroke-width="0.5">'
+                f'<title>{s:.1f}–{e:.1f}s</title></rect>'
+            )
+        return "".join(out)
+
+    def render_axis(dur):
+        out = [
+            f'<line x1="{LABEL_W}" y1="0" x2="{LABEL_W + TRACK_W}" y2="0" stroke="#888" stroke-width="1"/>'
+        ]
+        # tick spacing: choose ~10 ticks across the duration
+        n_ticks = 10
+        step_s = max(1, dur / n_ticks)
+        # round step to a nice number
+        for nice in [60, 120, 180, 300, 600, 900, 1200, 1800, 3600]:
+            if dur / nice <= 15:
+                step_s = nice
+                break
+        t = 0.0
+        while t <= dur + 1e-6:
+            x = time_to_x(t, dur)
+            out.append(
+                f'<line x1="{x:.1f}" y1="0" x2="{x:.1f}" y2="6" stroke="#888" stroke-width="1"/>'
+            )
+            mm = int(t // 60)
+            ss = int(t % 60)
+            out.append(
+                f'<text x="{x:.1f}" y="18" font-size="9" fill="#666" text-anchor="middle">{mm}:{ss:02d}</text>'
+            )
+            t += step_s
+        return "".join(out)
+
+    deep_t = {p["sample_id"]: p for p in deep_data["think"]["preds"]}
+    deep_n = {p["sample_id"]: p for p in deep_data["nothink"]["preds"]}
+
+    for sid in TAB4_TARGET_SIDS:
+        tp = deep_t.get(sid)
+        np_ = deep_n.get(sid)
+        if tp is None or np_ is None:
+            continue
+        gt = np_.get("chapters") or tp.get("chapters")
+        if isinstance(gt, str):
+            try:
+                gt = json.loads(gt)
+            except Exception:
+                gt = []
+        if not isinstance(gt, list):
+            gt = []
+        t_resp = tp.get("response") if isinstance(tp.get("response"), list) else []
+        n_resp = np_.get("response") if isinstance(np_.get("response"), list) else []
+        dur = sample_duration(np_) or sample_duration(tp) or 0
+        q = (np_.get("user_query_segment") or tp.get("user_query_segment") or [""])
+        if isinstance(q, str):
+            try:
+                q = json.loads(q)
+            except Exception:
+                q = [q]
+        query = q[0] if q else ""
+
+        # Stats per side: f1_seg
+        t_seg_s = deep_data["think"]["per"].get(sid, {}).get("f1_segment_score", 0)
+        n_seg_s = deep_data["nothink"]["per"].get(sid, {}).get("f1_segment_score", 0)
+
+        svg_h = AXIS_H + 3 * BAR_H + 2 * ROW_GAP + 8
+        y_gt = AXIS_H + 2
+        y_n = y_gt + BAR_H + ROW_GAP
+        y_t = y_n + BAR_H + ROW_GAP
+
+        svg_parts = [f'<svg width="{SVG_W}" height="{svg_h}" style="display:block;margin:8px 0;font-family:-apple-system,sans-serif">']
+        svg_parts.append(render_axis(dur))
+        svg_parts.append(render_track(y_gt, f"GT (n={len(gt)})", gt, dur, "#2e7d32"))
+        svg_parts.append(render_track(y_n, f"no-think (n={len(n_resp)})", n_resp, dur, "#1976d2"))
+        svg_parts.append(render_track(y_t, f"think (n={len(t_resp)})", t_resp, dur, "#c62828"))
+        svg_parts.append("</svg>")
+
+        parts.append(
+            f"""<div class='card'>
+<div class='hdr'>
+  <span class='badge'>SOCCER</span>
+  <span class='lbl'>dur={dur:.0f}s ({dur/60:.1f} min)</span>
+  <span>GT segs={len(gt)}</span>
+  <span>think f1_seg={t_seg_s:.3f}</span>
+  <span>no-think f1_seg={n_seg_s:.3f}</span>
+  <span class='ds'>sample_id={html.escape(sid)}</span>
+</div>
+<details open><summary>query</summary>
+<pre class='inp'>{html.escape(str(query))[:600]}</pre>
+</details>
+{"".join(svg_parts)}
+</div>"""
+        )
+
+    parts.append("</div>")  # /#tab4
 
     # Tab switching JS
     parts.append(
