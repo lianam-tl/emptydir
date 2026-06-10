@@ -902,7 +902,7 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
                 trend[mode].append({"x": gm, "y": statistics.mean(vals)})
 
     # Per-bin sample counts → proportions for hanging bar plot (9b)
-    bin_labels = [
+    len_bin_labels = [
         f"{log_bins[i]:,}–{log_bins[i+1]:,}" if log_bins[i+1] < 1000
         else f"{log_bins[i]//1000 if log_bins[i]>=1000 else log_bins[i]}{'k' if log_bins[i]>=1000 else ''}-{log_bins[i+1]//1000}k"
         for i in range(len(log_bins) - 1)
@@ -1706,7 +1706,7 @@ new Chart(document.getElementById('resp_len_lines').getContext('2d'), {{
 }});
 new Chart(document.getElementById('resp_len_hist').getContext('2d'), {{
   type:'bar',
-  data:{{labels: {json.dumps(bin_labels)},
+  data:{{labels: {json.dumps(len_bin_labels)},
          datasets:[
            {{label:'no-think', data: {json.dumps(props_pct['nothink'])}, backgroundColor:'rgba(25,118,210,0.75)' }},
            {{label:'think',    data: {json.dumps(props_pct['think'])},   backgroundColor:'rgba(198,40,40,0.75)' }}
