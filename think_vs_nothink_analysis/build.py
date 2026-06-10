@@ -864,7 +864,7 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
         "Log x-axis. Pooled across all 8 pairs (~9336 points per mode).</p>"
     )
 
-    # Per-side data for bin-mean lines (kept) + paired diff for the new scatter
+    # Per-side bin means for the line plot (9a) + per-bin counts for proportions (9b)
     binned_means = {"nothink": defaultdict(list), "think": defaultdict(list)}
     log_bins = [10, 30, 100, 300, 1000, 3000, 10000, 30000, 100000, 300000]
 
@@ -876,40 +876,23 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
             return len(r.get("text", "") or "")
         return 0
 
-    diff_pts_pos = []  # think wins
-    diff_pts_neg = []  # nothink wins
-    diff_binned = defaultdict(list)
     for (run, step), pd in data.items():
-        t_idx = {p["sample_id"]: p for p in pd["think"]["preds"]}
-        n_idx = {p["sample_id"]: p for p in pd["nothink"]["preds"]}
-        per_t = pd["think"]["per"]
-        per_n = pd["nothink"]["per"]
-        for sid in set(per_t) & set(per_n) & set(t_idx) & set(n_idx):
-            t_chars = chars_of(t_idx[sid])
-            n_chars = chars_of(n_idx[sid])
-            t_f1 = per_t[sid].get("f1_segment_score", 0)
-            n_f1 = per_n[sid].get("f1_segment_score", 0)
-            # bin-mean lines: use each mode's own chars
-            for i in range(len(log_bins) - 1):
-                if log_bins[i] <= t_chars < log_bins[i + 1]:
-                    binned_means["think"][i].append(t_f1)
-                    break
-            for i in range(len(log_bins) - 1):
-                if log_bins[i] <= n_chars < log_bins[i + 1]:
-                    binned_means["nothink"][i].append(n_f1)
-                    break
-            # diff scatter: x = max of think/nothink chars; y = Δ
-            x_max = max(t_chars, n_chars)
-            if x_max <= 0:
-                continue
-            delta = t_f1 - n_f1
-            (diff_pts_pos if delta > 0 else diff_pts_neg).append({"x": x_max, "y": delta})
-            for i in range(len(log_bins) - 1):
-                if log_bins[i] <= x_max < log_bins[i + 1]:
-                    diff_binned[i].append(delta)
-                    break
+        for mode in ("nothink", "think"):
+            per = pd[mode]["per"]
+            for p in pd[mode]["preds"]:
+                sid = p["sample_id"]
+                if sid not in per:
+                    continue
+                c = chars_of(p)
+                if c <= 0:
+                    continue
+                f1 = per[sid].get("f1_segment_score", 0)
+                for i in range(len(log_bins) - 1):
+                    if log_bins[i] <= c < log_bins[i + 1]:
+                        binned_means[mode][i].append(f1)
+                        break
 
-    # Bin-mean lines (kept)
+    # Bin-mean lines (9a)
     trend = {"nothink": [], "think": []}
     for mode in trend:
         for i in range(len(log_bins) - 1):
@@ -918,24 +901,32 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
                 gm = (log_bins[i] * log_bins[i + 1]) ** 0.5
                 trend[mode].append({"x": gm, "y": statistics.mean(vals)})
 
-    # Diff bin-mean line
-    diff_trend = []
-    for i in range(len(log_bins) - 1):
-        vals = diff_binned[i]
-        if len(vals) >= 5:
-            gm = (log_bins[i] * log_bins[i + 1]) ** 0.5
-            diff_trend.append({"x": gm, "y": statistics.mean(vals)})
+    # Per-bin sample counts → proportions for hanging bar plot (9b)
+    bin_labels = [
+        f"{log_bins[i]:,}–{log_bins[i+1]:,}" if log_bins[i+1] < 1000
+        else f"{log_bins[i]//1000 if log_bins[i]>=1000 else log_bins[i]}{'k' if log_bins[i]>=1000 else ''}-{log_bins[i+1]//1000}k"
+        for i in range(len(log_bins) - 1)
+    ]
+    counts_per_bin = {
+        "nothink": [len(binned_means["nothink"][i]) for i in range(len(log_bins) - 1)],
+        "think": [len(binned_means["think"][i]) for i in range(len(log_bins) - 1)],
+    }
+    totals = {k: sum(v) for k, v in counts_per_bin.items()}
+    # Proportions as % (0–100)
+    props_pct = {
+        k: [100 * c / max(totals[k], 1) for c in counts_per_bin[k]]
+        for k in counts_per_bin
+    }
 
     parts.append("<h3>9a. Per-side mean f1_segment by response length (line plot)</h3>")
-    parts.append("<div class='chart-wrap' style='width:1100px;height:420px'><canvas id='resp_len_lines'></canvas></div>")
+    parts.append("<div class='chart-wrap' style='width:1100px;height:380px'><canvas id='resp_len_lines'></canvas></div>")
 
-    parts.append("<h3>9b. Per-sample Δ f1_segment (think − no-think) vs response length</h3>")
+    parts.append("<h3>9b. Sample distribution per char-length bin (hanging bars)</h3>")
     parts.append(
-        "<p class='note'>x = <b>max</b>(think_chars, nothink_chars) per sample (log). "
-        "y = Δ f1_segment. Green dots = think wins, red dots = no-think wins. "
-        "Dark line = bin mean Δ.</p>"
+        "<p class='note'>Density indicator for 9a. y-axis reversed (zero at top → bars hang downward). "
+        "Bin labels are the same as 9a's log buckets.</p>"
     )
-    parts.append("<div class='chart-wrap' style='width:1100px;height:520px'><canvas id='resp_len_diff_scatter'></canvas></div>")
+    parts.append("<div class='chart-wrap' style='width:1100px;height:260px'><canvas id='resp_len_hist'></canvas></div>")
 
     # ---------------- Tab 2: meta-divergence ----------------
     parts.append("<div id='tab2' class='tab-content'>")
@@ -1713,23 +1704,21 @@ new Chart(document.getElementById('resp_len_lines').getContext('2d'), {{
     }}
   }}
 }});
-new Chart(document.getElementById('resp_len_diff_scatter').getContext('2d'), {{
-  type:'scatter',
-  data:{{datasets:[
-    {{label:'think wins (Δ > 0)', data: {json.dumps(diff_pts_pos)},
-      backgroundColor:'rgba(46,125,50,0.22)', pointRadius:1.4, pointHoverRadius:3, borderColor:'rgba(46,125,50,0)' }},
-    {{label:'no-think wins (Δ < 0)', data: {json.dumps(diff_pts_neg)},
-      backgroundColor:'rgba(198,40,40,0.22)', pointRadius:1.4, pointHoverRadius:3, borderColor:'rgba(198,40,40,0)' }},
-    {{label:'bin mean Δ', type:'line', data: {json.dumps(diff_trend)},
-      borderColor:'#000', backgroundColor:'#000', borderWidth:2.5, pointRadius:5, showLine:true, fill:false, tension:0.2 }}
-  ]}},
+new Chart(document.getElementById('resp_len_hist').getContext('2d'), {{
+  type:'bar',
+  data:{{labels: {json.dumps(bin_labels)},
+         datasets:[
+           {{label:'no-think', data: {json.dumps(props_pct['nothink'])}, backgroundColor:'rgba(25,118,210,0.75)' }},
+           {{label:'think',    data: {json.dumps(props_pct['think'])},   backgroundColor:'rgba(198,40,40,0.75)' }}
+         ]}},
   options:{{responsive:true, maintainAspectRatio:false,
-    plugins:{{title:{{display:true, text:'Δ f1_segment (think − no-think) vs paired response length'}},
-              legend:{{position:'bottom', labels:{{boxWidth:10, font:{{size:11}}}}}},
-              annotation:null}},
+    plugins:{{title:{{display:true, text:'% of samples per response char length bin (per side)'}},
+              legend:{{position:'bottom', labels:{{boxWidth:10, font:{{size:11}}}}}}}},
     scales:{{
-      x:{{type:'logarithmic', title:{{display:true, text:'max(think, no-think) response char length per sample (log)'}}, min:10, max:300000}},
-      y:{{title:{{display:true, text:'Δ f1_segment (think − no-think)'}}, min:-1, max:1}}
+      x:{{title:{{display:true, text:'response char length bin'}}}},
+      y:{{reverse:true, beginAtZero:true,
+          title:{{display:true, text:'% samples'}},
+          ticks:{{callback: function(v){{ return v + '%'; }}}}}}
     }}
   }}
 }});
