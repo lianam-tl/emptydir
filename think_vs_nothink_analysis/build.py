@@ -1361,7 +1361,7 @@ new Chart(document.getElementById('nseg_tmp').getContext('2d'), {{
     scales:{{x:{{type:'linear', title:{{display:true, text:'step'}}}},
              y:{{title:{{display:true, text:'mean f1_segment'}}}}}}}}
 }});""" for cid, run_lbl, ds in soccer_traj_charts
-        ) + """
+        ) + f"""
 
 new Chart(document.getElementById('soccer_dur_chart').getContext('2d'), {{
   type:'bar',
