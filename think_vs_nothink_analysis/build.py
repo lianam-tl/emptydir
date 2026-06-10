@@ -44,6 +44,7 @@ FOCUS_SUBSETS = {
 
 META_SIMILAR_THRESHOLD = 0.05  # |Δ f1_segment| ≤ this counts as "similar segmentation"
 META_TOP_N = 20
+META_IOU_THRESHOLD = 0.8  # only pred-GT segment pairs with IoU >= this contribute to meta
 
 
 def load_pair(rel: str):
@@ -169,6 +170,74 @@ def compute_per_sample_diff(d):
     return out
 
 
+def _iou(a, b):
+    """1-D IoU between two segments with start_time/end_time."""
+    try:
+        lo = max(a["start_time"], b["start_time"])
+        hi = min(a["end_time"], b["end_time"])
+    except (KeyError, TypeError):
+        return 0.0
+    inter = max(0.0, hi - lo)
+    union = (a["end_time"] - a["start_time"]) + (b["end_time"] - b["start_time"]) - inter
+    return inter / union if union > 0 else 0.0
+
+
+def _matched_pairs(gt_items, pred_items, iou_thresh=0.8):
+    """Greedy max-IoU pairing; return list of (pred, gt, iou) with iou >= thresh."""
+    if not isinstance(gt_items, list) or not isinstance(pred_items, list):
+        return []
+    candidates = []
+    for i, p in enumerate(pred_items):
+        if not isinstance(p, dict):
+            continue
+        for j, g in enumerate(gt_items):
+            if not isinstance(g, dict):
+                continue
+            iou = _iou(p, g)
+            if iou >= iou_thresh:
+                candidates.append((iou, i, j))
+    candidates.sort(reverse=True)
+    used_p, used_g = set(), set()
+    pairs = []
+    for iou, i, j in candidates:
+        if i in used_p or j in used_g:
+            continue
+        used_p.add(i)
+        used_g.add(j)
+        pairs.append((pred_items[i], gt_items[j], iou))
+    return pairs
+
+
+def _pair_meta_f1(pred_seg, gt_seg):
+    """Token-bag F1 of non-time fields within one matched (pred, gt) pair."""
+    from collections import Counter
+
+    pred_bag = Counter(_meta_tokens(pred_seg))
+    gt_bag = Counter(_meta_tokens(gt_seg))
+    if not pred_bag and not gt_bag:
+        return None
+    if not pred_bag or not gt_bag:
+        return 0.0
+    common = sum((pred_bag & gt_bag).values())
+    if common == 0:
+        return 0.0
+    P = common / sum(pred_bag.values())
+    R = common / sum(gt_bag.values())
+    return 2 * P * R / (P + R)
+
+
+def meta_score_iou(gt_items, pred_items, iou_thresh=0.8):
+    """Mean per-pair meta F1 over IoU-matched (>=thresh) pairs.
+    Returns (mean_score, n_matched). Returns (None, 0) if no matches."""
+    pairs = _matched_pairs(gt_items, pred_items, iou_thresh)
+    if not pairs:
+        return None, 0
+    scores = [s for p, g, _ in pairs if (s := _pair_meta_f1(p, g)) is not None]
+    if not scores:
+        return None, len(pairs)
+    return sum(scores) / len(scores), len(pairs)
+
+
 def _meta_tokens(item):
     """Yield lowercase word tokens from non-time metadata fields of one segment dict."""
     if not isinstance(item, dict):
@@ -280,7 +349,21 @@ details summary{cursor:pointer}
 <a href='https://sturdy-adventure-l4jp4le.pages.github.io/lia/260609_lia_th_think_vs_nothink.html'>260609 Macro HTML</a>.
 Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code>.
 <b>think_blocks (raw &lt;think&gt; text) is NOT in current eval-service outputs</b> — see
-<a href='https://github.com/lianam-tl/emptydir/blob/main/think_blocks_drop_issue/README.md'>think_blocks_drop_issue</a>.</p>"""
+<a href='https://github.com/lianam-tl/emptydir/blob/main/think_blocks_drop_issue/README.md'>think_blocks_drop_issue</a>.</p>
+
+<div class='notes'>
+<b>Scoring methodology — read this first</b>
+<ul style='margin:6px 0 0;line-height:1.5'>
+<li><b>f1_segment / f1_temporal / coverage</b>: from eval-service <code>persample_evaluations.json</code> &amp;
+<code>sme_eval_v1_results.json</code>. Macro = mean across 31 segment configs (equal weight). Global = sample-weighted mean.</li>
+<li><b>meta_score (Tab 2 only)</b>: <b>per-pair token-F1, averaged across IoU≥{META_IOU_THRESHOLD} matched pred-GT segment pairs.</b><br>
+&nbsp;&nbsp;1. Greedy match predicted segments to GT chapters by 1-D IoU; keep only pairs with IoU ≥ {META_IOU_THRESHOLD}.<br>
+&nbsp;&nbsp;2. For each matched pair, take <i>non-time</i> field values (<code>transcript</code>, <code>summary</code>, <code>speaker_id</code>, <code>action_label</code>, …; skip <code>start_time</code>/<code>end_time</code>).<br>
+&nbsp;&nbsp;3. Lowercase + whitespace-tokenize all values into a multiset; F1 = 2PR/(P+R) where common is multiset intersection, P over predicted-token total, R over GT-token total.<br>
+&nbsp;&nbsp;4. Sample meta_score = mean F1 across that sample's matched pairs. Samples with 0 matched pairs are dropped.</li>
+<li><b>Tab 2 filter</b>: FOCUS subsets only ({len(FOCUS_SUBSETS)} configs); samples where both <code>f1_segment &gt; 0</code> on both sides AND <code>|Δ f1_segment| ≤ {META_SIMILAR_THRESHOLD}</code>; both sides must have ≥1 IoU≥{META_IOU_THRESHOLD} matched pair. Sorted by |Δ meta_score| descending.</li>
+</ul>
+</div>"""
     )
 
     # Tab navigation
@@ -547,11 +630,7 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
         f"<h2>Meta-divergence — FOCUS group, similar f1_segment (|Δ| ≤ {META_SIMILAR_THRESHOLD}), <code>{html.escape(deep_run)}</code> step {deep_step}</h2>"
     )
     parts.append(
-        f"""<p class='note'>For each sample we compute a per-sample <b>meta_score</b> = token-level F1 between the
-bag of all non-time metadata field values in the GT chapters vs in the model's predicted segments
-(<code>transcript</code>, <code>summary</code>, <code>speaker_id</code>, <code>action_label</code>, …; everything except <code>start_time</code>/<code>end_time</code>).
-Then we filter to <b>FOCUS</b> ({len(FOCUS_SUBSETS)} subsets) and samples where think and no-think
-disagree on <b>meta</b> but agree on segmentation. Sorted by |Δ meta_score| descending, top {META_TOP_N}.</p>"""
+        f"""<p class='note'>FOCUS group + similar segmentation + diverging metadata. See methodology box at top of page for the exact meta_score definition.</p>"""
     )
 
     # Compute meta_score per sample
@@ -565,6 +644,10 @@ disagree on <b>meta</b> but agree on segmentation. Sorted by |Δ meta_score| des
         return ch if isinstance(ch, list) else None
 
     candidates = []
+    n_focus = 0
+    n_dropped_zero_seg = 0
+    n_dropped_diff_seg = 0
+    n_dropped_no_iou_match = 0
     for sid in set(deep_data["think"]["per"]) & set(deep_data["nothink"]["per"]):
         t_pred = think_preds_by_sid.get(sid)
         n_pred = nothink_preds_by_sid.get(sid)
@@ -573,21 +656,29 @@ disagree on <b>meta</b> but agree on segmentation. Sorted by |Δ meta_score| des
         cfg = sample_config(t_pred) or sample_config(n_pred)
         if cfg not in FOCUS_SUBSETS:
             continue
-        # GT chapters (prefer the rich record — n_pred after our swap)
+        n_focus += 1
+
+        t_seg = deep_data["think"]["per"][sid].get("f1_segment_score", 0)
+        n_seg = deep_data["nothink"]["per"][sid].get("f1_segment_score", 0)
+        # Skip samples where either side scored 0 on segmentation
+        if t_seg == 0 or n_seg == 0:
+            n_dropped_zero_seg += 1
+            continue
+        d_seg = t_seg - n_seg
+        if abs(d_seg) > META_SIMILAR_THRESHOLD:
+            n_dropped_diff_seg += 1
+            continue
+
         gt = chapters_of(n_pred) or chapters_of(t_pred)
         if gt is None:
             continue
         t_resp = t_pred.get("response")
         n_resp = n_pred.get("response")
-        t_meta = meta_f1(gt, t_resp if isinstance(t_resp, list) else None)
-        n_meta = meta_f1(gt, n_resp if isinstance(n_resp, list) else None)
+        t_meta, t_pairs = meta_score_iou(gt, t_resp if isinstance(t_resp, list) else None, META_IOU_THRESHOLD)
+        n_meta, n_pairs = meta_score_iou(gt, n_resp if isinstance(n_resp, list) else None, META_IOU_THRESHOLD)
+        # Require at least one IoU>=threshold matched pair on BOTH sides
         if t_meta is None or n_meta is None:
-            continue
-
-        t_seg = deep_data["think"]["per"][sid].get("f1_segment_score", 0)
-        n_seg = deep_data["nothink"]["per"][sid].get("f1_segment_score", 0)
-        d_seg = t_seg - n_seg
-        if abs(d_seg) > META_SIMILAR_THRESHOLD:
+            n_dropped_no_iou_match += 1
             continue
 
         d_meta = t_meta - n_meta
@@ -603,6 +694,8 @@ disagree on <b>meta</b> but agree on segmentation. Sorted by |Δ meta_score| des
                 "t_meta": t_meta,
                 "n_meta": n_meta,
                 "d_meta": d_meta,
+                "t_pairs": t_pairs,
+                "n_pairs": n_pairs,
                 "t_pred": t_pred,
                 "n_pred": n_pred,
                 "gt": gt,
@@ -610,18 +703,18 @@ disagree on <b>meta</b> but agree on segmentation. Sorted by |Δ meta_score| des
         )
 
     candidates.sort(key=lambda x: -abs(x["d_meta"]))
-    total_focus = sum(1 for sid in set(deep_data["think"]["per"]) & set(deep_data["nothink"]["per"])
-                      if sample_config(think_preds_by_sid.get(sid, {})) in FOCUS_SUBSETS
-                      or sample_config(nothink_preds_by_sid.get(sid, {})) in FOCUS_SUBSETS)
     parts.append(
-        f"<p class='note'>FOCUS samples in this step: {total_focus}. "
-        f"Passing similar-f1_seg filter (|Δ|≤{META_SIMILAR_THRESHOLD}): {len(candidates)}. "
-        f"Showing top {min(META_TOP_N, len(candidates))} by |Δ meta_score|.</p>"
+        f"""<p class='note'>FOCUS samples in this step: {n_focus}.
+Dropped (f1_seg=0 on either side): {n_dropped_zero_seg}.
+Dropped (|Δ f1_seg| &gt; {META_SIMILAR_THRESHOLD}): {n_dropped_diff_seg}.
+Dropped (no IoU≥{META_IOU_THRESHOLD} pair on at least one side): {n_dropped_no_iou_match}.
+Passing all filters: <b>{len(candidates)}</b>. Showing top {min(META_TOP_N, len(candidates))} by |Δ meta_score|.</p>"""
     )
 
     # Summary table
     parts.append("<table><thead><tr><th>#</th><th>_config</th><th>duration</th>"
                  "<th>no-think f1_seg</th><th>think f1_seg</th><th>Δ f1_seg</th>"
+                 "<th>n-pairs (n/t)</th>"
                  "<th>no-think meta</th><th>think meta</th><th>Δ meta</th></tr></thead><tbody>")
     for i, c in enumerate(candidates[:META_TOP_N], 1):
         dur = f"{c['dur']:.0f}s" if c['dur'] else "-"
@@ -629,6 +722,7 @@ disagree on <b>meta</b> but agree on segmentation. Sorted by |Δ meta_score| des
             f"<tr><td>{i}</td><td class='lbl'>{html.escape(str(c['cfg']))}</td><td>{dur}</td>"
             f"<td>{c['n_seg']:.3f}</td><td>{c['t_seg']:.3f}</td>"
             f"<td><span class='{color_for_delta(c['d_seg'])}'>{c['d_seg']:+.3f}</span></td>"
+            f"<td>{c['n_pairs']}/{c['t_pairs']}</td>"
             f"<td>{c['n_meta']:.3f}</td><td>{c['t_meta']:.3f}</td>"
             f"<td><span class='{color_for_delta(c['d_meta'])}'>{c['d_meta']:+.3f}</span></td></tr>"
         )
@@ -657,7 +751,7 @@ disagree on <b>meta</b> but agree on segmentation. Sorted by |Δ meta_score| des
   <span>{html.escape(str(c['cfg']))}</span>
   <span>seg={html.escape(str(c['seg']))}</span>
   <span>dur={dur}</span>
-  <span class='ds'>n-meta={c['n_meta']:.3f}, t-meta={c['t_meta']:.3f}</span>
+  <span class='ds'>n-meta={c['n_meta']:.3f} ({c['n_pairs']} pairs), t-meta={c['t_meta']:.3f} ({c['t_pairs']} pairs)</span>
   <span class='ds'>sample_id={html.escape(c['sid'])}</span>
 </div>
 <details open><summary>query &amp; GT chapters</summary>
