@@ -34,8 +34,8 @@ DURATION_BUCKETS = [(0, 60), (60, 180), (180, 600), (600, 100000)]
 BUCKET_LABELS = ["<60s", "60–180s", "180–600s", ">600s"]
 
 # GT segment count buckets (lo inclusive, hi exclusive)
-NSEG_BUCKETS = [(1, 3), (3, 6), (6, 11), (11, 21), (21, 10000)]
-NSEG_LABELS = ["1–2", "3–5", "6–10", "11–20", "21+"]
+NSEG_BUCKETS = [(1, 4), (4, 11), (11, 21), (21, 10000)]
+NSEG_LABELS = ["1–3", "4–10", "11–20", "21+"]
 
 # FOCUS subsets (from 260609 HTML)
 FOCUS_SUBSETS = {
@@ -848,126 +848,6 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
         )
     parts.append("</tbody></table>")
 
-    # ---------------- Section 8: predicted segment count buckets ----------------
-    parts.append("<h2>8. Performance vs. number of <i>predicted</i> segments</h2>")
-    parts.append(
-        "<p class='note'>Unlike GT count, pred count is a model output. Each side has its own pred count per "
-        "sample, so we compute per-side mean f1_segment when that side outputs N segments. Same NSEG buckets.</p>"
-    )
-
-    # 8a. Per-pair summary of pred count distribution
-    parts.append("<h3>8a. Pred count distribution per side</h3>")
-    parts.append("<table><thead><tr><th>run</th><th>step</th><th>side</th>"
-                 "<th>n=0</th><th>mean</th><th>median</th><th>p90</th><th>max</th></tr></thead><tbody>")
-
-    def pred_count(p):
-        r = p.get("response")
-        if isinstance(r, list):
-            return len(r)
-        return 0  # dict-fallback samples produced no parseable list
-
-    pred_counts_by_pair_side = {}  # (run, step, side) -> list of counts
-    f1_by_pair_side_count = {}  # (run, step, side) -> dict[count] -> [f1_seg]
-    for (run, step), pd in data.items():
-        for mode in ("nothink", "think"):
-            counts = [pred_count(p) for p in pd[mode]["preds"]]
-            f1_buckets = defaultdict(list)
-            for p in pd[mode]["preds"]:
-                sid = p["sample_id"]
-                if sid not in pd[mode]["per"]:
-                    continue
-                f1_buckets[pred_count(p)].append(pd[mode]["per"][sid].get("f1_segment_score", 0))
-            pred_counts_by_pair_side[(run, step, mode)] = counts
-            f1_by_pair_side_count[(run, step, mode)] = f1_buckets
-            sorted_c = sorted(counts)
-            n_zero = sum(1 for c in counts if c == 0)
-            p90 = sorted_c[int(len(sorted_c) * 0.9)] if sorted_c else 0
-            parts.append(
-                f"<tr><td class='lbl'>{html.escape(run)}</td><td>{step}</td><td class='lbl'>{mode}</td>"
-                f"<td>{n_zero}</td>"
-                f"<td>{statistics.mean(counts):.1f}</td>"
-                f"<td>{sorted_c[len(sorted_c)//2] if sorted_c else 0}</td>"
-                f"<td>{p90}</td>"
-                f"<td>{max(counts) if counts else 0}</td></tr>"
-            )
-    parts.append("</tbody></table>")
-    parts.append(
-        "<div class='notes'><b>Behavioral split:</b> run3 (mtp_loss_scale_0p5) → think OVER-segments vs no-think; "
-        "run2 (mtp_loss_scale_0) → think UNDER-segments vs no-think. Same training family, opposite output behavior.</div>"
-    )
-
-    # 8b. f1_segment conditional on each side's pred count, per bucket, aggregated
-    parts.append("<h3>8b. Mean f1_segment per pred-count bucket (each side independently, pooled across 8 pairs)</h3>")
-    parts.append(
-        "<p class='note'>For each mode, group all 8×1167 = 9336 samples by that mode's own predicted segment count, "
-        "compute mean f1_segment per bucket. These are not paired comparisons (different sample sets per bucket per mode), "
-        "but they show how each mode's accuracy depends on how many segments it chose to output.</p>"
-    )
-
-    def nseg_bucket_of2(n):
-        for i, (lo, hi) in enumerate(NSEG_BUCKETS):
-            if lo <= n < hi:
-                return i
-        return None
-
-    bucket_scores = {mode: {b: [] for b in range(len(NSEG_BUCKETS))} for mode in ("nothink", "think")}
-    bucket_n_zero = {"nothink": 0, "think": 0}
-    for (run, step, mode), f1_by_c in f1_by_pair_side_count.items():
-        for c, f1s in f1_by_c.items():
-            if c == 0:
-                bucket_n_zero[mode] += len(f1s)
-                continue
-            b = nseg_bucket_of2(c)
-            if b is None:
-                continue
-            bucket_scores[mode][b].extend(f1s)
-
-    parts.append("<table><thead><tr><th>pred segs</th>"
-                 "<th>no-think n</th><th>no-think mean f1_seg</th>"
-                 "<th>think n</th><th>think mean f1_seg</th></tr></thead><tbody>")
-    parts.append(
-        f"<tr><td class='lbl'>0 (parse fail/empty)</td>"
-        f"<td>{bucket_n_zero['nothink']}</td><td>—</td>"
-        f"<td>{bucket_n_zero['think']}</td><td>—</td></tr>"
-    )
-    for b in range(len(NSEG_BUCKETS)):
-        n_s = bucket_scores["nothink"][b]
-        t_s = bucket_scores["think"][b]
-        n_m = statistics.mean(n_s) if n_s else 0
-        t_m = statistics.mean(t_s) if t_s else 0
-        parts.append(
-            f"<tr><td class='lbl'>{NSEG_LABELS[b]} segs</td>"
-            f"<td>{len(n_s)}</td><td>{n_m:.3f}</td>"
-            f"<td>{len(t_s)}</td><td>{t_m:.3f}</td></tr>"
-        )
-    parts.append("</tbody></table>")
-
-    # Chart: f1 vs pred-count bucket, one line per side
-    parts.append("<div class='chart-wrap'><canvas id='pred_seg_chart'></canvas></div>")
-    chart_nothink = [statistics.mean(bucket_scores["nothink"][b]) if bucket_scores["nothink"][b] else 0 for b in range(len(NSEG_BUCKETS))]
-    chart_think = [statistics.mean(bucket_scores["think"][b]) if bucket_scores["think"][b] else 0 for b in range(len(NSEG_BUCKETS))]
-
-    # 8c. Per-sample paired diff in pred count
-    parts.append("<h3>8c. Per-sample pred count diff (think − no-think) — run3 step200</h3>")
-    deep_data2 = data[(deep_run, deep_step)]
-    t_p_lookup = {p["sample_id"]: p for p in deep_data2["think"]["preds"]}
-    n_p_lookup = {p["sample_id"]: p for p in deep_data2["nothink"]["preds"]}
-    diff_counts = []
-    for sid in set(t_p_lookup) & set(n_p_lookup):
-        diff_counts.append(pred_count(t_p_lookup[sid]) - pred_count(n_p_lookup[sid]))
-    if diff_counts:
-        sd = sorted(diff_counts)
-        n_over = sum(1 for x in diff_counts if x > 0)
-        n_eq = sum(1 for x in diff_counts if x == 0)
-        n_under = sum(1 for x in diff_counts if x < 0)
-        parts.append(
-            f"<p class='note'>n={len(diff_counts)}. mean={statistics.mean(diff_counts):+.2f}, median={sd[len(sd)//2]}, "
-            f"p10={sd[int(len(sd)*0.1)]}, p90={sd[int(len(sd)*0.9)]}.<br>"
-            f"think outputs MORE segs than no-think: <b>{n_over}</b> ({100*n_over/len(diff_counts):.1f}%). "
-            f"equal: <b>{n_eq}</b> ({100*n_eq/len(diff_counts):.1f}%). "
-            f"think outputs FEWER: <b>{n_under}</b> ({100*n_under/len(diff_counts):.1f}%).</p>"
-        )
-
     # Close Tab 1
     parts.append("</div>")  # /#tab1
 
@@ -1221,17 +1101,6 @@ new Chart(document.getElementById('nseg_tmp').getContext('2d'), {{
   options:{{responsive:true, maintainAspectRatio:false,
     plugins:{{title:{{display:true, text:'Δ f1_temporal by # GT segments (avg across 8 pairs)'}}, legend:{{display:false}}}},
     scales:{{y:{{title:{{display:true, text:'Δ f1_temporal'}}}}}}}}
-}});
-new Chart(document.getElementById('pred_seg_chart').getContext('2d'), {{
-  type:'line',
-  data:{{labels: {json.dumps(NSEG_LABELS)},
-         datasets:[
-           {{label:'no-think', data: {json.dumps(chart_nothink)}, borderColor:'#1976d2', backgroundColor:'#1976d2', borderWidth:2.5, pointRadius:5, tension:0.2, fill:false}},
-           {{label:'think', data: {json.dumps(chart_think)}, borderColor:'#c62828', backgroundColor:'#c62828', borderWidth:2.5, pointRadius:5, tension:0.2, fill:false}}
-         ]}},
-  options:{{responsive:true, maintainAspectRatio:false,
-    plugins:{{title:{{display:true, text:'Mean f1_segment vs # predicted segments (per side, pooled)'}}, legend:{{position:'bottom'}}}},
-    scales:{{y:{{title:{{display:true, text:'mean f1_segment'}}}}, x:{{title:{{display:true, text:'# predicted segments (bucket)'}}}}}}}}
 }});
 new Chart(document.getElementById('hist').getContext('2d'), {{
   type:'bar',
