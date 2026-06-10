@@ -50,6 +50,11 @@ META_SIMILAR_THRESHOLD = 0.05  # |Δ f1_segment| ≤ this counts as "similar seg
 META_TOP_N = 20
 META_IOU_THRESHOLD = 0.8  # only pred-GT segment pairs with IoU >= this contribute to meta
 
+# Tab 3 (SOCCER deep dive)
+SOCCER_CONFIG = "H16_SOCCER"
+SOCCER_DUR_BUCKETS = [(0, 1000), (1000, 2000), (2000, 100000)]
+SOCCER_DUR_LABELS = ["<1000s (~8-16 min)", "1000–2000s (~17-33 min)", "≥2000s (~45+ min)"]
+
 
 def load_pair(rel: str):
     base = DATA / rel
@@ -481,6 +486,7 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
         """<div class='tabs'>
 <button class='tab-btn active' onclick="showTab('tab1', this)">1. Performance overview</button>
 <button class='tab-btn' onclick="showTab('tab2', this)">2. Meta-divergence (FOCUS, similar f1_seg)</button>
+<button class='tab-btn' onclick="showTab('tab3', this)">3. SOCCER deep dive</button>
 </div>
 <div id='tab1' class='tab-content active'>"""
     )
@@ -1055,6 +1061,182 @@ Passing all filters: <b>{len(candidates)}</b>. Showing top {min(META_TOP_N, len(
 
     parts.append("</div>")  # /#tab2
 
+    # ---------------- Tab 3: SOCCER deep dive ----------------
+    parts.append("<div id='tab3' class='tab-content'>")
+    parts.append(f"<h2>SOCCER (<code>{SOCCER_CONFIG}</code>) — duration &amp; segment-count buckets</h2>")
+    parts.append(
+        f"""<p class='note'>Filter: <code>_config == {SOCCER_CONFIG}</code>. Pooled across 8 (run, step) pairs
+(30 unique samples × 8 pairs = 240 sample-runs). Each row is the mean per-sample f1_segment / f1_temporal /
+meta_score for that bucket. <b>meta_score</b> uses the same dtype-aware definition as Tab 2 (per-pair score
+over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levenshtein). SOCCER schema fields:
+<code>display_time</code>, <code>header_result</code>, <code>team</code>, <code>player</code>, <code>match_period</code>.</p>"""
+    )
+
+    # Collect all SOCCER sample evaluations across pairs
+    def soccer_records():
+        """Yield dicts with f1_seg, f1_tmp, meta scores per side, per (sample_id, run, step)."""
+        for (run, step), pd in data.items():
+            t_preds_local = {p["sample_id"]: p for p in pd["think"]["preds"]}
+            n_preds_local = {p["sample_id"]: p for p in pd["nothink"]["preds"]}
+            for sid in set(pd["think"]["per"]) & set(pd["nothink"]["per"]):
+                tp = t_preds_local.get(sid)
+                np_ = n_preds_local.get(sid)
+                if tp is None or np_ is None:
+                    continue
+                cfg = sample_config(tp) or sample_config(np_)
+                if cfg != SOCCER_CONFIG:
+                    continue
+                dur = sample_duration(np_) or sample_duration(tp)
+                ch = np_.get("chapters") or tp.get("chapters")
+                if isinstance(ch, str):
+                    try:
+                        ch = json.loads(ch)
+                    except Exception:
+                        ch = None
+                n_chapters = len(ch) if isinstance(ch, list) else None
+                t_seg = pd["think"]["per"][sid].get("f1_segment_score", 0)
+                n_seg = pd["nothink"]["per"][sid].get("f1_segment_score", 0)
+                t_tmp = pd["think"]["per"][sid].get("f1_temporal_score", 0)
+                n_tmp = pd["nothink"]["per"][sid].get("f1_temporal_score", 0)
+                # meta_score (might be None if no IoU match)
+                t_resp = tp.get("response")
+                n_resp = np_.get("response")
+                t_meta = n_meta = None
+                if isinstance(ch, list):
+                    t_meta, _, _ = meta_score_iou(
+                        ch, t_resp if isinstance(t_resp, list) else None, META_IOU_THRESHOLD
+                    )
+                    n_meta, _, _ = meta_score_iou(
+                        ch, n_resp if isinstance(n_resp, list) else None, META_IOU_THRESHOLD
+                    )
+                yield {
+                    "sid": sid,
+                    "run": run,
+                    "step": step,
+                    "dur": dur,
+                    "n_chapters": n_chapters,
+                    "t_seg": t_seg,
+                    "n_seg": n_seg,
+                    "t_tmp": t_tmp,
+                    "n_tmp": n_tmp,
+                    "t_meta": t_meta,
+                    "n_meta": n_meta,
+                }
+
+    soccer_recs = list(soccer_records())
+    n_unique = len({r["sid"] for r in soccer_recs})
+    parts.append(
+        f"<p class='note'>Loaded <b>{len(soccer_recs)}</b> SOCCER records ({n_unique} unique samples × {len(soccer_recs)//max(n_unique,1)} pairs).</p>"
+    )
+
+    # 3a. Duration buckets
+    parts.append("<h3>3a. By video duration</h3>")
+    def dur_bucket_of(dur):
+        if dur is None:
+            return None
+        for i, (lo, hi) in enumerate(SOCCER_DUR_BUCKETS):
+            if lo <= dur < hi:
+                return i
+        return None
+
+    parts.append("<table><thead><tr><th>duration</th><th>n samples</th>"
+                 "<th>no-think f1_seg</th><th>think f1_seg</th><th>Δ</th>"
+                 "<th>no-think f1_tmp</th><th>think f1_tmp</th><th>Δ</th>"
+                 "<th>no-think meta</th><th>think meta</th><th>Δ</th></tr></thead><tbody>")
+    chart_seg_d = []
+    chart_tmp_d = []
+    chart_meta_d = []
+    for b in range(len(SOCCER_DUR_BUCKETS)):
+        rows = [r for r in soccer_recs if dur_bucket_of(r["dur"]) == b]
+        if not rows:
+            chart_seg_d.append(0); chart_tmp_d.append(0); chart_meta_d.append(0)
+            continue
+        t_seg = statistics.mean(r["t_seg"] for r in rows)
+        n_seg = statistics.mean(r["n_seg"] for r in rows)
+        t_tmp = statistics.mean(r["t_tmp"] for r in rows)
+        n_tmp = statistics.mean(r["n_tmp"] for r in rows)
+        meta_rows = [r for r in rows if r["t_meta"] is not None and r["n_meta"] is not None]
+        if meta_rows:
+            t_meta = statistics.mean(r["t_meta"] for r in meta_rows)
+            n_meta = statistics.mean(r["n_meta"] for r in meta_rows)
+        else:
+            t_meta = n_meta = None
+        d_seg, d_tmp = t_seg - n_seg, t_tmp - n_tmp
+        d_meta = (t_meta - n_meta) if (t_meta is not None) else None
+        chart_seg_d.append(d_seg); chart_tmp_d.append(d_tmp); chart_meta_d.append(d_meta or 0)
+        meta_cells = (
+            f"<td>{n_meta:.3f}</td><td>{t_meta:.3f}</td>"
+            f"<td><span class='{color_for_delta(d_meta)}'>{d_meta:+.3f}</span></td>"
+            if t_meta is not None
+            else "<td>—</td><td>—</td><td>—</td>"
+        )
+        parts.append(
+            f"<tr><td class='lbl'>{SOCCER_DUR_LABELS[b]}</td><td>{len(rows)}</td>"
+            f"<td>{n_seg:.3f}</td><td>{t_seg:.3f}</td>"
+            f"<td><span class='{color_for_delta(d_seg)}'>{d_seg:+.3f}</span></td>"
+            f"<td>{n_tmp:.3f}</td><td>{t_tmp:.3f}</td>"
+            f"<td><span class='{color_for_delta(d_tmp)}'>{d_tmp:+.3f}</span></td>"
+            f"{meta_cells}</tr>"
+        )
+    parts.append("</tbody></table>")
+    parts.append("<div class='chart-wrap'><canvas id='soccer_dur_chart'></canvas></div>")
+
+    # 3b. GT segment count buckets
+    parts.append("<h3>3b. By # GT segments</h3>")
+    def nseg_bucket_of3(n):
+        if n is None:
+            return None
+        for i, (lo, hi) in enumerate(NSEG_BUCKETS):
+            if lo <= n < hi:
+                return i
+        return None
+
+    parts.append("<table><thead><tr><th># GT segs</th><th>n samples</th>"
+                 "<th>no-think f1_seg</th><th>think f1_seg</th><th>Δ</th>"
+                 "<th>no-think f1_tmp</th><th>think f1_tmp</th><th>Δ</th>"
+                 "<th>no-think meta</th><th>think meta</th><th>Δ</th></tr></thead><tbody>")
+    chart_seg_n = []
+    chart_tmp_n = []
+    chart_meta_n = []
+    for b in range(len(NSEG_BUCKETS)):
+        rows = [r for r in soccer_recs if nseg_bucket_of3(r["n_chapters"]) == b]
+        if not rows:
+            chart_seg_n.append(0); chart_tmp_n.append(0); chart_meta_n.append(0)
+            parts.append(f"<tr><td class='lbl'>{NSEG_LABELS[b]} segs</td><td>0</td>"
+                         "<td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>")
+            continue
+        t_seg = statistics.mean(r["t_seg"] for r in rows)
+        n_seg = statistics.mean(r["n_seg"] for r in rows)
+        t_tmp = statistics.mean(r["t_tmp"] for r in rows)
+        n_tmp = statistics.mean(r["n_tmp"] for r in rows)
+        meta_rows = [r for r in rows if r["t_meta"] is not None and r["n_meta"] is not None]
+        if meta_rows:
+            t_meta = statistics.mean(r["t_meta"] for r in meta_rows)
+            n_meta = statistics.mean(r["n_meta"] for r in meta_rows)
+        else:
+            t_meta = n_meta = None
+        d_seg, d_tmp = t_seg - n_seg, t_tmp - n_tmp
+        d_meta = (t_meta - n_meta) if (t_meta is not None) else None
+        chart_seg_n.append(d_seg); chart_tmp_n.append(d_tmp); chart_meta_n.append(d_meta or 0)
+        meta_cells = (
+            f"<td>{n_meta:.3f}</td><td>{t_meta:.3f}</td>"
+            f"<td><span class='{color_for_delta(d_meta)}'>{d_meta:+.3f}</span></td>"
+            if t_meta is not None
+            else "<td>—</td><td>—</td><td>—</td>"
+        )
+        parts.append(
+            f"<tr><td class='lbl'>{NSEG_LABELS[b]} segs</td><td>{len(rows)}</td>"
+            f"<td>{n_seg:.3f}</td><td>{t_seg:.3f}</td>"
+            f"<td><span class='{color_for_delta(d_seg)}'>{d_seg:+.3f}</span></td>"
+            f"<td>{n_tmp:.3f}</td><td>{t_tmp:.3f}</td>"
+            f"<td><span class='{color_for_delta(d_tmp)}'>{d_tmp:+.3f}</span></td>"
+            f"{meta_cells}</tr>"
+        )
+    parts.append("</tbody></table>")
+    parts.append("<div class='chart-wrap'><canvas id='soccer_nseg_chart'></canvas></div>")
+
+    parts.append("</div>")  # /#tab3
+
     # Tab switching JS
     parts.append(
         """<script>
@@ -1101,6 +1283,30 @@ new Chart(document.getElementById('nseg_tmp').getContext('2d'), {{
   options:{{responsive:true, maintainAspectRatio:false,
     plugins:{{title:{{display:true, text:'Δ f1_temporal by # GT segments (avg across 8 pairs)'}}, legend:{{display:false}}}},
     scales:{{y:{{title:{{display:true, text:'Δ f1_temporal'}}}}}}}}
+}});
+new Chart(document.getElementById('soccer_dur_chart').getContext('2d'), {{
+  type:'bar',
+  data:{{labels: {json.dumps(SOCCER_DUR_LABELS)},
+         datasets:[
+           {{label:'Δ f1_seg', data: {json.dumps(chart_seg_d)}, backgroundColor:'#1976d2'}},
+           {{label:'Δ f1_tmp', data: {json.dumps(chart_tmp_d)}, backgroundColor:'#388e3c'}},
+           {{label:'Δ meta', data: {json.dumps(chart_meta_d)}, backgroundColor:'#c62828'}}
+         ]}},
+  options:{{responsive:true, maintainAspectRatio:false,
+    plugins:{{title:{{display:true, text:'SOCCER — Δ (think − no-think) by duration'}}, legend:{{position:'bottom'}}}},
+    scales:{{y:{{title:{{display:true, text:'Δ'}}}}}}}}
+}});
+new Chart(document.getElementById('soccer_nseg_chart').getContext('2d'), {{
+  type:'bar',
+  data:{{labels: {json.dumps(NSEG_LABELS)},
+         datasets:[
+           {{label:'Δ f1_seg', data: {json.dumps(chart_seg_n)}, backgroundColor:'#1976d2'}},
+           {{label:'Δ f1_tmp', data: {json.dumps(chart_tmp_n)}, backgroundColor:'#388e3c'}},
+           {{label:'Δ meta', data: {json.dumps(chart_meta_n)}, backgroundColor:'#c62828'}}
+         ]}},
+  options:{{responsive:true, maintainAspectRatio:false,
+    plugins:{{title:{{display:true, text:'SOCCER — Δ (think − no-think) by # GT segments'}}, legend:{{position:'bottom'}}}},
+    scales:{{y:{{title:{{display:true, text:'Δ'}}}}}}}}
 }});
 new Chart(document.getElementById('hist').getContext('2d'), {{
   type:'bar',
