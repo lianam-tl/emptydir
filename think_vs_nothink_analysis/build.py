@@ -1181,8 +1181,60 @@ over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levens
     parts.append("</tbody></table>")
     parts.append("<div class='chart-wrap'><canvas id='soccer_dur_chart'></canvas></div>")
 
-    # 3b. GT segment count buckets
-    parts.append("<h3>3b. By # GT segments</h3>")
+    # 3b. Per-step, per-duration line plot (one per run)
+    parts.append("<h3>3b. Per-step trajectories — f1_segment by duration bucket</h3>")
+    parts.append(
+        "<p class='note'>Dashed = no-think, solid = think. One line per duration bucket. "
+        "run3 and run2 are separate training runs (different step axes).</p>"
+    )
+
+    from collections import defaultdict as _dd
+    soccer_by_key = _dd(lambda: {"think": [], "nothink": []})
+    for r in soccer_recs:
+        b = dur_bucket_of(r["dur"])
+        if b is None:
+            continue
+        soccer_by_key[(r["run"], r["step"], b)]["think"].append(r["t_seg"])
+        soccer_by_key[(r["run"], r["step"], b)]["nothink"].append(r["n_seg"])
+
+    run_steps = _dd(set)
+    for run, step, _ in PAIRS:
+        run_steps[run].add(step)
+    runs_ordered = list(run_steps.keys())
+
+    soccer_traj_charts = []
+    bucket_colors = ["#1976d2", "#f57c00", "#388e3c"]
+    for ri, run in enumerate(runs_ordered):
+        steps = sorted(run_steps[run])
+        datasets = []
+        for b in range(len(SOCCER_DUR_BUCKETS)):
+            color = bucket_colors[b % len(bucket_colors)]
+            t_pts = []
+            n_pts = []
+            for s in steps:
+                key = (run, s, b)
+                if key in soccer_by_key and soccer_by_key[key]["think"]:
+                    t_pts.append({"x": s, "y": statistics.mean(soccer_by_key[key]["think"])})
+                if key in soccer_by_key and soccer_by_key[key]["nothink"]:
+                    n_pts.append({"x": s, "y": statistics.mean(soccer_by_key[key]["nothink"])})
+            label_base = SOCCER_DUR_LABELS[b].split()[0]
+            datasets.append({
+                "label": f"{label_base} no-think", "data": n_pts,
+                "borderColor": color, "backgroundColor": color,
+                "borderDash": [5, 5], "borderWidth": 1.5, "pointRadius": 4,
+                "tension": 0.2, "fill": False,
+            })
+            datasets.append({
+                "label": f"{label_base} think", "data": t_pts,
+                "borderColor": color, "backgroundColor": color,
+                "borderWidth": 2.5, "pointRadius": 5, "tension": 0.2, "fill": False,
+            })
+        canvas_id = f"soccer_traj_{ri}"
+        soccer_traj_charts.append((canvas_id, run, datasets))
+        parts.append(f"<div class='chart-wrap' style='width:760px;height:380px'><canvas id='{canvas_id}'></canvas></div>")
+
+    # 3c. GT segment count buckets
+    parts.append("<h3>3c. By # GT segments</h3>")
     def nseg_bucket_of3(n):
         if n is None:
             return None
@@ -1234,73 +1286,6 @@ over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levens
         )
     parts.append("</tbody></table>")
     parts.append("<div class='chart-wrap'><canvas id='soccer_nseg_chart'></canvas></div>")
-
-    # 3c. Per-step, per-duration line plot (one per run)
-    parts.append("<h3>3c. Per-step trajectories — f1_segment by duration bucket</h3>")
-    parts.append(
-        "<p class='note'>Dashed = no-think, solid = think. One line per duration bucket. "
-        "run3 and run2 are separate training runs (different step axes).</p>"
-    )
-
-    # Group records by (run, step, dur_bucket, mode)
-    # then compute mean f1_seg per (run, step, dur_bucket, mode)
-    from collections import defaultdict as _dd
-    soccer_by_key = _dd(lambda: {"think": [], "nothink": []})
-    for r in soccer_recs:
-        b = dur_bucket_of(r["dur"])
-        if b is None:
-            continue
-        soccer_by_key[(r["run"], r["step"], b)]["think"].append(r["t_seg"])
-        soccer_by_key[(r["run"], r["step"], b)]["nothink"].append(r["n_seg"])
-
-    # Identify runs and their step lists
-    run_steps = _dd(set)
-    for run, step, _ in PAIRS:
-        run_steps[run].add(step)
-    runs_ordered = list(run_steps.keys())  # preserves insertion order
-
-    # Build chart datasets per run
-    soccer_traj_charts = []  # list of (canvas_id, title, datasets_json)
-    bucket_colors = ["#1976d2", "#f57c00", "#388e3c"]  # blue / orange / green per bucket
-    for ri, run in enumerate(runs_ordered):
-        steps = sorted(run_steps[run])
-        datasets = []
-        for b in range(len(SOCCER_DUR_BUCKETS)):
-            color = bucket_colors[b % len(bucket_colors)]
-            # think series
-            t_pts = []
-            n_pts = []
-            for s in steps:
-                key = (run, s, b)
-                if key in soccer_by_key and soccer_by_key[key]["think"]:
-                    t_pts.append({"x": s, "y": statistics.mean(soccer_by_key[key]["think"])})
-                if key in soccer_by_key and soccer_by_key[key]["nothink"]:
-                    n_pts.append({"x": s, "y": statistics.mean(soccer_by_key[key]["nothink"])})
-            label_base = SOCCER_DUR_LABELS[b].split()[0]  # "<1000s" etc
-            datasets.append({
-                "label": f"{label_base} no-think",
-                "data": n_pts,
-                "borderColor": color,
-                "backgroundColor": color,
-                "borderDash": [5, 5],
-                "borderWidth": 1.5,
-                "pointRadius": 4,
-                "tension": 0.2,
-                "fill": False,
-            })
-            datasets.append({
-                "label": f"{label_base} think",
-                "data": t_pts,
-                "borderColor": color,
-                "backgroundColor": color,
-                "borderWidth": 2.5,
-                "pointRadius": 5,
-                "tension": 0.2,
-                "fill": False,
-            })
-        canvas_id = f"soccer_traj_{ri}"
-        soccer_traj_charts.append((canvas_id, run, datasets))
-        parts.append(f"<div class='chart-wrap' style='width:760px;height:380px'><canvas id='{canvas_id}'></canvas></div>")
 
     # 3d. Per-step, per-#GT-segments line plot (one per run)
     parts.append("<h3>3d. Per-step trajectories — f1_segment by # GT segments bucket</h3>")
