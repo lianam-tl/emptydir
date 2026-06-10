@@ -1302,6 +1302,67 @@ over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levens
         soccer_traj_charts.append((canvas_id, run, datasets))
         parts.append(f"<div class='chart-wrap' style='width:760px;height:380px'><canvas id='{canvas_id}'></canvas></div>")
 
+    # 3d. Per-step, per-#GT-segments line plot (one per run)
+    parts.append("<h3>3d. Per-step trajectories — f1_segment by # GT segments bucket</h3>")
+    parts.append(
+        "<p class='note'>Dashed = no-think, solid = think. One line per # GT segments bucket.</p>"
+    )
+
+    soccer_by_nseg_key = _dd(lambda: {"think": [], "nothink": []})
+    for r in soccer_recs:
+        b = nseg_bucket_of3(r["n_chapters"])
+        if b is None:
+            continue
+        soccer_by_nseg_key[(r["run"], r["step"], b)]["think"].append(r["t_seg"])
+        soccer_by_nseg_key[(r["run"], r["step"], b)]["nothink"].append(r["n_seg"])
+
+    soccer_nseg_traj_charts = []
+    nseg_bucket_colors = ["#1976d2", "#f57c00", "#388e3c", "#7b1fa2"]  # blue/orange/green/purple per bucket
+    for ri, run in enumerate(runs_ordered):
+        steps = sorted(run_steps[run])
+        datasets = []
+        for b in range(len(NSEG_BUCKETS)):
+            color = nseg_bucket_colors[b % len(nseg_bucket_colors)]
+            t_pts = []
+            n_pts = []
+            for s in steps:
+                key = (run, s, b)
+                if key in soccer_by_nseg_key:
+                    if soccer_by_nseg_key[key]["think"]:
+                        t_pts.append({"x": s, "y": statistics.mean(soccer_by_nseg_key[key]["think"])})
+                    if soccer_by_nseg_key[key]["nothink"]:
+                        n_pts.append({"x": s, "y": statistics.mean(soccer_by_nseg_key[key]["nothink"])})
+            # # samples per bucket per step (consistent across run since same 30 unique samples × 8 pairs)
+            n_per_step = "—"
+            for s in steps:
+                if (run, s, b) in soccer_by_nseg_key and soccer_by_nseg_key[(run, s, b)]["think"]:
+                    n_per_step = len(soccer_by_nseg_key[(run, s, b)]["think"])
+                    break
+            datasets.append({
+                "label": f"{NSEG_LABELS[b]} segs (n={n_per_step}) no-think",
+                "data": n_pts,
+                "borderColor": color,
+                "backgroundColor": color,
+                "borderDash": [5, 5],
+                "borderWidth": 1.5,
+                "pointRadius": 4,
+                "tension": 0.2,
+                "fill": False,
+            })
+            datasets.append({
+                "label": f"{NSEG_LABELS[b]} segs think",
+                "data": t_pts,
+                "borderColor": color,
+                "backgroundColor": color,
+                "borderWidth": 2.5,
+                "pointRadius": 5,
+                "tension": 0.2,
+                "fill": False,
+            })
+        canvas_id = f"soccer_nseg_traj_{ri}"
+        soccer_nseg_traj_charts.append((canvas_id, run, datasets))
+        parts.append(f"<div class='chart-wrap' style='width:760px;height:380px'><canvas id='{canvas_id}'></canvas></div>")
+
     parts.append("</div>")  # /#tab3
 
     # Tab switching JS
@@ -1361,6 +1422,16 @@ new Chart(document.getElementById('nseg_tmp').getContext('2d'), {{
     scales:{{x:{{type:'linear', title:{{display:true, text:'step'}}}},
              y:{{title:{{display:true, text:'mean f1_segment'}}}}}}}}
 }});""" for cid, run_lbl, ds in soccer_traj_charts
+        ) + "\n" + "\n".join(
+            f"""new Chart(document.getElementById('{cid}').getContext('2d'), {{
+  type:'line',
+  data:{{datasets: {json.dumps(ds)}}},
+  options:{{responsive:true, maintainAspectRatio:false,
+    plugins:{{title:{{display:true, text:'SOCCER — f1_segment trajectory by # GT segs ({html.escape(run_lbl)})'}},
+              legend:{{position:'bottom', labels:{{boxWidth:10, font:{{size:10}}}}}}}},
+    scales:{{x:{{type:'linear', title:{{display:true, text:'step'}}}},
+             y:{{title:{{display:true, text:'mean f1_segment'}}}}}}}}
+}});""" for cid, run_lbl, ds in soccer_nseg_traj_charts
         ) + f"""
 
 new Chart(document.getElementById('soccer_dur_chart').getContext('2d'), {{
