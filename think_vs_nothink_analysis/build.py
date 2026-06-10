@@ -33,6 +33,10 @@ DEEP_DIVE = ("run3 (mtp_loss_scale_0p5+think)", 200, "run3_mtp_loss_scale_0p5/st
 DURATION_BUCKETS = [(0, 60), (60, 180), (180, 600), (600, 100000)]
 BUCKET_LABELS = ["<60s", "60–180s", "180–600s", ">600s"]
 
+# GT segment count buckets (lo inclusive, hi exclusive)
+NSEG_BUCKETS = [(1, 3), (3, 6), (6, 11), (11, 21), (21, 10000)]
+NSEG_LABELS = ["1–2", "3–5", "6–10", "11–20", "21+"]
+
 # FOCUS subsets (from 260609 HTML)
 FOCUS_SUBSETS = {
     "A0_OTHERS", "A1_NEWS", "C0_MOVIE", "C0_NEWS", "C1_MOVIE", "C1_NEWS",
@@ -727,6 +731,123 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
     for d in losers[:3]:
         parts.append(example_card(d, "NOTHINK WINS"))
 
+    # ---------------- Section 7: GT segment count buckets ----------------
+    parts.append("<h2>7. Performance vs. number of GT segments</h2>")
+    parts.append(
+        "<p class='note'>For each sample, count the GT chapters and bucket by it. Mean per-sample "
+        "f1_segment per bucket and Δ (think − no-think). Samples with 0 GT segments are dropped "
+        "(trivial case). Numbers below pool across all 8 pairs.</p>"
+    )
+
+    def nseg_bucket_of(n):
+        for i, (lo, hi) in enumerate(NSEG_BUCKETS):
+            if lo <= n < hi:
+                return i
+        return None
+
+    def chapters_count(p):
+        ch = p.get("chapters")
+        if isinstance(ch, str):
+            try:
+                ch = json.loads(ch)
+            except Exception:
+                return None
+        return len(ch) if isinstance(ch, list) else None
+
+    # Per-pair, per-bucket scores
+    nseg_pair = {}
+    for (run, step), pd in data.items():
+        t_preds_b = {p["sample_id"]: p for p in pd["think"]["preds"]}
+        n_preds_b = {p["sample_id"]: p for p in pd["nothink"]["preds"]}
+        per_t = pd["think"]["per"]
+        per_n = pd["nothink"]["per"]
+        bucket_t = {b: [] for b in range(len(NSEG_BUCKETS))}
+        bucket_n = {b: [] for b in range(len(NSEG_BUCKETS))}
+        bucket_tt = {b: [] for b in range(len(NSEG_BUCKETS))}  # f1_temporal
+        bucket_nt = {b: [] for b in range(len(NSEG_BUCKETS))}
+        for sid in set(per_t) & set(per_n):
+            src = n_preds_b.get(sid) or t_preds_b.get(sid)
+            if src is None:
+                continue
+            cnt = chapters_count(src)
+            if cnt is None or cnt == 0:
+                continue
+            b = nseg_bucket_of(cnt)
+            if b is None:
+                continue
+            bucket_t[b].append(per_t[sid].get("f1_segment_score", 0))
+            bucket_n[b].append(per_n[sid].get("f1_segment_score", 0))
+            bucket_tt[b].append(per_t[sid].get("f1_temporal_score", 0))
+            bucket_nt[b].append(per_n[sid].get("f1_temporal_score", 0))
+        nseg_pair[(run, step)] = {
+            "seg_t": bucket_t,
+            "seg_n": bucket_n,
+            "tmp_t": bucket_tt,
+            "tmp_n": bucket_nt,
+        }
+
+    # Per-pair table
+    parts.append("<table><thead><tr><th>run</th><th>step</th><th>metric</th>")
+    for b_lbl in NSEG_LABELS:
+        parts.append(f"<th>{b_lbl}<br>n</th><th>no-think</th><th>think</th><th>Δ</th>")
+    parts.append("</tr></thead><tbody>")
+    for (run, step), b_data in nseg_pair.items():
+        parts.append(f"<tr><td class='lbl'>{html.escape(run)}</td><td>{step}</td><td>f1_seg</td>")
+        for b in range(len(NSEG_BUCKETS)):
+            t_s = b_data["seg_t"][b]
+            n_s = b_data["seg_n"][b]
+            n = len(t_s)
+            t_m = statistics.mean(t_s) if t_s else 0
+            n_m = statistics.mean(n_s) if n_s else 0
+            d = t_m - n_m
+            parts.append(
+                f"<td>{n}</td><td>{n_m:.3f}</td><td>{t_m:.3f}</td>"
+                f"<td><span class='{color_for_delta(d)}'>{d:+.3f}</span></td>"
+            )
+        parts.append("</tr>")
+    parts.append("</tbody></table>")
+
+    # Aggregate chart
+    parts.append("<h3>Aggregate Δ vs. # GT segments (mean across 8 pairs)</h3>")
+    nseg_agg_seg = {b: [] for b in range(len(NSEG_BUCKETS))}
+    nseg_agg_tmp = {b: [] for b in range(len(NSEG_BUCKETS))}
+    total_n_per_bucket = [0] * len(NSEG_BUCKETS)
+    for (run, step), b_data in nseg_pair.items():
+        for b in range(len(NSEG_BUCKETS)):
+            if b_data["seg_t"][b] and b_data["seg_n"][b]:
+                nseg_agg_seg[b].append(
+                    statistics.mean(b_data["seg_t"][b]) - statistics.mean(b_data["seg_n"][b])
+                )
+                nseg_agg_tmp[b].append(
+                    statistics.mean(b_data["tmp_t"][b]) - statistics.mean(b_data["tmp_n"][b])
+                )
+            total_n_per_bucket[b] += len(b_data["seg_t"][b])
+    chart_data_nseg_seg = [statistics.mean(nseg_agg_seg[b]) if nseg_agg_seg[b] else 0 for b in range(len(NSEG_BUCKETS))]
+    chart_data_nseg_tmp = [statistics.mean(nseg_agg_tmp[b]) if nseg_agg_tmp[b] else 0 for b in range(len(NSEG_BUCKETS))]
+    nseg_labels_with_n = [f"{NSEG_LABELS[b]}\n(n={total_n_per_bucket[b]})" for b in range(len(NSEG_BUCKETS))]
+
+    parts.append("<div class='chart-wrap'><canvas id='nseg_seg'></canvas></div>")
+    parts.append("<div class='chart-wrap'><canvas id='nseg_tmp'></canvas></div>")
+
+    # Also aggregate absolute scores by bucket (helps see baseline difficulty)
+    parts.append("<h3>Baseline difficulty — absolute f1_segment per bucket (mean across 8 pairs)</h3>")
+    abs_n = [statistics.mean(
+        [statistics.mean(b_data["seg_n"][b]) for (_, _), b_data in nseg_pair.items() if b_data["seg_n"][b]]
+    ) for b in range(len(NSEG_BUCKETS))]
+    abs_t = [statistics.mean(
+        [statistics.mean(b_data["seg_t"][b]) for (_, _), b_data in nseg_pair.items() if b_data["seg_t"][b]]
+    ) for b in range(len(NSEG_BUCKETS))]
+    parts.append("<table><thead><tr><th>bucket</th><th>pooled n (across 8 pairs)</th><th>no-think mean</th><th>think mean</th><th>Δ</th></tr></thead><tbody>")
+    for b in range(len(NSEG_BUCKETS)):
+        d = abs_t[b] - abs_n[b]
+        parts.append(
+            f"<tr><td class='lbl'>{NSEG_LABELS[b]} segments</td>"
+            f"<td>{total_n_per_bucket[b]}</td>"
+            f"<td>{abs_n[b]:.3f}</td><td>{abs_t[b]:.3f}</td>"
+            f"<td><span class='{color_for_delta(d)}'>{d:+.3f}</span></td></tr>"
+        )
+    parts.append("</tbody></table>")
+
     # Close Tab 1
     parts.append("</div>")  # /#tab1
 
@@ -963,6 +1084,22 @@ new Chart(document.getElementById('bucket_tmp').getContext('2d'), {{
          datasets:[{{label:'mean Δ f1_temporal', data: {json.dumps(chart_data_tmp)}, backgroundColor: '#388e3c'}}]}},
   options:{{responsive:true, maintainAspectRatio:false,
     plugins:{{title:{{display:true, text:'Δ f1_temporal by duration bucket (avg across 8 pairs)'}}, legend:{{display:false}}}},
+    scales:{{y:{{title:{{display:true, text:'Δ f1_temporal'}}}}}}}}
+}});
+new Chart(document.getElementById('nseg_seg').getContext('2d'), {{
+  type:'bar',
+  data:{{labels: {json.dumps(nseg_labels_with_n)},
+         datasets:[{{label:'mean Δ f1_segment (think − no-think)', data: {json.dumps(chart_data_nseg_seg)}, backgroundColor: '#1976d2'}}]}},
+  options:{{responsive:true, maintainAspectRatio:false,
+    plugins:{{title:{{display:true, text:'Δ f1_segment by # GT segments (avg across 8 pairs)'}}, legend:{{display:false}}}},
+    scales:{{y:{{title:{{display:true, text:'Δ f1_segment'}}}}}}}}
+}});
+new Chart(document.getElementById('nseg_tmp').getContext('2d'), {{
+  type:'bar',
+  data:{{labels: {json.dumps(nseg_labels_with_n)},
+         datasets:[{{label:'mean Δ f1_temporal', data: {json.dumps(chart_data_nseg_tmp)}, backgroundColor: '#388e3c'}}]}},
+  options:{{responsive:true, maintainAspectRatio:false,
+    plugins:{{title:{{display:true, text:'Δ f1_temporal by # GT segments (avg across 8 pairs)'}}, legend:{{display:false}}}},
     scales:{{y:{{title:{{display:true, text:'Δ f1_temporal'}}}}}}}}
 }});
 new Chart(document.getElementById('hist').getContext('2d'), {{
