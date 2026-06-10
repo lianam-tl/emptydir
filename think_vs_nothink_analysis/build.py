@@ -856,8 +856,53 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
         )
     parts.append("</tbody></table>")
 
-    # Close Tab 1
-    parts.append("</div>")  # /#tab1
+    # ---------------- Section 9: response length scatter ----------------
+    parts.append("<h2>9. Response length vs. f1_segment (scatter)</h2>")
+    parts.append(
+        "<p class='note'>Each point = one sample-pair (sample × (run, step) × mode). "
+        "x = JSON char length of <code>response</code> field. y = f1_segment. "
+        "Log x-axis. Pooled across all 8 pairs (~9336 points per mode).</p>"
+    )
+
+    # Collect points per mode
+    scatter_pts = {"nothink": [], "think": []}
+    binned_means = {"nothink": defaultdict(list), "think": defaultdict(list)}
+    log_bins = [10, 30, 100, 300, 1000, 3000, 10000, 30000, 100000, 300000]
+    for (run, step), pd in data.items():
+        for mode in ("nothink", "think"):
+            per = pd[mode]["per"]
+            for p in pd[mode]["preds"]:
+                sid = p["sample_id"]
+                if sid not in per:
+                    continue
+                r = p.get("response")
+                if isinstance(r, list):
+                    chars = len(json.dumps(r))
+                elif isinstance(r, dict):
+                    chars = len(r.get("text", "") or "")
+                else:
+                    continue
+                if chars <= 0:
+                    continue
+                f1 = per[sid].get("f1_segment_score", 0)
+                scatter_pts[mode].append({"x": chars, "y": f1})
+                # bin
+                for i in range(len(log_bins) - 1):
+                    if log_bins[i] <= chars < log_bins[i + 1]:
+                        binned_means[mode][i].append(f1)
+                        break
+
+    # Compute trend (geo-mean x, arithmetic mean y) per bin per side
+    trend = {"nothink": [], "think": []}
+    for mode in trend:
+        for i in range(len(log_bins) - 1):
+            vals = binned_means[mode][i]
+            if len(vals) >= 5:
+                # geometric center of bin
+                gm = (log_bins[i] * log_bins[i + 1]) ** 0.5
+                trend[mode].append({"x": gm, "y": statistics.mean(vals)})
+
+    parts.append("<div class='chart-wrap' style='width:1100px;height:520px'><canvas id='resp_len_scatter'></canvas></div>")
 
     # ---------------- Tab 2: meta-divergence ----------------
     parts.append("<div id='tab2' class='tab-content'>")
@@ -1617,6 +1662,28 @@ new Chart(document.getElementById('soccer_nseg_chart').getContext('2d'), {{
   options:{{responsive:true, maintainAspectRatio:false,
     plugins:{{title:{{display:true, text:'SOCCER — Δ (think − no-think) by # GT segments'}}, legend:{{position:'bottom'}}}},
     scales:{{y:{{title:{{display:true, text:'Δ'}}}}}}}}
+}});
+new Chart(document.getElementById('resp_len_scatter').getContext('2d'), {{
+  type:'scatter',
+  data:{{datasets:[
+    {{label:'no-think (raw)', data: {json.dumps(scatter_pts['nothink'])},
+      backgroundColor:'rgba(25,118,210,0.18)', pointRadius:1.3, pointHoverRadius:3, borderColor:'rgba(25,118,210,0)' }},
+    {{label:'think (raw)', data: {json.dumps(scatter_pts['think'])},
+      backgroundColor:'rgba(198,40,40,0.18)', pointRadius:1.3, pointHoverRadius:3, borderColor:'rgba(198,40,40,0)' }},
+    {{label:'no-think (bin mean)', type:'line', data: {json.dumps(trend['nothink'])},
+      borderColor:'#1976d2', backgroundColor:'#1976d2', borderWidth:2.5, pointRadius:5, showLine:true, fill:false, tension:0.2 }},
+    {{label:'think (bin mean)', type:'line', data: {json.dumps(trend['think'])},
+      borderColor:'#c62828', backgroundColor:'#c62828', borderWidth:2.5, pointRadius:5, showLine:true, fill:false, tension:0.2 }}
+  ]}},
+  options:{{responsive:true, maintainAspectRatio:false,
+    plugins:{{title:{{display:true, text:'response char length vs f1_segment (log x; bin means overlaid)'}},
+              legend:{{position:'bottom', labels:{{boxWidth:10, font:{{size:11}}}}}}}},
+    scales:{{
+      x:{{type:'logarithmic', title:{{display:true, text:'response JSON char length (log scale)'}},
+          min:10, max:300000}},
+      y:{{title:{{display:true, text:'f1_segment'}}, min:0, max:1}}
+    }}
+  }}
 }});
 new Chart(document.getElementById('hist').getContext('2d'), {{
   type:'bar',
