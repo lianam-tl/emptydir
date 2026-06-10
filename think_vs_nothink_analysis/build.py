@@ -208,34 +208,136 @@ def _matched_pairs(gt_items, pred_items, iou_thresh=0.8):
     return pairs
 
 
-def _pair_meta_f1(pred_seg, gt_seg):
-    """Token-bag F1 of non-time fields within one matched (pred, gt) pair."""
-    from collections import Counter
+def _norm(s):
+    return str(s).strip().lower() if s is not None else ""
 
-    pred_bag = Counter(_meta_tokens(pred_seg))
-    gt_bag = Counter(_meta_tokens(gt_seg))
-    if not pred_bag and not gt_bag:
+
+def _classify_value(v):
+    """Return one of {'numeric','enum','string'} based on value type/shape.
+    Returns None if value is missing/empty."""
+    if v is None or v == "":
         return None
-    if not pred_bag or not gt_bag:
+    if isinstance(v, bool):
+        return "enum"
+    if isinstance(v, (int, float)):
+        return "numeric"
+    if isinstance(v, list):
+        return "enum"
+    if isinstance(v, dict):
+        return None
+    s = str(v).strip()
+    if not s:
+        return None
+    try:
+        float(s)
+        return "numeric"
+    except (ValueError, TypeError):
+        pass
+    # Free text vs short categorical
+    if len(s.split()) >= 4 or len(s) > 40:
+        return "string"
+    return "enum"
+
+
+def _levenshtein_ratio(a, b):
+    """1 - edit_distance / max(len). Falls back to SequenceMatcher for very long strings."""
+    a = _norm(a)
+    b = _norm(b)
+    if not a and not b:
+        return 1.0
+    if not a or not b:
         return 0.0
-    common = sum((pred_bag & gt_bag).values())
-    if common == 0:
+    m, n = len(a), len(b)
+    # cap heavy DP cost
+    if m * n > 200_000:
+        import difflib
+        return difflib.SequenceMatcher(None, a, b).ratio()
+    prev = list(range(n + 1))
+    for i in range(1, m + 1):
+        curr = [i] + [0] * n
+        ai = a[i - 1]
+        for j in range(1, n + 1):
+            cost = 0 if ai == b[j - 1] else 1
+            curr[j] = min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + cost)
+        prev = curr
+    return 1.0 - prev[n] / max(m, n)
+
+
+def _field_similarity(gt_val, pred_val, ftype):
+    """0-1 similarity for one field given its GT-derived dtype."""
+    if (gt_val is None or gt_val == "") and (pred_val is None or pred_val == ""):
+        return None
+    if gt_val is None or gt_val == "" or pred_val is None or pred_val == "":
         return 0.0
-    P = common / sum(pred_bag.values())
-    R = common / sum(gt_bag.values())
-    return 2 * P * R / (P + R)
+    # list (keywords etc.): set Jaccard, regardless of detected type
+    if isinstance(gt_val, list) or isinstance(pred_val, list):
+        g = set(_norm(x) for x in (gt_val if isinstance(gt_val, list) else [gt_val]))
+        p = set(_norm(x) for x in (pred_val if isinstance(pred_val, list) else [pred_val]))
+        if not g and not p:
+            return None
+        if not g or not p:
+            return 0.0
+        return len(g & p) / len(g | p)
+    if ftype == "numeric":
+        try:
+            return 1.0 if float(gt_val) == float(pred_val) else 0.0
+        except (ValueError, TypeError):
+            return 1.0 if _norm(gt_val) == _norm(pred_val) else 0.0
+    if ftype == "enum":
+        return 1.0 if _norm(gt_val) == _norm(pred_val) else 0.0
+    if ftype == "string":
+        return _levenshtein_ratio(gt_val, pred_val)
+    return None
+
+
+def _pair_meta_typed(pred_seg, gt_seg):
+    """Return (pair_score, type_contributions) where pair_score is mean over
+    non-time fields, and type_contributions accumulates per-dtype (sum, count)."""
+    if not isinstance(gt_seg, dict) or not isinstance(pred_seg, dict):
+        return None, {"numeric": [0.0, 0], "enum": [0.0, 0], "string": [0.0, 0]}
+    fields = (set(gt_seg.keys()) | set(pred_seg.keys())) - {"start_time", "end_time"}
+    field_scores = []
+    contrib = {"numeric": [0.0, 0], "enum": [0.0, 0], "string": [0.0, 0]}
+    for f in fields:
+        gt_v = gt_seg.get(f)
+        pred_v = pred_seg.get(f)
+        ftype = _classify_value(gt_v) or _classify_value(pred_v)
+        if ftype is None:
+            continue
+        sim = _field_similarity(gt_v, pred_v, ftype)
+        if sim is None:
+            continue
+        field_scores.append(sim)
+        contrib[ftype][0] += sim
+        contrib[ftype][1] += 1
+    if not field_scores:
+        return None, contrib
+    return sum(field_scores) / len(field_scores), contrib
 
 
 def meta_score_iou(gt_items, pred_items, iou_thresh=0.8):
-    """Mean per-pair meta F1 over IoU-matched (>=thresh) pairs.
-    Returns (mean_score, n_matched). Returns (None, 0) if no matches."""
+    """Mean per-pair meta over IoU-matched (>=thresh) pairs, with dtype breakdown.
+    Returns (mean_score, n_matched, breakdown_per_type) where
+    breakdown_per_type[dt] = (mean_field_score_for_that_type, total_field_count) or (None, 0)."""
     pairs = _matched_pairs(gt_items, pred_items, iou_thresh)
     if not pairs:
-        return None, 0
-    scores = [s for p, g, _ in pairs if (s := _pair_meta_f1(p, g)) is not None]
-    if not scores:
-        return None, len(pairs)
-    return sum(scores) / len(scores), len(pairs)
+        return None, 0, None
+    pair_scores = []
+    totals = {"numeric": [0.0, 0], "enum": [0.0, 0], "string": [0.0, 0]}
+    for p, g, _ in pairs:
+        s, contrib = _pair_meta_typed(p, g)
+        if s is not None:
+            pair_scores.append(s)
+        for k, (sm, c) in contrib.items():
+            totals[k][0] += sm
+            totals[k][1] += c
+    if not pair_scores:
+        return None, len(pairs), None
+    mean_score = sum(pair_scores) / len(pair_scores)
+    breakdown = {
+        k: (sm / c if c > 0 else None, c) for k, (sm, c) in totals.items()
+    }
+    return mean_score, len(pairs), breakdown
 
 
 def _meta_tokens(item):
@@ -356,11 +458,15 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
 <ul style='margin:6px 0 0;line-height:1.5'>
 <li><b>f1_segment / f1_temporal / coverage</b>: from eval-service <code>persample_evaluations.json</code> &amp;
 <code>sme_eval_v1_results.json</code>. Macro = mean across 31 segment configs (equal weight). Global = sample-weighted mean.</li>
-<li><b>meta_score (Tab 2 only)</b>: <b>per-pair token-F1, averaged across IoU≥{META_IOU_THRESHOLD} matched pred-GT segment pairs.</b><br>
+<li><b>meta_score (Tab 2 only)</b>: <b>per-pair, dtype-aware field score averaged across IoU≥{META_IOU_THRESHOLD} matched pred-GT segment pairs.</b><br>
 &nbsp;&nbsp;1. Greedy match predicted segments to GT chapters by 1-D IoU; keep only pairs with IoU ≥ {META_IOU_THRESHOLD}.<br>
-&nbsp;&nbsp;2. For each matched pair, take <i>non-time</i> field values (<code>transcript</code>, <code>summary</code>, <code>speaker_id</code>, <code>action_label</code>, …; skip <code>start_time</code>/<code>end_time</code>).<br>
-&nbsp;&nbsp;3. Lowercase + whitespace-tokenize all values into a multiset; F1 = 2PR/(P+R) where common is multiset intersection, P over predicted-token total, R over GT-token total.<br>
-&nbsp;&nbsp;4. Sample meta_score = mean F1 across that sample's matched pairs. Samples with 0 matched pairs are dropped.</li>
+&nbsp;&nbsp;2. For each matched pair, iterate the union of non-time fields. Classify each field from its GT value:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&middot; <b>numeric</b> (int/float/numeric-parseable): exact match → 1/0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&middot; <b>enum</b> (short categorical: bool, or string with &lt;4 words AND ≤40 chars; also lists e.g. <code>keywords</code> use Jaccard): case-insensitive exact match → 1/0 (list = set Jaccard)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&middot; <b>string</b> (free text: ≥4 words OR &gt;40 chars): <code>1 − Levenshtein/max(len)</code> on lowercased strings<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Missing-on-one-side counts as 0; both-missing skipped.<br>
+&nbsp;&nbsp;3. pair_score = mean of those field similarities (equal weight per field).<br>
+&nbsp;&nbsp;4. Sample meta_score = mean pair_score over matched pairs. Samples with 0 matched pairs are dropped.</li>
 <li><b>Tab 2 filter</b>: FOCUS subsets only ({len(FOCUS_SUBSETS)} configs); samples where both <code>f1_segment &gt; 0</code> on both sides AND <code>|Δ f1_segment| ≤ {META_SIMILAR_THRESHOLD}</code>; both sides must have ≥1 IoU≥{META_IOU_THRESHOLD} matched pair. Sorted by |Δ meta_score| descending.</li>
 </ul>
 </div>"""
@@ -674,9 +780,8 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
             continue
         t_resp = t_pred.get("response")
         n_resp = n_pred.get("response")
-        t_meta, t_pairs = meta_score_iou(gt, t_resp if isinstance(t_resp, list) else None, META_IOU_THRESHOLD)
-        n_meta, n_pairs = meta_score_iou(gt, n_resp if isinstance(n_resp, list) else None, META_IOU_THRESHOLD)
-        # Require at least one IoU>=threshold matched pair on BOTH sides
+        t_meta, t_pairs, t_bd = meta_score_iou(gt, t_resp if isinstance(t_resp, list) else None, META_IOU_THRESHOLD)
+        n_meta, n_pairs, n_bd = meta_score_iou(gt, n_resp if isinstance(n_resp, list) else None, META_IOU_THRESHOLD)
         if t_meta is None or n_meta is None:
             n_dropped_no_iou_match += 1
             continue
@@ -696,6 +801,8 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
                 "d_meta": d_meta,
                 "t_pairs": t_pairs,
                 "n_pairs": n_pairs,
+                "t_bd": t_bd,
+                "n_bd": n_bd,
                 "t_pred": t_pred,
                 "n_pred": n_pred,
                 "gt": gt,
@@ -712,19 +819,75 @@ Passing all filters: <b>{len(candidates)}</b>. Showing top {min(META_TOP_N, len(
     )
 
     # Summary table
+    # Aggregate win counts across all passing samples (not just top N)
+    if candidates:
+        n_t_win = sum(1 for c in candidates if c["d_meta"] > 0.001)
+        n_n_win = sum(1 for c in candidates if c["d_meta"] < -0.001)
+        n_tie = len(candidates) - n_t_win - n_n_win
+        mean_dm = statistics.mean(c["d_meta"] for c in candidates)
+        mean_tm = statistics.mean(c["t_meta"] for c in candidates)
+        mean_nm = statistics.mean(c["n_meta"] for c in candidates)
+        # Per-dtype aggregate across all candidates
+        type_agg = {dt: {"t_sum": 0.0, "n_sum": 0.0, "t_cnt": 0, "n_cnt": 0}
+                    for dt in ("numeric", "enum", "string")}
+        for c in candidates:
+            for dt in type_agg:
+                tm_dt, tc = c["t_bd"][dt]
+                nm_dt, nc = c["n_bd"][dt]
+                if tc:
+                    type_agg[dt]["t_sum"] += tm_dt * tc
+                    type_agg[dt]["t_cnt"] += tc
+                if nc:
+                    type_agg[dt]["n_sum"] += nm_dt * nc
+                    type_agg[dt]["n_cnt"] += nc
+        parts.append(
+            f"""<div class='summary'>
+<b>Across the {len(candidates)} passing samples:</b><br>
+&nbsp;&nbsp;think_meta &gt; nothink_meta: <b>{n_t_win}</b> ({100*n_t_win/len(candidates):.1f}%)<br>
+&nbsp;&nbsp;nothink_meta &gt; think_meta: <b>{n_n_win}</b> ({100*n_n_win/len(candidates):.1f}%)<br>
+&nbsp;&nbsp;tie (|Δ| ≤ 0.001): <b>{n_tie}</b> ({100*n_tie/len(candidates):.1f}%)<br>
+&nbsp;&nbsp;mean meta: nothink=<b>{mean_nm:.3f}</b>, think=<b>{mean_tm:.3f}</b>, Δ=<b class='{color_for_delta(mean_dm)}'>{mean_dm:+.3f}</b>
+</div>
+<table><thead><tr><th>dtype</th><th># fields evaluated</th><th>no-think mean</th><th>think mean</th><th>Δ</th></tr></thead><tbody>"""
+        )
+        for dt in ("numeric", "enum", "string"):
+            ta = type_agg[dt]
+            if ta["t_cnt"] == 0 and ta["n_cnt"] == 0:
+                continue
+            t_mean = ta["t_sum"] / ta["t_cnt"] if ta["t_cnt"] else 0
+            n_mean = ta["n_sum"] / ta["n_cnt"] if ta["n_cnt"] else 0
+            d = t_mean - n_mean
+            parts.append(
+                f"<tr><td class='lbl'>{dt}</td><td>{ta['t_cnt']}t / {ta['n_cnt']}n</td>"
+                f"<td>{n_mean:.3f}</td><td>{t_mean:.3f}</td>"
+                f"<td><span class='{color_for_delta(d)}'>{d:+.3f}</span></td></tr>"
+            )
+        parts.append("</tbody></table>")
+
     parts.append("<table><thead><tr><th>#</th><th>_config</th><th>duration</th>"
                  "<th>no-think f1_seg</th><th>think f1_seg</th><th>Δ f1_seg</th>"
-                 "<th>n-pairs (n/t)</th>"
-                 "<th>no-think meta</th><th>think meta</th><th>Δ meta</th></tr></thead><tbody>")
+                 "<th>pairs (n/t)</th>"
+                 "<th>no-think meta</th><th>think meta</th><th>Δ meta</th>"
+                 "<th>Δ enum</th><th>Δ num</th><th>Δ str</th></tr></thead><tbody>")
     for i, c in enumerate(candidates[:META_TOP_N], 1):
         dur = f"{c['dur']:.0f}s" if c['dur'] else "-"
+        def dt_delta(dt):
+            tm, tc = c["t_bd"][dt]
+            nm, nc = c["n_bd"][dt]
+            if not tc and not nc:
+                return "—"
+            t_s = tm if tc else 0
+            n_s = nm if nc else 0
+            d = t_s - n_s
+            return f"<span class='{color_for_delta(d)}'>{d:+.2f}</span>"
         parts.append(
             f"<tr><td>{i}</td><td class='lbl'>{html.escape(str(c['cfg']))}</td><td>{dur}</td>"
             f"<td>{c['n_seg']:.3f}</td><td>{c['t_seg']:.3f}</td>"
             f"<td><span class='{color_for_delta(c['d_seg'])}'>{c['d_seg']:+.3f}</span></td>"
             f"<td>{c['n_pairs']}/{c['t_pairs']}</td>"
             f"<td>{c['n_meta']:.3f}</td><td>{c['t_meta']:.3f}</td>"
-            f"<td><span class='{color_for_delta(c['d_meta'])}'>{c['d_meta']:+.3f}</span></td></tr>"
+            f"<td><span class='{color_for_delta(c['d_meta'])}'>{c['d_meta']:+.3f}</span></td>"
+            f"<td>{dt_delta('enum')}</td><td>{dt_delta('numeric')}</td><td>{dt_delta('string')}</td></tr>"
         )
     parts.append("</tbody></table>")
 
