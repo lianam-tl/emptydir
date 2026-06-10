@@ -487,7 +487,8 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
 <button class='tab-btn active' onclick="showTab('tab1', this)">1. Performance overview</button>
 <button class='tab-btn' onclick="showTab('tab2', this)">2. Meta-divergence (FOCUS, similar f1_seg)</button>
 <button class='tab-btn' onclick="showTab('tab3', this)">3. SOCCER deep dive</button>
-<button class='tab-btn' onclick="showTab('tab4', this)">4. SOCCER long+dense — timeline bars</button>
+<button class='tab-btn' onclick="showTab('tab4', this)">4. SOCCER long videos (≥45 min) — timeline bars</button>
+<button class='tab-btn' onclick="showTab('tab5', this)">5. SOCCER long+dense — timeline bars</button>
 </div>
 <div id='tab1' class='tab-content active'>"""
     )
@@ -1351,23 +1352,7 @@ over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levens
 
     parts.append("</div>")  # /#tab3
 
-    # ---------------- Tab 4: SOCCER long+dense timeline bars ----------------
-    parts.append("<div id='tab4' class='tab-content'>")
-    parts.append("<h2>SOCCER ≥45min &amp; ≥11 GT segments — predicted vs GT timeline bars</h2>")
-    parts.append(
-        f"<p class='note'>Predictions from <code>{html.escape(deep_run)}</code> step {deep_step}. "
-        "Each card = one sample. Three horizontal bars per sample: GT (green), no-think (blue), think (red). "
-        "X-axis = video duration (s). Inside each bar, a rectangle marks each predicted/GT segment at its "
-        "[start_time, end_time].</p>"
-    )
-
-    TAB4_TARGET_SIDS = [
-        "ef85541d5d41c9b889a9eaf78f9ea99b89fa256495748762127de790dd130629",
-        "70f9fed3d7b5f08e1875290ee9862115dcb3070b825a12feef396896f8bd4d13",
-        "1193d4fd46d0963a1923ead8334a3948504863b82dd110efec96df5af9a0bab7",
-        "8630eb18e74c4fc3f460201835aa97eb14292f9b392809486797e7481c8abf2e",
-    ]
-
+    # ---------------- Tab 4 + Tab 5: SOCCER timeline bars ----------------
     SVG_W = 1180
     BAR_H = 22
     ROW_GAP = 6
@@ -1437,11 +1422,11 @@ over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levens
     deep_t = {p["sample_id"]: p for p in deep_data["think"]["preds"]}
     deep_n = {p["sample_id"]: p for p in deep_data["nothink"]["preds"]}
 
-    for sid in TAB4_TARGET_SIDS:
+    def render_sample_card(sid):
         tp = deep_t.get(sid)
         np_ = deep_n.get(sid)
         if tp is None or np_ is None:
-            continue
+            return ""
         gt = np_.get("chapters") or tp.get("chapters")
         if isinstance(gt, str):
             try:
@@ -1460,8 +1445,6 @@ over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levens
             except Exception:
                 q = [q]
         query = q[0] if q else ""
-
-        # Stats per side: f1_seg
         t_seg_s = deep_data["think"]["per"].get(sid, {}).get("f1_segment_score", 0)
         n_seg_s = deep_data["nothink"]["per"].get(sid, {}).get("f1_segment_score", 0)
 
@@ -1477,8 +1460,7 @@ over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levens
         svg_parts.append(render_track(y_t, f"think (n={len(t_resp)})", t_resp, dur, "#c62828"))
         svg_parts.append("</svg>")
 
-        parts.append(
-            f"""<div class='card'>
+        return f"""<div class='card'>
 <div class='hdr'>
   <span class='badge'>SOCCER</span>
   <span class='lbl'>dur={dur:.0f}s ({dur/60:.1f} min)</span>
@@ -1492,9 +1474,56 @@ over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levens
 </details>
 {"".join(svg_parts)}
 </div>"""
-        )
 
+    # Find all SOCCER ≥2000s samples (≥45 min)
+    soccer_long_sids = []
+    seen_local = set()
+    # Use deep_data nothink preds (has chapters)
+    for p in deep_data["nothink"]["preds"]:
+        if sample_config(p) != SOCCER_CONFIG:
+            continue
+        sid = p["sample_id"]
+        if sid in seen_local:
+            continue
+        dur = sample_duration(p) or 0
+        if dur < 2000:
+            continue
+        ch = p.get("chapters")
+        if isinstance(ch, str):
+            try:
+                ch = json.loads(ch)
+            except Exception:
+                ch = []
+        nseg = len(ch) if isinstance(ch, list) else 0
+        soccer_long_sids.append((sid, dur, nseg))
+        seen_local.add(sid)
+    # Sort by duration desc, then by # GT segs desc
+    soccer_long_sids.sort(key=lambda x: (-x[1], -x[2]))
+
+    # Tab 4: ALL ≥45 min SOCCER samples
+    parts.append("<div id='tab4' class='tab-content'>")
+    parts.append(f"<h2>SOCCER ≥45 min (≥2000s) — all {len(soccer_long_sids)} samples</h2>")
+    parts.append(
+        f"<p class='note'>Predictions from <code>{html.escape(deep_run)}</code> step {deep_step}. "
+        "Each card = one sample (sorted by duration desc, then by # GT segs desc). "
+        "Three horizontal bars per sample: GT (green), no-think (blue), think (red). "
+        "X-axis = video duration; each rectangle marks one segment's [start_time, end_time].</p>"
+    )
+    for sid, dur, nseg in soccer_long_sids:
+        parts.append(render_sample_card(sid))
     parts.append("</div>")  # /#tab4
+
+    # Tab 5: SOCCER long+dense (≥2000s AND ≥11 GT segs)
+    parts.append("<div id='tab5' class='tab-content'>")
+    dense_sids = [(sid, dur, nseg) for (sid, dur, nseg) in soccer_long_sids if nseg >= 11]
+    parts.append(f"<h2>SOCCER ≥45 min &amp; ≥11 GT segments — {len(dense_sids)} samples</h2>")
+    parts.append(
+        f"<p class='note'>Subset of Tab 4 filtered to GT segs ≥ 11 (dense annotations). "
+        "Same render layout: GT green / no-think blue / think red.</p>"
+    )
+    for sid, dur, nseg in dense_sids:
+        parts.append(render_sample_card(sid))
+    parts.append("</div>")  # /#tab5
 
     # Tab switching JS
     parts.append(
