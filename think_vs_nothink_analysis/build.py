@@ -898,15 +898,14 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
                 if log_bins[i] <= n_chars < log_bins[i + 1]:
                     binned_means["nothink"][i].append(n_f1)
                     break
-            # diff scatter: x = mean of think/nothink chars; y = Δ
-            if t_chars <= 0 and n_chars <= 0:
+            # diff scatter: x = max of think/nothink chars; y = Δ
+            x_max = max(t_chars, n_chars)
+            if x_max <= 0:
                 continue
-            x_mean = (t_chars + n_chars) / 2 if (t_chars > 0 and n_chars > 0) else max(t_chars, n_chars)
             delta = t_f1 - n_f1
-            (diff_pts_pos if delta > 0 else diff_pts_neg).append({"x": x_mean, "y": delta})
-            # bin Δ by mean chars
+            (diff_pts_pos if delta > 0 else diff_pts_neg).append({"x": x_max, "y": delta})
             for i in range(len(log_bins) - 1):
-                if log_bins[i] <= x_mean < log_bins[i + 1]:
+                if log_bins[i] <= x_max < log_bins[i + 1]:
                     diff_binned[i].append(delta)
                     break
 
@@ -932,8 +931,8 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
 
     parts.append("<h3>9b. Per-sample Δ f1_segment (think − no-think) vs response length</h3>")
     parts.append(
-        "<p class='note'>x = mean of think and no-think response char lengths for that sample (log). "
-        "y = Δ f1_segment per sample. Green dots = think wins, red dots = no-think wins. "
+        "<p class='note'>x = <b>max</b>(think_chars, nothink_chars) per sample (log). "
+        "y = Δ f1_segment. Green dots = think wins, red dots = no-think wins. "
         "Dark line = bin mean Δ.</p>"
     )
     parts.append("<div class='chart-wrap' style='width:1100px;height:520px'><canvas id='resp_len_diff_scatter'></canvas></div>")
@@ -1729,7 +1728,7 @@ new Chart(document.getElementById('resp_len_diff_scatter').getContext('2d'), {{
               legend:{{position:'bottom', labels:{{boxWidth:10, font:{{size:11}}}}}},
               annotation:null}},
     scales:{{
-      x:{{type:'logarithmic', title:{{display:true, text:'mean response char length per sample (log)'}}, min:10, max:300000}},
+      x:{{type:'logarithmic', title:{{display:true, text:'max(think, no-think) response char length per sample (log)'}}, min:10, max:300000}},
       y:{{title:{{display:true, text:'Δ f1_segment (think − no-think)'}}, min:-1, max:1}}
     }}
   }}
