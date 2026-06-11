@@ -783,6 +783,209 @@ think beats nothink on that metric. No length confound (same prompt, two models)
 </body></html>"""
 
 
+BIN_WIDTH = 20  # 20-step bins
+
+
+def build_binned_pattern_trends(mode: str = "mean",
+                                 win_threshold: float = 0.1,
+                                 bin_width: int = BIN_WIDTH) -> str:
+    """For every available step (think and nothink), pair best/mean-of-8 by sample_id,
+    bin steps into `bin_width`-step buckets, and plot Δpp = (think-win % − nothink-win %)
+    per pattern across bins. One SVG per metric, with 13 colored lines (one per pattern)."""
+    # discover all available steps from both runs
+    have_think = {int(f.stem) for f in ROLLOUT_DIR.glob("*.jsonl") if f.stem.isdigit()}
+    have_nothink = {int(f.stem) for f in NOTHINK_ROLLOUT_DIR.glob("*.jsonl") if f.stem.isdigit()}
+    available = sorted(have_think & have_nothink)
+    if not available:
+        return "<html><body>No paired steps available.</body></html>"
+
+    # collect paired prompts for all steps
+    pairs, _ = collect_paired(available, mode=mode)
+
+    # bin by step
+    max_step = max(p["step"] for p in pairs)
+    n_bins = max_step // bin_width + 1
+    bins: dict[int, list[dict]] = defaultdict(list)
+    for p in pairs:
+        bin_idx = (p["step"] - 1) // bin_width  # step 1-20 → bin 0, 21-40 → bin 1, …
+        bins[bin_idx].append(p)
+
+    sorted_bins = sorted(bins.keys())
+    bin_labels = [f"{b*bin_width+1}-{(b+1)*bin_width}" for b in sorted_bins]
+    bin_midpoints = [b * bin_width + bin_width // 2 for b in sorted_bins]
+
+    METRIC_PAIRS = [
+        ("score", "think_score", "nothink_score"),
+        ("unified_score", "think_unified", "nothink_unified"),
+        ("f1_segment", "think_f1_seg", "nothink_f1_seg"),
+        ("f1_temporal", "think_f1_temp", "nothink_f1_temp"),
+        ("format_score", "think_format", "nothink_format"),
+    ]
+
+    # Compute per-bin Δpp per pattern per metric, plus bin stats
+    bin_stats: list[dict] = []
+    for b in sorted_bins:
+        bucket = bins[b]
+        b_stat = {"bin": b, "label": bin_labels[sorted_bins.index(b)], "n": len(bucket),
+                  "steps": sorted({p["step"] for p in bucket}),
+                  "metrics": {}}
+        for label, tk, ntk in METRIC_PAIRS:
+            tw = [p for p in bucket if p[tk] - p[ntk] > win_threshold]
+            nw = [p for p in bucket if p[ntk] - p[tk] > win_threshold]
+            row = {"n_tw": len(tw), "n_nw": len(nw), "patterns": {}}
+            if tw and nw:
+                for name in PATTERN_ORDER:
+                    tw_pct = 100 * sum(p["patterns"][name] for p in tw) / len(tw)
+                    nw_pct = 100 * sum(p["patterns"][name] for p in nw) / len(nw)
+                    row["patterns"][name] = tw_pct - nw_pct
+            b_stat["metrics"][label] = row
+        # think/nothink word averages per bin
+        b_stat["avg_think_words"] = sum(p["think_words"] for p in bucket) / len(bucket)
+        b_stat["avg_nothink_words"] = sum(p["nothink_words"] for p in bucket) / len(bucket)
+        b_stat["avg_think_score"] = sum(p["think_score"] for p in bucket) / len(bucket)
+        b_stat["avg_nothink_score"] = sum(p["nothink_score"] for p in bucket) / len(bucket)
+        bin_stats.append(b_stat)
+
+    # Render SVG line plot per metric
+    COLORS = ["#1f77b4", "#d62728", "#2ca02c", "#9467bd", "#ff7f0e",
+              "#17becf", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22",
+              "#aec7e8", "#ffbb78", "#98df8a"]
+
+    def line_plot_for_metric(metric: str) -> str:
+        # determine y-range
+        all_vals = []
+        for s in bin_stats:
+            row = s["metrics"][metric]
+            if row["patterns"]:
+                all_vals.extend(row["patterns"].values())
+        if not all_vals:
+            return f"<h3>{metric}</h3><p style='color:#999'>(no data)</p>"
+        y_max = max(20, max(abs(v) for v in all_vals) + 2)
+        y_min = -y_max
+
+        W, H = 980, 360
+        L, R, T, B = 50, 160, 20, 36
+        plot_w = W - L - R
+        plot_h = H - T - B
+
+        # x positions per bin
+        x_positions = []
+        for s in bin_stats:
+            mid = s["bin"] * bin_width + bin_width // 2
+            x = L + plot_w * (mid - bin_midpoints[0]) / max(bin_midpoints[-1] - bin_midpoints[0], 1)
+            x_positions.append(x)
+
+        # gridlines + y axis labels
+        gridlines = []
+        for y_val in [y_min, y_min/2, 0, y_max/2, y_max]:
+            y = T + plot_h * (1 - (y_val - y_min) / (y_max - y_min))
+            stroke = "#999" if y_val == 0 else "#eee"
+            gridlines.append(
+                f"<line x1='{L}' y1='{y:.1f}' x2='{L+plot_w}' y2='{y:.1f}' stroke='{stroke}' stroke-width='{2 if y_val == 0 else 1}'/>"
+                f"<text x='{L-4}' y='{y+3:.1f}' font-size='10' text-anchor='end'>{y_val:+.0f}</text>"
+            )
+
+        # x ticks: every-other bin label
+        x_ticks = []
+        for i, s in enumerate(bin_stats):
+            if i % max(1, len(bin_stats) // 10) == 0 or i == len(bin_stats) - 1:
+                x_ticks.append(
+                    f"<text x='{x_positions[i]:.1f}' y='{T+plot_h+14}' "
+                    f"font-size='9' text-anchor='middle'>{s['label']}</text>"
+                )
+
+        # one path per pattern
+        paths = []
+        legend = []
+        for i, name in enumerate(PATTERN_ORDER):
+            color = COLORS[i % len(COLORS)]
+            pts = []
+            for j, s in enumerate(bin_stats):
+                row = s["metrics"][metric]
+                if not row["patterns"] or name not in row["patterns"]:
+                    continue
+                d = row["patterns"][name]
+                x = x_positions[j]
+                y = T + plot_h * (1 - (d - y_min) / (y_max - y_min))
+                pts.append((x, y))
+            if not pts:
+                continue
+            path = "M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in pts)
+            paths.append(f"<path d='{path}' stroke='{color}' fill='none' stroke-width='1.6' opacity='0.85'/>")
+            # circles at data points
+            for x, y in pts:
+                paths.append(f"<circle cx='{x:.1f}' cy='{y:.1f}' r='2' fill='{color}'/>")
+            ly = T + i * 18
+            legend.append(
+                f"<rect x='{L+plot_w+8}' y='{ly}' width='10' height='10' fill='{color}'/>"
+                f"<text x='{L+plot_w+22}' y='{ly+9}' font-size='11'>{name}</text>"
+            )
+
+        svg = (
+            f"<svg viewBox='0 0 {W} {H}' style='width:100%;max-width:{W}px;border:1px solid #eee;background:#fafafa'>"
+            f"<text x='{L+plot_w/2}' y='{T-6}' font-size='12' text-anchor='middle' fill='#333' font-weight='600'>{metric} · Δpp (think-win % − nothink-win %) vs training step bin</text>"
+            + "".join(gridlines)
+            + "".join(x_ticks)
+            + "".join(paths)
+            + "".join(legend)
+            + f"<text x='{L+plot_w/2}' y='{H-4}' font-size='11' text-anchor='middle' fill='#666'>training step (20-step bins)</text>"
+            "</svg>"
+        )
+        return f"<h3>{metric}</h3>{svg}"
+
+    plots_html = "".join(line_plot_for_metric(m) for m, _, _ in METRIC_PAIRS)
+
+    # Per-bin summary table
+    summary_rows = "".join(
+        f"<tr><td>{s['label']}</td><td>{s['n']}</td>"
+        f"<td>{s['avg_think_score']:.3f}</td>"
+        f"<td>{s['avg_nothink_score']:.3f}</td>"
+        f"<td>{s['avg_think_score']-s['avg_nothink_score']:+.3f}</td>"
+        f"<td>{s['avg_think_words']:.0f}</td>"
+        f"<td>{s['avg_nothink_words']:.0f}</td>"
+        f"<td>{s['metrics']['unified_score']['n_tw']}</td>"
+        f"<td>{s['metrics']['unified_score']['n_nw']}</td>"
+        f"</tr>"
+        for s in bin_stats
+    )
+
+    css = """
+body{font-family:-apple-system,system-ui,sans-serif;max-width:1200px;margin:18px auto;padding:0 14px;color:#222;background:#fafafa}
+h1,h2{border-bottom:1px solid #ccc;padding-bottom:4px}
+h3{color:#1a4d8c;margin-top:24px}
+.summary{background:#fff;border:1px solid #ddd;padding:10px 14px;border-radius:6px;margin:10px 0}
+.note{background:#fff3e0;border-left:4px solid #ff9800;padding:8px 12px;margin:8px 0;font-size:13.5px}
+table{border-collapse:collapse;font-size:12px;margin:6px 0}
+th,td{padding:4px 8px;border:1px solid #ddd;text-align:right}
+th{background:#eee}
+td:first-child,th:first-child{text-align:left}
+code{background:#eee;padding:1px 4px;border-radius:3px;font-size:11px}
+"""
+
+    return f"""<!doctype html>
+<html><head><meta charset='utf-8'>
+<title>Binned pattern trends — think vs nothink</title>
+<style>{css}</style></head><body>
+<h1>Binned cognitive-pattern trends — think (hgmkw8sg) vs nothink (vljh1yhk)</h1>
+<div class='summary'>
+  Bin width: {bin_width} steps · bins: {len(bin_stats)} · paired prompts total: {len(pairs)} · pairing: {mode}-of-8 · tie threshold: |Δ|&gt;{win_threshold}<br>
+  Available steps: {len(available)} (think × nothink intersection)
+</div>
+<div class='note'>Each line is one cognitive pattern. y = Δpp = (% of think-win prompts with the pattern) − (% of nothink-win prompts with the pattern), computed within each 20-step bin.
+A positive value means: at this training stage, when the think model beats nothink, this pattern is over-represented.
+Negative means: the pattern shows up more when nothink wins. y = 0 is the no-difference baseline.</div>
+
+{plots_html}
+
+<h2>Per-bin summary (unified_score buckets)</h2>
+<table>
+<tr><th>bin</th><th>n prompts</th><th>avg think score</th><th>avg nothink score</th><th>Δ score</th>
+<th>avg think words</th><th>avg nothink words</th><th>think-wins</th><th>nothink-wins</th></tr>
+{summary_rows}
+</table>
+</body></html>"""
+
+
 PATTERN_DESCRIPTIONS = {
     "numbered_list": "Lines that start with a number followed by '.' or ')' — like '1. step one' or '2) the team'. Captures structured enumeration the model uses to lay out segments or steps.",
     "bulleted_list": "Lines that start with '-', '*', or '•' — bullet points in the think trace.",
@@ -1143,6 +1346,11 @@ def main():
     (OUT_DIR / "260611_pattern_examples.html").write_text(examples_html)
     print(f"wrote pattern_examples ({len(examples_html)} bytes)")
 
+    # 6) binned pattern trend lines (20-step bins, mean-of-8, |Δ|>0.1)
+    trend_html = build_binned_pattern_trends(mode="mean", win_threshold=0.1, bin_width=20)
+    (OUT_DIR / "260611_pattern_trends_binned.html").write_text(trend_html)
+    print(f"wrote pattern_trends_binned ({len(trend_html)} bytes)")
+
     # 5) wrapper
     early_opts = "\n".join(
         f"<option value='{s['step']}'>step {s['step']} (avg unified {s['avg_unified']:.3f}, "
@@ -1178,6 +1386,7 @@ code{{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:11px}}
   <button data-tab='step200'>4b) step 200</button>
   <button data-tab='step200_240'>4c) steps 100-200 (mean-of-8, |Δ|&gt;0.1)</button>
   <button data-tab='examples'>5) pattern examples</button>
+  <button data-tab='trends'>6) pattern trends (20-step bins)</button>
 </div>
 <div id='tab-early' class='tabpane active'>
   <div style='margin:12px 0;font-size:13px'>
@@ -1195,6 +1404,7 @@ code{{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:11px}}
 <div id='tab-step200' class='tabpane'><iframe src='260611_think_vs_nothink_step200.html'></iframe></div>
 <div id='tab-step200_240' class='tabpane'><iframe src='260611_think_vs_nothink_step100_200_mean.html'></iframe></div>
 <div id='tab-examples' class='tabpane'><iframe src='260611_pattern_examples.html'></iframe></div>
+<div id='tab-trends' class='tabpane'><iframe src='260611_pattern_trends_binned.html'></iframe></div>
 <script>
 document.querySelectorAll('.toptabs button').forEach(btn => {{
   btn.addEventListener('click', () => {{
