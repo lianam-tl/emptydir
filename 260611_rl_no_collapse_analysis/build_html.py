@@ -1132,10 +1132,11 @@ def main():
     (OUT_DIR / "260611_think_vs_nothink_step200.html").write_text(step200_html)
     print(f"wrote step200 paired ({len(step200_html)} bytes)")
 
-    # 4c) step 200–240 range, mean-of-8, threshold=0 (use every prompt, no ties bucket)
-    range_html = build_paired_single_step([200, 210, 220, 230, 240], mode="mean", win_threshold=0)
-    (OUT_DIR / "260611_think_vs_nothink_step200_240_mean.html").write_text(range_html)
-    print(f"wrote step200-240 mean-of-8 (threshold=0, {len(range_html)} bytes)")
+    # 4c) step 100–200 range (every-10), mean-of-8, threshold=0.1
+    range_steps = list(range(100, 201, 10))  # 100,110,...,200 → 11 steps
+    range_html = build_paired_single_step(range_steps, mode="mean", win_threshold=0.1)
+    (OUT_DIR / "260611_think_vs_nothink_step100_200_mean.html").write_text(range_html)
+    print(f"wrote step100-200 mean-of-8 (threshold=0.1, {len(range_html)} bytes)")
 
     # 5) pattern examples (descriptions + regex + real snippets)
     examples_html = build_pattern_examples(step=200)
@@ -1175,7 +1176,7 @@ code{{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:11px}}
   <button data-tab='late'>3) step {INSPECT_STEP} rollouts</button>
   <button data-tab='pattern'>4) think vs nothink patterns</button>
   <button data-tab='step200'>4b) step 200</button>
-  <button data-tab='step200_240'>4c) steps 200-240 (mean-of-8, all prompts)</button>
+  <button data-tab='step200_240'>4c) steps 100-200 (mean-of-8, |Δ|&gt;0.1)</button>
   <button data-tab='examples'>5) pattern examples</button>
 </div>
 <div id='tab-early' class='tabpane active'>
@@ -1192,7 +1193,7 @@ code{{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:11px}}
 <div id='tab-late' class='tabpane'><iframe src='260611_hgmkw8sg_step{INSPECT_STEP}_rollouts.html'></iframe></div>
 <div id='tab-pattern' class='tabpane'><iframe src='260611_think_vs_nothink_patterns.html'></iframe></div>
 <div id='tab-step200' class='tabpane'><iframe src='260611_think_vs_nothink_step200.html'></iframe></div>
-<div id='tab-step200_240' class='tabpane'><iframe src='260611_think_vs_nothink_step200_240_mean.html'></iframe></div>
+<div id='tab-step200_240' class='tabpane'><iframe src='260611_think_vs_nothink_step100_200_mean.html'></iframe></div>
 <div id='tab-examples' class='tabpane'><iframe src='260611_pattern_examples.html'></iframe></div>
 <script>
 document.querySelectorAll('.toptabs button').forEach(btn => {{
