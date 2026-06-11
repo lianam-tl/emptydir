@@ -894,12 +894,15 @@ def build_binned_pattern_trends(mode: str = "mean",
                     f"font-size='9' text-anchor='middle'>{s['label']}</text>"
                 )
 
-        # one path per pattern
+        # one path per pattern; fade segments where both endpoints have |Δ| ≤ FADE_THRESH
+        FADE_THRESH = 2.0
+        FADE_OPACITY = 0.12
+        FULL_OPACITY = 0.85
         paths = []
         legend = []
         for i, name in enumerate(PATTERN_ORDER):
             color = COLORS[i % len(COLORS)]
-            pts = []
+            pts = []  # (x, y, d)
             for j, s in enumerate(bin_stats):
                 row = s["metrics"][metric]
                 if not row["patterns"] or name not in row["patterns"]:
@@ -907,18 +910,30 @@ def build_binned_pattern_trends(mode: str = "mean",
                 d = row["patterns"][name]
                 x = x_positions[j]
                 y = T + plot_h * (1 - (d - y_min) / (y_max - y_min))
-                pts.append((x, y))
+                pts.append((x, y, d))
             if not pts:
                 continue
-            path = "M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in pts)
-            paths.append(f"<path d='{path}' stroke='{color}' fill='none' stroke-width='1.6' opacity='0.85'/>")
-            # circles at data points
-            for x, y in pts:
-                paths.append(f"<circle cx='{x:.1f}' cy='{y:.1f}' r='2' fill='{color}'/>")
+            # draw segments individually so we can fade by |Δ|
+            for k in range(len(pts) - 1):
+                x1, y1, d1 = pts[k]
+                x2, y2, d2 = pts[k + 1]
+                op = FADE_OPACITY if (abs(d1) <= FADE_THRESH and abs(d2) <= FADE_THRESH) else FULL_OPACITY
+                paths.append(
+                    f"<path d='M{x1:.1f},{y1:.1f} L{x2:.1f},{y2:.1f}' stroke='{color}' "
+                    f"fill='none' stroke-width='1.6' opacity='{op}'/>"
+                )
+            # circles at data points, faded if |Δ| <= threshold
+            for x, y, d in pts:
+                cop = FADE_OPACITY if abs(d) <= FADE_THRESH else FULL_OPACITY
+                paths.append(f"<circle cx='{x:.1f}' cy='{y:.1f}' r='2' fill='{color}' opacity='{cop}'/>")
+            # legend: fade swatch if pattern has no significant point on this metric
+            any_sig = any(abs(d) > FADE_THRESH for _, _, d in pts)
+            leg_op = FULL_OPACITY if any_sig else FADE_OPACITY
             ly = T + i * 18
             legend.append(
-                f"<rect x='{L+plot_w+8}' y='{ly}' width='10' height='10' fill='{color}'/>"
-                f"<text x='{L+plot_w+22}' y='{ly+9}' font-size='11'>{name}</text>"
+                f"<rect x='{L+plot_w+8}' y='{ly}' width='10' height='10' fill='{color}' opacity='{leg_op}'/>"
+                f"<text x='{L+plot_w+22}' y='{ly+9}' font-size='11' "
+                f"opacity='{1.0 if any_sig else 0.45}'>{name}</text>"
             )
 
         svg = (
@@ -973,7 +988,8 @@ code{background:#eee;padding:1px 4px;border-radius:3px;font-size:11px}
 </div>
 <div class='note'>Each line is one cognitive pattern. y = Δpp = (% of think-win prompts with the pattern) − (% of nothink-win prompts with the pattern), computed within each 20-step bin.
 A positive value means: at this training stage, when the think model beats nothink, this pattern is over-represented.
-Negative means: the pattern shows up more when nothink wins. y = 0 is the no-difference baseline.</div>
+Negative means: the pattern shows up more when nothink wins. y = 0 is the no-difference baseline.
+<b>Segments where both endpoints have |Δ| ≤ 2 are faded</b>, so visible lines highlight bins with meaningful signal. Legend swatches are also faded for patterns with no meaningful point on that metric.</div>
 
 {plots_html}
 
