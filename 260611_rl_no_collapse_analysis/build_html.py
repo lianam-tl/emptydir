@@ -573,16 +573,14 @@ def _best_of_n(rows: list[dict], metric: str = "score") -> dict | None:
     return max(rows, key=lambda r: float(r.get(metric, 0) or 0))
 
 
-def collect_paired() -> tuple[list[dict], dict[int, dict[str, float]]]:
-    """For each step in TREND_STEPS, pair best-of-8 think vs best-of-8 nothink per sample_id.
-    Returns (pairs, step_pattern_rate).
-    pairs is list of dicts with keys:
-      step, sample_id, think_metrics, nothink_metrics, think_patterns, think_counts,
-      think_words, nothink_words.
-    step_pattern_rate[step][pattern_name] = fraction of paired-prompts whose think rollout hits."""
+def collect_paired(steps: list[int] | None = None) -> tuple[list[dict], dict[int, dict[str, float]]]:
+    """For each step in `steps` (default TREND_STEPS), pair best-of-8 think vs best-of-8 nothink per sample_id.
+    Returns (pairs, step_pattern_rate)."""
+    if steps is None:
+        steps = TREND_STEPS
     pairs: list[dict] = []
     step_pattern_rate: dict[int, dict[str, float]] = {}
-    for step in TREND_STEPS:
+    for step in steps:
         think_rows = load_step(step, ROLLOUT_DIR)
         nothink_rows = load_step(step, NOTHINK_ROLLOUT_DIR)
         if not think_rows or not nothink_rows:
@@ -635,6 +633,113 @@ def collect_paired() -> tuple[list[dict], dict[int, dict[str, float]]]:
                 n: step_hits[n] / step_n_pairs for n in PATTERN_ORDER
             }
     return pairs, step_pattern_rate
+
+
+def build_paired_single_step(step: int) -> str:
+    """Single-step paired analysis (focused snapshot) — same per-metric tables as
+    build_cognitive_patterns but using only one step, no trend SVG."""
+    pairs, _ = collect_paired([step])
+    if not pairs:
+        return f"<html><body>No paired rollouts at step {step}.</body></html>"
+
+    METRIC_PAIRS = [
+        ("score", "think_score", "nothink_score"),
+        ("unified_score", "think_unified", "nothink_unified"),
+        ("f1_segment", "think_f1_seg", "nothink_f1_seg"),
+        ("f1_temporal", "think_f1_temp", "nothink_f1_temp"),
+        ("format_score", "think_format", "nothink_format"),
+    ]
+    metric_tables_html = []
+    for label, tk, ntk in METRIC_PAIRS:
+        tw = [p for p in pairs if p[tk] - p[ntk] > WIN_THRESHOLD]
+        nw = [p for p in pairs if p[ntk] - p[tk] > WIN_THRESHOLD]
+        tie = [p for p in pairs if abs(p[tk] - p[ntk]) <= WIN_THRESHOLD]
+        sample_warning = (
+            "<div style='color:#c62828;font-size:11px;margin-top:4px'>"
+            "⚠ small bucket — Δs are noisy</div>"
+            if min(len(tw), len(nw)) < 20 else ""
+        )
+        if not tw or not nw:
+            metric_tables_html.append(
+                f"<h3>{label}</h3><p style='color:#999'>No usable buckets "
+                f"(think-win={len(tw)}, nothink-win={len(nw)}, tie={len(tie)})</p>"
+            )
+            continue
+        rows_data = []
+        for name in PATTERN_ORDER:
+            tw_pct = 100 * sum(1 for p in tw if p["patterns"][name]) / len(tw)
+            nw_pct = 100 * sum(1 for p in nw if p["patterns"][name]) / len(nw)
+            rows_data.append((name, tw_pct, nw_pct, tw_pct - nw_pct))
+        rows_data.sort(key=lambda x: abs(x[3]), reverse=True)
+        body = "".join(
+            f"<tr class='{'pos' if d > 0 else 'neg'}'>"
+            f"<td>{n}</td><td>{h:.1f}%</td><td>{l:.1f}%</td>"
+            f"<td><b>{d:+.1f}</b></td></tr>"
+            for n, h, l, d in rows_data
+        )
+        metric_tables_html.append(
+            f"<h3>{label} <span class='small'>(think-wins n={len(tw)}, "
+            f"nothink-wins n={len(nw)}, ties n={len(tie)}, |Δ|&gt;{WIN_THRESHOLD})</span></h3>"
+            f"{sample_warning}"
+            f"<table><tr><th>pattern</th><th>think-win %</th><th>nothink-win %</th><th>Δ pp</th></tr>{body}</table>"
+        )
+
+    # Overall summary
+    avg_t = sum(p["think_score"] for p in pairs) / len(pairs)
+    avg_n = sum(p["nothink_score"] for p in pairs) / len(pairs)
+    tw_all = sum(1 for p in pairs if p["think_score"] - p["nothink_score"] > WIN_THRESHOLD)
+    nw_all = sum(1 for p in pairs if p["nothink_score"] - p["think_score"] > WIN_THRESHOLD)
+    tie_all = len(pairs) - tw_all - nw_all
+    avg_tw = sum(p["think_words"] for p in pairs) / len(pairs)
+    avg_ntw = sum(p["nothink_words"] for p in pairs) / len(pairs)
+
+    css = """
+body{font-family:-apple-system,system-ui,sans-serif;max-width:1200px;margin:18px auto;padding:0 14px;color:#222}
+h1,h2{border-bottom:1px solid #ccc;padding-bottom:4px}
+.summary{background:#fafafa;border:1px solid #ddd;padding:10px 14px;border-radius:6px;margin:10px 0}
+.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.summary-grid div{background:#fff;padding:8px;border-radius:4px;font-size:13px}
+.summary-grid .label{color:#666;font-size:11px;text-transform:uppercase}
+.summary-grid .val{font-weight:600;font-size:16px}
+table{border-collapse:collapse;margin:6px 0;font-size:13px}
+td,th{border:1px solid #ddd;padding:3px 9px;text-align:left}
+th{background:#eee}
+tr.pos td:last-child{color:#1b5e20;font-weight:bold}
+tr.neg td:last-child{color:#b71c1c;font-weight:bold}
+.small{color:#666;font-size:11px}
+.note{background:#fff3e0;border-left:4px solid #ff9800;padding:8px 12px;margin:8px 0;font-size:13.5px}
+code{background:#eee;padding:1px 4px;border-radius:3px;font-size:11px}
+"""
+
+    return f"""<!doctype html>
+<html><head><meta charset='utf-8'>
+<title>Step {step} · think vs nothink paired patterns</title>
+<style>{css}</style></head><body>
+<h1>Step {step} · think (hgmkw8sg) vs nothink (vljh1yhk)</h1>
+<div class='summary'>
+  <div style='margin-bottom:8px'>
+    Think: <a href='{WANDB_URL}'>hgmkw8sg</a> · <code>{CKPT_NAME}</code><br>
+    Nothink: <a href='{NOTHINK_WANDB_URL}'>vljh1yhk</a> · <code>{NOTHINK_CKPT_NAME}</code>
+  </div>
+  <div class='summary-grid'>
+    <div><div class='label'>paired prompts</div><div class='val'>{len(pairs)}</div></div>
+    <div><div class='label'>avg think score</div><div class='val'>{avg_t:.3f}</div></div>
+    <div><div class='label'>avg nothink score</div><div class='val'>{avg_n:.3f}</div></div>
+    <div><div class='label'>Δ score</div><div class='val'>{avg_t-avg_n:+.3f}</div></div>
+    <div><div class='label'>think wins (|Δ|&gt;{WIN_THRESHOLD})</div><div class='val'>{tw_all} ({100*tw_all/len(pairs):.0f}%)</div></div>
+    <div><div class='label'>nothink wins</div><div class='val'>{nw_all} ({100*nw_all/len(pairs):.0f}%)</div></div>
+    <div><div class='label'>ties</div><div class='val'>{tie_all} ({100*tie_all/len(pairs):.0f}%)</div></div>
+    <div><div class='label'>avg think words / nothink words</div><div class='val'>{avg_tw:.0f} / {avg_ntw:.0f}</div></div>
+  </div>
+</div>
+
+<h2>Per-metric pattern differentials at step {step}</h2>
+<div class='note'>Best-of-8 think vs best-of-8 nothink (by <code>score</code>) per sample_id at step {step}.
+Bucket prompts by sign of (think − nothink); Δpp &gt; 0 ⇒ pattern more common in think rollout when
+think beats nothink on that metric. No length confound (same prompt, two models). Sample sizes are
+small at the per-step level — interpret with caution.</div>
+{''.join(metric_tables_html)}
+</body></html>"""
 
 
 def build_cognitive_patterns() -> str:
@@ -860,6 +965,11 @@ def main():
     (OUT_DIR / "260611_think_vs_nothink_patterns.html").write_text(pat_html)
     print(f"wrote cognitive_patterns ({len(pat_html)} bytes)")
 
+    # 4b) step-200 focused snapshot
+    step200_html = build_paired_single_step(200)
+    (OUT_DIR / "260611_think_vs_nothink_step200.html").write_text(step200_html)
+    print(f"wrote step200 paired ({len(step200_html)} bytes)")
+
     # 5) wrapper
     early_opts = "\n".join(
         f"<option value='{s['step']}'>step {s['step']} (avg unified {s['avg_unified']:.3f}, "
@@ -892,6 +1002,7 @@ code{{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:11px}}
   <button data-tab='sigthink'>2) significant-think (≥{SIG_THINK_WORDS}w)</button>
   <button data-tab='late'>3) step {INSPECT_STEP} rollouts</button>
   <button data-tab='pattern'>4) think vs nothink patterns</button>
+  <button data-tab='step200'>4b) step 200 snapshot</button>
 </div>
 <div id='tab-early' class='tabpane active'>
   <div style='margin:12px 0;font-size:13px'>
@@ -906,6 +1017,7 @@ code{{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:11px}}
 <div id='tab-sigthink' class='tabpane'><iframe src='260611_hgmkw8sg_significant_think.html'></iframe></div>
 <div id='tab-late' class='tabpane'><iframe src='260611_hgmkw8sg_step{INSPECT_STEP}_rollouts.html'></iframe></div>
 <div id='tab-pattern' class='tabpane'><iframe src='260611_think_vs_nothink_patterns.html'></iframe></div>
+<div id='tab-step200' class='tabpane'><iframe src='260611_think_vs_nothink_step200.html'></iframe></div>
 <script>
 document.querySelectorAll('.toptabs button').forEach(btn => {{
   btn.addEventListener('click', () => {{
