@@ -299,10 +299,8 @@ def build_step_rollouts(step: int, total_samples_expected: int | None = None) ->
     avg = lambda k: sum(float(r.get(k, 0) or 0) for r in rows) / max(n, 1)
     avg_think_w = sum(actual_think_words(r.get("output") or "") for r in rows) / max(n, 1)
 
-    pick_has = random.sample(has_close, min(SAMPLES_PER_BUCKET_HAS, len(has_close)))
-    pool_no = [r for r in rows if r not in has_close]
-    pick_no = random.sample(pool_no, min(SAMPLES_PER_BUCKET_NO, len(pool_no)))
-    picks = pick_has + pick_no
+    n_show = SAMPLES_PER_BUCKET_HAS + SAMPLES_PER_BUCKET_NO  # keep total card count
+    picks = random.sample(has_close, min(n_show, len(has_close)))
     random.shuffle(picks)
 
     cards = "".join(render_sample_card(r, i + 1) for i, r in enumerate(picks))
@@ -322,7 +320,7 @@ def build_step_rollouts(step: int, total_samples_expected: int | None = None) ->
   </div>
   <p style='font-size: 12px; color: #666; margin-top: 12px; margin-bottom: 0;'>
     The system prompt instructs the model to put reasoning between <code>&lt;think&gt;</code> and <code>&lt;/think&gt;</code>.
-    Below: up to {SAMPLES_PER_BUCKET_HAS} random samples that DID emit <code>&lt;/think&gt;</code> + up to {SAMPLES_PER_BUCKET_NO} that did NOT.
+    Below: {len(picks)} random samples that DID emit <code>&lt;/think&gt;</code> (samples without <code>&lt;/think&gt;</code> are skipped).
   </p>
 </div>"""
 
