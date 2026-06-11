@@ -1494,7 +1494,7 @@ over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levens
     deep_t = {p["sample_id"]: p for p in deep_data["think"]["preds"]}
     deep_n = {p["sample_id"]: p for p in deep_data["nothink"]["preds"]}
 
-    def render_sample_card(sid):
+    def render_sample_card(sid, include_predictions=False):
         tp = deep_t.get(sid)
         np_ = deep_n.get(sid)
         if tp is None or np_ is None:
@@ -1532,6 +1532,19 @@ over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levens
         svg_parts.append(render_track(y_t, f"think (n={len(t_resp)})", t_resp, dur, "#c62828"))
         svg_parts.append("</svg>")
 
+        pred_blocks = ""
+        if include_predictions:
+            pred_blocks = f"""
+<details open><summary>GT (n={len(gt)})</summary>
+<pre class='gt'>{html.escape(json.dumps(gt, indent=2, ensure_ascii=False))[:8000]}</pre>
+</details>
+<details open><summary>no-think prediction (n={len(n_resp)})</summary>
+<pre class='ans'>{html.escape(json.dumps(n_resp, indent=2, ensure_ascii=False))[:8000]}</pre>
+</details>
+<details open><summary>think prediction (n={len(t_resp)})</summary>
+<pre class='ans'>{html.escape(json.dumps(t_resp, indent=2, ensure_ascii=False))[:8000]}</pre>
+</details>"""
+
         return f"""<div class='card'>
 <div class='hdr'>
   <span class='badge'>SOCCER</span>
@@ -1545,6 +1558,7 @@ over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levens
 <pre class='inp'>{html.escape(str(query))[:600]}</pre>
 </details>
 {"".join(svg_parts)}
+{pred_blocks}
 </div>"""
 
     # Find all SOCCER ≥2000s samples (≥45 min)
@@ -1594,7 +1608,7 @@ over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levens
         "Same render layout: GT green / no-think blue / think red.</p>"
     )
     for sid, dur, nseg in dense_sids:
-        parts.append(render_sample_card(sid))
+        parts.append(render_sample_card(sid, include_predictions=True))
     parts.append("</div>")  # /#tab5
 
     # Tab switching JS
