@@ -635,12 +635,21 @@ def collect_paired(steps: list[int] | None = None) -> tuple[list[dict], dict[int
     return pairs, step_pattern_rate
 
 
-def build_paired_single_step(step: int) -> str:
-    """Single-step paired analysis (focused snapshot) — same per-metric tables as
-    build_cognitive_patterns but using only one step, no trend SVG."""
-    pairs, _ = collect_paired([step])
+def build_paired_single_step(steps: int | list[int], title_suffix: str | None = None) -> str:
+    """Paired analysis for one step or a contiguous range of steps. Same per-metric tables
+    as build_cognitive_patterns but restricted to the given step(s), no trend SVG."""
+    if isinstance(steps, int):
+        step_list = [steps]
+        range_label = f"step {steps}"
+    else:
+        step_list = list(steps)
+        range_label = (
+            f"step {step_list[0]}" if len(step_list) == 1
+            else f"steps {step_list[0]}-{step_list[-1]} ({len(step_list)} steps: {', '.join(str(s) for s in step_list)})"
+        )
+    pairs, _ = collect_paired(step_list)
     if not pairs:
-        return f"<html><body>No paired rollouts at step {step}.</body></html>"
+        return f"<html><body>No paired rollouts at {range_label}.</body></html>"
 
     METRIC_PAIRS = [
         ("score", "think_score", "nothink_score"),
@@ -713,9 +722,9 @@ code{background:#eee;padding:1px 4px;border-radius:3px;font-size:11px}
 
     return f"""<!doctype html>
 <html><head><meta charset='utf-8'>
-<title>Step {step} · think vs nothink paired patterns</title>
+<title>{range_label} · think vs nothink paired patterns</title>
 <style>{css}</style></head><body>
-<h1>Step {step} · think (hgmkw8sg) vs nothink (vljh1yhk)</h1>
+<h1>{range_label} · think (hgmkw8sg) vs nothink (vljh1yhk)</h1>
 <div class='summary'>
   <div style='margin-bottom:8px'>
     Think: <a href='{WANDB_URL}'>hgmkw8sg</a> · <code>{CKPT_NAME}</code><br>
@@ -733,11 +742,10 @@ code{background:#eee;padding:1px 4px;border-radius:3px;font-size:11px}
   </div>
 </div>
 
-<h2>Per-metric pattern differentials at step {step}</h2>
-<div class='note'>Best-of-8 think vs best-of-8 nothink (by <code>score</code>) per sample_id at step {step}.
+<h2>Per-metric pattern differentials ({range_label})</h2>
+<div class='note'>Best-of-8 think vs best-of-8 nothink (by <code>score</code>) per sample_id, aggregated across {range_label}.
 Bucket prompts by sign of (think − nothink); Δpp &gt; 0 ⇒ pattern more common in think rollout when
-think beats nothink on that metric. No length confound (same prompt, two models). Sample sizes are
-small at the per-step level — interpret with caution.</div>
+think beats nothink on that metric. No length confound (same prompt, two models).</div>
 {''.join(metric_tables_html)}
 </body></html>"""
 
@@ -970,6 +978,11 @@ def main():
     (OUT_DIR / "260611_think_vs_nothink_step200.html").write_text(step200_html)
     print(f"wrote step200 paired ({len(step200_html)} bytes)")
 
+    # 4c) step 200–240 range (every-10)
+    range_html = build_paired_single_step([200, 210, 220, 230, 240])
+    (OUT_DIR / "260611_think_vs_nothink_step200_240.html").write_text(range_html)
+    print(f"wrote step200-240 paired ({len(range_html)} bytes)")
+
     # 5) wrapper
     early_opts = "\n".join(
         f"<option value='{s['step']}'>step {s['step']} (avg unified {s['avg_unified']:.3f}, "
@@ -1002,7 +1015,8 @@ code{{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:11px}}
   <button data-tab='sigthink'>2) significant-think (≥{SIG_THINK_WORDS}w)</button>
   <button data-tab='late'>3) step {INSPECT_STEP} rollouts</button>
   <button data-tab='pattern'>4) think vs nothink patterns</button>
-  <button data-tab='step200'>4b) step 200 snapshot</button>
+  <button data-tab='step200'>4b) step 200</button>
+  <button data-tab='step200_240'>4c) steps 200-240</button>
 </div>
 <div id='tab-early' class='tabpane active'>
   <div style='margin:12px 0;font-size:13px'>
@@ -1018,6 +1032,7 @@ code{{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:11px}}
 <div id='tab-late' class='tabpane'><iframe src='260611_hgmkw8sg_step{INSPECT_STEP}_rollouts.html'></iframe></div>
 <div id='tab-pattern' class='tabpane'><iframe src='260611_think_vs_nothink_patterns.html'></iframe></div>
 <div id='tab-step200' class='tabpane'><iframe src='260611_think_vs_nothink_step200.html'></iframe></div>
+<div id='tab-step200_240' class='tabpane'><iframe src='260611_think_vs_nothink_step200_240.html'></iframe></div>
 <script>
 document.querySelectorAll('.toptabs button').forEach(btn => {{
   btn.addEventListener('click', () => {{
