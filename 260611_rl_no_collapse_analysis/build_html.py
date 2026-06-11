@@ -662,10 +662,11 @@ def collect_paired(steps: list[int] | None = None, mode: str = "max") -> tuple[l
 
 
 def build_paired_single_step(steps: int | list[int], title_suffix: str | None = None,
-                              mode: str = "max") -> str:
+                              mode: str = "max", win_threshold: float = WIN_THRESHOLD) -> str:
     """Paired analysis for one step or a contiguous range of steps.
     mode='max'  → best-of-8 vs best-of-8 by score
-    mode='mean' → mean-of-8 metrics; pattern hit = fraction of 8 rollouts hitting"""
+    mode='mean' → mean-of-8 metrics; pattern hit = fraction of 8 rollouts hitting
+    win_threshold: ties are |Δ| <= win_threshold. Set to 0 to put every prompt in a win bucket."""
     if isinstance(steps, int):
         step_list = [steps]
         range_label = f"step {steps}"
@@ -689,9 +690,9 @@ def build_paired_single_step(steps: int | list[int], title_suffix: str | None = 
     ]
     metric_tables_html = []
     for label, tk, ntk in METRIC_PAIRS:
-        tw = [p for p in pairs if p[tk] - p[ntk] > WIN_THRESHOLD]
-        nw = [p for p in pairs if p[ntk] - p[tk] > WIN_THRESHOLD]
-        tie = [p for p in pairs if abs(p[tk] - p[ntk]) <= WIN_THRESHOLD]
+        tw = [p for p in pairs if p[tk] - p[ntk] > win_threshold]
+        nw = [p for p in pairs if p[ntk] - p[tk] > win_threshold]
+        tie = [p for p in pairs if abs(p[tk] - p[ntk]) <= win_threshold]
         sample_warning = (
             "<div style='color:#c62828;font-size:11px;margin-top:4px'>"
             "⚠ small bucket — Δs are noisy</div>"
@@ -715,9 +716,11 @@ def build_paired_single_step(steps: int | list[int], title_suffix: str | None = 
             f"<td><b>{d:+.1f}</b></td></tr>"
             for n, h, l, d in rows_data
         )
+        thresh_label = (f"|Δ|&gt;{win_threshold}" if win_threshold > 0
+                        else "all prompts (no tie threshold)")
         metric_tables_html.append(
             f"<h3>{label} <span class='small'>(think-wins n={len(tw)}, "
-            f"nothink-wins n={len(nw)}, ties n={len(tie)}, |Δ|&gt;{WIN_THRESHOLD})</span></h3>"
+            f"nothink-wins n={len(nw)}, ties n={len(tie)}, {thresh_label})</span></h3>"
             f"{sample_warning}"
             f"<table><tr><th>pattern</th><th>think-win %</th><th>nothink-win %</th><th>Δ pp</th></tr>{body}</table>"
         )
@@ -725,8 +728,8 @@ def build_paired_single_step(steps: int | list[int], title_suffix: str | None = 
     # Overall summary
     avg_t = sum(p["think_score"] for p in pairs) / len(pairs)
     avg_n = sum(p["nothink_score"] for p in pairs) / len(pairs)
-    tw_all = sum(1 for p in pairs if p["think_score"] - p["nothink_score"] > WIN_THRESHOLD)
-    nw_all = sum(1 for p in pairs if p["nothink_score"] - p["think_score"] > WIN_THRESHOLD)
+    tw_all = sum(1 for p in pairs if p["think_score"] - p["nothink_score"] > win_threshold)
+    nw_all = sum(1 for p in pairs if p["nothink_score"] - p["think_score"] > win_threshold)
     tie_all = len(pairs) - tw_all - nw_all
     avg_tw = sum(p["think_words"] for p in pairs) / len(pairs)
     avg_ntw = sum(p["nothink_words"] for p in pairs) / len(pairs)
@@ -764,7 +767,7 @@ code{background:#eee;padding:1px 4px;border-radius:3px;font-size:11px}
     <div><div class='label'>avg think score</div><div class='val'>{avg_t:.3f}</div></div>
     <div><div class='label'>avg nothink score</div><div class='val'>{avg_n:.3f}</div></div>
     <div><div class='label'>Δ score</div><div class='val'>{avg_t-avg_n:+.3f}</div></div>
-    <div><div class='label'>think wins (|Δ|&gt;{WIN_THRESHOLD})</div><div class='val'>{tw_all} ({100*tw_all/len(pairs):.0f}%)</div></div>
+    <div><div class='label'>think wins (|Δ|&gt;{win_threshold})</div><div class='val'>{tw_all} ({100*tw_all/len(pairs):.0f}%)</div></div>
     <div><div class='label'>nothink wins</div><div class='val'>{nw_all} ({100*nw_all/len(pairs):.0f}%)</div></div>
     <div><div class='label'>ties</div><div class='val'>{tie_all} ({100*tie_all/len(pairs):.0f}%)</div></div>
     <div><div class='label'>avg think words / nothink words</div><div class='val'>{avg_tw:.0f} / {avg_ntw:.0f}</div></div>
@@ -777,6 +780,127 @@ code{background:#eee;padding:1px 4px;border-radius:3px;font-size:11px}
 Bucket prompts by sign of (think − nothink); Δpp &gt; 0 ⇒ pattern more common in think rollout when
 think beats nothink on that metric. No length confound (same prompt, two models).</div>
 {''.join(metric_tables_html)}
+</body></html>"""
+
+
+PATTERN_DESCRIPTIONS = {
+    "numbered_list": "Lines that start with a number followed by '.' or ')' — like '1. step one' or '2) the team'. Captures structured enumeration the model uses to lay out segments or steps.",
+    "bulleted_list": "Lines that start with '-', '*', or '•' — bullet points in the think trace.",
+    "enumerates_segments": "Mentions specific numbered segments / scenes / clips / chapters / sections (e.g., 'Segment 1', 'scene 2', 'first segment'). Captures the model treating the answer as a sequence of named units.",
+    "timestamp_mention": "Timestamps like 'mm:ss', 'hh:mm:ss', or '12.3 seconds'. Almost universally present in this domain.",
+    "asr_quote": "Quoted spoken content or reporting verbs (says/said/asks/told/announces/narrates/reads). Captures the model leaning on audio transcript.",
+    "json_schema_words": "Mentions JSON schema/keys directly (results, start_time, end_time, player_name, json, schema, field, key, value, …). Captures the model talking about output format inside its think trace.",
+    "video_watch_lang": "First-person observation language ('I see', 'I observe', 'I notice') or 'video/clip/footage shows/depicts/features'. Captures the model narrating its visual perception.",
+    "uncertainty": "Hedge words: maybe, perhaps, might, likely, possibly, probably, unclear, unsure, 'not sure', hmm, 'I think', 'I believe', 'seems like', 'appears to', 'can't tell', 'difficult to', 'confusing'.",
+    "self_correct": "Self-correction markers: wait, actually, 'let me re-', reconsider, 'on second thought', 'I was wrong', correction, 'scratch that', 'never mind', 're-examine', 're-check', 're-look', 'hold on'.",
+    "plan_words": "Planning language: plan, approach, strategy, 'step 1' / 'step one', 'First, ', 'Then, ', 'Next, ', 'Finally, ', 'I'll', 'I will', 'I need to', 'I should', 'my task'.",
+    "verify_words": "Verification language: verify/verifies/verifying, check/checks/checking, confirm/confirms/confirming, validate/validated, double-check, re-check.",
+    "gt_word_count_check": "Mentions explicit word counts: '<N> words', 'word count', 'count(ing) (the) words'. Rare; mostly captures the model checking length constraints.",
+    "summary_at_end": "Wrap-up phrases: 'in summary', 'to summarize', 'in conclusion', 'final answer', 'Summary:', 'Conclusion:', 'so, the answer is', 'Therefore, '. Captures the model closing its reasoning.",
+}
+
+
+def _snip_around(text: str, span: tuple[int, int], radius: int = 80) -> str:
+    s, e = span
+    lo = max(0, s - radius)
+    hi = min(len(text), e + radius)
+    pre = "…" if lo > 0 else ""
+    post = "…" if hi < len(text) else ""
+    chunk = text[lo:hi]
+    rel_s = s - lo
+    rel_e = e - lo
+    highlighted = (
+        html.escape(chunk[:rel_s])
+        + f"<mark>{html.escape(chunk[rel_s:rel_e])}</mark>"
+        + html.escape(chunk[rel_e:])
+    )
+    return pre + highlighted + post
+
+
+def build_pattern_examples(step: int = 200, examples_per_pattern: int = 3) -> str:
+    """For each cognitive pattern, list the regex, a description, and 2-3 real
+    matched snippets from think rollouts at the given step."""
+    rows = load_step(step, ROLLOUT_DIR)
+    # collect pre-think text per rollout
+    candidates = []
+    for r in rows:
+        out = r.get("output") or ""
+        pre = pre_think(out)
+        if len(pre.split()) >= 30:
+            candidates.append((r.get("sample_id", "?"), pre))
+    random.Random(7).shuffle(candidates)
+
+    sections = []
+    for name in PATTERN_ORDER:
+        rx = PATTERN_REGEX[name]
+        desc = PATTERN_DESCRIPTIONS.get(name, "")
+        # find first N rollouts where the pattern matches, snip around the first match
+        examples = []
+        for sid, pre in candidates:
+            m = rx.search(pre)
+            if not m:
+                continue
+            snip = _snip_around(pre, m.span(), radius=120)
+            examples.append((sid, snip))
+            if len(examples) >= examples_per_pattern:
+                break
+
+        # raw regex (truncate if long)
+        pattern_str = rx.pattern.strip()
+        if len(pattern_str) > 280:
+            pattern_str = pattern_str[:277] + "..."
+        regex_html = f"<pre style='background:#272822;color:#f8f8f2;padding:8px 10px;border-radius:4px;font-size:11px;overflow:auto;white-space:pre-wrap'>{html.escape(pattern_str)}</pre>"
+
+        examples_html = "".join(
+            f"<div class='ex'>"
+            f"<div class='ex-meta'>sample <code>{html.escape(sid.replace('-','')[:24])}</code></div>"
+            f"<div class='ex-snip'>{snip}</div>"
+            f"</div>"
+            for sid, snip in examples
+        ) or "<div class='no-ex'>No matches found in this step.</div>"
+
+        sections.append(f"""
+<div class='pcard' id='p-{name}'>
+  <h3>{name}</h3>
+  <div class='desc'>{html.escape(desc)}</div>
+  <details><summary>regex</summary>{regex_html}</details>
+  <div class='ex-list'>{examples_html}</div>
+</div>""")
+
+    toc = "<div class='toc'>" + " · ".join(
+        f"<a href='#p-{name}'>{name}</a>" for name in PATTERN_ORDER
+    ) + "</div>"
+
+    css = """
+body{font-family:-apple-system,system-ui,sans-serif;max-width:1200px;margin:18px auto;padding:0 14px;color:#222;background:#fafafa}
+h1{border-bottom:1px solid #ccc;padding-bottom:4px}
+.toc{margin:10px 0 24px;font-size:13px;line-height:1.8}
+.toc a{color:#1a4d8c;text-decoration:none}
+.toc a:hover{text-decoration:underline}
+.pcard{background:#fff;border:1px solid #ddd;border-radius:8px;padding:14px 18px;margin-bottom:16px}
+.pcard h3{margin:0 0 6px;color:#1a4d8c;font-size:16px}
+.desc{color:#444;font-size:13px;margin-bottom:8px;line-height:1.5}
+details summary{cursor:pointer;font-size:12px;color:#666;margin-bottom:4px}
+.ex{background:#f7f7f7;border:1px solid #eee;border-radius:4px;padding:8px 10px;margin:8px 0;font-size:12px;line-height:1.55}
+.ex-meta{color:#888;font-size:11px;margin-bottom:4px}
+.ex-snip{font-family:ui-monospace,'SF Mono',Menlo,monospace;white-space:pre-wrap}
+mark{background:#fff59d;padding:0 2px;border-radius:2px}
+code{background:#eee;padding:1px 4px;border-radius:3px;font-size:11px}
+.no-ex{color:#999;font-style:italic;font-size:12px}
+"""
+
+    return f"""<!doctype html>
+<html><head><meta charset='utf-8'>
+<title>Cognitive pattern examples</title>
+<style>{css}</style></head><body>
+<h1>Cognitive pattern examples <span style='font-size:14px;color:#666'>(from step {step} think rollouts)</span></h1>
+<p style='color:#555;font-size:13px'>
+Each card shows one of the 13 cognitive patterns: a plain-English description,
+the underlying regex (click "regex" to expand), and {examples_per_pattern} real matched
+snippets from the think model's rollouts at step {step}. Matched portions are highlighted.
+</p>
+{toc}
+{''.join(sections)}
 </body></html>"""
 
 
@@ -1008,10 +1132,15 @@ def main():
     (OUT_DIR / "260611_think_vs_nothink_step200.html").write_text(step200_html)
     print(f"wrote step200 paired ({len(step200_html)} bytes)")
 
-    # 4c) step 200–240 range, mean-of-8 (per-prompt mean over 8 rollouts)
-    range_html = build_paired_single_step([200, 210, 220, 230, 240], mode="mean")
+    # 4c) step 200–240 range, mean-of-8, threshold=0 (use every prompt, no ties bucket)
+    range_html = build_paired_single_step([200, 210, 220, 230, 240], mode="mean", win_threshold=0)
     (OUT_DIR / "260611_think_vs_nothink_step200_240_mean.html").write_text(range_html)
-    print(f"wrote step200-240 mean-of-8 ({len(range_html)} bytes)")
+    print(f"wrote step200-240 mean-of-8 (threshold=0, {len(range_html)} bytes)")
+
+    # 5) pattern examples (descriptions + regex + real snippets)
+    examples_html = build_pattern_examples(step=200)
+    (OUT_DIR / "260611_pattern_examples.html").write_text(examples_html)
+    print(f"wrote pattern_examples ({len(examples_html)} bytes)")
 
     # 5) wrapper
     early_opts = "\n".join(
@@ -1046,7 +1175,8 @@ code{{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:11px}}
   <button data-tab='late'>3) step {INSPECT_STEP} rollouts</button>
   <button data-tab='pattern'>4) think vs nothink patterns</button>
   <button data-tab='step200'>4b) step 200</button>
-  <button data-tab='step200_240'>4c) steps 200-240 (mean-of-8)</button>
+  <button data-tab='step200_240'>4c) steps 200-240 (mean-of-8, all prompts)</button>
+  <button data-tab='examples'>5) pattern examples</button>
 </div>
 <div id='tab-early' class='tabpane active'>
   <div style='margin:12px 0;font-size:13px'>
@@ -1063,6 +1193,7 @@ code{{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:11px}}
 <div id='tab-pattern' class='tabpane'><iframe src='260611_think_vs_nothink_patterns.html'></iframe></div>
 <div id='tab-step200' class='tabpane'><iframe src='260611_think_vs_nothink_step200.html'></iframe></div>
 <div id='tab-step200_240' class='tabpane'><iframe src='260611_think_vs_nothink_step200_240_mean.html'></iframe></div>
+<div id='tab-examples' class='tabpane'><iframe src='260611_pattern_examples.html'></iframe></div>
 <script>
 document.querySelectorAll('.toptabs button').forEach(btn => {{
   btn.addEventListener('click', () => {{
