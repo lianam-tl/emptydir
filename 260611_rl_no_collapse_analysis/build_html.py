@@ -1,13 +1,15 @@
 """[cc-generated] Reproduce 260508_rl_eval_research_questions rollout analyses for the
-hgmkw8sg RL run where response length did NOT collapse.
+hgmkw8sg (think) RL run, with a paired think-vs-nothink (vljh1yhk) comparison for
+cognitive patterns (mirrors 260503 framework — same prompts, two models).
 
-Reads jsonl files under ROLLOUT_DIR/{step}.jsonl. Generates 4 standalone HTMLs +
-1 wrapper:
-  - 260611_hgmkw8sg_early_rollouts.html        (steps 1-7, per-step cards)
-  - 260611_hgmkw8sg_step400_rollouts.html      (step 400, 20 sample cards)
-  - 260611_hgmkw8sg_significant_think.html     (steps 1-7, >=100 think words)
-  - 260611_hgmkw8sg_cognitive_patterns.html    (per-metric tables + monotonic trends)
-  - 260611_hgmkw8sg_rl_no_collapse.html        (wrapper with tabs)
+Reads jsonl files under ROLLOUT_DIR/{step}.jsonl (think) and
+NOTHINK_ROLLOUT_DIR/{step}.jsonl (nothink). Generates 4 standalone HTMLs + 1 wrapper:
+  - 260611_hgmkw8sg_early_rollouts.html       (steps 1-7, per-step think cards)
+  - 260611_hgmkw8sg_step400_rollouts.html     (step 400, 20 think sample cards)
+  - 260611_hgmkw8sg_significant_think.html    (steps 1-7, >=100 think words)
+  - 260611_think_vs_nothink_patterns.html     (paired best-of-8 vs best-of-8 by sample_id,
+                                                per-step counts + per-metric tables + trends)
+  - 260611_hgmkw8sg_rl_no_collapse.html       (wrapper with tabs)
 
 Pattern detection mirrors the names from 260503_think_pattern_v2.html using
 regex heuristics on the pre-</think> text.
@@ -23,11 +25,14 @@ from collections import defaultdict
 from pathlib import Path
 
 ROLLOUT_DIR = Path("/tmp/rollout_logs_hgmkw8sg")
+NOTHINK_ROLLOUT_DIR = Path("/tmp/rollout_logs_vljh1yhk")
 OUT_DIR = Path("/Users/long8v/emptydir/260611_rl_no_collapse_analysis/out")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 WANDB_URL = "https://wandb.ai/twelvelabs/pegasus-rl/runs/hgmkw8sg"
+NOTHINK_WANDB_URL = "https://wandb.ai/twelvelabs/pegasus-rl/runs/vljh1yhk"
 CKPT_NAME = "rl_rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7_no_detach_encoder_mtp_loss_scale_0p5_think"
+NOTHINK_CKPT_NAME = "rl_rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7_no_detach_encoder_mtp_loss_scale_0p5"
 
 EARLY_STEPS = list(range(1, 8))
 INSPECT_STEP = 400
@@ -134,10 +139,15 @@ def detect_patterns(think_text: str) -> dict[str, bool]:
     return {name: bool(rx.search(think_text)) for name, rx in PATTERN_REGEX.items()}
 
 
+def count_patterns(think_text: str) -> dict[str, int]:
+    """Per-text occurrence count of each pattern (NOT just binary hit)."""
+    return {name: len(rx.findall(think_text)) for name, rx in PATTERN_REGEX.items()}
+
+
 # ---------------------------- IO ----------------------------
 
-def load_step(step: int) -> list[dict]:
-    path = ROLLOUT_DIR / f"{step}.jsonl"
+def load_step(step: int, base: Path = ROLLOUT_DIR) -> list[dict]:
+    path = base / f"{step}.jsonl"
     if not path.exists():
         return []
     rows = []
@@ -552,86 +562,125 @@ def build_significant_think() -> str:
     return html_doc
 
 
-# ---------------------------- 4) cognitive patterns v2 ----------------------------
+# ---------------------------- 4) cognitive patterns v2 (paired think-vs-nothink) ----------------------------
+
+WIN_THRESHOLD = 0.1  # |Δscore| > 0.1 → not a tie (matches 260503)
+
+
+def _best_of_n(rows: list[dict], metric: str = "score") -> dict | None:
+    if not rows:
+        return None
+    return max(rows, key=lambda r: float(r.get(metric, 0) or 0))
+
+
+def collect_paired() -> tuple[list[dict], dict[int, dict[str, float]]]:
+    """For each step in TREND_STEPS, pair best-of-8 think vs best-of-8 nothink per sample_id.
+    Returns (pairs, step_pattern_rate).
+    pairs is list of dicts with keys:
+      step, sample_id, think_metrics, nothink_metrics, think_patterns, think_counts,
+      think_words, nothink_words.
+    step_pattern_rate[step][pattern_name] = fraction of paired-prompts whose think rollout hits."""
+    pairs: list[dict] = []
+    step_pattern_rate: dict[int, dict[str, float]] = {}
+    for step in TREND_STEPS:
+        think_rows = load_step(step, ROLLOUT_DIR)
+        nothink_rows = load_step(step, NOTHINK_ROLLOUT_DIR)
+        if not think_rows or not nothink_rows:
+            continue
+        # group by sample_id
+        think_by_id: dict[str, list[dict]] = defaultdict(list)
+        nothink_by_id: dict[str, list[dict]] = defaultdict(list)
+        for r in think_rows:
+            think_by_id[r["sample_id"]].append(r)
+        for r in nothink_rows:
+            nothink_by_id[r["sample_id"]].append(r)
+        shared = set(think_by_id) & set(nothink_by_id)
+        step_hits: dict[str, int] = {n: 0 for n in PATTERN_ORDER}
+        step_n_pairs = 0
+        for sid in shared:
+            t = _best_of_n(think_by_id[sid], "score")
+            nt = _best_of_n(nothink_by_id[sid], "score")
+            if t is None or nt is None:
+                continue
+            t_out = t.get("output") or ""
+            nt_out = nt.get("output") or ""
+            t_pre = pre_think(t_out)
+            t_words = len(t_pre.split())
+            nt_words = len((nt_out or "").split())
+            t_pat = detect_patterns(t_pre)
+            t_cnt = count_patterns(t_pre)
+            for name in PATTERN_ORDER:
+                step_hits[name] += int(t_pat[name])
+            step_n_pairs += 1
+            pairs.append({
+                "step": step,
+                "sample_id": sid,
+                "think_score": float(t.get("score", 0) or 0),
+                "think_unified": float(t.get("unified_score", 0) or 0),
+                "think_f1_seg": float(t.get("f1_segment", 0) or 0),
+                "think_f1_temp": float(t.get("f1_temporal", 0) or 0),
+                "think_format": float(t.get("format_score", 0) or 0),
+                "nothink_score": float(nt.get("score", 0) or 0),
+                "nothink_unified": float(nt.get("unified_score", 0) or 0),
+                "nothink_f1_seg": float(nt.get("f1_segment", 0) or 0),
+                "nothink_f1_temp": float(nt.get("f1_temporal", 0) or 0),
+                "nothink_format": float(nt.get("format_score", 0) or 0),
+                "patterns": t_pat,
+                "counts": t_cnt,
+                "think_words": t_words,
+                "nothink_words": nt_words,
+            })
+        if step_n_pairs:
+            step_pattern_rate[step] = {
+                n: step_hits[n] / step_n_pairs for n in PATTERN_ORDER
+            }
+    return pairs, step_pattern_rate
+
 
 def build_cognitive_patterns() -> str:
-    # 1. trend over steps: pattern hit rate among rollouts with non-empty think
-    # 2. per-metric pattern win/lose differential
+    pairs, step_pattern_rate = collect_paired()
+    if not pairs:
+        return "<html><body>No paired rollouts found.</body></html>"
 
-    # Collect: for each step, for each rollout with non-empty think, pattern hits + metrics
-    step_pattern_rate: dict[int, dict[str, float]] = {}
-    step_n: dict[int, int] = {}
-
-    # For per-metric tables: aggregate over all trend steps a list of rollouts
-    # with non-empty think, with their pattern hits and metric values
-    all_rollouts: list[dict] = []
-
-    for step in TREND_STEPS:
-        rows = load_step(step)
-        if not rows:
-            continue
-        bucket = []
-        for r in rows:
-            out = r.get("output") or ""
-            pre = pre_think(out)
-            if not pre.strip():
-                continue
-            # require at least some think content (>0 words)
-            words = pre.split()
-            if len(words) < 5:
-                continue
-            hits = detect_patterns(pre)
-            bucket.append({
-                "patterns": hits,
-                "score": float(r.get("score", 0) or 0),
-                "unified_score": float(r.get("unified_score", 0) or 0),
-                "f1_segment": float(r.get("f1_segment", 0) or 0),
-                "f1_temporal": float(r.get("f1_temporal", 0) or 0),
-                "format_score": float(r.get("format_score", 0) or 0),
-                "step": step,
-            })
-        if not bucket:
-            continue
-        step_n[step] = len(bucket)
-        step_pattern_rate[step] = {
-            name: sum(1 for b in bucket if b["patterns"][name]) / len(bucket)
-            for name in PATTERN_ORDER
+    # Per-step summary: count of think_wins / nothink_wins / ties by score
+    from collections import defaultdict
+    step_summary: dict[int, dict] = {}
+    for step in sorted(set(p["step"] for p in pairs)):
+        step_pairs = [p for p in pairs if p["step"] == step]
+        tw = sum(1 for p in step_pairs if p["think_score"] - p["nothink_score"] > WIN_THRESHOLD)
+        nw = sum(1 for p in step_pairs if p["nothink_score"] - p["think_score"] > WIN_THRESHOLD)
+        tie = len(step_pairs) - tw - nw
+        avg_dt = sum(p["think_score"] - p["nothink_score"] for p in step_pairs) / len(step_pairs)
+        avg_tw = sum(p["think_words"] for p in step_pairs) / len(step_pairs)
+        avg_ntw = sum(p["nothink_words"] for p in step_pairs) / len(step_pairs)
+        step_summary[step] = {
+            "n": len(step_pairs), "think_wins": tw, "nothink_wins": nw, "ties": tie,
+            "avg_dscore": avg_dt, "avg_think_words": avg_tw, "avg_nothink_words": avg_ntw,
         }
-        all_rollouts.extend(bucket)
 
-    if not all_rollouts:
-        return "<html><body>No rollouts found.</body></html>"
-
-    # For each metric, bucket samples by per-sample value;
-    # since we have a single run (no two model comparison), reinterpret:
-    #   high vs low buckets per metric (above-median vs below-median).
-    # That captures pattern association: "when the model gets HIGH unified, which patterns appear?"
-    METRICS = ["score", "unified_score", "f1_segment", "f1_temporal", "format_score"]
+    # Per-metric pattern tables: for each metric, bucket paired prompts into
+    #   think-win (Δm > thresh), nothink-win (Δm < -thresh), tie.
+    # Compute think rollout's pattern hit % in think-win vs nothink-win.
+    # Δpp = think-win% - nothink-win% > 0 ⇒ pattern more present when think beats nothink.
+    METRIC_PAIRS = [
+        ("score", "think_score", "nothink_score"),
+        ("unified_score", "think_unified", "nothink_unified"),
+        ("f1_segment", "think_f1_seg", "nothink_f1_seg"),
+        ("f1_temporal", "think_f1_temp", "nothink_f1_temp"),
+        ("format_score", "think_format", "nothink_format"),
+    ]
     metric_tables_html = []
-    for metric in METRICS:
-        vals = sorted(b[metric] for b in all_rollouts)
-        if not vals:
-            continue
-        # quartile split: top 25% (win) vs bottom 25% (lose)
-        q25 = vals[len(vals) // 4]
-        q75 = vals[3 * len(vals) // 4]
-        if q25 == q75:
-            # too many ties (e.g. all zero for some metric) — fall back to nonzero vs zero
-            high = [b for b in all_rollouts if b[metric] > 0]
-            low = [b for b in all_rollouts if b[metric] == 0]
-            label = f"split=nonzero vs zero (n={len(all_rollouts)})"
-        else:
-            high = [b for b in all_rollouts if b[metric] >= q75]
-            low = [b for b in all_rollouts if b[metric] <= q25]
-            label = f"top-25% (≥{q75:.3f}) vs bottom-25% (≤{q25:.3f})"
-        if not high or not low:
+    for label, tk, ntk in METRIC_PAIRS:
+        tw = [p for p in pairs if p[tk] - p[ntk] > WIN_THRESHOLD]
+        nw = [p for p in pairs if p[ntk] - p[tk] > WIN_THRESHOLD]
+        tie = [p for p in pairs if abs(p[tk] - p[ntk]) <= WIN_THRESHOLD]
+        if not tw or not nw:
             continue
         rows_data = []
         for name in PATTERN_ORDER:
-            high_pct = 100 * sum(1 for b in high if b["patterns"][name]) / len(high)
-            low_pct = 100 * sum(1 for b in low if b["patterns"][name]) / len(low)
-            diff = high_pct - low_pct
-            rows_data.append((name, high_pct, low_pct, diff))
+            tw_pct = 100 * sum(1 for p in tw if p["patterns"][name]) / len(tw)
+            nw_pct = 100 * sum(1 for p in nw if p["patterns"][name]) / len(nw)
+            rows_data.append((name, tw_pct, nw_pct, tw_pct - nw_pct))
         rows_data.sort(key=lambda x: abs(x[3]), reverse=True)
         body = "".join(
             f"<tr class='{'pos' if d > 0 else 'neg'}'>"
@@ -640,30 +689,22 @@ def build_cognitive_patterns() -> str:
             for n, h, l, d in rows_data
         )
         metric_tables_html.append(
-            f"<h3>{metric} <span class='small'>(win n={len(high)}, "
-            f"lose n={len(low)}, {label})</span></h3>"
-            f"<table><tr><th>pattern</th><th>win %</th><th>lose %</th><th>Δ pp</th></tr>{body}</table>"
+            f"<h3>{label} <span class='small'>(think-wins n={len(tw)}, "
+            f"nothink-wins n={len(nw)}, ties n={len(tie)}, "
+            f"|Δ|&gt;{WIN_THRESHOLD})</span></h3>"
+            f"<table><tr><th>pattern</th><th>think-win %</th><th>nothink-win %</th><th>Δ pp</th></tr>{body}</table>"
         )
 
-    # Trend SVG: pattern rate vs step.
-    # Split patterns into "win-correlated" (Δ > 0 on unified_score) and "lose-correlated" (Δ < 0)
-    # using the same quartile split as the unified_score table above.
+    # Classify win-correlated vs lose-correlated using unified_score paired Δ
+    tw_u = [p for p in pairs if p["think_unified"] - p["nothink_unified"] > WIN_THRESHOLD]
+    nw_u = [p for p in pairs if p["nothink_unified"] - p["think_unified"] > WIN_THRESHOLD]
     win_patterns = []
     lose_patterns = []
-    if all_rollouts:
-        u_vals = sorted(b["unified_score"] for b in all_rollouts)
-        u_q25 = u_vals[len(u_vals) // 4]
-        u_q75 = u_vals[3 * len(u_vals) // 4]
-        if u_q25 == u_q75:
-            high_u = [b for b in all_rollouts if b["unified_score"] > 0]
-            low_u = [b for b in all_rollouts if b["unified_score"] == 0]
-        else:
-            high_u = [b for b in all_rollouts if b["unified_score"] >= u_q75]
-            low_u = [b for b in all_rollouts if b["unified_score"] <= u_q25]
+    if tw_u and nw_u:
         for name in PATTERN_ORDER:
-            h_pct = 100 * sum(1 for b in high_u if b["patterns"][name]) / max(len(high_u), 1)
-            l_pct = 100 * sum(1 for b in low_u if b["patterns"][name]) / max(len(low_u), 1)
-            (win_patterns if h_pct > l_pct else lose_patterns).append(name)
+            tw_pct = 100 * sum(1 for p in tw_u if p["patterns"][name]) / len(tw_u)
+            nw_pct = 100 * sum(1 for p in nw_u if p["patterns"][name]) / len(nw_u)
+            (win_patterns if tw_pct > nw_pct else lose_patterns).append(name)
 
     COLORS = ["#1f77b4", "#d62728", "#2ca02c", "#9467bd", "#ff7f0e",
               "#17becf", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22",
@@ -736,38 +777,62 @@ tr.neg td:last-child{color:#b71c1c;font-weight:bold}
 nav a{margin-right:14px;font-size:13px}
 """
 
-    total_rollouts = sum(step_n.values())
+    total_pairs = len(pairs)
+    per_step_table_rows = "".join(
+        f"<tr><td>{s}</td><td>{d['n']}</td>"
+        f"<td>{d['think_wins']} ({100*d['think_wins']/max(d['n'],1):.0f}%)</td>"
+        f"<td>{d['nothink_wins']} ({100*d['nothink_wins']/max(d['n'],1):.0f}%)</td>"
+        f"<td>{d['ties']} ({100*d['ties']/max(d['n'],1):.0f}%)</td>"
+        f"<td>{d['avg_dscore']:+.3f}</td>"
+        f"<td>{d['avg_think_words']:.0f}</td>"
+        f"<td>{d['avg_nothink_words']:.0f}</td></tr>"
+        for s, d in sorted(step_summary.items())
+    )
 
     return f"""<!doctype html>
 <html><head><meta charset='utf-8'>
-<title>Cognitive patterns — hgmkw8sg (no-collapse run)</title>
-<style>{css}</style></head><body>
-<h1>Cognitive Patterns — hgmkw8sg (response length did NOT collapse)</h1>
+<title>Cognitive patterns — think (hgmkw8sg) vs nothink (vljh1yhk)</title>
+<style>{css}
+.summary-table {{ width:100%; border-collapse:collapse; font-size:12px; }}
+.summary-table th, .summary-table td {{ padding:4px 8px; border:1px solid #ddd; text-align:right; }}
+.summary-table th {{ background:#eee; }}
+.summary-table td:first-child, .summary-table th:first-child {{ text-align:left; }}
+</style></head><body>
+<h1>Cognitive Patterns — think (hgmkw8sg) vs nothink (vljh1yhk)</h1>
 <nav>
+ <a href='#step'>Per-step counts</a>
  <a href='#m'>Per-metric tables</a>
  <a href='#trend'>Monotonic trends</a>
 </nav>
 <div class='summary'>
- Run: <a href='{WANDB_URL}'>hgmkw8sg</a> · checkpoint: <code>{CKPT_NAME}</code><br>
- Steps analyzed (trends): {len(step_pattern_rate)} steps ({', '.join(str(s) for s in sorted(step_pattern_rate)[:12])}, ...)<br>
- Total rollouts with non-empty &lt;think&gt;: <b>{total_rollouts}</b><br>
- Bucket split: per-metric quartile (top-25% win vs bottom-25% lose)
+ Think: <a href='{WANDB_URL}'>hgmkw8sg</a> · <code>{CKPT_NAME}</code><br>
+ Nothink: <a href='{NOTHINK_WANDB_URL}'>vljh1yhk</a> · <code>{NOTHINK_CKPT_NAME}</code><br>
+ Steps analyzed: {len(step_pattern_rate)}<br>
+ Total paired prompts (best-of-8 think vs best-of-8 nothink, matched by sample_id): <b>{total_pairs}</b><br>
+ Win threshold: |Δscore| &gt; {WIN_THRESHOLD}
 </div>
 
-<h2 id='m'>Per-metric pattern differentials (single-run interpretation)</h2>
+<h2 id='step'>Per-step paired counts</h2>
+<div class='note'>For each step we take best-of-8 think and best-of-8 nothink rollout per prompt (by <code>score</code>),
+then compare. avg Δ = think_score − nothink_score.</div>
+<table class='summary-table'>
+<tr><th>step</th><th>n prompts</th><th>think wins</th><th>nothink wins</th><th>ties</th>
+<th>avg Δscore</th><th>think words (avg)</th><th>nothink words (avg)</th></tr>
+{per_step_table_rows}
+</table>
+
+<h2 id='m'>Per-metric pattern differentials (paired)</h2>
 <div class='note'>
-For each metric, split rollouts into top-25% (win) and bottom-25% (lose) buckets,
-then compute pattern hit rates per bucket. Δpp &gt; 0 = pattern more common in win rollouts.
-The original 260503 analysis compared two models (think vs nothink); here we have one run,
-so we compare the model's own win-vs-lose rollouts.
+For each metric, bucket prompts by sign of (think − nothink): if think wins by &gt; {WIN_THRESHOLD},
+take its pattern hits; if nothink wins, take the think rollout's pattern hits (still measured
+on think content). Δpp &gt; 0 ⇒ pattern is more common in the think rollout exactly when think beats nothink.
+No length confound — same prompt, two models. Mirrors the 260503 framework.
 </div>
 {''.join(metric_tables_html)}
 
-<h2 id='trend'>Monotonic trends — pattern rate vs training step</h2>
-<div class='note'>Does the model adopt win-patterns over training? Drop lose-patterns?
-Patterns are classified as win/lose based on the unified_score median split above.
-Since response length did not collapse here, sustained think content lets us track
-pattern evolution across all {len(step_pattern_rate)} sampled steps.</div>
+<h2 id='trend'>Monotonic trends — pattern rate in think rollouts vs training step</h2>
+<div class='note'>Does the think model adopt win-patterns over training? Drop lose-patterns?
+Patterns classified as win/lose by the paired unified_score Δ above.</div>
 {trend_html}
 </body></html>"""
 
@@ -792,7 +857,7 @@ def main():
 
     # 4) cognitive patterns
     pat_html = build_cognitive_patterns()
-    (OUT_DIR / "260611_hgmkw8sg_cognitive_patterns.html").write_text(pat_html)
+    (OUT_DIR / "260611_think_vs_nothink_patterns.html").write_text(pat_html)
     print(f"wrote cognitive_patterns ({len(pat_html)} bytes)")
 
     # 5) wrapper
@@ -826,7 +891,7 @@ code{{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:11px}}
   <button class='active' data-tab='early'>1) early-step rollouts (1-7)</button>
   <button data-tab='sigthink'>2) significant-think (≥{SIG_THINK_WORDS}w)</button>
   <button data-tab='late'>3) step {INSPECT_STEP} rollouts</button>
-  <button data-tab='pattern'>4) cognitive patterns</button>
+  <button data-tab='pattern'>4) think vs nothink patterns</button>
 </div>
 <div id='tab-early' class='tabpane active'>
   <div style='margin:12px 0;font-size:13px'>
@@ -840,7 +905,7 @@ code{{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:11px}}
 </div>
 <div id='tab-sigthink' class='tabpane'><iframe src='260611_hgmkw8sg_significant_think.html'></iframe></div>
 <div id='tab-late' class='tabpane'><iframe src='260611_hgmkw8sg_step{INSPECT_STEP}_rollouts.html'></iframe></div>
-<div id='tab-pattern' class='tabpane'><iframe src='260611_hgmkw8sg_cognitive_patterns.html'></iframe></div>
+<div id='tab-pattern' class='tabpane'><iframe src='260611_think_vs_nothink_patterns.html'></iframe></div>
 <script>
 document.querySelectorAll('.toptabs button').forEach(btn => {{
   btn.addEventListener('click', () => {{
