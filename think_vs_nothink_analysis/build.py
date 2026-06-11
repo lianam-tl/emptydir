@@ -1617,24 +1617,59 @@ over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levens
     parts.append("<div id='tab6' class='tab-content'>")
     parts.extend(section9_parts)
 
-    # Long-output sample deep dive (run3 step200)
-    parts.append("<h2>Long-output samples — GT vs no-think vs think</h2>")
+    # Long-GT sample deep dive (run3 step200)
+    # Pick top 30 by GT char length, then sort by |Δ f1_segment| desc, show top 10.
+    TAB6_LONG_GT_POOL = 30
+    TAB6_TOP_N = 10
+    parts.append("<h2>Long-GT samples where think and no-think disagree</h2>")
     parts.append(
-        f"<p class='note'>Top 10 samples by <code>max(think_chars, nothink_chars)</code> in "
-        f"<code>{html.escape(deep_run)}</code> step {deep_step}. Same timeline + JSON layout as Tab 5.</p>"
+        f"<p class='note'>Step 1: rank samples in <code>{html.escape(deep_run)}</code> step {deep_step} by GT JSON "
+        f"char length, take top {TAB6_LONG_GT_POOL}. Step 2: from that pool, sort by "
+        f"<code>|Δ f1_segment|</code> descending and show top {TAB6_TOP_N}. Same timeline + JSON layout as Tab 5.</p>"
     )
 
-    long_output_rows = []
-    for sid in set(deep_t) & set(deep_n):
+    long_gt_rows = []
+    for sid in set(deep_t) & set(deep_n) & set(deep_data["think"]["per"]) & set(deep_data["nothink"]["per"]):
         tp = deep_t[sid]
         np_ = deep_n[sid]
-        tc = len(json.dumps(tp.get("response"))) if isinstance(tp.get("response"), list) else 0
-        nc = len(json.dumps(np_.get("response"))) if isinstance(np_.get("response"), list) else 0
+        gt_obj = np_.get("chapters") or tp.get("chapters")
+        if isinstance(gt_obj, str):
+            try:
+                gt_obj = json.loads(gt_obj)
+            except Exception:
+                gt_obj = None
+        if not isinstance(gt_obj, list):
+            continue
+        gt_chars = len(json.dumps(gt_obj))
+        t_f1 = deep_data["think"]["per"][sid].get("f1_segment_score", 0)
+        n_f1 = deep_data["nothink"]["per"][sid].get("f1_segment_score", 0)
         cfg = sample_config(tp) or sample_config(np_) or "?"
-        long_output_rows.append((max(tc, nc), tc, nc, cfg, sid))
-    long_output_rows.sort(reverse=True)
-    for max_c, tc, nc, cfg, sid in long_output_rows[:10]:
-        parts.append(render_sample_card(sid, include_predictions=True, badge_label=cfg))
+        long_gt_rows.append({
+            "sid": sid, "cfg": cfg, "gt_chars": gt_chars,
+            "t_f1": t_f1, "n_f1": n_f1, "delta": t_f1 - n_f1,
+        })
+
+    long_gt_rows.sort(key=lambda x: -x["gt_chars"])
+    pool = long_gt_rows[:TAB6_LONG_GT_POOL]
+    pool.sort(key=lambda x: -abs(x["delta"]))
+
+    # Summary table for context
+    parts.append(f"<h3>Selected {TAB6_TOP_N} samples — summary</h3>")
+    parts.append("<table><thead><tr><th>#</th><th>_config</th><th>GT chars</th>"
+                 "<th>no-think f1_seg</th><th>think f1_seg</th><th>Δ</th><th>sample_id</th></tr></thead><tbody>")
+    for i, r in enumerate(pool[:TAB6_TOP_N], 1):
+        d = r["delta"]
+        parts.append(
+            f"<tr><td>{i}</td><td class='lbl'>{html.escape(r['cfg'])}</td>"
+            f"<td>{r['gt_chars']:,}</td>"
+            f"<td>{r['n_f1']:.3f}</td><td>{r['t_f1']:.3f}</td>"
+            f"<td><span class='{color_for_delta(d)}'>{d:+.3f}</span></td>"
+            f"<td class='lbl'>{html.escape(r['sid'][:18])}…</td></tr>"
+        )
+    parts.append("</tbody></table>")
+
+    for r in pool[:TAB6_TOP_N]:
+        parts.append(render_sample_card(r["sid"], include_predictions=True, badge_label=r["cfg"]))
 
     parts.append("</div>")  # /#tab6
 
