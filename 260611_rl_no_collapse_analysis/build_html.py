@@ -573,11 +573,19 @@ def _best_of_n(rows: list[dict], metric: str = "score") -> dict | None:
     return max(rows, key=lambda r: float(r.get(metric, 0) or 0))
 
 
-def collect_paired(steps: list[int] | None = None) -> tuple[list[dict], dict[int, dict[str, float]]]:
-    """For each step in `steps` (default TREND_STEPS), pair best-of-8 think vs best-of-8 nothink per sample_id.
+def _mean(xs: list[float]) -> float:
+    return sum(xs) / len(xs) if xs else 0.0
+
+
+def collect_paired(steps: list[int] | None = None, mode: str = "max") -> tuple[list[dict], dict[int, dict[str, float]]]:
+    """For each step in `steps` (default TREND_STEPS), pair think vs nothink rollouts per sample_id.
+    mode='max'  → best-of-8 vs best-of-8 by `score` (single rollout per side).
+    mode='mean' → mean-of-8 metrics; pattern hit rate = fraction of 8 rollouts hitting each pattern.
     Returns (pairs, step_pattern_rate)."""
     if steps is None:
         steps = TREND_STEPS
+    if mode not in ("max", "mean"):
+        raise ValueError(f"unknown mode {mode!r}")
     pairs: list[dict] = []
     step_pattern_rate: dict[int, dict[str, float]] = {}
     for step in steps:
@@ -585,7 +593,6 @@ def collect_paired(steps: list[int] | None = None) -> tuple[list[dict], dict[int
         nothink_rows = load_step(step, NOTHINK_ROLLOUT_DIR)
         if not think_rows or not nothink_rows:
             continue
-        # group by sample_id
         think_by_id: dict[str, list[dict]] = defaultdict(list)
         nothink_by_id: dict[str, list[dict]] = defaultdict(list)
         for r in think_rows:
@@ -593,51 +600,72 @@ def collect_paired(steps: list[int] | None = None) -> tuple[list[dict], dict[int
         for r in nothink_rows:
             nothink_by_id[r["sample_id"]].append(r)
         shared = set(think_by_id) & set(nothink_by_id)
-        step_hits: dict[str, int] = {n: 0 for n in PATTERN_ORDER}
+        step_pattern_acc: dict[str, float] = {n: 0.0 for n in PATTERN_ORDER}
         step_n_pairs = 0
         for sid in shared:
-            t = _best_of_n(think_by_id[sid], "score")
-            nt = _best_of_n(nothink_by_id[sid], "score")
-            if t is None or nt is None:
+            t_rollouts = think_by_id[sid]
+            nt_rollouts = nothink_by_id[sid]
+            if not t_rollouts or not nt_rollouts:
                 continue
-            t_out = t.get("output") or ""
-            nt_out = nt.get("output") or ""
-            t_pre = pre_think(t_out)
-            t_words = len(t_pre.split())
-            nt_words = len((nt_out or "").split())
-            t_pat = detect_patterns(t_pre)
-            t_cnt = count_patterns(t_pre)
-            for name in PATTERN_ORDER:
-                step_hits[name] += int(t_pat[name])
+            # think-side pattern hits (per-rollout binary), aggregated
+            t_pre_list = [pre_think(r.get("output") or "") for r in t_rollouts]
+            t_pat_list = [detect_patterns(p) for p in t_pre_list]
+            t_word_list = [len(p.split()) for p in t_pre_list]
+            nt_word_list = [len((r.get("output") or "").split()) for r in nt_rollouts]
+
+            def _metric(rows: list[dict], key: str) -> float:
+                if mode == "max":
+                    return max(float(r.get(key, 0) or 0) for r in rows)
+                return _mean([float(r.get(key, 0) or 0) for r in rows])
+
+            if mode == "max":
+                # pick the best think rollout by score, take its patterns/words
+                best_idx = max(range(len(t_rollouts)),
+                               key=lambda i: float(t_rollouts[i].get("score", 0) or 0))
+                p_dict: dict[str, float] = {n: float(t_pat_list[best_idx][n]) for n in PATTERN_ORDER}
+                t_words = float(t_word_list[best_idx])
+                # nothink words: take its best rollout too for symmetry
+                best_nt_idx = max(range(len(nt_rollouts)),
+                                  key=lambda i: float(nt_rollouts[i].get("score", 0) or 0))
+                nt_words = float(nt_word_list[best_nt_idx])
+            else:  # mean
+                # pattern hit rate = fraction of 8 rollouts hitting
+                p_dict = {n: _mean([float(d[n]) for d in t_pat_list]) for n in PATTERN_ORDER}
+                t_words = _mean(t_word_list)
+                nt_words = _mean(nt_word_list)
+
+            for n_ in PATTERN_ORDER:
+                step_pattern_acc[n_] += p_dict[n_]
             step_n_pairs += 1
             pairs.append({
                 "step": step,
                 "sample_id": sid,
-                "think_score": float(t.get("score", 0) or 0),
-                "think_unified": float(t.get("unified_score", 0) or 0),
-                "think_f1_seg": float(t.get("f1_segment", 0) or 0),
-                "think_f1_temp": float(t.get("f1_temporal", 0) or 0),
-                "think_format": float(t.get("format_score", 0) or 0),
-                "nothink_score": float(nt.get("score", 0) or 0),
-                "nothink_unified": float(nt.get("unified_score", 0) or 0),
-                "nothink_f1_seg": float(nt.get("f1_segment", 0) or 0),
-                "nothink_f1_temp": float(nt.get("f1_temporal", 0) or 0),
-                "nothink_format": float(nt.get("format_score", 0) or 0),
-                "patterns": t_pat,
-                "counts": t_cnt,
+                "think_score": _metric(t_rollouts, "score"),
+                "think_unified": _metric(t_rollouts, "unified_score"),
+                "think_f1_seg": _metric(t_rollouts, "f1_segment"),
+                "think_f1_temp": _metric(t_rollouts, "f1_temporal"),
+                "think_format": _metric(t_rollouts, "format_score"),
+                "nothink_score": _metric(nt_rollouts, "score"),
+                "nothink_unified": _metric(nt_rollouts, "unified_score"),
+                "nothink_f1_seg": _metric(nt_rollouts, "f1_segment"),
+                "nothink_f1_temp": _metric(nt_rollouts, "f1_temporal"),
+                "nothink_format": _metric(nt_rollouts, "format_score"),
+                "patterns": p_dict,
                 "think_words": t_words,
                 "nothink_words": nt_words,
             })
         if step_n_pairs:
             step_pattern_rate[step] = {
-                n: step_hits[n] / step_n_pairs for n in PATTERN_ORDER
+                n: step_pattern_acc[n] / step_n_pairs for n in PATTERN_ORDER
             }
     return pairs, step_pattern_rate
 
 
-def build_paired_single_step(steps: int | list[int], title_suffix: str | None = None) -> str:
-    """Paired analysis for one step or a contiguous range of steps. Same per-metric tables
-    as build_cognitive_patterns but restricted to the given step(s), no trend SVG."""
+def build_paired_single_step(steps: int | list[int], title_suffix: str | None = None,
+                              mode: str = "max") -> str:
+    """Paired analysis for one step or a contiguous range of steps.
+    mode='max'  → best-of-8 vs best-of-8 by score
+    mode='mean' → mean-of-8 metrics; pattern hit = fraction of 8 rollouts hitting"""
     if isinstance(steps, int):
         step_list = [steps]
         range_label = f"step {steps}"
@@ -647,7 +675,8 @@ def build_paired_single_step(steps: int | list[int], title_suffix: str | None = 
             f"step {step_list[0]}" if len(step_list) == 1
             else f"steps {step_list[0]}-{step_list[-1]} ({len(step_list)} steps: {', '.join(str(s) for s in step_list)})"
         )
-    pairs, _ = collect_paired(step_list)
+    mode_label = "mean-of-8" if mode == "mean" else "best-of-8"
+    pairs, _ = collect_paired(step_list, mode=mode)
     if not pairs:
         return f"<html><body>No paired rollouts at {range_label}.</body></html>"
 
@@ -676,8 +705,8 @@ def build_paired_single_step(steps: int | list[int], title_suffix: str | None = 
             continue
         rows_data = []
         for name in PATTERN_ORDER:
-            tw_pct = 100 * sum(1 for p in tw if p["patterns"][name]) / len(tw)
-            nw_pct = 100 * sum(1 for p in nw if p["patterns"][name]) / len(nw)
+            tw_pct = 100 * sum(p["patterns"][name] for p in tw) / len(tw)
+            nw_pct = 100 * sum(p["patterns"][name] for p in nw) / len(nw)
             rows_data.append((name, tw_pct, nw_pct, tw_pct - nw_pct))
         rows_data.sort(key=lambda x: abs(x[3]), reverse=True)
         body = "".join(
@@ -722,9 +751,9 @@ code{background:#eee;padding:1px 4px;border-radius:3px;font-size:11px}
 
     return f"""<!doctype html>
 <html><head><meta charset='utf-8'>
-<title>{range_label} · think vs nothink paired patterns</title>
+<title>{range_label} · think vs nothink paired patterns ({mode_label})</title>
 <style>{css}</style></head><body>
-<h1>{range_label} · think (hgmkw8sg) vs nothink (vljh1yhk)</h1>
+<h1>{range_label} · think (hgmkw8sg) vs nothink (vljh1yhk) <span style='font-size:14px;color:#666'>[{mode_label}]</span></h1>
 <div class='summary'>
   <div style='margin-bottom:8px'>
     Think: <a href='{WANDB_URL}'>hgmkw8sg</a> · <code>{CKPT_NAME}</code><br>
@@ -742,8 +771,9 @@ code{background:#eee;padding:1px 4px;border-radius:3px;font-size:11px}
   </div>
 </div>
 
-<h2>Per-metric pattern differentials ({range_label})</h2>
-<div class='note'>Best-of-8 think vs best-of-8 nothink (by <code>score</code>) per sample_id, aggregated across {range_label}.
+<h2>Per-metric pattern differentials ({range_label}, {mode_label})</h2>
+<div class='note'>{mode_label} per sample_id, aggregated across {range_label}.
+{("For each prompt: mean of 8 rollouts' metrics; pattern hit rate = fraction of 8 rollouts hitting." if mode == 'mean' else "For each prompt: best-of-8 think (max score) vs best-of-8 nothink.")}
 Bucket prompts by sign of (think − nothink); Δpp &gt; 0 ⇒ pattern more common in think rollout when
 think beats nothink on that metric. No length confound (same prompt, two models).</div>
 {''.join(metric_tables_html)}
@@ -791,8 +821,8 @@ def build_cognitive_patterns() -> str:
             continue
         rows_data = []
         for name in PATTERN_ORDER:
-            tw_pct = 100 * sum(1 for p in tw if p["patterns"][name]) / len(tw)
-            nw_pct = 100 * sum(1 for p in nw if p["patterns"][name]) / len(nw)
+            tw_pct = 100 * sum(p["patterns"][name] for p in tw) / len(tw)
+            nw_pct = 100 * sum(p["patterns"][name] for p in nw) / len(nw)
             rows_data.append((name, tw_pct, nw_pct, tw_pct - nw_pct))
         rows_data.sort(key=lambda x: abs(x[3]), reverse=True)
         body = "".join(
@@ -815,8 +845,8 @@ def build_cognitive_patterns() -> str:
     lose_patterns = []
     if tw_u and nw_u:
         for name in PATTERN_ORDER:
-            tw_pct = 100 * sum(1 for p in tw_u if p["patterns"][name]) / len(tw_u)
-            nw_pct = 100 * sum(1 for p in nw_u if p["patterns"][name]) / len(nw_u)
+            tw_pct = 100 * sum(p["patterns"][name] for p in tw_u) / len(tw_u)
+            nw_pct = 100 * sum(p["patterns"][name] for p in nw_u) / len(nw_u)
             (win_patterns if tw_pct > nw_pct else lose_patterns).append(name)
 
     COLORS = ["#1f77b4", "#d62728", "#2ca02c", "#9467bd", "#ff7f0e",
@@ -978,10 +1008,10 @@ def main():
     (OUT_DIR / "260611_think_vs_nothink_step200.html").write_text(step200_html)
     print(f"wrote step200 paired ({len(step200_html)} bytes)")
 
-    # 4c) step 200–240 range (every-10)
-    range_html = build_paired_single_step([200, 210, 220, 230, 240])
-    (OUT_DIR / "260611_think_vs_nothink_step200_240.html").write_text(range_html)
-    print(f"wrote step200-240 paired ({len(range_html)} bytes)")
+    # 4c) step 200–240 range, mean-of-8 (per-prompt mean over 8 rollouts)
+    range_html = build_paired_single_step([200, 210, 220, 230, 240], mode="mean")
+    (OUT_DIR / "260611_think_vs_nothink_step200_240_mean.html").write_text(range_html)
+    print(f"wrote step200-240 mean-of-8 ({len(range_html)} bytes)")
 
     # 5) wrapper
     early_opts = "\n".join(
@@ -1016,7 +1046,7 @@ code{{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:11px}}
   <button data-tab='late'>3) step {INSPECT_STEP} rollouts</button>
   <button data-tab='pattern'>4) think vs nothink patterns</button>
   <button data-tab='step200'>4b) step 200</button>
-  <button data-tab='step200_240'>4c) steps 200-240</button>
+  <button data-tab='step200_240'>4c) steps 200-240 (mean-of-8)</button>
 </div>
 <div id='tab-early' class='tabpane active'>
   <div style='margin:12px 0;font-size:13px'>
@@ -1032,7 +1062,7 @@ code{{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:11px}}
 <div id='tab-late' class='tabpane'><iframe src='260611_hgmkw8sg_step{INSPECT_STEP}_rollouts.html'></iframe></div>
 <div id='tab-pattern' class='tabpane'><iframe src='260611_think_vs_nothink_patterns.html'></iframe></div>
 <div id='tab-step200' class='tabpane'><iframe src='260611_think_vs_nothink_step200.html'></iframe></div>
-<div id='tab-step200_240' class='tabpane'><iframe src='260611_think_vs_nothink_step200_240.html'></iframe></div>
+<div id='tab-step200_240' class='tabpane'><iframe src='260611_think_vs_nothink_step200_240_mean.html'></iframe></div>
 <script>
 document.querySelectorAll('.toptabs button').forEach(btn => {{
   btn.addEventListener('click', () => {{
