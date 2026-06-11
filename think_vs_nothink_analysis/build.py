@@ -489,6 +489,7 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
 <button class='tab-btn' onclick="showTab('tab3', this)">3. SOCCER deep dive</button>
 <button class='tab-btn' onclick="showTab('tab4', this)">4. SOCCER long videos (≥45 min) — timeline bars</button>
 <button class='tab-btn' onclick="showTab('tab5', this)">5. SOCCER long+dense — timeline bars</button>
+<button class='tab-btn' onclick="showTab('tab6', this)">6. Response length analysis</button>
 </div>
 <div id='tab1' class='tab-content active'>"""
     )
@@ -856,9 +857,10 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
         )
     parts.append("</tbody></table>")
 
-    # ---------------- Section 9: response length scatter ----------------
-    parts.append("<h2>9. Response length vs. f1_segment (scatter)</h2>")
-    parts.append(
+    # ---------------- Section 9 moved to Tab 6 ----------------
+    section9_parts = []  # captured locally, appended into Tab 6 below
+    section9_parts.append("<h2>9. Response length vs. f1_segment (scatter)</h2>")
+    section9_parts.append(
         "<p class='note'>Each point = one sample-pair (sample × (run, step) × mode). "
         "x = JSON char length of <code>response</code> field. y = f1_segment. "
         "Log x-axis. Pooled across all 8 pairs (~9336 points per mode).</p>"
@@ -918,15 +920,15 @@ Data: 8 (run, step) pairs × 1167 samples each on <code>sme_eval_v3.1_fast</code
         for k in counts_per_bin
     }
 
-    parts.append("<h3>9a. Per-side mean f1_segment by response length (line plot)</h3>")
-    parts.append("<div class='chart-wrap' style='width:1100px;height:380px'><canvas id='resp_len_lines'></canvas></div>")
+    section9_parts.append("<h3>9a. Per-side mean f1_segment by response length (line plot)</h3>")
+    section9_parts.append("<div class='chart-wrap' style='width:1100px;height:380px'><canvas id='resp_len_lines'></canvas></div>")
 
-    parts.append("<h3>9b. Sample distribution per char-length bin (hanging bars)</h3>")
-    parts.append(
+    section9_parts.append("<h3>9b. Sample distribution per char-length bin (hanging bars)</h3>")
+    section9_parts.append(
         "<p class='note'>Density indicator for 9a. y-axis reversed (zero at top → bars hang downward). "
         "Bin labels are the same as 9a's log buckets.</p>"
     )
-    parts.append("<div class='chart-wrap' style='width:1100px;height:260px'><canvas id='resp_len_hist'></canvas></div>")
+    section9_parts.append("<div class='chart-wrap' style='width:1100px;height:260px'><canvas id='resp_len_hist'></canvas></div>")
 
     # Close Tab 1
     parts.append("</div>")  # /#tab1
@@ -1494,7 +1496,7 @@ over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levens
     deep_t = {p["sample_id"]: p for p in deep_data["think"]["preds"]}
     deep_n = {p["sample_id"]: p for p in deep_data["nothink"]["preds"]}
 
-    def render_sample_card(sid, include_predictions=False):
+    def render_sample_card(sid, include_predictions=False, badge_label="SOCCER"):
         tp = deep_t.get(sid)
         np_ = deep_n.get(sid)
         if tp is None or np_ is None:
@@ -1547,7 +1549,7 @@ over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levens
 
         return f"""<div class='card'>
 <div class='hdr'>
-  <span class='badge'>SOCCER</span>
+  <span class='badge'>{html.escape(badge_label)}</span>
   <span class='lbl'>dur={dur:.0f}s ({dur/60:.1f} min)</span>
   <span>GT segs={len(gt)}</span>
   <span>think f1_seg={t_seg_s:.3f}</span>
@@ -1610,6 +1612,31 @@ over IoU≥{META_IOU_THRESHOLD} matched pairs; numeric/enum exact, string Levens
     for sid, dur, nseg in dense_sids:
         parts.append(render_sample_card(sid, include_predictions=True))
     parts.append("</div>")  # /#tab5
+
+    # ---------------- Tab 6: Response length analysis ----------------
+    parts.append("<div id='tab6' class='tab-content'>")
+    parts.extend(section9_parts)
+
+    # Long-output sample deep dive (run3 step200)
+    parts.append("<h2>Long-output samples — GT vs no-think vs think</h2>")
+    parts.append(
+        f"<p class='note'>Top 10 samples by <code>max(think_chars, nothink_chars)</code> in "
+        f"<code>{html.escape(deep_run)}</code> step {deep_step}. Same timeline + JSON layout as Tab 5.</p>"
+    )
+
+    long_output_rows = []
+    for sid in set(deep_t) & set(deep_n):
+        tp = deep_t[sid]
+        np_ = deep_n[sid]
+        tc = len(json.dumps(tp.get("response"))) if isinstance(tp.get("response"), list) else 0
+        nc = len(json.dumps(np_.get("response"))) if isinstance(np_.get("response"), list) else 0
+        cfg = sample_config(tp) or sample_config(np_) or "?"
+        long_output_rows.append((max(tc, nc), tc, nc, cfg, sid))
+    long_output_rows.sort(reverse=True)
+    for max_c, tc, nc, cfg, sid in long_output_rows[:10]:
+        parts.append(render_sample_card(sid, include_predictions=True, badge_label=cfg))
+
+    parts.append("</div>")  # /#tab6
 
     # Tab switching JS
     parts.append(
