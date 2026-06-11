@@ -783,6 +783,32 @@ think beats nothink on that metric. No length confound (same prompt, two models)
 </body></html>"""
 
 
+def _combine_pattern_pages(top_html: str, bottom_html: str) -> str:
+    """Extract <style> and <body> contents from two standalone HTMLs and stack them
+    in a single document. Used to merge pattern-examples (top) and pattern-trends
+    (bottom) into the wrapper's tab 4."""
+    style_re = re.compile(r"<style[^>]*>(.*?)</style>", re.DOTALL | re.IGNORECASE)
+    body_re = re.compile(r"<body[^>]*>(.*?)</body>", re.DOTALL | re.IGNORECASE)
+    top_styles = "\n".join(m.group(1) for m in style_re.finditer(top_html))
+    bot_styles = "\n".join(m.group(1) for m in style_re.finditer(bottom_html))
+    top_body = body_re.search(top_html).group(1) if body_re.search(top_html) else top_html
+    bot_body = body_re.search(bottom_html).group(1) if body_re.search(bottom_html) else bottom_html
+    return f"""<!doctype html>
+<html><head><meta charset='utf-8'>
+<title>Cognitive patterns — examples + binned trends</title>
+<style>
+{top_styles}
+{bot_styles}
+.combined-divider {{ margin: 56px 0 28px; border: none; border-top: 2px solid #ccc; }}
+.combined-divider-label {{ text-align: center; font-size: 13px; color: #888; margin-top: -18px; background: #fafafa; display: inline-block; padding: 0 16px; position: relative; left: 50%; transform: translateX(-50%); }}
+</style></head><body>
+{top_body}
+<hr class='combined-divider'>
+<div class='combined-divider-label'>↓ pattern trends (20-step bins) ↓</div>
+{bot_body}
+</body></html>"""
+
+
 BIN_WIDTH = 20  # 20-step bins
 
 
@@ -1357,15 +1383,12 @@ def main():
     (OUT_DIR / "260611_think_vs_nothink_step100_200_mean.html").write_text(range_html)
     print(f"wrote step100-200 mean-of-8 (threshold=0.1, {len(range_html)} bytes)")
 
-    # 5) pattern examples (descriptions + regex + real snippets)
+    # 4) Combined "pattern examples + 20-step binned trend lines" for tab 4
     examples_html = build_pattern_examples(step=200)
-    (OUT_DIR / "260611_pattern_examples.html").write_text(examples_html)
-    print(f"wrote pattern_examples ({len(examples_html)} bytes)")
-
-    # 6) binned pattern trend lines (20-step bins, mean-of-8, |Δ|>0.1)
     trend_html = build_binned_pattern_trends(mode="mean", win_threshold=0.1, bin_width=20)
-    (OUT_DIR / "260611_pattern_trends_binned.html").write_text(trend_html)
-    print(f"wrote pattern_trends_binned ({len(trend_html)} bytes)")
+    combined_html = _combine_pattern_pages(examples_html, trend_html)
+    (OUT_DIR / "260611_pattern_examples_and_trends.html").write_text(combined_html)
+    print(f"wrote pattern_examples_and_trends ({len(combined_html)} bytes)")
 
     # 5) wrapper
     early_opts = "\n".join(
@@ -1398,11 +1421,9 @@ code{{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:11px}}
   <button class='active' data-tab='early'>1) early-step rollouts (1-7)</button>
   <button data-tab='sigthink'>2) significant-think (≥{SIG_THINK_WORDS}w)</button>
   <button data-tab='late'>3) step {INSPECT_STEP} rollouts</button>
-  <button data-tab='pattern'>4) think vs nothink patterns</button>
+  <button data-tab='pattern'>4) cognitive patterns (examples + binned trends)</button>
   <button data-tab='step200'>4b) step 200</button>
   <button data-tab='step200_240'>4c) steps 100-200 (mean-of-8, |Δ|&gt;0.1)</button>
-  <button data-tab='examples'>5) pattern examples</button>
-  <button data-tab='trends'>6) pattern trends (20-step bins)</button>
 </div>
 <div id='tab-early' class='tabpane active'>
   <div style='margin:12px 0;font-size:13px'>
@@ -1416,11 +1437,9 @@ code{{background:#f4f4f4;padding:1px 4px;border-radius:3px;font-size:11px}}
 </div>
 <div id='tab-sigthink' class='tabpane'><iframe src='260611_hgmkw8sg_significant_think.html'></iframe></div>
 <div id='tab-late' class='tabpane'><iframe src='260611_hgmkw8sg_step{INSPECT_STEP}_rollouts.html'></iframe></div>
-<div id='tab-pattern' class='tabpane'><iframe src='260611_think_vs_nothink_patterns.html'></iframe></div>
+<div id='tab-pattern' class='tabpane'><iframe src='260611_pattern_examples_and_trends.html'></iframe></div>
 <div id='tab-step200' class='tabpane'><iframe src='260611_think_vs_nothink_step200.html'></iframe></div>
 <div id='tab-step200_240' class='tabpane'><iframe src='260611_think_vs_nothink_step100_200_mean.html'></iframe></div>
-<div id='tab-examples' class='tabpane'><iframe src='260611_pattern_examples.html'></iframe></div>
-<div id='tab-trends' class='tabpane'><iframe src='260611_pattern_trends_binned.html'></iframe></div>
 <script>
 document.querySelectorAll('.toptabs button').forEach(btn => {{
   btn.addEventListener('click', () => {{
