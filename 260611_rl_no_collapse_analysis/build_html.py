@@ -229,16 +229,38 @@ def actual_think_words(output: str) -> int:
     return len(output[:output.find("</think>")].split())
 
 
+PROMPT_MARKER = "Output segments should be based ONLY on the segmentation criterion specified below."
+VIDEO_DURATION_RX = re.compile(r"The video is \d+(?:\.\d+)?\s+seconds long\.\s*")
+
+
 def _render_prompt_tail(input_text: str, max_chars: int = 3000) -> str:
-    """Show the last `max_chars` chars of the input (where the actual question lives),
-    truncating the leading timestamp/system stretch with a marker. HTML-escaped."""
-    if len(input_text) <= max_chars:
-        return html.escape(input_text)
-    cut = len(input_text) - max_chars
-    return (
-        f"<span style='color:#888'>… [{cut} chars truncated above — mostly video timestamps] …</span>\n"
-        + html.escape(input_text[-max_chars:])
-    )
+    """Show only the user instruction portion.
+    Transcript-style prompts: split on PROMPT_MARKER (the line that ends the
+        'Note:' block about audio diarization).
+    Sports-style prompts (no transcript): split on 'The video is N seconds long.'
+        — the actual question follows immediately.
+    Falls back to last max_chars chars when neither marker is found.
+    Also strips the trailing 'assistant\\n<think>' prelude. HTML-escaped output."""
+    # transcript-style first (more specific)
+    idx = input_text.find(PROMPT_MARKER)
+    if idx >= 0:
+        tail = input_text[idx + len(PROMPT_MARKER):]
+    else:
+        # sports-style: split on the LAST occurrence of "The video is N seconds long."
+        matches = list(VIDEO_DURATION_RX.finditer(input_text))
+        if matches:
+            tail = input_text[matches[-1].end():]
+        else:
+            tail = input_text[-max_chars:] if len(input_text) > max_chars else input_text
+            cut = len(input_text) - max_chars
+            return (
+                (f"<span style='color:#888'>… [{cut} chars truncated above — no marker found] …</span>\n"
+                 if cut > 0 else "")
+                + html.escape(tail)
+            )
+    tail = tail.lstrip("\n").rstrip()
+    tail = re.sub(r"\s*assistant\s*<think>\s*$", "", tail).rstrip()
+    return html.escape(tail)
 
 
 def render_sample_card(row: dict, idx: int | None = None) -> str:
@@ -287,7 +309,7 @@ def render_sample_card(row: dict, idx: int | None = None) -> str:
     <span>step: {step}</span>
   </div>
   <div class='metrics'>{metric_html}</div>
-  <details open><summary>input prompt — last {min(len(input_text), 3000)} of {len(input_text)} chars (the actual question; leading timestamps truncated)</summary>
+  <details open><summary>input prompt (user instruction — text after the segmentation-criterion marker)</summary>
     <pre class='input'>{_render_prompt_tail(input_text, 3000)}</pre>
   </details>
   <details open><summary>output (model response)</summary>
