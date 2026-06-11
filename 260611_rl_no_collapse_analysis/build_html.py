@@ -229,6 +229,18 @@ def actual_think_words(output: str) -> int:
     return len(output[:output.find("</think>")].split())
 
 
+def _render_prompt_tail(input_text: str, max_chars: int = 3000) -> str:
+    """Show the last `max_chars` chars of the input (where the actual question lives),
+    truncating the leading timestamp/system stretch with a marker. HTML-escaped."""
+    if len(input_text) <= max_chars:
+        return html.escape(input_text)
+    cut = len(input_text) - max_chars
+    return (
+        f"<span style='color:#888'>… [{cut} chars truncated above — mostly video timestamps] …</span>\n"
+        + html.escape(input_text[-max_chars:])
+    )
+
+
 def render_sample_card(row: dict, idx: int | None = None) -> str:
     sample_id = row.get("sample_id", "?")
     short_id = sample_id.replace("-", "")[:32]
@@ -275,14 +287,14 @@ def render_sample_card(row: dict, idx: int | None = None) -> str:
     <span>step: {step}</span>
   </div>
   <div class='metrics'>{metric_html}</div>
+  <details open><summary>input prompt — last {min(len(input_text), 3000)} of {len(input_text)} chars (the actual question; leading timestamps truncated)</summary>
+    <pre class='input'>{_render_prompt_tail(input_text, 3000)}</pre>
+  </details>
   <details open><summary>output (model response)</summary>
     <pre class='output'>{safe_output}</pre>
   </details>
   <details><summary>ground truth</summary>
     <pre class='gt'>{html.escape(gts)}</pre>
-  </details>
-  <details><summary>input prompt ({len(input_text)} chars)</summary>
-    <pre class='input'>{html.escape(input_text[:4000])}</pre>
   </details>
 </div>"""
 
