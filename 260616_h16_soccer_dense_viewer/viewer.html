@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>H16_SOCCER_DENSE — chapter fixer (Belarus soccer)</title>
+<style>
+  :root { --bg:#0f1115; --panel:#171a21; --line:#2a2f3a; --txt:#e6e8ec; --muted:#9aa3b2;
+          --goal:#22c55e; --flag:#ef4444; --accent:#3b82f6; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--txt); font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif; }
+  header { padding:12px 16px; border-bottom:1px solid var(--line); display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+  header h1 { font-size:15px; margin:0; font-weight:600; }
+  .pill { font-size:12px; color:var(--muted); }
+  .wrap { display:grid; grid-template-columns: 520px 1fr; gap:16px; padding:16px; align-items:start; }
+  video { width:520px; border-radius:8px; background:#000; }
+  .vid-meta { color:var(--muted); font-size:12px; margin-top:6px; }
+  .timeline { position:relative; height:54px; margin:12px 0 4px; background:var(--panel);
+              border:1px solid var(--line); border-radius:6px; overflow:hidden; }
+  .seg { position:absolute; top:0; bottom:0; border-right:1px solid #00000055; cursor:pointer;
+         font-size:9px; color:#0008; overflow:hidden; padding:2px 3px; white-space:nowrap; }
+  .seg.flag { outline:2px solid var(--flag); outline-offset:-2px; z-index:3; }
+  .seg.goal { background:var(--goal)!important; }
+  .playhead { position:absolute; top:0; bottom:0; width:2px; background:#fff; z-index:5; pointer-events:none; }
+  .ticks { display:flex; justify-content:space-between; color:var(--muted); font-size:10px; }
+  table { border-collapse:collapse; width:100%; font-size:12.5px; }
+  th,td { border:1px solid var(--line); padding:4px 6px; text-align:left; vertical-align:top; }
+  th { background:var(--panel); position:sticky; top:0; z-index:2; }
+  tr.flag td { background:#2a1416; }
+  tr.goal td { background:#13261a; }
+  tr.active td { box-shadow: inset 3px 0 0 var(--accent); }
+  input,select,textarea { background:#0c0e12; color:var(--txt); border:1px solid var(--line);
+                          border-radius:4px; padding:3px 5px; font:inherit; width:100%; }
+  textarea { resize:vertical; min-height:34px; }
+  input.t { width:64px; }
+  .num { color:var(--muted); }
+  button { background:var(--accent); color:#fff; border:0; border-radius:6px; padding:6px 11px;
+           font:inherit; cursor:pointer; }
+  button.ghost { background:transparent; border:1px solid var(--line); color:var(--txt); }
+  button.sm { padding:2px 7px; font-size:11px; }
+  button.danger { background:#7f1d1d; }
+  .toolbar { display:flex; gap:8px; flex-wrap:wrap; margin:8px 0; align-items:center; }
+  .legend { display:flex; gap:14px; font-size:12px; color:var(--muted); align-items:center; }
+  .swatch { display:inline-block; width:12px; height:12px; border-radius:3px; vertical-align:-2px; margin-right:4px; }
+  .note { color:var(--muted); font-size:12px; }
+  .right { max-height:calc(100vh - 120px); overflow:auto; }
+  .flagbox { background:#2a1416; border:1px solid var(--flag); border-radius:6px; padding:8px 10px; margin:10px 0; font-size:12.5px; }
+  code { background:#0c0e12; padding:1px 4px; border-radius:3px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>H16_SOCCER_DENSE · chapter fixer</h1>
+  <span class="pill">twelvelabs/sme_eval_v3.1_lia · 1 sample · <span id="chcount"></span> chapters</span>
+  <span class="legend" style="margin-left:auto">
+    <span><span class="swatch" style="background:#ef4444"></span>Dean flagged → should be GOAL</span>
+    <span><span class="swatch" style="background:#22c55e"></span>GOAL</span>
+  </span>
+</header>
+
+<div class="wrap">
+  <div>
+    <video id="v" controls preload="metadata" src="dean-pegasus15-soccer.mp4"></video>
+    <div class="vid-meta">1920×1080 · 25fps · 180.09s · h264 &nbsp;|&nbsp; t=<span id="tnow">0.00</span>s</div>
+    <div class="timeline" id="tl"></div>
+    <div class="ticks"><span>0:00</span><span>1:00</span><span>2:00</span><span>3:00</span></div>
+
+    <div class="flagbox">
+      <b>Dean's report (ground truth = GOAL, Pegasus missed):</b><br/>
+      • <b>Case 1 ~00:04–00:07</b>: keeper dives but misses, ball goes in. Pegasus said <code>SHOT_ON_TARGET</code>/save.<br/>
+      • <b>Case 2 ~02:11</b>: ball occluded then visible entering goal as camera pans. Pegasus said <code>SHOT_OFF_TARGET</code>/wide.
+    </div>
+    <div class="note">Click a timeline segment or table row to seek. Use <b>⟕ start</b>/<b>end ⟖</b> to set times to the current playhead.</div>
+  </div>
+
+  <div class="right">
+    <div class="toolbar">
+      <button id="exportBtn">⬇ Download corrected chapters.json</button>
+      <button class="ghost" id="copyBtn">Copy chapters JSON</button>
+      <button class="ghost" id="addBtn">+ Add chapter</button>
+      <span class="note" id="status"></span>
+    </div>
+    <table id="tbl">
+      <thead><tr>
+        <th>#</th><th>start</th><th>end</th><th>event_type</th><th>playback</th>
+        <th>match_start</th><th>match_end</th><th>description</th><th>players</th><th></th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+const DURATION = 180.09;
+const EVENT_ENUM = ["GOAL","SHOT_ON_TARGET","SHOT_OFF_TARGET","HEADER","SAVE","FREE_KICK","CORNER_KICK","PENALTY_KICK","COUNTER_ATTACK","PASS","DRIBBLE","SUBSTITUTION","FOUL","YELLOW_CARD","RED_CARD","OFFSIDE","VAR_REVIEW","STOPPAGE_TIME","HYDRATION_BREAK","EXTRA_TIME","PENALTY_SHOOT_OUT","CELEBRATION"];
+const PLAYBACK_ENUM = ["LIVE_GAMEPLAY","REPLAY"];
+
+// Pegasus H16_soccer_events (placeholder GT). _dean = Dean flagged this window as a missed GOAL.
+let chapters = [
+ {start_time:0,end_time:7,event_type:"SHOT_ON_TARGET",playback_status:"LIVE_GAMEPLAY",match_start_time:"00:00",match_end_time:"00:07",description:"A player in a black jersey receives a pass and shoots towards the goal. The goalkeeper makes a diving save to his left, preventing a goal.",player_names:[],_dean:true},
+ {start_time:7,end_time:34,event_type:"SAVE",playback_status:"LIVE_GAMEPLAY",match_start_time:"00:07",match_end_time:"00:34",description:"The goalkeeper restarts play with a kick. A player in a black jersey intercepts the ball and takes a shot, which the goalkeeper saves again. The referee then signals for a foul.",player_names:[]},
+ {start_time:34,end_time:43,event_type:"PASS",playback_status:"LIVE_GAMEPLAY",match_start_time:"00:34",match_end_time:"00:43",description:"Following the foul, a player in a black jersey takes a free kick, passing the ball to a teammate who then kicks it out of bounds.",player_names:[]},
+ {start_time:43,end_time:54,event_type:"DRIBBLE",playback_status:"LIVE_GAMEPLAY",match_start_time:"00:43",match_end_time:"00:54",description:"A player in a pink bib dribbles the ball down the field, maneuvering past a defender in a black jersey before passing to a teammate.",player_names:[]},
+ {start_time:54,end_time:64,event_type:"FOUL",playback_status:"LIVE_GAMEPLAY",match_start_time:"00:54",match_end_time:"01:04",description:"A player in a pink bib is tackled by a player in a black jersey. The player in pink falls to the ground and appears to be injured.",player_names:[]},
+ {start_time:64,end_time:71,event_type:"SHOT_OFF_TARGET",playback_status:"LIVE_GAMEPLAY",match_start_time:"01:04",match_end_time:"01:11",description:"A player in a black jersey dribbles towards the goal and takes a shot, but the ball goes wide of the target.",player_names:[]},
+ {start_time:71,end_time:81,event_type:"DRIBBLE",playback_status:"LIVE_GAMEPLAY",match_start_time:"01:11",match_end_time:"01:21",description:"A player in a pink bib dribbles the ball down the sideline, evading a defender before passing to a teammate.",player_names:[]},
+ {start_time:81,end_time:87,event_type:"SHOT_OFF_TARGET",playback_status:"LIVE_GAMEPLAY",match_start_time:"01:21",match_end_time:"01:27",description:"A player in a pink bib takes a long shot from outside the penalty area, but the ball goes over the crossbar.",player_names:[]},
+ {start_time:87,end_time:101,event_type:"PASS",playback_status:"LIVE_GAMEPLAY",match_start_time:"01:27",match_end_time:"01:41",description:"Players in pink bibs pass the ball amongst themselves, trying to build an attack. A player in a black jersey intercepts a pass.",player_names:[]},
+ {start_time:101,end_time:108,event_type:"FOUL",playback_status:"LIVE_GAMEPLAY",match_start_time:"01:41",match_end_time:"01:48",description:"A player in a pink bib dribbles towards the goal and is fouled by a player in a black jersey, who slides in and takes him down.",player_names:[]},
+ {start_time:108,end_time:118,event_type:"PASS",playback_status:"LIVE_GAMEPLAY",match_start_time:"01:48",match_end_time:"01:58",description:"Players in black jerseys pass the ball around the midfield, looking for an opening in the defense.",player_names:[]},
+ {start_time:118,end_time:132,event_type:"SHOT_OFF_TARGET",playback_status:"LIVE_GAMEPLAY",match_start_time:"01:58",match_end_time:"02:12",description:"A player in a black jersey dribbles past a defender and takes a shot, but the ball goes wide of the goal.",player_names:[],_dean:true},
+ {start_time:132,end_time:148,event_type:"PASS",playback_status:"LIVE_GAMEPLAY",match_start_time:"02:12",match_end_time:"02:28",description:"Players in pink bibs pass the ball around, trying to create a scoring opportunity. A player in a black jersey intercepts a pass and clears the ball.",player_names:[]},
+ {start_time:148,end_time:158,event_type:"PASS",playback_status:"LIVE_GAMEPLAY",match_start_time:"02:28",match_end_time:"02:38",description:"Players in pink bibs pass the ball amongst themselves, trying to maintain possession.",player_names:[]},
+ {start_time:158,end_time:170,event_type:"PASS",playback_status:"LIVE_GAMEPLAY",match_start_time:"02:38",match_end_time:"02:50",description:"The goalkeeper kicks the ball downfield. A player in a pink bib receives the ball and passes it to a teammate.",player_names:[]},
+ {start_time:170,end_time:180,event_type:"PASS",playback_status:"LIVE_GAMEPLAY",match_start_time:"02:50",match_end_time:"03:00",description:"A player in a green jersey passes the ball to a teammate in a white jersey, who then dribbles down the field.",player_names:[]},
+];
+
+const v = document.getElementById('v');
+const tl = document.getElementById('tl');
+const tbody = document.querySelector('#tbl tbody');
+const COLORS = {GOAL:'#22c55e',SHOT_ON_TARGET:'#f59e0b',SHOT_OFF_TARGET:'#a16207',SAVE:'#06b6d4',FOUL:'#ef4444',PASS:'#475569',DRIBBLE:'#6366f1',HEADER:'#ec4899'};
+let activeIdx = -1;
+
+function fmt(t){ const m=Math.floor(t/60), s=Math.floor(t%60); return m+':'+String(s).padStart(2,'0'); }
+
+function renderTimeline(){
+  tl.innerHTML='';
+  chapters.forEach((c,i)=>{
+    const d=document.createElement('div');
+    d.className='seg'+(c._dean?' flag':'')+(c.event_type==='GOAL'?' goal':'');
+    d.style.left=(c.start_time/DURATION*100)+'%';
+    d.style.width=((c.end_time-c.start_time)/DURATION*100)+'%';
+    d.style.background=COLORS[c.event_type]||'#334155';
+    d.title=`#${i} ${c.event_type} ${c.start_time}-${c.end_time}s`;
+    d.textContent=c.event_type;
+    d.onclick=()=>{ v.currentTime=c.start_time; setActive(i); };
+    tl.appendChild(d);
+  });
+  const ph=document.createElement('div'); ph.className='playhead'; ph.id='ph'; tl.appendChild(ph);
+}
+
+function renderTable(){
+  tbody.innerHTML='';
+  chapters.forEach((c,i)=>{
+    const tr=document.createElement('tr');
+    tr.className=(c._dean?'flag':'')+(c.event_type==='GOAL'?' goal':'');
+    tr.dataset.i=i;
+    const opt=(arr,val)=>arr.map(o=>`<option ${o===val?'selected':''}>${o}</option>`).join('');
+    tr.innerHTML=`
+      <td class="num">${i}${c._dean?' 🚩':''}</td>
+      <td><input class="t" type="number" step="0.1" value="${c.start_time}" data-k="start_time"></td>
+      <td><input class="t" type="number" step="0.1" value="${c.end_time}" data-k="end_time"></td>
+      <td><select data-k="event_type">${opt(EVENT_ENUM,c.event_type)}</select></td>
+      <td><select data-k="playback_status">${opt(PLAYBACK_ENUM,c.playback_status)}</select></td>
+      <td><input value="${c.match_start_time||''}" data-k="match_start_time"></td>
+      <td><input value="${c.match_end_time||''}" data-k="match_end_time"></td>
+      <td><textarea data-k="description">${(c.description||'').replace(/</g,'&lt;')}</textarea></td>
+      <td><input value="${(c.player_names||[]).join(', ')}" data-k="player_names"></td>
+      <td>
+        <button class="sm" data-act="seek">▶</button>
+        <button class="sm ghost" data-act="setstart">⟕</button>
+        <button class="sm ghost" data-act="setend">⟖</button>
+        <button class="sm" data-act="goal" title="set GOAL">G</button>
+        <button class="sm danger" data-act="del">✕</button>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('chcount').textContent=chapters.length;
+}
+
+tbody.addEventListener('input', e=>{
+  const tr=e.target.closest('tr'); if(!tr) return;
+  const i=+tr.dataset.i, k=e.target.dataset.k; if(!k) return;
+  let val=e.target.value;
+  if(k==='start_time'||k==='end_time') val=parseFloat(val);
+  if(k==='player_names') val=val.split(',').map(s=>s.trim()).filter(Boolean);
+  chapters[i][k]=val;
+  if(k==='event_type'){ renderTimeline(); tr.className=(chapters[i]._dean?'flag':'')+(val==='GOAL'?' goal':''); }
+  if(k==='start_time'||k==='end_time') renderTimeline();
+  markDirty();
+});
+
+tbody.addEventListener('click', e=>{
+  const b=e.target.closest('button'); if(!b) return;
+  const tr=e.target.closest('tr'); const i=+tr.dataset.i; const act=b.dataset.act;
+  if(act==='seek'){ v.currentTime=chapters[i].start_time; setActive(i); }
+  if(act==='setstart'){ chapters[i].start_time=+v.currentTime.toFixed(2); renderTable(); renderTimeline(); markDirty(); }
+  if(act==='setend'){ chapters[i].end_time=+v.currentTime.toFixed(2); renderTable(); renderTimeline(); markDirty(); }
+  if(act==='goal'){ chapters[i].event_type='GOAL'; renderTable(); renderTimeline(); markDirty(); }
+  if(act==='del'){ if(confirm('delete chapter #'+i+'?')){ chapters.splice(i,1); renderTable(); renderTimeline(); markDirty(); } }
+});
+
+function setActive(i){
+  activeIdx=i;
+  [...tbody.children].forEach(tr=>tr.classList.toggle('active',+tr.dataset.i===i));
+}
+
+v.addEventListener('timeupdate', ()=>{
+  document.getElementById('tnow').textContent=v.currentTime.toFixed(2);
+  const ph=document.getElementById('ph'); if(ph) ph.style.left=(v.currentTime/DURATION*100)+'%';
+  const i=chapters.findIndex(c=>v.currentTime>=c.start_time && v.currentTime<c.end_time);
+  if(i!==-1 && i!==activeIdx) setActive(i);
+});
+
+function cleanExport(){
+  return chapters.map(c=>{ const {_dean,...rest}=c; rest.start_time=+rest.start_time; rest.end_time=+rest.end_time; return rest; });
+}
+let dirty=false;
+function markDirty(){ dirty=true; document.getElementById('status').textContent='● unsaved edits'; }
+
+document.getElementById('exportBtn').onclick=()=>{
+  const blob=new Blob([JSON.stringify(cleanExport(),null,2)],{type:'application/json'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='chapters_corrected.json'; a.click();
+  document.getElementById('status').textContent='✓ downloaded chapters_corrected.json';
+};
+document.getElementById('copyBtn').onclick=async()=>{
+  await navigator.clipboard.writeText(JSON.stringify(cleanExport(),null,2));
+  document.getElementById('status').textContent='✓ copied to clipboard';
+};
+document.getElementById('addBtn').onclick=()=>{
+  const t=+v.currentTime.toFixed(2);
+  chapters.push({start_time:t,end_time:Math.min(t+5,DURATION),event_type:"GOAL",playback_status:"LIVE_GAMEPLAY",match_start_time:"",match_end_time:"",description:"",player_names:[]});
+  chapters.sort((a,b)=>a.start_time-b.start_time);
+  renderTable(); renderTimeline(); markDirty();
+};
+
+renderTimeline(); renderTable();
+</script>
+</body>
+</html>
