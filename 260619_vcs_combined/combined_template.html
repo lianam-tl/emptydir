@@ -1,0 +1,241 @@
+<!DOCTYPE html><html lang=en><head><meta charset=utf-8>
+<meta name=viewport content="width=device-width, initial-scale=1">
+<title>VCS — Pegasus vs Gemini (combined)</title>
+<style>
+:root{--peg:#3b82f6;--gem:#f59e0b;--p3:#3b82f6;--p6:#a855f7;--bg:#0f1117;--panel:#171a23;--panel2:#1e222d;--border:#2a2f3a;--text:#e8eaf0;--muted:#9aa3b2;}
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.55;font-size:14px}
+.top{position:sticky;top:0;z-index:10;background:var(--panel);border-bottom:1px solid var(--border);padding:10px 24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.top h1{margin:0;font-size:15px;font-weight:700}.top .sp{flex:1}
+.tabs button{background:var(--panel2);color:var(--text);border:1px solid var(--border);padding:8px 14px;cursor:pointer;font-size:13px;font-weight:600}
+.tabs button:first-child{border-radius:8px 0 0 8px}.tabs button:last-child{border-radius:0 8px 8px 0;border-left:none}.tabs button:not(:first-child):not(:last-child){border-left:none}
+.tabs button.on{background:#2d3953;color:#fff;border-color:#3b5273}
+select{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:7px 11px;font-size:13px}
+button.nav{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:7px 11px;font-size:13px;cursor:pointer}button.nav:hover{background:#262b38}
+.seg-toggle button{background:var(--panel2);color:var(--text);border:1px solid var(--border);padding:7px 12px;cursor:pointer;font-size:13px}
+.seg-toggle button:first-child{border-radius:8px 0 0 8px}.seg-toggle button:last-child{border-radius:0 8px 8px 0;border-left:none}.seg-toggle button.on{background:#2d3953;color:#fff;border-color:#3b5273}
+.ctl{position:sticky;top:53px;z-index:9;background:var(--panel);border-bottom:1px solid var(--border);padding:9px 24px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:13px}
+.wrap{max-width:1800px;margin:0 auto;padding:14px 24px 90px}
+.tag{display:inline-block;padding:2px 10px;border-radius:10px;font-size:12px;font-weight:700}
+.peg{background:rgba(59,130,246,.2);color:#9cc0ff}.gem{background:rgba(245,158,11,.2);color:#fbd07a}.p6t{background:rgba(168,85,247,.2);color:#d6b4fb}
+.pill{display:inline-block;background:var(--panel2);border:1px solid var(--border);border-radius:7px;padding:2px 9px;font-size:12px;color:#cdd4e0;font-weight:600}
+.muted{color:var(--muted)}small.mono,.mono{font-family:ui-monospace,Menlo,monospace;color:var(--muted);font-size:12px}
+.chunkbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:4px 0 12px;color:var(--muted);font-size:13px}
+.prompt{background:#11151e;border:1px solid var(--border);border-left:4px solid #6b7280;border-radius:10px;margin:22px 0 0;padding:13px 18px}
+.prompt .lab{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#cbd3e1;margin-bottom:8px}
+.prompt .lab .axn{color:#fff;background:#374151;border-radius:6px;padding:1px 8px;margin-left:4px}
+.axdesc{font-size:13px;color:#d7dce6}
+table.fields{border-collapse:collapse;width:100%;margin:10px 0 2px;font-size:12px}table.fields th,table.fields td{border:1px solid var(--border);padding:5px 8px;text-align:left;vertical-align:top}table.fields th{background:var(--panel2)}
+.answer{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-top:none;border-radius:0 0 10px 10px;margin:0 0 8px}
+.ahead{grid-column:1 / -1;display:grid;grid-template-columns:1fr 1fr;background:var(--panel)}
+.ahead>div{padding:8px 16px;font-weight:700;font-size:13px}
+.col-peg,.col-a{border-left:3px solid var(--peg)!important}.col-gem{border-left:3px solid var(--gem)!important}.col-b{border-left:3px solid var(--p6)!important}
+.gc{padding:8px 12px;border-top:1px solid var(--border)}
+.gc.left{border-right:1px solid var(--border)}
+.gc.empty{background:repeating-linear-gradient(45deg,#12151d,#12151d 8px,#151922 8px,#151922 16px)}
+.item{border:1px solid var(--border);border-radius:8px;background:var(--panel2);overflow:hidden}
+.item .ttl{padding:5px 10px;font-weight:700;font-size:13px;background:#222734;border-bottom:1px solid var(--border)}.item .ttl .count{font-weight:500}
+table.fv{border-collapse:collapse;width:100%;font-size:13px}table.fv td{border-top:1px solid #232836;padding:5px 10px;vertical-align:top}
+table.fv td.fn{width:120px;color:#aeb6c4;font-weight:600;font-family:ui-monospace,Menlo,monospace;font-size:12px;background:#1a1f2a;white-space:nowrap}
+.val .arr div{padding:1px 0}.empty{color:#5b6473}.warn{color:#f6c777;font-weight:600}.count{font-size:12px;color:var(--muted);font-weight:500}
+.timeline{grid-column:1 / -1;padding:10px 16px;border-bottom:1px solid var(--border)}
+.trow{display:flex;align-items:center;gap:8px;margin:3px 0}.trow .lab{width:64px;font-size:11px;color:var(--muted);text-align:right;flex:0 0 64px}
+.bar{position:relative;height:15px;background:#0b0d13;border-radius:4px;flex:1;border:1px solid var(--border)}
+.seg{position:absolute;height:100%;border-radius:2px;opacity:.8}.seg.peg,.seg.a{background:var(--peg)}.seg.gem{background:var(--gem)}.seg.b{background:var(--p6)}
+/* stats */
+h2{font-size:16px;border-left:3px solid #4b5563;padding-left:10px;margin:30px 0 6px}.sub{color:var(--muted);font-size:13px;margin:0 0 12px 13px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:10px 0}
+.kpi{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px 14px}.kpi .v{font-size:22px;font-weight:700}.kpi .l{color:var(--muted);font-size:12px;margin-top:2px}.kpi .d{font-size:12px;margin-top:4px}
+.gpanel{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin:10px 0}.gpanel h3{margin:0 0 10px;font-size:14px}
+table.st{border-collapse:collapse;width:100%;font-size:13px;margin:6px 0}table.st th,table.st td{border:1px solid var(--border);padding:6px 9px;text-align:left;vertical-align:top}table.st th{background:var(--panel2)}table.st td.num,table.st th.num{text-align:right;font-variant-numeric:tabular-nums}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.legend{font-size:12px;color:var(--muted);margin:4px 0 10px}.dot{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:middle}
+.bp{position:relative;height:9px;background:#0b0d13;border-radius:3px;border:1px solid var(--border);margin:2px 0}.bp .fill{position:absolute;height:100%;border-radius:3px;top:0;left:0}
+.barlbl{display:flex;justify-content:space-between;font-size:12px;margin-top:6px}.barlbl .nm{color:#cdd4e0}
+.hbar{display:flex;align-items:center;gap:8px;margin:2px 0;font-size:12px}.hbar .nm{width:130px;flex:0 0 130px;color:#cdd4e0;text-align:right}.hbar .tr{flex:1;display:flex;flex-direction:column;gap:2px}.hbar .row{position:relative;height:13px;background:#0b0d13;border-radius:3px}.hbar .row .f{position:absolute;height:100%;border-radius:3px;left:0}
+.hist{display:flex;align-items:flex-end;gap:1px;height:120px;border-bottom:1px solid var(--border);padding-top:4px}.hist .col{flex:1;display:flex;flex-direction:column-reverse;gap:1px;min-width:0}.hist .col .pp{background:var(--peg);width:100%}.hist .col .gg{background:var(--gem);width:100%;opacity:.85}
+.xax{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:3px}
+.note{background:#11151e;border-left:3px solid #10b981;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13px}.note b{color:#6ee7b7}
+</style></head><body>
+<div class=top>
+  <h1>VCS · Pegasus vs Gemini</h1>
+  <span class=tabs><button id=t0 class=on onclick="setTab(0)">Sample compare (P vs G)</button><button id=t1 onclick="setTab(1)">300s vs 600s</button><button id=t2 onclick="setTab(2)">Statistics</button></span>
+  <span class=sp></span>
+  <span class=muted style="font-size:12px">Gemini shot fields trimmed to match Pegasus (no narrative_descriptor / footage_type)</span>
+</div>
+<div class=ctl id=ctl></div>
+<div class=wrap><div id=chunkmeta class=chunkbar></div><div id=body></div></div>
+<script>
+const SETS=__SETS__, STATS=__STATS__;
+const AX={entity:__AXENTITY__, shot:__AXSHOT__, video:__AXVIDEO__};
+const SETKEYS=Object.keys(SETS);
+let TAB=0;
+// state per tab
+let pg={set:SETKEYS[0],epi:0,chi:0};
+let run={model:'pegasus',epi:0,chi:0};   // uses TV 300s vs TV 600s
+let stat={set:SETKEYS[0]};
+const RUN300='TV 300s', RUN600='TV 600s';
+const THR_ENT=18, THR_SHOT=6;
+const C={p:'#3b82f6',g:'#f59e0b'};
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function mmss(t){if(t==null)return null;const p=String(t).split(':');if(p.length===3)return +p[0]*3600+ +p[1]*60+ +p[2];if(p.length===2)return +p[0]*60+ +p[1];return +t;}
+function ts(s){if(s==null||isNaN(s))return '—';s=Math.round(s);const m=Math.floor(s/60),x=s%60;return m+':'+String(x).padStart(2,'0');}
+const GT={person_entities:'person',character_entities:'character',place_entities:'place',object_entities:'object',concept_entities:'concept',thing_entities:'thing'};
+function gcount(g){return g&&g.entities?Object.values(g.entities).reduce((a,v)=>a+v.length,0):0;}
+function fmtThumb(a){if(!a||!a.length)return '<span class=empty>[]</span>';return `<span class=mono>${ts(a[0])} · y ${(a[1]/1000).toFixed(2)}–${(a[3]/1000).toFixed(2)} · x ${(a[2]/1000).toFixed(2)}–${(a[4]/1000).toFixed(2)}</span>`;}
+function fmtArr(a){if(!a||!a.length)return '<span class=empty>[]</span>';return '<div class=arr>'+a.map(x=>'<div>'+esc(x)+'</div>').join('')+'</div>';}
+function fvTable(title,rows){let h=`<div class=item><div class=ttl>${title}</div><table class=fv>`;for(const [k,v] of rows)h+=`<tr><td class=fn>${esc(k)}</td><td class=val>${v==null||v===''?'<span class=empty>—</span>':v}</td></tr>`;return h+'</table></div>';}
+
+// ---- item builders (return {t,html}) ; gemini SHOT trimmed to pegasus fields ----
+function pegEnt(s){const m=s.metadata;return {t:s.start_time, html:fvTable(`entity <span class=count>[${ts(s.start_time)}–${ts(s.end_time)}]</span>`,[
+  ['start_time',ts(s.start_time)],['end_time',ts(s.end_time)],['canonical_name','<b>'+esc(m.canonical_name)+'</b>'],['entity_type',esc(m.entity_type)],
+  ['description',esc(m.description)],['relationships',fmtArr(m.relationships)],['best_thumbnail',fmtThumb(m.best_thumbnail)],['second_best_thumbnail',fmtThumb(m.second_best_thumbnail)],['third_best_thumbnail',fmtThumb(m.third_best_thumbnail)]])};}
+function gemEnt(e,ty){const th=e.thumbnail;const tv=th&&th.time_mmss?mmss(th.time_mmss):null;
+  const thv=th?`<span class=mono>${th.time_mmss?ts(tv):'—'} · bbox=${th.bbox?esc(JSON.stringify(th.bbox)):'null'}</span>`:'<span class=empty>—</span>';
+  return {t:tv, html:fvTable(`entity${th&&th.time_mmss?' <span class=count>[~'+ts(tv)+']</span>':''}`,[
+   ['entity_type',ty],['canonical_name','<b>'+esc(e.canonical_name)+'</b>'],['description',esc(e.description)],['aliases',fmtArr(e.aliases)],['tags',fmtArr(e.tags)],['thumbnail',thv]])};}
+function pegShot(s){const m=s.metadata;return {t:s.start_time, html:fvTable(`shot <span class=count>[${ts(s.start_time)}–${ts(s.end_time)}]</span>`,[
+  ['start_time',ts(s.start_time)],['end_time',ts(s.end_time)],['shot_type',esc(m.shot_type)],['camera_motion',esc(m.camera_motion)],['camera_angle',esc(m.camera_angle)],['description',esc(m.description)],['entities',fmtArr(m.entities)]])};}
+function gemShot(s){const ents=[];if(s.entities)for(const k in s.entities)for(const e of s.entities[k])ents.push(e.canonical_name+' ('+GT[k]+')');
+  const a=mmss(s.start_time),b=mmss(s.end_time);
+  return {t:a, html:fvTable(`shot <span class=count>[${ts(a)}–${ts(b)}]</span>`,[
+   ['start_time',ts(a)],['end_time',ts(b)],['shot_type',esc(s.shot_type)],['camera_motion',esc(s.camera_motion)],['camera_angle',esc(s.camera_angle)],['description',esc(s.description)],['entities',fmtArr(ents)]])};}
+function pegVid(s,ci){const m=s.metadata;return {t:s.start_time,html:fvTable(`video${ci!=null?' · chunk#'+ci:''} <span class=count>[${ts(s.start_time)}–${ts(s.end_time)}]</span>`,[['start_time',ts(s.start_time)],['end_time',ts(s.end_time)],['title','<b>'+esc(m.title)+'</b>'],['work',esc(m.work)],['description',esc(m.description)]])};}
+function gemVid(g,ci,start){return {t:start,html:fvTable(`video${ci!=null?' · chunk#'+ci:''}`,[['title','<b>'+esc(g.title)+'</b>'],['work',esc(g.work)],['description',esc(g.description)]])};}
+
+function alignByTime(A,B,thr){let i=0,j=0,rows=[];const v=x=>x==null?Infinity:x;
+  while(i<A.length||j<B.length){
+    if(i>=A.length){rows.push([null,B[j++]]);continue;}
+    if(j>=B.length){rows.push([A[i++],null]);continue;}
+    const a=v(A[i].t),b=v(B[j].t);
+    if(Math.abs(a-b)<=thr){rows.push([A[i++],B[j++]]);}else if(a<b){rows.push([A[i++],null]);}else{rows.push([null,B[j++]]);}
+  }return rows;}
+function gridRows(rows,lc,rc){let h='';for(const [a,b] of rows){h+=a?`<div class="gc left ${lc}">${a.html}</div>`:`<div class="gc left ${lc} empty"></div>`;h+=b?`<div class="gc ${rc}">${b.html}</div>`:`<div class="gc ${rc} empty"></div>`;}return h;}
+function promptBlock(n,ax){return `<div class=prompt><div class=lab>Prompt ${n}<span class=axn>${ax}</span> axis</div>${AX[ax]}</div>`;}
+function ahead(la,lb,a,b){return `<div class=ahead><div class="col-${la}">${a}</div><div class="col-${lb}">${b}</div></div>`;}
+function epByLabel(D,l){return D.find(e=>e.label===l);}
+
+// ===== VIEW 0: Pegasus vs Gemini, per chunk =====
+function renderPG(){
+  const D=SETS[pg.set], ep=D[pg.epi], c=ep.chunks[pg.chi], seg=c.pegasus.segments, g=c.gemini, dur=c.chunk_len_sec, base=c.start_sec;
+  document.getElementById('chunkmeta').innerHTML=`<span class=pill>${esc(pg.set)}</span><span class=pill>${esc(ep.label)}</span><span>chunk #${c.chunk_index}/${ep.num_chunks}</span><span>${ts(c.start_sec)}–${ts(c.end_sec)} (len ${ts(dur)})</span><span class=mono>${esc(ep.video_url)}</span>`;
+  let h='';
+  // entity
+  const pe=seg.entity.map(pegEnt);
+  let ge=[];if(g){for(const k in GT)for(const e of g.entities[k]){const it=gemEnt(e,GT[k]);ge.push(it);} ge.sort((x,y)=>(x.t==null?1e9:x.t)-(y.t==null?1e9:y.t));}
+  h+=promptBlock(1,'entity')+`<div class=answer>`+ahead('peg','gem',`<span class="peg tag">Pegasus</span> <span class=count>${pe.length} entities</span>`,`<span class="gem tag">Gemini</span> <span class=count>${g?gcount(g):0} entities${g?'':' · ⚠ null'}</span>`);
+  h+= g?gridRows(alignByTime(pe,ge,THR_ENT),'col-peg','col-gem'):gridRows(pe.map(x=>[x,null]),'col-peg','col-gem');
+  h+=`</div>`;
+  // shot
+  const psh=seg.shot.map(pegShot), gsh=g?g.shots.map(gemShot):[];
+  h+=promptBlock(2,'shot')+`<div class=answer>`+ahead('peg','gem',`<span class="peg tag">Pegasus</span> <span class=count>${psh.length} shots</span>`,`<span class="gem tag">Gemini</span> <span class=count>${gsh.length} shots${g?'':' · ⚠ null'}</span>`);
+  h+=`<div class=timeline><div class=trow><div class=lab>Pegasus</div><div class=bar>`;
+  for(const s of seg.shot){const l=(s.start_time-base)/dur*100,w=(s.end_time-s.start_time)/dur*100;h+=`<div class="seg peg" style="left:${l.toFixed(2)}%;width:${Math.max(w,.2).toFixed(2)}%" title="${ts(s.start_time)}-${ts(s.end_time)}"></div>`;}
+  h+=`</div></div><div class=trow><div class=lab>Gemini</div><div class=bar>`;
+  if(g)for(const s of g.shots){const a=mmss(s.start_time),b=mmss(s.end_time),l=(a-base)/dur*100,w=(b-a)/dur*100;h+=`<div class="seg gem" style="left:${l.toFixed(2)}%;width:${Math.max(w,.2).toFixed(2)}%" title="${ts(a)}-${ts(b)}"></div>`;}
+  h+=`</div></div></div>`;
+  h+= g?gridRows(alignByTime(psh,gsh,THR_SHOT),'col-peg','col-gem'):gridRows(psh.map(x=>[x,null]),'col-peg','col-gem');
+  h+=`</div>`;
+  // video
+  h+=promptBlock(3,'video')+`<div class=answer>`+ahead('peg','gem',`<span class="peg tag">Pegasus</span>`,`<span class="gem tag">Gemini</span>`);
+  const pv=pegVid(seg.video[0]); const gv=g?gemVid(g):null;
+  h+=gridRows([[pv,gv]],'col-peg','col-gem');
+  h+=`</div>`;
+  document.getElementById('body').innerHTML=h;window.scrollTo(0,0);
+}
+
+// ===== VIEW 1: 300s vs 600s, per model, windowed by 600s chunk =====
+function collect(run3,label,axis,ws,we,model){
+  const ep=epByLabel(run3,label); if(!ep)return [];let items=[];
+  for(const c of ep.chunks){ if(c.end_sec<=ws||c.start_sec>=we) continue;
+    if(model==='pegasus'){const seg=c.pegasus.segments;
+      if(axis==='entity')for(const s of seg.entity){const it=pegEnt(s);if(it.t>=ws&&it.t<we)items.push(it);}
+      if(axis==='shot')for(const s of seg.shot){const it=pegShot(s);if(it.t>=ws&&it.t<we)items.push(it);}
+      if(axis==='video')for(const s of seg.video)items.push(pegVid(s,c.chunk_index));
+    }else{const g=c.gemini; if(!g){if(axis==='video')items.push({t:c.start_sec,html:`<div class=item><div class=ttl>chunk#${c.chunk_index}</div><div style=padding:10px><span class=warn>⚠ Gemini null</span></div></div>`});continue;}
+      if(axis==='entity'){for(const k in GT)for(const e of g.entities[k]){const it=gemEnt(e,GT[k]);const tt=it.t==null?c.start_sec:it.t;if(it.t==null||(it.t>=ws&&it.t<we))items.push({t:tt,html:it.html});}}
+      if(axis==='shot')for(const s of g.shots){const it=gemShot(s);if(it.t!=null&&it.t>=ws&&it.t<we)items.push(it);}
+      if(axis==='video')items.push(gemVid(g,c.chunk_index,c.start_sec));
+    }}
+  items.sort((x,y)=>(x.t==null?1e9:x.t)-(y.t==null?1e9:y.t));return items;
+}
+function renderRun(){
+  const D3=SETS[RUN300], D6=SETS[RUN600]; const ep6=D6[run.epi], c6=ep6.chunks[run.chi];
+  const ws=c6.start_sec, we=c6.end_sec, label=ep6.label;
+  const ep3=epByLabel(D3,label); const sub=ep3.chunks.filter(c=>!(c.end_sec<=ws||c.start_sec>=we)).map(c=>'#'+c.chunk_index);
+  document.getElementById('chunkmeta').innerHTML=`<span class=pill>model: ${run.model}</span><span class=pill>${esc(label)}</span><span>600s chunk #${c6.chunk_index}/${ep6.num_chunks}</span><span>window ${ts(ws)}–${ts(we)}</span><span class=muted>↔ 300s chunks ${sub.join(', ')}</span>`;
+  let h='';
+  for(const [n,ax,thr] of [[1,'entity',THR_ENT],[2,'shot',THR_SHOT],[3,'video',1e9]]){
+    const A=collect(D3,label,ax,ws,we,run.model), B=collect(D6,label,ax,ws,we,run.model);
+    h+=promptBlock(n,ax)+`<div class=answer>`+ahead('a','b',`<span class="peg tag">300s run</span> <span class=count>${A.length} ${ax}</span>`,`<span class="p6t tag">600s run</span> <span class=count>${B.length} ${ax}</span>`);
+    if(ax==='shot'){const W=we-ws||1;h+=`<div class=timeline><div class=trow><div class=lab>300s</div><div class=bar>`;for(const it of A){if(it.t==null)continue;h+=`<div class="seg a" style="left:${Math.max(0,(it.t-ws)/W*100).toFixed(2)}%;width:1.5px" title="${ts(it.t)}"></div>`;}h+=`</div></div><div class=trow><div class=lab>600s</div><div class=bar>`;for(const it of B){if(it.t==null)continue;h+=`<div class="seg b" style="left:${Math.max(0,(it.t-ws)/W*100).toFixed(2)}%;width:1.5px" title="${ts(it.t)}"></div>`;}h+=`</div></div></div>`;}
+    h+= ax==='video' ? gridRows(A.map((a,i)=>[a,B[i]||null]),'col-a','col-b') : gridRows(alignByTime(A,B,thr),'col-a','col-b');
+    h+=`</div>`;
+  }
+  document.getElementById('body').innerHTML=h;window.scrollTo(0,0);
+}
+
+// ===== VIEW 2: statistics =====
+function nf(x){return x==null?'—':(typeof x==='number'?x.toLocaleString(undefined,{maximumFractionDigits:2}):x);}
+function rat(a,b){return b?a/b:0;}function pct(x){return (x*100).toFixed(0)+'%';}
+function kpi(v,l,d){return `<div class=kpi><div class=v>${v}</div><div class=l>${l}</div>${d?`<div class=d>${d}</div>`:''}</div>`;}
+function barPair(items){const mx=Math.max(...items.flatMap(i=>[i.p||0,i.g||0]),1);let h='';for(const it of items){const f=it.fmt||(x=>nf(x));h+=`<div style="margin:8px 0"><div class=barlbl><span class=nm>${it.nm}</span><span><span class=peg style="padding:0 5px">${f(it.p)}</span> <span class=gem style="padding:0 5px">${f(it.g)}</span></span></div><div class=bp><div class=fill style="background:${C.p};width:${(it.p||0)/mx*100}%"></div></div><div class=bp><div class=fill style="background:${C.g};width:${(it.g||0)/mx*100}%"></div></div></div>`;}return h;}
+function catBars(dp,dg,order){const keys=order||[...new Set([...Object.keys(dp||{}),...Object.keys(dg||{})])];const tp=Object.values(dp||{}).reduce((a,b)=>a+b,0)||1,tg=Object.values(dg||{}).reduce((a,b)=>a+b,0)||1;let h='';for(const k of keys){const pp=((dp&&dp[k])||0)/tp*100,gp=((dg&&dg[k])||0)/tg*100;h+=`<div class=hbar><div class=nm>${k}</div><div class=tr><div class=row><div class=f style="background:${C.p};width:${pp}%"></div></div><div class=row><div class=f style="background:${C.g};width:${gp}%"></div></div></div><div style="width:96px;flex:0 0 96px;font-size:11px;text-align:right"><span class=peg style="padding:0 3px">${pp.toFixed(0)}%</span> <span class=gem style="padding:0 3px">${gp.toFixed(0)}%</span></div></div>`;}return h;}
+function hist(lp,lg,bins,hi,unit){const all=[...lp,...lg];if(!all.length)return '';const w=hi/bins;const cp=Array(bins).fill(0),cg=Array(bins).fill(0);for(const x of lp){if(x<=hi)cp[Math.min(bins-1,Math.floor(x/w))]++;}for(const x of lg){if(x<=hi)cg[Math.min(bins-1,Math.floor(x/w))]++;}const sp=lp.length||1,sg=lg.length||1;const fp=cp.map(c=>c/sp),fg=cg.map(c=>c/sg);const mx=Math.max(...fp,...fg,0.01);let cols='';for(let i=0;i<bins;i++)cols+=`<div class=col title="${(i*w).toFixed(0)}-${((i+1)*w).toFixed(0)}${unit}: P ${(fp[i]*100).toFixed(0)}% / G ${(fg[i]*100).toFixed(0)}%"><div class=pp style="height:${fp[i]/mx*100}%"></div><div class=gg style="height:${fg[i]/mx*100}%"></div></div>`;return `<div class=hist>${cols}</div><div class=xax><span>0</span><span>${(hi/2).toFixed(0)}${unit}</span><span>${hi.toFixed(0)}${unit}</span></div>`;}
+function legend(){return `<div class=legend><span class=dot style="background:${C.p}"></span>Pegasus &nbsp; <span class=dot style="background:${C.g}"></span>Gemini</div>`;}
+function dRow(name,P,G){return `<tr><td>${name}</td><td class=num>${nf(P.n)}</td><td class=num>${nf(P.mean)}</td><td class=num>${nf(P.median)}</td><td class=num>${nf(P.p10)}</td><td class=num>${nf(P.p90)}</td><td class=num>${nf(P.max)}</td><td class=num>${nf(G.n)}</td><td class=num>${nf(G.mean)}</td><td class=num>${nf(G.median)}</td><td class=num>${nf(G.p10)}</td><td class=num>${nf(G.p90)}</td><td class=num>${nf(G.max)}</td></tr>`;}
+function renderStats(){
+  const S=STATS[stat.set],P=S.P,G=S.G,M=S.meta;const mins=M.total_video_sec/60;const gmins=mins*rat(M.n_chunks_gem,M.n_chunks);
+  document.getElementById('chunkmeta').innerHTML='';
+  let h=`<h2>Overview <span class=muted style="font-weight:400;font-size:13px">· ${esc(stat.set)}</span></h2><div class=sub>${M.n_chunks} chunks (Gemini output on ${M.n_chunks_gem}) · ${(M.total_video_sec/60).toFixed(0)} min of video</div>`;
+  h+=`<div class=cards>${kpi(nf(P.shot_n),'Pegasus shots',`<span class=peg>${(P.shot_n/mins).toFixed(1)}/min</span>`)}${kpi(nf(G.shot_n),'Gemini shots',`<span class=gem>${(G.shot_n/gmins).toFixed(1)}/min</span>`)}${kpi(nf(P.ent_n),'Pegasus entities',`<span class=peg>${(P.ent_n/mins).toFixed(1)}/min</span>`)}${kpi(nf(G.ent_n),'Gemini entities',`<span class=gem>${(G.ent_n/gmins).toFixed(1)}/min</span>`)}${kpi(nf(P.shot_dur.mean)+'s','Pegasus avg shot')}${kpi(nf(G.shot_dur.mean)+'s','Gemini avg shot')}</div>`;
+  h+=`<h2>1 · Segment counts</h2><div class=grid2><div class=gpanel><h3>Totals & density</h3>${legend()}${barPair([{nm:'shots',p:P.shot_n,g:G.shot_n},{nm:'entities',p:P.ent_n,g:G.ent_n},{nm:'shots / min',p:P.shot_n/mins,g:G.shot_n/gmins,fmt:x=>x.toFixed(1)},{nm:'entities / min',p:P.ent_n/mins,g:G.ent_n/gmins,fmt:x=>x.toFixed(1)},{nm:'relationships',p:P.ent_rel,g:G.rel_n}])}</div>`;
+  h+=`<div class=gpanel><h3>Per-episode (shots / entities)</h3><table class=st><tr><th>episode</th><th class=num>P shot</th><th class=num>G shot</th><th class=num>P ent</th><th class=num>G ent</th></tr>`;
+  for(const ep of S.episodes){let ps=0,gs=0,pe=0,ge=0;for(const c of ep.chunks){ps+=c.p_shot;pe+=c.p_ent;if(c.g_shot!=null){gs+=c.g_shot;ge+=c.g_ent;}}h+=`<tr><td>${esc(ep.label)}</td><td class=num>${ps}</td><td class=num>${gs}</td><td class=num>${pe}</td><td class=num>${ge}</td></tr>`;}
+  h+=`</table></div></div>`;
+  h+=`<h2>2 · Meta value lengths (chars)</h2><table class=st><tr><th rowspan=2>field</th><th colspan=6 style="text-align:center">Pegasus</th><th colspan=6 style="text-align:center">Gemini</th></tr><tr><th class=num>n</th><th class=num>mean</th><th class=num>med</th><th class=num>p10</th><th class=num>p90</th><th class=num>max</th><th class=num>n</th><th class=num>mean</th><th class=num>med</th><th class=num>p10</th><th class=num>p90</th><th class=num>max</th></tr>${dRow('shot.description',P.shot_desc,G.shot_desc)}${dRow('entity.description',P.ent_desc,G.ent_desc)}${dRow('video.description',P.vid_desc,G.vid_desc)}${dRow('video.title',P.vid_title,G.vid_title)}</table>`;
+  h+=`<div class=grid2><div class=gpanel><h3>shot.description length</h3>${legend()}${hist(P.shot_desc_list,G.shot_desc_list,30,400,'')}<div class=legend>chars (cap 400)</div></div><div class=gpanel><h3>entity.description length</h3>${legend()}${hist(P.ent_desc_list,G.ent_desc_list,30,700,'')}<div class=legend>chars (cap 700)</div></div></div>`;
+  h+=`<h2>3 · Segment durations (s)</h2><table class=st><tr><th rowspan=2>segment</th><th colspan=6 style="text-align:center">Pegasus</th><th colspan=6 style="text-align:center">Gemini</th></tr><tr><th class=num>n</th><th class=num>mean</th><th class=num>med</th><th class=num>p10</th><th class=num>p90</th><th class=num>max</th><th class=num>n</th><th class=num>mean</th><th class=num>med</th><th class=num>p10</th><th class=num>p90</th><th class=num>max</th></tr>${dRow('shot',P.shot_dur,G.shot_dur)}${dRow('entity segment',P.ent_dur,{n:0})}</table>`;
+  h+=`<div class=gpanel><h3>shot duration distribution</h3>${legend()}${hist(P.shot_dur_list,G.shot_dur_list,30,30,'s')}<div class=legend>seconds (cap 30s)</div></div>`;
+  h+=`<h2>4 · Cinematography labels (share of shots)</h2><div class=grid3><div class=gpanel><h3>shot_type</h3>${legend()}${catBars(P.shot_type,G.shot_type)}</div><div class=gpanel><h3>camera_motion</h3>${legend()}${catBars(P.cam_motion,G.cam_motion)}</div><div class=gpanel><h3>camera_angle</h3>${legend()}${catBars(P.cam_angle,G.cam_angle)}</div></div>`;
+  const ps=rat(P.cam_motion.static||0,Object.values(P.cam_motion).reduce((a,b)=>a+b,0)),gs=rat(G.cam_motion.static||0,Object.values(G.cam_motion).reduce((a,b)=>a+b,0));
+  h+=`<div class=note><b>Read:</b> Pegasus labels ${pct(ps)} of shots <small class=mono>static</small> vs Gemini ${pct(gs)}.</div>`;
+  h+=`<h2>5 · Entity typing & naming</h2><div class=grid2><div class=gpanel><h3>entity_type (share)</h3>${legend()}${catBars(P.ent_type,G.ent_type,['person','character','place','object','concept','thing'])}<div class=legend>Pegasus emits person/character only at the entity axis.</div></div><div class=gpanel><h3>generic / descriptive names</h3>${legend()}${barPair([{nm:'generic-label entities',p:P.ent_generic,g:G.ent_generic},{nm:'% generic',p:rat(P.ent_generic,P.ent_n)*100,g:rat(G.ent_generic,G.ent_n)*100,fmt:x=>x.toFixed(1)+'%'}])}</div></div>`;
+  h+=`<h2>6 · Visual grounding</h2><div class=gpanel>${legend()}${barPair([{nm:'entities w/ bbox',p:rat(P.bbox_best,P.ent_n)*100,g:rat(G.thumb_bbox,G.ent_n)*100,fmt:x=>x.toFixed(0)+'%'},{nm:'entities w/ thumbnail time',p:rat(P.bbox_best,P.ent_n)*100,g:rat(G.thumb_time,G.ent_n)*100,fmt:x=>x.toFixed(0)+'%'},{nm:'entities w/ 2nd thumbnail',p:rat(P.bbox_2,P.ent_n)*100,g:0,fmt:x=>x.toFixed(0)+'%'},{nm:'entities w/ 3rd thumbnail',p:rat(P.bbox_3,P.ent_n)*100,g:0,fmt:x=>x.toFixed(0)+'%'}])}<div class=note><b>Read:</b> Pegasus gives a bbox for ${pct(rat(P.bbox_best,P.ent_n))} of entities; Gemini ${pct(rat(G.thumb_bbox,G.ent_n))}.</div></div>`;
+  h+=`<h2>7 · Entities per shot & coverage</h2><div class=grid2><div class=gpanel><h3>entities per shot</h3>${legend()}${barPair([{nm:'mean',p:P.ents_per_shot.mean,g:G.ents_per_shot.mean},{nm:'median',p:P.ents_per_shot.median,g:G.ents_per_shot.median},{nm:'p90',p:P.ents_per_shot.p90,g:G.ents_per_shot.p90}])}</div><div class=gpanel><h3>shot coverage of chunk</h3>${legend()}${barPair([{nm:'mean coverage',p:P.shot_cov.mean,g:G.shot_cov.mean,fmt:x=>x.toFixed(0)+'%'},{nm:'min',p:P.shot_cov.min,g:G.shot_cov.min,fmt:x=>x.toFixed(0)+'%'}])}</div></div>`;
+  h+=`<div class=note><b>Takeaways:</b> Gemini = more/shorter shots, ~${(P.shot_desc.mean/G.shot_desc.mean).toFixed(1)}× shorter shot descriptions, ~${pct(rat(G.thumb_bbox,G.ent_n))} bbox grounding, ${M.n_chunks-M.n_chunks_gem}/${M.n_chunks} null chunks. Pegasus = fewer/longer richly-described shots, ${pct(ps)} static, ${pct(rat(P.bbox_best,P.ent_n))} bbox grounding, no failures.</div>`;
+  document.getElementById('body').innerHTML=h;
+}
+
+// ===== controls / router =====
+function opt(v,sel){return `<option value="${v}"${v==sel?' selected':''}>${v}</option>`;}
+function buildCtl(){
+  const ctl=document.getElementById('ctl');
+  if(TAB===0){
+    const D=SETS[pg.set],ep=D[pg.epi];
+    ctl.innerHTML=`<span class=muted>dataset</span><select id=cset>${SETKEYS.map(k=>opt(k,pg.set)).join('')}</select>
+      <button class=nav id=cprev>‹ prev</button><select id=cep>${D.map((e,i)=>`<option value=${i}${i==pg.epi?' selected':''}>${esc(e.label)}</option>`).join('')}</select>
+      <select id=cch>${ep.chunks.map((c,i)=>`<option value=${i}${i==pg.chi?' selected':''}>#${c.chunk_index} · ${ts(c.start_sec)}–${ts(c.end_sec)}${c.gemini?'':' ⚠'}</option>`).join('')}</select><button class=nav id=cnext>next ›</button>`;
+    cset.onchange=()=>{pg.set=cset.value;pg.epi=0;pg.chi=0;buildCtl();renderPG();};
+    cep.onchange=()=>{pg.epi=+cep.value;pg.chi=0;buildCtl();renderPG();};
+    cch.onchange=()=>{pg.chi=+cch.value;renderPG();};
+    cprev.onclick=()=>{if(pg.chi>0)pg.chi--;else if(pg.epi>0){pg.epi--;pg.chi=SETS[pg.set][pg.epi].chunks.length-1;}buildCtl();renderPG();};
+    cnext.onclick=()=>{const D=SETS[pg.set];if(pg.chi<D[pg.epi].chunks.length-1)pg.chi++;else if(pg.epi<D.length-1){pg.epi++;pg.chi=0;}buildCtl();renderPG();};
+  } else if(TAB===1){
+    const D6=SETS[RUN600],ep=D6[run.epi];
+    ctl.innerHTML=`<span class=muted>model</span><span class=seg-toggle><button id=mp class="${run.model=='pegasus'?'on':''}">Pegasus</button><button id=mg class="${run.model=='gemini'?'on':''}">Gemini</button></span>
+      <span class=muted>· TV episodes (300s vs 600s)</span>
+      <button class=nav id=cprev>‹ prev</button><select id=cep>${D6.map((e,i)=>`<option value=${i}${i==run.epi?' selected':''}>${esc(e.label)}</option>`).join('')}</select>
+      <select id=cch>${ep.chunks.map((c,i)=>`<option value=${i}${i==run.chi?' selected':''}>600s #${c.chunk_index} · ${ts(c.start_sec)}–${ts(c.end_sec)}</option>`).join('')}</select><button class=nav id=cnext>next ›</button>`;
+    mp.onclick=()=>{run.model='pegasus';buildCtl();renderRun();};mg.onclick=()=>{run.model='gemini';buildCtl();renderRun();};
+    cep.onchange=()=>{run.epi=+cep.value;run.chi=0;buildCtl();renderRun();};
+    cch.onchange=()=>{run.chi=+cch.value;renderRun();};
+    cprev.onclick=()=>{if(run.chi>0)run.chi--;else if(run.epi>0){run.epi--;run.chi=SETS[RUN600][run.epi].chunks.length-1;}buildCtl();renderRun();};
+    cnext.onclick=()=>{const D=SETS[RUN600];if(run.chi<D[run.epi].chunks.length-1)run.chi++;else if(run.epi<D.length-1){run.epi++;run.chi=0;}buildCtl();renderRun();};
+  } else {
+    ctl.innerHTML=`<span class=muted>dataset</span><select id=cset>${SETKEYS.map(k=>opt(k,stat.set)).join('')}</select>`;
+    cset.onchange=()=>{stat.set=cset.value;renderStats();};
+  }
+}
+function setTab(t){TAB=t;for(let i=0;i<3;i++)document.getElementById('t'+i).classList.toggle('on',i===t);buildCtl();if(t===0)renderPG();else if(t===1)renderRun();else renderStats();}
+buildCtl();renderPG();
+</script></body></html>
