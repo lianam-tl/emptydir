@@ -38,7 +38,7 @@ curl -L -s -X POST http://127.0.0.1:18082/jobs \
   --data-binary @orchestrator_smoke_job.json
 
 Example payload:
-https://github.com/lianam-tl/emptydir/blob/main/260708_pegasus15_sme_persistent_deployment/orchestrator_smoke_job.json
+orchestrator_smoke_job.json in this same repo directory
 
 Poll status:
 
