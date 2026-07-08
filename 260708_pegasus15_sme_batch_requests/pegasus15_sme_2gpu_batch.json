@@ -1,0 +1,88 @@
+{
+  "name": "lia-soccer-mtp-ck2000-pegasus15-sme-2gpu-smoke",
+  "model_deployment_template": {
+    "concurrency": 1,
+    "deploymentMode": "legacy",
+    "env": {
+      "DP": "1",
+      "DTYPE": "bfloat16",
+      "EXTRA_ARGS": "--guided-decoding-backend guidance",
+      "GPU_MEM": "0.85",
+      "MODEL": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/ablation_260416_soccer_clean_filter_low_aug-highres_lr2e-6_qwen3_5_27b_soccer_dc_sme_low_filter_mtp_0513-base/checkpoint-2000-safetensors/",
+      "PEGASUS_VLLM_VIDEO_REQUEST_SEMAPHORE_COUNT": "1",
+      "TP": "2",
+      "VLLM_SPECULATIVE_CONFIG": "{\"method\":\"mtp\",\"num_speculative_tokens\":4}",
+      "VLLM_WORKER_MULTIPROC_METHOD": "spawn"
+    },
+    "gpu": 2,
+    "healthCheckPath": "/health",
+    "healthCheckPort": 8000,
+    "image": "476114115052.dkr.ecr.us-west-2.amazonaws.com/tl-data-training-pegasus-vllm-video:main-fb19772",
+    "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/ablation_260416_soccer_clean_filter_low_aug-highres_lr2e-6_qwen3_5_27b_soccer_dc_sme_low_filter_mtp_0513-base/checkpoint-2000-safetensors/",
+    "port": 8000
+  },
+  "job_requests": [
+    {
+      "request_id": "lia-soccer-mtp-ck2000-pegasus15-sme-2gpu-smoke-001",
+      "job_request": {
+        "pipelineId": "pegasus15-sme",
+        "url": "s3://tl-data-training-pegasus-us-west-2/raw_media/private/entity_coverage_v0_chunks/5m/sport-01/sport-01_chunk_000_0000000000ms_0000180013ms.mp4",
+        "params": {
+          "audio_worker_call_mode": "loadbalancer",
+          "ignore_cache": true,
+          "max_segment_duration": 30,
+          "max_tokens": 8192,
+          "min_segment_duration": 3,
+          "segment_definitions": [
+            {
+              "description": "Find meaningful soccer gameplay segments. For each segment, identify the start and end time in seconds and describe the main event. Focus on possession changes, passes, shots, tackles, fouls, restarts, and important camera-visible game actions.",
+              "fields": [
+                {
+                  "description": "Concise description of the soccer event in this segment.",
+                  "name": "description",
+                  "type": "string"
+                }
+              ],
+              "id": "soccer_events"
+            }
+          ],
+          "summary_prompt": "Summarize the soccer video with focus on game flow, teams, ball movement, scoring chances, fouls, and transitions.",
+          "temperature": 0,
+          "worker_call_mode": "loadbalancer",
+          "worker_type": "vllm-video-v1"
+        }
+      }
+    }
+  ],
+  "capacity_policy": {
+    "node_pool": "b300-pegasus",
+    "placement_policy": "compact_hard_pinning",
+    "min_replicas": 1,
+    "max_replicas": 1
+  },
+  "execution_policy": {
+    "max_in_flight": 1
+  },
+  "lifecycle_policy": {
+    "readiness": {
+      "mode": "partial",
+      "min_ready_replicas": 1
+    },
+    "teardown": {
+      "policy": "immediate"
+    }
+  },
+  "output_policy": {},
+  "options": {
+    "vllm_direct": {}
+  },
+  "metadata": {
+    "batch_name_prefix": "lia-soccer-mtp-ck2000-pegasus15-sme-2gpu-smoke",
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/ablation_260416_soccer_clean_filter_low_aug-highres_lr2e-6_qwen3_5_27b_soccer_dc_sme_low_filter_mtp_0513-base/checkpoint-2000-safetensors/",
+    "owner": "lia",
+    "pipeline_id": "pegasus15-sme",
+    "source": "codex",
+    "gpu_per_replica": 2,
+    "tensor_parallel_size": 2
+  }
+}
