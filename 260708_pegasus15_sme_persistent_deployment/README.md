@@ -14,6 +14,45 @@ TP: 2
 
 This is **one worker pod using two GPUs**, not two separate worker pods.
 
+## Message For Owen
+
+Send this if someone needs to call the deployed Pegasus15 SME API:
+
+```text
+Pegasus15-SME API is called through orchestrator /jobs.
+
+Model worker:
+- pipelineId: pegasus15-sme
+- worker_type: lia-soccer-mtp-ck2000-persistent
+- worker_call_mode: loadbalancer
+- audio_worker_call_mode: loadbalancer
+
+If calling from a laptop, first port-forward orchestrator:
+
+kubectl port-forward -n pegasus-platform svc/orchestrator 18082:8080
+
+Then submit a job:
+
+curl -L -s -X POST http://127.0.0.1:18082/jobs \
+  -H 'Content-Type: application/json' \
+  --data-binary @orchestrator_smoke_job.json
+
+Example payload:
+https://github.com/lianam-tl/emptydir/blob/main/260708_pegasus15_sme_persistent_deployment/orchestrator_smoke_job.json
+
+Poll status:
+
+curl -L -s http://127.0.0.1:18082/jobs/{jobId}
+
+When status becomes completed, fetch output:
+
+curl -L -s http://127.0.0.1:18082/jobs/{jobId}/output
+
+Important: this is not batch-request. Batch-request currently creates and tears down its own model deployment, so for the persistent Pegasus15 SME worker, use /jobs directly.
+
+If the job stays JOB_STATUS_PENDING, the request was accepted but workflow-engine has not started it yet. This usually means workflow-engine is saturated or one of its admission gates is closed.
+```
+
 ## Important
 
 `batch-request` currently creates its own temporary model deployment for each `/batch-runs` request and tears it down at the end. So a new call to:
@@ -183,4 +222,3 @@ kubectl get pods -n pegasus-platform -o wide | rg 'model-lia-soccer-mtp-ck2000-p
 curl -L http://127.0.0.1:18082/jobs/stats
 kubectl get pods -n pegasus-platform -o wide | rg 'workflow-workflow-engine-v1-pegasus'
 ```
-
