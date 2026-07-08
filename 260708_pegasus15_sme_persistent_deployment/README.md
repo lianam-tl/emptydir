@@ -14,6 +14,68 @@ TP: 2
 
 This is **one worker pod using two GPUs**, not two separate worker pods.
 
+## Deployment Flow
+
+There are three separate concepts:
+
+```text
+pipelineId   = pegasus15-sme
+worker_type  = lia-soccer-mtp-ck2000-persistent
+MODEL        = s3://.../checkpoint-2000-safetensors/
+```
+
+- `pipelineId` is the pipeline recipe. It decides which workflow logic runs.
+- `worker_type` is the model worker name. It decides which live model server the pipeline calls.
+- `MODEL` is the checkpoint path loaded inside that model worker.
+
+Deploying this worker means:
+
+1. Register a model record in spec-center with `legacy_model_register.json`.
+2. Mark that model record active with `status_active.json`.
+3. Ask infra-controller to scale that model to one replica with `scale_one.json`.
+4. Wait until Kubernetes shows `model-lia-soccer-mtp-ck2000-persistent-v1-...` as `2/2 Running`.
+5. Submit jobs through orchestrator `/jobs` with `pipelineId: pegasus15-sme` and `worker_type: lia-soccer-mtp-ck2000-persistent`.
+
+In beginner terms:
+
+- spec-center is the registry/address book.
+- infra-controller starts or stops the actual Kubernetes model pod.
+- orchestrator `/jobs` is the API entrypoint users call.
+- workflow-engine later picks up the accepted job and runs the pipeline.
+- the model pod is only one part of the pipeline; it is not the whole pipeline by itself.
+
+## Difference From Generic vLLM Video
+
+This deployment still uses the `vllm-video` worker image internally:
+
+```text
+476114115052.dkr.ecr.us-west-2.amazonaws.com/tl-data-training-pegasus-vllm-video:main-fb19772
+```
+
+The difference is the registered worker identity and the checkpoint it loads.
+
+| Case | `worker_type` | What it calls | Lifecycle |
+| --- | --- | --- | --- |
+| Shared/default vLLM video | `vllm-video-b300` | Existing shared/default vLLM video worker | Managed separately by platform |
+| This deployment | `lia-soccer-mtp-ck2000-persistent` | Our checkpoint-2000 SME worker | Stays alive until manual teardown |
+| Batch-request model deployment | Generated per batch run | Temporary worker for that batch | Batch-request tears it down when done |
+
+So this is not a new pipeline. It is a custom persistent `vllm-video` worker that the existing `pegasus15-sme` pipeline can route to.
+
+To use the deployed checkpoint, the important request field is:
+
+```json
+"worker_type": "lia-soccer-mtp-ck2000-persistent"
+```
+
+If this is changed back to:
+
+```json
+"worker_type": "vllm-video-b300"
+```
+
+then the request uses the shared/default vLLM video worker instead of this checkpoint.
+
 ## Message For Owen
 
 Send this if someone needs to call the deployed Pegasus15 SME API:
