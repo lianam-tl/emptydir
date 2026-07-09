@@ -1,0 +1,28 @@
+{
+  "pipelineId": "pegasus15-sme",
+  "url": "s3://tl-data-training-pegasus-us-west-2/raw_media/private/entity_coverage_v0_chunks/5m/sport-01/sport-01_chunk_000_0000000000ms_0000180013ms.mp4",
+  "params": {
+    "audio_worker_call_mode": "loadbalancer",
+    "ignore_cache": true,
+    "max_segment_duration": 30,
+    "max_tokens": 8192,
+    "min_segment_duration": 3,
+    "segment_definitions": [
+      {
+        "description": "Find meaningful soccer gameplay segments. For each segment, identify the start and end time in seconds and describe the main event. Focus on possession changes, passes, shots, tackles, fouls, restarts, and important camera-visible game actions.",
+        "fields": [
+          {
+            "description": "Concise description of the soccer event in this segment.",
+            "name": "description",
+            "type": "string"
+          }
+        ],
+        "id": "soccer_events"
+      }
+    ],
+    "summary_prompt": "Summarize the soccer video with focus on game flow, teams, ball movement, scoring chances, fouls, and transitions.",
+    "temperature": 0,
+    "worker_call_mode": "loadbalancer",
+    "worker_type": "h0-entity-augment-ck2200"
+  }
+}
