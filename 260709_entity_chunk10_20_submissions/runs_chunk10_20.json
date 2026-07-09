@@ -1,0 +1,32 @@
+[
+  {
+    "label": "chunk10m / Pegasus1.5-2604",
+    "run_id": "24481538-b9e8-42ea-8eac-f1ca950eb392",
+    "batch_id": "batch-d5cef657-bb61-4550-842d-3e58ca02d72a"
+  },
+  {
+    "label": "chunk10m / ff-sft",
+    "run_id": "5fcd57a4-b91d-4236-a666-ca48ec4c30bb",
+    "batch_id": "batch-e74333b7-df7a-4505-ae5e-9cc1bcf7a480"
+  },
+  {
+    "label": "chunk10m / entity-h0-added",
+    "run_id": "8f0af0a6-cb0a-48ed-a1b1-0c0e2c1b5f52",
+    "batch_id": "batch-a3c8bd36-ef1e-488b-9752-94b2ef0494fa"
+  },
+  {
+    "label": "chunk20m / Pegasus1.5-2604",
+    "run_id": "a01106c8-98de-4e8c-90f9-9b4eaf04f909",
+    "batch_id": "batch-149c682e-019d-4536-97ea-9b428453edeb"
+  },
+  {
+    "label": "chunk20m / ff-sft",
+    "run_id": "3287433e-e496-4149-929f-8c671e919d00",
+    "batch_id": "batch-81c8be9e-9353-4ee7-b771-738a11ae568d"
+  },
+  {
+    "label": "chunk20m / entity-h0-added",
+    "run_id": "bb7385f1-90b7-4082-9610-8db349cb63e2",
+    "batch_id": "batch-0f1998b6-29fd-4dca-9359-555201b42632"
+  }
+]
