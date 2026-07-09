@@ -93,6 +93,19 @@ BATCHES: list[dict[str, str]] = [
         "run_id": "fd608426-d4f6-4593-9cac-76adfae1b928",
         "batch_id": "batch-af4b7e69-8e0f-40e8-b9f6-90b85f2cec2e",
     },
+    # Backfill 20260709-115441: chunk20m/chunk45m entity-h0-sme-1300 (grid completion)
+    {
+        "chunk": "chunk20m",
+        "model": "entity-h0-sme-1300",
+        "run_id": "5f581e2d-c08b-4ccb-8082-c2081469404f",
+        "batch_id": "batch-21affe62-cea7-4e61-8acd-01132abc79a5",
+    },
+    {
+        "chunk": "chunk45m",
+        "model": "entity-h0-sme-1300",
+        "run_id": "70d21770-af78-4751-ad6e-d58fd9057e36",
+        "batch_id": "batch-6b20b325-345e-419e-b175-c72d3576b420",
+    },
 ]
 
 
