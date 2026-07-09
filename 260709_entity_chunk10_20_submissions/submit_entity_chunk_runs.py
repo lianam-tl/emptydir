@@ -19,6 +19,7 @@ DATASET_NAME = "twelvelabs/entity_cov_v0_tdf"
 CONFIG_SAMPLE_COUNTS = {
     "chunk_10m": 20,
     "chunk_20m": 13,
+    "chunk_45m": 7,
 }
 
 CHECKPOINTS: list[dict[str, Any]] = [
@@ -122,6 +123,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--base-url", default=DEFAULT_BASE_URL)
     parser.add_argument("--output-dir", type=Path, default=DEFAULT_OUTPUT_DIR)
     parser.add_argument("--timestamp", default=datetime.now().strftime("%Y%m%d-%H%M%S"))
+    parser.add_argument(
+        "--configs",
+        nargs="+",
+        choices=sorted(CONFIG_SAMPLE_COUNTS),
+        default=["chunk_10m", "chunk_20m"],
+    )
     parser.add_argument("--submit", action="store_true")
     return parser.parse_args()
 
@@ -132,7 +139,7 @@ def main() -> None:
     results_path = args.output_dir / "submission_results.jsonl"
 
     payloads: list[tuple[Path, dict[str, Any]]] = []
-    for config_name in CONFIG_SAMPLE_COUNTS:
+    for config_name in args.configs:
         for checkpoint in CHECKPOINTS:
             payload = build_payload(checkpoint, config_name, args.timestamp)
             path = args.output_dir / f"{payload['name']}.json"

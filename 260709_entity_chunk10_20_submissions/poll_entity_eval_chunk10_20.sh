@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# [cc-generated] Poll entity-coverage chunk_10m/chunk_20m eval-service runs.
+# [cc-generated] Poll entity-coverage chunk_10m/chunk_20m/chunk_45m eval-service runs.
 set -uo pipefail
 
 WORK_DIR="$HOME/lia_eval_poll_chunk10_20"
@@ -77,7 +77,7 @@ summary_line() {
   batch_completed=$(jq -r '.completed // 0' <<<"$batch_compact")
   batch_failed=$(jq -r '.failed // 0' <<<"$batch_compact")
   cancelled=$(jq -r '.cancelled // 0' <<<"$batch_compact")
-  printf '[entity-eval chunk10/20] %s: eval=%s %s/%s failed=%s | batch=%s submitted=%s completed=%s failed=%s cancelled=%s | run=%s batch=%s' \
+  printf '[entity-eval chunk10/20/45] %s: eval=%s %s/%s failed=%s | batch=%s submitted=%s completed=%s failed=%s cancelled=%s | run=%s batch=%s' \
     "$label" "$eval_status" "$completed" "$total" "$failed" "$batch_status" "$submitted" "$batch_completed" "$batch_failed" "$cancelled" "$run_id" "$batch_id"
 }
 
@@ -90,7 +90,7 @@ metrics_suffix() {
   fi
 }
 
-post_slack "[entity-eval chunk10/20] started polling six TP=2 runs for Pegasus1.5-2604, ff-sft, entity-h0-added. Poll interval=${POLL_SECONDS}s."
+post_slack "[entity-eval chunk10/20/45] started polling nine TP=2 runs for Pegasus1.5-2604, ff-sft, entity-h0-added. Poll interval=${POLL_SECONDS}s."
 
 loop=0
 while [ "$loop" -lt "$MAX_LOOPS" ]; do
@@ -124,10 +124,10 @@ while [ "$loop" -lt "$MAX_LOOPS" ]; do
   done < <(jq -r '.[] | [.label,.run_id,.batch_id] | @tsv' "$RUNS_JSON")
 
   if [ "$all_terminal" -eq 1 ]; then
-    post_slack "[entity-eval chunk10/20] polling finished; all six tracked runs are terminal."
+    post_slack "[entity-eval chunk10/20/45] polling finished; all nine tracked runs are terminal."
     exit 0
   fi
   sleep "$POLL_SECONDS"
 done
 
-post_slack "[entity-eval chunk10/20] polling stopped after max loops; at least one run is still non-terminal."
+post_slack "[entity-eval chunk10/20/45] polling stopped after max loops; at least one run is still non-terminal."
