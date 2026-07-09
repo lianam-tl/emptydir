@@ -108,6 +108,25 @@ BATCHES: list[dict[str, str]] = [
         "run_id": "c432df9b-61f9-4e3e-baa3-85eb61eeb69e",
         "batch_id": "batch-a3cb9632-41f1-4651-bab3-985ce93667e0",
     },
+    # 20260709-153156: pegasus-15 (kian-kim/soce_rl_260516_all_pair_p15_a1mckpt1000s60_w7030) across all 3 chunks
+    {
+        "chunk": "chunk10m",
+        "model": "pegasus-15",
+        "run_id": "1f643f85-d914-446b-a2fd-303098ac0e0d",
+        "batch_id": "batch-081550ac-e194-4e11-ad04-ca07109428da",
+    },
+    {
+        "chunk": "chunk20m",
+        "model": "pegasus-15",
+        "run_id": "d37fab87-b3d8-4b6e-a8f2-333e793e49fa",
+        "batch_id": "batch-2677c8bf-e279-4ff7-a197-d5abeae6bd72",
+    },
+    {
+        "chunk": "chunk45m",
+        "model": "pegasus-15",
+        "run_id": "0c5c09a1-7859-4be4-8121-39f2bd735f73",
+        "batch_id": "batch-0d9b0c49-05f9-40dc-83bf-344fe1b63e03",
+    },
 ]
 
 

@@ -1,0 +1,260 @@
+recovering 1 batch(es) into /Users/long8v/pegasus-vcs-2339-entity-eval/eval/eval-service/eval_output/ckpt-comparison-20260709-chunk10_20_45-recovered/raw_outputs
+Traceback (most recent call last):
+  File "/Users/long8v/emptydir/260709_entity_chunk_recovery/recover_raw_outputs.py", line 214, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/Users/long8v/emptydir/260709_entity_chunk_recovery/recover_raw_outputs.py", line 194, in main
+    results = [recover_batch(entry, s3_client, executor) for entry in entries]
+               ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/emptydir/260709_entity_chunk_recovery/recover_raw_outputs.py", line 157, in recover_batch
+    kind, detail = future.result()
+                   ~~~~~~~~~~~~~^^
+  File "/Users/long8v/.local/share/uv/python/cpython-3.13.12-macos-aarch64-none/lib/python3.13/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/Users/long8v/.local/share/uv/python/cpython-3.13.12-macos-aarch64-none/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/Users/long8v/.local/share/uv/python/cpython-3.13.12-macos-aarch64-none/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/long8v/emptydir/260709_entity_chunk_recovery/recover_raw_outputs.py", line 132, in download_one
+    s3_client.download_file(parsed.netloc, parsed.path.lstrip("/"), str(target_path))
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/context.py", line 123, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/boto3/s3/inject.py", line 223, in download_file
+    return transfer.download_file(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        bucket=Bucket,
+        ^^^^^^^^^^^^^^
+    ...<3 lines>...
+        callback=Callback,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/boto3/s3/transfer.py", line 484, in download_file
+    future.result()
+    ~~~~~~~~~~~~~^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/s3transfer/futures.py", line 111, in result
+    return self._coordinator.result()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/s3transfer/futures.py", line 287, in result
+    raise self._exception
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/s3transfer/tasks.py", line 272, in _main
+    self._submit(transfer_future=transfer_future, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/s3transfer/download.py", line 359, in _submit
+    response = client.head_object(
+        Bucket=transfer_future.meta.call_args.bucket,
+        Key=transfer_future.meta.call_args.key,
+        **transfer_future.meta.call_args.extra_args,
+    )
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/client.py", line 602, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/context.py", line 123, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/client.py", line 1060, in _make_api_call
+    http, parsed_response = self._make_request(
+                            ~~~~~~~~~~~~~~~~~~^
+        operation_model, request_dict, request_context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/client.py", line 1084, in _make_request
+    return self._endpoint.make_request(operation_model, request_dict)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/endpoint.py", line 119, in make_request
+    return self._send_request(request_dict, operation_model)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/endpoint.py", line 196, in _send_request
+    request = self.create_request(request_dict, operation_model)
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/endpoint.py", line 132, in create_request
+    self._event_emitter.emit(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        event_name,
+        ^^^^^^^^^^^
+        request=request,
+        ^^^^^^^^^^^^^^^^
+        operation_name=operation_model.name,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/hooks.py", line 412, in emit
+    return self._emitter.emit(aliased_event_name, **kwargs)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/hooks.py", line 256, in emit
+    return self._emit(event_name, kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/hooks.py", line 239, in _emit
+    response = handler(**kwargs)
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/signers.py", line 108, in handler
+    return self.sign(operation_name, request)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/signers.py", line 191, in sign
+    auth = self.get_auth_instance(**kwargs)
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/signers.py", line 312, in get_auth_instance
+    frozen_credentials = credentials.get_frozen_credentials()
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/credentials.py", line 697, in get_frozen_credentials
+    self._refresh()
+    ~~~~~~~~~~~~~^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/credentials.py", line 584, in _refresh
+    self._protected_refresh(is_mandatory=is_mandatory_refresh)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/credentials.py", line 600, in _protected_refresh
+    metadata = self._refresh_using()
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/credentials.py", line 750, in fetch_credentials
+    return self._get_cached_credentials()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/credentials.py", line 760, in _get_cached_credentials
+    response = self._get_credentials()
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/credentials.py", line 2317, in _get_credentials
+    token = initial_token_data.get_frozen_token().token
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/tokens.py", line 89, in get_frozen_token
+    self._refresh()
+    ~~~~~~~~~~~~~^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/tokens.py", line 102, in _refresh
+    self._protected_refresh()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/tokens.py", line 129, in _protected_refresh
+    raise TokenRetrievalError(
+    ...<2 lines>...
+    )
+botocore.exceptions.TokenRetrievalError: Error when retrieving token from sso: Token has expired and refresh failed
+recovering 1 batch(es) into /Users/long8v/pegasus-vcs-2339-entity-eval/eval/eval-service/eval_output/ckpt-comparison-20260709-chunk10_20_45-recovered/raw_outputs
+Traceback (most recent call last):
+  File "/Users/long8v/emptydir/260709_entity_chunk_recovery/recover_raw_outputs.py", line 214, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/Users/long8v/emptydir/260709_entity_chunk_recovery/recover_raw_outputs.py", line 194, in main
+    results = [recover_batch(entry, s3_client, executor) for entry in entries]
+               ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/emptydir/260709_entity_chunk_recovery/recover_raw_outputs.py", line 157, in recover_batch
+    kind, detail = future.result()
+                   ~~~~~~~~~~~~~^^
+  File "/Users/long8v/.local/share/uv/python/cpython-3.13.12-macos-aarch64-none/lib/python3.13/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/Users/long8v/.local/share/uv/python/cpython-3.13.12-macos-aarch64-none/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/Users/long8v/.local/share/uv/python/cpython-3.13.12-macos-aarch64-none/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/long8v/emptydir/260709_entity_chunk_recovery/recover_raw_outputs.py", line 132, in download_one
+    s3_client.download_file(parsed.netloc, parsed.path.lstrip("/"), str(target_path))
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/context.py", line 123, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/boto3/s3/inject.py", line 223, in download_file
+    return transfer.download_file(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        bucket=Bucket,
+        ^^^^^^^^^^^^^^
+    ...<3 lines>...
+        callback=Callback,
+        ^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/boto3/s3/transfer.py", line 484, in download_file
+    future.result()
+    ~~~~~~~~~~~~~^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/s3transfer/futures.py", line 111, in result
+    return self._coordinator.result()
+           ~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/s3transfer/futures.py", line 287, in result
+    raise self._exception
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/s3transfer/tasks.py", line 272, in _main
+    self._submit(transfer_future=transfer_future, **kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/s3transfer/download.py", line 359, in _submit
+    response = client.head_object(
+        Bucket=transfer_future.meta.call_args.bucket,
+        Key=transfer_future.meta.call_args.key,
+        **transfer_future.meta.call_args.extra_args,
+    )
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/client.py", line 602, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/context.py", line 123, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/client.py", line 1060, in _make_api_call
+    http, parsed_response = self._make_request(
+                            ~~~~~~~~~~~~~~~~~~^
+        operation_model, request_dict, request_context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/client.py", line 1084, in _make_request
+    return self._endpoint.make_request(operation_model, request_dict)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/endpoint.py", line 119, in make_request
+    return self._send_request(request_dict, operation_model)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/endpoint.py", line 196, in _send_request
+    request = self.create_request(request_dict, operation_model)
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/endpoint.py", line 132, in create_request
+    self._event_emitter.emit(
+    ~~~~~~~~~~~~~~~~~~~~~~~~^
+        event_name,
+        ^^^^^^^^^^^
+        request=request,
+        ^^^^^^^^^^^^^^^^
+        operation_name=operation_model.name,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/hooks.py", line 412, in emit
+    return self._emitter.emit(aliased_event_name, **kwargs)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/hooks.py", line 256, in emit
+    return self._emit(event_name, kwargs)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/hooks.py", line 239, in _emit
+    response = handler(**kwargs)
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/signers.py", line 108, in handler
+    return self.sign(operation_name, request)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/signers.py", line 191, in sign
+    auth = self.get_auth_instance(**kwargs)
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/signers.py", line 312, in get_auth_instance
+    frozen_credentials = credentials.get_frozen_credentials()
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/credentials.py", line 697, in get_frozen_credentials
+    self._refresh()
+    ~~~~~~~~~~~~~^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/credentials.py", line 584, in _refresh
+    self._protected_refresh(is_mandatory=is_mandatory_refresh)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/credentials.py", line 600, in _protected_refresh
+    metadata = self._refresh_using()
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/credentials.py", line 750, in fetch_credentials
+    return self._get_cached_credentials()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/credentials.py", line 760, in _get_cached_credentials
+    response = self._get_credentials()
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/credentials.py", line 2317, in _get_credentials
+    token = initial_token_data.get_frozen_token().token
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/tokens.py", line 89, in get_frozen_token
+    self._refresh()
+    ~~~~~~~~~~~~~^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/tokens.py", line 102, in _refresh
+    self._protected_refresh()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/long8v/.venv/lib/python3.13/site-packages/botocore/tokens.py", line 129, in _protected_refresh
+    raise TokenRetrievalError(
+    ...<2 lines>...
+    )
+botocore.exceptions.TokenRetrievalError: Error when retrieving token from sso: Token has expired and refresh failed
+scoring 1 (chunk, model) combos, parallel=1
+[chunk20m/entity-h0-sme-1300] ERROR: missing local output for request_id=561bab0b-7ac0-4d5e-8b32-d4f96b63aca7.561bab0b-7ac0-4d5e-8b32-d4f96b63aca7.TTAKJZVKM3ES4HDN
+
+==== summary (2.0s) ====
+[]
+
+summary saved to: /Users/long8v/pegasus-vcs-2339-entity-eval/eval/eval-service/eval_output/ckpt-comparison-20260709-chunk10_20_45-recovered/summary_metrics_1783572280.json
+scoring 1 (chunk, model) combos, parallel=1
+[chunk45m/entity-h0-sme-1300] ERROR: missing local output for request_id=c432df9b-61f9-4e3e-baa3-85eb61eeb69e.c432df9b-61f9-4e3e-baa3-85eb61eeb69e.ZPU436GUT7Q2KMGR
+
+==== summary (1.4s) ====
+[]
+
+summary saved to: /Users/long8v/pegasus-vcs-2339-entity-eval/eval/eval-service/eval_output/ckpt-comparison-20260709-chunk10_20_45-recovered/summary_metrics_1783572282.json
