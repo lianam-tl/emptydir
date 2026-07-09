@@ -8,7 +8,7 @@ Context: I wanted to convert `checkpoint-2200/` (DCP) → `checkpoint-2200-safet
 
 1. Edit `S3_SOURCE_PATH` / `S3_OUTPUT_PATH` (and `name:`) in `export-safetensors-generic.yaml`.
 2. `tlab submit export-safetensors-generic.yaml --priority high --yes`
-3. (optional, if >10min) `scp poll_tlab_job.sh cpu:~/ && ssh cpu "JOB=<job-name> nohup ~/poll_tlab_job.sh &"`
+3. (optional, if >10min) Slack poll via generic utility — see [`../slack_poll/README.md`](../slack_poll/README.md), tlab recipe.
 4. Watch `#fun-lia-trashcan`. Output ends up at `${S3_OUTPUT_PATH}/` as sharded safetensors + `model.safetensors.index.json`.
 
 Expected duration: ~30–60 min on 1× b300 GPU for a 27B bf16 model (~55GB DCP → 11× 5GB shards).
@@ -81,7 +81,7 @@ When a job fails before writing to FSx, the `trap upload_logs EXIT` still upload
 ## Files
 
 - `export-safetensors-generic.yaml` — parameterized tlab yaml (edit SRC/DST at top, submit).
-- `poll_tlab_job.sh` — generic tlab job status poller, Slack heartbeats to `#fun-lia-trashcan`.
+- For polling: [`../slack_poll/poll_generic.sh`](../slack_poll/poll_generic.sh) (backend-agnostic, tlab/ray/http/shell).
 
 ## Verification
 
