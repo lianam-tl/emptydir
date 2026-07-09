@@ -15,6 +15,7 @@ MAX_LOOPS=576
 
 mkdir -p "$WORK_DIR"
 [ -f "$STATE_JSON" ] || printf '{}\n' > "$STATE_JSON"
+run_count=$(jq length "$RUNS_JSON" 2>/dev/null || printf '0')
 
 load_env_file() {
   local env_file="$1"
@@ -90,7 +91,7 @@ metrics_suffix() {
   fi
 }
 
-post_slack "[entity-eval chunk10/20/45] started polling nine TP=2 runs for Pegasus1.5-2604, ff-sft, entity-h0-added. Poll interval=${POLL_SECONDS}s."
+post_slack "[entity-eval chunk10/20/45] started polling ${run_count} TP=2 runs for configured checkpoints. Poll interval=${POLL_SECONDS}s."
 
 loop=0
 while [ "$loop" -lt "$MAX_LOOPS" ]; do
@@ -124,7 +125,7 @@ while [ "$loop" -lt "$MAX_LOOPS" ]; do
   done < <(jq -r '.[] | [.label,.run_id,.batch_id] | @tsv' "$RUNS_JSON")
 
   if [ "$all_terminal" -eq 1 ]; then
-    post_slack "[entity-eval chunk10/20/45] polling finished; all nine tracked runs are terminal."
+    post_slack "[entity-eval chunk10/20/45] polling finished; all ${run_count} tracked runs are terminal."
     exit 0
   fi
   sleep "$POLL_SECONDS"

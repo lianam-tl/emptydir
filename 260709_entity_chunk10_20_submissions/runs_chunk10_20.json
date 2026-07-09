@@ -5,12 +5,12 @@
     "batch_id": "batch-d5cef657-bb61-4550-842d-3e58ca02d72a"
   },
   {
-    "label": "chunk10m / ff-sft",
+    "label": "chunk10m / pegasus-15-sft-2000",
     "run_id": "5fcd57a4-b91d-4236-a666-ca48ec4c30bb",
     "batch_id": "batch-e74333b7-df7a-4505-ae5e-9cc1bcf7a480"
   },
   {
-    "label": "chunk10m / entity-h0-added",
+    "label": "chunk10m / entity-h0-sme-1300",
     "run_id": "8f0af0a6-cb0a-48ed-a1b1-0c0e2c1b5f52",
     "batch_id": "batch-a3c8bd36-ef1e-488b-9752-94b2ef0494fa"
   },
@@ -20,12 +20,12 @@
     "batch_id": "batch-149c682e-019d-4536-97ea-9b428453edeb"
   },
   {
-    "label": "chunk20m / ff-sft",
+    "label": "chunk20m / pegasus-15-sft-2000",
     "run_id": "3287433e-e496-4149-929f-8c671e919d00",
     "batch_id": "batch-81c8be9e-9353-4ee7-b771-738a11ae568d"
   },
   {
-    "label": "chunk20m / entity-h0-added",
+    "label": "chunk20m / entity-h0-sme-1300",
     "run_id": "bb7385f1-90b7-4082-9610-8db349cb63e2",
     "batch_id": "batch-0f1998b6-29fd-4dca-9359-555201b42632"
   },
@@ -35,13 +35,58 @@
     "batch_id": "batch-d1509d73-7c1c-426d-954d-615f0b656775"
   },
   {
-    "label": "chunk45m / ff-sft",
+    "label": "chunk45m / pegasus-15-sft-2000",
     "run_id": "81a57601-0846-495c-827e-d3e04c07964b",
     "batch_id": "batch-dd2f289a-c3f0-48e5-83e5-81cf6c4f1bc4"
   },
   {
-    "label": "chunk45m / entity-h0-added",
+    "label": "chunk45m / entity-h0-sme-1300",
     "run_id": "0a770c17-d318-4267-887f-a3d38dde8ddd",
     "batch_id": "batch-21dcf8d5-5d85-4d0f-b7b9-5273d8eb8d13"
+  },
+  {
+    "label": "chunk10m / pegasus-15-sft",
+    "run_id": "5aadd17c-c730-4b93-a50a-443a47e4ea25",
+    "batch_id": "batch-79d6c685-5f80-4254-a067-edec479b6613"
+  },
+  {
+    "label": "chunk10m / pegasus-15-rl",
+    "run_id": "3ed903f2-3c32-498a-808e-a21b1a54a974",
+    "batch_id": "batch-d66148b9-b462-4a0d-a857-f26e92911a34"
+  },
+  {
+    "label": "chunk10m / entity-h0-sme-2200",
+    "run_id": "6886d35b-2d0c-4c35-883a-dce22d929242",
+    "batch_id": "batch-983641a6-401d-46e1-ba90-d7f3b7321bb0"
+  },
+  {
+    "label": "chunk20m / pegasus-15-sft",
+    "run_id": "e4945224-2e34-478f-826a-c597c8c52967",
+    "batch_id": "batch-d83a0056-3b15-4b24-a83e-de4c8f5d5e8e"
+  },
+  {
+    "label": "chunk20m / pegasus-15-rl",
+    "run_id": "8e697ad0-d4bc-49fe-addc-5e5938238d4b",
+    "batch_id": "batch-6eb672e3-d379-41cc-bec9-17336bd096d6"
+  },
+  {
+    "label": "chunk20m / entity-h0-sme-2200",
+    "run_id": "20279ddc-4090-4399-af89-57dc52a88da2",
+    "batch_id": "batch-40d89494-4ebc-4890-8ce5-8f1876c3d504"
+  },
+  {
+    "label": "chunk45m / pegasus-15-sft",
+    "run_id": "a6f8e6de-3836-443e-bc23-8223efea55d5",
+    "batch_id": "batch-5959d76b-5fdd-4baa-856a-07a4e204dfd8"
+  },
+  {
+    "label": "chunk45m / pegasus-15-rl",
+    "run_id": "b38fbc85-cf0e-463d-b1bc-42631c3397a0",
+    "batch_id": "batch-dca5f1d4-f8d5-4304-92ec-883d5d00ef2d"
+  },
+  {
+    "label": "chunk45m / entity-h0-sme-2200",
+    "run_id": "fd608426-d4f6-4593-9cac-76adfae1b928",
+    "batch_id": "batch-af4b7e69-8e0f-40e8-b9f6-90b85f2cec2e"
   }
 ]

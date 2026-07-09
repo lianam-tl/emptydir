@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Submit entity-coverage chunk_10m/chunk_20m eval-service runs."""
+"""Submit entity-coverage chunked eval-service runs."""
 
 from __future__ import annotations
 
@@ -16,6 +16,18 @@ DEFAULT_BASE_URL = "http://127.0.0.1:18090/api/eval/runs"
 DEFAULT_OUTPUT_DIR = Path(__file__).resolve().parent / "payloads"
 
 DATASET_NAME = "twelvelabs/entity_cov_v0_tdf"
+DEFAULT_IMAGE_URL = (
+    "476114115052.dkr.ecr.us-west-2.amazonaws.com/"
+    "tl-data-training-pegasus-vllm-video@sha256:"
+    "f9d093da963cc0f17b621a80db578f68d2c5ab5349616d5092732a4c19f3a228"
+)
+MTP_IMAGE_URL = (
+    "476114115052.dkr.ecr.us-west-2.amazonaws.com/"
+    "tl-data-training-pegasus-vllm-video@sha256:"
+    "12b80e36ee9aa10903883af6cd3b6e4e7dfd212a7f503ec675da819941ee931d"
+)
+MTP_SPECULATIVE_CONFIG = {"method": "mtp", "num_speculative_tokens": 4}
+
 CONFIG_SAMPLE_COUNTS = {
     "chunk_10m": 20,
     "chunk_20m": 13,
@@ -24,49 +36,101 @@ CONFIG_SAMPLE_COUNTS = {
 
 CHECKPOINTS: list[dict[str, Any]] = [
     {
-        "label": "pegasus2604",
-        "display_name": "Pegasus1.5-2604",
-        "model_path": "s3://tl-data-training-pegasus-us-west-2/releases/Pegasus1.5-2604/",
-        "image_url": (
-            "476114115052.dkr.ecr.us-west-2.amazonaws.com/"
-            "tl-data-training-pegasus-vllm-video@sha256:"
-            "f9d093da963cc0f17b621a80db578f68d2c5ab5349616d5092732a4c19f3a228"
+        "label": "pegasus-15",
+        "display_name": "pegasus-15",
+        "model_path": (
+            "s3://tl-data-training-pegasus-us-west-2/checkpoints/kian-kim/"
+            "soce_rl_260516_all_pair_p15_a1mckpt1000s60_w7030"
         ),
+        "image_url": DEFAULT_IMAGE_URL,
+        "worker_type": "vllm-video-v1",
         "concurrency": 2,
         "speculative_config": None,
     },
     {
-        "label": "ff-sft",
-        "display_name": "ff-sft",
+        "label": "pegasus-15-2604",
+        "display_name": "Pegasus1.5-2604",
+        "model_path": "s3://tl-data-training-pegasus-us-west-2/releases/Pegasus1.5-2604/",
+        "image_url": DEFAULT_IMAGE_URL,
+        "worker_type": "vllm-video-v1",
+        "concurrency": 2,
+        "speculative_config": None,
+    },
+    {
+        "label": "pegasus-15-2605",
+        "display_name": "Pegasus1.5-2605",
+        "model_path": "s3://tl-data-training-pegasus-us-west-2/releases/Pegasus1.5-2605/",
+        "image_url": DEFAULT_IMAGE_URL,
+        "worker_type": "vllm-video-v1",
+        "concurrency": 2,
+        "speculative_config": None,
+    },
+    {
+        "label": "pegasus-15-sft",
+        "display_name": "pegasus-15-sft",
+        "model_path": (
+            "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/"
+            "ablation_260416_soccer_clean_filter_low_aug-highres_lr2e-6_"
+            "qwen3_5_27b_soccer_dc_sme_low_filter_mtp_0513-base/"
+            "checkpoint-1000-safetensors"
+        ),
+        "image_url": MTP_IMAGE_URL,
+        "worker_type": "vllm-video-v1",
+        "concurrency": 1,
+        "speculative_config": MTP_SPECULATIVE_CONFIG,
+    },
+    {
+        "label": "pegasus-15-sft-2000",
+        "display_name": "pegasus-15-sft-2000",
         "model_path": (
             "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/"
             "ablation_260416_soccer_clean_filter_low_aug-highres_lr2e-6_"
             "qwen3_5_27b_soccer_dc_sme_low_filter_mtp_0513-base/"
             "checkpoint-2000-safetensors/"
         ),
-        "image_url": (
-            "476114115052.dkr.ecr.us-west-2.amazonaws.com/"
-            "tl-data-training-pegasus-vllm-video@sha256:"
-            "12b80e36ee9aa10903883af6cd3b6e4e7dfd212a7f503ec675da819941ee931d"
-        ),
+        "image_url": MTP_IMAGE_URL,
+        "worker_type": "lia-soccer-mtp-ck2000-persistent",
         "concurrency": 1,
-        "speculative_config": {"method": "mtp", "num_speculative_tokens": 4},
+        "speculative_config": MTP_SPECULATIVE_CONFIG,
     },
     {
-        "label": "entity-h0-added",
-        "display_name": "entity-h0-added",
+        "label": "pegasus-15-rl",
+        "display_name": "pegasus-15-rl",
+        "model_path": (
+            "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/"
+            "rl_rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7_ckpt1000-base/"
+            "global_step_60/actor/huggingface/"
+        ),
+        "image_url": MTP_IMAGE_URL,
+        "worker_type": "vllm-video-v1",
+        "concurrency": 1,
+        "speculative_config": MTP_SPECULATIVE_CONFIG,
+    },
+    {
+        "label": "entity-h0-sme-1300",
+        "display_name": "entity-h0-sme-1300",
         "model_path": (
             "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/"
             "consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_"
-            "qwen3_5_27b-base/checkpoint-1300-safetensors/"
+            "qwen3_5_27b-base/checkpoint-1300"
         ),
-        "image_url": (
-            "476114115052.dkr.ecr.us-west-2.amazonaws.com/"
-            "tl-data-training-pegasus-vllm-video@sha256:"
-            "f9d093da963cc0f17b621a80db578f68d2c5ab5349616d5092732a4c19f3a228"
-        ),
+        "image_url": DEFAULT_IMAGE_URL,
+        "worker_type": "vllm-video-b300",
         "concurrency": 1,
         "speculative_config": None,
+    },
+    {
+        "label": "entity-h0-sme-2200",
+        "display_name": "entity-h0-sme-2200",
+        "model_path": (
+            "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/"
+            "consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_"
+            "qwen3_5_27b-base/checkpoint-2200-safetensors"
+        ),
+        "image_url": MTP_IMAGE_URL,
+        "worker_type": "vllm-video-v1",
+        "concurrency": 1,
+        "speculative_config": MTP_SPECULATIVE_CONFIG,
     },
 ]
 
@@ -83,7 +147,7 @@ def build_payload(checkpoint: dict[str, Any], config_name: str, timestamp: str) 
         "config": config_name,
         "split": "test",
         "pipelineId": "vllm-direct",
-        "workerType": "vllm-video-v1",
+        "workerType": checkpoint["worker_type"],
         "maxTokens": 16384,
         "temperature": 0.0,
         "nodePool": "b300-pegasus",
@@ -129,6 +193,12 @@ def parse_args() -> argparse.Namespace:
         choices=sorted(CONFIG_SAMPLE_COUNTS),
         default=["chunk_10m", "chunk_20m"],
     )
+    parser.add_argument(
+        "--checkpoint-labels",
+        nargs="+",
+        choices=sorted(checkpoint["label"] for checkpoint in CHECKPOINTS),
+        default=[checkpoint["label"] for checkpoint in CHECKPOINTS],
+    )
     parser.add_argument("--submit", action="store_true")
     return parser.parse_args()
 
@@ -139,8 +209,9 @@ def main() -> None:
     results_path = args.output_dir / "submission_results.jsonl"
 
     payloads: list[tuple[Path, dict[str, Any]]] = []
+    requested_checkpoints = [checkpoint for checkpoint in CHECKPOINTS if checkpoint["label"] in set(args.checkpoint_labels)]
     for config_name in args.configs:
-        for checkpoint in CHECKPOINTS:
+        for checkpoint in requested_checkpoints:
             payload = build_payload(checkpoint, config_name, args.timestamp)
             path = args.output_dir / f"{payload['name']}.json"
             path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")

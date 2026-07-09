@@ -1,0 +1,28 @@
+{
+  "batchNamePrefix": "lia-entcov-chunk45m-pegasus-15-rl-tp2",
+  "concurrency": 1,
+  "config": "chunk_45m",
+  "convertIfNeeded": false,
+  "dataset": "twelvelabs/entity_cov_v0_tdf",
+  "dp": 1,
+  "experimentName": "lia-entity-cov-chunk45m-pegasus-15-rl-tp2-20260709-103141",
+  "idempotencyKey": "lia-entity-cov-chunk45m-pegasus-15-rl-tp2-20260709-103141",
+  "imageUrl": "476114115052.dkr.ecr.us-west-2.amazonaws.com/tl-data-training-pegasus-vllm-video@sha256:12b80e36ee9aa10903883af6cd3b6e4e7dfd212a7f503ec675da819941ee931d",
+  "maxInFlight": 7,
+  "maxReplicas": 1,
+  "maxTokens": 16384,
+  "minReplicas": 1,
+  "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/rl_rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7_ckpt1000-base/global_step_60/actor/huggingface/",
+  "name": "lia-entity-cov-chunk45m-pegasus-15-rl-tp2-20260709-103141",
+  "nodePool": "b300-pegasus",
+  "pipelineId": "vllm-direct",
+  "pollTimeoutSeconds": 14400,
+  "speculativeConfig": {
+    "method": "mtp",
+    "num_speculative_tokens": 4
+  },
+  "split": "test",
+  "temperature": 0.0,
+  "tp": 2,
+  "workerType": "vllm-video-v1"
+}
