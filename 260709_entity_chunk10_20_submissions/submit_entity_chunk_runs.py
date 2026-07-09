@@ -112,7 +112,7 @@ CHECKPOINTS: list[dict[str, Any]] = [
         "model_path": (
             "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/"
             "consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_"
-            "qwen3_5_27b-base/checkpoint-1300"
+            "qwen3_5_27b-base/checkpoint-1300-safetensors"
         ),
         "image_url": DEFAULT_IMAGE_URL,
         "worker_type": "vllm-video-b300",
@@ -209,7 +209,9 @@ def main() -> None:
     results_path = args.output_dir / "submission_results.jsonl"
 
     payloads: list[tuple[Path, dict[str, Any]]] = []
-    requested_checkpoints = [checkpoint for checkpoint in CHECKPOINTS if checkpoint["label"] in set(args.checkpoint_labels)]
+    requested_checkpoints = [
+        checkpoint for checkpoint in CHECKPOINTS if checkpoint["label"] in set(args.checkpoint_labels)
+    ]
     for config_name in args.configs:
         for checkpoint in requested_checkpoints:
             payload = build_payload(checkpoint, config_name, args.timestamp)

@@ -7,8 +7,8 @@
 
 set -u
 BR_URL="http://xplatform-training.twelve.labs/batch-request/batch-runs"
-BATCH_20M="batch-21affe62-cea7-4e61-8acd-01132abc79a5"   # chunk20m/entity-h0-sme-1300, 13 tasks
-BATCH_45M="batch-6b20b325-345e-419e-b175-c72d3576b420"   #  chunk45m/entity-h0-sme-1300,  7 tasks
+BATCH_20M="batch-3fa04ecc-f92d-4891-90c3-b90b6a0b219f"   # chunk20m/entity-h0-sme-1300, 13 tasks (resubmit -safetensors)
+BATCH_45M="batch-a3cb9632-41f1-4651-bab3-985ce93667e0"   #  chunk45m/entity-h0-sme-1300,  7 tasks (resubmit -safetensors)
 TOKEN=$(cat ~/tmp/.slack_bot_token)
 CHANNEL="#fun-lia-trashcan"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
