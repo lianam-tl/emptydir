@@ -1,0 +1,244 @@
+{
+  "H13": {
+    "input_s3": "s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/lia-h13-others-full-2607031334/sme_eval_v3.1_fast/predictions.jsonl",
+    "eval_file": "/private/tmp/sme_description_eval_full_2607031334/h13_exploded_desc_v2/metadata_evaluation.json",
+    "exploded_predictions": "/private/tmp/sme_description_eval_full_2607031334/h13/predictions.description_only.exploded.jsonl",
+    "num_segments": 80,
+    "description_unweighted": 2.625,
+    "description_iou_weighted": 2.622,
+    "score_distribution": {
+      "1": 15,
+      "2": 19,
+      "3": 27,
+      "4": 19
+    },
+    "tag_distribution": {
+      "#coverage": 74,
+      "#visual-detail": 71,
+      "#transcription": 50,
+      "#hallucination": 23,
+      "#ocr": 15,
+      "#specificity": 11,
+      "#entity-recognition": 5,
+      "#temporal-grounding": 4,
+      "#event-sequence": 3,
+      "#contextual-understanding": 1
+    },
+    "method_counts": {
+      "description_rubric_llm": 80
+    },
+    "failed_parse_segments": 0,
+    "fallback_without_rationale_segments": 0,
+    "zero_score_segments": 0,
+    "total_cost": 0.0157,
+    "total_tokens": {
+      "input": 122556,
+      "output": 8638
+    },
+    "by_original_sample": [
+      {
+        "sample_id": "644b6b5e-e58a-4bc5-be27-1b1a62b2534b",
+        "mean_score": 1.5,
+        "num_segments": 8,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H13_OTHERS/NcOfnHc3-tQ.mp4"
+      },
+      {
+        "sample_id": "254e435c-df16-411a-9bf6-3c0599a1b810",
+        "mean_score": 2.0,
+        "num_segments": 3,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H13_OTHERS/jD2X9XL-yuo.mp4"
+      },
+      {
+        "sample_id": "48c5153c-ab98-4d81-bb1b-4cf17aad83ce",
+        "mean_score": 2.0,
+        "num_segments": 6,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H13_OTHERS/oxeQD6cYB54.mp4"
+      },
+      {
+        "sample_id": "6c0d5644-5960-4c7e-bd44-34cc87bc63bd",
+        "mean_score": 2.0,
+        "num_segments": 3,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H13_OTHERS/hICOpUJmPrQ.mp4"
+      },
+      {
+        "sample_id": "cd44c4aa-309e-441e-beb1-a39f673cbafa",
+        "mean_score": 2.286,
+        "num_segments": 7,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H13_OTHERS/joPLhoRx9lg.mp4"
+      },
+      {
+        "sample_id": "1490db5a-a526-4757-9ff7-77d3ac2d32b2",
+        "mean_score": 2.4,
+        "num_segments": 5,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H13_OTHERS/tfvxpgZ5ESQ.mp4"
+      },
+      {
+        "sample_id": "3ce486db-d09f-49f2-be19-f34ccc8332e8",
+        "mean_score": 2.4,
+        "num_segments": 5,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H13_OTHERS/gn_9D5F6-MM.mp4"
+      },
+      {
+        "sample_id": "713d8b5b-ef06-478e-b2b7-7ebeba814340",
+        "mean_score": 2.429,
+        "num_segments": 7,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H13_OTHERS/XQ767LlrDc0.mp4"
+      },
+      {
+        "sample_id": "3c230f0e-9959-4656-b3d6-8a396b618b71",
+        "mean_score": 2.75,
+        "num_segments": 4,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H13_OTHERS/9a230D8TnFk.mp4"
+      },
+      {
+        "sample_id": "69584e0e-0159-4de2-b924-d7561bc2887b",
+        "mean_score": 2.833,
+        "num_segments": 6,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H13_OTHERS/mnCf4rzKG2I.mp4"
+      },
+      {
+        "sample_id": "74766a59-d783-44cf-a463-5e2efc210afd",
+        "mean_score": 3.0,
+        "num_segments": 2,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H13_OTHERS/_1VzOpX_vbc.mp4"
+      },
+      {
+        "sample_id": "0fd396e2-34ad-47ea-9997-57e1524c51dc",
+        "mean_score": 3.25,
+        "num_segments": 8,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H13_OTHERS/Qh0tvwb2kjc.mp4"
+      },
+      {
+        "sample_id": "e090b57c-75fc-431f-8a9c-7c296902f6b6",
+        "mean_score": 3.333,
+        "num_segments": 3,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H13_OTHERS/p_dJorRq7Zc.mp4"
+      },
+      {
+        "sample_id": "0a79f3c7-e65a-4681-ae44-ce1bc8b18046",
+        "mean_score": 3.571,
+        "num_segments": 7,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H13_OTHERS/Gy_X3Qjei3s.mp4"
+      },
+      {
+        "sample_id": "1d65d182-9ab6-4f86-a37e-b4a692987c45",
+        "mean_score": 3.667,
+        "num_segments": 6,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H13_OTHERS/J3lyOFVnRm8.mp4"
+      }
+    ]
+  },
+  "H14": {
+    "input_s3": "s3://tl-data-training-pegasus-us-west-2/eval_results/outputs/lia-h14-others-full-2607031334/sme_eval_v3.1_fast/predictions.jsonl",
+    "eval_file": "/private/tmp/sme_description_eval_full_2607031334/h14_exploded_desc_v2/metadata_evaluation.json",
+    "exploded_predictions": "/private/tmp/sme_description_eval_full_2607031334/h14/predictions.description_only.exploded.jsonl",
+    "num_segments": 109,
+    "description_unweighted": 2.156,
+    "description_iou_weighted": 2.151,
+    "score_distribution": {
+      "0": 1,
+      "1": 37,
+      "2": 25,
+      "3": 36,
+      "4": 10
+    },
+    "tag_distribution": {
+      "#visual-detail": 95,
+      "#coverage": 92,
+      "#transcription": 68,
+      "#hallucination": 41,
+      "#ocr": 21,
+      "#specificity": 13,
+      "#temporal-grounding": 10,
+      "#event-sequence": 10,
+      "#entity-recognition": 6,
+      "#contextual-understanding": 1
+    },
+    "method_counts": {
+      "description_empty": 1,
+      "description_rubric_llm": 108
+    },
+    "failed_parse_segments": 0,
+    "fallback_without_rationale_segments": 0,
+    "zero_score_segments": 1,
+    "total_cost": 0.0206,
+    "total_tokens": {
+      "input": 159505,
+      "output": 11560
+    },
+    "by_original_sample": [
+      {
+        "sample_id": "4a4f1271-3991-48e1-9c04-879de0faa0b5",
+        "mean_score": 1.133,
+        "num_segments": 15,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H14_OTHERS/_1VzOpX_vbc.mp4"
+      },
+      {
+        "sample_id": "a4e0dc35-ea79-4d36-9cf2-e071ea262067",
+        "mean_score": 1.562,
+        "num_segments": 16,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H14_OTHERS/oyroAUHfv2Y.mp4"
+      },
+      {
+        "sample_id": "befc6886-138b-405f-a8b2-3abefc22a448",
+        "mean_score": 1.75,
+        "num_segments": 4,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H14_OTHERS/tfvxpgZ5ESQ.mp4"
+      },
+      {
+        "sample_id": "f10be53c-acc8-4b4f-b517-771863bf50e8",
+        "mean_score": 1.857,
+        "num_segments": 7,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H14_OTHERS/qmsFFkQfeV0.mp4"
+      },
+      {
+        "sample_id": "b4e9f0b3-eaa6-4c7a-add7-3af45136b94f",
+        "mean_score": 2.0,
+        "num_segments": 11,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H14_OTHERS/p_dJorRq7Zc.mp4"
+      },
+      {
+        "sample_id": "77239ade-7838-4fcf-9eb9-8cafbf3f97ab",
+        "mean_score": 2.25,
+        "num_segments": 4,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H14_OTHERS/jD2X9XL-yuo.mp4"
+      },
+      {
+        "sample_id": "582abaea-181e-48d2-bf29-9842bdfb2e40",
+        "mean_score": 2.4,
+        "num_segments": 10,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H14_OTHERS/joPLhoRx9lg.mp4"
+      },
+      {
+        "sample_id": "2e0753d4-f55c-4b6c-95ff-fa67cc6d951f",
+        "mean_score": 2.5,
+        "num_segments": 6,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H14_OTHERS/Wg_Ql89fWy4.mp4"
+      },
+      {
+        "sample_id": "21241bf8-f1bd-4d89-b24e-39b8055a1dca",
+        "mean_score": 2.727,
+        "num_segments": 11,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H14_OTHERS/J3lyOFVnRm8.mp4"
+      },
+      {
+        "sample_id": "2ec08f48-56ee-4779-b001-5b7024bb01ed",
+        "mean_score": 2.727,
+        "num_segments": 11,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H14_OTHERS/mnCf4rzKG2I.mp4"
+      },
+      {
+        "sample_id": "59db9188-2e93-4872-99e2-7bb1ec0ab564",
+        "mean_score": 3.0,
+        "num_segments": 2,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H14_OTHERS/U5wHXic4WJE.mp4"
+      },
+      {
+        "sample_id": "994b2143-c260-4e01-a24f-0b47727f1bab",
+        "mean_score": 3.083,
+        "num_segments": 12,
+        "media_path": "s3://tl-data-training-pegasus-us-west-2/tl-vlm-eval/sme_eval_v3/H14_OTHERS/gn_9D5F6-MM.mp4"
+      }
+    ]
+  }
+}
