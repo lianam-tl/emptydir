@@ -108,6 +108,31 @@ BATCHES: list[dict[str, str]] = [
         "run_id": "c432df9b-61f9-4e3e-baa3-85eb61eeb69e",
         "batch_id": "batch-a3cb9632-41f1-4651-bab3-985ce93667e0",
     },
+    # 20260710-152340: chunk_05m × 4 models (entity-h0-sme-1300 reuses morning data)
+    {
+        "chunk": "chunk05m",
+        "model": "pegasus-15",
+        "run_id": "1e2e690a-ecd4-4769-8486-7a6ecdb0b2db",
+        "batch_id": "batch-14bcdded-96db-4980-a12d-77eb5665c09a",
+    },
+    {
+        "chunk": "chunk05m",
+        "model": "pegasus-15-sft",
+        "run_id": "273d1796-801e-4732-9dce-814a12151d78",
+        "batch_id": "batch-832d3937-a2e5-49c3-968e-34176db3039a",
+    },
+    {
+        "chunk": "chunk05m",
+        "model": "pegasus-15-rl",
+        "run_id": "c45f7d5c-e0fc-41e5-b899-eb2d572db33c",
+        "batch_id": "batch-60988c72-e5e4-4b8a-baee-6301e1e3220b",
+    },
+    {
+        "chunk": "chunk05m",
+        "model": "entity-h0-sme-2200",
+        "run_id": "7f99870e-240c-42ba-b814-f48e658f7a42",
+        "batch_id": "batch-fce615b6-c352-4750-bb8e-a0d3ae6f7900",
+    },
     # 20260710-134958: pegasus-15 resubmit (previous 20260709-153156 failed when infracontroller OOMKilled mid-flight)
     {
         "chunk": "chunk10m",
