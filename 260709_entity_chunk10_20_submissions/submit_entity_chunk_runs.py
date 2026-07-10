@@ -29,6 +29,7 @@ MTP_IMAGE_URL = (
 MTP_SPECULATIVE_CONFIG = {"method": "mtp", "num_speculative_tokens": 4}
 
 CONFIG_SAMPLE_COUNTS = {
+    "chunk_05m": 34,
     "chunk_10m": 20,
     "chunk_20m": 13,
     "chunk_45m": 7,
