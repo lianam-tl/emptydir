@@ -5,9 +5,9 @@
 
 set -u
 BR_URL="http://xplatform-training.twelve.labs/batch-request/batch-runs"
-BATCH_10M="batch-081550ac-e194-4e11-ad04-ca07109428da"   # chunk10m/pegasus-15, 20 tasks
-BATCH_20M="batch-2677c8bf-e279-4ff7-a197-d5abeae6bd72"   # chunk20m/pegasus-15, 13 tasks
-BATCH_45M="batch-0d9b0c49-05f9-40dc-83bf-344fe1b63e03"   # chunk45m/pegasus-15,  7 tasks
+BATCH_10M="batch-b8b8dc64-e86e-46b0-8c78-32140ea7ccc6"   # chunk10m/pegasus-15, 20 tasks (resubmit 20260710-134958)
+BATCH_20M="batch-ebd1f369-fc80-4258-8b4a-ff4a3efa29fc"   # chunk20m/pegasus-15, 13 tasks (resubmit 20260710-134958)
+BATCH_45M="batch-ac47789e-af5b-45cf-bef4-b35ebbf9d0ec"   # chunk45m/pegasus-15,  7 tasks (resubmit 20260710-134958)
 TOKEN=$(cat ~/tmp/.slack_bot_token)
 CHANNEL="#fun-lia-trashcan"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"

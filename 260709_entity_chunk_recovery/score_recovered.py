@@ -106,24 +106,24 @@ BATCHES: list[dict[str, str]] = [
         "run_id": "c432df9b-61f9-4e3e-baa3-85eb61eeb69e",
         "batch_id": "batch-a3cb9632-41f1-4651-bab3-985ce93667e0",
     },
-    # 20260709-153156: pegasus-15 (kian-kim/soce_rl_260516_all_pair_p15_a1mckpt1000s60_w7030) across all 3 chunks
+    # 20260710-134958: pegasus-15 resubmit (previous 20260709-153156 failed when infracontroller OOMKilled mid-flight)
     {
         "chunk": "chunk10m",
         "model": "pegasus-15",
-        "run_id": "1f643f85-d914-446b-a2fd-303098ac0e0d",
-        "batch_id": "batch-081550ac-e194-4e11-ad04-ca07109428da",
+        "run_id": "37474b64-69c0-46af-bc93-a30fdda6055f",
+        "batch_id": "batch-b8b8dc64-e86e-46b0-8c78-32140ea7ccc6",
     },
     {
         "chunk": "chunk20m",
         "model": "pegasus-15",
-        "run_id": "d37fab87-b3d8-4b6e-a8f2-333e793e49fa",
-        "batch_id": "batch-2677c8bf-e279-4ff7-a197-d5abeae6bd72",
+        "run_id": "c5b7e8d1-38b9-44b9-893e-749658245519",
+        "batch_id": "batch-ebd1f369-fc80-4258-8b4a-ff4a3efa29fc",
     },
     {
         "chunk": "chunk45m",
         "model": "pegasus-15",
-        "run_id": "0c5c09a1-7859-4be4-8121-39f2bd735f73",
-        "batch_id": "batch-0d9b0c49-05f9-40dc-83bf-344fe1b63e03",
+        "run_id": "4014ca07-a70d-43e6-bbf0-60ad4cdfaddc",
+        "batch_id": "batch-ac47789e-af5b-45cf-bef4-b35ebbf9d0ec",
     },
 ]
 
