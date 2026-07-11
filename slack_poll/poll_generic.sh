@@ -15,6 +15,7 @@
 #   LABEL         human description (default: $JOB_ID)
 #   ARTIFACT_URL  mentioned in success message (default: none)
 #   CHANNEL       slack channel (default: fun-lia-trashcan)
+#   ENV_FILE      .env containing SLACK_BOT_TOKEN (default: ~/pegasus/.env)
 #   TOKEN_FILE    slack token path (default: ~/tmp/.slack_bot_token)
 #   POLL_SEC      poll interval (default: 120)
 #   HEARTBEAT_SEC heartbeat interval (default: 1200 = 20min)
@@ -33,13 +34,23 @@ set -uo pipefail
 LABEL="${LABEL:-$JOB_ID}"
 ARTIFACT_URL="${ARTIFACT_URL:-}"
 CHANNEL="${CHANNEL:-fun-lia-trashcan}"
+ENV_FILE="${ENV_FILE:-$HOME/pegasus/.env}"
 TOKEN_FILE="${TOKEN_FILE:-$HOME/tmp/.slack_bot_token}"
 POLL_SEC="${POLL_SEC:-120}"
 HEARTBEAT_SEC="${HEARTBEAT_SEC:-1200}"
 LOG="$HOME/poll_${JOB_ID}.log"
 
 export JOB_ID
-SLACK_TOKEN="$(cat "$TOKEN_FILE")"
+if [[ -z ${SLACK_BOT_TOKEN:-} && -f $ENV_FILE ]]; then
+  set -a
+  source "$ENV_FILE"
+  set +a
+fi
+if [[ -n ${SLACK_BOT_TOKEN:-} ]]; then
+  SLACK_TOKEN="$SLACK_BOT_TOKEN"
+else
+  SLACK_TOKEN="$(cat "$TOKEN_FILE")"
+fi
 
 slack() {
   local msg="$1"
