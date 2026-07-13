@@ -1,0 +1,115 @@
+{
+  "git_sha": "86fdb2d8d28fcdef65a9d63453b09e2ace64956f",
+  "sample_count": 20,
+  "added_rows": 0,
+  "output_structure_counts": {
+    "flat": 9,
+    "consolidated": 11
+  },
+  "mode_counts": {
+    "audio_encoder": 12,
+    "asr": 8
+  },
+  "representation_counts": {
+    "string": 3,
+    "object": 17
+  },
+  "paraphrased_count": 14,
+  "segment_instruction_count": 7,
+  "roster_reference_problem_count": 4,
+  "skipped_stages": [
+    "preprocessing.base.stages.common.count_tokens:run"
+  ],
+  "stage_stats": [
+    {
+      "stage": "tl_entity_sme:default_sft",
+      "rows_in": null,
+      "rows_out": 3428,
+      "duration_seconds": 14.292846416996326
+    },
+    {
+      "stage": "preprocessing.base.stages.common.media_num_mismatch_filter:run",
+      "rows_in": 3428,
+      "rows_out": 3428,
+      "duration_seconds": 0.47347720799734816
+    },
+    {
+      "stage": "preprocessing.base.stages.common.max_video_duration_filter:run",
+      "rows_in": 3428,
+      "rows_out": 2520,
+      "duration_seconds": 3.812179374974221
+    },
+    {
+      "stage": "preprocessing.base.stages.instruction_tuning.faulty_conversation_filter:run",
+      "rows_in": 2520,
+      "rows_out": 2520,
+      "duration_seconds": 0.3372021249961108
+    },
+    {
+      "stage": "preprocessing.base.stages.instruction_tuning.empty_assistant_output_filter:run",
+      "rows_in": 2520,
+      "rows_out": 2520,
+      "duration_seconds": 0.3593792920000851
+    },
+    {
+      "stage": "preprocessing.base.stages.common.anonymization_filter:run",
+      "rows_in": 2520,
+      "rows_out": 2495,
+      "duration_seconds": 20.020391541009303
+    },
+    {
+      "stage": "preprocessing.base.stages.common.subsample:run",
+      "rows_in": 2495,
+      "rows_out": 20,
+      "duration_seconds": 0.0025494159781374037
+    },
+    {
+      "stage": "preprocessing.base.stages.common.save_pre_aug_ids:run",
+      "rows_in": 20,
+      "rows_out": 20,
+      "duration_seconds": 0.0007605419959872961
+    },
+    {
+      "stage": "preprocessing.base.stages.instruction_tuning.reorder_chapter_keys:run",
+      "rows_in": 20,
+      "rows_out": 20,
+      "duration_seconds": 0.15794166701380163
+    },
+    {
+      "stage": "preprocessing.base.stages.instruction_tuning.entity_sme_render:run",
+      "rows_in": 20,
+      "rows_out": 20,
+      "duration_seconds": 0.1726707910420373
+    },
+    {
+      "stage": "preprocessing.base.stages.instruction_tuning.paraphrase_text:run",
+      "rows_in": 20,
+      "rows_out": 20,
+      "duration_seconds": 0.17637720896163955
+    },
+    {
+      "stage": "preprocessing.base.stages.instruction_tuning.add_segment_instructions:run",
+      "rows_in": 20,
+      "rows_out": 20,
+      "duration_seconds": 0.14513908297521994
+    },
+    {
+      "stage": "preprocessing.base.stages.common.set_video_sampling_args:run",
+      "rows_in": 20,
+      "rows_out": 20,
+      "duration_seconds": 0.13124266697559506
+    },
+    {
+      "stage": "preprocessing.base.stages.common.convert_tdf_to_hf_messages:run",
+      "rows_in": 20,
+      "rows_out": 20,
+      "duration_seconds": 0.16151925001759082
+    },
+    {
+      "stage": "preprocessing.base.stages.common.oci_to_s3_media:run",
+      "rows_in": 20,
+      "rows_out": 20,
+      "duration_seconds": 0.11471125000389293
+    }
+  ]
+}
