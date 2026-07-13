@@ -1,0 +1,11 @@
+period,data_source,records,share
+early,finevideo_sme,952,0.26153846153846155
+early,tl_composite_movies_and_tvshows,560,0.15384615384615385
+early,tl_composite_sports,968,0.26593406593406593
+early,tl_gemini_sports_sme,984,0.2703296703296703
+early,tl_soccer_h16_sme,176,0.04835164835164835
+late,finevideo_sme,1024,0.2650103519668737
+late,tl_composite_movies_and_tvshows,424,0.10973084886128365
+late,tl_composite_sports,1136,0.2939958592132505
+late,tl_gemini_sports_sme,1088,0.2815734989648033
+late,tl_soccer_h16_sme,192,0.049689440993788817
