@@ -138,6 +138,8 @@ To use this persistent worker, submit jobs directly to orchestrator and set:
 ```text
 legacy_model_register.json  # Register the persistent legacy model in spec-center.
 legacy_model_register_node2.json # Register the second node-pinned model.
+legacy_model_register_tp8_node1.json # Register the first 8-GPU worker.
+legacy_model_register_tp8_node2.json # Register the second 8-GPU worker.
 status_active.json          # Mark the model active.
 status_active_node2.json    # Mark the second node-pinned model active.
 scale_one.json              # Scale the deployment to 1 replica.
@@ -210,6 +212,12 @@ activate both `legacy_model_register.json` and
 `scale_one.json`. Both records advertise the same
 `worker_type: lia-soccer-mtp-ck2000-persistent`, so loadbalancer calls use them
 as one worker pool. Each worker uses two GPUs, for four GPUs total.
+
+For 16 GPUs across two nodes, register
+`legacy_model_register_tp8_node1.json` and
+`legacy_model_register_tp8_node2.json`, then activate both records with the
+same status payloads. Each node-pinned worker uses `TP=8`, `DP=1`, and eight
+GPUs; the two workers still share one loadbalancer `worker_type`.
 
 Open two port-forwards:
 
