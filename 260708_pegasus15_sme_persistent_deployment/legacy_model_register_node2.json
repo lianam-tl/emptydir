@@ -1,0 +1,33 @@
+{
+  "id": "lia-soccer-mtp-ck2000-persistent-node2",
+  "version": "v1",
+  "replicas": 1,
+  "node_group_id": "b300-pegasus",
+  "node_names": [
+    "hyperpod-i-034c545fc9a1f4555"
+  ],
+  "resources": {
+    "gpu_count": 2,
+    "concurrency": 1
+  },
+  "runtime": {
+    "image_url": "476114115052.dkr.ecr.us-west-2.amazonaws.com/tl-data-training-pegasus-vllm-video:main-fb19772",
+    "worker_type": "lia-soccer-mtp-ck2000-persistent",
+    "port": 8000,
+    "health_check_path": "/health",
+    "health_check_port": 8000,
+    "command": [],
+    "args": [],
+    "env": {
+      "DP": "1",
+      "DTYPE": "bfloat16",
+      "EXTRA_ARGS": "--guided-decoding-backend guidance",
+      "GPU_MEM": "0.85",
+      "MODEL": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/ablation_260416_soccer_clean_filter_low_aug-highres_lr2e-6_qwen3_5_27b_soccer_dc_sme_low_filter_mtp_0513-base/checkpoint-2000-safetensors/",
+      "PEGASUS_VLLM_VIDEO_REQUEST_SEMAPHORE_COUNT": "1",
+      "TP": "2",
+      "VLLM_SPECULATIVE_CONFIG": "{\"method\":\"mtp\",\"num_speculative_tokens\":4}",
+      "VLLM_WORKER_MULTIPROC_METHOD": "spawn"
+    }
+  }
+}

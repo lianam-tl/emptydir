@@ -137,7 +137,9 @@ To use this persistent worker, submit jobs directly to orchestrator and set:
 
 ```text
 legacy_model_register.json  # Register the persistent legacy model in spec-center.
+legacy_model_register_node2.json # Register the second node-pinned model.
 status_active.json          # Mark the model active.
+status_active_node2.json    # Mark the second node-pinned model active.
 scale_one.json              # Scale the deployment to 1 replica.
 orchestrator_smoke_job.json # Example pegasus15-sme job routed to this worker.
 ```
@@ -199,6 +201,15 @@ aws s3 cp --profile training \
 ## Recreate The Persistent Worker
 
 Only do this if the worker was torn down or disappeared.
+
+### Two-node variant
+
+To guarantee two independent `TP=2` workers on different nodes, register and
+activate both `legacy_model_register.json` and
+`legacy_model_register_node2.json`. Scale each model ID to one replica with
+`scale_one.json`. Both records advertise the same
+`worker_type: lia-soccer-mtp-ck2000-persistent`, so loadbalancer calls use them
+as one worker pool. Each worker uses two GPUs, for four GPUs total.
 
 Open two port-forwards:
 
