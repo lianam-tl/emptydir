@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a one-to-one raw-Pegasus viewer for grouped versus consolidated runs."""
+"""Build a shot-level raw-Pegasus viewer for grouped versus consolidated runs."""
 
 from __future__ import annotations
 
@@ -134,63 +134,117 @@ def nearest_record(
     )
 
 
-def compact_payload(payload: dict[str, Any]) -> dict[str, Any]:
-    segments = payload.get("segments", {})
-    result: dict[str, Any] = {
-        "metrics": payload.get("metrics", {}),
-        "definition_errors": payload.get("definition_errors", []),
-    }
-    if isinstance(segments, dict):
-        result["segments"] = segments
-    return result
+def shot_metadata(record: dict[str, Any], grouped: bool) -> list[dict[str, Any]]:
+    segments = record["payload"].get("segments", {})
+    if not isinstance(segments, dict):
+        return []
+    if grouped:
+        return [shot for shot in segments.get("shot", []) if isinstance(shot, dict)]
+    shots: list[dict[str, Any]] = []
+    for video_segment in segments.get("video", []):
+        if not isinstance(video_segment, dict):
+            continue
+        metadata = video_segment.get("metadata", {})
+        if isinstance(metadata, dict):
+            shots.extend(
+                shot
+                for shot in metadata.get("shot_metadata", [])
+                if isinstance(shot, dict)
+            )
+    return shots
 
 
-def panel(title: str, record: dict[str, Any] | None) -> str:
+def entity_text(entities: Any) -> str:
+    if not isinstance(entities, list):
+        return "—"
+    rendered = []
+    for entity in entities:
+        if not isinstance(entity, dict):
+            continue
+        name = entity.get("canonical_name", entity.get("entity_name", "Unnamed"))
+        description = entity.get("appearance", entity.get("entity_description", ""))
+        rendered.append(
+            f"<b>{html.escape(str(name))}</b>"
+            + (
+                f"<br><span>{html.escape(str(description))}</span>"
+                if description
+                else ""
+            )
+        )
+    return "<br><br>".join(rendered) or "—"
+
+
+def shot_table(record: dict[str, Any], grouped: bool) -> str:
+    rows = []
+    for shot in shot_metadata(record, grouped):
+        metadata = shot.get("metadata", {})
+        if not isinstance(metadata, dict):
+            metadata = {}
+        description = metadata.get("shot_summary", metadata.get("description", "—"))
+        rows.append(
+            "<tr>"
+            f"<td>{html.escape(str(shot.get('start_time', '?')))}–{html.escape(str(shot.get('end_time', '?')))}</td>"
+            f"<td>{html.escape(str(metadata.get('shot_type', '—')))}</td>"
+            f"<td>{html.escape(str(metadata.get('camera_motion', '—')))}<br>{html.escape(str(metadata.get('camera_angle', '—')))}</td>"
+            f"<td>{html.escape(str(description))}</td>"
+            f"<td>{entity_text(metadata.get('entities'))}</td>"
+            "</tr>"
+        )
+    if not rows:
+        return "<p class='empty'>No shot-level output in this artifact.</p>"
+    return (
+        "<table><thead><tr><th>Time (s)</th><th>Shot type</th><th>Camera</th>"
+        "<th>Model summary</th><th>Entities</th></tr></thead><tbody>"
+        + "".join(rows)
+        + "</tbody></table>"
+    )
+
+
+def panel(title: str, record: dict[str, Any] | None, grouped: bool) -> str:
     if record is None:
         return f"<section class='panel missing'><h3>{html.escape(title)}</h3><p>No matching artifact found.</p></section>"
-    payload = compact_payload(record["payload"])
     window = record["window"]
     window_text = "unknown" if window is None else f"{window[0]:.1f}–{window[1]:.1f}s"
+    shots = shot_metadata(record, grouped)
     return (
         f"<section class='panel'><h3>{html.escape(title)}</h3>"
         f"<p><b>Window:</b> {window_text}<br><b>Job:</b> <code>{html.escape(str(record['job_id']))}</code><br>"
+        f"<b>Shot-level model output:</b> {len(shots)}<br>"
         f"<b>Raw:</b> <code>{html.escape(str(record['raw_pegasus_output_s3_uri']))}</code></p>"
-        f"<pre>{html.escape(json.dumps(payload, ensure_ascii=False, indent=2))}</pre></section>"
+        + shot_table(record, grouped)
+        + "</section>"
     )
 
 
 def build_pairs(
     consolidated: list[dict[str, Any]], grouped: list[dict[str, Any]]
-) -> list[tuple[dict[str, Any], dict[str, Any] | None, dict[str, Any] | None]]:
+) -> list[tuple[dict[str, Any], dict[str, Any] | None]]:
     consolidated_by_source: dict[str, list[dict[str, Any]]] = defaultdict(list)
     grouped_detect_by_source: dict[str, list[dict[str, Any]]] = defaultdict(list)
-    grouped_consolidate: list[dict[str, Any]] = []
     for record in consolidated:
         consolidated_by_source[str(record["source_video_s3_uri"])].append(record)
     for record in grouped:
-        if record["kind"] == "grouped-consolidate":
-            grouped_consolidate.append(record)
-        elif record["kind"] == "consolidated-or-detect":
+        if record["kind"] == "consolidated-or-detect":
             grouped_detect_by_source[str(record["source_video_s3_uri"])].append(record)
 
     used_consolidated_job_ids: set[str] = set()
     pairs = []
-    for grouped_final in sorted(
-        grouped_consolidate,
+    grouped_detect_records = [
+        record for records in grouped_detect_by_source.values() for record in records
+    ]
+    for grouped_detect in sorted(
+        grouped_detect_records,
         key=lambda record: (str(record["source_video_s3_uri"]), str(record["job_id"])),
     ):
-        source_video_s3_uri = str(grouped_final["source_video_s3_uri"])
-        grouped_detect = nearest_record(
-            grouped_final, grouped_detect_by_source[source_video_s3_uri], set()
-        )
+        source_video_s3_uri = str(grouped_detect["source_video_s3_uri"])
         consolidated_match = nearest_record(
-            grouped_final,
+            grouped_detect,
             consolidated_by_source[source_video_s3_uri],
             used_consolidated_job_ids,
         )
         if consolidated_match is not None:
             used_consolidated_job_ids.add(str(consolidated_match["job_id"]))
-        pairs.append((grouped_final, grouped_detect, consolidated_match))
+        pairs.append((grouped_detect, consolidated_match))
     return pairs
 
 
@@ -206,29 +260,28 @@ def main() -> int:
     pairs = build_pairs(consolidated_records, grouped_records)
 
     cards = []
-    for index, (grouped_final, grouped_detect, consolidated_match) in enumerate(
-        pairs, start=1
-    ):
-        source = str(grouped_final["source_video_s3_uri"])
+    for index, (grouped_detect, consolidated_match) in enumerate(pairs, start=1):
+        source = str(grouped_detect["source_video_s3_uri"])
         cards.append(
             "<details class='pair'><summary>"
-            f"{index}. {html.escape(Path(source).name)} — grouped final job {html.escape(str(grouped_final['job_id']))}"
+            f"{index}. {html.escape(Path(source).name)} — grouped detect job {html.escape(str(grouped_detect['job_id']))}"
             "</summary><div class='source'><code>"
             + html.escape(source)
             + "</code></div><div class='grid'>"
-            + panel("Consolidated", consolidated_match)
-            + panel("Grouped detect", grouped_detect)
-            + panel("Grouped consolidate", grouped_final)
+            + panel(
+                "Consolidated — shot-level output", consolidated_match, grouped=False
+            )
+            + panel("Grouped detect — shot-level output", grouped_detect, grouped=True)
             + "</div></details>"
         )
 
     arguments.output_html.parent.mkdir(parents=True, exist_ok=True)
     arguments.output_html.write_text(
-        "<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Kian grouped vs consolidated raw Pegasus outputs</title>"
+        "<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Kian shot-level grouped vs consolidated outputs</title>"
         "<style>body{font:15px system-ui;max-width:1800px;margin:24px auto;padding:0 20px;color:#18212f}"
-        ".pair{border:1px solid #d0d7de;border-radius:8px;margin:12px 0}.pair summary{cursor:pointer;padding:12px;background:#f6f8fa;font-weight:650}.source{padding:10px 12px;overflow-wrap:anywhere}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding:12px}.panel{border:1px solid #d8dee4;border-radius:6px;padding:10px;overflow:hidden}.missing{background:#fff8c5}.panel h3{margin-top:0}.panel p{font-size:12px;overflow-wrap:anywhere}.panel pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f6f8fa;padding:8px;font-size:11px;max-height:650px;overflow:auto}code{font-size:11px}.controls{position:sticky;top:0;background:#fff;padding:10px 0;border-bottom:1px solid #d0d7de}.controls input{width:min(760px,95%);padding:9px;font-size:14px}@media(max-width:1100px){.grid{grid-template-columns:1fr}}</style></head><body>"
-        "<h1>Kian SoccerRL 4-node: grouped vs consolidated raw Pegasus outputs</h1>"
-        "<p>One row per grouped consolidation artifact. Matches use source-video URI plus maximum time-window overlap. Grouped is intentionally shown as two raw Pegasus calls: detect and consolidate.</p>"
+        ".pair{border:1px solid #d0d7de;border-radius:8px;margin:12px 0}.pair summary{cursor:pointer;padding:12px;background:#f6f8fa;font-weight:650}.source{padding:10px 12px;overflow-wrap:anywhere}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:12px}.panel{border:1px solid #d8dee4;border-radius:6px;padding:10px;overflow:hidden}.missing{background:#fff8c5}.panel h3{margin-top:0}.panel p{font-size:12px;overflow-wrap:anywhere}table{border-collapse:collapse;width:100%;font-size:12px}th,td{border:1px solid #d8dee4;padding:7px;vertical-align:top;text-align:left}th{background:#f6f8fa}td:first-child{white-space:nowrap}.empty{color:#57606a;font-style:italic}code{font-size:11px}.controls{position:sticky;top:0;background:#fff;padding:10px 0;border-bottom:1px solid #d0d7de}.controls input{width:min(760px,95%);padding:9px;font-size:14px}@media(max-width:1100px){.grid{grid-template-columns:1fr}}</style></head><body>"
+        "<h1>Kian SoccerRL 4-node: shot-level output — grouped vs consolidated</h1>"
+        "<p>Only the shot-level model output is shown. Each row starts from one grouped detect artifact and matches one consolidated artifact using the same source-video URI plus maximum time-window overlap.</p>"
         "<div class='controls'><input id='search' placeholder='Filter by filename, source URI, or job ID'><span id='count'></span></div><main>"
         + "".join(cards)
         + "</main><script>const pairs=[...document.querySelectorAll('.pair')];const input=document.querySelector('#search');const count=document.querySelector('#count');function filter(){const query=input.value.toLowerCase();let shown=0;for(const pair of pairs){const visible=!query||pair.textContent.toLowerCase().includes(query);pair.hidden=!visible;if(visible)shown++;}count.textContent=` ${shown}/${pairs.length} shown`;};input.addEventListener('input',filter);filter();</script></body></html>",
@@ -239,7 +292,7 @@ def main() -> int:
             {
                 "consolidated_artifacts": len(consolidated_records),
                 "grouped_artifacts": len(grouped_records),
-                "matched_grouped_finals": len(pairs),
+                "matched_grouped_detects": len(pairs),
             },
             indent=2,
         )
