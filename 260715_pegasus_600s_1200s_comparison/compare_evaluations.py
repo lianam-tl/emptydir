@@ -21,6 +21,7 @@ def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--ten-minute", type=Path, required=True)
     parser.add_argument("--twenty-minute", type=Path, required=True)
+    parser.add_argument("--exclude-id", action="append", default=[])
     parser.add_argument("--output-json", type=Path, required=True)
     parser.add_argument("--output-html", type=Path, required=True)
     return parser.parse_args()
@@ -49,6 +50,7 @@ def format_delta(value: float | None) -> str:
 
 def render_html(comparison: dict) -> str:
     rows = comparison["samples"]
+    excluded_ids = comparison["excluded_ids"]
     summary_rows = "".join(
         "<tr>"
         f"<td>{html.escape(metric)}</td>"
@@ -97,7 +99,8 @@ h1{{font-size:25px;margin:0 0 4px}} .subtle{{color:#57606a;font-size:13px}} .not
 table{{border-collapse:collapse;width:100%;font-size:12px;margin:12px 0}} th,td{{border:1px solid #d0d7de;padding:6px 8px;vertical-align:top}} th{{background:#f6f8fa;text-align:left;position:sticky;top:0}} td.num{{text-align:right;font-variant-numeric:tabular-nums}} .delta{{font-weight:650}} .positive{{color:#1a7f37;background:#dafbe1}} .negative{{color:#cf222e;background:#ffebe9}} code{{font-size:11px;white-space:nowrap}} .scroll{{overflow:auto;border:1px solid #d0d7de;border-radius:8px}}
 </style></head><body>
 <h1>Pegasus <code>assembly-v0</code>: 10-minute vs 20-minute chunks</h1>
-<p class=\"subtle\">Checkpoint: <code>pegasus-sft-4node</code> · 16 samples in each completed run · generated from the two <code>evaluations.json</code> files.</p>
+<p class=\"subtle\">Checkpoint: <code>pegasus-sft-4node</code> · {len(rows)} matched samples · generated from the two <code>evaluations.json</code> files.</p>
+<p class=\"subtle\">Excluded samples: <code>{html.escape(", ".join(excluded_ids) or "none")}</code></p>
 <div class=\"note\"><b>How to read Δ:</b> <code>10m − 20m</code>. Green means the 10-minute run scored higher; red means the 20-minute run scored higher. This compares final e2e scores per test sample, not raw model chunks.</div>
 <h2>Mean score across matched samples</h2><table><thead><tr><th>Metric</th><th>10m</th><th>20m</th><th>Δ (10m − 20m)</th></tr></thead><tbody>{summary_rows}</tbody></table>
 <h2>Per-sample score comparison</h2><div class=\"scroll\"><table><thead><tr><th rowspan=\"2\">Sample</th>{metric_headers}<th rowspan=\"2\">10m errors</th><th rowspan=\"2\">20m errors</th></tr><tr>{subheaders}</tr></thead><tbody>{"".join(table_rows)}</tbody></table></div>
@@ -108,7 +111,8 @@ def main() -> None:
     arguments = parse_arguments()
     ten_minute = read_evaluations(arguments.ten_minute)
     twenty_minute = read_evaluations(arguments.twenty_minute)
-    sample_ids = sorted(set(ten_minute) | set(twenty_minute))
+    excluded_ids = sorted(set(arguments.exclude_id))
+    sample_ids = sorted((set(ten_minute) | set(twenty_minute)) - set(excluded_ids))
     samples = []
     for sample_id in sample_ids:
         ten_minute_entry = ten_minute.get(sample_id)
@@ -166,7 +170,11 @@ def main() -> None:
                 else None
             ),
         }
-    comparison = {"samples": samples, "summary": summary}
+    comparison = {
+        "samples": samples,
+        "summary": summary,
+        "excluded_ids": excluded_ids,
+    }
     arguments.output_json.parent.mkdir(parents=True, exist_ok=True)
     arguments.output_json.write_text(json.dumps(comparison, indent=2) + "\n")
     arguments.output_html.write_text(render_html(comparison))
