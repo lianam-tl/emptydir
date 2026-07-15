@@ -1,0 +1,26 @@
+{
+  "id": "b300-ens",
+  "name": "b300-ens",
+  "nodeSelector": {
+    "sagemaker.amazonaws.com/instance-group-name": "b300-ens"
+  },
+  "nodeAffinity": {
+    "requiredDuringSchedulingIgnoredDuringExecution": {
+      "nodeSelectorTerms": [
+        {
+          "matchExpressions": [
+            {
+              "key": "sagemaker.amazonaws.com/instance-group-name",
+              "operator": "In",
+              "values": [
+                "b300-ens"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "description": "B300 ENS HyperPod instance group"
+}
+
