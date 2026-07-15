@@ -8,6 +8,8 @@ adds `pegasus-sft-4node` on four `b300-ens` nodes.
 - `TP=2`, `DP=4` per replica
 - concurrency 4 per replica
 - checkpoint: `checkpoint-1000-safetensors`
+- v2 generation default: 128,000 tokens
+- v2 structured-output string cap: 102,000 characters
 
 Each replica requests all 8 GPUs on a B300 node, so Kubernetes necessarily
 places the four replicas on four distinct nodes.
@@ -33,3 +35,7 @@ curl -L -X PATCH http://127.0.0.1:18080/status \
 
 To stop it, patch `status_inactive.json`. Deactivation removes the generated
 deployment and its pods.
+
+`model_register_v2_128k.json` upgrades the same worker to the branch-specific
+128K/102K image. Activate it with `status_active_v2.json`; v1 remains available
+as an inactive rollback version.
