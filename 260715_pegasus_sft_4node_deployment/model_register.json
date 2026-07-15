@@ -8,7 +8,7 @@
     "concurrency": 4
   },
   "runtime": {
-    "image_url": "476114115052.dkr.ecr.us-west-2.amazonaws.com/tl-data-training-pegasus-vllm-video:main-fb19772",
+    "image_url": "476114115052.dkr.ecr.us-west-2.amazonaws.com/tl-data-training-pegasus-vllm-video:lia-128k-102k-eaa7c96@sha256:521400b4881ae44c769c9f39d845c7a0924a6b1d0c53da5f0f312b823729fef3",
     "worker_type": "pegasus-sft-4node",
     "port": 8000,
     "health_check_path": "/health",

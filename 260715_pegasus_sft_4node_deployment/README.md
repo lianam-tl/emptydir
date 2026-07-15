@@ -36,6 +36,5 @@ curl -L -X PATCH http://127.0.0.1:18080/status \
 To stop it, patch `status_inactive.json`. Deactivation removes the generated
 deployment and its pods.
 
-`model_register_v2_128k.json` upgrades the same worker to the branch-specific
-128K/102K image. Activate it with `status_active_v2.json`; v1 remains available
-as an inactive rollback version.
+`model_register.json` now points v1 at the branch-specific 128K/102K image.
+The v2 payloads preserve the attempted versioned rollout configuration.
