@@ -7,6 +7,7 @@ import argparse
 import concurrent.futures
 import html
 import json
+import time
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -14,8 +15,15 @@ from pathlib import Path
 
 def get_json(url: str) -> dict[str, object]:
     request = urllib.request.Request(url, headers={"Accept": "application/json"})
-    with urllib.request.urlopen(request, timeout=30) as response:  # noqa: S310
-        return json.loads(response.read())
+    for attempt in range(3):
+        try:
+            with urllib.request.urlopen(request, timeout=30) as response:  # noqa: S310
+                return json.loads(response.read())
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError):
+            if attempt == 2:
+                raise
+            time.sleep(2**attempt)
+    raise RuntimeError("unreachable")
 
 
 def fetch_job(job_id: str, orchestrator_url: str) -> dict[str, object]:
@@ -36,14 +44,14 @@ def fetch_job(job_id: str, orchestrator_url: str) -> dict[str, object]:
 def build_html(records: list[dict[str, object]], title: str) -> str:
     rows = []
     for record in records:
-        output_url = str(record["output_url"])
+        output_url = str(record.get("output_url", ""))
         escaped_output_url = html.escape(output_url)
         rows.append(
             "<tr>"
             f"<td><code>{html.escape(str(record['job_id']))}</code></td>"
-            f"<td>{html.escape(str(record['status']))}</td>"
-            f"<td>{html.escape(str(record['segment_count']))}</td>"
-            f"<td><code>{html.escape(str(record['source_url']))}</code></td>"
+            f"<td>{html.escape(str(record.get('status', 'UNKNOWN')))}</td>"
+            f"<td>{html.escape(str(record.get('segment_count', '')))}</td>"
+            f"<td><code>{html.escape(str(record.get('source_url', record.get('error', ''))))}</code></td>"
             f"<td><a href=\"{escaped_output_url}\">{escaped_output_url}</a></td>"
             "</tr>"
         )
@@ -73,7 +81,16 @@ def main() -> None:
             try:
                 records.append(future.result())
             except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as error:
-                records.append({"job_id": job_id, "status": "ERROR", "error": str(error)})
+                records.append(
+                    {
+                        "job_id": job_id,
+                        "status": "ERROR",
+                        "source_url": "",
+                        "segment_count": 0,
+                        "output_url": "",
+                        "error": str(error),
+                    }
+                )
 
     records.sort(key=lambda record: str(record["job_id"]))
     args.output_dir.mkdir(parents=True, exist_ok=True)
