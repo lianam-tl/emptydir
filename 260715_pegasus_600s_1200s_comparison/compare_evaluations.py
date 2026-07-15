@@ -43,67 +43,54 @@ def format_value(value: float | None) -> str:
     return "—" if value is None else f"{value:.3f}"
 
 
-def format_delta(value: float | None) -> str:
-    if value is None:
-        return "—"
-    return f"{value:+.3f}"
+def winner_class(values: list[float | None], value: float | None) -> str:
+    valid_values = [candidate for candidate in values if candidate is not None]
+    return (
+        "winner"
+        if value is not None and valid_values and value == max(valid_values)
+        else ""
+    )
 
 
 def render_html(comparison: dict) -> str:
     rows = comparison["samples"]
     excluded_ids = comparison["excluded_ids"]
     has_five_minute = comparison["has_five_minute"]
-    summary_rows = "".join(
-        "<tr>"
-        f"<td>{html.escape(metric)}</td>"
-        + (
-            f'<td class="num">{format_value(values["five_minute_mean"])}</td>'
-            if has_five_minute
-            else ""
+
+    def cells(values: dict, suffix: str = "") -> str:
+        candidates = [
+            values.get("five_minute" + suffix),
+            values["ten_minute" + suffix],
+            values["twenty_minute" + suffix],
+        ]
+        durations = ("five_minute", "ten_minute", "twenty_minute")
+        return "".join(
+            f'<td class="num {winner_class(candidates, values.get(duration + suffix))}">{format_value(values.get(duration + suffix))}</td>'
+            for duration in durations
+            if has_five_minute or duration != "five_minute"
         )
-        + f'<td class="num">{format_value(values["ten_minute_mean"])}</td>'
-        f'<td class="num">{format_value(values["twenty_minute_mean"])}</td>'
-        f'<td class="num delta {"positive" if values["delta_mean"] > 0 else "negative" if values["delta_mean"] < 0 else ""}">{format_delta(values["delta_mean"])}</td>'
-        "</tr>"
+
+    summary_rows = "".join(
+        f"<tr><td>{html.escape(metric)}</td>{cells(values, '_mean')}</tr>"
         for metric, values in comparison["summary"].items()
     )
     table_rows = []
     for sample in rows:
-        cells = [f"<td><code>{html.escape(sample['id'])}</code></td>"]
-        for metric in METRICS:
-            values = sample["metrics"][metric]
-            delta = values["delta_ten_minus_twenty"]
-            delta_class = (
-                "positive"
-                if delta and delta > 0
-                else "negative"
-                if delta and delta < 0
-                else ""
-            )
-            cells.extend(
-                (
-                    f'<td class="num">{format_value(values["five_minute"])}</td>'
-                    if has_five_minute
-                    else "",
-                    f'<td class="num">{format_value(values["ten_minute"])}</td>',
-                    f'<td class="num">{format_value(values["twenty_minute"])}</td>',
-                    f'<td class="num delta {delta_class}">{format_delta(delta)}</td>',
-                )
-            )
-        cells.append(
+        cells_html = [f"<td><code>{html.escape(sample['id'])}</code></td>"]
+        cells_html.extend(cells(sample["metrics"][metric]) for metric in METRICS)
+        cells_html.append(
             f"<td>{html.escape(', '.join(sample['ten_minute_errors']) or '—')}</td>"
         )
-        cells.append(
+        cells_html.append(
             f"<td>{html.escape(', '.join(sample['twenty_minute_errors']) or '—')}</td>"
         )
-        table_rows.append("<tr>" + "".join(cells) + "</tr>")
+        table_rows.append("<tr>" + "".join(cells_html) + "</tr>")
+    column_count = 3 if has_five_minute else 2
     metric_headers = "".join(
-        f'<th colspan="{4 if has_five_minute else 3}">{html.escape(metric)}</th>'
-        for metric in METRICS
+        f'<th colspan="{column_count}">{html.escape(metric)}</th>' for metric in METRICS
     )
     subheaders = "".join(
-        ("<th>5m</th>" if has_five_minute else "")
-        + "<th>10m</th><th>20m</th><th>Δ</th>"
+        ("<th>5m</th>" if has_five_minute else "") + "<th>10m</th><th>20m</th>"
         for _ in METRICS
     )
     return f"""<!doctype html>
@@ -111,13 +98,13 @@ def render_html(comparison: dict) -> str:
 <style>
 body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;margin:24px;color:#24292f;line-height:1.5;max-width:1800px}}
 h1{{font-size:25px;margin:0 0 4px}} .subtle{{color:#57606a;font-size:13px}} .note{{background:#eef6ff;border-left:4px solid #0969da;padding:11px 14px;border-radius:6px;margin:18px 0}}
-table{{border-collapse:collapse;width:100%;font-size:12px;margin:12px 0}} th,td{{border:1px solid #d0d7de;padding:6px 8px;vertical-align:top}} th{{background:#f6f8fa;text-align:left;position:sticky;top:0}} td.num{{text-align:right;font-variant-numeric:tabular-nums}} .delta{{font-weight:650}} .positive{{color:#1a7f37;background:#dafbe1}} .negative{{color:#cf222e;background:#ffebe9}} code{{font-size:11px;white-space:nowrap}} .scroll{{overflow:auto;border:1px solid #d0d7de;border-radius:8px}}
+table{{border-collapse:collapse;width:100%;font-size:12px;margin:12px 0}} th,td{{border:1px solid #d0d7de;padding:6px 8px;vertical-align:top}} th{{background:#f6f8fa;text-align:left;position:sticky;top:0}} td.num{{text-align:right;font-variant-numeric:tabular-nums}} .winner{{font-weight:700;color:#1a7f37;background:#dafbe1}} code{{font-size:11px;white-space:nowrap}} .scroll{{overflow:auto;border:1px solid #d0d7de;border-radius:8px}}
 </style></head><body>
 <h1>Pegasus <code>assembly-v0</code>: 5-minute vs 10-minute vs 20-minute chunks</h1>
 <p class=\"subtle\">Checkpoint: <code>pegasus-sft-4node</code> · {len(rows)} matched samples · generated from the completed <code>evaluations.json</code> files.</p>
 <p class=\"subtle\">Excluded samples: <code>{html.escape(", ".join(excluded_ids) or "none")}</code></p>
-<div class=\"note\"><b>How to read Δ:</b> <code>10m − 20m</code>. Green means the 10-minute run scored higher; red means the 20-minute run scored higher. This compares final e2e scores per test sample, not raw model chunks.</div>
-<h2>Mean score across matched samples</h2><table><thead><tr><th>Metric</th>{"<th>5m</th>" if has_five_minute else ""}<th>10m</th><th>20m</th><th>Δ (10m − 20m)</th></tr></thead><tbody>{summary_rows}</tbody></table>
+<div class=\"note\"><b>Winner highlight:</b> green is the highest score among 5m, 10m, and 20m for that metric. This compares final e2e scores per test sample, not raw model chunks.</div>
+<h2>Mean score across matched samples</h2><table><thead><tr><th>Metric</th>{"<th>5m</th>" if has_five_minute else ""}<th>10m</th><th>20m</th></tr></thead><tbody>{summary_rows}</tbody></table>
 <h2>Per-sample score comparison</h2><div class=\"scroll\"><table><thead><tr><th rowspan=\"2\">Sample</th>{metric_headers}<th rowspan=\"2\">10m errors</th><th rowspan=\"2\">20m errors</th></tr><tr>{subheaders}</tr></thead><tbody>{"".join(table_rows)}</tbody></table></div>
 </body></html>"""
 
