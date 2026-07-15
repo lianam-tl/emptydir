@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a shot-level raw-Pegasus viewer for grouped versus consolidated runs."""
+"""Build a shot-level viewer for grouped (multiple-call) versus consolidated inference."""
 
 from __future__ import annotations
 
@@ -266,24 +266,34 @@ def main() -> int:
         source = str(grouped_detect["source_video_s3_uri"])
         cards.append(
             "<details class='pair'><summary>"
-            f"{index}. {html.escape(Path(source).name)} — grouped detect job {html.escape(str(grouped_detect['job_id']))}"
+            f"{index}. {html.escape(Path(source).name)} — Grouped (multiple-call) detect job {html.escape(str(grouped_detect['job_id']))}"
             "</summary><div class='source'><code>"
             + html.escape(source)
             + "</code></div><div class='grid'>"
             + panel(
-                "Consolidated — shot-level output", consolidated_match, grouped=False
+                "Consolidated (nested, one-call) — shot-level output",
+                consolidated_match,
+                grouped=False,
             )
-            + panel("Grouped detect — shot-level output", grouped_detect, grouped=True)
+            + panel(
+                "Grouped (multiple-call) — detect-call shot-level output",
+                grouped_detect,
+                grouped=True,
+            )
             + "</div></details>"
         )
 
     arguments.output_html.parent.mkdir(parents=True, exist_ok=True)
     arguments.output_html.write_text(
-        "<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Kian shot-level grouped vs consolidated outputs</title>"
+        "<!doctype html><html lang='en'><head><meta charset='utf-8'><title>Kian: grouped (multiple-call) vs consolidated (one-call)</title>"
         "<style>body{font:15px system-ui;max-width:1800px;margin:24px auto;padding:0 20px;color:#18212f}"
-        ".pair{border:1px solid #d0d7de;border-radius:8px;margin:12px 0}.pair summary{cursor:pointer;padding:12px;background:#f6f8fa;font-weight:650}.source{padding:10px 12px;overflow-wrap:anywhere}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:12px}.panel{border:1px solid #d8dee4;border-radius:6px;padding:10px;overflow:hidden}.missing{background:#fff8c5}.panel h3{margin-top:0}.panel p{font-size:12px;overflow-wrap:anywhere}table{border-collapse:collapse;width:100%;font-size:12px}th,td{border:1px solid #d8dee4;padding:7px;vertical-align:top;text-align:left}th{background:#f6f8fa}td:first-child{white-space:nowrap}.empty{color:#57606a;font-style:italic}code{font-size:11px}.controls{position:sticky;top:0;background:#fff;padding:10px 0;border-bottom:1px solid #d0d7de}.controls input{width:min(760px,95%);padding:9px;font-size:14px}@media(max-width:1100px){.grid{grid-template-columns:1fr}}</style></head><body>"
-        "<h1>Kian SoccerRL 4-node: shot-level output — grouped vs consolidated</h1>"
-        "<p>Only the shot-level model output is shown. Each row starts from one grouped detect artifact and matches one consolidated artifact using the same source-video URI plus maximum time-window overlap.</p>"
+        ".how{border:1px solid #b6d4fe;background:#f1f8ff;border-radius:8px;padding:14px 16px;margin:16px 0;line-height:1.55}.how h2{margin:0 0 8px;font-size:18px}.how ol{margin:6px 0 0;padding-left:22px}.how code{font-size:12px}.pair{border:1px solid #d0d7de;border-radius:8px;margin:12px 0}.pair summary{cursor:pointer;padding:12px;background:#f6f8fa;font-weight:650}.source{padding:10px 12px;overflow-wrap:anywhere}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:12px}.panel{border:1px solid #d8dee4;border-radius:6px;padding:10px;overflow:hidden}.missing{background:#fff8c5}.panel h3{margin-top:0}.panel p{font-size:12px;overflow-wrap:anywhere}table{border-collapse:collapse;width:100%;font-size:12px}th,td{border:1px solid #d8dee4;padding:7px;vertical-align:top;text-align:left}th{background:#f6f8fa}td:first-child{white-space:nowrap}.empty{color:#57606a;font-style:italic}code{font-size:11px}.controls{position:sticky;top:0;background:#fff;padding:10px 0;border-bottom:1px solid #d0d7de}.controls input{width:min(760px,95%);padding:9px;font-size:14px}@media(max-width:1100px){.grid{grid-template-columns:1fr}}</style></head><body>"
+        "<h1>Kian SoccerRL 4-node: Grouped (multiple-call) vs Consolidated (nested, one-call)</h1>"
+        "<section class='how'><h2>What differs between the two inference modes?</h2>"
+        "<ol><li><b>Grouped (multiple-call):</b> Pegasus first makes a <b>detect call</b> that produces shot-level and video-level candidates. A separate <b>consolidate call</b> then consumes those candidates and emits the final entity-level result. This page shows the <b>detect-call shot output</b>, because that is where shot descriptions live.</li>"
+        "<li><b>Consolidated (nested, one-call):</b> Pegasus makes one call. Its video-level result contains the shot-level descriptions <b>nested</b> under <code>video[].metadata.shot_metadata</code>. This page extracts that nested shot output.</li>"
+        "</ol><p>Therefore this is a comparison of the two modes' <b>shot descriptions</b>, not a comparison of grouped's final entity-level consolidate output. The stored artifacts are post-processed JSON used by indexing, rather than an unparsed token stream.</p></section>"
+        "<p>Each row starts from one Grouped (multiple-call) detect artifact and matches one Consolidated (nested, one-call) artifact using the same source-video URI plus maximum time-window overlap.</p>"
         "<div class='controls'><input id='search' placeholder='Filter by filename, source URI, or job ID'><span id='count'></span></div><main>"
         + "".join(cards)
         + "</main><script>const pairs=[...document.querySelectorAll('.pair')];const input=document.querySelector('#search');const count=document.querySelector('#count');function filter(){const query=input.value.toLowerCase();let shown=0;for(const pair of pairs){const visible=!query||pair.textContent.toLowerCase().includes(query);pair.hidden=!visible;if(visible)shown++;}count.textContent=` ${shown}/${pairs.length} shown`;};input.addEventListener('input',filter);filter();</script></body></html>",
