@@ -177,7 +177,9 @@ def entity_text(entities: Any) -> str:
 def shot_table(record: dict[str, Any], grouped: bool) -> str:
     rows = []
     for shot in shot_metadata(record, grouped):
-        metadata = shot.get("metadata", {})
+        # Consolidated embeds shot fields directly in ``shot_metadata``;
+        # grouped detect nests the same fields below ``metadata``.
+        metadata = shot.get("metadata", {}) if grouped else shot
         if not isinstance(metadata, dict):
             metadata = {}
         description = metadata.get("shot_summary", metadata.get("description", "—"))
