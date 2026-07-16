@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>entity_cov v0.2 consolidated prompt viewer</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;max-width:1400px;margin:28px;color:#24292f;line-height:1.55;background:#fff}
+h1{font-size:26px;margin:0 0 5px} h2{font-size:20px;margin:25px 0 9px} h3{font-size:15px;margin:22px 0 8px}
+.subtle{color:#57606a;font-size:13px} .note{background:#eef6ff;border-left:4px solid #0969da;padding:11px 14px;border-radius:6px;margin:16px 0}
+.warn{background:#fff8c5;border-left:4px solid #bf8700;padding:11px 14px;border-radius:6px;margin:16px 0}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid #d0d7de;margin-top:24px}
+.tab{border:1px solid #d0d7de;border-bottom:0;border-radius:8px 8px 0 0;background:#f6f8fa;padding:8px 13px;cursor:pointer;font-weight:600}
+.tab.active{background:#fff;color:#0969da;position:relative;top:1px} .panel{display:none;padding:18px 2px} .panel.active{display:block}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(140px,1fr));gap:10px} .card{border:1px solid #d0d7de;border-radius:8px;padding:10px;background:#f6f8fa}
+.card span{display:block;color:#57606a;font-size:12px} .card strong{font-size:18px;overflow-wrap:anywhere}
+pre{background:#f6f8fa;border:1px solid #d0d7de;border-radius:8px;padding:12px;overflow:auto;font-size:12px;line-height:1.45}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;background:#f6f8fa;border:1px solid #d0d7de;border-radius:5px;padding:1px 4px}
+pre code{border:0;background:transparent;padding:0;font-size:12px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 14px} .pill{border-radius:999px;padding:5px 10px;font-size:12px;border:1px solid #d0d7de}
+.pill.on{background:#dafbe1;color:#116329;border-color:#4ac26b} .pill.off{background:#ffebe9;color:#82071e;border-color:#ff8182}
+@media(max-width:800px){body{margin:18px}.grid{grid-template-columns:repeat(2,minmax(140px,1fr))}}
+</style>
+</head>
+<body>
+<h1>entity_cov v0.2 consolidated prompt viewer</h1>
+<p class="subtle">Generated from PR #1725 source: <code>/Users/long8v/worktrees/pegasus/pr-1725-review/data/entity-eval/entity_cov_v0_2_tdf.py</code></p>
+<div class="note"><b>Key point:</b> the consolidated segment instruction is plain text inside the user message. It is not stored as <code>json_schema</code>, and v0.2 intentionally does not include the old flat <code>metadata_schema</code> or <code>Example output structure</code> block.</div>
+<div class="warn"><b>Current PR detail:</b> the actual prompt text in the branch is the trimmed consolidated wording. It contains the requested concepts, but the row assistant answer is still old entity-coverage GT: <code>domain</code>, <code>roster</code>, <code>spans</code>.</div>
+<div class="tabs" role="tablist"><button class="tab active" data-tab="full">full row</button>
+<button class="tab " data-tab="half0">half row 0</button>
+<button class="tab " data-tab="half1">half row 1</button></div>
+
+<section class="panel active" id="full">
+  <h2>full row</h2>
+  <div class="grid"><div class="card"><span>segment_shape</span><strong>full</strong></div><div class="card"><span>chunk_index</span><strong>0</strong></div><div class="card"><span>chunk_count</span><strong>1</strong></div><div class="card"><span>seconds</span><strong>0.0 - 900.0</strong></div><div class="card"><span>duration</span><strong>900.0</strong></div><div class="card"><span>GT roster</span><strong>2</strong></div><div class="card"><span>GT spans</span><strong>3</strong></div><div class="card"><span>metadata_schema</span><strong>absent</strong></div></div>
+  <div class="note">
+    <b>Where the consolidated prompt goes:</b>
+    <code>messages[0].content[1].text</code>. The video token is the previous content item:
+    <code>messages[0].content[0].video = &lt;|TWLV_VIDEO|&gt;</code>.
+  </div>
+  <h3>Prompt Feature Check</h3>
+  <div class="pills"><span class="pill on">video-level summary</span><span class="pill on">canonical roster</span><span class="pill on">relationships</span><span class="pill on">shot_metadata</span></div>
+  <h3>Actual User Turn Content Array</h3>
+  <pre><code class="language-json">[
+  {
+    &quot;type&quot;: &quot;video&quot;,
+    &quot;text&quot;: null,
+    &quot;image&quot;: null,
+    &quot;video&quot;: &quot;&lt;|TWLV_VIDEO|&gt;&quot;,
+    &quot;audio&quot;: null,
+    &quot;json_schema&quot;: null,
+    &quot;asr_data&quot;: null
+  },
+  {
+    &quot;type&quot;: &quot;text&quot;,
+    &quot;text&quot;: &quot;Produce ONE record for this whole part: a video-level summary, the canonical roster of every important entity, the relationships among them, and a contiguous shot-by-shot breakdown in `shot_metadata`. The first shot starts at 0 and the last ends at 900, covering the part end to end with no gaps.&quot;,
+    &quot;image&quot;: null,
+    &quot;video&quot;: null,
+    &quot;audio&quot;: null,
+    &quot;json_schema&quot;: null,
+    &quot;asr_data&quot;: null
+  }
+]</code></pre>
+  <h3>Exact Prompt Text</h3>
+  <pre><code class="language-text">Produce ONE record for this whole part: a video-level summary, the canonical roster of every important entity, the relationships among them, and a contiguous shot-by-shot breakdown in `shot_metadata`. The first shot starts at 0 and the last ends at 900, covering the part end to end with no gaps.</code></pre>
+  <h3>Assistant Ground Truth Stored In This TDF Row</h3>
+  <p class="subtle">This is still the entity-coverage GT shape: <code>domain</code>, <code>roster</code>, <code>spans</code>.</p>
+  <pre><code class="language-text">```json
+{
+    &quot;domain&quot;: &quot;film&quot;,
+    &quot;roster&quot;: [
+        {
+            &quot;label_id&quot;: &quot;alice&quot;,
+            &quot;name&quot;: &quot;Alice&quot;,
+            &quot;name_known&quot;: true,
+            &quot;aliases&quot;: [],
+            &quot;name_evidence&quot;: &quot;Spoken at 00:12.&quot;,
+            &quot;appearance&quot;: {
+                &quot;hair&quot;: &quot;brown&quot;,
+                &quot;role&quot;: &quot;lead&quot;
+            },
+            &quot;domain&quot;: &quot;film&quot;
+        },
+        {
+            &quot;label_id&quot;: &quot;bob&quot;,
+            &quot;name&quot;: &quot;Bob&quot;,
+            &quot;name_known&quot;: true,
+            &quot;aliases&quot;: [],
+            &quot;name_evidence&quot;: &quot;Name appears on screen at 08:20.&quot;,
+            &quot;appearance&quot;: {
+                &quot;hair&quot;: &quot;black&quot;,
+                &quot;role&quot;: &quot;doctor&quot;
+            },
+            &quot;domain&quot;: &quot;film&quot;
+        }
+    ],
+    &quot;spans&quot;: [
+        {
+            &quot;label_id&quot;: &quot;alice&quot;,
+            &quot;start&quot;: 10.0,
+            &quot;end&quot;: 20.0
+        },
+        {
+            &quot;label_id&quot;: &quot;alice&quot;,
+            &quot;start&quot;: 400.0,
+            &quot;end&quot;: 500.0
+        },
+        {
+            &quot;label_id&quot;: &quot;bob&quot;,
+            &quot;start&quot;: 500.0,
+            &quot;end&quot;: 600.0
+        }
+    ]
+}```</code></pre>
+  <h3>Parsed Assistant JSON</h3>
+  <pre><code class="language-json">{
+  &quot;domain&quot;: &quot;film&quot;,
+  &quot;roster&quot;: [
+    {
+      &quot;label_id&quot;: &quot;alice&quot;,
+      &quot;name&quot;: &quot;Alice&quot;,
+      &quot;name_known&quot;: true,
+      &quot;aliases&quot;: [],
+      &quot;name_evidence&quot;: &quot;Spoken at 00:12.&quot;,
+      &quot;appearance&quot;: {
+        &quot;hair&quot;: &quot;brown&quot;,
+        &quot;role&quot;: &quot;lead&quot;
+      },
+      &quot;domain&quot;: &quot;film&quot;
+    },
+    {
+      &quot;label_id&quot;: &quot;bob&quot;,
+      &quot;name&quot;: &quot;Bob&quot;,
+      &quot;name_known&quot;: true,
+      &quot;aliases&quot;: [],
+      &quot;name_evidence&quot;: &quot;Name appears on screen at 08:20.&quot;,
+      &quot;appearance&quot;: {
+        &quot;hair&quot;: &quot;black&quot;,
+        &quot;role&quot;: &quot;doctor&quot;
+      },
+      &quot;domain&quot;: &quot;film&quot;
+    }
+  ],
+  &quot;spans&quot;: [
+    {
+      &quot;label_id&quot;: &quot;alice&quot;,
+      &quot;start&quot;: 10.0,
+      &quot;end&quot;: 20.0
+    },
+    {
+      &quot;label_id&quot;: &quot;alice&quot;,
+      &quot;start&quot;: 400.0,
+      &quot;end&quot;: 500.0
+    },
+    {
+      &quot;label_id&quot;: &quot;bob&quot;,
+      &quot;start&quot;: 500.0,
+      &quot;end&quot;: 600.0
+    }
+  ]
+}</code></pre>
+  <h3>Metadata Driving The Prompt And Chunk</h3>
+  <pre><code class="language-json">{
+  &quot;chunk_count&quot;: 1,
+  &quot;chunk_duration_seconds&quot;: 900.0,
+  &quot;chunk_end_seconds&quot;: 900.0,
+  &quot;chunk_index&quot;: 0,
+  &quot;chunk_start_seconds&quot;: 0.0,
+  &quot;domain&quot;: &quot;film&quot;,
+  &quot;evaluation&quot;: {
+    &quot;output_format&quot;: &quot;structured&quot;
+  },
+  &quot;ground_truth&quot;: {
+    &quot;domain&quot;: &quot;film&quot;,
+    &quot;roster&quot;: [
+      {
+        &quot;aliases&quot;: [],
+        &quot;appearance&quot;: {
+          &quot;hair&quot;: &quot;brown&quot;,
+          &quot;role&quot;: &quot;lead&quot;
+        },
+        &quot;domain&quot;: &quot;film&quot;,
+        &quot;label_id&quot;: &quot;alice&quot;,
+        &quot;name&quot;: &quot;Alice&quot;,
+        &quot;name_evidence&quot;: &quot;Spoken at 00:12.&quot;,
+        &quot;name_known&quot;: true
+      },
+      {
+        &quot;aliases&quot;: [],
+        &quot;appearance&quot;: {
+          &quot;hair&quot;: &quot;black&quot;,
+          &quot;role&quot;: &quot;doctor&quot;
+        },
+        &quot;domain&quot;: &quot;film&quot;,
+        &quot;label_id&quot;: &quot;bob&quot;,
+        &quot;name&quot;: &quot;Bob&quot;,
+        &quot;name_evidence&quot;: &quot;Name appears on screen at 08:20.&quot;,
+        &quot;name_known&quot;: true
+      }
+    ],
+    &quot;spans&quot;: [
+      {
+        &quot;end&quot;: 20.0,
+        &quot;label_id&quot;: &quot;alice&quot;,
+        &quot;start&quot;: 10.0
+      },
+      {
+        &quot;end&quot;: 500.0,
+        &quot;label_id&quot;: &quot;alice&quot;,
+        &quot;start&quot;: 400.0
+      },
+      {
+        &quot;end&quot;: 600.0,
+        &quot;label_id&quot;: &quot;bob&quot;,
+        &quot;start&quot;: 500.0
+      }
+    ],
+    &quot;video_id&quot;: &quot;lia-demo-video__full__000&quot;
+  },
+  &quot;index_id&quot;: &quot;entity-coverage-v0&quot;,
+  &quot;media_status&quot;: &quot;planned_not_cut&quot;,
+  &quot;query&quot;: &quot;Entity-coverage metadata extraction (query unused during evaluation)&quot;,
+  &quot;roster_count&quot;: 2,
+  &quot;sample_id&quot;: &quot;lia-demo-video__full__000&quot;,
+  &quot;segment_shape&quot;: &quot;full&quot;,
+  &quot;source_branch&quot;: &quot;feat/vcs-2339-pegasus-eval-entity-metric&quot;,
+  &quot;source_repo&quot;: &quot;twelvelabs-io/tl-embed&quot;,
+  &quot;source_suite_url&quot;: &quot;https://github.com/twelvelabs-io/tl-embed/tree/feat/vcs-2339-pegasus-eval-entity-metric/services/tl-vcs/eval/test_suites/entity-coverage-v0&quot;,
+  &quot;source_video_id&quot;: &quot;lia-demo-video&quot;,
+  &quot;source_video_url&quot;: &quot;s3://source/lia-demo-video.mp4&quot;,
+  &quot;span_count&quot;: 3,
+  &quot;suite&quot;: &quot;entity-coverage-v0&quot;,
+  &quot;task_type&quot;: &quot;entity_coverage&quot;,
+  &quot;timestamp_origin&quot;: &quot;chunk_relative_seconds&quot;,
+  &quot;video_id&quot;: &quot;lia-demo-video__full__000&quot;,
+  &quot;video_url&quot;: &quot;s3://tl-data-training-pegasus-us-west-2/raw_media/private/entity_cov_v0_2_chunks/full/lia-demo-video/lia-demo-video_full_000_0000000000ms_0000900000ms.mp4&quot;
+}</code></pre>
+</section>
+
+
+<section class="panel" id="half0">
+  <h2>half row 0</h2>
+  <div class="grid"><div class="card"><span>segment_shape</span><strong>half</strong></div><div class="card"><span>chunk_index</span><strong>0</strong></div><div class="card"><span>chunk_count</span><strong>2</strong></div><div class="card"><span>seconds</span><strong>0.0 - 450.0</strong></div><div class="card"><span>duration</span><strong>450.0</strong></div><div class="card"><span>GT roster</span><strong>1</strong></div><div class="card"><span>GT spans</span><strong>2</strong></div><div class="card"><span>metadata_schema</span><strong>absent</strong></div></div>
+  <div class="note">
+    <b>Where the consolidated prompt goes:</b>
+    <code>messages[0].content[1].text</code>. The video token is the previous content item:
+    <code>messages[0].content[0].video = &lt;|TWLV_VIDEO|&gt;</code>.
+  </div>
+  <h3>Prompt Feature Check</h3>
+  <div class="pills"><span class="pill on">video-level summary</span><span class="pill on">canonical roster</span><span class="pill on">relationships</span><span class="pill on">shot_metadata</span></div>
+  <h3>Actual User Turn Content Array</h3>
+  <pre><code class="language-json">[
+  {
+    &quot;type&quot;: &quot;video&quot;,
+    &quot;text&quot;: null,
+    &quot;image&quot;: null,
+    &quot;video&quot;: &quot;&lt;|TWLV_VIDEO|&gt;&quot;,
+    &quot;audio&quot;: null,
+    &quot;json_schema&quot;: null,
+    &quot;asr_data&quot;: null
+  },
+  {
+    &quot;type&quot;: &quot;text&quot;,
+    &quot;text&quot;: &quot;Produce ONE record for this whole part: a video-level summary, the canonical roster of every important entity, the relationships among them, and a contiguous shot-by-shot breakdown in `shot_metadata`. The first shot starts at 0 and the last ends at 450, covering the part end to end with no gaps.&quot;,
+    &quot;image&quot;: null,
+    &quot;video&quot;: null,
+    &quot;audio&quot;: null,
+    &quot;json_schema&quot;: null,
+    &quot;asr_data&quot;: null
+  }
+]</code></pre>
+  <h3>Exact Prompt Text</h3>
+  <pre><code class="language-text">Produce ONE record for this whole part: a video-level summary, the canonical roster of every important entity, the relationships among them, and a contiguous shot-by-shot breakdown in `shot_metadata`. The first shot starts at 0 and the last ends at 450, covering the part end to end with no gaps.</code></pre>
+  <h3>Assistant Ground Truth Stored In This TDF Row</h3>
+  <p class="subtle">This is still the entity-coverage GT shape: <code>domain</code>, <code>roster</code>, <code>spans</code>.</p>
+  <pre><code class="language-text">```json
+{
+    &quot;domain&quot;: &quot;film&quot;,
+    &quot;roster&quot;: [
+        {
+            &quot;label_id&quot;: &quot;alice&quot;,
+            &quot;name&quot;: &quot;Alice&quot;,
+            &quot;name_known&quot;: true,
+            &quot;aliases&quot;: [],
+            &quot;name_evidence&quot;: &quot;Spoken at 00:12.&quot;,
+            &quot;appearance&quot;: {
+                &quot;hair&quot;: &quot;brown&quot;,
+                &quot;role&quot;: &quot;lead&quot;
+            },
+            &quot;domain&quot;: &quot;film&quot;
+        }
+    ],
+    &quot;spans&quot;: [
+        {
+            &quot;label_id&quot;: &quot;alice&quot;,
+            &quot;start&quot;: 10.0,
+            &quot;end&quot;: 20.0
+        },
+        {
+            &quot;label_id&quot;: &quot;alice&quot;,
+            &quot;start&quot;: 400.0,
+            &quot;end&quot;: 450.0
+        }
+    ]
+}```</code></pre>
+  <h3>Parsed Assistant JSON</h3>
+  <pre><code class="language-json">{
+  &quot;domain&quot;: &quot;film&quot;,
+  &quot;roster&quot;: [
+    {
+      &quot;label_id&quot;: &quot;alice&quot;,
+      &quot;name&quot;: &quot;Alice&quot;,
+      &quot;name_known&quot;: true,
+      &quot;aliases&quot;: [],
+      &quot;name_evidence&quot;: &quot;Spoken at 00:12.&quot;,
+      &quot;appearance&quot;: {
+        &quot;hair&quot;: &quot;brown&quot;,
+        &quot;role&quot;: &quot;lead&quot;
+      },
+      &quot;domain&quot;: &quot;film&quot;
+    }
+  ],
+  &quot;spans&quot;: [
+    {
+      &quot;label_id&quot;: &quot;alice&quot;,
+      &quot;start&quot;: 10.0,
+      &quot;end&quot;: 20.0
+    },
+    {
+      &quot;label_id&quot;: &quot;alice&quot;,
+      &quot;start&quot;: 400.0,
+      &quot;end&quot;: 450.0
+    }
+  ]
+}</code></pre>
+  <h3>Metadata Driving The Prompt And Chunk</h3>
+  <pre><code class="language-json">{
+  &quot;chunk_count&quot;: 2,
+  &quot;chunk_duration_seconds&quot;: 450.0,
+  &quot;chunk_end_seconds&quot;: 450.0,
+  &quot;chunk_index&quot;: 0,
+  &quot;chunk_start_seconds&quot;: 0.0,
+  &quot;domain&quot;: &quot;film&quot;,
+  &quot;evaluation&quot;: {
+    &quot;output_format&quot;: &quot;structured&quot;
+  },
+  &quot;ground_truth&quot;: {
+    &quot;domain&quot;: &quot;film&quot;,
+    &quot;roster&quot;: [
+      {
+        &quot;aliases&quot;: [],
+        &quot;appearance&quot;: {
+          &quot;hair&quot;: &quot;brown&quot;,
+          &quot;role&quot;: &quot;lead&quot;
+        },
+        &quot;domain&quot;: &quot;film&quot;,
+        &quot;label_id&quot;: &quot;alice&quot;,
+        &quot;name&quot;: &quot;Alice&quot;,
+        &quot;name_evidence&quot;: &quot;Spoken at 00:12.&quot;,
+        &quot;name_known&quot;: true
+      }
+    ],
+    &quot;spans&quot;: [
+      {
+        &quot;end&quot;: 20.0,
+        &quot;label_id&quot;: &quot;alice&quot;,
+        &quot;start&quot;: 10.0
+      },
+      {
+        &quot;end&quot;: 450.0,
+        &quot;label_id&quot;: &quot;alice&quot;,
+        &quot;start&quot;: 400.0
+      }
+    ],
+    &quot;video_id&quot;: &quot;lia-demo-video__half__000&quot;
+  },
+  &quot;index_id&quot;: &quot;entity-coverage-v0&quot;,
+  &quot;media_status&quot;: &quot;planned_not_cut&quot;,
+  &quot;query&quot;: &quot;Entity-coverage metadata extraction (query unused during evaluation)&quot;,
+  &quot;roster_count&quot;: 1,
+  &quot;sample_id&quot;: &quot;lia-demo-video__half__000&quot;,
+  &quot;segment_shape&quot;: &quot;half&quot;,
+  &quot;source_branch&quot;: &quot;feat/vcs-2339-pegasus-eval-entity-metric&quot;,
+  &quot;source_repo&quot;: &quot;twelvelabs-io/tl-embed&quot;,
+  &quot;source_suite_url&quot;: &quot;https://github.com/twelvelabs-io/tl-embed/tree/feat/vcs-2339-pegasus-eval-entity-metric/services/tl-vcs/eval/test_suites/entity-coverage-v0&quot;,
+  &quot;source_video_id&quot;: &quot;lia-demo-video&quot;,
+  &quot;source_video_url&quot;: &quot;s3://source/lia-demo-video.mp4&quot;,
+  &quot;span_count&quot;: 2,
+  &quot;suite&quot;: &quot;entity-coverage-v0&quot;,
+  &quot;task_type&quot;: &quot;entity_coverage&quot;,
+  &quot;timestamp_origin&quot;: &quot;chunk_relative_seconds&quot;,
+  &quot;video_id&quot;: &quot;lia-demo-video__half__000&quot;,
+  &quot;video_url&quot;: &quot;s3://tl-data-training-pegasus-us-west-2/raw_media/private/entity_cov_v0_2_chunks/half/lia-demo-video/lia-demo-video_half_000_0000000000ms_0000450000ms.mp4&quot;
+}</code></pre>
+</section>
+
+
+<section class="panel" id="half1">
+  <h2>half row 1</h2>
+  <div class="grid"><div class="card"><span>segment_shape</span><strong>half</strong></div><div class="card"><span>chunk_index</span><strong>1</strong></div><div class="card"><span>chunk_count</span><strong>2</strong></div><div class="card"><span>seconds</span><strong>450.0 - 900.0</strong></div><div class="card"><span>duration</span><strong>450.0</strong></div><div class="card"><span>GT roster</span><strong>2</strong></div><div class="card"><span>GT spans</span><strong>2</strong></div><div class="card"><span>metadata_schema</span><strong>absent</strong></div></div>
+  <div class="note">
+    <b>Where the consolidated prompt goes:</b>
+    <code>messages[0].content[1].text</code>. The video token is the previous content item:
+    <code>messages[0].content[0].video = &lt;|TWLV_VIDEO|&gt;</code>.
+  </div>
+  <h3>Prompt Feature Check</h3>
+  <div class="pills"><span class="pill on">video-level summary</span><span class="pill on">canonical roster</span><span class="pill on">relationships</span><span class="pill on">shot_metadata</span></div>
+  <h3>Actual User Turn Content Array</h3>
+  <pre><code class="language-json">[
+  {
+    &quot;type&quot;: &quot;video&quot;,
+    &quot;text&quot;: null,
+    &quot;image&quot;: null,
+    &quot;video&quot;: &quot;&lt;|TWLV_VIDEO|&gt;&quot;,
+    &quot;audio&quot;: null,
+    &quot;json_schema&quot;: null,
+    &quot;asr_data&quot;: null
+  },
+  {
+    &quot;type&quot;: &quot;text&quot;,
+    &quot;text&quot;: &quot;Produce ONE record for this whole part: a video-level summary, the canonical roster of every important entity, the relationships among them, and a contiguous shot-by-shot breakdown in `shot_metadata`. The first shot starts at 0 and the last ends at 450, covering the part end to end with no gaps.&quot;,
+    &quot;image&quot;: null,
+    &quot;video&quot;: null,
+    &quot;audio&quot;: null,
+    &quot;json_schema&quot;: null,
+    &quot;asr_data&quot;: null
+  }
+]</code></pre>
+  <h3>Exact Prompt Text</h3>
+  <pre><code class="language-text">Produce ONE record for this whole part: a video-level summary, the canonical roster of every important entity, the relationships among them, and a contiguous shot-by-shot breakdown in `shot_metadata`. The first shot starts at 0 and the last ends at 450, covering the part end to end with no gaps.</code></pre>
+  <h3>Assistant Ground Truth Stored In This TDF Row</h3>
+  <p class="subtle">This is still the entity-coverage GT shape: <code>domain</code>, <code>roster</code>, <code>spans</code>.</p>
+  <pre><code class="language-text">```json
+{
+    &quot;domain&quot;: &quot;film&quot;,
+    &quot;roster&quot;: [
+        {
+            &quot;label_id&quot;: &quot;alice&quot;,
+            &quot;name&quot;: &quot;Alice&quot;,
+            &quot;name_known&quot;: true,
+            &quot;aliases&quot;: [],
+            &quot;name_evidence&quot;: &quot;Spoken at 00:12.&quot;,
+            &quot;appearance&quot;: {
+                &quot;hair&quot;: &quot;brown&quot;,
+                &quot;role&quot;: &quot;lead&quot;
+            },
+            &quot;domain&quot;: &quot;film&quot;
+        },
+        {
+            &quot;label_id&quot;: &quot;bob&quot;,
+            &quot;name&quot;: &quot;Bob&quot;,
+            &quot;name_known&quot;: true,
+            &quot;aliases&quot;: [],
+            &quot;name_evidence&quot;: &quot;Name appears on screen at 08:20.&quot;,
+            &quot;appearance&quot;: {
+                &quot;hair&quot;: &quot;black&quot;,
+                &quot;role&quot;: &quot;doctor&quot;
+            },
+            &quot;domain&quot;: &quot;film&quot;
+        }
+    ],
+    &quot;spans&quot;: [
+        {
+            &quot;label_id&quot;: &quot;alice&quot;,
+            &quot;start&quot;: 0.0,
+            &quot;end&quot;: 50.0
+        },
+        {
+            &quot;label_id&quot;: &quot;bob&quot;,
+            &quot;start&quot;: 50.0,
+            &quot;end&quot;: 150.0
+        }
+    ]
+}```</code></pre>
+  <h3>Parsed Assistant JSON</h3>
+  <pre><code class="language-json">{
+  &quot;domain&quot;: &quot;film&quot;,
+  &quot;roster&quot;: [
+    {
+      &quot;label_id&quot;: &quot;alice&quot;,
+      &quot;name&quot;: &quot;Alice&quot;,
+      &quot;name_known&quot;: true,
+      &quot;aliases&quot;: [],
+      &quot;name_evidence&quot;: &quot;Spoken at 00:12.&quot;,
+      &quot;appearance&quot;: {
+        &quot;hair&quot;: &quot;brown&quot;,
+        &quot;role&quot;: &quot;lead&quot;
+      },
+      &quot;domain&quot;: &quot;film&quot;
+    },
+    {
+      &quot;label_id&quot;: &quot;bob&quot;,
+      &quot;name&quot;: &quot;Bob&quot;,
+      &quot;name_known&quot;: true,
+      &quot;aliases&quot;: [],
+      &quot;name_evidence&quot;: &quot;Name appears on screen at 08:20.&quot;,
+      &quot;appearance&quot;: {
+        &quot;hair&quot;: &quot;black&quot;,
+        &quot;role&quot;: &quot;doctor&quot;
+      },
+      &quot;domain&quot;: &quot;film&quot;
+    }
+  ],
+  &quot;spans&quot;: [
+    {
+      &quot;label_id&quot;: &quot;alice&quot;,
+      &quot;start&quot;: 0.0,
+      &quot;end&quot;: 50.0
+    },
+    {
+      &quot;label_id&quot;: &quot;bob&quot;,
+      &quot;start&quot;: 50.0,
+      &quot;end&quot;: 150.0
+    }
+  ]
+}</code></pre>
+  <h3>Metadata Driving The Prompt And Chunk</h3>
+  <pre><code class="language-json">{
+  &quot;chunk_count&quot;: 2,
+  &quot;chunk_duration_seconds&quot;: 450.0,
+  &quot;chunk_end_seconds&quot;: 900.0,
+  &quot;chunk_index&quot;: 1,
+  &quot;chunk_start_seconds&quot;: 450.0,
+  &quot;domain&quot;: &quot;film&quot;,
+  &quot;evaluation&quot;: {
+    &quot;output_format&quot;: &quot;structured&quot;
+  },
+  &quot;ground_truth&quot;: {
+    &quot;domain&quot;: &quot;film&quot;,
+    &quot;roster&quot;: [
+      {
+        &quot;aliases&quot;: [],
+        &quot;appearance&quot;: {
+          &quot;hair&quot;: &quot;brown&quot;,
+          &quot;role&quot;: &quot;lead&quot;
+        },
+        &quot;domain&quot;: &quot;film&quot;,
+        &quot;label_id&quot;: &quot;alice&quot;,
+        &quot;name&quot;: &quot;Alice&quot;,
+        &quot;name_evidence&quot;: &quot;Spoken at 00:12.&quot;,
+        &quot;name_known&quot;: true
+      },
+      {
+        &quot;aliases&quot;: [],
+        &quot;appearance&quot;: {
+          &quot;hair&quot;: &quot;black&quot;,
+          &quot;role&quot;: &quot;doctor&quot;
+        },
+        &quot;domain&quot;: &quot;film&quot;,
+        &quot;label_id&quot;: &quot;bob&quot;,
+        &quot;name&quot;: &quot;Bob&quot;,
+        &quot;name_evidence&quot;: &quot;Name appears on screen at 08:20.&quot;,
+        &quot;name_known&quot;: true
+      }
+    ],
+    &quot;spans&quot;: [
+      {
+        &quot;end&quot;: 50.0,
+        &quot;label_id&quot;: &quot;alice&quot;,
+        &quot;start&quot;: 0.0
+      },
+      {
+        &quot;end&quot;: 150.0,
+        &quot;label_id&quot;: &quot;bob&quot;,
+        &quot;start&quot;: 50.0
+      }
+    ],
+    &quot;video_id&quot;: &quot;lia-demo-video__half__001&quot;
+  },
+  &quot;index_id&quot;: &quot;entity-coverage-v0&quot;,
+  &quot;media_status&quot;: &quot;planned_not_cut&quot;,
+  &quot;query&quot;: &quot;Entity-coverage metadata extraction (query unused during evaluation)&quot;,
+  &quot;roster_count&quot;: 2,
+  &quot;sample_id&quot;: &quot;lia-demo-video__half__001&quot;,
+  &quot;segment_shape&quot;: &quot;half&quot;,
+  &quot;source_branch&quot;: &quot;feat/vcs-2339-pegasus-eval-entity-metric&quot;,
+  &quot;source_repo&quot;: &quot;twelvelabs-io/tl-embed&quot;,
+  &quot;source_suite_url&quot;: &quot;https://github.com/twelvelabs-io/tl-embed/tree/feat/vcs-2339-pegasus-eval-entity-metric/services/tl-vcs/eval/test_suites/entity-coverage-v0&quot;,
+  &quot;source_video_id&quot;: &quot;lia-demo-video&quot;,
+  &quot;source_video_url&quot;: &quot;s3://source/lia-demo-video.mp4&quot;,
+  &quot;span_count&quot;: 2,
+  &quot;suite&quot;: &quot;entity-coverage-v0&quot;,
+  &quot;task_type&quot;: &quot;entity_coverage&quot;,
+  &quot;timestamp_origin&quot;: &quot;chunk_relative_seconds&quot;,
+  &quot;video_id&quot;: &quot;lia-demo-video__half__001&quot;,
+  &quot;video_url&quot;: &quot;s3://tl-data-training-pegasus-us-west-2/raw_media/private/entity_cov_v0_2_chunks/half/lia-demo-video/lia-demo-video_half_001_0000450000ms_0000900000ms.mp4&quot;
+}</code></pre>
+</section>
+
+<script>
+for (const button of document.querySelectorAll('.tab')) {
+  button.onclick = () => {
+    document.querySelectorAll('.tab,.panel').forEach(element => element.classList.remove('active'));
+    button.classList.add('active');
+    document.querySelector('#' + button.dataset.tab).classList.add('active');
+  };
+}
+</script>
+</body>
+</html>
