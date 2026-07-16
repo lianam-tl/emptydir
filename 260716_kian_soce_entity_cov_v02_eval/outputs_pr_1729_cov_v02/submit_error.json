@@ -1,0 +1,16 @@
+{
+  "attempted_at_utc": "2026-07-16T11:20:25Z",
+  "service": "eval-v3-api-pr-1729-cov-v02",
+  "host": "http://localhost:18094",
+  "dataset": "twelvelabs/entity_cov_v02_tdf",
+  "dataset_url": "https://huggingface.co/datasets/twelvelabs/entity_cov_v02_tdf",
+  "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/kian-kim/soce_rl_260516_all_pair_p15_a1mckpt1000s60_w7030/",
+  "http_status": 500,
+  "run_created": false,
+  "error": "Failed to create Eval V3 run: ProgramLimitExceeded: index row size 3960 exceeds btree version 4 maximum 2704 for index \"eval_tasks_eval_run_id_sample_external_id_segment_definitio_key\" DETAIL: Index row references tuple (0,1) in relation \"eval_tasks\". HINT: Values larger than 1/3 of a buffer page cannot be indexed. Consider a function index of an MD5 hash of the value, or use full text indexing.",
+  "notes": [
+    "The eval-v3-api-pr-1729-cov-v02 API was live and ready.",
+    "The corrected Hugging Face cache for twelvelabs/entity_cov_v02_tdf was copied into /tmp/eval-v3-cache before submission.",
+    "GET /eval/runs returned an empty evalRuns list after the failed submission, so no partial run ID was left behind."
+  ]
+}
