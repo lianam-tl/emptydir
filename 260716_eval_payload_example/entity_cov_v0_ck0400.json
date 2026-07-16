@@ -1,0 +1,23 @@
+{
+  "name": "lia-entity-cov-chunk10m-h0-ck0400-pr1729-example",
+  "experimentName": "lia-entity-cov-chunk10m-h0-ck0400-pr1729-example",
+  "batchNamePrefix": "lia-entcov-h0-ck0400-pr1729",
+  "idempotencyKey": "lia-entity-cov-chunk10m-h0-ck0400-pr1729-example",
+  "dataset": "twelvelabs/entity_cov_v0_tdf",
+  "config": "chunk_10m",
+  "split": "test",
+  "pipelineId": "vllm-direct",
+  "workerType": "vllm-video-v1",
+  "maxSamples": 20,
+  "maxTokens": 16384,
+  "temperature": 0.0,
+  "nodePool": "b300-pegasus",
+  "minReplicas": 1,
+  "maxReplicas": 1,
+  "concurrency": 1,
+  "maxInFlight": 20,
+  "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-400-safetensors/",
+  "tp": 2,
+  "dp": 1,
+  "convertIfNeeded": false
+}
