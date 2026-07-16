@@ -1,0 +1,65 @@
+# One-off DCP -> safetensors conversion for H0 checkpoint 2000.
+# Based on pegasus/training/tlab-config/export-safetensors.yaml.
+name: export-ck2000-safetensors
+image: 476114115052.dkr.ecr.us-west-2.amazonaws.com/pegasus-training:b300-sft-latest
+nodes: 1
+gpus: 1
+cpu: "24"
+memory: "240Gi"
+instanceGroup: b300-pegasus
+sharedStorage:
+  enabled: true
+  claimName: fsx-shared
+env:
+  TOKENIZERS_PARALLELISM: "false"
+  HF_HUB_DISABLE_PROGRESS_BARS: "1"
+  HDF5_USE_FILE_LOCKING: "false"
+  AWS_REGION: "us-west-2"
+  TZ: "Asia/Seoul"
+  PYTORCH_CUDA_ALLOC_CONF: "expandable_segments:True"
+  GH_BRANCH: "main"
+  CKPT_PATH: "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-2000"
+command: |
+  set -euo pipefail
+
+  if [[ -z "${CKPT_PATH:-}" ]]; then
+    echo "ERROR: CKPT_PATH must be set in the YAML env block" >&2
+    exit 1
+  fi
+
+  PROJECT_ROOT="${EPHEMERAL_ROOT}/project/training"
+  git clone --filter=blob:none -b "${GH_BRANCH}" \
+    git@github.com:twelvelabs-io/pegasus.git "${EPHEMERAL_ROOT}/project"
+  export GH_SHA="$(git -C "${EPHEMERAL_ROOT}/project" rev-parse HEAD)"
+  export GH_REF="refs/experiments/runs/${JOB_NAME}"
+  if [[ "${NODE_RANK:-0}" == "0" ]]; then
+    if ! git -C "${EPHEMERAL_ROOT}/project" push --quiet origin "${GH_SHA}:${GH_REF}" 2>&1; then
+      REMOTE_SHA="$(git -C "${EPHEMERAL_ROOT}/project" ls-remote origin "${GH_REF}" | awk '{print $1}')"
+      if [[ "${REMOTE_SHA}" != "${GH_SHA}" ]]; then
+        echo "ERROR: failed to push ${GH_REF}; remote=${REMOTE_SHA:-<none>}, local=${GH_SHA}" >&2
+        exit 1
+      fi
+      echo "Note: ${GH_REF} already points to ${GH_SHA}; continuing"
+    fi
+  fi
+  echo "Using ${GH_BRANCH}@${GH_SHA}; pinned ${GH_REF}"
+
+  export PYTHONPATH="${PROJECT_ROOT}:${PROJECT_ROOT}/sft:${PROJECT_ROOT}/rl:${EPHEMERAL_ROOT}/project/eval:${PYTHONPATH:-}"
+  export TRITON_CACHE_DIR="${EPHEMERAL_ROOT}/triton_cache"
+  export HF_MODULES_CACHE="${EPHEMERAL_ROOT}/hf_modules_cache"
+  mkdir -p "${TRITON_CACHE_DIR}" "${HF_MODULES_CACHE}"
+
+  S3_LOG_URI="s3://tl-data-training-pegasus-us-west-2/logs/${JOB_NAME}/${POD_NAME}/export.log"
+  LOCAL_LOG="${EPHEMERAL_ROOT}/export.log"
+  upload_logs() {
+    if command -v aws >/dev/null 2>&1 && [[ -f "${LOCAL_LOG}" ]]; then
+      aws s3 cp "${LOCAL_LOG}" "${S3_LOG_URI}" --region us-west-2 || true
+    fi
+  }
+  trap upload_logs EXIT
+
+  cd "${PROJECT_ROOT}"
+  LOCAL_CKPT="${EPHEMERAL_ROOT}/remote_checkpoint_dcp"
+  s5cmd sync "${CKPT_PATH}/model/*" "${LOCAL_CKPT}/model/"
+  bash export/dcp_to_safetensors.sh "${LOCAL_CKPT}" 2>&1 | tee -a "${LOCAL_LOG}"
+  s5cmd sync "${LOCAL_CKPT}/*" "${CKPT_PATH}/"
