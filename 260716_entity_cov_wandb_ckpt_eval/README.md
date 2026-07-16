@@ -17,7 +17,7 @@ I submitted the 10-minute entity coverage eval for every available 400-step safe
 - `checkpoint-1200-safetensors`
 - `checkpoint-1600-safetensors`
 
-`checkpoint-2000-safetensors` was not present in S3 when checked. `checkpoint-2200-safetensors` exists but is not a 400-step checkpoint, so it is not part of this run.
+`checkpoint-2000-safetensors` was created after converting the raw DCP checkpoint, then added as the next eval target. `checkpoint-2200-safetensors` exists but is not a 400-step checkpoint, so it is not part of this run.
 
 Dataset link: https://huggingface.co/datasets/twelvelabs/entity_cov_v0_tdf
 
@@ -62,4 +62,4 @@ Payloads and submission responses are under `payloads/`.
 
 ## TL;DR
 
-This folder tracks eval-service submissions for W&B run `06h8x4z6`, checkpoints `400/800/1200/1600`, entity coverage `chunk_10m`.
+This folder tracks eval-service submissions for W&B run `06h8x4z6`, checkpoints `400/800/1200/1600/2000`, entity coverage `chunk_10m`.

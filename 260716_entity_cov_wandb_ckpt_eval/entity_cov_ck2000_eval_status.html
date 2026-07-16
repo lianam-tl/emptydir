@@ -61,15 +61,15 @@
   <main>
     <h1>Entity Coverage Eval: ck2000</h1>
     <p>
-      ck2000 exists only as a raw DCP training checkpoint, so it must be converted
-      to root-level safetensors before Eval V3 will accept it.
+      ck2000 was converted from raw DCP training checkpoint state into a clean
+      root-level safetensors prefix before Eval V3 submission.
     </p>
 
     <table>
       <tbody>
         <tr>
           <th>Current phase</th>
-          <td><span class="status">conversion pending</span></td>
+          <td><span class="status">eval processing</span></td>
         </tr>
         <tr>
           <th>Conversion job</th>
@@ -77,19 +77,22 @@
         </tr>
         <tr>
           <th>Checkpoint path</th>
-          <td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-2000</code></td>
+          <td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-2000-safetensors/</code></td>
         </tr>
         <tr>
           <th>Rejected eval payload</th>
           <td>
-            Eval V3 rejected <code>convertIfNeeded: true</code>, so conversion is being run first.
-            The CPU poller will submit the same eval settings with <code>convertIfNeeded: false</code>
-            after safetensors appear.
+            Eval V3 rejected <code>convertIfNeeded: true</code>, so conversion was run first.
+            The eval payload now uses <code>convertIfNeeded: false</code>.
           </td>
         </tr>
         <tr>
           <th>Eval settings</th>
           <td><code>twelvelabs/entity_cov_v0_tdf</code>, <code>chunk_10m</code>, split <code>test</code>, max-in-flight 20, TP=2, DP=1</td>
+        </tr>
+        <tr>
+          <th>Eval run</th>
+          <td><code>3b6b3e0f-b778-50a9-859e-9bb319900ca2</code>, batch <code>batch-79a6c4a8-97ce-4383-9f9e-4472f1aa4a32</code>, status <code>processing</code>, completed <code>0/20</code></td>
         </tr>
       </tbody>
     </table>
