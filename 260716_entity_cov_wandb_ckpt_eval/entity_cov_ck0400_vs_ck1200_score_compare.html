@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entity Coverage: checkpoint 400 vs 1200</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --text: #17202a;
+      --muted: #5b6673;
+      --border: #d6dbe2;
+      --surface: #f7f9fb;
+      --good: #0f7b45;
+      --warn: #986400;
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: white;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    .subtitle {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 0 0 24px;
+    }
+    .metric {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+      background: var(--surface);
+    }
+    .metric .label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+    .metric .value {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+    .metric .note {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0 28px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      text-align: right;
+      vertical-align: top;
+    }
+    th:first-child, td:first-child {
+      text-align: left;
+    }
+    th {
+      background: #eef2f6;
+      font-weight: 650;
+    }
+    .positive {
+      color: var(--good);
+      font-weight: 700;
+    }
+    .negative {
+      color: var(--warn);
+      font-weight: 700;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      word-break: break-all;
+    }
+    .footnote {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Entity Coverage: checkpoint 400 vs 1200</h1>
+    <p class="subtitle">
+      Dataset: <code>twelvelabs/entity_cov_v0_tdf</code>, config: <code>chunk_10m</code>,
+      split: <code>test</code>, 20/20 samples scored for both runs. Metrics were read from
+      Eval V3 DB tables <code>eval_v3.scoring_runs</code> and <code>eval_v3.metrics</code>.
+    </p>
+
+    <section class="summary">
+      <div class="metric">
+        <div class="label">Primary metric winner</div>
+        <div class="value">ck0400</div>
+        <div class="note">Higher <code>name_appearance_iou</code>.</div>
+      </div>
+      <div class="metric">
+        <div class="label">Primary metric gap</div>
+        <div class="value positive">+0.0226</div>
+        <div class="note">+2.26 points absolute, +7.07% relative to ck1200.</div>
+      </div>
+      <div class="metric">
+        <div class="label">Scoring health</div>
+        <div class="value">20/20</div>
+        <div class="note">No prediction failures, no parse errors for either run.</div>
+      </div>
+    </section>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>ck0400</th>
+          <th>ck1200</th>
+          <th>ck0400 - ck1200</th>
+          <th>Winner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>entity_coverage::name_appearance_iou</code> primary</td>
+          <td>0.342916</td>
+          <td>0.320272</td>
+          <td class="positive">+0.022644</td>
+          <td>ck0400</td>
+        </tr>
+        <tr>
+          <td><code>entity_coverage::naming_iou</code></td>
+          <td>0.194079</td>
+          <td>0.183305</td>
+          <td class="positive">+0.010774</td>
+          <td>ck0400</td>
+        </tr>
+        <tr>
+          <td><code>entity_coverage::delta</code></td>
+          <td>0.197706</td>
+          <td>0.214733</td>
+          <td class="negative">-0.017027</td>
+          <td>ck1200</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Checkpoint</th>
+          <th>Eval run ID</th>
+          <th>Scoring run ID</th>
+          <th>Status</th>
+          <th>Scored</th>
+          <th>Failed</th>
+          <th>Missing</th>
+          <th>Completed at UTC</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ck0400</td>
+          <td><code>1087e81a-cf77-5df6-9fe6-359c0ad5d365</code></td>
+          <td><code>c7f45594-b27f-4633-950f-38e081bd2d6f</code></td>
+          <td>completed</td>
+          <td>20</td>
+          <td>0</td>
+          <td>0</td>
+          <td>2026-07-16 06:40:07</td>
+        </tr>
+        <tr>
+          <td>ck1200</td>
+          <td><code>b820e020-8cbe-57b3-b9eb-fd59bcb08a8b</code></td>
+          <td><code>37bef521-74e2-4b4f-8bbe-85e6df59c23d</code></td>
+          <td>completed</td>
+          <td>20</td>
+          <td>0</td>
+          <td>0</td>
+          <td>2026-07-16 06:44:02</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="footnote">
+      Interpretation: checkpoint 400 is better on the primary metric and on naming-only IoU.
+      Checkpoint 1200 is only higher on the auxiliary delta metric.
+    </p>
+  </main>
+</body>
+</html>
