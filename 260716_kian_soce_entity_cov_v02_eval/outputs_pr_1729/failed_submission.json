@@ -1,0 +1,9 @@
+{
+  "attempted_at": "2026-07-16T10:05:36Z",
+  "host": "http://localhost:18092",
+  "api_service": "eval-v3-api-pr-1729",
+  "api_image": "476114115052.dkr.ecr.us-west-2.amazonaws.com/tl-data-training-pegasus-eval-v3:db109e6",
+  "status": "not_submitted",
+  "http_status": 400,
+  "error": "unsupported V3 dataset 'twelvelabs/entity_cov_v02_tdf'; supported datasets: twelvelabs/activitynet_rtl_tdf, twelvelabs/entity_cov_v0_tdf, twelvelabs/pegasus_pipeline_qual_eval_tdf, twelvelabs/sme_eval_v3.1_fast, twelvelabs/video_mme_tdf"
+}
