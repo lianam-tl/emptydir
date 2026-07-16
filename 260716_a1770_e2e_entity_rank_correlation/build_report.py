@@ -76,7 +76,7 @@ def main() -> None:
         )
         for index, item in enumerate(RESULTS)
     )
-    output = Path("260716_a1770_e2e_entity_rank_correlation.html")
+    output = Path(__file__).with_name("260716_a1770_e2e_entity_rank_correlation.html")
     output.write_text(
         """<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>A-1770: 10-minute E2E vs entity coverage</title>
