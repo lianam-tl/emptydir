@@ -2,7 +2,7 @@
   "batchNamePrefix": "lia-entcov-h0-ck2000",
   "concurrency": 1,
   "config": "chunk_10m",
-  "convertIfNeeded": true,
+  "convertIfNeeded": false,
   "dataset": "twelvelabs/entity_cov_v0_tdf",
   "dp": 1,
   "experimentName": "lia-entity-cov-chunk10m-h0-ck2000-20260716-165505",
