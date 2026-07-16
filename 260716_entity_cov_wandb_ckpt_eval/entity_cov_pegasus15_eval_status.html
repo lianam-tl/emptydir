@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entity Coverage Eval: pegasus-15</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #17202a;
+      background: #ffffff;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    p {
+      color: #5b6673;
+      line-height: 1.5;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+    th, td {
+      border: 1px solid #d6dbe2;
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      width: 220px;
+      background: #eef2f6;
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      word-break: break-all;
+    }
+    .status {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: #fff3cd;
+      color: #7a5700;
+      font-weight: 650;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Entity Coverage Eval: pegasus-15</h1>
+    <p>
+      Same settings as the checkpoint-400 and checkpoint-1200 comparison:
+      <code>twelvelabs/entity_cov_v0_tdf</code>, <code>chunk_10m</code>,
+      split <code>test</code>, max-in-flight 20, TP=2, DP=1.
+    </p>
+
+    <table>
+      <tbody>
+        <tr>
+          <th>Status at submission check</th>
+          <td><span class="status">processing</span> 0/20 completed, 0 failed</td>
+        </tr>
+        <tr>
+          <th>Eval run ID</th>
+          <td><code>2c1ffa5c-6363-5975-ad62-ecddbae8d4a0</code></td>
+        </tr>
+        <tr>
+          <th>Batch ID</th>
+          <td><code>batch-e88914b0-b3ab-4dc4-ac1a-7d68c02391d4</code></td>
+        </tr>
+        <tr>
+          <th>Run name</th>
+          <td><code>lia-entity-cov-chunk10m-pegasus-15-20260716-163225</code></td>
+        </tr>
+        <tr>
+          <th>Model path</th>
+          <td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/kian-kim/soce_rl_260516_all_pair_p15_a1mckpt1000s60_w7030/</code></td>
+        </tr>
+        <tr>
+          <th>Poller</th>
+          <td><code>cpu:~/cc_entity_cov_wandb_ckpt_eval_260716/poll_entity_cov_pegasus15.log</code>, Python PID <code>590136</code>, Slack channel <code>#fun-lia-trashcan</code></td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>
