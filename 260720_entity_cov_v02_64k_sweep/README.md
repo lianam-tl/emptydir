@@ -22,3 +22,9 @@ HTML report.
 
 The final 20-artifact snapshot found 17 `stop` outputs and three `length`
 outputs. All three reached 65,536 tokens and ended with truncated JSON.
+
+The production-path parser diagnosis found one unrecoverable sample:
+`film-04 full` repaired to an object containing only `entity_relationships`,
+so the nested parser could find neither `rosters` nor `shot_metadata`. This
+produced the scorer summary `19 scored / 1 failed`, which Eval V3 rejects as
+incomplete.
