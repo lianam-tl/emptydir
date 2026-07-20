@@ -17,3 +17,6 @@ output tokens on `b300-pegasus`.
 `analyze_finish_reasons.py` downloads the available A-1790 step-1200 output
 artifacts with `s5cmd` and writes `a1790_step1200_finish_reasons.json` plus an
 HTML report.
+
+The 17-artifact snapshot found 16 `stop` outputs and one `length` output:
+`film-04_half_001` reached 65,536 tokens and ended with truncated JSON.

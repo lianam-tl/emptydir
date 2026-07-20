@@ -22,9 +22,10 @@ def download_outputs(s3_output_glob: str, output_directory: Path) -> None:
     )
 
 
-def inspect_output(output_path: Path, request_urls: dict[str, str]) -> dict:
+def inspect_output(output_path: Path, requests_by_artifact: dict[str, dict]) -> dict:
     payload = json.loads(output_path.read_text())
-    request_id = payload.get("request_id") or output_path.stem
+    request_metadata = requests_by_artifact.get(output_path.name, {})
+    request_id = request_metadata.get("request_id") or output_path.stem
     generated_text = payload.get("text", "")
     try:
         parsed_text = json.loads(generated_text)
@@ -36,10 +37,12 @@ def inspect_output(output_path: Path, request_urls: dict[str, str]) -> dict:
         top_level_keys = []
         parse_error = str(error)
 
-    media_url = request_urls.get(request_id, "")
+    media_url = request_metadata.get("url", "")
     output_tokens = payload.get("output_tokens")
     return {
         "request_id": request_id,
+        "caller_request_id": payload.get("caller_request_id"),
+        "vllm_request_id": payload.get("request_id"),
         "sample": Path(media_url).stem if media_url else request_id.rsplit(".", 1)[-1],
         "media_url": media_url,
         "finish_reason": payload.get("finish_reason"),
@@ -104,14 +107,13 @@ def main() -> None:
     arguments = parser.parse_args()
 
     manifest = json.loads(arguments.manifest.read_text())
-    request_urls = {
-        request["request_id"]: request.get("url", "")
-        for request in manifest["requests"]
+    requests_by_artifact = {
+        Path(request["output_key"]).name: request for request in manifest["requests"]
     }
     download_outputs(arguments.s3_output_glob, arguments.download_directory)
     records = sorted(
         (
-            inspect_output(output_path, request_urls)
+            inspect_output(output_path, requests_by_artifact)
             for output_path in arguments.download_directory.glob("*.json")
         ),
         key=lambda record: record["sample"],
