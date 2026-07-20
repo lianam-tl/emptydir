@@ -18,5 +18,5 @@ output tokens on `b300-pegasus`.
 artifacts with `s5cmd` and writes `a1790_step1200_finish_reasons.json` plus an
 HTML report.
 
-The 17-artifact snapshot found 16 `stop` outputs and one `length` output:
-`film-04_half_001` reached 65,536 tokens and ended with truncated JSON.
+The final 20-artifact snapshot found 17 `stop` outputs and three `length`
+outputs. All three reached 65,536 tokens and ended with truncated JSON.

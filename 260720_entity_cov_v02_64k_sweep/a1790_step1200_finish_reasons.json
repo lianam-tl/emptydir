@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-07-20T13:54:02.849866+00:00",
+  "generated_at": "2026-07-20T14:01:41.756729+00:00",
   "batch_id": "batch-e22f5141-ad07-4a91-a38b-b745ebea7af1",
-  "artifact_count": 17,
+  "artifact_count": 20,
   "finish_reason_counts": {
-    "length": 1,
-    "stop": 16
+    "length": 3,
+    "stop": 17
   },
-  "valid_json_count": 16,
+  "valid_json_count": 17,
   "max_output_tokens": 65536,
   "records": [
     {
@@ -56,6 +56,47 @@
         "work"
       ],
       "artifact": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43.prediction.XPSWL4EIXXHTQRXU.json"
+    },
+    {
+      "request_id": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43.prediction.AFMMDF6W55SVJJEC",
+      "caller_request_id": "7f1459ad-9c4c-4368-9e58-c60485784b54:ca4807b8",
+      "vllm_request_id": "7f1459ad-9c4c-4368-9e58-c60485784b54:ca4807b8",
+      "sample": "film-01_half_001_0000792884ms_0001585767ms",
+      "media_url": "s3://tl-data-training-pegasus-us-west-2/raw_media/private/entity_cov_v0_2_chunks/half/film-01/film-01_half_001_0000792884ms_0001585767ms.mp4",
+      "finish_reason": "length",
+      "input_tokens": 135562,
+      "output_tokens": 65536,
+      "output_token_utilization": 1.0,
+      "video_frames": 796,
+      "vllm_generate_ms": 889753.4375,
+      "parsed_json": false,
+      "parse_error": "Unterminated string starting at: line 7014 column 27 (char 269295)",
+      "top_level_keys": [],
+      "artifact": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43.prediction.AFMMDF6W55SVJJEC.json"
+    },
+    {
+      "request_id": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43.prediction.24JZ56DWRILOSYHI",
+      "caller_request_id": "59d76f20-efd3-40ba-a416-ccf3123e41a0:2468daf8",
+      "vllm_request_id": "59d76f20-efd3-40ba-a416-ccf3123e41a0:2468daf8",
+      "sample": "film-02_full_000_0000000000ms_0001256989ms",
+      "media_url": "s3://tl-data-training-pegasus-us-west-2/raw_media/private/entity_cov_v0_2_chunks/full/film-02/film-02_full_000_0000000000ms_0001256989ms.mp4",
+      "finish_reason": "stop",
+      "input_tokens": 81937,
+      "output_tokens": 44469,
+      "output_token_utilization": 0.6785430908203125,
+      "video_frames": 1256,
+      "vllm_generate_ms": 571594.9375,
+      "parsed_json": true,
+      "parse_error": null,
+      "top_level_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "artifact": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43.prediction.24JZ56DWRILOSYHI.json"
     },
     {
       "request_id": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43.prediction.UOMQ7A3K6HNPYN5X",
@@ -176,6 +217,23 @@
         "work"
       ],
       "artifact": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43.prediction.KIVVPJBHTC7GRRKS.json"
+    },
+    {
+      "request_id": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43.prediction.6VH6C4ZOE6Z2H36G",
+      "caller_request_id": "5abe159e-80e1-4473-b0db-43fa9b331f54:77fe4821",
+      "vllm_request_id": "5abe159e-80e1-4473-b0db-43fa9b331f54:77fe4821",
+      "sample": "film-04_full_000_0000000000ms_0001934408ms",
+      "media_url": "s3://tl-data-training-pegasus-us-west-2/raw_media/private/entity_cov_v0_2_chunks/full/film-04/film-04_full_000_0000000000ms_0001934408ms.mp4",
+      "finish_reason": "length",
+      "input_tokens": 124271,
+      "output_tokens": 65536,
+      "output_token_utilization": 1.0,
+      "video_frames": 1934,
+      "vllm_generate_ms": 876689.6875,
+      "parsed_json": false,
+      "parse_error": "Unterminated string starting at: line 8258 column 13 (char 265197)",
+      "top_level_keys": [],
+      "artifact": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43.prediction.6VH6C4ZOE6Z2H36G.json"
     },
     {
       "request_id": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43.prediction.YHIULWZPOPVCZ3HN",
