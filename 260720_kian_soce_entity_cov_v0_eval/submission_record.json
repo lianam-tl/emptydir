@@ -1,0 +1,9 @@
+{
+  "batch_id": "batch-1f65209b-d152-49cf-97c8-9142bbb6be85",
+  "eval_run_id": "c9676b7f-6433-5523-acaf-8d30ea602536",
+  "eval_service": "eval-v3-api-lia",
+  "initial_status": "processing",
+  "submitted_at": "2026-07-20T03:19:26.590612+00:00",
+  "total_tasks": 20
+}
+
