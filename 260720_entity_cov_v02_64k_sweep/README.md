@@ -32,3 +32,7 @@ incomplete.
 After deploying Pegasus commit `2d5981762`, the same stored predictions were
 rescored successfully: 20 scored, 0 failed, 0 missing. The malformed
 `film-04 full` prediction remains in `parse_errors` and contributes zero.
+
+`score_trends.html` compares the final scores for both three-checkpoint families.
+The A-1790 primary full-video naming + appearance IoU improves monotonically
+(0.2627, 0.3138, 0.3358); A-1740 declines (0.2873, 0.2517, 0.2350).

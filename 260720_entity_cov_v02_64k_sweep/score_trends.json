@@ -1,0 +1,67 @@
+{
+  "dataset": "https://huggingface.co/datasets/twelvelabs/entity_cov_v02_tdf",
+  "checked_at": "2026-07-21T00:08:00+09:00",
+  "metric_scale": "0_to_1",
+  "runs": [
+    {
+      "family": "A1740 h0-duration",
+      "step": 400,
+      "run_id": "34e63948-7068-5c19-9d49-4a14eaf44341",
+      "full_naming_iou": 0.27499171815809453,
+      "full_name_appearance_iou": 0.28727214655425953,
+      "overall_naming_iou": 0.29343397338616595,
+      "overall_name_appearance_iou": 0.3210424712641629,
+      "parse_errors": 2
+    },
+    {
+      "family": "A1740 h0-duration",
+      "step": 800,
+      "run_id": "254e310b-e99f-5e1c-8ef3-816062a54cab",
+      "full_naming_iou": 0.2790758797163563,
+      "full_name_appearance_iou": 0.25173415243272373,
+      "overall_naming_iou": 0.2503387350633559,
+      "overall_name_appearance_iou": 0.2367476399410701,
+      "parse_errors": 2
+    },
+    {
+      "family": "A1740 h0-duration",
+      "step": 1200,
+      "run_id": "36ff2578-3a7d-51c9-a555-ca8958929a30",
+      "full_naming_iou": 0.21225909215790745,
+      "full_name_appearance_iou": 0.23502997588947114,
+      "overall_naming_iou": 0.24919442964342953,
+      "overall_name_appearance_iou": 0.25617421613191355,
+      "parse_errors": 2
+    },
+    {
+      "family": "A1790 entity-sme4x",
+      "step": 400,
+      "run_id": "bea5f764-eb67-59c9-901f-acc92b3866df",
+      "full_naming_iou": 0.2499764747128304,
+      "full_name_appearance_iou": 0.2627328181362265,
+      "overall_naming_iou": 0.2840397739052177,
+      "overall_name_appearance_iou": 0.29139186872344774,
+      "parse_errors": 2
+    },
+    {
+      "family": "A1790 entity-sme4x",
+      "step": 800,
+      "run_id": "081b8752-d98a-54a1-b225-d00f94a6c754",
+      "full_naming_iou": 0.3082145794088995,
+      "full_name_appearance_iou": 0.313828101253704,
+      "overall_naming_iou": 0.2768936803848824,
+      "overall_name_appearance_iou": 0.29423514950057544,
+      "parse_errors": 2
+    },
+    {
+      "family": "A1790 entity-sme4x",
+      "step": 1200,
+      "run_id": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43",
+      "full_naming_iou": 0.29850777835076453,
+      "full_name_appearance_iou": 0.33578357515873863,
+      "overall_naming_iou": 0.2719787177621889,
+      "overall_name_appearance_iou": 0.283375556434441,
+      "parse_errors": 1
+    }
+  ]
+}
