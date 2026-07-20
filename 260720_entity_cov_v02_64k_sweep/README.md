@@ -28,3 +28,7 @@ The production-path parser diagnosis found one unrecoverable sample:
 so the nested parser could find neither `rosters` nor `shot_metadata`. This
 produced the scorer summary `19 scored / 1 failed`, which Eval V3 rejects as
 incomplete.
+
+After deploying Pegasus commit `2d5981762`, the same stored predictions were
+rescored successfully: 20 scored, 0 failed, 0 missing. The malformed
+`film-04 full` prediction remains in `parse_errors` and contributes zero.
