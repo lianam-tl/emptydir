@@ -15,5 +15,6 @@ temperature 0, and 16,384 maximum output tokens.
 
 Open [`pegasus15_vs_gemini3flash_asr_predictions.html`](./pegasus15_vs_gemini3flash_asr_predictions.html)
 to inspect the ground truth, Pegasus-15 output, and Gemini 3 Flash + ASR output
-for each of the 20 samples. The page includes aligned timelines, rosters,
-per-sample scores, and expandable inference JSON.
+for each of the 20 samples. Predictions are mapped to GT entities and displayed
+as three adjacent timeline bars per entity. The page also includes rosters,
+per-sample scores, unmatched predictions, and expandable inference JSON.
