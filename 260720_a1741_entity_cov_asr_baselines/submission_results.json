@@ -3,36 +3,93 @@
     "model": "pegasus-15-sft",
     "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/ablation_260416_soccer_clean_filter_low_aug-highres_lr2e-6_qwen3_5_27b_soccer_dc_sme_low_filter_mtp_0513-base/checkpoint-1000-safetensors/",
     "payload_file": "payloads/pegasus-15-sft.json",
-    "http_status": 0,
+    "http_status": 202,
     "response": {
       "evalRun": {
-        "status": "dry-run"
-      }
+        "id": "4dcbf500-e1b6-5c65-bf51-ef508feae454",
+        "status": "queued"
+      },
+      "replayed": false
     },
-    "submitted_at": "2026-07-20T07:07:44.306461+00:00"
+    "submitted_at": "2026-07-20T07:09:01.913592+00:00",
+    "latest_run": {
+      "id": "4dcbf500-e1b6-5c65-bf51-ef508feae454",
+      "name": "lia-entcov-v0-asr-pegasus-15-sft-tp1-r8-20260720T070901Z",
+      "dataset": "twelvelabs/entity_cov_v0_tdf",
+      "config": "chunk_10m",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "batchId": "batch-1971371b-be86-445a-97c0-03d73b3b295d",
+      "experimentName": "lia-entcov-v0-asr-pegasus-15-sft-tp1-r8-20260720T070901Z",
+      "status": "processing",
+      "totalTasks": 20,
+      "completed": 0,
+      "failed": 0,
+      "createdAt": "2026-07-20T07:09:01.831585+00:00",
+      "startedAt": "2026-07-20T07:09:02.090464+00:00",
+      "completedAt": null
+    }
   },
   {
     "model": "pegasus-15-rl",
     "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/rl_rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7_ckpt1000-base/global_step_60/actor/huggingface/",
     "payload_file": "payloads/pegasus-15-rl.json",
-    "http_status": 0,
+    "http_status": 202,
     "response": {
       "evalRun": {
-        "status": "dry-run"
-      }
+        "id": "5c1ec745-f032-5e74-9ed7-c64e17eeaa0f",
+        "status": "queued"
+      },
+      "replayed": false
     },
-    "submitted_at": "2026-07-20T07:07:44.813357+00:00"
+    "submitted_at": "2026-07-20T07:09:03.067550+00:00",
+    "latest_run": {
+      "id": "5c1ec745-f032-5e74-9ed7-c64e17eeaa0f",
+      "name": "lia-entcov-v0-asr-pegasus-15-rl-tp1-r8-20260720T070901Z",
+      "dataset": "twelvelabs/entity_cov_v0_tdf",
+      "config": "chunk_10m",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "batchId": "batch-88a871f4-928d-4042-a350-74c3fce70117",
+      "experimentName": "lia-entcov-v0-asr-pegasus-15-rl-tp1-r8-20260720T070901Z",
+      "status": "processing",
+      "totalTasks": 20,
+      "completed": 0,
+      "failed": 0,
+      "createdAt": "2026-07-20T07:09:02.986561+00:00",
+      "startedAt": "2026-07-20T07:09:03.251477+00:00",
+      "completedAt": null
+    }
   },
   {
     "model": "pegasus-15",
     "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/kian-kim/soce_rl_260516_all_pair_p15_a1mckpt1000s60_w7030/",
     "payload_file": "payloads/pegasus-15.json",
-    "http_status": 0,
+    "http_status": 202,
     "response": {
       "evalRun": {
-        "status": "dry-run"
-      }
+        "id": "593e332b-eb96-53ac-acdd-61b7ade0cf9e",
+        "status": "queued"
+      },
+      "replayed": false
     },
-    "submitted_at": "2026-07-20T07:07:45.314752+00:00"
+    "submitted_at": "2026-07-20T07:09:04.233003+00:00",
+    "latest_run": {
+      "id": "593e332b-eb96-53ac-acdd-61b7ade0cf9e",
+      "name": "lia-entcov-v0-asr-pegasus-15-tp1-r8-20260720T070901Z",
+      "dataset": "twelvelabs/entity_cov_v0_tdf",
+      "config": "chunk_10m",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "batchId": "batch-7bddaac0-d96a-48a1-bc7b-3486a404d58e",
+      "experimentName": "lia-entcov-v0-asr-pegasus-15-tp1-r8-20260720T070901Z",
+      "status": "processing",
+      "totalTasks": 20,
+      "completed": 0,
+      "failed": 0,
+      "createdAt": "2026-07-20T07:09:04.150732+00:00",
+      "startedAt": "2026-07-20T07:09:04.365963+00:00",
+      "completedAt": null
+    }
   }
 ]
