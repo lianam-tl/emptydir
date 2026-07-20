@@ -1,0 +1,35 @@
+{
+  "verified_max_tokens": 65536,
+  "batches": [
+    {
+      "family": "a1740-h0-duration",
+      "step": 400,
+      "batch_id": "batch-a5676d73-b899-4f17-bcef-837fde4f70e7",
+      "request_count": 20
+    },
+    {
+      "family": "a1740-h0-duration",
+      "step": 800,
+      "batch_id": "batch-8ebe172c-1267-4792-bf68-9731fae8ac77",
+      "request_count": 20
+    },
+    {
+      "family": "a1740-h0-duration",
+      "step": 1200,
+      "batch_id": "batch-680d6cd5-2d5a-4ac2-8eb0-a9986e53ae27",
+      "request_count": 20
+    },
+    {
+      "family": "a1790-entity-sme4x",
+      "step": 400,
+      "batch_id": "batch-bf24b0af-47d7-4afc-9a08-274553fed752",
+      "request_count": 20
+    },
+    {
+      "family": "a1790-entity-sme4x",
+      "step": 800,
+      "batch_id": "batch-4b14cc6d-38a7-4d6c-9c03-d2256d638e73",
+      "request_count": 20
+    }
+  ]
+}

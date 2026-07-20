@@ -1,0 +1,65 @@
+{
+  "checked_at": "2026-07-20T13:41:46.821956+00:00",
+  "runs": [
+    {
+      "family": "a1790-entity-sme4x",
+      "step": 1200,
+      "run_id": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43",
+      "batch_id": "batch-e22f5141-ad07-4a91-a38b-b745ebea7af1",
+      "status": "processing",
+      "completed": 0,
+      "failed": 0,
+      "total": 20
+    },
+    {
+      "family": "a1740-h0-duration",
+      "step": 400,
+      "run_id": "34e63948-7068-5c19-9d49-4a14eaf44341",
+      "batch_id": "batch-a5676d73-b899-4f17-bcef-837fde4f70e7",
+      "status": "processing",
+      "completed": 0,
+      "failed": 0,
+      "total": 20
+    },
+    {
+      "family": "a1740-h0-duration",
+      "step": 800,
+      "run_id": "254e310b-e99f-5e1c-8ef3-816062a54cab",
+      "batch_id": "batch-8ebe172c-1267-4792-bf68-9731fae8ac77",
+      "status": "processing",
+      "completed": 0,
+      "failed": 0,
+      "total": 20
+    },
+    {
+      "family": "a1740-h0-duration",
+      "step": 1200,
+      "run_id": "36ff2578-3a7d-51c9-a555-ca8958929a30",
+      "batch_id": "batch-680d6cd5-2d5a-4ac2-8eb0-a9986e53ae27",
+      "status": "processing",
+      "completed": 0,
+      "failed": 0,
+      "total": 20
+    },
+    {
+      "family": "a1790-entity-sme4x",
+      "step": 400,
+      "run_id": "bea5f764-eb67-59c9-901f-acc92b3866df",
+      "batch_id": "batch-bf24b0af-47d7-4afc-9a08-274553fed752",
+      "status": "processing",
+      "completed": 0,
+      "failed": 0,
+      "total": 20
+    },
+    {
+      "family": "a1790-entity-sme4x",
+      "step": 800,
+      "run_id": "081b8752-d98a-54a1-b225-d00f94a6c754",
+      "batch_id": "batch-4b14cc6d-38a7-4d6c-9c03-d2256d638e73",
+      "status": "processing",
+      "completed": 0,
+      "failed": 0,
+      "total": 20
+    }
+  ]
+}

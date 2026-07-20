@@ -1,0 +1,200 @@
+[
+  {
+    "family": "a1790-entity-sme4x",
+    "step": 1200,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-1200-safetensors/",
+    "run_id": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43",
+    "batch_id": "batch-e22f5141-ad07-4a91-a38b-b745ebea7af1",
+    "existing": true
+  },
+  {
+    "family": "a1740-h0-duration",
+    "step": 400,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1740_h0_duration_consol_7n_qwen3_5_27b-base/checkpoint-400-safetensors/",
+    "run_id": "34e63948-7068-5c19-9d49-4a14eaf44341",
+    "batch_id": null,
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "34e63948-7068-5c19-9d49-4a14eaf44341",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "payload": {
+      "name": "lia-entcov-v02-64k-a1740-h0-duration-step400-tp1-r8-20260720T134106Z",
+      "experimentName": "lia-entcov-v02-64k-a1740-h0-duration-step400-tp1-r8-20260720T134106Z",
+      "batchNamePrefix": "lia-entcov-v02-64k-a1740-h0-duration-s400",
+      "idempotencyKey": "lia-entcov-v02-64k-a1740-h0-duration-step400-tp1-r8-20260720T134106Z",
+      "dataset": "twelvelabs/entity_cov_v02_tdf",
+      "config": "default",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "workerType": "vllm-video-v1",
+      "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1740_h0_duration_consol_7n_qwen3_5_27b-base/checkpoint-400-safetensors/",
+      "nodePool": "b300-pegasus",
+      "minReplicas": 8,
+      "maxReplicas": 8,
+      "concurrency": 1,
+      "maxInFlight": 20,
+      "tp": 1,
+      "dp": 1,
+      "maxTokens": 65536,
+      "temperature": 0.0,
+      "convertIfNeeded": false,
+      "enableTensorCache": true
+    }
+  },
+  {
+    "family": "a1740-h0-duration",
+    "step": 800,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1740_h0_duration_consol_7n_qwen3_5_27b-base/checkpoint-800-safetensors/",
+    "run_id": "254e310b-e99f-5e1c-8ef3-816062a54cab",
+    "batch_id": null,
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "254e310b-e99f-5e1c-8ef3-816062a54cab",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "payload": {
+      "name": "lia-entcov-v02-64k-a1740-h0-duration-step800-tp1-r8-20260720T134106Z",
+      "experimentName": "lia-entcov-v02-64k-a1740-h0-duration-step800-tp1-r8-20260720T134106Z",
+      "batchNamePrefix": "lia-entcov-v02-64k-a1740-h0-duration-s800",
+      "idempotencyKey": "lia-entcov-v02-64k-a1740-h0-duration-step800-tp1-r8-20260720T134106Z",
+      "dataset": "twelvelabs/entity_cov_v02_tdf",
+      "config": "default",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "workerType": "vllm-video-v1",
+      "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1740_h0_duration_consol_7n_qwen3_5_27b-base/checkpoint-800-safetensors/",
+      "nodePool": "b300-pegasus",
+      "minReplicas": 8,
+      "maxReplicas": 8,
+      "concurrency": 1,
+      "maxInFlight": 20,
+      "tp": 1,
+      "dp": 1,
+      "maxTokens": 65536,
+      "temperature": 0.0,
+      "convertIfNeeded": false,
+      "enableTensorCache": true
+    }
+  },
+  {
+    "family": "a1740-h0-duration",
+    "step": 1200,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1740_h0_duration_consol_7n_qwen3_5_27b-base/checkpoint-1200-safetensors/",
+    "run_id": "36ff2578-3a7d-51c9-a555-ca8958929a30",
+    "batch_id": null,
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "36ff2578-3a7d-51c9-a555-ca8958929a30",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "payload": {
+      "name": "lia-entcov-v02-64k-a1740-h0-duration-step1200-tp1-r8-20260720T134106Z",
+      "experimentName": "lia-entcov-v02-64k-a1740-h0-duration-step1200-tp1-r8-20260720T134106Z",
+      "batchNamePrefix": "lia-entcov-v02-64k-a1740-h0-duration-s1200",
+      "idempotencyKey": "lia-entcov-v02-64k-a1740-h0-duration-step1200-tp1-r8-20260720T134106Z",
+      "dataset": "twelvelabs/entity_cov_v02_tdf",
+      "config": "default",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "workerType": "vllm-video-v1",
+      "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1740_h0_duration_consol_7n_qwen3_5_27b-base/checkpoint-1200-safetensors/",
+      "nodePool": "b300-pegasus",
+      "minReplicas": 8,
+      "maxReplicas": 8,
+      "concurrency": 1,
+      "maxInFlight": 20,
+      "tp": 1,
+      "dp": 1,
+      "maxTokens": 65536,
+      "temperature": 0.0,
+      "convertIfNeeded": false,
+      "enableTensorCache": true
+    }
+  },
+  {
+    "family": "a1790-entity-sme4x",
+    "step": 400,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-400-safetensors/",
+    "run_id": "bea5f764-eb67-59c9-901f-acc92b3866df",
+    "batch_id": null,
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "bea5f764-eb67-59c9-901f-acc92b3866df",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "payload": {
+      "name": "lia-entcov-v02-64k-a1790-entity-sme4x-step400-tp1-r8-20260720T134106Z",
+      "experimentName": "lia-entcov-v02-64k-a1790-entity-sme4x-step400-tp1-r8-20260720T134106Z",
+      "batchNamePrefix": "lia-entcov-v02-64k-a1790-entity-sme4x-s400",
+      "idempotencyKey": "lia-entcov-v02-64k-a1790-entity-sme4x-step400-tp1-r8-20260720T134106Z",
+      "dataset": "twelvelabs/entity_cov_v02_tdf",
+      "config": "default",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "workerType": "vllm-video-v1",
+      "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-400-safetensors/",
+      "nodePool": "b300-pegasus",
+      "minReplicas": 8,
+      "maxReplicas": 8,
+      "concurrency": 1,
+      "maxInFlight": 20,
+      "tp": 1,
+      "dp": 1,
+      "maxTokens": 65536,
+      "temperature": 0.0,
+      "convertIfNeeded": false,
+      "enableTensorCache": true
+    }
+  },
+  {
+    "family": "a1790-entity-sme4x",
+    "step": 800,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-800-safetensors/",
+    "run_id": "081b8752-d98a-54a1-b225-d00f94a6c754",
+    "batch_id": null,
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "081b8752-d98a-54a1-b225-d00f94a6c754",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "payload": {
+      "name": "lia-entcov-v02-64k-a1790-entity-sme4x-step800-tp1-r8-20260720T134106Z",
+      "experimentName": "lia-entcov-v02-64k-a1790-entity-sme4x-step800-tp1-r8-20260720T134106Z",
+      "batchNamePrefix": "lia-entcov-v02-64k-a1790-entity-sme4x-s800",
+      "idempotencyKey": "lia-entcov-v02-64k-a1790-entity-sme4x-step800-tp1-r8-20260720T134106Z",
+      "dataset": "twelvelabs/entity_cov_v02_tdf",
+      "config": "default",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "workerType": "vllm-video-v1",
+      "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-800-safetensors/",
+      "nodePool": "b300-pegasus",
+      "minReplicas": 8,
+      "maxReplicas": 8,
+      "concurrency": 1,
+      "maxInFlight": 20,
+      "tp": 1,
+      "dp": 1,
+      "maxTokens": 65536,
+      "temperature": 0.0,
+      "convertIfNeeded": false,
+      "enableTensorCache": true
+    }
+  }
+]
