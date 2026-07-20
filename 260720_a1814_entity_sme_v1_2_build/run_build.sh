@@ -24,12 +24,12 @@ cd "$WORKTREE"
 
 printf '\n[%s] Starting A-1814 full build\n' "$(date --iso-8601=seconds)" >> "$RUN_ROOT/build.log"
 printf '%s\n' \
-  "$PYTHON -u data/h0_from_dc/build_duration_diverse_tdf.py --workers 8 --resume --output-dir $RUN_ROOT/output --report-html $RUN_ROOT/a1814_full_report.html" \
+  "$PYTHON -u data/h0_from_dc/build_duration_diverse_tdf.py --workers 10 --resume --output-dir $RUN_ROOT/output --report-html $RUN_ROOT/a1814_full_report.html" \
   > "$RUN_ROOT/build.command"
 
 status=0
 "$PYTHON" -u data/h0_from_dc/build_duration_diverse_tdf.py \
-  --workers 8 \
+  --workers 10 \
   --resume \
   --output-dir "$RUN_ROOT/output" \
   --report-html "$RUN_ROOT/a1814_full_report.html" \
