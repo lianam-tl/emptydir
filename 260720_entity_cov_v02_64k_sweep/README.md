@@ -54,3 +54,7 @@ The CPU-node poller runs as PID `754561` and reports state changes to
 `consol_h0mn2x_step2000_payload.json` adds the merged step-2000 checkpoint from
 `consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base`
 to the same evaluation setup.
+
+- eval run: `55ccccf4-87a9-576f-acb7-45adac7e8fdb`
+- batch: `batch-d3cce84a-a08e-4abd-a18a-1ea3962ae1eb`
+- CPU-node Slack poller: PID `759426`
