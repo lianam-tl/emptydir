@@ -58,3 +58,6 @@ to the same evaluation setup.
 - eval run: `55ccccf4-87a9-576f-acb7-45adac7e8fdb`
 - batch: `batch-d3cce84a-a08e-4abd-a18a-1ea3962ae1eb`
 - CPU-node Slack poller: PID `759426`
+
+`submit_consol_h0mn2x.py` submits the remaining steps 400, 800, 1200, and
+1600 with the same configuration as the separately submitted step 2000 run.
