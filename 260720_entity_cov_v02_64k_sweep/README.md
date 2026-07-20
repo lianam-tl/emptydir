@@ -50,3 +50,7 @@ The soccer-lvreason runs submitted on 2026-07-21 are:
 
 The CPU-node poller runs as PID `754561` and reports state changes to
 `#fun-lia-trashcan` every two minutes.
+
+`consol_h0mn2x_step2000_payload.json` adds the merged step-2000 checkpoint from
+`consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base`
+to the same evaluation setup.
