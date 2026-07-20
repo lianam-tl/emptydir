@@ -93,6 +93,14 @@ def metric(sample: dict[str, Any], key: str) -> float:
     return float(value) if value is not None else 0.0
 
 
+def named_character_hits(sample: dict[str, Any]) -> int:
+    return sum(
+        character.get("name_known")
+        and int(character.get("naming_predicted_span_count") or 0) > 0
+        for character in sample["character_scores"]
+    )
+
+
 def format_number(value: float, digits: int = 4) -> str:
     return f"{value:.{digits}f}"
 
@@ -110,6 +118,7 @@ def render_html(report: dict[str, Any]) -> str:
             f"<td>{html.escape(sample['sample_id'])}</td>"
             f"<td>{sample['asr_segment_count']}</td>"
             f"<td>{sample['asr_roster_count']} / {sample['no_asr_roster_count']} / {sample['ground_truth_roster_count']}</td>"
+            f"<td>{sample['asr_named_character_hits']} / {sample['no_asr_named_character_hits']} / {sample['ground_truth_known_name_count']}</td>"
             f"<td>{sample['asr_span_count']} / {sample['no_asr_span_count']} / {sample['ground_truth_span_count']}</td>"
             f"<td>{format_number(sample['asr_naming_iou'])}</td>"
             f"<td>{format_number(sample['no_asr_naming_iou'])}</td>"
@@ -132,16 +141,18 @@ th {{ background: #eef2f3; position: sticky; top: 0; }} .positive {{ color: #087
 </style></head><body><main>
 <h1>Gemini 3 Flash ASR prediction audit</h1>
 <p><a href="https://huggingface.co/datasets/twelvelabs/entity_cov_v0_tdf">entity_cov_v0_tdf</a>, chunk_10m/test, v0.1, 20 samples.</p>
+<p><strong>Important:</strong> the no-ASR request still uploaded the original MP4 with its audio track. <a href="https://ai.google.dev/gemini-api/docs/video-understanding">Gemini video understanding processes both audio and visual streams</a>, so this compares native video audio against native video audio plus an external ASR transcript. It is not an audio-off ablation.</p>
 <div class="summary">
 <div>Outputs differing<strong>{aggregate["different_outputs"]}/20</strong></div>
 <div>Samples carrying ASR<strong>{aggregate["samples_with_asr"]}/20</strong></div>
 <div>Naming improved / worsened<strong>{aggregate["naming_improved"]} / {aggregate["naming_worsened"]}</strong></div>
 <div>Appearance improved / worsened<strong>{aggregate["appearance_improved"]} / {aggregate["appearance_worsened"]}</strong></div>
+<div>Named-character recall, ASR / no-ASR<strong>{format_number(aggregate["asr_named_character_recall"])} / {format_number(aggregate["no_asr_named_character_recall"])}</strong></div>
 <div>Mean predicted roster, ASR / no-ASR<strong>{format_number(aggregate["mean_asr_roster_count"], 2)} / {format_number(aggregate["mean_no_asr_roster_count"], 2)}</strong></div>
 <div>Mean span inflation, ASR / no-ASR<strong>{format_number(aggregate["mean_asr_span_inflation"], 2)}x / {format_number(aggregate["mean_no_asr_span_inflation"], 2)}x</strong></div>
 </div>
 <p>Roster and span columns show ASR / no-ASR / ground truth. Aggregate evaluator scores are naming {format_number(aggregate["asr_naming_iou"])} vs {format_number(aggregate["no_asr_naming_iou"])}, and naming+appearance {format_number(aggregate["asr_appearance_iou"])} vs {format_number(aggregate["no_asr_appearance_iou"])}.</p>
-<div class="table-wrap"><table><thead><tr><th>Sample</th><th>ASR segments</th><th>Roster A/N/GT</th><th>Spans A/N/GT</th><th>Naming A</th><th>Naming N</th><th>Delta</th><th>Appearance A</th><th>Appearance N</th><th>Delta</th></tr></thead>
+<div class="table-wrap"><table><thead><tr><th>Sample</th><th>ASR segments</th><th>Roster A/N/GT</th><th>Named hits A/N/GT</th><th>Spans A/N/GT</th><th>Naming A</th><th>Naming N</th><th>Delta</th><th>Appearance A</th><th>Appearance N</th><th>Delta</th></tr></thead>
 <tbody>{"".join(rows)}</tbody></table></div></main></body></html>"""
 
 
@@ -209,6 +220,10 @@ def main() -> None:
                 else 0.0,
                 "asr_naming_iou": metric(asr_scores[sample_id], NAMING_KEY),
                 "no_asr_naming_iou": metric(no_asr_scores[sample_id], NAMING_KEY),
+                "asr_named_character_hits": named_character_hits(asr_scores[sample_id]),
+                "no_asr_named_character_hits": named_character_hits(
+                    no_asr_scores[sample_id]
+                ),
                 "asr_appearance_iou": metric(asr_scores[sample_id], APPEARANCE_KEY),
                 "no_asr_appearance_iou": metric(
                     no_asr_scores[sample_id], APPEARANCE_KEY
@@ -216,6 +231,9 @@ def main() -> None:
             }
         )
 
+    known_character_total = sum(
+        sample["ground_truth_known_name_count"] for sample in samples
+    )
     aggregate = {
         "different_outputs": sum(not sample["outputs_equal"] for sample in samples),
         "samples_with_asr": sum(sample["asr_segment_count"] > 0 for sample in samples),
@@ -233,6 +251,14 @@ def main() -> None:
             sample["asr_appearance_iou"] < sample["no_asr_appearance_iou"]
             for sample in samples
         ),
+        "asr_named_character_recall": sum(
+            sample["asr_named_character_hits"] for sample in samples
+        )
+        / known_character_total,
+        "no_asr_named_character_recall": sum(
+            sample["no_asr_named_character_hits"] for sample in samples
+        )
+        / known_character_total,
         "mean_asr_roster_count": mean(sample["asr_roster_count"] for sample in samples),
         "mean_no_asr_roster_count": mean(
             sample["no_asr_roster_count"] for sample in samples
