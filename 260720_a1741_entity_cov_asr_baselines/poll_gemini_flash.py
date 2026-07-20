@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Track the Gemini 3 Flash ASR run, render HTML, and notify Slack."""
+"""Track a Gemini 3 Flash run, render HTML, and notify Slack."""
 
 from __future__ import annotations
 
@@ -54,8 +54,10 @@ def process_exists(pid: int) -> bool:
     return True
 
 
-def render_html(status: str, completed: int, metrics: dict | None) -> str:
-    rows = list(BASELINES)
+def render_html(
+    status: str, completed: int, metrics: dict | None, asr_mode: str = "enabled"
+) -> str:
+    rows = list(BASELINES) if asr_mode == "enabled" else []
     if metrics:
         rows.append(
             (
@@ -72,17 +74,18 @@ def render_html(status: str, completed: int, metrics: dict | None) -> str:
         "</tr>"
         for name, naming, appearance in rows
     )
+    asr_label = "ASR" if asr_mode == "enabled" else "Without ASR"
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>A-1741 Gemini 3 Flash ASR Result</title><style>
+<title>A-1741 Gemini 3 Flash {asr_label} Result</title><style>
 :root {{ font-family: ui-sans-serif, system-ui, sans-serif; color: #182026; }} body {{ margin: 0; background: #f5f7f8; }}
 main {{ width: min(900px, calc(100% - 32px)); margin: 40px auto; }} h1 {{ font-size: 28px; letter-spacing: 0; }}
 table {{ width: 100%; border-collapse: collapse; background: white; border: 1px solid #d8dee2; }}
 th, td {{ padding: 10px 12px; border-bottom: 1px solid #e4e8eb; text-align: right; }} th:first-child, td:first-child {{ text-align: left; }}
 th {{ background: #eef2f3; }} a {{ color: #0563c1; }}</style></head><body><main>
-<h1>Gemini 3 Flash ASR Rerun</h1>
+<h1>Gemini 3 Flash {asr_label}</h1>
 <p>Status: <strong>{html.escape(status)}</strong>. Inference outputs: {completed}/20.</p>
-<p><a href="https://huggingface.co/datasets/twelvelabs/entity_cov_v0_tdf">entity_cov_v0_tdf</a>, chunk_10m/test, entity-coverage v0.1.</p>
+<p><a href="https://huggingface.co/datasets/twelvelabs/entity_cov_v0_tdf">entity_cov_v0_tdf</a>, chunk_10m/test, entity-coverage v0.1. ASR: {asr_mode}.</p>
 <table><thead><tr><th>Model</th><th>Naming IoU</th><th>Naming + appearance IoU</th></tr></thead>
 <tbody>{rendered_rows}</tbody></table></main></body></html>"""
 
@@ -93,6 +96,9 @@ def main() -> None:
     parser.add_argument("--pid-file", type=Path, required=True)
     parser.add_argument("--poll-seconds", type=int, default=60)
     parser.add_argument("--env-file", type=Path, required=True)
+    parser.add_argument(
+        "--asr-mode", choices=("enabled", "disabled"), default="enabled"
+    )
     arguments = parser.parse_args()
 
     load_environment(arguments.env_file)
@@ -101,12 +107,16 @@ def main() -> None:
         arguments.run_root / "output/raw_outputs/chunk10m/gemini-3-flash-preview"
     )
     status_path = arguments.run_root / "status.html"
-    post_slack("[cc-generated] Gemini 3 Flash chunk_10m ASR evaluation started.")
+    asr_label = "ASR" if arguments.asr_mode == "enabled" else "without ASR"
+    post_slack(
+        f"[cc-generated] Gemini 3 Flash chunk_10m {asr_label} evaluation started."
+    )
 
     while process_exists(pid):
         completed = len(list(raw_directory.glob("*.json")))
         status_path.write_text(
-            render_html("running", completed, None), encoding="utf-8"
+            render_html("running", completed, None, arguments.asr_mode),
+            encoding="utf-8",
         )
         print(json.dumps({"status": "running", "completed": completed}), flush=True)
         time.sleep(arguments.poll_seconds)
@@ -117,9 +127,11 @@ def main() -> None:
         json.loads(summaries[-1].read_text(encoding="utf-8")) if summaries else None
     )
     status = "completed" if metrics and completed == 20 else "failed"
-    status_path.write_text(render_html(status, completed, metrics), encoding="utf-8")
+    status_path.write_text(
+        render_html(status, completed, metrics, arguments.asr_mode), encoding="utf-8"
+    )
     post_slack(
-        "[cc-generated] Gemini 3 Flash chunk_10m ASR evaluation "
+        f"[cc-generated] Gemini 3 Flash chunk_10m {asr_label} evaluation "
         f"{status}: completed={completed}/20 metrics={metrics}"
     )
     if status != "completed":
