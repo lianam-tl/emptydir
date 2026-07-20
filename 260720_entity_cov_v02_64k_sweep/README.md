@@ -13,3 +13,7 @@ output tokens on `b300-pegasus`.
 
 `poll_sweep.py` reads `submission_results.json`, writes `status.json` and
 `status.html`, and reports state changes to `#fun-lia-trashcan`.
+
+`analyze_finish_reasons.py` downloads the available A-1790 step-1200 output
+artifacts with `s5cmd` and writes `a1790_step1200_finish_reasons.json` plus an
+HTML report.
