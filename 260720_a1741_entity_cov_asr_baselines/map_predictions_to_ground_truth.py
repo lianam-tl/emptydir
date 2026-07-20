@@ -114,7 +114,7 @@ def map_prediction(
         predicted_payload, raw_row, ground_truth
     )
     best_result = None
-    maximum_attempts = 6 if retry_mismatch else 1
+    maximum_attempts = 20 if retry_mismatch else 1
     for attempt in range(1, maximum_attempts + 1):
         attempt_cache = mapping_cache if attempt == 1 else {}
         combined_mapping: dict[str, str | None] = {}
