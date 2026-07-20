@@ -1,0 +1,322 @@
+[
+  {
+    "family": "consol-h0mn2x",
+    "step": 400,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-400-safetensors/",
+    "payload_file": "payloads/consol-h0mn2x-step400.json",
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "a128c528-3620-53ab-b53e-c3aa37a8f58b",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "submitted_at": "2026-07-20T05:24:01.054140+00:00",
+    "latest_run": {
+      "id": "a128c528-3620-53ab-b53e-c3aa37a8f58b",
+      "name": "lia-entcov-v0-consol-h0mn2x-step400-tp1-r8-20260720T052359Z",
+      "dataset": "twelvelabs/entity_cov_v0_tdf",
+      "config": "chunk_10m",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "batchId": "batch-9f7fdfcc-53b2-40e6-89db-f92f0632b7bd",
+      "experimentName": "lia-entcov-v0-consol-h0mn2x-step400-tp1-r8-20260720T052359Z",
+      "status": "processing",
+      "totalTasks": 20,
+      "completed": 0,
+      "failed": 0,
+      "createdAt": "2026-07-20T05:24:00.920343+00:00",
+      "startedAt": "2026-07-20T05:24:01.244250+00:00",
+      "completedAt": null
+    }
+  },
+  {
+    "family": "consol-h0mn2x",
+    "step": 800,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-800-safetensors/",
+    "payload_file": "payloads/consol-h0mn2x-step800.json",
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "88a45684-f8c8-5d38-99a1-b8fa78f6a0f9",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "submitted_at": "2026-07-20T05:24:02.791025+00:00",
+    "latest_run": {
+      "id": "88a45684-f8c8-5d38-99a1-b8fa78f6a0f9",
+      "name": "lia-entcov-v0-consol-h0mn2x-step800-tp1-r8-20260720T052359Z",
+      "dataset": "twelvelabs/entity_cov_v0_tdf",
+      "config": "chunk_10m",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "batchId": "batch-c6671673-307e-4a99-a718-4c40050b5543",
+      "experimentName": "lia-entcov-v0-consol-h0mn2x-step800-tp1-r8-20260720T052359Z",
+      "status": "processing",
+      "totalTasks": 20,
+      "completed": 0,
+      "failed": 0,
+      "createdAt": "2026-07-20T05:24:02.671472+00:00",
+      "startedAt": "2026-07-20T05:24:02.914048+00:00",
+      "completedAt": null
+    }
+  },
+  {
+    "family": "consol-h0mn2x",
+    "step": 1200,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-1200-safetensors/",
+    "payload_file": "payloads/consol-h0mn2x-step1200.json",
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "e7baf9e8-2266-5430-9baa-5a99da5f44cf",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "submitted_at": "2026-07-20T05:24:04.536737+00:00",
+    "latest_run": {
+      "id": "e7baf9e8-2266-5430-9baa-5a99da5f44cf",
+      "name": "lia-entcov-v0-consol-h0mn2x-step1200-tp1-r8-20260720T052359Z",
+      "dataset": "twelvelabs/entity_cov_v0_tdf",
+      "config": "chunk_10m",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "batchId": "batch-7c23cc2f-aaa1-44e9-8505-68065bc7325a",
+      "experimentName": "lia-entcov-v0-consol-h0mn2x-step1200-tp1-r8-20260720T052359Z",
+      "status": "processing",
+      "totalTasks": 20,
+      "completed": 0,
+      "failed": 0,
+      "createdAt": "2026-07-20T05:24:04.424877+00:00",
+      "startedAt": "2026-07-20T05:24:04.727707+00:00",
+      "completedAt": null
+    }
+  },
+  {
+    "family": "consol-h0mn2x",
+    "step": 1600,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-1600-safetensors/",
+    "payload_file": "payloads/consol-h0mn2x-step1600.json",
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "711f778c-e7ee-5246-9253-8761cce853e3",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "submitted_at": "2026-07-20T05:24:06.356110+00:00",
+    "latest_run": {
+      "id": "711f778c-e7ee-5246-9253-8761cce853e3",
+      "name": "lia-entcov-v0-consol-h0mn2x-step1600-tp1-r8-20260720T052359Z",
+      "dataset": "twelvelabs/entity_cov_v0_tdf",
+      "config": "chunk_10m",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "batchId": "batch-4b289b7f-13e5-413b-ad02-863a29174fe6",
+      "experimentName": "lia-entcov-v0-consol-h0mn2x-step1600-tp1-r8-20260720T052359Z",
+      "status": "processing",
+      "totalTasks": 20,
+      "completed": 0,
+      "failed": 0,
+      "createdAt": "2026-07-20T05:24:06.169671+00:00",
+      "startedAt": "2026-07-20T05:24:06.450574+00:00",
+      "completedAt": null
+    }
+  },
+  {
+    "family": "consol-h0mn2x",
+    "step": 2000,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-2000-safetensors/",
+    "payload_file": "payloads/consol-h0mn2x-step2000.json",
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "60d573c3-7aee-51e4-bbbf-9056910ded20",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "submitted_at": "2026-07-20T05:24:08.105403+00:00",
+    "latest_run": {
+      "id": "60d573c3-7aee-51e4-bbbf-9056910ded20",
+      "name": "lia-entcov-v0-consol-h0mn2x-step2000-tp1-r8-20260720T052359Z",
+      "dataset": "twelvelabs/entity_cov_v0_tdf",
+      "config": "chunk_10m",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "batchId": "batch-358c7c56-1db8-4c2b-a5a1-c323ad0f36b7",
+      "experimentName": "lia-entcov-v0-consol-h0mn2x-step2000-tp1-r8-20260720T052359Z",
+      "status": "processing",
+      "totalTasks": 20,
+      "completed": 0,
+      "failed": 0,
+      "createdAt": "2026-07-20T05:24:07.988650+00:00",
+      "startedAt": "2026-07-20T05:24:08.245736+00:00",
+      "completedAt": null
+    }
+  },
+  {
+    "family": "soccer-lvreason-mcq",
+    "step": 400,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-400-safetensors/",
+    "payload_file": "payloads/soccer-lvreason-mcq-step400.json",
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "656abe33-2d76-588e-8a4b-7543622e0409",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "submitted_at": "2026-07-20T05:24:09.805256+00:00",
+    "latest_run": {
+      "id": "656abe33-2d76-588e-8a4b-7543622e0409",
+      "name": "lia-entcov-v0-soccer-lvreason-mcq-step400-tp1-r8-20260720T052359Z",
+      "dataset": "twelvelabs/entity_cov_v0_tdf",
+      "config": "chunk_10m",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "batchId": "batch-cdd01826-5555-44d9-b8d5-7de8a6b4b6f1",
+      "experimentName": "lia-entcov-v0-soccer-lvreason-mcq-step400-tp1-r8-20260720T052359Z",
+      "status": "processing",
+      "totalTasks": 20,
+      "completed": 0,
+      "failed": 0,
+      "createdAt": "2026-07-20T05:24:09.692724+00:00",
+      "startedAt": "2026-07-20T05:24:10.306242+00:00",
+      "completedAt": null
+    }
+  },
+  {
+    "family": "soccer-lvreason-mcq",
+    "step": 800,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-800-safetensors/",
+    "payload_file": "payloads/soccer-lvreason-mcq-step800.json",
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "b0b64842-9528-5155-a386-c9f2cbdfd8f4",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "submitted_at": "2026-07-20T05:24:11.503545+00:00",
+    "latest_run": {
+      "id": "b0b64842-9528-5155-a386-c9f2cbdfd8f4",
+      "name": "lia-entcov-v0-soccer-lvreason-mcq-step800-tp1-r8-20260720T052359Z",
+      "dataset": "twelvelabs/entity_cov_v0_tdf",
+      "config": "chunk_10m",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "batchId": "batch-ae6cdbc1-aefb-48bc-bcfe-917cd0729054",
+      "experimentName": "lia-entcov-v0-soccer-lvreason-mcq-step800-tp1-r8-20260720T052359Z",
+      "status": "processing",
+      "totalTasks": 20,
+      "completed": 0,
+      "failed": 0,
+      "createdAt": "2026-07-20T05:24:11.387468+00:00",
+      "startedAt": "2026-07-20T05:24:11.657624+00:00",
+      "completedAt": null
+    }
+  },
+  {
+    "family": "soccer-lvreason-mcq",
+    "step": 1200,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-1200-safetensors/",
+    "payload_file": "payloads/soccer-lvreason-mcq-step1200.json",
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "7371ed63-dbc9-54d7-862b-b387726f5b00",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "submitted_at": "2026-07-20T05:24:13.331956+00:00",
+    "latest_run": {
+      "id": "7371ed63-dbc9-54d7-862b-b387726f5b00",
+      "name": "lia-entcov-v0-soccer-lvreason-mcq-step1200-tp1-r8-20260720T052359Z",
+      "dataset": "twelvelabs/entity_cov_v0_tdf",
+      "config": "chunk_10m",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "batchId": "batch-06f9aee4-a089-4e70-a396-f4b934ec8624",
+      "experimentName": "lia-entcov-v0-soccer-lvreason-mcq-step1200-tp1-r8-20260720T052359Z",
+      "status": "processing",
+      "totalTasks": 20,
+      "completed": 0,
+      "failed": 0,
+      "createdAt": "2026-07-20T05:24:13.215353+00:00",
+      "startedAt": "2026-07-20T05:24:13.460771+00:00",
+      "completedAt": null
+    }
+  },
+  {
+    "family": "soccer-lvreason-mcq",
+    "step": 1600,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-1600-safetensors/",
+    "payload_file": "payloads/soccer-lvreason-mcq-step1600.json",
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "d053e0b5-70c0-50bd-8a15-ecb692981fd7",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "submitted_at": "2026-07-20T05:24:15.051875+00:00",
+    "latest_run": {
+      "id": "d053e0b5-70c0-50bd-8a15-ecb692981fd7",
+      "name": "lia-entcov-v0-soccer-lvreason-mcq-step1600-tp1-r8-20260720T052359Z",
+      "dataset": "twelvelabs/entity_cov_v0_tdf",
+      "config": "chunk_10m",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "batchId": "batch-96ca3b1a-5ac8-4cd0-8db3-6f231acca836",
+      "experimentName": "lia-entcov-v0-soccer-lvreason-mcq-step1600-tp1-r8-20260720T052359Z",
+      "status": "processing",
+      "totalTasks": 20,
+      "completed": 0,
+      "failed": 0,
+      "createdAt": "2026-07-20T05:24:14.938452+00:00",
+      "startedAt": "2026-07-20T05:24:15.208165+00:00",
+      "completedAt": null
+    }
+  },
+  {
+    "family": "soccer-lvreason-mcq",
+    "step": 2000,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-2000-safetensors/",
+    "payload_file": "payloads/soccer-lvreason-mcq-step2000.json",
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "0b646e48-4f81-59ca-a383-7249d41ce92c",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "submitted_at": "2026-07-20T05:24:16.867578+00:00",
+    "latest_run": {
+      "id": "0b646e48-4f81-59ca-a383-7249d41ce92c",
+      "name": "lia-entcov-v0-soccer-lvreason-mcq-step2000-tp1-r8-20260720T052359Z",
+      "dataset": "twelvelabs/entity_cov_v0_tdf",
+      "config": "chunk_10m",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "batchId": "batch-cf0f1ac0-70e3-488e-b92d-8d23e3b1830b",
+      "experimentName": "lia-entcov-v0-soccer-lvreason-mcq-step2000-tp1-r8-20260720T052359Z",
+      "status": "processing",
+      "totalTasks": 20,
+      "completed": 0,
+      "failed": 0,
+      "createdAt": "2026-07-20T05:24:16.742826+00:00",
+      "startedAt": "2026-07-20T05:24:16.962597+00:00",
+      "completedAt": null
+    }
+  }
+]

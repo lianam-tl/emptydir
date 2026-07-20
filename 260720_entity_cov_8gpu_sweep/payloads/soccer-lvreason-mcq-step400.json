@@ -1,0 +1,22 @@
+{
+  "name": "lia-entcov-v0-soccer-lvreason-mcq-step400-tp1-r8-20260720T052359Z",
+  "experimentName": "lia-entcov-v0-soccer-lvreason-mcq-step400-tp1-r8-20260720T052359Z",
+  "batchNamePrefix": "lia-entcov-soccer-lvreason-mcq-s400",
+  "idempotencyKey": "lia-entcov-v0-soccer-lvreason-mcq-step400-tp1-r8-20260720T052359Z",
+  "dataset": "twelvelabs/entity_cov_v0_tdf",
+  "config": "chunk_10m",
+  "split": "test",
+  "pipelineId": "vllm-direct",
+  "workerType": "vllm-video-v1",
+  "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-400-safetensors/",
+  "nodePool": "b300-pegasus",
+  "minReplicas": 8,
+  "maxReplicas": 8,
+  "concurrency": 1,
+  "maxInFlight": 20,
+  "tp": 1,
+  "dp": 1,
+  "maxTokens": 16384,
+  "temperature": 0.0,
+  "convertIfNeeded": false
+}
