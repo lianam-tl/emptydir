@@ -13,7 +13,7 @@ The launcher uses eight workers, `AWS_PROFILE=training`, an FSx-backed temporary
 RUN_ROOT=/fsx/jeongyeon-nam/a1814-entity-sme-v1-2-build \
   nohup bash run_build.sh > launcher.log 2>&1 &
 
-nohup python3 poll_build.py \
+nohup /home/jeongyeon-nam/pegasus/.venv/bin/python poll_build.py \
   --run-root /fsx/jeongyeon-nam/a1814-entity-sme-v1-2-build \
   --poll-seconds 300 \
   --notify-seconds 3600 \

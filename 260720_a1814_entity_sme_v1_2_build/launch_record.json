@@ -1,0 +1,12 @@
+{
+  "branch": "lia/a-1814-scale-entity-sme-v1-2",
+  "build_pid": 104723,
+  "commit": "8873d563666a9d41b28f3324f6fc6615003592b0",
+  "cpu_host": "jeongyeon-nam-cpu-lia-cpu-0",
+  "launched_at": "2026-07-20T10:58:55Z",
+  "poll_pid": 104943,
+  "run_root": "/fsx/jeongyeon-nam/a1814-entity-sme-v1-2-build",
+  "slack_channel": "C0ATJME17EK",
+  "workers": 8,
+  "worktree": "/fsx/jeongyeon-nam/pegasus-worktrees/lia-a-1814-scale-entity-sme-v1-2"
+}
