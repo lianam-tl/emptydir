@@ -1,9 +1,10 @@
 {
-  "batch_id": "batch-1f65209b-d152-49cf-97c8-9142bbb6be85",
-  "eval_run_id": "c9676b7f-6433-5523-acaf-8d30ea602536",
+  "batch_id": "batch-eb4225e9-1e4c-4da3-8ebb-eb3a266edc48",
+  "deployed_branch": "lia/no-ticket-entity-cov-v02-benchmark-260716",
+  "deployed_git_sha": "e0e07743d798416dcf23c4e74f4e2af9c4ae21b0",
+  "eval_run_id": "7c2a3a9b-d814-5944-9243-19a34c971fa8",
   "eval_service": "eval-v3-api-lia",
   "initial_status": "processing",
-  "submitted_at": "2026-07-20T03:19:26.590612+00:00",
+  "submitted_at": "2026-07-20T03:43:29.615959+00:00",
   "total_tasks": 20
 }
-
