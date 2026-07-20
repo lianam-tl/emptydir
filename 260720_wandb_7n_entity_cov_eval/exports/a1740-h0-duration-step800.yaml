@@ -1,0 +1,54 @@
+# DCP checkpoint to sharded safetensors for Eval V3.
+name: export-a1740-h0-duration-s800
+image: 476114115052.dkr.ecr.us-west-2.amazonaws.com/pegasus-training:b300-sft-latest
+nodes: 1
+gpus: 1
+cpu: "24"
+memory: "240Gi"
+instanceGroup: b300-pegasus
+sharedStorage:
+  enabled: true
+  claimName: fsx-shared
+env:
+  TOKENIZERS_PARALLELISM: "false"
+  HF_HUB_DISABLE_PROGRESS_BARS: "1"
+  HDF5_USE_FILE_LOCKING: "false"
+  AWS_REGION: "us-west-2"
+  TZ: "Asia/Seoul"
+  PYTORCH_CUDA_ALLOC_CONF: "expandable_segments:True"
+  GH_BRANCH: "main"
+  S3_SOURCE_PATH: "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1740_h0_duration_consol_7n_qwen3_5_27b-base/checkpoint-800"
+  S3_OUTPUT_PATH: "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1740_h0_duration_consol_7n_qwen3_5_27b-base/checkpoint-800-safetensors"
+command: |
+  set -euo pipefail
+
+  PROJECT_ROOT="${EPHEMERAL_ROOT}/project"
+  git clone --filter=blob:none -b "${GH_BRANCH}" \
+    git@github.com:twelvelabs-io/pegasus.git "${PROJECT_ROOT}"
+  export GH_SHA="$(git -C "${PROJECT_ROOT}" rev-parse HEAD)"
+  export GH_REF="refs/experiments/runs/${JOB_NAME}"
+  if [[ "${NODE_RANK:-0}" == "0" ]]; then
+    if ! git -C "${PROJECT_ROOT}" push --quiet origin "${GH_SHA}:${GH_REF}" 2>&1; then
+      REMOTE_SHA="$(git -C "${PROJECT_ROOT}" ls-remote origin "${GH_REF}" | awk '{print $1}')"
+      if [[ "${REMOTE_SHA}" != "${GH_SHA}" ]]; then
+        echo "ERROR: failed to push ${GH_REF}; remote=${REMOTE_SHA:-<none>}, local=${GH_SHA}" >&2
+        exit 1
+      fi
+    fi
+  fi
+
+  export PYTHONPATH="${PROJECT_ROOT}/eval/eval-service:${PYTHONPATH:-}"
+  S3_LOG_URI="s3://tl-data-training-pegasus-us-west-2/logs/${JOB_NAME}/${POD_NAME}/convert.log"
+  LOCAL_LOG="${EPHEMERAL_ROOT}/convert.log"
+  upload_logs() {
+    if command -v aws >/dev/null 2>&1 && [[ -f "${LOCAL_LOG}" ]]; then
+      aws s3 cp "${LOCAL_LOG}" "${S3_LOG_URI}" --region us-west-2 || true
+    fi
+  }
+  trap upload_logs EXIT
+
+  uv pip install --quiet safetensors boto3 s5cmd "s3torchconnector[dcp]" 2>&1 | tee -a "${LOCAL_LOG}"
+  cd "${PROJECT_ROOT}/eval/eval-service"
+  python3 -c "import os; os.makedirs(os.path.join(os.environ['EPHEMERAL_ROOT'], 'models'), exist_ok=True); import eval_service.conversion.checkpoint_convert_job as job; job.install_dependencies = lambda: None; job.LOCAL_DIR = os.path.join(os.environ['EPHEMERAL_ROOT'], 'models', 'checkpoint'); job.main()" 2>&1 | tee -a "${LOCAL_LOG}"
+
+  echo "Done. Sharded safetensors uploaded to ${S3_OUTPUT_PATH}/"
