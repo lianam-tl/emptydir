@@ -61,3 +61,9 @@ to the same evaluation setup.
 
 `submit_consol_h0mn2x.py` submits the remaining steps 400, 800, 1200, and
 1600 with the same configuration as the separately submitted step 2000 run.
+
+- step 400: `6a1d2ca0-f030-5ae9-bfd4-d63c5c0584b6`
+- step 800: `a7ed23df-4db0-5ef1-ab05-ca51a995264f`
+- step 1200: `239cf441-25eb-591c-ab32-32bdfaa91241`
+- step 1600: `78542b3b-6142-5487-80eb-2be8006ce1f9`
+- CPU-node Slack poller: PID `763251`

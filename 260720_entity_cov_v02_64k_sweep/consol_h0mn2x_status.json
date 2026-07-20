@@ -1,0 +1,45 @@
+{
+  "checked_at": "2026-07-20T16:01:03.415155+00:00",
+  "runs": [
+    {
+      "family": "consol-h0mn2x",
+      "step": 400,
+      "run_id": "6a1d2ca0-f030-5ae9-bfd4-d63c5c0584b6",
+      "batch_id": "batch-e9dddd4f-3845-484e-a9ce-fb84869e1cf1",
+      "status": "processing",
+      "completed": 0,
+      "failed": 0,
+      "total": 20
+    },
+    {
+      "family": "consol-h0mn2x",
+      "step": 800,
+      "run_id": "a7ed23df-4db0-5ef1-ab05-ca51a995264f",
+      "batch_id": "batch-b091a32f-bce6-4669-bffe-1bd64b6170b1",
+      "status": "processing",
+      "completed": 0,
+      "failed": 0,
+      "total": 20
+    },
+    {
+      "family": "consol-h0mn2x",
+      "step": 1200,
+      "run_id": "239cf441-25eb-591c-ab32-32bdfaa91241",
+      "batch_id": "batch-53649a33-48fd-4c5b-af29-a7e9f41d0bcd",
+      "status": "processing",
+      "completed": 0,
+      "failed": 0,
+      "total": 20
+    },
+    {
+      "family": "consol-h0mn2x",
+      "step": 1600,
+      "run_id": "78542b3b-6142-5487-80eb-2be8006ce1f9",
+      "batch_id": "batch-72ff7887-540f-4a1f-9a65-1a1d042c6a16",
+      "status": "processing",
+      "completed": 0,
+      "failed": 0,
+      "total": 20
+    }
+  ]
+}

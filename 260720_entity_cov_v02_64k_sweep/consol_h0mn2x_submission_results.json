@@ -1,0 +1,154 @@
+[
+  {
+    "family": "consol-h0mn2x",
+    "step": 400,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-400-safetensors/",
+    "run_id": "6a1d2ca0-f030-5ae9-bfd4-d63c5c0584b6",
+    "batch_id": "batch-e9dddd4f-3845-484e-a9ce-fb84869e1cf1",
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "6a1d2ca0-f030-5ae9-bfd4-d63c5c0584b6",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "payload": {
+      "name": "lia-entcov-v02-64k-consol-h0mn2x-step400-tp1-r8-20260720T160044Z",
+      "experimentName": "lia-entcov-v02-64k-consol-h0mn2x-step400-tp1-r8-20260720T160044Z",
+      "batchNamePrefix": "lia-entcov-v02-64k-consol-h0mn2x-s400",
+      "idempotencyKey": "lia-entcov-v02-64k-consol-h0mn2x-step400-tp1-r8-20260720T160044Z",
+      "dataset": "twelvelabs/entity_cov_v02_tdf",
+      "config": "default",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "workerType": "vllm-video-v1",
+      "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-400-safetensors/",
+      "nodePool": "b300-pegasus",
+      "minReplicas": 8,
+      "maxReplicas": 8,
+      "concurrency": 1,
+      "maxInFlight": 20,
+      "tp": 1,
+      "dp": 1,
+      "maxTokens": 65536,
+      "temperature": 0.0,
+      "convertIfNeeded": false,
+      "enableTensorCache": true
+    }
+  },
+  {
+    "family": "consol-h0mn2x",
+    "step": 800,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-800-safetensors/",
+    "run_id": "a7ed23df-4db0-5ef1-ab05-ca51a995264f",
+    "batch_id": "batch-b091a32f-bce6-4669-bffe-1bd64b6170b1",
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "a7ed23df-4db0-5ef1-ab05-ca51a995264f",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "payload": {
+      "name": "lia-entcov-v02-64k-consol-h0mn2x-step800-tp1-r8-20260720T160044Z",
+      "experimentName": "lia-entcov-v02-64k-consol-h0mn2x-step800-tp1-r8-20260720T160044Z",
+      "batchNamePrefix": "lia-entcov-v02-64k-consol-h0mn2x-s800",
+      "idempotencyKey": "lia-entcov-v02-64k-consol-h0mn2x-step800-tp1-r8-20260720T160044Z",
+      "dataset": "twelvelabs/entity_cov_v02_tdf",
+      "config": "default",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "workerType": "vllm-video-v1",
+      "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-800-safetensors/",
+      "nodePool": "b300-pegasus",
+      "minReplicas": 8,
+      "maxReplicas": 8,
+      "concurrency": 1,
+      "maxInFlight": 20,
+      "tp": 1,
+      "dp": 1,
+      "maxTokens": 65536,
+      "temperature": 0.0,
+      "convertIfNeeded": false,
+      "enableTensorCache": true
+    }
+  },
+  {
+    "family": "consol-h0mn2x",
+    "step": 1200,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-1200-safetensors/",
+    "run_id": "239cf441-25eb-591c-ab32-32bdfaa91241",
+    "batch_id": "batch-53649a33-48fd-4c5b-af29-a7e9f41d0bcd",
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "239cf441-25eb-591c-ab32-32bdfaa91241",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "payload": {
+      "name": "lia-entcov-v02-64k-consol-h0mn2x-step1200-tp1-r8-20260720T160044Z",
+      "experimentName": "lia-entcov-v02-64k-consol-h0mn2x-step1200-tp1-r8-20260720T160044Z",
+      "batchNamePrefix": "lia-entcov-v02-64k-consol-h0mn2x-s1200",
+      "idempotencyKey": "lia-entcov-v02-64k-consol-h0mn2x-step1200-tp1-r8-20260720T160044Z",
+      "dataset": "twelvelabs/entity_cov_v02_tdf",
+      "config": "default",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "workerType": "vllm-video-v1",
+      "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-1200-safetensors/",
+      "nodePool": "b300-pegasus",
+      "minReplicas": 8,
+      "maxReplicas": 8,
+      "concurrency": 1,
+      "maxInFlight": 20,
+      "tp": 1,
+      "dp": 1,
+      "maxTokens": 65536,
+      "temperature": 0.0,
+      "convertIfNeeded": false,
+      "enableTensorCache": true
+    }
+  },
+  {
+    "family": "consol-h0mn2x",
+    "step": 1600,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-1600-safetensors/",
+    "run_id": "78542b3b-6142-5487-80eb-2be8006ce1f9",
+    "batch_id": "batch-72ff7887-540f-4a1f-9a65-1a1d042c6a16",
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "78542b3b-6142-5487-80eb-2be8006ce1f9",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "payload": {
+      "name": "lia-entcov-v02-64k-consol-h0mn2x-step1600-tp1-r8-20260720T160044Z",
+      "experimentName": "lia-entcov-v02-64k-consol-h0mn2x-step1600-tp1-r8-20260720T160044Z",
+      "batchNamePrefix": "lia-entcov-v02-64k-consol-h0mn2x-s1600",
+      "idempotencyKey": "lia-entcov-v02-64k-consol-h0mn2x-step1600-tp1-r8-20260720T160044Z",
+      "dataset": "twelvelabs/entity_cov_v02_tdf",
+      "config": "default",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "workerType": "vllm-video-v1",
+      "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-1600-safetensors/",
+      "nodePool": "b300-pegasus",
+      "minReplicas": 8,
+      "maxReplicas": 8,
+      "concurrency": 1,
+      "maxInFlight": 20,
+      "tp": 1,
+      "dp": 1,
+      "maxTokens": 65536,
+      "temperature": 0.0,
+      "convertIfNeeded": false,
+      "enableTensorCache": true
+    }
+  }
+]
