@@ -35,12 +35,15 @@ def pegasus_predictions(path: Path) -> list[dict[str, Any]]:
     predictions = []
     for record in load_json_lines(path):
         response = record.get("parsed_response") or {}
+        raw_row = record["raw_row"]
+        if isinstance(raw_row, str):
+            raw_row = json.loads(raw_row)
         predictions.append(
             {
                 "sample_id": record["sample_id"],
                 "status": "JOB_STATUS_COMPLETED",
                 "output": {"text": response.get("text") or ""},
-                "raw_row": record["raw_row"],
+                "raw_row": raw_row,
             }
         )
     return predictions
