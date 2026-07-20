@@ -1,0 +1,38 @@
+[
+  {
+    "model": "pegasus-15-sft",
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/ablation_260416_soccer_clean_filter_low_aug-highres_lr2e-6_qwen3_5_27b_soccer_dc_sme_low_filter_mtp_0513-base/checkpoint-1000-safetensors/",
+    "payload_file": "payloads/pegasus-15-sft.json",
+    "http_status": 0,
+    "response": {
+      "evalRun": {
+        "status": "dry-run"
+      }
+    },
+    "submitted_at": "2026-07-20T07:07:44.306461+00:00"
+  },
+  {
+    "model": "pegasus-15-rl",
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/rl_rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7_ckpt1000-base/global_step_60/actor/huggingface/",
+    "payload_file": "payloads/pegasus-15-rl.json",
+    "http_status": 0,
+    "response": {
+      "evalRun": {
+        "status": "dry-run"
+      }
+    },
+    "submitted_at": "2026-07-20T07:07:44.813357+00:00"
+  },
+  {
+    "model": "pegasus-15",
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/kian-kim/soce_rl_260516_all_pair_p15_a1mckpt1000s60_w7030/",
+    "payload_file": "payloads/pegasus-15.json",
+    "http_status": 0,
+    "response": {
+      "evalRun": {
+        "status": "dry-run"
+      }
+    },
+    "submitted_at": "2026-07-20T07:07:45.314752+00:00"
+  }
+]

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A-1741 ASR Baseline Rerun</title>
+  <style>
+    :root { font-family: ui-sans-serif, system-ui, sans-serif; color: #182026; }
+    body { margin: 0; background: #f5f7f8; }
+    main { width: min(1200px, calc(100% - 32px)); margin: 40px auto; }
+    h1 { font-size: 28px; margin: 0 0 8px; letter-spacing: 0; }
+    p { line-height: 1.5; }
+    table { width: 100%; border-collapse: collapse; background: white; border: 1px solid #d8dee2; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid #e4e8eb; text-align: left; vertical-align: top; }
+    th { background: #eef2f3; }
+    code { overflow-wrap: anywhere; }
+    a { color: #0563c1; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>A-1741 ASR Baseline Rerun</h1>
+    <p><a href="https://huggingface.co/datasets/twelvelabs/entity_cov_v0_tdf">twelvelabs/entity_cov_v0_tdf</a>, <code>chunk_10m/test</code>. ASR is explicitly enabled. Each run uses TP=1 and eight replicas.</p>
+    <table>
+      <thead><tr><th>Model</th><th>Status</th><th>Progress</th><th>Naming IoU</th><th>Naming + appearance IoU</th><th>Run ID</th><th>Batch ID</th><th>Model path</th></tr></thead>
+      <tbody><tr><td>pegasus-15-sft</td><td>dry-run</td><td>0/20</td><td></td><td></td><td><code></code></td><td><code></code></td><td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/ablation_260416_soccer_clean_filter_low_aug-highres_lr2e-6_qwen3_5_27b_soccer_dc_sme_low_filter_mtp_0513-base/checkpoint-1000-safetensors/</code></td></tr><tr><td>pegasus-15-rl</td><td>dry-run</td><td>0/20</td><td></td><td></td><td><code></code></td><td><code></code></td><td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/rl_rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7_ckpt1000-base/global_step_60/actor/huggingface/</code></td></tr><tr><td>pegasus-15</td><td>dry-run</td><td>0/20</td><td></td><td></td><td><code></code></td><td><code></code></td><td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/kian-kim/soce_rl_260516_all_pair_p15_a1mckpt1000s60_w7030/</code></td></tr></tbody>
+    </table>
+  </main>
+</body>
+</html>
