@@ -13,8 +13,9 @@ The Lia sandbox was rebuilt from
 at `e0e07743d798416dcf23c4e74f4e2af9c4ae21b0`. The fresh run contains all 20
 rows from `chunk_10m`.
 
-Batch Request accepted the batch, but it had submitted 0 of 20 jobs at the
-first post-submission check. The CPU-node monitor continues polling Eval V3.
+Batch Request reserved two GPUs on `hyperpod-i-0b332ff06a8e6a4fc`, started
+model session `ms-f8dde132-b32a-4a14-a024-e09106f684b5`, and submitted all 20
+requests. The CPU-node monitor continues polling Eval V3.
 
 The first request included `pollTimeoutSeconds` and was rejected with HTTP 422.
 No run was created by that request. The accepted request in `payload.json` omits
