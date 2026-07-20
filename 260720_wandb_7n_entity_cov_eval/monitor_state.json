@@ -1,0 +1,74 @@
+[
+  {
+    "family": "a1790-entity-sme4x",
+    "step": 400,
+    "wandb_run_id": "kp1ju1r1",
+    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1",
+    "source_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-400",
+    "output_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-400-safetensors",
+    "export_name": "export-a1790-entity-sme4x-s400",
+    "manifest": "exports/a1790-entity-sme4x-step400.yaml",
+    "job_name": "export-a1790-entity-sme4x-s400-tigmh5",
+    "export_status": "Running"
+  },
+  {
+    "family": "a1790-entity-sme4x",
+    "step": 800,
+    "wandb_run_id": "kp1ju1r1",
+    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1",
+    "source_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-800",
+    "output_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-800-safetensors",
+    "export_name": "export-a1790-entity-sme4x-s800",
+    "manifest": "exports/a1790-entity-sme4x-step800.yaml",
+    "job_name": "export-a1790-entity-sme4x-s800-tigmhc",
+    "export_status": "Running"
+  },
+  {
+    "family": "a1790-entity-sme4x",
+    "step": 1200,
+    "wandb_run_id": "kp1ju1r1",
+    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1",
+    "source_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-1200",
+    "output_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-1200-safetensors",
+    "export_name": "export-a1790-entity-sme4x-s1200",
+    "manifest": "exports/a1790-entity-sme4x-step1200.yaml",
+    "job_name": "export-a1790-entity-sme4x-s1200-tigmhj",
+    "export_status": "Running"
+  },
+  {
+    "family": "a1740-h0-duration",
+    "step": 400,
+    "wandb_run_id": "bqm74hdf",
+    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/bqm74hdf",
+    "source_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1740_h0_duration_consol_7n_qwen3_5_27b-base/checkpoint-400",
+    "output_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1740_h0_duration_consol_7n_qwen3_5_27b-base/checkpoint-400-safetensors",
+    "export_name": "export-a1740-h0-duration-s400",
+    "manifest": "exports/a1740-h0-duration-step400.yaml",
+    "job_name": "export-a1740-h0-duration-s400-tigmgj",
+    "export_status": "Running"
+  },
+  {
+    "family": "a1740-h0-duration",
+    "step": 800,
+    "wandb_run_id": "bqm74hdf",
+    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/bqm74hdf",
+    "source_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1740_h0_duration_consol_7n_qwen3_5_27b-base/checkpoint-800",
+    "output_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1740_h0_duration_consol_7n_qwen3_5_27b-base/checkpoint-800-safetensors",
+    "export_name": "export-a1740-h0-duration-s800",
+    "manifest": "exports/a1740-h0-duration-step800.yaml",
+    "job_name": "export-a1740-h0-duration-s800-tigmgq",
+    "export_status": "Running"
+  },
+  {
+    "family": "a1740-h0-duration",
+    "step": 1200,
+    "wandb_run_id": "bqm74hdf",
+    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/bqm74hdf",
+    "source_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1740_h0_duration_consol_7n_qwen3_5_27b-base/checkpoint-1200",
+    "output_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1740_h0_duration_consol_7n_qwen3_5_27b-base/checkpoint-1200-safetensors",
+    "export_name": "export-a1740-h0-duration-s1200",
+    "manifest": "exports/a1740-h0-duration-step1200.yaml",
+    "job_name": "export-a1740-h0-duration-s1200-tigmgy",
+    "export_status": "Running"
+  }
+]
