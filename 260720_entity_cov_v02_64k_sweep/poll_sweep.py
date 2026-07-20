@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Poll the six entity_cov_v02 runs and notify Slack on state changes."""
+"""Poll entity_cov_v02 runs and notify Slack on state changes."""
 
 from __future__ import annotations
 
@@ -116,7 +116,7 @@ def main() -> None:
     post_slack(
         slack_token,
         arguments.slack_channel,
-        "Started entity_cov_v02 64K six-run polling.",
+        f"Started entity_cov_v02 64K polling for {len(tracked_runs)} runs.",
     )
     while True:
         statuses = [
@@ -140,7 +140,7 @@ def main() -> None:
             post_slack(
                 slack_token,
                 arguments.slack_channel,
-                "All six entity_cov_v02 64K runs are terminal.",
+                "All tracked entity_cov_v02 64K runs are terminal.",
             )
             return
         time.sleep(arguments.poll_seconds)

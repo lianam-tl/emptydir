@@ -36,3 +36,8 @@ rescored successfully: 20 scored, 0 failed, 0 missing. The malformed
 `score_trends.html` compares the final scores for both three-checkpoint families.
 The A-1790 primary full-video naming + appearance IoU improves monotonically
 (0.2627, 0.3138, 0.3358); A-1740 declines (0.2873, 0.2517, 0.2350).
+
+`submit_soccer_lvreason.py` submits steps 400, 800, and 1200 from
+`sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base` with the
+same entity-coverage v0.2 settings: 65,536 output tokens, TP=1, eight replicas,
+and the `b300-pegasus` node pool.
