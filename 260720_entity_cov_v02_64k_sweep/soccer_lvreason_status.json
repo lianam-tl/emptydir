@@ -1,0 +1,35 @@
+{
+  "checked_at": "2026-07-20T15:52:38.533480+00:00",
+  "runs": [
+    {
+      "family": "soccer-lvreason-mcq",
+      "step": 400,
+      "run_id": "29162be7-08eb-569f-babd-fe4ce9b5bbfa",
+      "batch_id": "batch-fed1aa51-7e77-4bee-9ddd-30dc78caf3e1",
+      "status": "processing",
+      "completed": 0,
+      "failed": 0,
+      "total": 20
+    },
+    {
+      "family": "soccer-lvreason-mcq",
+      "step": 800,
+      "run_id": "5287cdbb-2fbf-5b13-8f4a-95aaf59401b4",
+      "batch_id": "batch-9e8201b3-eac4-4996-84e7-44dbd198800a",
+      "status": "processing",
+      "completed": 0,
+      "failed": 0,
+      "total": 20
+    },
+    {
+      "family": "soccer-lvreason-mcq",
+      "step": 1200,
+      "run_id": "fca2533a-a6fc-550e-8c58-a49d8363626a",
+      "batch_id": "batch-b8b133da-a7f3-4035-8e39-e1a91984b4bc",
+      "status": "processing",
+      "completed": 0,
+      "failed": 0,
+      "total": 20
+    }
+  ]
+}

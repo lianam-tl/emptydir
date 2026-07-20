@@ -41,3 +41,12 @@ The A-1790 primary full-video naming + appearance IoU improves monotonically
 `sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base` with the
 same entity-coverage v0.2 settings: 65,536 output tokens, TP=1, eight replicas,
 and the `b300-pegasus` node pool.
+
+The soccer-lvreason runs submitted on 2026-07-21 are:
+
+- step 400: `29162be7-08eb-569f-babd-fe4ce9b5bbfa`
+- step 800: `5287cdbb-2fbf-5b13-8f4a-95aaf59401b4`
+- step 1200: `fca2533a-a6fc-550e-8c58-a49d8363626a`
+
+The CPU-node poller runs as PID `754561` and reports state changes to
+`#fun-lia-trashcan` every two minutes.

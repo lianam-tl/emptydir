@@ -1,0 +1,116 @@
+[
+  {
+    "family": "soccer-lvreason-mcq",
+    "step": 400,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-400-safetensors/",
+    "run_id": "29162be7-08eb-569f-babd-fe4ce9b5bbfa",
+    "batch_id": "batch-fed1aa51-7e77-4bee-9ddd-30dc78caf3e1",
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "29162be7-08eb-569f-babd-fe4ce9b5bbfa",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "payload": {
+      "name": "lia-entcov-v02-64k-soccer-lvreason-step400-tp1-r8-20260720T155129Z",
+      "experimentName": "lia-entcov-v02-64k-soccer-lvreason-step400-tp1-r8-20260720T155129Z",
+      "batchNamePrefix": "lia-entcov-v02-64k-soccer-lvreason-s400",
+      "idempotencyKey": "lia-entcov-v02-64k-soccer-lvreason-step400-tp1-r8-20260720T155129Z",
+      "dataset": "twelvelabs/entity_cov_v02_tdf",
+      "config": "default",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "workerType": "vllm-video-v1",
+      "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-400-safetensors/",
+      "nodePool": "b300-pegasus",
+      "minReplicas": 8,
+      "maxReplicas": 8,
+      "concurrency": 1,
+      "maxInFlight": 20,
+      "tp": 1,
+      "dp": 1,
+      "maxTokens": 65536,
+      "temperature": 0.0,
+      "convertIfNeeded": false,
+      "enableTensorCache": true
+    }
+  },
+  {
+    "family": "soccer-lvreason-mcq",
+    "step": 800,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-800-safetensors/",
+    "run_id": "5287cdbb-2fbf-5b13-8f4a-95aaf59401b4",
+    "batch_id": "batch-9e8201b3-eac4-4996-84e7-44dbd198800a",
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "5287cdbb-2fbf-5b13-8f4a-95aaf59401b4",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "payload": {
+      "name": "lia-entcov-v02-64k-soccer-lvreason-step800-tp1-r8-20260720T155129Z",
+      "experimentName": "lia-entcov-v02-64k-soccer-lvreason-step800-tp1-r8-20260720T155129Z",
+      "batchNamePrefix": "lia-entcov-v02-64k-soccer-lvreason-s800",
+      "idempotencyKey": "lia-entcov-v02-64k-soccer-lvreason-step800-tp1-r8-20260720T155129Z",
+      "dataset": "twelvelabs/entity_cov_v02_tdf",
+      "config": "default",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "workerType": "vllm-video-v1",
+      "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-800-safetensors/",
+      "nodePool": "b300-pegasus",
+      "minReplicas": 8,
+      "maxReplicas": 8,
+      "concurrency": 1,
+      "maxInFlight": 20,
+      "tp": 1,
+      "dp": 1,
+      "maxTokens": 65536,
+      "temperature": 0.0,
+      "convertIfNeeded": false,
+      "enableTensorCache": true
+    }
+  },
+  {
+    "family": "soccer-lvreason-mcq",
+    "step": 1200,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-1200-safetensors/",
+    "run_id": "fca2533a-a6fc-550e-8c58-a49d8363626a",
+    "batch_id": "batch-b8b133da-a7f3-4035-8e39-e1a91984b4bc",
+    "http_status": 202,
+    "response": {
+      "evalRun": {
+        "id": "fca2533a-a6fc-550e-8c58-a49d8363626a",
+        "status": "queued"
+      },
+      "replayed": false
+    },
+    "payload": {
+      "name": "lia-entcov-v02-64k-soccer-lvreason-step1200-tp1-r8-20260720T155129Z",
+      "experimentName": "lia-entcov-v02-64k-soccer-lvreason-step1200-tp1-r8-20260720T155129Z",
+      "batchNamePrefix": "lia-entcov-v02-64k-soccer-lvreason-s1200",
+      "idempotencyKey": "lia-entcov-v02-64k-soccer-lvreason-step1200-tp1-r8-20260720T155129Z",
+      "dataset": "twelvelabs/entity_cov_v02_tdf",
+      "config": "default",
+      "split": "test",
+      "pipelineId": "vllm-direct",
+      "workerType": "vllm-video-v1",
+      "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-1200-safetensors/",
+      "nodePool": "b300-pegasus",
+      "minReplicas": 8,
+      "maxReplicas": 8,
+      "concurrency": 1,
+      "maxInFlight": 20,
+      "tp": 1,
+      "dp": 1,
+      "maxTokens": 65536,
+      "temperature": 0.0,
+      "convertIfNeeded": false,
+      "enableTensorCache": true
+    }
+  }
+]
