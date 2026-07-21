@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-07-20T15:57:27.680918+00:00",
+  "runs": [
+    {
+      "family": "consol-h0mn2x",
+      "step": 2000,
+      "run_id": "55ccccf4-87a9-576f-acb7-45adac7e8fdb",
+      "batch_id": "batch-d3cce84a-a08e-4abd-a18a-1ea3962ae1eb",
+      "status": "processing",
+      "completed": 0,
+      "failed": 0,
+      "total": 20
+    }
+  ]
+}

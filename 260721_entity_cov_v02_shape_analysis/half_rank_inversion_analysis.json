@@ -1,0 +1,1970 @@
+{
+  "character_rows": [
+    {
+      "a1740_appearance": 0.8656562137049941,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 2,
+      "appearance_gap": 0.8656562137049941,
+      "consol_appearance": 0.0,
+      "consol_naming": null,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 3,
+      "label_id": "ChristianFriend",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-04__half__000",
+      "source": "film-04"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": 0.4082057389134616,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": -0.8085727435686272,
+      "consol_appearance": 0.8085727435686272,
+      "consol_naming": 0.8085727435686272,
+      "consol_predicted_spans": 12,
+      "ground_truth_spans": 9,
+      "label_id": "Louis",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-01__half__000",
+      "source": "film-01"
+    },
+    {
+      "a1740_appearance": 0.7004003179073586,
+      "a1740_naming": 0.7004003179073586,
+      "a1740_predicted_spans": 41,
+      "appearance_gap": 0.7004003179073586,
+      "consol_appearance": 0.0,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 56,
+      "label_id": "Christian",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-04__half__000",
+      "source": "film-04"
+    },
+    {
+      "a1740_appearance": 0.705788975087693,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 25,
+      "appearance_gap": 0.646888626842314,
+      "consol_appearance": 0.05890034824537902,
+      "consol_naming": null,
+      "consol_predicted_spans": 1,
+      "ground_truth_spans": 23,
+      "label_id": "Husband",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-05__half__001",
+      "source": "film-05"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 7,
+      "appearance_gap": -0.5874556489593004,
+      "consol_appearance": 0.5874556489593004,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 14,
+      "ground_truth_spans": 15,
+      "label_id": "Ina",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-03__half__001",
+      "source": "film-03"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": -0.5866506028551266,
+      "consol_appearance": 0.5866506028551266,
+      "consol_naming": 0.5866506028551266,
+      "consol_predicted_spans": 15,
+      "ground_truth_spans": 25,
+      "label_id": "Christian",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-04__half__001",
+      "source": "film-04"
+    },
+    {
+      "a1740_appearance": 0.5485085874017613,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 12,
+      "appearance_gap": 0.5485085874017613,
+      "consol_appearance": 0.0,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 22,
+      "label_id": "Crystal",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-04__half__000",
+      "source": "film-04"
+    },
+    {
+      "a1740_appearance": 0.63461886655803,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 174,
+      "appearance_gap": 0.5340367190806691,
+      "consol_appearance": 0.10058214747736094,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 6,
+      "ground_truth_spans": 46,
+      "label_id": "Beth",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-05__half__000",
+      "source": "film-05"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": -0.47845219537542266,
+      "consol_appearance": 0.47845219537542266,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 12,
+      "ground_truth_spans": 20,
+      "label_id": "Noah Prome",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-03__half__000",
+      "source": "film-03"
+    },
+    {
+      "a1740_appearance": 0.574896493152624,
+      "a1740_naming": 0.574896493152624,
+      "a1740_predicted_spans": 176,
+      "appearance_gap": 0.46878471627061075,
+      "consol_appearance": 0.10611177688201329,
+      "consol_naming": 0.10611177688201329,
+      "consol_predicted_spans": 8,
+      "ground_truth_spans": 52,
+      "label_id": "Alex",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-05__half__000",
+      "source": "film-05"
+    },
+    {
+      "a1740_appearance": 0.8069230769230765,
+      "a1740_naming": 0.8069230769230765,
+      "a1740_predicted_spans": 2,
+      "appearance_gap": 0.4415834984687446,
+      "consol_appearance": 0.3653395784543319,
+      "consol_naming": 0.3653395784543319,
+      "consol_predicted_spans": 1,
+      "ground_truth_spans": 2,
+      "label_id": "2-on-australia",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__sport-01__half__000",
+      "source": "sport-01"
+    },
+    {
+      "a1740_appearance": 0.07262059268873013,
+      "a1740_naming": 0.07262059268873013,
+      "a1740_predicted_spans": 7,
+      "appearance_gap": -0.4394834954932132,
+      "consol_appearance": 0.5121040881819433,
+      "consol_naming": 0.09682501140058372,
+      "consol_predicted_spans": 3,
+      "ground_truth_spans": 4,
+      "label_id": "Old Man George",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-03__half__000",
+      "source": "film-03"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": -0.4185051666279032,
+      "consol_appearance": 0.4185051666279032,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 10,
+      "ground_truth_spans": 12,
+      "label_id": "Enny",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-03__half__001",
+      "source": "film-03"
+    },
+    {
+      "a1740_appearance": 0.389680772086117,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 21,
+      "appearance_gap": 0.389680772086117,
+      "consol_appearance": 0.0,
+      "consol_naming": null,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 16,
+      "label_id": "Feroz Ali Khan",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-02__half__001",
+      "source": "film-02"
+    },
+    {
+      "a1740_appearance": 0.7211883774077704,
+      "a1740_naming": 0.7211883774077704,
+      "a1740_predicted_spans": 6,
+      "appearance_gap": 0.3419011095476395,
+      "consol_appearance": 0.3792872678601309,
+      "consol_naming": 0.3792872678601309,
+      "consol_predicted_spans": 5,
+      "ground_truth_spans": 4,
+      "label_id": "TanyaEx",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-06__half__001",
+      "source": "film-06"
+    },
+    {
+      "a1740_appearance": 0.32890821698329137,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 2,
+      "appearance_gap": 0.32890821698329137,
+      "consol_appearance": 0.0,
+      "consol_naming": null,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 37,
+      "label_id": "TanyaExGirlfriend",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-06__half__000",
+      "source": "film-06"
+    },
+    {
+      "a1740_appearance": 0.7167564208782107,
+      "a1740_naming": 0.7167564208782107,
+      "a1740_predicted_spans": 55,
+      "appearance_gap": 0.311656623613712,
+      "consol_appearance": 0.4050997972644987,
+      "consol_naming": 0.4050997972644987,
+      "consol_predicted_spans": 39,
+      "ground_truth_spans": 38,
+      "label_id": "Alex",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-06__half__001",
+      "source": "film-06"
+    },
+    {
+      "a1740_appearance": 0.25023830174582856,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 8,
+      "appearance_gap": -0.27863776370554977,
+      "consol_appearance": 0.5288760654513783,
+      "consol_naming": null,
+      "consol_predicted_spans": 11,
+      "ground_truth_spans": 15,
+      "label_id": "Slade",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-03__half__001",
+      "source": "film-03"
+    },
+    {
+      "a1740_appearance": 0.4068330625707683,
+      "a1740_naming": 0.4068330625707683,
+      "a1740_predicted_spans": 2,
+      "appearance_gap": -0.260089625522922,
+      "consol_appearance": 0.6669226880936903,
+      "consol_naming": 0.6669226880936903,
+      "consol_predicted_spans": 24,
+      "ground_truth_spans": 22,
+      "label_id": "Hector",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-01__half__000",
+      "source": "film-01"
+    },
+    {
+      "a1740_appearance": 0.4942259903522873,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 9,
+      "appearance_gap": 0.2559476291631141,
+      "consol_appearance": 0.23827836118917325,
+      "consol_naming": null,
+      "consol_predicted_spans": 11,
+      "ground_truth_spans": 27,
+      "label_id": "Manager",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-06__half__001",
+      "source": "film-06"
+    },
+    {
+      "a1740_appearance": 0.702612826603325,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 18,
+      "appearance_gap": 0.22885495396511651,
+      "consol_appearance": 0.4737578726382085,
+      "consol_naming": null,
+      "consol_predicted_spans": 14,
+      "ground_truth_spans": 18,
+      "label_id": "Zohaib's Friend 1",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-02__half__000",
+      "source": "film-02"
+    },
+    {
+      "a1740_appearance": 0.22449863768088124,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 3,
+      "appearance_gap": 0.22449863768088124,
+      "consol_appearance": 0.0,
+      "consol_naming": null,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 14,
+      "label_id": "ChristianUncle",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-04__half__000",
+      "source": "film-04"
+    },
+    {
+      "a1740_appearance": 0.7230718268646827,
+      "a1740_naming": 0.7230718268646827,
+      "a1740_predicted_spans": 42,
+      "appearance_gap": 0.22426157527756796,
+      "consol_appearance": 0.4988102515871148,
+      "consol_naming": 0.4988102515871148,
+      "consol_predicted_spans": 54,
+      "ground_truth_spans": 28,
+      "label_id": "Alex",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-05__half__001",
+      "source": "film-05"
+    },
+    {
+      "a1740_appearance": 0.6556776556776553,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 19,
+      "appearance_gap": 0.2096156031716888,
+      "consol_appearance": 0.44606205250596653,
+      "consol_naming": null,
+      "consol_predicted_spans": 13,
+      "ground_truth_spans": 20,
+      "label_id": "Zohaib's Friend 2",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-02__half__000",
+      "source": "film-02"
+    },
+    {
+      "a1740_appearance": 0.645258439557361,
+      "a1740_naming": 0.645258439557361,
+      "a1740_predicted_spans": 20,
+      "appearance_gap": 0.20935082784214565,
+      "consol_appearance": 0.4359076117152153,
+      "consol_naming": 0.4359076117152153,
+      "consol_predicted_spans": 15,
+      "ground_truth_spans": 12,
+      "label_id": "Alice",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-06__half__001",
+      "source": "film-06"
+    },
+    {
+      "a1740_appearance": 0.7053298266330311,
+      "a1740_naming": 0.7053298266330311,
+      "a1740_predicted_spans": 52,
+      "appearance_gap": 0.1980286756280487,
+      "consol_appearance": 0.5073011510049824,
+      "consol_naming": 0.5073011510049824,
+      "consol_predicted_spans": 45,
+      "ground_truth_spans": 33,
+      "label_id": "Tanya",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-06__half__001",
+      "source": "film-06"
+    },
+    {
+      "a1740_appearance": 0.07617482961107426,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 3,
+      "appearance_gap": -0.1886911597790304,
+      "consol_appearance": 0.26486598939010464,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 3,
+      "ground_truth_spans": 5,
+      "label_id": "Keltzo",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-01__half__000",
+      "source": "film-01"
+    },
+    {
+      "a1740_appearance": 0.31503682597709776,
+      "a1740_naming": 0.31503682597709776,
+      "a1740_predicted_spans": 3,
+      "appearance_gap": -0.14582151894198364,
+      "consol_appearance": 0.4608583449190814,
+      "consol_naming": 0.4608583449190814,
+      "consol_predicted_spans": 10,
+      "ground_truth_spans": 12,
+      "label_id": "Igor",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-01__half__000",
+      "source": "film-01"
+    },
+    {
+      "a1740_appearance": 0.626513970313085,
+      "a1740_naming": 0.626513970313085,
+      "a1740_predicted_spans": 13,
+      "appearance_gap": -0.13495755843334512,
+      "consol_appearance": 0.7614715287464301,
+      "consol_naming": 0.7614715287464301,
+      "consol_predicted_spans": 78,
+      "ground_truth_spans": 43,
+      "label_id": "Rose",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-01__half__000",
+      "source": "film-01"
+    },
+    {
+      "a1740_appearance": 0.28181013160707186,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 6,
+      "appearance_gap": -0.11214440249235397,
+      "consol_appearance": 0.3939545340994258,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 18,
+      "ground_truth_spans": 16,
+      "label_id": "Rehana",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-02__half__001",
+      "source": "film-02"
+    },
+    {
+      "a1740_appearance": 0.6687449043211353,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 7,
+      "appearance_gap": 0.11006051594537403,
+      "consol_appearance": 0.5586843883757613,
+      "consol_naming": null,
+      "consol_predicted_spans": 10,
+      "ground_truth_spans": 5,
+      "label_id": "Feroz Ali Khan",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-02__half__000",
+      "source": "film-02"
+    },
+    {
+      "a1740_appearance": 0.30765291872265144,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 29,
+      "appearance_gap": 0.10227941984213035,
+      "consol_appearance": 0.2053734988805211,
+      "consol_naming": null,
+      "consol_predicted_spans": 10,
+      "ground_truth_spans": 16,
+      "label_id": "Zohaib's Friend 1",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-02__half__001",
+      "source": "film-02"
+    },
+    {
+      "a1740_appearance": 0.30765291872265144,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 29,
+      "appearance_gap": 0.10227941984213035,
+      "consol_appearance": 0.2053734988805211,
+      "consol_naming": null,
+      "consol_predicted_spans": 10,
+      "ground_truth_spans": 16,
+      "label_id": "Zohaib's Friend 2",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-02__half__001",
+      "source": "film-02"
+    },
+    {
+      "a1740_appearance": 0.7107731067499602,
+      "a1740_naming": 0.7107731067499602,
+      "a1740_predicted_spans": 51,
+      "appearance_gap": 0.08940823986517132,
+      "consol_appearance": 0.6213648668847889,
+      "consol_naming": 0.6213648668847889,
+      "consol_predicted_spans": 20,
+      "ground_truth_spans": 20,
+      "label_id": "Shabbir",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-02__half__001",
+      "source": "film-02"
+    },
+    {
+      "a1740_appearance": 0.6468425118918184,
+      "a1740_naming": 0.6468425118918184,
+      "a1740_predicted_spans": 13,
+      "appearance_gap": -0.08881359232173591,
+      "consol_appearance": 0.7356561042135543,
+      "consol_naming": 0.7356561042135543,
+      "consol_predicted_spans": 78,
+      "ground_truth_spans": 53,
+      "label_id": "Violet",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-01__half__000",
+      "source": "film-01"
+    },
+    {
+      "a1740_appearance": 0.640185433426796,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 55,
+      "appearance_gap": -0.07530570618318666,
+      "consol_appearance": 0.7154911396099827,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 30,
+      "ground_truth_spans": 30,
+      "label_id": "Noah Prome",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-03__half__001",
+      "source": "film-03"
+    },
+    {
+      "a1740_appearance": 0.4024932457819683,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 7,
+      "appearance_gap": 0.07488965671048947,
+      "consol_appearance": 0.32760358907147885,
+      "consol_naming": null,
+      "consol_predicted_spans": 10,
+      "ground_truth_spans": 19,
+      "label_id": "Slade",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-03__half__000",
+      "source": "film-03"
+    },
+    {
+      "a1740_appearance": 0.47411357102489127,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 12,
+      "appearance_gap": -0.07031307335299641,
+      "consol_appearance": 0.5444266443778877,
+      "consol_naming": null,
+      "consol_predicted_spans": 13,
+      "ground_truth_spans": 13,
+      "label_id": "Shabbir's Daughter",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-02__half__001",
+      "source": "film-02"
+    },
+    {
+      "a1740_appearance": 0.23066956755567503,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 8,
+      "appearance_gap": -0.06890959900162746,
+      "consol_appearance": 0.2995791665573025,
+      "consol_naming": null,
+      "consol_predicted_spans": 57,
+      "ground_truth_spans": 40,
+      "label_id": "Husband",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-05__half__000",
+      "source": "film-05"
+    },
+    {
+      "a1740_appearance": 0.215174129353234,
+      "a1740_naming": 0.215174129353234,
+      "a1740_predicted_spans": 1,
+      "appearance_gap": 0.06295106982045312,
+      "consol_appearance": 0.15222305953278087,
+      "consol_naming": 0.15222305953278087,
+      "consol_predicted_spans": 2,
+      "ground_truth_spans": 17,
+      "label_id": "TanyaEx",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-06__half__000",
+      "source": "film-06"
+    },
+    {
+      "a1740_appearance": 0.7659114297176148,
+      "a1740_naming": 0.7659114297176148,
+      "a1740_predicted_spans": 4,
+      "appearance_gap": 0.05642907343426007,
+      "consol_appearance": 0.7094823562833548,
+      "consol_naming": 0.7094823562833548,
+      "consol_predicted_spans": 41,
+      "ground_truth_spans": 22,
+      "label_id": "Tanya",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-06__half__000",
+      "source": "film-06"
+    },
+    {
+      "a1740_appearance": 0.7113818834419572,
+      "a1740_naming": 0.7113818834419572,
+      "a1740_predicted_spans": 67,
+      "appearance_gap": 0.054986834447630306,
+      "consol_appearance": 0.6563950489943269,
+      "consol_naming": 0.6563950489943269,
+      "consol_predicted_spans": 62,
+      "ground_truth_spans": 42,
+      "label_id": "Beth",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-05__half__001",
+      "source": "film-05"
+    },
+    {
+      "a1740_appearance": 0.5347865034338618,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 12,
+      "appearance_gap": -0.05429856879727868,
+      "consol_appearance": 0.5890850722311405,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 23,
+      "ground_truth_spans": 20,
+      "label_id": "Rehana",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-02__half__000",
+      "source": "film-02"
+    },
+    {
+      "a1740_appearance": 0.925580794567564,
+      "a1740_naming": 0.925580794567564,
+      "a1740_predicted_spans": 13,
+      "appearance_gap": 0.048550388748670126,
+      "consol_appearance": 0.8770304058188939,
+      "consol_naming": 0.8770304058188939,
+      "consol_predicted_spans": 14,
+      "ground_truth_spans": 6,
+      "label_id": "59-on-australia",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__sport-01__half__000",
+      "source": "sport-01"
+    },
+    {
+      "a1740_appearance": 0.6186664198787653,
+      "a1740_naming": 0.6186664198787653,
+      "a1740_predicted_spans": 20,
+      "appearance_gap": 0.043953190207594806,
+      "consol_appearance": 0.5747132296711704,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 20,
+      "ground_truth_spans": 18,
+      "label_id": "Zohaib",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-02__half__001",
+      "source": "film-02"
+    },
+    {
+      "a1740_appearance": 0.609998579747195,
+      "a1740_naming": 0.609998579747195,
+      "a1740_predicted_spans": 26,
+      "appearance_gap": -0.042900059791963985,
+      "consol_appearance": 0.6528986395391589,
+      "consol_naming": 0.6528986395391589,
+      "consol_predicted_spans": 43,
+      "ground_truth_spans": 37,
+      "label_id": "Shabbir",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-02__half__000",
+      "source": "film-02"
+    },
+    {
+      "a1740_appearance": 0.29609913080092576,
+      "a1740_naming": 0.29609913080092576,
+      "a1740_predicted_spans": 2,
+      "appearance_gap": 0.038237891907485444,
+      "consol_appearance": 0.2578612388934403,
+      "consol_naming": 0.2578612388934403,
+      "consol_predicted_spans": 9,
+      "ground_truth_spans": 32,
+      "label_id": "Alice",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-06__half__000",
+      "source": "film-06"
+    },
+    {
+      "a1740_appearance": 0.1121615450963151,
+      "a1740_naming": 0.1121615450963151,
+      "a1740_predicted_spans": 3,
+      "appearance_gap": 0.030553639500137397,
+      "consol_appearance": 0.0816079055961777,
+      "consol_naming": 0.0816079055961777,
+      "consol_predicted_spans": 2,
+      "ground_truth_spans": 8,
+      "label_id": "Igor",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-01__half__001",
+      "source": "film-01"
+    },
+    {
+      "a1740_appearance": 0.5153310104529623,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 10,
+      "appearance_gap": 0.027483788230739548,
+      "consol_appearance": 0.4878472222222227,
+      "consol_naming": null,
+      "consol_predicted_spans": 24,
+      "ground_truth_spans": 17,
+      "label_id": "Shabbir's Daughter",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-02__half__000",
+      "source": "film-02"
+    },
+    {
+      "a1740_appearance": 0.7269853292279326,
+      "a1740_naming": 0.7269853292279326,
+      "a1740_predicted_spans": 5,
+      "appearance_gap": 0.025040200543654523,
+      "consol_appearance": 0.701945128684278,
+      "consol_naming": 0.701945128684278,
+      "consol_predicted_spans": 58,
+      "ground_truth_spans": 55,
+      "label_id": "Alex",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-06__half__000",
+      "source": "film-06"
+    },
+    {
+      "a1740_appearance": 0.5471778925425461,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 14,
+      "appearance_gap": 0.019639389358286574,
+      "consol_appearance": 0.5275385031842595,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 25,
+      "ground_truth_spans": 33,
+      "label_id": "Enny",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-03__half__000",
+      "source": "film-03"
+    },
+    {
+      "a1740_appearance": 0.9121560326579982,
+      "a1740_naming": 0.9121560326579982,
+      "a1740_predicted_spans": 7,
+      "appearance_gap": 0.0025140817135380633,
+      "consol_appearance": 0.9096419509444601,
+      "consol_naming": 0.9096419509444601,
+      "consol_predicted_spans": 8,
+      "ground_truth_spans": 4,
+      "label_id": "7-on-korea",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__sport-01__half__000",
+      "source": "sport-01"
+    },
+    {
+      "a1740_appearance": 0.027700711117483845,
+      "a1740_naming": 0.027700711117483845,
+      "a1740_predicted_spans": 148,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.027700711117483845,
+      "consol_naming": 0.027700711117483845,
+      "consol_predicted_spans": 148,
+      "ground_truth_spans": 9,
+      "label_id": "Hector",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-01__half__001",
+      "source": "film-01"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 4,
+      "label_id": "Keltzo",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-01__half__001",
+      "source": "film-01"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 22,
+      "label_id": "Louis",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-01__half__001",
+      "source": "film-01"
+    },
+    {
+      "a1740_appearance": 0.10186398082651676,
+      "a1740_naming": 0.10186398082651676,
+      "a1740_predicted_spans": 8,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.10186398082651676,
+      "consol_naming": 0.10186398082651676,
+      "consol_predicted_spans": 8,
+      "ground_truth_spans": 47,
+      "label_id": "Rose",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-01__half__001",
+      "source": "film-01"
+    },
+    {
+      "a1740_appearance": 0.14122856056709682,
+      "a1740_naming": 0.14122856056709682,
+      "a1740_predicted_spans": 8,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.14122856056709682,
+      "consol_naming": 0.14122856056709682,
+      "consol_predicted_spans": 8,
+      "ground_truth_spans": 33,
+      "label_id": "Violet",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-01__half__001",
+      "source": "film-01"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 26,
+      "label_id": "Zohaib",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-02__half__000",
+      "source": "film-02"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 3,
+      "label_id": "Old Man George",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-03__half__001",
+      "source": "film-03"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": null,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 17,
+      "label_id": "OlderDealer1",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-04__half__000",
+      "source": "film-04"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": null,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 12,
+      "label_id": "OlderDealer2",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-04__half__000",
+      "source": "film-04"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 5,
+      "label_id": "Tira",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-04__half__000",
+      "source": "film-04"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 21,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 1,
+      "label_id": "CrystalFriend",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-04__half__000",
+      "source": "film-04"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": null,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 14,
+      "label_id": "ChristianFriend",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-04__half__001",
+      "source": "film-04"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": null,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 3,
+      "label_id": "ChristianUncle",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-04__half__001",
+      "source": "film-04"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 17,
+      "label_id": "Crystal",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-04__half__001",
+      "source": "film-04"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": null,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 14,
+      "label_id": "OlderDealer1",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-04__half__001",
+      "source": "film-04"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": null,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 7,
+      "label_id": "OlderDealer2",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-04__half__001",
+      "source": "film-04"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 5,
+      "label_id": "Tira",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-04__half__001",
+      "source": "film-04"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 1,
+      "label_id": "CrystalFriend",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-04__half__001",
+      "source": "film-04"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 26,
+      "label_id": "Dan",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-05__half__000",
+      "source": "film-05"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 7,
+      "label_id": "Dan",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__film-05__half__001",
+      "source": "film-05"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": null,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 3,
+      "label_id": "Manager",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__film-06__half__000",
+      "source": "film-06"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": 0.0,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": 0.0,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 2,
+      "label_id": "4-on-australia",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__sport-01__half__000",
+      "source": "sport-01"
+    },
+    {
+      "a1740_appearance": 0.847832902265068,
+      "a1740_naming": 0.847832902265068,
+      "a1740_predicted_spans": 7,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.847832902265068,
+      "consol_naming": 0.847832902265068,
+      "consol_predicted_spans": 7,
+      "ground_truth_spans": 3,
+      "label_id": "51-on-korea",
+      "name_known": true,
+      "sample_id": "entity_coverage_v0__sport-01__half__000",
+      "source": "sport-01"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": null,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 2,
+      "label_id": "60-on-australia",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__sport-01__half__000",
+      "source": "sport-01"
+    },
+    {
+      "a1740_appearance": 0.0,
+      "a1740_naming": null,
+      "a1740_predicted_spans": 0,
+      "appearance_gap": 0.0,
+      "consol_appearance": 0.0,
+      "consol_naming": null,
+      "consol_predicted_spans": 0,
+      "ground_truth_spans": 10,
+      "label_id": "catcher-on-australia",
+      "name_known": false,
+      "sample_id": "entity_coverage_v0__sport-01__half__000",
+      "source": "sport-01"
+    }
+  ],
+  "examples": {
+    "film02_roster_names": {
+      "a1740-h0-duration-s400": [
+        "Zohaib",
+        "Zohaib's Father",
+        "Shabir",
+        "Shabir's Wife",
+        "Shabir's Daughter",
+        "Zohaib's Friend 1",
+        "Zohaib's Friend 2"
+      ],
+      "consol-h0mn2x-s2000": [
+        "Young Man in Pink",
+        "Older Man in Blue Suit",
+        "Woman in Orange",
+        "Shabir",
+        "Young Woman in Purple",
+        "Young Man in Red",
+        "Young Man in Tie-Dye"
+      ]
+    },
+    "film05_husband_mentions": {
+      "a1740-h0-duration-s400": 25,
+      "consol-h0mn2x-s2000": 1
+    },
+    "sport": {
+      "a1740-h0-duration-s400": {
+        "v02_appearance": 0.4989275437733866,
+        "v02_predicted_spans": 29,
+        "v0_appearance": 0.2837535584553739,
+        "v0_predicted_spans": 5
+      },
+      "consol-h0mn2x-s2000": {
+        "v02_appearance": 0.42854926249753633,
+        "v02_predicted_spans": 30,
+        "v0_appearance": 0.6213124642296369,
+        "v0_predicted_spans": 40
+      }
+    }
+  },
+  "failed_sample_ids": [
+    "entity_coverage_v0__film-04__half__000",
+    "entity_coverage_v0__film-04__half__001"
+  ],
+  "gaps": {
+    "common_valid_v02_half_appearance": 0.0233672863886899,
+    "failure_placement_share": 0.43379977548266724,
+    "official_v02_half_appearance": 0.041270358747402036,
+    "v0_appearance": -0.020755999999999997,
+    "v0_without_sport_appearance": 0.0038844466087728513
+  },
+  "models": {
+    "a1740-h0-duration-s400": {
+      "label": "A1740 duration s400",
+      "structure": {
+        "length_finishes": 1,
+        "mean_mentions": 136.16666666666666,
+        "mean_output_tokens": 19376.333333333332,
+        "mean_predicted_entities": 6.416666666666667,
+        "mean_predicted_spans": 133.66666666666666,
+        "mean_rosters": 8.416666666666666,
+        "mean_shots": 74.25,
+        "parse_failures": 1,
+        "valid_predictions": 12
+      },
+      "v0": {
+        "appearance": 0.373595,
+        "failed": 0,
+        "naming": 0.23856690594855015,
+        "scored": 20,
+        "slices": {
+          "appearance": 0.37359510708938104,
+          "characters": 97,
+          "known_appearance": 0.44128857903885566,
+          "known_characters": 68,
+          "naming": 0.2385669059485501,
+          "unknown_appearance": 0.2148655866561302,
+          "unknown_characters": 29
+        }
+      },
+      "v02_half": {
+        "common_valid": {
+          "appearance": 0.3907103359536294,
+          "characters": 61,
+          "known_appearance": 0.39544408222848326,
+          "known_characters": 44,
+          "naming": 0.3430225386315306,
+          "unknown_appearance": 0.3784582867716549,
+          "unknown_characters": 17
+        },
+        "failed_samples": [
+          "entity_coverage_v0__film-04__half__001"
+        ],
+        "official": {
+          "appearance": 0.3399012240242389,
+          "characters": 77,
+          "known_appearance": 0.3586240100646612,
+          "known_characters": 52,
+          "naming": 0.30371907726335967,
+          "unknown_appearance": 0.30095782906016033,
+          "unknown_characters": 25
+        },
+        "own_clean": {
+          "appearance": 0.37931006159226655,
+          "characters": 69,
+          "known_appearance": 0.3885093442367163,
+          "known_characters": 48,
+          "naming": 0.32902900036863963,
+          "unknown_appearance": 0.3582831298335242,
+          "unknown_characters": 21
+        }
+      }
+    },
+    "consol-h0mn2x-s2000": {
+      "label": "Consol h0/mn 2x s2000",
+      "structure": {
+        "length_finishes": 1,
+        "mean_mentions": 128.33333333333334,
+        "mean_output_tokens": 16776.0,
+        "mean_predicted_entities": 6.333333333333333,
+        "mean_predicted_spans": 121.58333333333333,
+        "mean_rosters": 8.916666666666666,
+        "mean_shots": 76.75,
+        "parse_failures": 1,
+        "valid_predictions": 12
+      },
+      "v0": {
+        "appearance": 0.394351,
+        "failed": 0,
+        "naming": 0.2471704267219127,
+        "scored": 20,
+        "slices": {
+          "appearance": 0.3943509024051572,
+          "characters": 97,
+          "known_appearance": 0.4641861062271029,
+          "known_characters": 68,
+          "naming": 0.24717042672191275,
+          "unknown_appearance": 0.23059938999507748,
+          "unknown_characters": 29
+        }
+      },
+      "v02_half": {
+        "common_valid": {
+          "appearance": 0.3673430495649395,
+          "characters": 61,
+          "known_appearance": 0.40984462079694345,
+          "known_characters": 44,
+          "naming": 0.29471001390132,
+          "unknown_appearance": 0.25733898284681184,
+          "unknown_characters": 17
+        },
+        "failed_samples": [
+          "entity_coverage_v0__film-04__half__000"
+        ],
+        "official": {
+          "appearance": 0.29863086527683685,
+          "characters": 77,
+          "known_appearance": 0.35807334457539686,
+          "known_characters": 52,
+          "naming": 0.260651754125254,
+          "unknown_appearance": 0.17499050833583205,
+          "unknown_characters": 25
+        },
+        "own_clean": {
+          "appearance": 0.33325473371473097,
+          "characters": 69,
+          "known_appearance": 0.38791278995667994,
+          "known_characters": 48,
+          "naming": 0.2823727336356918,
+          "unknown_appearance": 0.20832203373313338,
+          "unknown_characters": 21
+        }
+      }
+    }
+  },
+  "sample_rows": [
+    {
+      "a1740": {
+        "appearance": 0.34523353339397395,
+        "error": null,
+        "mentions": 45,
+        "naming": 0.4005720182777052,
+        "output_tokens": 6547,
+        "predicted_entities": 10,
+        "predicted_spans": 42,
+        "rosters": 8,
+        "shots": 20
+      },
+      "appearance_gap": -0.2711576997612741,
+      "consol": {
+        "appearance": 0.616391233155248,
+        "error": null,
+        "mentions": 244,
+        "naming": 0.5722469015902306,
+        "output_tokens": 30195,
+        "predicted_entities": 12,
+        "predicted_spans": 238,
+        "rosters": 8,
+        "shots": 128
+      },
+      "sample_id": "entity_coverage_v0__film-01__half__000",
+      "source": "film-01"
+    },
+    {
+      "a1740": {
+        "appearance": 0.06382579960123543,
+        "error": null,
+        "mentions": 317,
+        "naming": 0.06382579960123543,
+        "output_tokens": 35300,
+        "predicted_entities": 5,
+        "predicted_spans": 316,
+        "rosters": 11,
+        "shots": 159
+      },
+      "appearance_gap": 0.0050922732500229065,
+      "consol": {
+        "appearance": 0.05873352635121252,
+        "error": null,
+        "mentions": 316,
+        "naming": 0.05873352635121252,
+        "output_tokens": 35318,
+        "predicted_entities": 5,
+        "predicted_spans": 315,
+        "rosters": 13,
+        "shots": 159
+      },
+      "sample_id": "entity_coverage_v0__film-01__half__001",
+      "source": "film-01"
+    },
+    {
+      "a1740": {
+        "appearance": 0.5267359257480192,
+        "error": null,
+        "mentions": 117,
+        "naming": 0.20333285991573166,
+        "output_tokens": 16775,
+        "predicted_entities": 7,
+        "predicted_spans": 117,
+        "rosters": 7,
+        "shots": 73
+      },
+      "appearance_gap": 0.06840231896052512,
+      "consol": {
+        "appearance": 0.4583336067874941,
+        "error": null,
+        "mentions": 149,
+        "naming": 0.21763287984638632,
+        "output_tokens": 20740,
+        "predicted_entities": 7,
+        "predicted_spans": 149,
+        "rosters": 7,
+        "shots": 90
+      },
+      "sample_id": "entity_coverage_v0__film-02__half__000",
+      "source": "film-02"
+    },
+    {
+      "a1740": {
+        "appearance": 0.4414785483988727,
+        "error": null,
+        "mentions": 168,
+        "naming": 0.4431465088762418,
+        "output_tokens": 23528,
+        "predicted_entities": 7,
+        "predicted_spans": 168,
+        "rosters": 7,
+        "shots": 92
+      },
+      "appearance_gap": 0.07787765228539911,
+      "consol": {
+        "appearance": 0.36360089611347357,
+        "error": null,
+        "mentions": 112,
+        "naming": 0.2071216222949296,
+        "output_tokens": 16835,
+        "predicted_entities": 7,
+        "predicted_spans": 112,
+        "rosters": 7,
+        "shots": 78
+      },
+      "sample_id": "entity_coverage_v0__film-02__half__001",
+      "source": "film-02"
+    },
+    {
+      "a1740": {
+        "appearance": 0.25557293275331117,
+        "error": null,
+        "mentions": 37,
+        "naming": 0.02420686422957671,
+        "output_tokens": 6923,
+        "predicted_entities": 4,
+        "predicted_spans": 32,
+        "rosters": 10,
+        "shots": 28
+      },
+      "appearance_gap": -0.20585166119996495,
+      "consol": {
+        "appearance": 0.4614245939532761,
+        "error": null,
+        "mentions": 59,
+        "naming": 0.032275003800194574,
+        "output_tokens": 10306,
+        "predicted_entities": 5,
+        "predicted_spans": 55,
+        "rosters": 12,
+        "shots": 60
+      },
+      "sample_id": "entity_coverage_v0__film-03__half__000",
+      "source": "film-03"
+    },
+    {
+      "a1740": {
+        "appearance": 0.1780847470345249,
+        "error": null,
+        "mentions": 118,
+        "naming": 0.0,
+        "output_tokens": 16330,
+        "predicted_entities": 4,
+        "predicted_spans": 115,
+        "rosters": 9,
+        "shots": 71
+      },
+      "appearance_gap": -0.27198085709518804,
+      "consol": {
+        "appearance": 0.45006560412971297,
+        "error": null,
+        "mentions": 79,
+        "naming": 0.0,
+        "output_tokens": 11709,
+        "predicted_entities": 6,
+        "predicted_spans": 66,
+        "rosters": 15,
+        "shots": 48
+      },
+      "sample_id": "entity_coverage_v0__film-03__half__001",
+      "source": "film-03"
+    },
+    {
+      "a1740": {
+        "appearance": 0.29238296958687443,
+        "error": null,
+        "mentions": 90,
+        "naming": 0.17510007947683964,
+        "output_tokens": 12988,
+        "predicted_entities": 9,
+        "predicted_spans": 90,
+        "rosters": 7,
+        "shots": 64
+      },
+      "appearance_gap": 0.29238296958687443,
+      "consol": {
+        "appearance": 0.0,
+        "error": "prediction: model output dict does not contain nested coverage JSON",
+        "mentions": null,
+        "naming": 0.0,
+        "output_tokens": 65536,
+        "predicted_entities": 0,
+        "predicted_spans": 0,
+        "rosters": null,
+        "shots": null
+      },
+      "sample_id": "entity_coverage_v0__film-04__half__000",
+      "source": "film-04"
+    },
+    {
+      "a1740": {
+        "appearance": 0.0,
+        "error": "prediction: model output dict does not contain nested coverage JSON",
+        "mentions": null,
+        "naming": 0.0,
+        "output_tokens": 65536,
+        "predicted_entities": 0,
+        "predicted_spans": 0,
+        "rosters": null,
+        "shots": null
+      },
+      "appearance_gap": -0.07333132535689083,
+      "consol": {
+        "appearance": 0.07333132535689083,
+        "error": null,
+        "mentions": 38,
+        "naming": 0.14666265071378165,
+        "output_tokens": 5980,
+        "predicted_entities": 5,
+        "predicted_spans": 38,
+        "rosters": 8,
+        "shots": 22
+      },
+      "sample_id": "entity_coverage_v0__film-04__half__001",
+      "source": "film-04"
+    },
+    {
+      "a1740": {
+        "appearance": 0.36004623181658224,
+        "error": null,
+        "mentions": 358,
+        "naming": 0.19163216438420802,
+        "output_tokens": 42311,
+        "predicted_entities": 3,
+        "predicted_spans": 358,
+        "rosters": 7,
+        "shots": 182
+      },
+      "appearance_gap": 0.23347795908741306,
+      "consol": {
+        "appearance": 0.12656827272916918,
+        "error": null,
+        "mentions": 123,
+        "naming": 0.03537059229400443,
+        "output_tokens": 13611,
+        "predicted_entities": 3,
+        "predicted_spans": 71,
+        "rosters": 7,
+        "shots": 63
+      },
+      "sample_id": "entity_coverage_v0__film-05__half__000",
+      "source": "film-05"
+    },
+    {
+      "a1740": {
+        "appearance": 0.5350606713485833,
+        "error": null,
+        "mentions": 178,
+        "naming": 0.47815123676888,
+        "output_tokens": 22316,
+        "predicted_entities": 11,
+        "predicted_spans": 162,
+        "rosters": 12,
+        "shots": 81
+      },
+      "appearance_gap": 0.23153425914187814,
+      "consol": {
+        "appearance": 0.3035264122067051,
+        "error": null,
+        "mentions": 140,
+        "naming": 0.3850684335271472,
+        "output_tokens": 16463,
+        "predicted_entities": 9,
+        "predicted_spans": 135,
+        "rosters": 12,
+        "shots": 67
+      },
+      "sample_id": "entity_coverage_v0__film-05__half__001",
+      "source": "film-05"
+    },
+    {
+      "a1740": {
+        "appearance": 0.3888463726804998,
+        "error": null,
+        "mentions": 14,
+        "naming": 0.5010425047749268,
+        "output_tokens": 20189,
+        "predicted_entities": 5,
+        "predicted_spans": 14,
+        "rosters": 5,
+        "shots": 5
+      },
+      "appearance_gap": 0.08526107544819078,
+      "consol": {
+        "appearance": 0.30358529723230904,
+        "error": null,
+        "mentions": 126,
+        "naming": 0.45537794584846353,
+        "output_tokens": 13922,
+        "predicted_entities": 5,
+        "predicted_spans": 126,
+        "rosters": 6,
+        "shots": 63
+      },
+      "sample_id": "entity_coverage_v0__film-06__half__000",
+      "source": "film-06"
+    },
+    {
+      "a1740": {
+        "appearance": 0.6565518109657321,
+        "error": null,
+        "mentions": 163,
+        "naming": 0.6971332661190933,
+        "output_tokens": 23254,
+        "predicted_entities": 8,
+        "predicted_spans": 161,
+        "rosters": 13,
+        "shots": 95
+      },
+      "appearance_gap": 0.263376973158932,
+      "consol": {
+        "appearance": 0.3931748378068001,
+        "error": null,
+        "mentions": 124,
+        "naming": 0.4318989569612068,
+        "output_tokens": 20860,
+        "predicted_entities": 8,
+        "predicted_spans": 124,
+        "rosters": 8,
+        "shots": 123
+      },
+      "sample_id": "entity_coverage_v0__film-06__half__001",
+      "source": "film-06"
+    },
+    {
+      "a1740": {
+        "appearance": 0.4989275437733866,
+        "error": null,
+        "mentions": 29,
+        "naming": 0.6984985612827412,
+        "output_tokens": 6055,
+        "predicted_entities": 4,
+        "predicted_spans": 29,
+        "rosters": 5,
+        "shots": 21
+      },
+      "appearance_gap": 0.07037828127585027,
+      "consol": {
+        "appearance": 0.42854926249753633,
+        "error": null,
+        "mentions": 30,
+        "naming": 0.5999689674965508,
+        "output_tokens": 5373,
+        "predicted_entities": 4,
+        "predicted_spans": 30,
+        "rosters": 4,
+        "shots": 20
+      },
+      "sample_id": "entity_coverage_v0__sport-01__half__000",
+      "source": "sport-01"
+    }
+  ],
+  "scorer_differences": {
+    "v02_character_observations": 77,
+    "v02_dataset": "https://huggingface.co/datasets/twelvelabs/entity_cov_v02_tdf",
+    "v02_mapper": "gpt-5.4-mini",
+    "v02_rows": 13,
+    "v02_schema": "nested rosters + shot_metadata.entities",
+    "v02_shape": "half",
+    "v0_character_observations": 97,
+    "v0_config": "chunk_10m",
+    "v0_dataset": "https://huggingface.co/datasets/twelvelabs/entity_cov_v0_tdf",
+    "v0_mapper": "gpt-5.2",
+    "v0_rows": 20,
+    "v0_schema": "flat roster + direct spans"
+  },
+  "v02_source_rows": [
+    {
+      "a1740": {
+        "appearance": 0.2045296664976047,
+        "characters": 12,
+        "known_appearance": 0.2045296664976047,
+        "known_characters": 12,
+        "naming": 0.2321989089394703,
+        "unknown_appearance": null,
+        "unknown_characters": 0
+      },
+      "appearance_gap": -0.13303271325562557,
+      "characters": 12,
+      "consol": {
+        "appearance": 0.3375623797532303,
+        "characters": 12,
+        "known_appearance": 0.3375623797532303,
+        "known_characters": 12,
+        "naming": 0.3154902139707215,
+        "unknown_appearance": null,
+        "unknown_characters": 0
+      },
+      "source": "film-01"
+    },
+    {
+      "a1740": {
+        "appearance": 0.48410723707344594,
+        "characters": 14,
+        "known_appearance": 0.4593391235694757,
+        "known_characters": 6,
+        "naming": 0.32323968439598677,
+        "unknown_appearance": 0.5026833222014236,
+        "unknown_characters": 8
+      },
+      "appearance_gap": 0.07313998562296209,
+      "characters": 14,
+      "consol": {
+        "appearance": 0.41096725145048385,
+        "characters": 14,
+        "known_appearance": 0.4720027237376141,
+        "known_characters": 6,
+        "naming": 0.21237725107065797,
+        "unknown_appearance": 0.3651906472351361,
+        "unknown_characters": 8
+      },
+      "source": "film-02"
+    },
+    {
+      "a1740": {
+        "appearance": 0.2125239406873188,
+        "characters": 9,
+        "known_appearance": 0.1799977026654389,
+        "known_characters": 7,
+        "naming": 0.010374370384104303,
+        "unknown_appearance": 0.3263657737638984,
+        "unknown_characters": 2
+      },
+      "appearance_gap": -0.24259010336397777,
+      "characters": 9,
+      "consol": {
+        "appearance": 0.4551140440512966,
+        "characters": 9,
+        "known_appearance": 0.4627923917055445,
+        "known_characters": 7,
+        "naming": 0.013832144485797674,
+        "unknown_appearance": 0.4282398272614286,
+        "unknown_characters": 2
+      },
+      "source": "film-03"
+    },
+    {
+      "a1740": {
+        "appearance": 0.14619148479343722,
+        "characters": 16,
+        "known_appearance": 0.15611361316363997,
+        "known_characters": 8,
+        "naming": 0.08755003973841982,
+        "unknown_appearance": 0.13626935642323443,
+        "unknown_characters": 8
+      },
+      "appearance_gap": 0.1095258221149918,
+      "characters": 16,
+      "consol": {
+        "appearance": 0.03666566267844541,
+        "characters": 16,
+        "known_appearance": 0.07333132535689083,
+        "known_characters": 8,
+        "naming": 0.07333132535689083,
+        "unknown_appearance": 0.0,
+        "unknown_characters": 8
+      },
+      "source": "film-04"
+    },
+    {
+      "a1740": {
+        "appearance": 0.44755345158258275,
+        "characters": 8,
+        "known_appearance": 0.440661511669549,
+        "known_characters": 6,
+        "naming": 0.334891700576544,
+        "unknown_appearance": 0.468229271321684,
+        "unknown_characters": 2
+      },
+      "appearance_gap": 0.2325061091146456,
+      "characters": 8,
+      "consol": {
+        "appearance": 0.21504734246793716,
+        "characters": 8,
+        "known_appearance": 0.22698320415680265,
+        "known_characters": 6,
+        "naming": 0.21021951291057583,
+        "unknown_appearance": 0.17923975740134077,
+        "unknown_characters": 2
+      },
+      "source": "film-05"
+    },
+    {
+      "a1740": {
+        "appearance": 0.5105306628101508,
+        "characters": 11,
+        "known_appearance": 0.5990878854470101,
+        "known_characters": 8,
+        "naming": 0.5990878854470101,
+        "unknown_appearance": 0.2743780691118596,
+        "unknown_characters": 3
+      },
+      "appearance_gap": 0.16622284713489127,
+      "characters": 11,
+      "consol": {
+        "appearance": 0.34430781567525953,
+        "characters": 11,
+        "known_appearance": 0.44363845140483515,
+        "known_characters": 8,
+        "naming": 0.44363845140483515,
+        "unknown_appearance": 0.07942612039639109,
+        "unknown_characters": 3
+      },
+      "source": "film-06"
+    },
+    {
+      "a1740": {
+        "appearance": 0.4989275437733867,
+        "characters": 7,
+        "known_appearance": 0.6984985612827413,
+        "known_characters": 5,
+        "naming": 0.6984985612827413,
+        "unknown_appearance": 0.0,
+        "unknown_characters": 2
+      },
+      "appearance_gap": 0.07037828127585044,
+      "characters": 7,
+      "consol": {
+        "appearance": 0.4285492624975363,
+        "characters": 7,
+        "known_appearance": 0.5999689674965507,
+        "known_characters": 5,
+        "naming": 0.5999689674965507,
+        "unknown_appearance": 0.0,
+        "unknown_characters": 2
+      },
+      "source": "sport-01"
+    }
+  ],
+  "v0_source_rows": [
+    {
+      "a1740": {
+        "appearance": 0.3095188051253744,
+        "characters": 17,
+        "known_appearance": 0.3095188051253744,
+        "known_characters": 17,
+        "naming": 0.21216160699366063,
+        "unknown_appearance": null,
+        "unknown_characters": 0
+      },
+      "appearance_gap": 0.04579227325745161,
+      "characters": 17,
+      "consol": {
+        "appearance": 0.2637265318679228,
+        "characters": 17,
+        "known_appearance": 0.2637265318679228,
+        "known_characters": 17,
+        "naming": 0.2967906133763673,
+        "unknown_appearance": null,
+        "unknown_characters": 0
+      },
+      "source": "film-01"
+    },
+    {
+      "a1740": {
+        "appearance": 0.349243676706238,
+        "characters": 17,
+        "known_appearance": 0.43757722531647925,
+        "known_characters": 8,
+        "naming": 0.1783314078934543,
+        "unknown_appearance": 0.27072496683046804,
+        "unknown_characters": 9
+      },
+      "appearance_gap": 0.08776890809625082,
+      "characters": 17,
+      "consol": {
+        "appearance": 0.2614747686099872,
+        "characters": 17,
+        "known_appearance": 0.35771389024725575,
+        "known_characters": 8,
+        "naming": 0.11265923566878981,
+        "unknown_appearance": 0.17592888271019289,
+        "unknown_characters": 9
+      },
+      "source": "film-02"
+    },
+    {
+      "a1740": {
+        "appearance": 0.5516739036276208,
+        "characters": 11,
+        "known_appearance": 0.5254008547360676,
+        "known_characters": 9,
+        "naming": 0.09450480765319419,
+        "unknown_appearance": 0.6699026236396108,
+        "unknown_characters": 2
+      },
+      "appearance_gap": -0.0722369433197767,
+      "characters": 11,
+      "consol": {
+        "appearance": 0.6239108469473975,
+        "characters": 11,
+        "known_appearance": 0.6084852596164977,
+        "known_characters": 9,
+        "naming": 0.07591384391805184,
+        "unknown_appearance": 0.693325989936446,
+        "unknown_characters": 2
+      },
+      "source": "film-03"
+    },
+    {
+      "a1740": {
+        "appearance": 0.3215359791993315,
+        "characters": 22,
+        "known_appearance": 0.4690576864252753,
+        "known_characters": 11,
+        "naming": 0.12812390797533488,
+        "unknown_appearance": 0.1740142719733879,
+        "unknown_characters": 11
+      },
+      "appearance_gap": -0.016382687268306384,
+      "characters": 22,
+      "consol": {
+        "appearance": 0.3379186664676379,
+        "characters": 22,
+        "known_appearance": 0.49078789742679957,
+        "known_characters": 11,
+        "naming": 0.1300816321492554,
+        "unknown_appearance": 0.1850494355084763,
+        "unknown_characters": 11
+      },
+      "source": "film-04"
+    },
+    {
+      "a1740": {
+        "appearance": 0.2370287346169274,
+        "characters": 10,
+        "known_appearance": 0.2876486205573139,
+        "known_characters": 8,
+        "naming": 0.003935985094804862,
+        "unknown_appearance": 0.03454919085538142,
+        "unknown_characters": 2
+      },
+      "appearance_gap": -0.04035193498604858,
+      "characters": 10,
+      "consol": {
+        "appearance": 0.27738066960297597,
+        "characters": 10,
+        "known_appearance": 0.34672583700371995,
+        "known_characters": 8,
+        "naming": 0.0,
+        "unknown_appearance": 0.0,
+        "unknown_characters": 2
+      },
+      "source": "film-05"
+    },
+    {
+      "a1740": {
+        "appearance": 0.5800766506835797,
+        "characters": 13,
+        "known_appearance": 0.7069479768030222,
+        "known_characters": 10,
+        "naming": 0.5245479768030222,
+        "unknown_appearance": 0.15717223028543761,
+        "unknown_characters": 3
+      },
+      "appearance_gap": -0.02787654168789322,
+      "characters": 13,
+      "consol": {
+        "appearance": 0.6079531923714729,
+        "characters": 13,
+        "known_appearance": 0.7006369997317439,
+        "known_characters": 10,
+        "naming": 0.5182369997317438,
+        "unknown_appearance": 0.2990071678372369,
+        "unknown_characters": 3
+      },
+      "source": "film-06"
+    },
+    {
+      "a1740": {
+        "appearance": 0.2837535584553739,
+        "characters": 7,
+        "known_appearance": 0.3972549818375235,
+        "known_characters": 5,
+        "naming": 0.7304554234130898,
+        "unknown_appearance": 0.0,
+        "unknown_characters": 2
+      },
+      "appearance_gap": -0.337558905774263,
+      "characters": 7,
+      "consol": {
+        "appearance": 0.6213124642296369,
+        "characters": 7,
+        "known_appearance": 0.7128764316239579,
+        "known_characters": 5,
+        "naming": 0.7128764316239579,
+        "unknown_appearance": 0.3924025457438346,
+        "unknown_characters": 2
+      },
+      "source": "sport-01"
+    }
+  ],
+  "v0_without_sport": {
+    "a1740-h0-duration-s400": {
+      "appearance": 0.38058278309424826,
+      "characters": 90,
+      "known_appearance": 0.4447833089754693,
+      "known_characters": 63,
+      "naming": 0.19952813472120567,
+      "unknown_appearance": 0.23078155603806577,
+      "unknown_characters": 27
+    },
+    "consol-h0mn2x-s2000": {
+      "appearance": 0.3766983364854754,
+      "characters": 90,
+      "known_appearance": 0.44444877881465406,
+      "known_characters": 63,
+      "naming": 0.21020963268206788,
+      "unknown_appearance": 0.21861397105072514,
+      "unknown_characters": 27
+    }
+  }
+}

@@ -1,0 +1,79 @@
+# Entity coverage v0.2 64K sweep
+
+This tracks seven evaluations on
+https://huggingface.co/datasets/twelvelabs/entity_cov_v02_tdf:
+
+- A-1740 h0-duration: steps 400, 800, and 1200
+- A-1790 entity-sme4x: steps 400, 800, and 1200
+- Pegasus-15 SOCE-RL reference
+
+A-1790 step 1200 was already submitted as eval run
+`6a75028e-b51d-5b44-a07c-21d2d3b0ff43`. `submit_sweep.py` submits only
+the other five runs. Pegasus-15 was appended as eval run
+`2708c7ac-820c-5aa4-b298-3705871c7e1d`. All runs use TP=1, eight replicas,
+and 65,536 maximum output tokens on `b300-pegasus`.
+
+`poll_sweep.py` reads `submission_results.json`, writes `status.json` and
+`status.html`, and reports state changes to `#fun-lia-trashcan`.
+
+`analyze_finish_reasons.py` downloads the available A-1790 step-1200 output
+artifacts with `s5cmd` and writes `a1790_step1200_finish_reasons.json` plus an
+HTML report.
+
+The final 20-artifact snapshot found 17 `stop` outputs and three `length`
+outputs. All three reached 65,536 tokens and ended with truncated JSON.
+
+The production-path parser diagnosis found one unrecoverable sample:
+`film-04 full` repaired to an object containing only `entity_relationships`,
+so the nested parser could find neither `rosters` nor `shot_metadata`. This
+produced the scorer summary `19 scored / 1 failed`, which Eval V3 rejects as
+incomplete.
+
+After deploying Pegasus commit `2d5981762`, the same stored predictions were
+rescored successfully: 20 scored, 0 failed, 0 missing. The malformed
+`film-04 full` prediction remains in `parse_errors` and contributes zero.
+
+`score_trends.html` compares the final scores for both three-checkpoint families.
+The A-1790 primary full-video naming + appearance IoU improves monotonically
+(0.2627, 0.3138, 0.3358); A-1740 declines (0.2873, 0.2517, 0.2350).
+
+`submit_soccer_lvreason.py` submits steps 400, 800, and 1200 from
+`sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base` with the
+same entity-coverage v0.2 settings: 65,536 output tokens, TP=1, eight replicas,
+and the `b300-pegasus` node pool.
+
+The soccer-lvreason runs submitted on 2026-07-21 are:
+
+- step 400: `29162be7-08eb-569f-babd-fe4ce9b5bbfa`
+- step 800: `5287cdbb-2fbf-5b13-8f4a-95aaf59401b4`
+- step 1200: `fca2533a-a6fc-550e-8c58-a49d8363626a`
+
+The CPU-node poller runs as PID `754561` and reports state changes to
+`#fun-lia-trashcan` every two minutes.
+
+`consol_h0mn2x_step2000_payload.json` adds the merged step-2000 checkpoint from
+`consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base`
+to the same evaluation setup.
+
+- eval run: `55ccccf4-87a9-576f-acb7-45adac7e8fdb`
+- batch: `batch-d3cce84a-a08e-4abd-a18a-1ea3962ae1eb`
+- CPU-node Slack poller: PID `759426`
+
+`submit_consol_h0mn2x.py` submits the remaining steps 400, 800, 1200, and
+1600 with the same configuration as the separately submitted step 2000 run.
+
+- step 400: `6a1d2ca0-f030-5ae9-bfd4-d63c5c0584b6`
+- step 800: `a7ed23df-4db0-5ef1-ab05-ca51a995264f`
+- step 1200: `239cf441-25eb-591c-ab32-32bdfaa91241`
+- step 1600: `78542b3b-6142-5487-80eb-2be8006ce1f9`
+- CPU-node Slack poller: PID `763251`
+
+`additional_checkpoint_results.html` compares the seven completed
+soccer-lvreason and consol-h0mn2x runs. The original consol step-400 run lost
+12 tasks to GPU reservation contention; retry `b0b7a57b-bbc7-546f-bf6e-fb9d30fe2dcb`
+is tracked by CPU-node poller PID `1305159`.
+
+The report also includes a denominator-matched diagnostic. Naming scores only
+81 known-name characters, while naming + appearance includes those 81 plus 39
+unnamed characters. Restricted to the same 81 characters, appearance improves
+IoU by 4.6 to 9.7 percentage points in every completed run.

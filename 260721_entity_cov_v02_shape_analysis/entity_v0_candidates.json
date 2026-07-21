@@ -1,0 +1,23 @@
+{
+  "source": "https://github.com/twelvelabs-io/pegasus/blob/github_pages/docs/lia/260720_eval_db_leaderboard_inventory.html",
+  "source_commit": "3582a8ff25b47f43af9908451fc74892e3389ea4",
+  "dataset": "https://huggingface.co/datasets/twelvelabs/entity_cov_v0_tdf",
+  "config": "chunk_10m",
+  "checkpoints": [
+    {"v02_name": "pegasus-15-kian-soce", "v0_name": "asr-pegasus-15", "family": "Pegasus 1.5 / Kian SOCE", "step": null, "naming": 0.27281517017364554, "appearance": 0.45557, "scored": 20, "failed": 0, "run_id": "593e332b-eb96-53ac-acdd-61b7ade0cf9e"},
+    {"v02_name": "a1740-h0-duration-s400", "v0_name": "a1740-h0-duration-s400", "family": "A1740 h0-duration", "step": 400, "naming": 0.23856690594855015, "appearance": 0.373595, "scored": 20, "failed": 0, "run_id": "39536e13-9e54-5dc8-99e0-9bca787cd5aa"},
+    {"v02_name": "a1740-h0-duration-s800", "v0_name": "a1740-h0-duration-s800", "family": "A1740 h0-duration", "step": 800, "naming": 0.18812789815880984, "appearance": 0.310138, "scored": 20, "failed": 0, "run_id": "75f8cdee-4e45-50d8-87b0-2832cd17ee13"},
+    {"v02_name": "a1740-h0-duration-s1200", "v0_name": "a1740-h0-duration-s1200", "family": "A1740 h0-duration", "step": 1200, "naming": 0.21133207420245814, "appearance": 0.361892, "scored": 19, "failed": 1, "run_id": "c601ed90-fa6e-5b80-85bd-75b741e9bd32"},
+    {"v02_name": "a1790-entity-sme4x-s400", "v0_name": "a1790-entity-sme4x-s400", "family": "A1790 entity-sme4x", "step": 400, "naming": 0.19098511832110948, "appearance": 0.294383, "scored": 19, "failed": 1, "run_id": "91d27469-042e-50a8-9d56-7c067b260e6d"},
+    {"v02_name": "a1790-entity-sme4x-s800", "v0_name": "a1790-entity-sme4x-s800", "family": "A1790 entity-sme4x", "step": 800, "naming": 0.2202431035402707, "appearance": 0.349843, "scored": 19, "failed": 1, "run_id": "2781d72f-cad1-5b5a-964d-1aa889483e6c"},
+    {"v02_name": "a1790-entity-sme4x-s1200", "v0_name": "a1790-entity-sme4x-s1200", "family": "A1790 entity-sme4x", "step": 1200, "naming": 0.17000046313312123, "appearance": 0.337318, "scored": 20, "failed": 0, "run_id": "054f6332-214a-545f-bb8c-3038b3c8b595"},
+    {"v02_name": "consol-h0mn2x-s400", "v0_name": "consol-h0mn2x-step400", "family": "Consol h0/mn SME 2x", "step": 400, "naming": 0.22200774982453558, "appearance": 0.354346, "scored": 20, "failed": 0, "run_id": "a128c528-3620-53ab-b53e-c3aa37a8f58b"},
+    {"v02_name": "consol-h0mn2x-s800", "v0_name": "consol-h0mn2x-step800", "family": "Consol h0/mn SME 2x", "step": 800, "naming": 0.20252100697214992, "appearance": 0.318063, "scored": 20, "failed": 0, "run_id": "88a45684-f8c8-5d38-99a1-b8fa78f6a0f9"},
+    {"v02_name": "consol-h0mn2x-s1200", "v0_name": "consol-h0mn2x-step1200", "family": "Consol h0/mn SME 2x", "step": 1200, "naming": 0.15722181952486794, "appearance": 0.322229, "scored": 20, "failed": 0, "run_id": "e7baf9e8-2266-5430-9baa-5a99da5f44cf"},
+    {"v02_name": "consol-h0mn2x-s1600", "v0_name": "consol-h0mn2x-step1600", "family": "Consol h0/mn SME 2x", "step": 1600, "naming": 0.17489220484161735, "appearance": 0.330487, "scored": 19, "failed": 1, "run_id": "711f778c-e7ee-5246-9253-8761cce853e3"},
+    {"v02_name": "consol-h0mn2x-s2000", "v0_name": "consol-h0mn2x-step2000", "family": "Consol h0/mn SME 2x", "step": 2000, "naming": 0.2471704267219127, "appearance": 0.394351, "scored": 20, "failed": 0, "run_id": "60d573c3-7aee-51e4-bbbf-9056910ded20"},
+    {"v02_name": "soccer-lvreason-mcq-s400", "v0_name": "soccer-lvreason-mcq-step400", "family": "Soccer LVReason MCQ", "step": 400, "naming": 0.22454578256660396, "appearance": 0.329682, "scored": 19, "failed": 1, "run_id": "656abe33-2d76-588e-8a4b-7543622e0409"},
+    {"v02_name": "soccer-lvreason-mcq-s800", "v0_name": "soccer-lvreason-mcq-step800", "family": "Soccer LVReason MCQ", "step": 800, "naming": 0.1829931734371763, "appearance": 0.300037, "scored": 17, "failed": 3, "run_id": "b0b64842-9528-5155-a386-c9f2cbdfd8f4"},
+    {"v02_name": "soccer-lvreason-mcq-s1200", "v0_name": "soccer-lvreason-mcq-step1200", "family": "Soccer LVReason MCQ", "step": 1200, "naming": 0.22703671063441344, "appearance": 0.321497, "scored": 20, "failed": 0, "run_id": "7371ed63-dbc9-54d7-862b-b387726f5b00"}
+  ]
+}

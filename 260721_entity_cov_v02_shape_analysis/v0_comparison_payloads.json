@@ -1,0 +1,3446 @@
+{
+  "runs": [
+    {
+      "name": "a1740-h0-duration-s400",
+      "v0_name": "a1740-h0-duration-s400",
+      "run_id": "39536e13-9e54-5dc8-99e0-9bca787cd5aa",
+      "evaluation": {
+        "id": "cd0936bc-2616-4a19-8bbf-f84aeac3c3b9",
+        "runId": "39536e13-9e54-5dc8-99e0-9bca787cd5aa",
+        "status": "completed",
+        "phase": null,
+        "scorer": {
+          "name": "entity_coverage",
+          "version": ""
+        },
+        "scoringConfigHash": "scoring_config_44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "denominator": 20,
+        "scored": 20,
+        "failed": 0,
+        "missing": 0,
+        "primaryMetric": {
+          "id": "4af81a2e-246d-4926-8e78-509a759a1770",
+          "level": "run",
+          "key": "entity_coverage::name_appearance_iou",
+          "value": 0.37359510708938104,
+          "valueText": null,
+          "unit": null,
+          "isPrimary": true
+        },
+        "attemptCount": 2,
+        "nextAttemptAt": null,
+        "errorType": null,
+        "errorMessage": null,
+        "lastErrorCode": null,
+        "lastErrorMessage": null,
+        "startedAt": null,
+        "completedAt": "2026-07-20T07:03:11.945025+00:00",
+        "createdAt": "2026-07-20T06:39:24.195664+00:00"
+      },
+      "benchmark": {
+        "failed": 0,
+        "summary": {
+          "total_samples": 20,
+          "valid_samples": 20,
+          "failed_samples": 0
+        },
+        "completed": 20,
+        "evaluator": "entity_coverage",
+        "parse_errors": 0,
+        "success_rate": 1.0,
+        "total_samples": 20,
+        "graded_samples": 20,
+        "entity_coverage": {
+          "samples": [
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 0,
+                "predicted_spans": 8,
+                "scored_entities": 6,
+                "ground_truth_spans": 102,
+                "predicted_entities": 8,
+                "ground_truth_entities": 6
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.0,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.0
+              },
+              "sample_id": "entity_coverage_v0__film-01__chunk_10m__000",
+              "character_scores": [
+                {
+                  "name": "Hector",
+                  "scored": true,
+                  "label_id": "Hector",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 11,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Igor",
+                  "scored": true,
+                  "label_id": "Igor",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 11,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Keltzo",
+                  "scored": true,
+                  "label_id": "Keltzo",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 5,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Louis",
+                  "scored": true,
+                  "label_id": "Louis",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 5,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Rose",
+                  "scored": true,
+                  "label_id": "Rose",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 32,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Violet",
+                  "scored": true,
+                  "label_id": "Violet",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 38,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 6,
+                "predicted_spans": 27,
+                "scored_entities": 6,
+                "ground_truth_spans": 115,
+                "predicted_entities": 6,
+                "ground_truth_entities": 6
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.0,
+                "entity_coverage::naming_iou": 0.35727761415464315,
+                "entity_coverage::name_appearance_iou": 0.35727761415464315
+              },
+              "sample_id": "entity_coverage_v0__film-01__chunk_10m__001",
+              "character_scores": [
+                {
+                  "name": "Hector",
+                  "scored": true,
+                  "label_id": "Hector",
+                  "name_known": true,
+                  "predicted_span_count": 3,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 20,
+                  "entity_coverage::naming_iou": 0.3795570776255708,
+                  "naming_predicted_span_count": 3,
+                  "entity_coverage::name_appearance_iou": 0.3795570776255708,
+                  "name_appearance_predicted_span_count": 3
+                },
+                {
+                  "name": "Igor",
+                  "scored": true,
+                  "label_id": "Igor",
+                  "name_known": true,
+                  "predicted_span_count": 3,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 6,
+                  "entity_coverage::naming_iou": 0.22776157551528628,
+                  "naming_predicted_span_count": 3,
+                  "entity_coverage::name_appearance_iou": 0.22776157551528628,
+                  "name_appearance_predicted_span_count": 3
+                },
+                {
+                  "name": "Keltzo",
+                  "scored": true,
+                  "label_id": "Keltzo",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Louis",
+                  "scored": true,
+                  "label_id": "Louis",
+                  "name_known": true,
+                  "predicted_span_count": 4,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 15,
+                  "entity_coverage::naming_iou": 0.3305024769992916,
+                  "naming_predicted_span_count": 4,
+                  "entity_coverage::name_appearance_iou": 0.3305024769992916,
+                  "name_appearance_predicted_span_count": 4
+                },
+                {
+                  "name": "Rose",
+                  "scored": true,
+                  "label_id": "Rose",
+                  "name_known": true,
+                  "predicted_span_count": 6,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 35,
+                  "entity_coverage::naming_iou": 0.6041886719003435,
+                  "naming_predicted_span_count": 6,
+                  "entity_coverage::name_appearance_iou": 0.6041886719003435,
+                  "name_appearance_predicted_span_count": 6
+                },
+                {
+                  "name": "Violet",
+                  "scored": true,
+                  "label_id": "Violet",
+                  "name_known": true,
+                  "predicted_span_count": 6,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 38,
+                  "entity_coverage::naming_iou": 0.6016558828873665,
+                  "naming_predicted_span_count": 6,
+                  "entity_coverage::name_appearance_iou": 0.6016558828873665,
+                  "name_appearance_predicted_span_count": 6
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 10,
+                "predicted_spans": 60,
+                "scored_entities": 5,
+                "ground_truth_spans": 53,
+                "predicted_entities": 10,
+                "ground_truth_entities": 5
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.3310144736478267,
+                "entity_coverage::naming_iou": 0.2926163267928744,
+                "entity_coverage::name_appearance_iou": 0.6236308004407011
+              },
+              "sample_id": "entity_coverage_v0__film-01__chunk_10m__002",
+              "character_scores": [
+                {
+                  "name": "Igor",
+                  "scored": true,
+                  "label_id": "Igor",
+                  "name_known": true,
+                  "predicted_span_count": 2,
+                  "entity_coverage::delta": 0.6767208043310121,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.6767208043310121,
+                  "name_appearance_predicted_span_count": 2
+                },
+                {
+                  "name": "Keltzo",
+                  "scored": true,
+                  "label_id": "Keltzo",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.310878470641784,
+                  "ground_truth_span_count": 4,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.310878470641784,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "Louis",
+                  "scored": true,
+                  "label_id": "Louis",
+                  "name_known": true,
+                  "predicted_span_count": 7,
+                  "entity_coverage::delta": 0.6674730932663375,
+                  "ground_truth_span_count": 11,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.6674730932663375,
+                  "name_appearance_predicted_span_count": 7
+                },
+                {
+                  "name": "Rose",
+                  "scored": true,
+                  "label_id": "Rose",
+                  "name_known": true,
+                  "predicted_span_count": 21,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 24,
+                  "entity_coverage::naming_iou": 0.7598887830250296,
+                  "naming_predicted_span_count": 21,
+                  "entity_coverage::name_appearance_iou": 0.7598887830250296,
+                  "name_appearance_predicted_span_count": 21
+                },
+                {
+                  "name": "Violet",
+                  "scored": true,
+                  "label_id": "Violet",
+                  "name_known": true,
+                  "predicted_span_count": 8,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 11,
+                  "entity_coverage::naming_iou": 0.7031928509393425,
+                  "naming_predicted_span_count": 8,
+                  "entity_coverage::name_appearance_iou": 0.7031928509393425,
+                  "name_appearance_predicted_span_count": 8
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 9,
+                "predicted_spans": 20,
+                "scored_entities": 7,
+                "ground_truth_spans": 139,
+                "predicted_entities": 9,
+                "ground_truth_entities": 7
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.0,
+                "entity_coverage::naming_iou": 0.171063241562032,
+                "entity_coverage::name_appearance_iou": 0.19648293391527774
+              },
+              "sample_id": "entity_coverage_v0__film-02__chunk_10m__000",
+              "character_scores": [
+                {
+                  "name": "Zohaib",
+                  "scored": true,
+                  "label_id": "Zohaib",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 24,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Zohaib's Friend 1",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 18,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Zohaib's Friend 2",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 20,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Shabir",
+                  "scored": true,
+                  "label_id": "Shabbir",
+                  "name_known": true,
+                  "predicted_span_count": 3,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 37,
+                  "entity_coverage::naming_iou": 0.513189724686096,
+                  "naming_predicted_span_count": 3,
+                  "entity_coverage::name_appearance_iou": 0.513189724686096,
+                  "name_appearance_predicted_span_count": 3
+                },
+                {
+                  "name": "Rehana",
+                  "scored": true,
+                  "label_id": "Rehana",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 20,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Shabbir's Daughter",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 17,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Feroz Ali Khan",
+                  "name_known": false,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.8621908127208482,
+                  "name_appearance_predicted_span_count": 1
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 7,
+                "predicted_spans": 21,
+                "scored_entities": 7,
+                "ground_truth_spans": 112,
+                "predicted_entities": 7,
+                "ground_truth_entities": 7
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.6913221797947332,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.5211857754482233
+              },
+              "sample_id": "entity_coverage_v0__film-02__chunk_10m__001",
+              "character_scores": [
+                {
+                  "name": "Zohaib",
+                  "scored": true,
+                  "label_id": "Zohaib",
+                  "name_known": true,
+                  "predicted_span_count": 4,
+                  "entity_coverage::delta": 0.6992234685073339,
+                  "ground_truth_span_count": 21,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.6992234685073339,
+                  "name_appearance_predicted_span_count": 4
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Zohaib's Friend 1",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 16,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Zohaib's Friend 2",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 16,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Shabir",
+                  "scored": true,
+                  "label_id": "Shabbir",
+                  "name_known": true,
+                  "predicted_span_count": 3,
+                  "entity_coverage::delta": 0.8036856533658245,
+                  "ground_truth_span_count": 15,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.8036856533658245,
+                  "name_appearance_predicted_span_count": 3
+                },
+                {
+                  "name": "Rehana",
+                  "scored": true,
+                  "label_id": "Rehana",
+                  "name_known": true,
+                  "predicted_span_count": 2,
+                  "entity_coverage::delta": 0.571057417511041,
+                  "ground_truth_span_count": 15,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.571057417511041,
+                  "name_appearance_predicted_span_count": 2
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Shabbir's Daughter",
+                  "name_known": false,
+                  "predicted_span_count": 3,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 11,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.7848780487804873,
+                  "name_appearance_predicted_span_count": 3
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Feroz Ali Khan",
+                  "name_known": false,
+                  "predicted_span_count": 3,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 18,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.7894558399728767,
+                  "name_appearance_predicted_span_count": 3
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 3,
+                "predicted_spans": 17,
+                "scored_entities": 3,
+                "ground_truth_spans": 10,
+                "predicted_entities": 3,
+                "ground_truth_entities": 3
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.0,
+                "entity_coverage::naming_iou": 0.4567307692307693,
+                "entity_coverage::name_appearance_iou": 0.3044871794871795
+              },
+              "sample_id": "entity_coverage_v0__film-02__chunk_10m__002",
+              "character_scores": [
+                {
+                  "name": "Shabir",
+                  "scored": true,
+                  "label_id": "Shabbir",
+                  "name_known": true,
+                  "predicted_span_count": 5,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 5,
+                  "entity_coverage::naming_iou": 0.9134615384615385,
+                  "naming_predicted_span_count": 5,
+                  "entity_coverage::name_appearance_iou": 0.9134615384615385,
+                  "name_appearance_predicted_span_count": 5
+                },
+                {
+                  "name": "Rehana",
+                  "scored": true,
+                  "label_id": "Rehana",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 2,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Shabbir's Daughter",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 8,
+                "predicted_spans": 68,
+                "scored_entities": 4,
+                "ground_truth_spans": 69,
+                "predicted_entities": 8,
+                "ground_truth_entities": 4
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.46616717373657063,
+                "entity_coverage::naming_iou": 0.04730639730639733,
+                "entity_coverage::name_appearance_iou": 0.5552343524032664
+              },
+              "sample_id": "entity_coverage_v0__film-03__chunk_10m__000",
+              "character_scores": [
+                {
+                  "name": "Enny",
+                  "scored": true,
+                  "label_id": "Enny",
+                  "name_known": true,
+                  "predicted_span_count": 24,
+                  "entity_coverage::delta": 0.7736381387958743,
+                  "ground_truth_span_count": 30,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.7736381387958743,
+                  "name_appearance_predicted_span_count": 24
+                },
+                {
+                  "name": "Noah Prome",
+                  "scored": true,
+                  "label_id": "Noah Prome",
+                  "name_known": true,
+                  "predicted_span_count": 11,
+                  "entity_coverage::delta": 0.6248633824138375,
+                  "ground_truth_span_count": 18,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.6248633824138375,
+                  "name_appearance_predicted_span_count": 11
+                },
+                {
+                  "name": "George",
+                  "scored": true,
+                  "label_id": "Old Man George",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 4,
+                  "entity_coverage::naming_iou": 0.141919191919192,
+                  "naming_predicted_span_count": 1,
+                  "entity_coverage::name_appearance_iou": 0.141919191919192,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Slade",
+                  "name_known": false,
+                  "predicted_span_count": 16,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 17,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.6805166964841614,
+                  "name_appearance_predicted_span_count": 16
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 5,
+                "predicted_spans": 61,
+                "scored_entities": 5,
+                "ground_truth_spans": 81,
+                "predicted_entities": 5,
+                "ground_truth_entities": 5
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.18017569743111517,
+                "entity_coverage::naming_iou": 0.17715601923988894,
+                "entity_coverage::name_appearance_iou": 0.41772308349581533
+              },
+              "sample_id": "entity_coverage_v0__film-03__chunk_10m__001",
+              "character_scores": [
+                {
+                  "name": "Enny",
+                  "scored": true,
+                  "label_id": "Enny",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 15,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Noah Prome",
+                  "scored": true,
+                  "label_id": "Noah Prome",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 32,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "George",
+                  "scored": true,
+                  "label_id": "Old Man George",
+                  "name_known": true,
+                  "predicted_span_count": 2,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": 0.7086240769595558,
+                  "naming_predicted_span_count": 2,
+                  "entity_coverage::name_appearance_iou": 0.7086240769595558,
+                  "name_appearance_predicted_span_count": 2
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Slade",
+                  "name_known": false,
+                  "predicted_span_count": 13,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 17,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.6592885507950602,
+                  "name_appearance_predicted_span_count": 13
+                },
+                {
+                  "name": "Ina",
+                  "scored": true,
+                  "label_id": "Ina",
+                  "name_known": true,
+                  "predicted_span_count": 12,
+                  "entity_coverage::delta": 0.7207027897244607,
+                  "ground_truth_span_count": 14,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.7207027897244607,
+                  "name_appearance_predicted_span_count": 12
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 2,
+                "predicted_spans": 3,
+                "scored_entities": 2,
+                "ground_truth_spans": 3,
+                "predicted_entities": 2,
+                "ground_truth_entities": 2
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.8794300564058437,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.8794300564058437
+              },
+              "sample_id": "entity_coverage_v0__film-03__chunk_10m__002",
+              "character_scores": [
+                {
+                  "name": "Noah Prome",
+                  "scored": true,
+                  "label_id": "Noah Prome",
+                  "name_known": true,
+                  "predicted_span_count": 2,
+                  "entity_coverage::delta": 0.9226387601006756,
+                  "ground_truth_span_count": 2,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.9226387601006756,
+                  "name_appearance_predicted_span_count": 2
+                },
+                {
+                  "name": "Ina",
+                  "scored": true,
+                  "label_id": "Ina",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.8362213527110117,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.8362213527110117,
+                  "name_appearance_predicted_span_count": 1
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 12,
+                "predicted_spans": 55,
+                "scored_entities": 6,
+                "ground_truth_spans": 58,
+                "predicted_entities": 12,
+                "ground_truth_entities": 6
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.5927988460546981,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.3296760819199229
+              },
+              "sample_id": "entity_coverage_v0__film-04__chunk_10m__000",
+              "character_scores": [
+                {
+                  "name": "Christian",
+                  "scored": true,
+                  "label_id": "Christian",
+                  "name_known": true,
+                  "predicted_span_count": 21,
+                  "entity_coverage::delta": 0.8562312155043341,
+                  "ground_truth_span_count": 26,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.8562312155043341,
+                  "name_appearance_predicted_span_count": 21
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "ChristianFriend",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Crystal",
+                  "scored": true,
+                  "label_id": "Crystal",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.9221653226597605,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.9221653226597605,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "OlderDealer1",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 17,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "OlderDealer2",
+                  "name_known": false,
+                  "predicted_span_count": 2,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 10,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.19965995335544295,
+                  "name_appearance_predicted_span_count": 2
+                },
+                {
+                  "name": "Jay",
+                  "scored": true,
+                  "label_id": "CrystalFriend",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 7,
+                "predicted_spans": 21,
+                "scored_entities": 6,
+                "ground_truth_spans": 90,
+                "predicted_entities": 7,
+                "ground_truth_entities": 6
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.20374410124410125,
+                "entity_coverage::naming_iou": 0.23230985688322833,
+                "entity_coverage::name_appearance_iou": 0.29708224409521317
+              },
+              "sample_id": "entity_coverage_v0__film-04__chunk_10m__001",
+              "character_scores": [
+                {
+                  "name": "Christian",
+                  "scored": true,
+                  "label_id": "Christian",
+                  "name_known": true,
+                  "predicted_span_count": 7,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 36,
+                  "entity_coverage::naming_iou": 0.696929570649685,
+                  "naming_predicted_span_count": 7,
+                  "entity_coverage::name_appearance_iou": 0.696929570649685,
+                  "name_appearance_predicted_span_count": 7
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "ChristianFriend",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "ChristianUncle",
+                  "name_known": false,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 17,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.4743315901892904,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "Crystal",
+                  "scored": true,
+                  "label_id": "Crystal",
+                  "name_known": true,
+                  "predicted_span_count": 6,
+                  "entity_coverage::delta": 0.6112323037323038,
+                  "ground_truth_span_count": 22,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.6112323037323038,
+                  "name_appearance_predicted_span_count": 6
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "OlderDealer2",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 2,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Tira",
+                  "scored": true,
+                  "label_id": "Tira",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 10,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 8,
+                "predicted_spans": 30,
+                "scored_entities": 6,
+                "ground_truth_spans": 58,
+                "predicted_entities": 8,
+                "ground_truth_entities": 6
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.2308364625732042,
+                "entity_coverage::naming_iou": 0.23747780569299956,
+                "entity_coverage::name_appearance_iou": 0.23415713413310188
+              },
+              "sample_id": "entity_coverage_v0__film-04__chunk_10m__002",
+              "character_scores": [
+                {
+                  "name": "Christian",
+                  "scored": true,
+                  "label_id": "Christian",
+                  "name_known": true,
+                  "predicted_span_count": 5,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 14,
+                  "entity_coverage::naming_iou": 0.7124334170789987,
+                  "naming_predicted_span_count": 5,
+                  "entity_coverage::name_appearance_iou": 0.7124334170789987,
+                  "name_appearance_predicted_span_count": 5
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "ChristianFriend",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 12,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Crystal",
+                  "scored": true,
+                  "label_id": "Crystal",
+                  "name_known": true,
+                  "predicted_span_count": 7,
+                  "entity_coverage::delta": 0.6925093877196126,
+                  "ground_truth_span_count": 13,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.6925093877196126,
+                  "name_appearance_predicted_span_count": 7
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "OlderDealer1",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 12,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "OlderDealer2",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 6,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Jay",
+                  "scored": true,
+                  "label_id": "CrystalFriend",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 5,
+                "predicted_spans": 6,
+                "scored_entities": 4,
+                "ground_truth_spans": 10,
+                "predicted_entities": 5,
+                "ground_truth_entities": 4
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.33406666666666657,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.47707469537396663
+              },
+              "sample_id": "entity_coverage_v0__film-04__chunk_10m__003",
+              "character_scores": [
+                {
+                  "name": "Christian",
+                  "scored": true,
+                  "label_id": "Christian",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 4,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Crystal",
+                  "scored": true,
+                  "label_id": "Crystal",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.6681333333333331,
+                  "ground_truth_span_count": 2,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.6681333333333331,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "OlderDealer1",
+                  "name_known": false,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.24625965996908802,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "OlderDealer2",
+                  "name_known": false,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.9939057881934453,
+                  "name_appearance_predicted_span_count": 1
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 1,
+                "predicted_spans": 244,
+                "scored_entities": 4,
+                "ground_truth_spans": 159,
+                "predicted_entities": 5,
+                "ground_truth_entities": 4
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.00314818979087025,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.0023611423431526874
+              },
+              "sample_id": "entity_coverage_v0__film-05__chunk_10m__000",
+              "character_scores": [
+                {
+                  "name": "Alex",
+                  "scored": true,
+                  "label_id": "Alex",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 51,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Beth",
+                  "scored": true,
+                  "label_id": "Beth",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.00944456937261075,
+                  "ground_truth_span_count": 45,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.00944456937261075,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "Dan",
+                  "scored": true,
+                  "label_id": "Dan",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 25,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Husband",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 38,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 8,
+                "predicted_spans": 407,
+                "scored_entities": 4,
+                "ground_truth_spans": 106,
+                "predicted_entities": 11,
+                "ground_truth_entities": 4
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.09725085910652907,
+                "entity_coverage::naming_iou": 0.010495960252812965,
+                "entity_coverage::name_appearance_iou": 0.09808470994719723
+              },
+              "sample_id": "entity_coverage_v0__film-05__chunk_10m__001",
+              "character_scores": [
+                {
+                  "name": "Alex",
+                  "scored": true,
+                  "label_id": "Alex",
+                  "name_known": true,
+                  "predicted_span_count": 51,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 30,
+                  "entity_coverage::naming_iou": 0.018250208971858462,
+                  "naming_predicted_span_count": 51,
+                  "entity_coverage::name_appearance_iou": 0.018250208971858462,
+                  "name_appearance_predicted_span_count": 51
+                },
+                {
+                  "name": "Beth",
+                  "scored": true,
+                  "label_id": "Beth",
+                  "name_known": true,
+                  "predicted_span_count": 50,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 44,
+                  "entity_coverage::naming_iou": 0.013237671786580436,
+                  "naming_predicted_span_count": 50,
+                  "entity_coverage::name_appearance_iou": 0.013237671786580436,
+                  "name_appearance_predicted_span_count": 50
+                },
+                {
+                  "name": "Dan",
+                  "scored": true,
+                  "label_id": "Dan",
+                  "name_known": true,
+                  "predicted_span_count": 51,
+                  "entity_coverage::delta": 0.2917525773195872,
+                  "ground_truth_span_count": 8,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.2917525773195872,
+                  "name_appearance_predicted_span_count": 51
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Husband",
+                  "name_known": false,
+                  "predicted_span_count": 51,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 24,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 51,
+                  "entity_coverage::name_appearance_iou": 0.06909838171076284,
+                  "name_appearance_predicted_span_count": 51
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 2,
+                "predicted_spans": 2,
+                "scored_entities": 2,
+                "ground_truth_spans": 2,
+                "predicted_entities": 2,
+                "ground_truth_entities": 2
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.984251968503937,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.984251968503937
+              },
+              "sample_id": "entity_coverage_v0__film-05__chunk_10m__002",
+              "character_scores": [
+                {
+                  "name": "Alex",
+                  "scored": true,
+                  "label_id": "Alex",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.984251968503937,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.984251968503937,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "Beth",
+                  "scored": true,
+                  "label_id": "Beth",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.984251968503937,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.984251968503937,
+                  "name_appearance_predicted_span_count": 1
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 6,
+                "predicted_spans": 22,
+                "scored_entities": 6,
+                "ground_truth_spans": 166,
+                "predicted_entities": 6,
+                "ground_truth_entities": 6
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.0,
+                "entity_coverage::naming_iou": 0.60189765927986,
+                "entity_coverage::name_appearance_iou": 0.40126510618657335
+              },
+              "sample_id": "entity_coverage_v0__film-06__chunk_10m__000",
+              "character_scores": [
+                {
+                  "name": "Alex",
+                  "scored": true,
+                  "label_id": "Alex",
+                  "name_known": true,
+                  "predicted_span_count": 7,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 55,
+                  "entity_coverage::naming_iou": 0.7261904761904766,
+                  "naming_predicted_span_count": 7,
+                  "entity_coverage::name_appearance_iou": 0.7261904761904766,
+                  "name_appearance_predicted_span_count": 7
+                },
+                {
+                  "name": "Alice",
+                  "scored": true,
+                  "label_id": "Alice",
+                  "name_known": true,
+                  "predicted_span_count": 4,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 32,
+                  "entity_coverage::naming_iou": 0.43688860839381527,
+                  "naming_predicted_span_count": 4,
+                  "entity_coverage::name_appearance_iou": 0.43688860839381527,
+                  "name_appearance_predicted_span_count": 4
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Manager",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Tanya",
+                  "scored": true,
+                  "label_id": "Tanya",
+                  "name_known": true,
+                  "predicted_span_count": 5,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 22,
+                  "entity_coverage::naming_iou": 0.8573629581576389,
+                  "naming_predicted_span_count": 5,
+                  "entity_coverage::name_appearance_iou": 0.8573629581576389,
+                  "name_appearance_predicted_span_count": 5
+                },
+                {
+                  "name": "Henry",
+                  "scored": true,
+                  "label_id": "TanyaEx",
+                  "name_known": true,
+                  "predicted_span_count": 2,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 17,
+                  "entity_coverage::naming_iou": 0.3871485943775098,
+                  "naming_predicted_span_count": 2,
+                  "entity_coverage::name_appearance_iou": 0.3871485943775098,
+                  "name_appearance_predicted_span_count": 2
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "TanyaExGirlfriend",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 37,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 8,
+                "predicted_spans": 32,
+                "scored_entities": 5,
+                "ground_truth_spans": 116,
+                "predicted_entities": 8,
+                "ground_truth_entities": 5
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.0,
+                "entity_coverage::naming_iou": 0.7094722827276955,
+                "entity_coverage::name_appearance_iou": 0.6618811643534189
+              },
+              "sample_id": "entity_coverage_v0__film-06__chunk_10m__001",
+              "character_scores": [
+                {
+                  "name": "Alex",
+                  "scored": true,
+                  "label_id": "Alex",
+                  "name_known": true,
+                  "predicted_span_count": 9,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 39,
+                  "entity_coverage::naming_iou": 0.7165489404641773,
+                  "naming_predicted_span_count": 9,
+                  "entity_coverage::name_appearance_iou": 0.7165489404641773,
+                  "name_appearance_predicted_span_count": 9
+                },
+                {
+                  "name": "Alice",
+                  "scored": true,
+                  "label_id": "Alice",
+                  "name_known": true,
+                  "predicted_span_count": 4,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 12,
+                  "entity_coverage::naming_iou": 0.675764468031337,
+                  "naming_predicted_span_count": 4,
+                  "entity_coverage::name_appearance_iou": 0.675764468031337,
+                  "name_appearance_predicted_span_count": 4
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Manager",
+                  "name_known": false,
+                  "predicted_span_count": 3,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 27,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 3,
+                  "entity_coverage::name_appearance_iou": 0.47151669085631287,
+                  "name_appearance_predicted_span_count": 3
+                },
+                {
+                  "name": "Tanya",
+                  "scored": true,
+                  "label_id": "Tanya",
+                  "name_known": true,
+                  "predicted_span_count": 8,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 34,
+                  "entity_coverage::naming_iou": 0.6994262643433917,
+                  "naming_predicted_span_count": 8,
+                  "entity_coverage::name_appearance_iou": 0.6994262643433917,
+                  "name_appearance_predicted_span_count": 8
+                },
+                {
+                  "name": "Henry",
+                  "scored": true,
+                  "label_id": "TanyaEx",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 4,
+                  "entity_coverage::naming_iou": 0.7461494580718758,
+                  "naming_predicted_span_count": 1,
+                  "entity_coverage::name_appearance_iou": 0.7461494580718758,
+                  "name_appearance_predicted_span_count": 1
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 2,
+                "predicted_spans": 2,
+                "scored_entities": 2,
+                "ground_truth_spans": 2,
+                "predicted_entities": 2,
+                "ground_truth_entities": 2
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.912,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.912
+              },
+              "sample_id": "entity_coverage_v0__film-06__chunk_10m__002",
+              "character_scores": [
+                {
+                  "name": "Alex",
+                  "scored": true,
+                  "label_id": "Alex",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.912,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.912,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "Tanya",
+                  "scored": true,
+                  "label_id": "Tanya",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.912,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.912,
+                  "name_appearance_predicted_span_count": 1
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 5,
+                "predicted_spans": 5,
+                "scored_entities": 7,
+                "ground_truth_spans": 29,
+                "predicted_entities": 5,
+                "ground_truth_entities": 7
+              },
+              "metrics": {
+                "entity_coverage::delta": -0.3332004415755662,
+                "entity_coverage::naming_iou": 0.7304554234130897,
+                "entity_coverage::name_appearance_iou": 0.2837535584553739
+              },
+              "sample_id": "entity_coverage_v0__sport-01__chunk_10m__000",
+              "character_scores": [
+                {
+                  "name": "Whitefield",
+                  "scored": true,
+                  "label_id": "2-on-australia",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": -0.8069230769230765,
+                  "ground_truth_span_count": 2,
+                  "entity_coverage::naming_iou": 0.8069230769230765,
+                  "naming_predicted_span_count": 1,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Wade",
+                  "scored": true,
+                  "label_id": "4-on-australia",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 2,
+                  "entity_coverage::naming_iou": 0.6095471236230107,
+                  "naming_predicted_span_count": 1,
+                  "entity_coverage::name_appearance_iou": 0.6095471236230107,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "Jung-Hoo Lee",
+                  "scored": true,
+                  "label_id": "51-on-korea",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": -0.8590791309547545,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": 0.8590791309547545,
+                  "naming_predicted_span_count": 1,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Jack O'Loughlin",
+                  "scored": true,
+                  "label_id": "59-on-australia",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 6,
+                  "entity_coverage::naming_iou": 0.665097350781998,
+                  "naming_predicted_span_count": 1,
+                  "entity_coverage::name_appearance_iou": 0.665097350781998,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "60-on-australia",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 2,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Ha Seong Kim",
+                  "scored": true,
+                  "label_id": "7-on-korea",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 4,
+                  "entity_coverage::naming_iou": 0.7116304347826087,
+                  "naming_predicted_span_count": 1,
+                  "entity_coverage::name_appearance_iou": 0.7116304347826087,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "catcher-on-australia",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 10,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                }
+              ]
+            }
+          ]
+        },
+        "skipped_incomplete": 0,
+        "entity_coverage::delta": 0.20272167309030556,
+        "entity_coverage::naming_iou": 0.23856690594855015,
+        "entity_coverage::name_appearance_iou": 0.37359510708938104
+      }
+    },
+    {
+      "name": "consol-h0mn2x-s2000",
+      "v0_name": "consol-h0mn2x-step2000",
+      "run_id": "60d573c3-7aee-51e4-bbbf-9056910ded20",
+      "evaluation": {
+        "id": "48e2b11f-1c67-4ebe-8f23-00e4ab023dcb",
+        "runId": "60d573c3-7aee-51e4-bbbf-9056910ded20",
+        "status": "completed",
+        "phase": null,
+        "scorer": {
+          "name": "entity_coverage",
+          "version": ""
+        },
+        "scoringConfigHash": "scoring_config_44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "denominator": 20,
+        "scored": 20,
+        "failed": 0,
+        "missing": 0,
+        "primaryMetric": {
+          "id": "43b97a53-c0d9-4d76-bbbc-e3295d5a9614",
+          "level": "run",
+          "key": "entity_coverage::name_appearance_iou",
+          "value": 0.3943509024051572,
+          "valueText": null,
+          "unit": null,
+          "isPrimary": true
+        },
+        "attemptCount": 2,
+        "nextAttemptAt": null,
+        "errorType": null,
+        "errorMessage": null,
+        "lastErrorCode": null,
+        "lastErrorMessage": null,
+        "startedAt": null,
+        "completedAt": "2026-07-20T05:57:18.900051+00:00",
+        "createdAt": "2026-07-20T05:24:08.001355+00:00"
+      },
+      "benchmark": {
+        "failed": 0,
+        "summary": {
+          "total_samples": 20,
+          "valid_samples": 20,
+          "failed_samples": 0
+        },
+        "completed": 20,
+        "evaluator": "entity_coverage",
+        "parse_errors": 0,
+        "success_rate": 1.0,
+        "total_samples": 20,
+        "graded_samples": 20,
+        "entity_coverage": {
+          "samples": [
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 0,
+                "predicted_spans": 451,
+                "scored_entities": 6,
+                "ground_truth_spans": 102,
+                "predicted_entities": 8,
+                "ground_truth_entities": 6
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.0,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.0
+              },
+              "sample_id": "entity_coverage_v0__film-01__chunk_10m__000",
+              "character_scores": [
+                {
+                  "name": "Hector",
+                  "scored": true,
+                  "label_id": "Hector",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 11,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Igor",
+                  "scored": true,
+                  "label_id": "Igor",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 11,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Keltzo",
+                  "scored": true,
+                  "label_id": "Keltzo",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 5,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Louis",
+                  "scored": true,
+                  "label_id": "Louis",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 5,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Rose",
+                  "scored": true,
+                  "label_id": "Rose",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 32,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Violet",
+                  "scored": true,
+                  "label_id": "Violet",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 38,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 8,
+                "predicted_spans": 48,
+                "scored_entities": 6,
+                "ground_truth_spans": 115,
+                "predicted_entities": 8,
+                "ground_truth_entities": 6
+              },
+              "metrics": {
+                "entity_coverage::delta": -0.14549464271422355,
+                "entity_coverage::naming_iou": 0.5956287031827122,
+                "entity_coverage::name_appearance_iou": 0.45013406046848864
+              },
+              "sample_id": "entity_coverage_v0__film-01__chunk_10m__001",
+              "character_scores": [
+                {
+                  "name": "Hector",
+                  "scored": true,
+                  "label_id": "Hector",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": -0.07880118961867695,
+                  "ground_truth_span_count": 20,
+                  "entity_coverage::naming_iou": 0.07880118961867695,
+                  "naming_predicted_span_count": 8,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Igor",
+                  "scored": true,
+                  "label_id": "Igor",
+                  "name_known": true,
+                  "predicted_span_count": 5,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 6,
+                  "entity_coverage::naming_iou": 0.6220832448849625,
+                  "naming_predicted_span_count": 5,
+                  "entity_coverage::name_appearance_iou": 0.6220832448849625,
+                  "name_appearance_predicted_span_count": 5
+                },
+                {
+                  "name": "Keltzo",
+                  "scored": true,
+                  "label_id": "Keltzo",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": -0.7941666666666644,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.7941666666666644,
+                  "naming_predicted_span_count": 1,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Louis",
+                  "scored": true,
+                  "label_id": "Louis",
+                  "name_known": true,
+                  "predicted_span_count": 6,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 15,
+                  "entity_coverage::naming_iou": 0.6735444474751643,
+                  "naming_predicted_span_count": 6,
+                  "entity_coverage::name_appearance_iou": 0.6735444474751643,
+                  "name_appearance_predicted_span_count": 6
+                },
+                {
+                  "name": "Rose",
+                  "scored": true,
+                  "label_id": "Rose",
+                  "name_known": true,
+                  "predicted_span_count": 10,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 35,
+                  "entity_coverage::naming_iou": 0.701407815469862,
+                  "naming_predicted_span_count": 10,
+                  "entity_coverage::name_appearance_iou": 0.701407815469862,
+                  "name_appearance_predicted_span_count": 10
+                },
+                {
+                  "name": "Violet",
+                  "scored": true,
+                  "label_id": "Violet",
+                  "name_known": true,
+                  "predicted_span_count": 9,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 38,
+                  "entity_coverage::naming_iou": 0.7037688549809431,
+                  "naming_predicted_span_count": 9,
+                  "entity_coverage::name_appearance_iou": 0.7037688549809431,
+                  "name_appearance_predicted_span_count": 9
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 8,
+                "predicted_spans": 45,
+                "scored_entities": 5,
+                "ground_truth_spans": 53,
+                "predicted_entities": 8,
+                "ground_truth_entities": 5
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.062175694128356794,
+                "entity_coverage::naming_iou": 0.2943336416603943,
+                "entity_coverage::name_appearance_iou": 0.3565093357887511
+              },
+              "sample_id": "entity_coverage_v0__film-01__chunk_10m__002",
+              "character_scores": [
+                {
+                  "name": "Igor",
+                  "scored": true,
+                  "label_id": "Igor",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Keltzo",
+                  "scored": true,
+                  "label_id": "Keltzo",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.310878470641784,
+                  "ground_truth_span_count": 4,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.310878470641784,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "Louis",
+                  "scored": true,
+                  "label_id": "Louis",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 11,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Rose",
+                  "scored": true,
+                  "label_id": "Rose",
+                  "name_known": true,
+                  "predicted_span_count": 16,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 24,
+                  "entity_coverage::naming_iou": 0.7805857720152849,
+                  "naming_predicted_span_count": 16,
+                  "entity_coverage::name_appearance_iou": 0.7805857720152849,
+                  "name_appearance_predicted_span_count": 16
+                },
+                {
+                  "name": "Violet",
+                  "scored": true,
+                  "label_id": "Violet",
+                  "name_known": true,
+                  "predicted_span_count": 7,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 11,
+                  "entity_coverage::naming_iou": 0.6910824362866864,
+                  "naming_predicted_span_count": 7,
+                  "entity_coverage::name_appearance_iou": 0.6910824362866864,
+                  "name_appearance_predicted_span_count": 7
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 9,
+                "predicted_spans": 21,
+                "scored_entities": 7,
+                "ground_truth_spans": 139,
+                "predicted_entities": 9,
+                "ground_truth_entities": 7
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.0,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.0
+              },
+              "sample_id": "entity_coverage_v0__film-02__chunk_10m__000",
+              "character_scores": [
+                {
+                  "name": "Zohaib",
+                  "scored": true,
+                  "label_id": "Zohaib",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 24,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Zohaib's Friend 1",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 18,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Zohaib's Friend 2",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 20,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Shabir",
+                  "scored": true,
+                  "label_id": "Shabbir",
+                  "name_known": true,
+                  "predicted_span_count": 3,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 37,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 3,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 3
+                },
+                {
+                  "name": "Rehana",
+                  "scored": true,
+                  "label_id": "Rehana",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 20,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Shabbir's Daughter",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 17,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Feroz Ali Khan",
+                  "name_known": false,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 1
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 9,
+                "predicted_spans": 24,
+                "scored_entities": 7,
+                "ground_truth_spans": 112,
+                "predicted_entities": 9,
+                "ground_truth_entities": 7
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.6534790788759092,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.5062567401456376
+              },
+              "sample_id": "entity_coverage_v0__film-02__chunk_10m__001",
+              "character_scores": [
+                {
+                  "name": "Zohaib",
+                  "scored": true,
+                  "label_id": "Zohaib",
+                  "name_known": true,
+                  "predicted_span_count": 4,
+                  "entity_coverage::delta": 0.6978898610396292,
+                  "ground_truth_span_count": 21,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.6978898610396292,
+                  "name_appearance_predicted_span_count": 4
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Zohaib's Friend 1",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 16,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Zohaib's Friend 2",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 16,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Shabir",
+                  "scored": true,
+                  "label_id": "Shabbir",
+                  "name_known": true,
+                  "predicted_span_count": 4,
+                  "entity_coverage::delta": 0.7541882424611642,
+                  "ground_truth_span_count": 15,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.7541882424611642,
+                  "name_appearance_predicted_span_count": 4
+                },
+                {
+                  "name": "Rehana",
+                  "scored": true,
+                  "label_id": "Rehana",
+                  "name_known": true,
+                  "predicted_span_count": 3,
+                  "entity_coverage::delta": 0.5083591331269339,
+                  "ground_truth_span_count": 15,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.5083591331269339,
+                  "name_appearance_predicted_span_count": 3
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Shabbir's Daughter",
+                  "name_known": false,
+                  "predicted_span_count": 4,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 11,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.7896660979770893,
+                  "name_appearance_predicted_span_count": 4
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Feroz Ali Khan",
+                  "name_known": false,
+                  "predicted_span_count": 3,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 18,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.7936938464146466,
+                  "name_appearance_predicted_span_count": 3
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 3,
+                "predicted_spans": 17,
+                "scored_entities": 3,
+                "ground_truth_spans": 10,
+                "predicted_entities": 3,
+                "ground_truth_entities": 3
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.0,
+                "entity_coverage::naming_iou": 0.45063694267515925,
+                "entity_coverage::name_appearance_iou": 0.30042462845010615
+              },
+              "sample_id": "entity_coverage_v0__film-02__chunk_10m__002",
+              "character_scores": [
+                {
+                  "name": "Shabir",
+                  "scored": true,
+                  "label_id": "Shabbir",
+                  "name_known": true,
+                  "predicted_span_count": 5,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 5,
+                  "entity_coverage::naming_iou": 0.9012738853503185,
+                  "naming_predicted_span_count": 5,
+                  "entity_coverage::name_appearance_iou": 0.9012738853503185,
+                  "name_appearance_predicted_span_count": 5
+                },
+                {
+                  "name": "Rehana",
+                  "scored": true,
+                  "label_id": "Rehana",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 2,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Shabbir's Daughter",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 8,
+                "predicted_spans": 65,
+                "scored_entities": 4,
+                "ground_truth_spans": 69,
+                "predicted_entities": 8,
+                "ground_truth_entities": 4
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.4646562823998919,
+                "entity_coverage::naming_iou": 0.04730639730639733,
+                "entity_coverage::name_appearance_iou": 0.570646145749543
+              },
+              "sample_id": "entity_coverage_v0__film-03__chunk_10m__000",
+              "character_scores": [
+                {
+                  "name": "Enny",
+                  "scored": true,
+                  "label_id": "Enny",
+                  "name_known": true,
+                  "predicted_span_count": 24,
+                  "entity_coverage::delta": 0.7774755346733042,
+                  "ground_truth_span_count": 30,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.7774755346733042,
+                  "name_appearance_predicted_span_count": 24
+                },
+                {
+                  "name": "Noah Prome",
+                  "scored": true,
+                  "label_id": "Noah Prome",
+                  "name_known": true,
+                  "predicted_span_count": 11,
+                  "entity_coverage::delta": 0.6164933125263714,
+                  "ground_truth_span_count": 18,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.6164933125263714,
+                  "name_appearance_predicted_span_count": 11
+                },
+                {
+                  "name": "George",
+                  "scored": true,
+                  "label_id": "Old Man George",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 4,
+                  "entity_coverage::naming_iou": 0.141919191919192,
+                  "naming_predicted_span_count": 1,
+                  "entity_coverage::name_appearance_iou": 0.141919191919192,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Slade",
+                  "name_known": false,
+                  "predicted_span_count": 16,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 17,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.7466965438793044,
+                  "name_appearance_predicted_span_count": 16
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 6,
+                "predicted_spans": 175,
+                "scored_entities": 5,
+                "ground_truth_spans": 81,
+                "predicted_entities": 6,
+                "ground_truth_entities": 5
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.41007844531866267,
+                "entity_coverage::naming_iou": 0.13532635083581862,
+                "entity_coverage::name_appearance_iou": 0.5643149241223026
+              },
+              "sample_id": "entity_coverage_v0__film-03__chunk_10m__001",
+              "character_scores": [
+                {
+                  "name": "Enny",
+                  "scored": true,
+                  "label_id": "Enny",
+                  "name_known": true,
+                  "predicted_span_count": 20,
+                  "entity_coverage::delta": 0.5915394584694663,
+                  "ground_truth_span_count": 15,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.5915394584694663,
+                  "name_appearance_predicted_span_count": 20
+                },
+                {
+                  "name": "Noah Prome",
+                  "scored": true,
+                  "label_id": "Noah Prome",
+                  "name_known": true,
+                  "predicted_span_count": 81,
+                  "entity_coverage::delta": 0.6106411862990813,
+                  "ground_truth_span_count": 32,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.6106411862990813,
+                  "name_appearance_predicted_span_count": 81
+                },
+                {
+                  "name": "George",
+                  "scored": true,
+                  "label_id": "Old Man George",
+                  "name_known": true,
+                  "predicted_span_count": 5,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": 0.5413054033432745,
+                  "naming_predicted_span_count": 5,
+                  "entity_coverage::name_appearance_iou": 0.5413054033432745,
+                  "name_appearance_predicted_span_count": 5
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Slade",
+                  "name_known": false,
+                  "predicted_span_count": 27,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 17,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.6399554359935876,
+                  "name_appearance_predicted_span_count": 27
+                },
+                {
+                  "name": "Ina",
+                  "scored": true,
+                  "label_id": "Ina",
+                  "name_known": true,
+                  "predicted_span_count": 38,
+                  "entity_coverage::delta": 0.43813313650610297,
+                  "ground_truth_span_count": 14,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.43813313650610297,
+                  "name_appearance_predicted_span_count": 38
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 2,
+                "predicted_spans": 3,
+                "scored_entities": 2,
+                "ground_truth_spans": 3,
+                "predicted_entities": 2,
+                "ground_truth_entities": 2
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.8794300564058437,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.8794300564058437
+              },
+              "sample_id": "entity_coverage_v0__film-03__chunk_10m__002",
+              "character_scores": [
+                {
+                  "name": "Noah Prome",
+                  "scored": true,
+                  "label_id": "Noah Prome",
+                  "name_known": true,
+                  "predicted_span_count": 2,
+                  "entity_coverage::delta": 0.9226387601006756,
+                  "ground_truth_span_count": 2,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.9226387601006756,
+                  "name_appearance_predicted_span_count": 2
+                },
+                {
+                  "name": "Ina",
+                  "scored": true,
+                  "label_id": "Ina",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.8362213527110117,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.8362213527110117,
+                  "name_appearance_predicted_span_count": 1
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 9,
+                "predicted_spans": 46,
+                "scored_entities": 6,
+                "ground_truth_spans": 58,
+                "predicted_entities": 9,
+                "ground_truth_entities": 6
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.5887422948847936,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.4269342045141811
+              },
+              "sample_id": "entity_coverage_v0__film-04__chunk_10m__000",
+              "character_scores": [
+                {
+                  "name": "Christian",
+                  "scored": true,
+                  "label_id": "Christian",
+                  "name_known": true,
+                  "predicted_span_count": 17,
+                  "entity_coverage::delta": 0.7851999456546355,
+                  "ground_truth_span_count": 26,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.7851999456546355,
+                  "name_appearance_predicted_span_count": 17
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "ChristianFriend",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Crystal",
+                  "scored": true,
+                  "label_id": "Crystal",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.9810269389997452,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.9810269389997452,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "OlderDealer1",
+                  "name_known": false,
+                  "predicted_span_count": 2,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 17,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.1332495790008283,
+                  "name_appearance_predicted_span_count": 2
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "OlderDealer2",
+                  "name_known": false,
+                  "predicted_span_count": 8,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 10,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.6621287634298778,
+                  "name_appearance_predicted_span_count": 8
+                },
+                {
+                  "name": "Jay",
+                  "scored": true,
+                  "label_id": "CrystalFriend",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 6,
+                "predicted_spans": 85,
+                "scored_entities": 6,
+                "ground_truth_spans": 90,
+                "predicted_entities": 6,
+                "ground_truth_entities": 6
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.1636237447061656,
+                "entity_coverage::naming_iou": 0.23915459680390785,
+                "entity_coverage::name_appearance_iou": 0.20138917075503673
+              },
+              "sample_id": "entity_coverage_v0__film-04__chunk_10m__001",
+              "character_scores": [
+                {
+                  "name": "Christian",
+                  "scored": true,
+                  "label_id": "Christian",
+                  "name_known": true,
+                  "predicted_span_count": 37,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 36,
+                  "entity_coverage::naming_iou": 0.7174637904117236,
+                  "naming_predicted_span_count": 37,
+                  "entity_coverage::name_appearance_iou": 0.7174637904117236,
+                  "name_appearance_predicted_span_count": 37
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "ChristianFriend",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "ChristianUncle",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 17,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Crystal",
+                  "scored": true,
+                  "label_id": "Crystal",
+                  "name_known": true,
+                  "predicted_span_count": 29,
+                  "entity_coverage::delta": 0.4908712341184968,
+                  "ground_truth_span_count": 22,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.4908712341184968,
+                  "name_appearance_predicted_span_count": 29
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "OlderDealer2",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 2,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Tira",
+                  "scored": true,
+                  "label_id": "Tira",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 10,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 8,
+                "predicted_spans": 32,
+                "scored_entities": 6,
+                "ground_truth_spans": 58,
+                "predicted_entities": 8,
+                "ground_truth_entities": 6
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.3276527523463619,
+                "entity_coverage::naming_iou": 0.23781138774336186,
+                "entity_coverage::name_appearance_iou": 0.2827320700448619
+              },
+              "sample_id": "entity_coverage_v0__film-04__chunk_10m__002",
+              "character_scores": [
+                {
+                  "name": "Christian",
+                  "scored": true,
+                  "label_id": "Christian",
+                  "name_known": true,
+                  "predicted_span_count": 6,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 14,
+                  "entity_coverage::naming_iou": 0.7134341632300856,
+                  "naming_predicted_span_count": 6,
+                  "entity_coverage::name_appearance_iou": 0.7134341632300856,
+                  "name_appearance_predicted_span_count": 6
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "ChristianFriend",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 12,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Crystal",
+                  "scored": true,
+                  "label_id": "Crystal",
+                  "name_known": true,
+                  "predicted_span_count": 7,
+                  "entity_coverage::delta": 0.6952265279838272,
+                  "ground_truth_span_count": 13,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.6952265279838272,
+                  "name_appearance_predicted_span_count": 7
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "OlderDealer1",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 12,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "OlderDealer2",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 6,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Jay",
+                  "scored": true,
+                  "label_id": "CrystalFriend",
+                  "name_known": true,
+                  "predicted_span_count": 5,
+                  "entity_coverage::delta": 0.28773172905525846,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.28773172905525846,
+                  "name_appearance_predicted_span_count": 5
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 5,
+                "predicted_spans": 6,
+                "scored_entities": 4,
+                "ground_truth_spans": 10,
+                "predicted_entities": 5,
+                "ground_truth_entities": 4
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.3638562711205115,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.4919694976008891
+              },
+              "sample_id": "entity_coverage_v0__film-04__chunk_10m__003",
+              "character_scores": [
+                {
+                  "name": "Christian",
+                  "scored": true,
+                  "label_id": "Christian",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 4,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Crystal",
+                  "scored": true,
+                  "label_id": "Crystal",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.727712542241023,
+                  "ground_truth_span_count": 2,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.727712542241023,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "OlderDealer1",
+                  "name_known": false,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.24625965996908802,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "OlderDealer2",
+                  "name_known": false,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.9939057881934453,
+                  "name_appearance_predicted_span_count": 1
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 4,
+                "predicted_spans": 296,
+                "scored_entities": 4,
+                "ground_truth_spans": 159,
+                "predicted_entities": 5,
+                "ground_truth_entities": 4
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.10408271639646403,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.07806203729734802
+              },
+              "sample_id": "entity_coverage_v0__film-05__chunk_10m__000",
+              "character_scores": [
+                {
+                  "name": "Alex",
+                  "scored": true,
+                  "label_id": "Alex",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 51,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Beth",
+                  "scored": true,
+                  "label_id": "Beth",
+                  "name_known": true,
+                  "predicted_span_count": 99,
+                  "entity_coverage::delta": 0.3122481491893921,
+                  "ground_truth_span_count": 45,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.3122481491893921,
+                  "name_appearance_predicted_span_count": 99
+                },
+                {
+                  "name": "Dan",
+                  "scored": true,
+                  "label_id": "Dan",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 25,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Husband",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 38,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 4,
+                "predicted_spans": 390,
+                "scored_entities": 4,
+                "ground_truth_spans": 106,
+                "predicted_entities": 8,
+                "ground_truth_entities": 4
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.16435153661083116,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.12326365245812336
+              },
+              "sample_id": "entity_coverage_v0__film-05__chunk_10m__001",
+              "character_scores": [
+                {
+                  "name": "Alex",
+                  "scored": true,
+                  "label_id": "Alex",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 30,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Beth",
+                  "scored": true,
+                  "label_id": "Beth",
+                  "name_known": true,
+                  "predicted_span_count": 192,
+                  "entity_coverage::delta": 0.49305460983249344,
+                  "ground_truth_span_count": 44,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.49305460983249344,
+                  "name_appearance_predicted_span_count": 192
+                },
+                {
+                  "name": "Dan",
+                  "scored": true,
+                  "label_id": "Dan",
+                  "name_known": true,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 8,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Husband",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 24,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 2,
+                "predicted_spans": 2,
+                "scored_entities": 2,
+                "ground_truth_spans": 2,
+                "predicted_entities": 2,
+                "ground_truth_entities": 2
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.984251968503937,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.984251968503937
+              },
+              "sample_id": "entity_coverage_v0__film-05__chunk_10m__002",
+              "character_scores": [
+                {
+                  "name": "Alex",
+                  "scored": true,
+                  "label_id": "Alex",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.984251968503937,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.984251968503937,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "Beth",
+                  "scored": true,
+                  "label_id": "Beth",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.984251968503937,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.984251968503937,
+                  "name_appearance_predicted_span_count": 1
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 6,
+                "predicted_spans": 25,
+                "scored_entities": 6,
+                "ground_truth_spans": 166,
+                "predicted_entities": 6,
+                "ground_truth_entities": 6
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.0,
+                "entity_coverage::naming_iou": 0.5760765521931972,
+                "entity_coverage::name_appearance_iou": 0.454460054826651
+              },
+              "sample_id": "entity_coverage_v0__film-06__chunk_10m__000",
+              "character_scores": [
+                {
+                  "name": "Alex",
+                  "scored": true,
+                  "label_id": "Alex",
+                  "name_known": true,
+                  "predicted_span_count": 7,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 55,
+                  "entity_coverage::naming_iou": 0.7312111381454452,
+                  "naming_predicted_span_count": 7,
+                  "entity_coverage::name_appearance_iou": 0.7312111381454452,
+                  "name_appearance_predicted_span_count": 7
+                },
+                {
+                  "name": "Alice",
+                  "scored": true,
+                  "label_id": "Alice",
+                  "name_known": true,
+                  "predicted_span_count": 4,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 32,
+                  "entity_coverage::naming_iou": 0.4413662836455219,
+                  "naming_predicted_span_count": 4,
+                  "entity_coverage::name_appearance_iou": 0.4413662836455219,
+                  "name_appearance_predicted_span_count": 4
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Manager",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Tanya",
+                  "scored": true,
+                  "label_id": "Tanya",
+                  "name_known": true,
+                  "predicted_span_count": 6,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 22,
+                  "entity_coverage::naming_iou": 0.805502774188645,
+                  "naming_predicted_span_count": 6,
+                  "entity_coverage::name_appearance_iou": 0.805502774188645,
+                  "name_appearance_predicted_span_count": 6
+                },
+                {
+                  "name": "Henry",
+                  "scored": true,
+                  "label_id": "TanyaEx",
+                  "name_known": true,
+                  "predicted_span_count": 3,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 17,
+                  "entity_coverage::naming_iou": 0.3262260127931768,
+                  "naming_predicted_span_count": 3,
+                  "entity_coverage::name_appearance_iou": 0.3262260127931768,
+                  "name_appearance_predicted_span_count": 3
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "TanyaExGirlfriend",
+                  "name_known": false,
+                  "predicted_span_count": 4,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 37,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.4224541201871175,
+                  "name_appearance_predicted_span_count": 4
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 8,
+                "predicted_spans": 31,
+                "scored_entities": 5,
+                "ground_truth_spans": 116,
+                "predicted_entities": 8,
+                "ground_truth_entities": 5
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.0,
+                "entity_coverage::naming_iou": 0.7195159471361623,
+                "entity_coverage::name_appearance_iou": 0.6705262343738485
+              },
+              "sample_id": "entity_coverage_v0__film-06__chunk_10m__001",
+              "character_scores": [
+                {
+                  "name": "Alex",
+                  "scored": true,
+                  "label_id": "Alex",
+                  "name_known": true,
+                  "predicted_span_count": 9,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 39,
+                  "entity_coverage::naming_iou": 0.7376072690560319,
+                  "naming_predicted_span_count": 9,
+                  "entity_coverage::name_appearance_iou": 0.7376072690560319,
+                  "name_appearance_predicted_span_count": 9
+                },
+                {
+                  "name": "Alice",
+                  "scored": true,
+                  "label_id": "Alice",
+                  "name_known": true,
+                  "predicted_span_count": 4,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 12,
+                  "entity_coverage::naming_iou": 0.6820823856456913,
+                  "naming_predicted_span_count": 4,
+                  "entity_coverage::name_appearance_iou": 0.6820823856456913,
+                  "name_appearance_predicted_span_count": 4
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "Manager",
+                  "name_known": false,
+                  "predicted_span_count": 3,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 27,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 3,
+                  "entity_coverage::name_appearance_iou": 0.47456738332459325,
+                  "name_appearance_predicted_span_count": 3
+                },
+                {
+                  "name": "Tanya",
+                  "scored": true,
+                  "label_id": "Tanya",
+                  "name_known": true,
+                  "predicted_span_count": 8,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 34,
+                  "entity_coverage::naming_iou": 0.7089410272669632,
+                  "naming_predicted_span_count": 8,
+                  "entity_coverage::name_appearance_iou": 0.7089410272669632,
+                  "name_appearance_predicted_span_count": 8
+                },
+                {
+                  "name": "Henry",
+                  "scored": true,
+                  "label_id": "TanyaEx",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 4,
+                  "entity_coverage::naming_iou": 0.7494331065759628,
+                  "naming_predicted_span_count": 1,
+                  "entity_coverage::name_appearance_iou": 0.7494331065759628,
+                  "name_appearance_predicted_span_count": 1
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 2,
+                "predicted_spans": 2,
+                "scored_entities": 2,
+                "ground_truth_spans": 2,
+                "predicted_entities": 2,
+                "ground_truth_entities": 2
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.912,
+                "entity_coverage::naming_iou": 0.0,
+                "entity_coverage::name_appearance_iou": 0.912
+              },
+              "sample_id": "entity_coverage_v0__film-06__chunk_10m__002",
+              "character_scores": [
+                {
+                  "name": "Alex",
+                  "scored": true,
+                  "label_id": "Alex",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.912,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.912,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "Tanya",
+                  "scored": true,
+                  "label_id": "Tanya",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.912,
+                  "ground_truth_span_count": 1,
+                  "entity_coverage::naming_iou": 0.0,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.912,
+                  "name_appearance_predicted_span_count": 1
+                }
+              ]
+            },
+            {
+              "config": "chunk_10m",
+              "counts": {
+                "chunk_groups": 1,
+                "chunk_entities": 6,
+                "predicted_spans": 40,
+                "scored_entities": 7,
+                "ground_truth_spans": 29,
+                "predicted_entities": 6,
+                "ground_truth_entities": 7
+              },
+              "metrics": {
+                "entity_coverage::delta": 0.0,
+                "entity_coverage::naming_iou": 0.7128764316239579,
+                "entity_coverage::name_appearance_iou": 0.6213124642296369
+              },
+              "sample_id": "entity_coverage_v0__sport-01__chunk_10m__000",
+              "character_scores": [
+                {
+                  "name": "Whitefield",
+                  "scored": true,
+                  "label_id": "2-on-australia",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 2,
+                  "entity_coverage::naming_iou": 0.42371323529411775,
+                  "naming_predicted_span_count": 1,
+                  "entity_coverage::name_appearance_iou": 0.42371323529411775,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "Wade",
+                  "scored": true,
+                  "label_id": "4-on-australia",
+                  "name_known": true,
+                  "predicted_span_count": 1,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 2,
+                  "entity_coverage::naming_iou": 0.45787139689578754,
+                  "naming_predicted_span_count": 1,
+                  "entity_coverage::name_appearance_iou": 0.45787139689578754,
+                  "name_appearance_predicted_span_count": 1
+                },
+                {
+                  "name": "Jung-Hoo Lee",
+                  "scored": true,
+                  "label_id": "51-on-korea",
+                  "name_known": true,
+                  "predicted_span_count": 7,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 3,
+                  "entity_coverage::naming_iou": 0.8925814751286457,
+                  "naming_predicted_span_count": 7,
+                  "entity_coverage::name_appearance_iou": 0.8925814751286457,
+                  "name_appearance_predicted_span_count": 7
+                },
+                {
+                  "name": "Jack O'Loughlin",
+                  "scored": true,
+                  "label_id": "59-on-australia",
+                  "name_known": true,
+                  "predicted_span_count": 12,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 6,
+                  "entity_coverage::naming_iou": 0.8205602536997888,
+                  "naming_predicted_span_count": 12,
+                  "entity_coverage::name_appearance_iou": 0.8205602536997888,
+                  "name_appearance_predicted_span_count": 12
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "60-on-australia",
+                  "name_known": false,
+                  "predicted_span_count": 0,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 2,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.0,
+                  "name_appearance_predicted_span_count": 0
+                },
+                {
+                  "name": "Ha Seong Kim",
+                  "scored": true,
+                  "label_id": "7-on-korea",
+                  "name_known": true,
+                  "predicted_span_count": 8,
+                  "entity_coverage::delta": 0.0,
+                  "ground_truth_span_count": 4,
+                  "entity_coverage::naming_iou": 0.9696557971014494,
+                  "naming_predicted_span_count": 8,
+                  "entity_coverage::name_appearance_iou": 0.9696557971014494,
+                  "name_appearance_predicted_span_count": 8
+                },
+                {
+                  "name": "unknown",
+                  "scored": true,
+                  "label_id": "catcher-on-australia",
+                  "name_known": false,
+                  "predicted_span_count": 11,
+                  "entity_coverage::delta": null,
+                  "ground_truth_span_count": 10,
+                  "entity_coverage::naming_iou": null,
+                  "naming_predicted_span_count": 0,
+                  "entity_coverage::name_appearance_iou": 0.7848050914876692,
+                  "name_appearance_predicted_span_count": 11
+                }
+              ]
+            }
+          ]
+        },
+        "skipped_incomplete": 0,
+        "entity_coverage::delta": 0.21701567950519013,
+        "entity_coverage::naming_iou": 0.2471704267219127,
+        "entity_coverage::name_appearance_iou": 0.3943509024051572
+      }
+    }
+  ]
+}

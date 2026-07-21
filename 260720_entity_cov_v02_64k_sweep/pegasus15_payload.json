@@ -1,0 +1,23 @@
+{
+  "name": "lia-entcov-v02-64k-pegasus15-tp1-r8-20260720T140354Z",
+  "experimentName": "lia-entcov-v02-64k-pegasus15-tp1-r8-20260720T140354Z",
+  "batchNamePrefix": "lia-entcov-v02-64k-pegasus15",
+  "idempotencyKey": "lia-entcov-v02-64k-pegasus15-tp1-r8-20260720T140354Z",
+  "dataset": "twelvelabs/entity_cov_v02_tdf",
+  "config": "default",
+  "split": "test",
+  "pipelineId": "vllm-direct",
+  "workerType": "vllm-video-v1",
+  "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/kian-kim/soce_rl_260516_all_pair_p15_a1mckpt1000s60_w7030/",
+  "nodePool": "b300-pegasus",
+  "minReplicas": 8,
+  "maxReplicas": 8,
+  "concurrency": 1,
+  "maxInFlight": 20,
+  "tp": 1,
+  "dp": 1,
+  "maxTokens": 65536,
+  "temperature": 0.0,
+  "convertIfNeeded": false,
+  "enableTensorCache": true
+}

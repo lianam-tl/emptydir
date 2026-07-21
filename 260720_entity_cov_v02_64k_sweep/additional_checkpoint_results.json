@@ -1,0 +1,41 @@
+{
+  "dataset": "https://huggingface.co/datasets/twelvelabs/entity_cov_v02_tdf",
+  "completed_runs": 7,
+  "pending_retries": 1,
+  "results": [
+    {"family":"soccer-lvreason","step":400,"run_id":"29162be7-08eb-569f-babd-fe4ce9b5bbfa","overall_naming":0.25531335636026337,"overall_appearance":0.3157272711393125,"full_naming":0.3332983115340669,"full_appearance":0.3361130775027956,"half_naming":0.21182174674410378,"half_appearance":0.3043429896636012,"parse_errors":1},
+    {"family":"soccer-lvreason","step":800,"run_id":"5287cdbb-2fbf-5b13-8f4a-95aaf59401b4","overall_naming":0.2743348655531319,"overall_appearance":0.2538582482189245,"full_naming":0.3220278471637225,"full_appearance":0.26740174573687453,"half_naming":0.24773685657799488,"half_appearance":0.24629499635825108,"parse_errors":1},
+    {"family":"soccer-lvreason","step":1200,"run_id":"fca2533a-a6fc-550e-8c58-a49d8363626a","overall_naming":0.281390189789864,"overall_appearance":0.2870742450166887,"full_naming":0.29712345165524484,"full_appearance":0.24059765539902325,"half_naming":0.2726158706726324,"half_appearance":0.31302870415382655,"parse_errors":2},
+    {"family":"consol-h0mn2x","step":800,"run_id":"a7ed23df-4db0-5ef1-ab05-ca51a995264f","overall_naming":0.3017828924780145,"overall_appearance":0.3200326281528882,"full_naming":0.2701503996533498,"full_appearance":0.31366806632220773,"half_naming":0.31942409039946207,"half_appearance":0.3235868639804109,"parse_errors":1},
+    {"family":"consol-h0mn2x","step":1200,"run_id":"239cf441-25eb-591c-ab32-32bdfaa91241","overall_naming":0.28012882258655786,"overall_appearance":0.31257670981465974,"full_naming":0.3557046795790636,"full_appearance":0.36940268444450397,"half_naming":0.2379807484945834,"half_appearance":0.2808427239824092,"parse_errors":2},
+    {"family":"consol-h0mn2x","step":1600,"run_id":"78542b3b-6142-5487-80eb-2be8006ce1f9","overall_naming":0.33495089971122366,"overall_appearance":0.32693728086893253,"full_naming":0.3422647134363397,"full_appearance":0.38242080731611644,"half_naming":0.3308720420568322,"half_appearance":0.2959529738919337,"parse_errors":2},
+    {"family":"consol-h0mn2x","step":2000,"run_id":"55ccccf4-87a9-576f-acb7-45adac7e8fdb","overall_naming":0.2905749271940507,"overall_appearance":0.31957747722329743,"full_naming":0.34423027200706546,"full_appearance":0.35708652652277345,"half_naming":0.26065175412525393,"half_appearance":0.29863086527683697,"parse_errors":2}
+  ],
+  "failed_run": {
+    "family": "consol-h0mn2x",
+    "step": 400,
+    "run_id": "6a1d2ca0-f030-5ae9-bfd4-d63c5c0584b6",
+    "completed": 8,
+    "cancelled": 12,
+    "reason": "degraded_retention_exceeded: reservation_contention"
+  },
+  "retry": {
+    "run_id": "b0b7a57b-bbc7-546f-bf6e-fb9d30fe2dcb",
+    "batch_id": "batch-735238ac-ed96-4000-9aaf-50498b3c7a3d",
+    "status": "processing"
+  },
+  "denominator_diagnostic": {
+    "known_characters": 81,
+    "unknown_characters": 39,
+    "explanation": "Naming averages only known-name characters; naming plus appearance averages both known and unknown characters.",
+    "results": [
+      {"family":"soccer-lvreason","step":400,"known_naming":0.25531335636026337,"known_appearance":0.3524611602810471,"known_delta":0.09714780392078376,"unknown_appearance":0.23943380907570982},
+      {"family":"soccer-lvreason","step":800,"known_naming":0.2743348655531319,"known_appearance":0.31988652700960185,"known_delta":0.045551661456469904,"unknown_appearance":0.11672259226905621},
+      {"family":"soccer-lvreason","step":1200,"known_naming":0.281390189789864,"known_appearance":0.3473220286031739,"known_delta":0.06593183881330986,"unknown_appearance":0.16194423295245036},
+      {"family":"consol-h0mn2x","step":800,"known_naming":0.3017828924780145,"known_appearance":0.36329338474470657,"known_delta":0.06151049226669196,"unknown_appearance":0.23018336446218862},
+      {"family":"consol-h0mn2x","step":1200,"known_naming":0.28012882258655786,"known_appearance":0.34808191742974665,"known_delta":0.06795309484318876,"unknown_appearance":0.23883512476794125},
+      {"family":"consol-h0mn2x","step":1600,"known_naming":0.33495089971122366,"known_appearance":0.384099369571312,"known_delta":0.04914846986008828,"unknown_appearance":0.20821601971783657},
+      {"family":"consol-h0mn2x","step":2000,"known_naming":0.2905749271940507,"known_appearance":0.3775556491855845,"known_delta":0.08698072199153375,"unknown_appearance":0.19916127391700902}
+    ]
+  }
+}

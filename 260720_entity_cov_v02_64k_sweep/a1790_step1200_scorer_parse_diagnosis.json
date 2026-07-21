@@ -1,0 +1,317 @@
+{
+  "generated_at": "2026-07-20T14:19:46.301955+00:00",
+  "eval_run_id": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43",
+  "total_count": 20,
+  "parseable_count": 19,
+  "failed_count": 1,
+  "records": [
+    {
+      "sample_external_id": "entity_coverage_v0__film-01__full__000",
+      "finish_reason": "stop",
+      "output_tokens": 62547,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__film-02__full__000",
+      "finish_reason": "stop",
+      "output_tokens": 44469,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__film-03__full__000",
+      "finish_reason": "stop",
+      "output_tokens": 40580,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__film-04__full__000",
+      "finish_reason": "length",
+      "output_tokens": 65536,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships"
+      ],
+      "parseable": false,
+      "parse_error": "model output dict does not contain nested coverage JSON"
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__film-05__full__000",
+      "finish_reason": "stop",
+      "output_tokens": 15572,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__film-06__full__000",
+      "finish_reason": "stop",
+      "output_tokens": 3922,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__sport-01__full__000",
+      "finish_reason": "stop",
+      "output_tokens": 6376,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__film-01__half__000",
+      "finish_reason": "stop",
+      "output_tokens": 6684,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__film-01__half__001",
+      "finish_reason": "length",
+      "output_tokens": 65536,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__film-02__half__000",
+      "finish_reason": "stop",
+      "output_tokens": 27353,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__film-02__half__001",
+      "finish_reason": "stop",
+      "output_tokens": 39076,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__film-03__half__000",
+      "finish_reason": "stop",
+      "output_tokens": 20839,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__film-03__half__001",
+      "finish_reason": "stop",
+      "output_tokens": 29822,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__film-04__half__000",
+      "finish_reason": "stop",
+      "output_tokens": 26675,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__film-04__half__001",
+      "finish_reason": "length",
+      "output_tokens": 65536,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__film-05__half__000",
+      "finish_reason": "stop",
+      "output_tokens": 15027,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__film-05__half__001",
+      "finish_reason": "stop",
+      "output_tokens": 21517,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__film-06__half__000",
+      "finish_reason": "stop",
+      "output_tokens": 25860,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__film-06__half__001",
+      "finish_reason": "stop",
+      "output_tokens": 34937,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "parseable": true,
+      "parse_error": null
+    },
+    {
+      "sample_external_id": "entity_coverage_v0__sport-01__half__000",
+      "finish_reason": "stop",
+      "output_tokens": 6376,
+      "normalized_type": "dict",
+      "normalized_keys": [
+        "entity_relationships",
+        "rosters",
+        "shot_metadata",
+        "title",
+        "video_summary",
+        "work"
+      ],
+      "parseable": true,
+      "parse_error": null
+    }
+  ]
+}
