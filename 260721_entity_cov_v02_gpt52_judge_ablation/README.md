@@ -62,3 +62,25 @@ The production `gpt-5.4-mini` result was not perfectly reproducible: the fresh
 replay changed overall naming IoU by +0.18pp and name + appearance IoU by
 +0.86pp even with temperature zero. Use the fresh replay, not the stored score,
 for the controlled model comparison.
+
+## Four-checkpoint half name + appearance ranking
+
+The requested four-run comparison is generated with:
+
+```bash
+/Users/long8v/.venv/bin/python build_rank_comparison.py \
+  --input-directory . \
+  --output-json four_run_half_name_appearance_rank.json \
+  --output-html four_run_half_name_appearance_rank.html
+```
+
+The order is unchanged between the fresh judge replays:
+
+1. `a1740-h0-duration-s400`
+2. `consol-h0mn2x-s800`
+3. `soccer-lvreason-mcq-s1200`
+4. `consol-h0mn2x-s1600`
+
+The GPT-5.4-mini replay places ranks 3 and 4 only 0.075pp apart, so that pair
+is not robust to the observed judge replay variance even though it did not flip
+in this experiment.

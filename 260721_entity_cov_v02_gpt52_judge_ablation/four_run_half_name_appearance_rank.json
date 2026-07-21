@@ -1,0 +1,114 @@
+{
+  "generated_at": "2026-07-21T09:16:41.571346+00:00",
+  "metric": "entity_coverage::by_shape::half::name_appearance_iou",
+  "rank_changed": false,
+  "spearman": 1.0,
+  "gpt54_order": [
+    "a1740-h0-duration-s400",
+    "consol-h0mn2x-s800",
+    "soccer-lvreason-mcq-s1200",
+    "consol-h0mn2x-s1600"
+  ],
+  "gpt52_order": [
+    "a1740-h0-duration-s400",
+    "consol-h0mn2x-s800",
+    "soccer-lvreason-mcq-s1200",
+    "consol-h0mn2x-s1600"
+  ],
+  "rows": [
+    {
+      "name": "a1740-h0-duration-s400",
+      "run_id": "34e63948-7068-5c19-9d49-4a14eaf44341",
+      "stored_gpt54": 0.3399012240242388,
+      "replayed_gpt54": 0.33990122402423883,
+      "gpt52": 0.2994672827041308,
+      "mapping_decisions": 220,
+      "changed_mappings": 34,
+      "gpt52_delta": -0.040433941320108024,
+      "gpt54_replay_delta": 5.551115123125783e-17,
+      "stored_rank": 1,
+      "gpt54_rank": 1,
+      "gpt52_rank": 1,
+      "rank_change": 0
+    },
+    {
+      "name": "consol-h0mn2x-s800",
+      "run_id": "a7ed23df-4db0-5ef1-ab05-ca51a995264f",
+      "stored_gpt54": 0.3235868639804109,
+      "replayed_gpt54": 0.3306935947205348,
+      "gpt52": 0.29568214033635715,
+      "mapping_decisions": 218,
+      "changed_mappings": 23,
+      "gpt52_delta": -0.03501145438417763,
+      "gpt54_replay_delta": 0.007106730740123857,
+      "stored_rank": 2,
+      "gpt54_rank": 2,
+      "gpt52_rank": 2,
+      "rank_change": 0
+    },
+    {
+      "name": "soccer-lvreason-mcq-s1200",
+      "run_id": "fca2533a-a6fc-550e-8c58-a49d8363626a",
+      "stored_gpt54": 0.31302870415382655,
+      "replayed_gpt54": 0.3037748282689203,
+      "gpt52": 0.27431818392904844,
+      "mapping_decisions": 212,
+      "changed_mappings": 20,
+      "gpt52_delta": -0.029456644339871885,
+      "gpt54_replay_delta": -0.009253875884906226,
+      "stored_rank": 3,
+      "gpt54_rank": 3,
+      "gpt52_rank": 3,
+      "rank_change": 0
+    },
+    {
+      "name": "consol-h0mn2x-s1600",
+      "run_id": "78542b3b-6142-5487-80eb-2be8006ce1f9",
+      "stored_gpt54": 0.2959529738919337,
+      "replayed_gpt54": 0.3030234497929452,
+      "gpt52": 0.24983172020932884,
+      "mapping_decisions": 246,
+      "changed_mappings": 30,
+      "gpt52_delta": -0.05319172958361637,
+      "gpt54_replay_delta": 0.007070475901011508,
+      "stored_rank": 4,
+      "gpt54_rank": 4,
+      "gpt52_rank": 4,
+      "rank_change": 0
+    }
+  ],
+  "gpt54_adjacent_margins": [
+    {
+      "higher": "a1740-h0-duration-s400",
+      "lower": "consol-h0mn2x-s800",
+      "margin": 0.009207629303704057
+    },
+    {
+      "higher": "consol-h0mn2x-s800",
+      "lower": "soccer-lvreason-mcq-s1200",
+      "margin": 0.02691876645161445
+    },
+    {
+      "higher": "soccer-lvreason-mcq-s1200",
+      "lower": "consol-h0mn2x-s1600",
+      "margin": 0.0007513784759751174
+    }
+  ],
+  "gpt52_adjacent_margins": [
+    {
+      "higher": "a1740-h0-duration-s400",
+      "lower": "consol-h0mn2x-s800",
+      "margin": 0.003785142367773664
+    },
+    {
+      "higher": "consol-h0mn2x-s800",
+      "lower": "soccer-lvreason-mcq-s1200",
+      "margin": 0.021363956407308704
+    },
+    {
+      "higher": "soccer-lvreason-mcq-s1200",
+      "lower": "consol-h0mn2x-s1600",
+      "margin": 0.024486463719719603
+    }
+  ]
+}
