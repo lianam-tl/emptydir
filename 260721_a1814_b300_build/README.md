@@ -10,3 +10,12 @@ The full build runs as one CPU-only Kubernetes Job on a `b300-pegasus` node with
 The CPU-node poller sends hourly and terminal messages to `#fun-lia-trashcan`.
 
 `publish_parquets.py` publishes the six completed domain Parquets as additive Hugging Face configs. `poll_hf_publish.py` tracks that publication and sends Slack progress notifications.
+
+## Publication result
+
+- Completed at `2026-07-21T07:03:55Z` from the CPU node.
+- Published 89,636 successful rows across six `*_v1_2_duration_diverse` configs.
+- Hugging Face revision: `a308e4743a29c2b54bb598cc2e2118fb9a85d02d`.
+- Preserved the existing `movie_duration_diverse` (2,407 rows) and `news_duration_diverse` (3,205 rows) configs.
+- The source build had 299 failed chunk attempts, so those chunks are not included.
+- Final machine-readable and HTML records: `hf_publish_status.json` and `hf_publish_status.html`.
