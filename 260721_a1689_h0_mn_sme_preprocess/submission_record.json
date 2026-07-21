@@ -3,6 +3,12 @@
   "job_name": "pp-a1689-allcfg-r2-260721-tl-h0-movies-and-news-sme-default-sft",
   "attempt": 2,
   "status": "running",
+  "runtime_validation": {
+    "config_casts_completed": 10,
+    "concatenated_rows": 99057,
+    "cleanup_map_started": true,
+    "checked_at": "2026-07-21T09:59:39Z"
+  },
   "submitted_at": "2026-07-21T09:55:53Z",
   "dataset": "twelvelabs/tl_h0_movies_and_news_sme_tdf",
   "dataset_revision": "533ef69c0ab5067503d0a861f371e92c36e287a0",
