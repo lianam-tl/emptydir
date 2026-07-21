@@ -8,3 +8,5 @@
 The full build runs as one CPU-only Kubernetes Job on a `b300-pegasus` node with 128 workers. Temporary videos use node-local NVMe. Final parquets, the build HTML, the monitor HTML, and `job.exitcode` are written under the FSx output directory recorded in `launch_record.json`.
 
 The CPU-node poller sends hourly and terminal messages to `#fun-lia-trashcan`.
+
+`publish_parquets.py` publishes the six completed domain Parquets as additive Hugging Face configs. `poll_hf_publish.py` tracks that publication and sends Slack progress notifications.
