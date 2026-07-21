@@ -34,6 +34,7 @@ command: |
 
   REPOSITORY_ROOT="${EPHEMERAL_ROOT}/project"
   PROJECT_ROOT="${REPOSITORY_ROOT}/training"
+  rm -rf "${REPOSITORY_ROOT}"
   git clone --filter=blob:none -b "${GH_BRANCH}" \
     git@github.com:twelvelabs-io/pegasus.git "${REPOSITORY_ROOT}"
   export GH_SHA="$(git -C "${REPOSITORY_ROOT}" rev-parse HEAD)"
