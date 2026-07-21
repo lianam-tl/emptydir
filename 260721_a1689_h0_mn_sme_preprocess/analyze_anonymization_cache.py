@@ -119,17 +119,32 @@ def main() -> None:
 
     selected_fingerprint = None
     selected_files = None
+    full_record_groups = []
     for fingerprint, cache_files in sorted(cache_groups(args.cache_root).items()):
+        first_shard = Dataset.from_file(str(sorted(cache_files)[0]))
         row_count = sum(len(Dataset.from_file(str(path))) for path in cache_files)
-        print(f"{fingerprint}: {len(cache_files)} files, {row_count} rows", flush=True)
+        columns = first_shard.column_names
+        print(f"{fingerprint}: {len(cache_files)} files, {row_count} rows, columns={columns}", flush=True)
         if row_count == args.target_rows:
             selected_fingerprint = fingerprint
             selected_files = cache_files
+        if "messages" in columns:
+            full_record_groups.append((row_count, fingerprint, cache_files))
 
     if selected_files is None:
         raise RuntimeError(f"No cache group has exactly {args.target_rows} rows")
 
     dataset = load_group(selected_files)
+    base_fingerprint = selected_fingerprint
+    if dataset.column_names == ["indices"]:
+        indices = dataset["indices"]
+        minimum_base_rows = max(indices) + 1
+        candidates = [group for group in full_record_groups if group[0] >= minimum_base_rows]
+        if not candidates:
+            raise RuntimeError(f"No full-record cache group can resolve index {minimum_base_rows - 1}")
+        _, base_fingerprint, base_files = min(candidates)
+        dataset = load_group(base_files).select(indices)
+
     rejected_rows = []
     for row in dataset:
         rejection = find_rejection(row["messages"])
@@ -151,6 +166,7 @@ def main() -> None:
     source_counts = Counter(row["source_hint"] for row in rejected_rows)
     summary = {
         "cache_fingerprint": selected_fingerprint,
+        "base_fingerprint": base_fingerprint,
         "cache_files": len(selected_files),
         "input_rows": len(dataset),
         "rejected_rows": len(rejected_rows),
