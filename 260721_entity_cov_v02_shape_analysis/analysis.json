@@ -299,6 +299,1386 @@
     "run_count": 15,
     "url": "https://huggingface.co/datasets/twelvelabs/entity_cov_v02_tdf"
   },
+  "duration_bucket_analysis": [
+    {
+      "buckets": {
+        "at_most": {
+          "clean_full_vs_matched_half": {
+            "appearance": {
+              "pearson": 0.9995889754144844,
+              "spearman": 0.9467311661626767
+            },
+            "delta": {
+              "pearson": 1.0,
+              "spearman": 1.0
+            },
+            "naming": {
+              "pearson": 0.9991828240393518,
+              "spearman": 0.9351824813485523
+            }
+          },
+          "duration_minutes": [
+            3.001
+          ],
+          "full_vs_all_half": {
+            "appearance": {
+              "pearson": 0.27665087251935905,
+              "spearman": 0.37859505649652186
+            },
+            "delta": {
+              "pearson": 0.161934317307663,
+              "spearman": 0.18557687223952257
+            },
+            "naming": {
+              "pearson": 0.22499644362534005,
+              "spearman": 0.3876677179518366
+            }
+          },
+          "full_vs_matched_half": {
+            "appearance": {
+              "pearson": 0.9995889754144844,
+              "spearman": 0.9467311661626767
+            },
+            "delta": {
+              "pearson": 1.0,
+              "spearman": 1.0
+            },
+            "naming": {
+              "pearson": 0.9991828240393518,
+              "spearman": 0.9351824813485523
+            }
+          },
+          "runs": [
+            {
+              "all_half": {
+                "appearance": 0.38804815650979246,
+                "delta": 0.04281209613481484,
+                "naming": 0.3928270413268126
+              },
+              "clean_full": {
+                "appearance": 0.49670568128646503,
+                "delta": 0.0,
+                "naming": 0.695387953801051
+              },
+              "clean_matched_half": {
+                "appearance": 0.49670568128646503,
+                "delta": 0.0,
+                "naming": 0.695387953801051
+              },
+              "family": "Pegasus 1.5 / Kian SOCE",
+              "full": {
+                "appearance": 0.49670568128646503,
+                "delta": 0.0,
+                "naming": 0.695387953801051
+              },
+              "matched_half": {
+                "appearance": 0.49670568128646503,
+                "delta": 0.0,
+                "naming": 0.695387953801051
+              },
+              "name": "pegasus-15-kian-soce",
+              "step": null
+            },
+            {
+              "all_half": {
+                "appearance": 0.3399012240242389,
+                "delta": 0.054904932801301536,
+                "naming": 0.30371907726335967
+              },
+              "clean_full": {
+                "appearance": 0.4989275437733867,
+                "delta": 0.0,
+                "naming": 0.6984985612827413
+              },
+              "clean_matched_half": {
+                "appearance": 0.4989275437733867,
+                "delta": 0.0,
+                "naming": 0.6984985612827413
+              },
+              "family": "A1740 h0-duration",
+              "full": {
+                "appearance": 0.4989275437733867,
+                "delta": 0.0,
+                "naming": 0.6984985612827413
+              },
+              "matched_half": {
+                "appearance": 0.4989275437733867,
+                "delta": 0.0,
+                "naming": 0.6984985612827413
+              },
+              "name": "a1740-h0-duration-s400",
+              "step": 400
+            },
+            {
+              "all_half": {
+                "appearance": 0.22837854854962722,
+                "delta": 0.03702035623819957,
+                "naming": 0.23431225054533644
+              },
+              "clean_full": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "clean_matched_half": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "family": "A1740 h0-duration",
+              "full": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "matched_half": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "name": "a1740-h0-duration-s800",
+              "step": 800
+            },
+            {
+              "all_half": {
+                "appearance": 0.26798203860496583,
+                "delta": 0.048625626030574125,
+                "naming": 0.26979298324112444
+              },
+              "clean_full": {
+                "appearance": 0.2566591481317895,
+                "delta": -0.3309511958376289,
+                "naming": 0.6902740032221343
+              },
+              "clean_matched_half": {
+                "appearance": 0.2566591481317895,
+                "delta": -0.3309511958376289,
+                "naming": 0.6902740032221343
+              },
+              "family": "A1740 h0-duration",
+              "full": {
+                "appearance": 0.2566591481317895,
+                "delta": -0.3309511958376289,
+                "naming": 0.6902740032221343
+              },
+              "matched_half": {
+                "appearance": 0.2566591481317895,
+                "delta": -0.3309511958376289,
+                "naming": 0.6902740032221343
+              },
+              "name": "a1740-h0-duration-s1200",
+              "step": 1200
+            },
+            {
+              "all_half": {
+                "appearance": 0.30739627359683097,
+                "delta": 0.04717775473386983,
+                "naming": 0.3030366138394337
+              },
+              "clean_full": {
+                "appearance": 0.3981254983907719,
+                "delta": 0.0,
+                "naming": 0.5573756977470806
+              },
+              "clean_matched_half": {
+                "appearance": 0.3981254983907719,
+                "delta": 0.0,
+                "naming": 0.5573756977470806
+              },
+              "family": "A1790 entity-sme4x",
+              "full": {
+                "appearance": 0.3981254983907719,
+                "delta": 0.0,
+                "naming": 0.5573756977470806
+              },
+              "matched_half": {
+                "appearance": 0.3981254983907719,
+                "delta": 0.0,
+                "naming": 0.5573756977470806
+              },
+              "name": "a1790-entity-sme4x-s400",
+              "step": 400
+            },
+            {
+              "all_half": {
+                "appearance": 0.2832936309890881,
+                "delta": 0.0693006657307244,
+                "naming": 0.2594262559291804
+              },
+              "clean_full": {
+                "appearance": 0.39634964881599793,
+                "delta": 0.0,
+                "naming": 0.554889508342397
+              },
+              "clean_matched_half": {
+                "appearance": 0.39634964881599793,
+                "delta": 0.0,
+                "naming": 0.554889508342397
+              },
+              "family": "A1790 entity-sme4x",
+              "full": {
+                "appearance": 0.39634964881599793,
+                "delta": 0.0,
+                "naming": 0.554889508342397
+              },
+              "matched_half": {
+                "appearance": 0.39634964881599793,
+                "delta": 0.0,
+                "naming": 0.554889508342397
+              },
+              "name": "a1790-entity-sme4x-s800",
+              "step": 800
+            },
+            {
+              "all_half": {
+                "appearance": 0.25410874078320983,
+                "delta": 0.06940329384503609,
+                "naming": 0.2571836647416372
+              },
+              "clean_full": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "clean_matched_half": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "family": "A1790 entity-sme4x",
+              "full": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "matched_half": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "name": "a1790-entity-sme4x-s1200",
+              "step": 1200
+            },
+            {
+              "all_half": {
+                "appearance": 0.3050761370565496,
+                "delta": 0.0682922667912659,
+                "naming": 0.2866324005654127
+              },
+              "clean_full": {
+                "appearance": 0.49863793473189527,
+                "delta": 0.0,
+                "naming": 0.6980931086246533
+              },
+              "clean_matched_half": {
+                "appearance": 0.49863793473189527,
+                "delta": 0.0,
+                "naming": 0.6980931086246533
+              },
+              "family": "Consol h0/mn SME 2x",
+              "full": {
+                "appearance": 0.49863793473189527,
+                "delta": 0.0,
+                "naming": 0.6980931086246533
+              },
+              "matched_half": {
+                "appearance": 0.49863793473189527,
+                "delta": 0.0,
+                "naming": 0.6980931086246533
+              },
+              "name": "consol-h0mn2x-s400",
+              "step": 400
+            },
+            {
+              "all_half": {
+                "appearance": 0.323586863980411,
+                "delta": 0.061307834738314734,
+                "naming": 0.31942409039946196
+              },
+              "clean_full": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "clean_matched_half": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "family": "Consol h0/mn SME 2x",
+              "full": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "matched_half": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "name": "consol-h0mn2x-s800",
+              "step": 800
+            },
+            {
+              "all_half": {
+                "appearance": 0.28084272398240917,
+                "delta": 0.07192459867713277,
+                "naming": 0.23798074849458337
+              },
+              "clean_full": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "clean_matched_half": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "family": "Consol h0/mn SME 2x",
+              "full": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "matched_half": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "name": "consol-h0mn2x-s1200",
+              "step": 1200
+            },
+            {
+              "all_half": {
+                "appearance": 0.2959529738919337,
+                "delta": 0.022441052268538073,
+                "naming": 0.3308720420568321
+              },
+              "clean_full": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "clean_matched_half": {
+                "appearance": 0.5012523676124788,
+                "delta": 0.0,
+                "naming": 0.7017533146574703
+              },
+              "family": "Consol h0/mn SME 2x",
+              "full": {
+                "appearance": 0.4930528594443816,
+                "delta": 0.0,
+                "naming": 0.6902740032221343
+              },
+              "matched_half": {
+                "appearance": 0.5012523676124788,
+                "delta": 0.0,
+                "naming": 0.7017533146574703
+              },
+              "name": "consol-h0mn2x-s1600",
+              "step": 1600
+            },
+            {
+              "all_half": {
+                "appearance": 0.29863086527683685,
+                "delta": 0.0974215904501429,
+                "naming": 0.260651754125254
+              },
+              "clean_full": {
+                "appearance": 0.4285492624975363,
+                "delta": 0.0,
+                "naming": 0.5999689674965507
+              },
+              "clean_matched_half": {
+                "appearance": 0.4285492624975363,
+                "delta": 0.0,
+                "naming": 0.5999689674965507
+              },
+              "family": "Consol h0/mn SME 2x",
+              "full": {
+                "appearance": 0.4285492624975363,
+                "delta": 0.0,
+                "naming": 0.5999689674965507
+              },
+              "matched_half": {
+                "appearance": 0.4285492624975363,
+                "delta": 0.0,
+                "naming": 0.5999689674965507
+              },
+              "name": "consol-h0mn2x-s2000",
+              "step": 2000
+            },
+            {
+              "all_half": {
+                "appearance": 0.3043429896636012,
+                "delta": 0.12685114811541987,
+                "naming": 0.21182174674410376
+              },
+              "clean_full": {
+                "appearance": 0.4757805262883165,
+                "delta": 0.0,
+                "naming": 0.6660927368036431
+              },
+              "clean_matched_half": {
+                "appearance": 0.4757805262883165,
+                "delta": 0.0,
+                "naming": 0.6660927368036431
+              },
+              "family": "Soccer LVReason MCQ",
+              "full": {
+                "appearance": 0.4757805262883165,
+                "delta": 0.0,
+                "naming": 0.6660927368036431
+              },
+              "matched_half": {
+                "appearance": 0.4757805262883165,
+                "delta": 0.0,
+                "naming": 0.6660927368036431
+              },
+              "name": "soccer-lvreason-mcq-s400",
+              "step": 400
+            },
+            {
+              "all_half": {
+                "appearance": 0.24629499635825108,
+                "delta": 0.04974470209025998,
+                "naming": 0.24773685657799488
+              },
+              "clean_full": {
+                "appearance": 0.36919836478509815,
+                "delta": 0.0,
+                "naming": 0.5168777106991375
+              },
+              "clean_matched_half": {
+                "appearance": 0.36919836478509815,
+                "delta": 0.0,
+                "naming": 0.5168777106991375
+              },
+              "family": "Soccer LVReason MCQ",
+              "full": {
+                "appearance": 0.36919836478509815,
+                "delta": 0.0,
+                "naming": 0.5168777106991375
+              },
+              "matched_half": {
+                "appearance": 0.36919836478509815,
+                "delta": 0.0,
+                "naming": 0.5168777106991375
+              },
+              "name": "soccer-lvreason-mcq-s800",
+              "step": 800
+            },
+            {
+              "all_half": {
+                "appearance": 0.3130287041538265,
+                "delta": 0.0967454864883602,
+                "naming": 0.2726158706726324
+              },
+              "clean_full": {
+                "appearance": 0.36919836478509815,
+                "delta": 0.0,
+                "naming": 0.5168777106991375
+              },
+              "clean_matched_half": {
+                "appearance": 0.36919836478509815,
+                "delta": 0.0,
+                "naming": 0.5168777106991375
+              },
+              "family": "Soccer LVReason MCQ",
+              "full": {
+                "appearance": 0.36919836478509815,
+                "delta": 0.0,
+                "naming": 0.5168777106991375
+              },
+              "matched_half": {
+                "appearance": 0.36919836478509815,
+                "delta": 0.0,
+                "naming": 0.5168777106991375
+              },
+              "name": "soccer-lvreason-mcq-s1200",
+              "step": 1200
+            }
+          ],
+          "source_count": 1,
+          "sources": [
+            "sport-01"
+          ]
+        },
+        "over": {
+          "clean_full_vs_matched_half": {
+            "appearance": {
+              "pearson": 0.05110687294495286,
+              "spearman": -0.09642857142857143
+            },
+            "delta": {
+              "pearson": -0.27233142811908284,
+              "spearman": -0.060714285714285714
+            },
+            "naming": {
+              "pearson": -0.24698594921064873,
+              "spearman": -0.3392857142857143
+            }
+          },
+          "duration_minutes": [
+            26.429,
+            20.95,
+            21.295,
+            32.24,
+            20.253,
+            20.244
+          ],
+          "full_vs_all_half": {
+            "appearance": {
+              "pearson": 0.4127515151425902,
+              "spearman": 0.12857142857142856
+            },
+            "delta": {
+              "pearson": -0.37947750153962284,
+              "spearman": -0.2
+            },
+            "naming": {
+              "pearson": -0.14815046157371162,
+              "spearman": -0.3678571428571429
+            }
+          },
+          "full_vs_matched_half": {
+            "appearance": {
+              "pearson": 0.35233440864167753,
+              "spearman": 0.07857142857142857
+            },
+            "delta": {
+              "pearson": -0.30282721441794447,
+              "spearman": -0.1
+            },
+            "naming": {
+              "pearson": -0.09303846685879363,
+              "spearman": -0.3107142857142857
+            }
+          },
+          "runs": [
+            {
+              "all_half": {
+                "appearance": 0.38804815650979246,
+                "delta": 0.04281209613481484,
+                "naming": 0.3928270413268126
+              },
+              "clean_full": {
+                "appearance": 0.39177238772945855,
+                "delta": 0.10734432622473737,
+                "naming": 0.2508013674597129
+              },
+              "clean_matched_half": {
+                "appearance": 0.3771824040321252,
+                "delta": 0.047366574447029186,
+                "naming": 0.36063971021253194
+              },
+              "family": "Pegasus 1.5 / Kian SOCE",
+              "full": {
+                "appearance": 0.39177238772945855,
+                "delta": 0.10734432622473737,
+                "naming": 0.2508013674597129
+              },
+              "matched_half": {
+                "appearance": 0.3771824040321252,
+                "delta": 0.047366574447029186,
+                "naming": 0.36063971021253194
+              },
+              "name": "pegasus-15-kian-soce",
+              "step": null
+            },
+            {
+              "all_half": {
+                "appearance": 0.3399012240242389,
+                "delta": 0.054904932801301536,
+                "naming": 0.30371907726335967
+              },
+              "clean_full": {
+                "appearance": 0.31643605340783754,
+                "delta": 0.06456480638127589,
+                "naming": 0.22411335100855173
+              },
+              "clean_matched_half": {
+                "appearance": 0.36580486199117235,
+                "delta": 0.06639666292250418,
+                "naming": 0.2860674235181627
+              },
+              "family": "A1740 h0-duration",
+              "full": {
+                "appearance": 0.24611693042831806,
+                "delta": 0.05380400531772991,
+                "naming": 0.18676112584045979
+              },
+              "matched_half": {
+                "appearance": 0.3239985920493241,
+                "delta": 0.060745883099312344,
+                "naming": 0.2617212598144893
+              },
+              "name": "a1740-h0-duration-s400",
+              "step": 400
+            },
+            {
+              "all_half": {
+                "appearance": 0.22837854854962722,
+                "delta": 0.03702035623819957,
+                "naming": 0.23431225054533644
+              },
+              "clean_full": {
+                "appearance": 0.263328519232016,
+                "delta": 0.061406321253727615,
+                "naming": 0.23209152478318304
+              },
+              "clean_matched_half": {
+                "appearance": 0.22796416487436488,
+                "delta": 0.044768802892706454,
+                "naming": 0.20308993051736798
+              },
+              "family": "A1740 h0-duration",
+              "full": {
+                "appearance": 0.20481107051379024,
+                "delta": 0.05117193437810635,
+                "naming": 0.19340960398598586
+              },
+              "matched_half": {
+                "appearance": 0.20191111746015175,
+                "delta": 0.0409586920082208,
+                "naming": 0.18580568111163454
+              },
+              "name": "a1740-h0-duration-s800",
+              "step": 800
+            },
+            {
+              "all_half": {
+                "appearance": 0.26798203860496583,
+                "delta": 0.048625626030574125,
+                "naming": 0.26979298324112444
+              },
+              "clean_full": {
+                "appearance": 0.2967741045115976,
+                "delta": 0.11841914150081718,
+                "naming": 0.13520718282343222
+              },
+              "clean_matched_half": {
+                "appearance": 0.3038387570267716,
+                "delta": 0.0972857798320465,
+                "naming": 0.24599686307971627
+              },
+              "family": "A1740 h0-duration",
+              "full": {
+                "appearance": 0.23082430350902033,
+                "delta": 0.09868261791734766,
+                "naming": 0.11267265235286018
+              },
+              "matched_half": {
+                "appearance": 0.26911432765228344,
+                "delta": 0.08900613899527658,
+                "naming": 0.22506095983888935
+              },
+              "name": "a1740-h0-duration-s1200",
+              "step": 1200
+            },
+            {
+              "all_half": {
+                "appearance": 0.30739627359683097,
+                "delta": 0.04717775473386983,
+                "naming": 0.3030366138394337
+              },
+              "clean_full": {
+                "appearance": 0.3039511675400835,
+                "delta": 0.05911422677115967,
+                "naming": 0.2231219638968339
+              },
+              "clean_matched_half": {
+                "appearance": 0.33681668674549325,
+                "delta": 0.05705216851537746,
+                "naming": 0.3016517542073291
+              },
+              "family": "A1790 entity-sme4x",
+              "full": {
+                "appearance": 0.23640646364228715,
+                "delta": 0.04926185564263306,
+                "naming": 0.18593496991402825
+              },
+              "matched_half": {
+                "appearance": 0.2983233511174369,
+                "delta": 0.05219666481194109,
+                "naming": 0.27597926448755644
+              },
+              "name": "a1790-entity-sme4x-s400",
+              "step": 400
+            },
+            {
+              "all_half": {
+                "appearance": 0.2832936309890881,
+                "delta": 0.0693006657307244,
+                "naming": 0.2594262559291804
+              },
+              "clean_full": {
+                "appearance": 0.3828628861499031,
+                "delta": 0.08198704484025522,
+                "naming": 0.3081887630573049
+              },
+              "clean_matched_half": {
+                "appearance": 0.3070832587814161,
+                "delta": 0.08380545623250392,
+                "naming": 0.24920273875826507
+              },
+              "family": "A1790 entity-sme4x",
+              "full": {
+                "appearance": 0.297782244783258,
+                "delta": 0.06832253736687935,
+                "naming": 0.2568239692144208
+              },
+              "matched_half": {
+                "appearance": 0.27198802920639714,
+                "delta": 0.0766730769786738,
+                "naming": 0.2279939950341574
+              },
+              "name": "a1790-entity-sme4x-s800",
+              "step": 800
+            },
+            {
+              "all_half": {
+                "appearance": 0.25410874078320983,
+                "delta": 0.06940329384503609,
+                "naming": 0.2571836647416372
+              },
+              "clean_full": {
+                "appearance": 0.392404418418396,
+                "delta": 0.09850916206954922,
+                "naming": 0.260267777803075
+              },
+              "clean_matched_half": {
+                "appearance": 0.23021432891709262,
+                "delta": 0.07678662297748673,
+                "naming": 0.21111022447775446
+              },
+              "family": "A1790 entity-sme4x",
+              "full": {
+                "appearance": 0.30520343654764137,
+                "delta": 0.08209096839129103,
+                "naming": 0.21688981483589584
+              },
+              "matched_half": {
+                "appearance": 0.23021432891709262,
+                "delta": 0.07678662297748673,
+                "naming": 0.21111022447775446
+              },
+              "name": "a1790-entity-sme4x-s1200",
+              "step": 1200
+            },
+            {
+              "all_half": {
+                "appearance": 0.3050761370565496,
+                "delta": 0.0682922667912659,
+                "naming": 0.2866324005654127
+              },
+              "clean_full": {
+                "appearance": 0.31696515798686986,
+                "delta": 0.13634738395621052,
+                "naming": 0.1587081291357919
+              },
+              "clean_matched_half": {
+                "appearance": 0.3225870485521138,
+                "delta": 0.08258599704990296,
+                "naming": 0.26545161130879524
+              },
+              "family": "Consol h0/mn SME 2x",
+              "full": {
+                "appearance": 0.2465284562120099,
+                "delta": 0.11362281996350876,
+                "naming": 0.1322567742798266
+              },
+              "matched_half": {
+                "appearance": 0.28571995728901506,
+                "delta": 0.0755574015562942,
+                "naming": 0.24285998481442966
+              },
+              "name": "consol-h0mn2x-s400",
+              "step": 400
+            },
+            {
+              "all_half": {
+                "appearance": 0.323586863980411,
+                "delta": 0.061307834738314734,
+                "naming": 0.31942409039946196
+              },
+              "clean_full": {
+                "appearance": 0.3584413155622949,
+                "delta": 0.08971712336048412,
+                "naming": 0.2191495786918237
+              },
+              "clean_matched_half": {
+                "appearance": 0.30664026443401393,
+                "delta": 0.06782994481685886,
+                "naming": 0.27997197201407137
+              },
+              "family": "Consol h0/mn SME 2x",
+              "full": {
+                "appearance": 0.27878768988178493,
+                "delta": 0.0747642694670701,
+                "naming": 0.18262464890985308
+              },
+              "matched_half": {
+                "appearance": 0.30664026443401393,
+                "delta": 0.06782994481685886,
+                "naming": 0.27997197201407137
+              },
+              "name": "consol-h0mn2x-s800",
+              "step": 800
+            },
+            {
+              "all_half": {
+                "appearance": 0.28084272398240917,
+                "delta": 0.07192459867713277,
+                "naming": 0.23798074849458337
+              },
+              "clean_full": {
+                "appearance": 0.44403376482153567,
+                "delta": 0.08820607755436927,
+                "naming": 0.34320328458410865
+              },
+              "clean_matched_half": {
+                "appearance": 0.29312128597636833,
+                "delta": 0.0869785844467652,
+                "naming": 0.20752625361878288
+              },
+              "family": "Consol h0/mn SME 2x",
+              "full": {
+                "appearance": 0.34535959486119444,
+                "delta": 0.07350506462864105,
+                "naming": 0.2860027371534239
+              },
+              "matched_half": {
+                "appearance": 0.2596217104362119,
+                "delta": 0.07957615172789158,
+                "naming": 0.18986444480016307
+              },
+              "name": "consol-h0mn2x-s1200",
+              "step": 1200
+            },
+            {
+              "all_half": {
+                "appearance": 0.2959529738919337,
+                "delta": 0.022441052268538073,
+                "naming": 0.3308720420568321
+              },
+              "clean_full": {
+                "appearance": 0.46402588208865475,
+                "delta": 0.14070456703515855,
+                "naming": 0.32371533367715905
+              },
+              "clean_matched_half": {
+                "appearance": 0.3109614905869604,
+                "delta": 0.02713801669683674,
+                "naming": 0.31852510729460276
+              },
+              "family": "Consol h0/mn SME 2x",
+              "full": {
+                "appearance": 0.36090901940228703,
+                "delta": 0.11725380586263212,
+                "naming": 0.2697627780642992
+              },
+              "matched_half": {
+                "appearance": 0.2754230345198792,
+                "delta": 0.02482839825455276,
+                "naming": 0.29141658752484934
+              },
+              "name": "consol-h0mn2x-s1600",
+              "step": 1600
+            },
+            {
+              "all_half": {
+                "appearance": 0.29863086527683685,
+                "delta": 0.0974215904501429,
+                "naming": 0.260651754125254
+              },
+              "clean_full": {
+                "appearance": 0.44124556439273227,
+                "delta": 0.09897578889534016,
+                "naming": 0.34914165253610724
+              },
+              "clean_matched_half": {
+                "appearance": 0.3224956740134465,
+                "delta": 0.11781215589319606,
+                "naming": 0.2454429390007082
+              },
+              "family": "Consol h0/mn SME 2x",
+              "full": {
+                "appearance": 0.34319099452768065,
+                "delta": 0.08247982407945013,
+                "naming": 0.2909513771134227
+              },
+              "matched_half": {
+                "appearance": 0.2856390255547669,
+                "delta": 0.10778558943420065,
+                "naming": 0.22455417823469048
+              },
+              "name": "consol-h0mn2x-s2000",
+              "step": 2000
+            },
+            {
+              "all_half": {
+                "appearance": 0.3043429896636012,
+                "delta": 0.12685114811541987,
+                "naming": 0.21182174674410376
+              },
+              "clean_full": {
+                "appearance": 0.39722852316435703,
+                "delta": 0.0636356207790827,
+                "naming": 0.31675936752348616
+              },
+              "clean_matched_half": {
+                "appearance": 0.2871992360011296,
+                "delta": 0.14034595110642198,
+                "naming": 0.16349504567393996
+              },
+              "family": "Soccer LVReason MCQ",
+              "full": {
+                "appearance": 0.30895551801672216,
+                "delta": 0.053029683982568916,
+                "naming": 0.2639661396029051
+              },
+              "matched_half": {
+                "appearance": 0.2871992360011296,
+                "delta": 0.14034595110642198,
+                "naming": 0.16349504567393996
+              },
+              "name": "soccer-lvreason-mcq-s400",
+              "step": 400
+            },
+            {
+              "all_half": {
+                "appearance": 0.24629499635825108,
+                "delta": 0.04974470209025998,
+                "naming": 0.24773685657799488
+              },
+              "clean_full": {
+                "appearance": 0.3183530897567827,
+                "delta": 0.05514800346402715,
+                "naming": 0.33772095071261327
+              },
+              "clean_matched_half": {
+                "appearance": 0.2340046595155664,
+                "delta": 0.055036691674330195,
+                "naming": 0.21910485082042647
+              },
+              "family": "Soccer LVReason MCQ",
+              "full": {
+                "appearance": 0.2476079586997199,
+                "delta": 0.04595666955335596,
+                "naming": 0.2814341255938444
+              },
+              "matched_half": {
+                "appearance": 0.2340046595155664,
+                "delta": 0.055036691674330195,
+                "naming": 0.21910485082042647
+              },
+              "name": "soccer-lvreason-mcq-s800",
+              "step": 800
+            },
+            {
+              "all_half": {
+                "appearance": 0.3130287041538265,
+                "delta": 0.0967454864883602,
+                "naming": 0.2726158706726324
+              },
+              "clean_full": {
+                "appearance": 0.27718966530936834,
+                "delta": 0.015485682324168405,
+                "naming": 0.30160957722532056
+              },
+              "clean_matched_half": {
+                "appearance": 0.3470777688120799,
+                "delta": 0.11699454179987746,
+                "naming": 0.26957294701119056
+              },
+              "family": "Soccer LVReason MCQ",
+              "full": {
+                "appearance": 0.2155919619072865,
+                "delta": 0.012904735270140336,
+                "naming": 0.2513413143544338
+              },
+              "matched_half": {
+                "appearance": 0.3074117380906994,
+                "delta": 0.10703755951903683,
+                "naming": 0.24663056854215307
+              },
+              "name": "soccer-lvreason-mcq-s1200",
+              "step": 1200
+            }
+          ],
+          "source_count": 6,
+          "sources": [
+            "film-01",
+            "film-02",
+            "film-03",
+            "film-04",
+            "film-05",
+            "film-06"
+          ]
+        }
+      },
+      "threshold_minutes": 20
+    },
+    {
+      "buckets": {
+        "at_most": {
+          "clean_full_vs_matched_half": {
+            "appearance": {
+              "pearson": 0.47995885891612305,
+              "spearman": 0.5
+            },
+            "delta": {
+              "pearson": 0.019723523788882088,
+              "spearman": 0.10196796280100931
+            },
+            "naming": {
+              "pearson": 0.40171438319722264,
+              "spearman": 0.3464285714285714
+            }
+          },
+          "duration_minutes": [
+            20.95,
+            20.253,
+            20.244,
+            3.001
+          ],
+          "full_vs_all_half": {
+            "appearance": {
+              "pearson": 0.3517216723158156,
+              "spearman": 0.2785714285714286
+            },
+            "delta": {
+              "pearson": 0.04224557339905402,
+              "spearman": 0.14669075350320637
+            },
+            "naming": {
+              "pearson": 0.03722809891757256,
+              "spearman": -0.04642857142857143
+            }
+          },
+          "full_vs_matched_half": {
+            "appearance": {
+              "pearson": 0.47995885891612305,
+              "spearman": 0.5
+            },
+            "delta": {
+              "pearson": 0.019723523788882088,
+              "spearman": 0.10196796280100931
+            },
+            "naming": {
+              "pearson": 0.40171438319722264,
+              "spearman": 0.3464285714285714
+            }
+          },
+          "runs": [],
+          "source_count": 4,
+          "sources": [
+            "film-02",
+            "film-05",
+            "film-06",
+            "sport-01"
+          ]
+        },
+        "over": {
+          "clean_full_vs_matched_half": {
+            "appearance": {
+              "pearson": -0.13519248514537432,
+              "spearman": -0.17142857142857143
+            },
+            "delta": {
+              "pearson": -0.5987563360058243,
+              "spearman": -0.28418241910683845
+            },
+            "naming": {
+              "pearson": -0.10644439835547935,
+              "spearman": -0.25
+            }
+          },
+          "duration_minutes": [
+            26.429,
+            21.295,
+            32.24
+          ],
+          "full_vs_all_half": {
+            "appearance": {
+              "pearson": 0.25956944082159955,
+              "spearman": -0.07142857142857142
+            },
+            "delta": {
+              "pearson": -0.5677700849857233,
+              "spearman": -0.3949956894503855
+            },
+            "naming": {
+              "pearson": -0.11051660364739103,
+              "spearman": -0.2642857142857143
+            }
+          },
+          "full_vs_matched_half": {
+            "appearance": {
+              "pearson": 0.25442441552882145,
+              "spearman": 0.08571428571428572
+            },
+            "delta": {
+              "pearson": -0.5854246166680871,
+              "spearman": -0.30920477047473616
+            },
+            "naming": {
+              "pearson": 0.02429036379904644,
+              "spearman": -0.17142857142857143
+            }
+          },
+          "runs": [],
+          "source_count": 3,
+          "sources": [
+            "film-01",
+            "film-03",
+            "film-04"
+          ]
+        }
+      },
+      "threshold_minutes": 21
+    },
+    {
+      "buckets": {
+        "at_most": {
+          "clean_full_vs_matched_half": {
+            "appearance": {
+              "pearson": 0.3104962160207047,
+              "spearman": 0.125
+            },
+            "delta": {
+              "pearson": -0.22878332828007292,
+              "spearman": -0.02857142857142857
+            },
+            "naming": {
+              "pearson": -0.0010702317698253344,
+              "spearman": -0.017857142857142856
+            }
+          },
+          "duration_minutes": [
+            20.95,
+            21.295,
+            20.253,
+            20.244,
+            3.001
+          ],
+          "full_vs_all_half": {
+            "appearance": {
+              "pearson": 0.3096361166312334,
+              "spearman": 0.17142857142857143
+            },
+            "delta": {
+              "pearson": -0.2497275616047192,
+              "spearman": -0.0035714285714285713
+            },
+            "naming": {
+              "pearson": -0.15677336014428167,
+              "spearman": -0.2571428571428571
+            }
+          },
+          "full_vs_matched_half": {
+            "appearance": {
+              "pearson": 0.3104962160207047,
+              "spearman": 0.125
+            },
+            "delta": {
+              "pearson": -0.22878332828007292,
+              "spearman": -0.02857142857142857
+            },
+            "naming": {
+              "pearson": -0.0010702317698253344,
+              "spearman": -0.017857142857142856
+            }
+          },
+          "runs": [],
+          "source_count": 5,
+          "sources": [
+            "film-02",
+            "film-03",
+            "film-05",
+            "film-06",
+            "sport-01"
+          ]
+        },
+        "over": {
+          "clean_full_vs_matched_half": {
+            "appearance": {
+              "pearson": -0.113904776778543,
+              "spearman": -0.08936554059963472
+            },
+            "delta": {
+              "pearson": -0.2924273200828007,
+              "spearman": -0.4441026811597043
+            },
+            "naming": {
+              "pearson": -0.1472715872279967,
+              "spearman": -0.08936554059963472
+            }
+          },
+          "duration_minutes": [
+            26.429,
+            32.24
+          ],
+          "full_vs_all_half": {
+            "appearance": {
+              "pearson": 0.30404761544247527,
+              "spearman": -0.01966041893191964
+            },
+            "delta": {
+              "pearson": -0.6027549246508417,
+              "spearman": -0.5916079783099616
+            },
+            "naming": {
+              "pearson": -0.0023941653397720397,
+              "spearman": -0.12689906765148132
+            }
+          },
+          "full_vs_matched_half": {
+            "appearance": {
+              "pearson": 0.21143736642536545,
+              "spearman": 0.08936554059963472
+            },
+            "delta": {
+              "pearson": -0.3074904566539434,
+              "spearman": -0.4441026811597043
+            },
+            "naming": {
+              "pearson": 0.0051221263587243855,
+              "spearman": -0.02323504055590503
+            }
+          },
+          "runs": [],
+          "source_count": 2,
+          "sources": [
+            "film-01",
+            "film-04"
+          ]
+        }
+      },
+      "threshold_minutes": 22
+    },
+    {
+      "buckets": {
+        "at_most": {
+          "clean_full_vs_matched_half": {
+            "appearance": {
+              "pearson": 0.3104962160207047,
+              "spearman": 0.125
+            },
+            "delta": {
+              "pearson": -0.22878332828007292,
+              "spearman": -0.02857142857142857
+            },
+            "naming": {
+              "pearson": -0.0010702317698253344,
+              "spearman": -0.017857142857142856
+            }
+          },
+          "duration_minutes": [
+            20.95,
+            21.295,
+            20.253,
+            20.244,
+            3.001
+          ],
+          "full_vs_all_half": {
+            "appearance": {
+              "pearson": 0.3096361166312334,
+              "spearman": 0.17142857142857143
+            },
+            "delta": {
+              "pearson": -0.2497275616047192,
+              "spearman": -0.0035714285714285713
+            },
+            "naming": {
+              "pearson": -0.15677336014428167,
+              "spearman": -0.2571428571428571
+            }
+          },
+          "full_vs_matched_half": {
+            "appearance": {
+              "pearson": 0.3104962160207047,
+              "spearman": 0.125
+            },
+            "delta": {
+              "pearson": -0.22878332828007292,
+              "spearman": -0.02857142857142857
+            },
+            "naming": {
+              "pearson": -0.0010702317698253344,
+              "spearman": -0.017857142857142856
+            }
+          },
+          "runs": [],
+          "source_count": 5,
+          "sources": [
+            "film-02",
+            "film-03",
+            "film-05",
+            "film-06",
+            "sport-01"
+          ]
+        },
+        "over": {
+          "clean_full_vs_matched_half": {
+            "appearance": {
+              "pearson": -0.113904776778543,
+              "spearman": -0.08936554059963472
+            },
+            "delta": {
+              "pearson": -0.2924273200828007,
+              "spearman": -0.4441026811597043
+            },
+            "naming": {
+              "pearson": -0.1472715872279967,
+              "spearman": -0.08936554059963472
+            }
+          },
+          "duration_minutes": [
+            26.429,
+            32.24
+          ],
+          "full_vs_all_half": {
+            "appearance": {
+              "pearson": 0.30404761544247527,
+              "spearman": -0.01966041893191964
+            },
+            "delta": {
+              "pearson": -0.6027549246508417,
+              "spearman": -0.5916079783099616
+            },
+            "naming": {
+              "pearson": -0.0023941653397720397,
+              "spearman": -0.12689906765148132
+            }
+          },
+          "full_vs_matched_half": {
+            "appearance": {
+              "pearson": 0.21143736642536545,
+              "spearman": 0.08936554059963472
+            },
+            "delta": {
+              "pearson": -0.3074904566539434,
+              "spearman": -0.4441026811597043
+            },
+            "naming": {
+              "pearson": 0.0051221263587243855,
+              "spearman": -0.02323504055590503
+            }
+          },
+          "runs": [],
+          "source_count": 2,
+          "sources": [
+            "film-01",
+            "film-04"
+          ]
+        }
+      },
+      "threshold_minutes": 25
+    }
+  ],
   "family_trends": [
     {
       "appearance": {

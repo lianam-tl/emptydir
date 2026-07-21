@@ -204,6 +204,20 @@ def correlation_for_field(
     return output
 
 
+def paired_correlations(
+    rows: list[dict[str, Any]], left_field: str, right_field: str
+) -> dict[str, dict[str, float | None]]:
+    output: dict[str, dict[str, float | None]] = {}
+    for metric_name in METRICS:
+        left = [row[left_field][metric_name] for row in rows]
+        right = [row[right_field][metric_name] for row in rows]
+        output[metric_name] = {
+            "pearson": pearson(left, right),
+            "spearman": spearman(left, right),
+        }
+    return output
+
+
 def rounded(value: float | None, digits: int = 6) -> float | None:
     return round(value, digits) if value is not None else None
 
@@ -494,6 +508,104 @@ def calculate_analysis() -> dict[str, Any]:
                 }
         family_trends.append(trend)
 
+    full_duration_by_source = {
+        row["source"]: row["duration_seconds"]
+        for row in dataset_rows
+        if row["shape"] == "full"
+    }
+    duration_bucket_analysis: list[dict[str, Any]] = []
+    for threshold_minutes in (20, 21, 22, 25):
+        threshold_seconds = threshold_minutes * 60
+        source_buckets = {
+            "at_most": sorted(
+                source
+                for source, duration in full_duration_by_source.items()
+                if duration <= threshold_seconds
+            ),
+            "over": sorted(
+                source
+                for source, duration in full_duration_by_source.items()
+                if duration > threshold_seconds
+            ),
+        }
+        threshold_result: dict[str, Any] = {
+            "threshold_minutes": threshold_minutes,
+            "buckets": {},
+        }
+        for bucket_name, bucket_sources in source_buckets.items():
+            bucket_run_rows: list[dict[str, Any]] = []
+            for run in runs:
+                samples = run["benchmark"]["entity_coverage"]["samples"]
+                full_samples = [
+                    sample
+                    for sample in samples
+                    if sample_parts(sample["sample_id"])[1] == "full"
+                    and sample_parts(sample["sample_id"])[0] in bucket_sources
+                ]
+                matched_half_samples = [
+                    sample
+                    for sample in samples
+                    if sample_parts(sample["sample_id"])[1] == "half"
+                    and sample_parts(sample["sample_id"])[0] in bucket_sources
+                ]
+                all_half_samples = [
+                    sample
+                    for sample in samples
+                    if sample_parts(sample["sample_id"])[1] == "half"
+                ]
+                bucket_run_rows.append(
+                    {
+                        "name": run["name"],
+                        "family": run["family"],
+                        "step": run["step"],
+                        "full": {
+                            metric_name: pooled_score(full_samples, metric_name)
+                            for metric_name in METRICS
+                        },
+                        "matched_half": {
+                            metric_name: pooled_score(matched_half_samples, metric_name)
+                            for metric_name in METRICS
+                        },
+                        "all_half": {
+                            metric_name: pooled_score(all_half_samples, metric_name)
+                            for metric_name in METRICS
+                        },
+                        "clean_full": {
+                            metric_name: pooled_score(
+                                full_samples, metric_name, exclude_errors=True
+                            )
+                            for metric_name in METRICS
+                        },
+                        "clean_matched_half": {
+                            metric_name: pooled_score(
+                                matched_half_samples,
+                                metric_name,
+                                exclude_errors=True,
+                            )
+                            for metric_name in METRICS
+                        },
+                    }
+                )
+            threshold_result["buckets"][bucket_name] = {
+                "sources": bucket_sources,
+                "source_count": len(bucket_sources),
+                "duration_minutes": [
+                    rounded(full_duration_by_source[source] / 60, 3)
+                    for source in bucket_sources
+                ],
+                "runs": bucket_run_rows if threshold_minutes == 20 else [],
+                "full_vs_matched_half": paired_correlations(
+                    bucket_run_rows, "full", "matched_half"
+                ),
+                "full_vs_all_half": paired_correlations(
+                    bucket_run_rows, "full", "all_half"
+                ),
+                "clean_full_vs_matched_half": paired_correlations(
+                    bucket_run_rows, "clean_full", "clean_matched_half"
+                ),
+            }
+        duration_bucket_analysis.append(threshold_result)
+
     sport_control: dict[str, Any] = {}
     for metric_name in METRICS:
         differences: list[float] = []
@@ -536,6 +648,7 @@ def calculate_analysis() -> dict[str, Any]:
         "finish_by_sample": finish_by_sample,
         "parse_error_finish_reasons": dict(parse_error_finish_reasons),
         "family_trends": family_trends,
+        "duration_bucket_analysis": duration_bucket_analysis,
         "sport_control": sport_control,
     }
 
@@ -717,6 +830,126 @@ def render_report(analysis: dict[str, Any]) -> str:
         ],
     )
 
+    duration_20 = next(
+        row
+        for row in analysis["duration_bucket_analysis"]
+        if row["threshold_minutes"] == 20
+    )
+    full_duration_table = render_table(
+        ["Full source", "Duration", "20-minute bucket"],
+        [
+            [
+                f'<span class="code">{row["source"]}</span>',
+                f"{row['duration_seconds'] / 60:.2f} min",
+                "at most 20" if row["duration_seconds"] <= 1200 else "over 20",
+            ]
+            for row in sorted(
+                (
+                    row
+                    for row in analysis["dataset"]["dataset_rows"]
+                    if row["shape"] == "full"
+                ),
+                key=lambda row: row["duration_seconds"],
+            )
+        ],
+    )
+    duration_correlation_table = render_table(
+        [
+            "Full bucket",
+            "Sources",
+            "Metric",
+            "vs matched half",
+            "vs all half",
+            "Parse-clean vs matched half",
+        ],
+        [
+            [
+                "at most 20 min" if bucket_name == "at_most" else "over 20 min",
+                ", ".join(bucket["sources"]),
+                metric_name,
+                format_score(bucket["full_vs_matched_half"][metric_name]["spearman"]),
+                format_score(bucket["full_vs_all_half"][metric_name]["spearman"]),
+                format_score(
+                    bucket["clean_full_vs_matched_half"][metric_name]["spearman"]
+                ),
+            ]
+            for bucket_name, bucket in duration_20["buckets"].items()
+            for metric_name in METRICS
+        ],
+    )
+    duration_sensitivity_table = render_table(
+        [
+            "Threshold",
+            "Short sources",
+            "Long sources",
+            "Short appearance rank corr.",
+            "Long appearance rank corr.",
+            "Short naming rank corr.",
+            "Long naming rank corr.",
+        ],
+        [
+            [
+                f"{row['threshold_minutes']} min",
+                f"{row['buckets']['at_most']['source_count']}: "
+                + ", ".join(row["buckets"]["at_most"]["sources"]),
+                f"{row['buckets']['over']['source_count']}: "
+                + ", ".join(row["buckets"]["over"]["sources"]),
+                format_score(
+                    row["buckets"]["at_most"]["full_vs_matched_half"]["appearance"][
+                        "spearman"
+                    ]
+                ),
+                format_score(
+                    row["buckets"]["over"]["full_vs_matched_half"]["appearance"][
+                        "spearman"
+                    ]
+                ),
+                format_score(
+                    row["buckets"]["at_most"]["full_vs_matched_half"]["naming"][
+                        "spearman"
+                    ]
+                ),
+                format_score(
+                    row["buckets"]["over"]["full_vs_matched_half"]["naming"]["spearman"]
+                ),
+            ]
+            for row in analysis["duration_bucket_analysis"]
+        ],
+    )
+
+    duration_family_rows: list[list[str]] = []
+    for family in sorted(
+        {
+            run["family"]
+            for run in duration_20["buckets"]["at_most"]["runs"]
+            if run["step"] is not None
+        }
+    ):
+        row = [html.escape(family)]
+        for bucket_name in ("at_most", "over"):
+            family_runs = sorted(
+                (
+                    run
+                    for run in duration_20["buckets"][bucket_name]["runs"]
+                    if run["family"] == family
+                ),
+                key=lambda run: run["step"],
+            )
+            for field in ("full", "matched_half"):
+                values = [run[field]["appearance"] for run in family_runs]
+                row.append(format_score(values[-1] - values[0]))
+        duration_family_rows.append(row)
+    duration_family_table = render_table(
+        [
+            "Family",
+            "At most 20 full",
+            "At most 20 matched half",
+            "Over 20 full",
+            "Over 20 matched half",
+        ],
+        duration_family_rows,
+    )
+
     chart_data = json.dumps(
         {
             "runs": [
@@ -732,6 +965,18 @@ def render_report(analysis: dict[str, Any]) -> str:
                 for run in runs
             ],
             "sources": analysis["source_effects"],
+            "duration20": {
+                bucket_name: [
+                    {
+                        "name": run["name"],
+                        "family": run["family"],
+                        "fullAppearance": run["full"]["appearance"],
+                        "matchedHalfAppearance": run["matched_half"]["appearance"],
+                    }
+                    for run in bucket["runs"]
+                ]
+                for bucket_name, bucket in duration_20["buckets"].items()
+            },
         }
     ).replace("</", "<\\/")
 
@@ -823,11 +1068,28 @@ def render_report(analysis: dict[str, Any]) -> str:
   </div>
   <div class="note"><b>Built-in control.</b> <code>sport-01</code> uses the same media and labels in both shapes. Its mean absolute full/half appearance difference is {format_score(analysis["sport_control"]["appearance"]["mean_absolute_difference"])} (maximum {format_score(analysis["sport_control"]["appearance"]["max_absolute_difference"])}). Any non-zero gap is inference variability, not clip duration.</div>
 
-  <h2>5. Training-step trends</h2>
+  <h2>5. Does a 20-minute full split match half?</h2>
+  <div class="note danger"><b>Short answer: not enough evidence at exactly 20 minutes.</b> The at-most-20 bucket is only the duplicated 3-minute <code>sport-01</code> sample. It agrees strongly with its identical half row (appearance rank correlation {format_score(duration_20["buckets"]["at_most"]["full_vs_matched_half"]["appearance"]["spearman"])}), but only weakly with the complete half benchmark ({format_score(duration_20["buckets"]["at_most"]["full_vs_all_half"]["appearance"]["spearman"])}). The six over-20-minute films still disagree with their matched halves ({format_score(duration_20["buckets"]["over"]["full_vs_matched_half"]["appearance"]["spearman"])}; parse-clean {format_score(duration_20["buckets"]["over"]["clean_full_vs_matched_half"]["appearance"]["spearman"])}).</div>
+  <p>The comparison uses Spearman rank correlation across the 15 model runs. "Matched half" means only half rows from the same source set; "all half" means the original 13-row half benchmark.</p>
+  {full_duration_table}
+  <h3>Exact 20-minute split</h3>
+  {duration_correlation_table}
+  <div class="chart-grid">
+    <div class="chart-wrap"><h3>At most 20 min: full vs matched half appearance</h3><canvas id="short-duration-scatter"></canvas></div>
+    <div class="chart-wrap"><h3>Over 20 min: full vs matched half appearance</h3><canvas id="long-duration-scatter"></canvas></div>
+  </div>
+  <h3>Threshold sensitivity</h3>
+  <p>The result changes sharply when films just above 20 minutes enter the short bucket. This instability means the current seven sources are too few to estimate a reliable duration boundary.</p>
+  {duration_sensitivity_table}
+  <h3>Appearance checkpoint endpoint changes at 20 minutes</h3>
+  <p>Each value is the last checkpoint minus the first checkpoint within a training family. The at-most-20 columns describe only <code>sport-01</code>.</p>
+  {duration_family_table}
+
+  <h2>6. Training-step trends</h2>
   <p>These are endpoint changes, last checkpoint minus first checkpoint. Opposite signs between full and half mean the apparent training conclusion depends on the shape selected.</p>
   {trend_table}
 
-  <h2>6. Recommended reporting</h2>
+  <h2>7. Recommended reporting</h2>
   <ol>
     <li>Keep <b>full</b> and <b>half</b> as separate stress tests; do not interpret either as a drop-in proxy for the other.</li>
     <li>Add a <b>source-balanced</b> metric: combine both halves back into one source, average repeated character labels, then weight each of the seven sources equally.</li>
@@ -849,15 +1111,17 @@ const familyColors = {{
   "Consol h0/mn SME 2x":"#b42318",
   "Soccer LVReason MCQ":"#8a5a00"
 }};
-function scatter(canvasId, xKey, yKey) {{
-  const grouped = DATA.runs.reduce((output, row) => {{
+function scatter(canvasId, xKey, yKey, rows=DATA.runs, xTitle="Full", yTitle="Half") {{
+  const grouped = rows.reduce((output, row) => {{
     (output[row.family] ||= []).push(row);
     return output;
   }}, {{}});
-  new Chart(document.getElementById(canvasId), {{type:"scatter", data:{{datasets:Object.entries(grouped).map(([family, rows]) => ({{label:family, data:rows.map(row => ({{x:row[xKey], y:row[yKey], name:row.name}})), backgroundColor:familyColors[family] || "#687385", pointRadius:5}}))}}, options:{{maintainAspectRatio:false, parsing:false, scales:{{x:{{title:{{display:true,text:"Full"}}}},y:{{title:{{display:true,text:"Half"}}}}}}, plugins:{{tooltip:{{callbacks:{{label:context => `${{context.raw.name}}: (${{context.raw.x.toFixed(3)}}, ${{context.raw.y.toFixed(3)}})`}}}}}}}}}});
+  new Chart(document.getElementById(canvasId), {{type:"scatter", data:{{datasets:Object.entries(grouped).map(([family, familyRows]) => ({{label:family, data:familyRows.map(row => ({{x:row[xKey], y:row[yKey], name:row.name}})), backgroundColor:familyColors[family] || "#687385", pointRadius:5}}))}}, options:{{maintainAspectRatio:false, parsing:false, scales:{{x:{{title:{{display:true,text:xTitle}}}},y:{{title:{{display:true,text:yTitle}}}}}}, plugins:{{tooltip:{{callbacks:{{label:context => `${{context.raw.name}}: (${{context.raw.x.toFixed(3)}}, ${{context.raw.y.toFixed(3)}})`}}}}}}}}}});
 }}
 scatter("naming-scatter", "fullNaming", "halfNaming");
 scatter("appearance-scatter", "fullAppearance", "halfAppearance");
+scatter("short-duration-scatter", "fullAppearance", "matchedHalfAppearance", DATA.duration20.at_most, "Full at most 20 min", "Matched half");
+scatter("long-duration-scatter", "fullAppearance", "matchedHalfAppearance", DATA.duration20.over, "Full over 20 min", "Matched half");
 new Chart(document.getElementById("source-gap"), {{type:"bar", data:{{labels:DATA.sources.map(row => row.source), datasets:[{{label:"Naming",data:DATA.sources.map(row => row.naming.mean_full_minus_half),backgroundColor:"#0b62d6"}},{{label:"Name + appearance",data:DATA.sources.map(row => row.appearance.mean_full_minus_half),backgroundColor:"#137333"}},{{label:"Delta",data:DATA.sources.map(row => row.delta.mean_full_minus_half),backgroundColor:"#8a5a00"}}]}}, options:{{maintainAspectRatio:false, scales:{{y:{{title:{{display:true,text:"Full minus half"}}}}}}}}}});
 </script>
 </body>
