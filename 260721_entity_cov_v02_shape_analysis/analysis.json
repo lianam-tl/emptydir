@@ -71,6 +71,669 @@
       }
     }
   },
+  "cross_benchmark": {
+    "correlations": {
+      "all": {
+        "count": 15,
+        "metrics": {
+          "appearance": {
+            "full": {
+              "pearson": 0.510922,
+              "spearman": 0.4
+            },
+            "half": {
+              "pearson": 0.636818,
+              "spearman": 0.296429
+            },
+            "overall": {
+              "pearson": 0.686807,
+              "spearman": 0.5
+            }
+          },
+          "naming": {
+            "full": {
+              "pearson": -0.06165,
+              "spearman": -0.082143
+            },
+            "half": {
+              "pearson": 0.407646,
+              "spearman": 0.335714
+            },
+            "overall": {
+              "pearson": 0.345302,
+              "spearman": 0.257143
+            }
+          }
+        }
+      },
+      "v0_complete": {
+        "count": 9,
+        "metrics": {
+          "appearance": {
+            "full": {
+              "pearson": 0.654551,
+              "spearman": 0.566667
+            },
+            "half": {
+              "pearson": 0.727917,
+              "spearman": 0.483333
+            },
+            "overall": {
+              "pearson": 0.827243,
+              "spearman": 0.633333
+            }
+          },
+          "naming": {
+            "full": {
+              "pearson": -0.028917,
+              "spearman": -0.016667
+            },
+            "half": {
+              "pearson": 0.716641,
+              "spearman": 0.666667
+            },
+            "overall": {
+              "pearson": 0.661094,
+              "spearman": 0.633333
+            }
+          }
+        }
+      },
+      "without_pegasus": {
+        "count": 14,
+        "metrics": {
+          "appearance": {
+            "full": {
+              "pearson": 0.231553,
+              "spearman": 0.261538
+            },
+            "half": {
+              "pearson": 0.299876,
+              "spearman": 0.134066
+            },
+            "overall": {
+              "pearson": 0.3527,
+              "spearman": 0.384615
+            }
+          },
+          "naming": {
+            "full": {
+              "pearson": -0.212735,
+              "spearman": -0.195604
+            },
+            "half": {
+              "pearson": 0.036577,
+              "spearman": 0.182418
+            },
+            "overall": {
+              "pearson": -0.113551,
+              "spearman": 0.085714
+            }
+          }
+        }
+      }
+    },
+    "dataset": "https://huggingface.co/datasets/twelvelabs/entity_cov_v0_tdf",
+    "family_trends": [
+      {
+        "family": "A1740 h0-duration",
+        "metrics": {
+          "appearance": {
+            "full": {
+              "spearman": 0.5,
+              "v02_change": -0.052242,
+              "v0_change": -0.011703
+            },
+            "half": {
+              "spearman": 1.0,
+              "v02_change": -0.071919,
+              "v0_change": -0.011703
+            },
+            "overall": {
+              "spearman": 1.0,
+              "v02_change": -0.064868,
+              "v0_change": -0.011703
+            }
+          },
+          "naming": {
+            "full": {
+              "spearman": -0.5,
+              "v02_change": -0.062733,
+              "v0_change": -0.027235
+            },
+            "half": {
+              "spearman": 1.0,
+              "v02_change": -0.033926,
+              "v0_change": -0.027235
+            },
+            "overall": {
+              "spearman": 0.5,
+              "v02_change": -0.04424,
+              "v0_change": -0.027235
+            }
+          }
+        },
+        "steps": [
+          400,
+          800,
+          1200
+        ]
+      },
+      {
+        "family": "A1790 entity-sme4x",
+        "metrics": {
+          "appearance": {
+            "full": {
+              "spearman": 0.5,
+              "v02_change": 0.073051,
+              "v0_change": 0.042935
+            },
+            "half": {
+              "spearman": -0.5,
+              "v02_change": -0.053288,
+              "v0_change": 0.042935
+            },
+            "overall": {
+              "spearman": 0.5,
+              "v02_change": -0.008016,
+              "v0_change": 0.042935
+            }
+          },
+          "naming": {
+            "full": {
+              "spearman": 0.5,
+              "v02_change": 0.048531,
+              "v0_change": -0.020985
+            },
+            "half": {
+              "spearman": 0.5,
+              "v02_change": -0.045853,
+              "v0_change": -0.020985
+            },
+            "overall": {
+              "spearman": 0.5,
+              "v02_change": -0.012061,
+              "v0_change": -0.020985
+            }
+          }
+        },
+        "steps": [
+          400,
+          800,
+          1200
+        ]
+      },
+      {
+        "family": "Consol h0/mn SME 2x",
+        "metrics": {
+          "appearance": {
+            "full": {
+              "spearman": -0.1,
+              "v02_change": 0.069517,
+              "v0_change": 0.040005
+            },
+            "half": {
+              "spearman": -0.1,
+              "v02_change": -0.006445,
+              "v0_change": 0.040005
+            },
+            "overall": {
+              "spearman": -0.3,
+              "v02_change": 0.020775,
+              "v0_change": 0.040005
+            }
+          },
+          "naming": {
+            "full": {
+              "spearman": -0.4,
+              "v02_change": 0.114416,
+              "v0_change": 0.025163
+            },
+            "half": {
+              "spearman": 0.0,
+              "v02_change": -0.025981,
+              "v0_change": 0.025163
+            },
+            "overall": {
+              "spearman": -0.2,
+              "v02_change": 0.024285,
+              "v0_change": 0.025163
+            }
+          }
+        },
+        "steps": [
+          400,
+          800,
+          1200,
+          1600,
+          2000
+        ]
+      },
+      {
+        "family": "Soccer LVReason MCQ",
+        "metrics": {
+          "appearance": {
+            "full": {
+              "spearman": 0.5,
+              "v02_change": -0.095515,
+              "v0_change": -0.008185
+            },
+            "half": {
+              "spearman": 0.5,
+              "v02_change": 0.008686,
+              "v0_change": -0.008185
+            },
+            "overall": {
+              "spearman": 1.0,
+              "v02_change": -0.028653,
+              "v0_change": -0.008185
+            }
+          },
+          "naming": {
+            "full": {
+              "spearman": -0.5,
+              "v02_change": -0.036175,
+              "v0_change": 0.002491
+            },
+            "half": {
+              "spearman": 0.5,
+              "v02_change": 0.060794,
+              "v0_change": 0.002491
+            },
+            "overall": {
+              "spearman": 0.5,
+              "v02_change": 0.026077,
+              "v0_change": 0.002491
+            }
+          }
+        },
+        "steps": [
+          400,
+          800,
+          1200
+        ]
+      }
+    ],
+    "rows": [
+      {
+        "appearance": 0.45557,
+        "failed": 0,
+        "family": "Pegasus 1.5 / Kian SOCE",
+        "naming": 0.27281517017364554,
+        "run_id": "593e332b-eb96-53ac-acdd-61b7ade0cf9e",
+        "scored": 20,
+        "step": null,
+        "v02": {
+          "full": {
+            "appearance": 0.4088545517968782,
+            "naming": 0.3274542271737367
+          },
+          "half": {
+            "appearance": 0.3880481565097926,
+            "naming": 0.3928270413268127
+          },
+          "overall": {
+            "appearance": 0.39550378148766485,
+            "naming": 0.36942195971645214
+          }
+        },
+        "v02_name": "pegasus-15-kian-soce",
+        "v0_name": "asr-pegasus-15"
+      },
+      {
+        "appearance": 0.373595,
+        "failed": 0,
+        "family": "A1740 h0-duration",
+        "naming": 0.23856690594855015,
+        "run_id": "39536e13-9e54-5dc8-99e0-9bca787cd5aa",
+        "scored": 20,
+        "step": 400,
+        "v02": {
+          "full": {
+            "appearance": 0.28727214655425953,
+            "naming": 0.27499171815809453
+          },
+          "half": {
+            "appearance": 0.3399012240242388,
+            "naming": 0.3037190772633597
+          },
+          "overall": {
+            "appearance": 0.3210424712641629,
+            "naming": 0.29343397338616595
+          }
+        },
+        "v02_name": "a1740-h0-duration-s400",
+        "v0_name": "a1740-h0-duration-s400"
+      },
+      {
+        "appearance": 0.310138,
+        "failed": 0,
+        "family": "A1740 h0-duration",
+        "naming": 0.18812789815880984,
+        "run_id": "75f8cdee-4e45-50d8-87b0-2832cd17ee13",
+        "scored": 20,
+        "step": 800,
+        "v02": {
+          "full": {
+            "appearance": 0.25173415243272373,
+            "naming": 0.2790758797163563
+          },
+          "half": {
+            "appearance": 0.22837854854962722,
+            "naming": 0.23431225054533641
+          },
+          "overall": {
+            "appearance": 0.2367476399410701,
+            "naming": 0.2503387350633559
+          }
+        },
+        "v02_name": "a1740-h0-duration-s800",
+        "v0_name": "a1740-h0-duration-s800"
+      },
+      {
+        "appearance": 0.361892,
+        "failed": 1,
+        "family": "A1740 h0-duration",
+        "naming": 0.21133207420245814,
+        "run_id": "c601ed90-fa6e-5b80-85bd-75b741e9bd32",
+        "scored": 19,
+        "step": 1200,
+        "v02": {
+          "full": {
+            "appearance": 0.23502997588947114,
+            "naming": 0.21225909215790745
+          },
+          "half": {
+            "appearance": 0.26798203860496583,
+            "naming": 0.26979298324112444
+          },
+          "overall": {
+            "appearance": 0.25617421613191355,
+            "naming": 0.24919442964342953
+          }
+        },
+        "v02_name": "a1740-h0-duration-s1200",
+        "v0_name": "a1740-h0-duration-s1200"
+      },
+      {
+        "appearance": 0.294383,
+        "failed": 1,
+        "family": "A1790 entity-sme4x",
+        "naming": 0.19098511832110948,
+        "run_id": "91d27469-042e-50a8-9d56-7c067b260e6d",
+        "scored": 19,
+        "step": 400,
+        "v02": {
+          "full": {
+            "appearance": 0.2627328181362265,
+            "naming": 0.2499764747128304
+          },
+          "half": {
+            "appearance": 0.3073962735968309,
+            "naming": 0.3030366138394337
+          },
+          "overall": {
+            "appearance": 0.29139186872344774,
+            "naming": 0.2840397739052177
+          }
+        },
+        "v02_name": "a1790-entity-sme4x-s400",
+        "v0_name": "a1790-entity-sme4x-s400"
+      },
+      {
+        "appearance": 0.349843,
+        "failed": 1,
+        "family": "A1790 entity-sme4x",
+        "naming": 0.2202431035402707,
+        "run_id": "2781d72f-cad1-5b5a-964d-1aa889483e6c",
+        "scored": 19,
+        "step": 800,
+        "v02": {
+          "full": {
+            "appearance": 0.313828101253704,
+            "naming": 0.3082145794088995
+          },
+          "half": {
+            "appearance": 0.28329363098908816,
+            "naming": 0.2594262559291804
+          },
+          "overall": {
+            "appearance": 0.29423514950057544,
+            "naming": 0.2768936803848824
+          }
+        },
+        "v02_name": "a1790-entity-sme4x-s800",
+        "v0_name": "a1790-entity-sme4x-s800"
+      },
+      {
+        "appearance": 0.337318,
+        "failed": 0,
+        "family": "A1790 entity-sme4x",
+        "naming": 0.17000046313312123,
+        "run_id": "054f6332-214a-545f-bb8c-3038b3c8b595",
+        "scored": 20,
+        "step": 1200,
+        "v02": {
+          "full": {
+            "appearance": 0.33578357515873863,
+            "naming": 0.29850777835076453
+          },
+          "half": {
+            "appearance": 0.25410874078320983,
+            "naming": 0.2571836647416372
+          },
+          "overall": {
+            "appearance": 0.283375556434441,
+            "naming": 0.2719787177621889
+          }
+        },
+        "v02_name": "a1790-entity-sme4x-s1200",
+        "v0_name": "a1790-entity-sme4x-s1200"
+      },
+      {
+        "appearance": 0.354346,
+        "failed": 0,
+        "family": "Consol h0/mn SME 2x",
+        "naming": 0.22200774982453558,
+        "run_id": "a128c528-3620-53ab-b53e-c3aa37a8f58b",
+        "scored": 20,
+        "step": 400,
+        "v02": {
+          "full": {
+            "appearance": 0.2875695341105958,
+            "naming": 0.22981476295996917
+          },
+          "half": {
+            "appearance": 0.30507613705654957,
+            "naming": 0.2866324005654127
+          },
+          "overall": {
+            "appearance": 0.29880293766758287,
+            "naming": 0.26629028339803174
+          }
+        },
+        "v02_name": "consol-h0mn2x-s400",
+        "v0_name": "consol-h0mn2x-step400"
+      },
+      {
+        "appearance": 0.318063,
+        "failed": 0,
+        "family": "Consol h0/mn SME 2x",
+        "naming": 0.20252100697214992,
+        "run_id": "88a45684-f8c8-5d38-99a1-b8fa78f6a0f9",
+        "scored": 20,
+        "step": 800,
+        "v02": {
+          "full": {
+            "appearance": 0.31366806632220773,
+            "naming": 0.2701503996533498
+          },
+          "half": {
+            "appearance": 0.3235868639804109,
+            "naming": 0.31942409039946207
+          },
+          "overall": {
+            "appearance": 0.3200326281528882,
+            "naming": 0.3017828924780145
+          }
+        },
+        "v02_name": "consol-h0mn2x-s800",
+        "v0_name": "consol-h0mn2x-step800"
+      },
+      {
+        "appearance": 0.322229,
+        "failed": 0,
+        "family": "Consol h0/mn SME 2x",
+        "naming": 0.15722181952486794,
+        "run_id": "e7baf9e8-2266-5430-9baa-5a99da5f44cf",
+        "scored": 20,
+        "step": 1200,
+        "v02": {
+          "full": {
+            "appearance": 0.36940268444450397,
+            "naming": 0.3557046795790636
+          },
+          "half": {
+            "appearance": 0.2808427239824092,
+            "naming": 0.2379807484945834
+          },
+          "overall": {
+            "appearance": 0.31257670981465974,
+            "naming": 0.28012882258655786
+          }
+        },
+        "v02_name": "consol-h0mn2x-s1200",
+        "v0_name": "consol-h0mn2x-step1200"
+      },
+      {
+        "appearance": 0.330487,
+        "failed": 1,
+        "family": "Consol h0/mn SME 2x",
+        "naming": 0.17489220484161735,
+        "run_id": "711f778c-e7ee-5246-9253-8761cce853e3",
+        "scored": 19,
+        "step": 1600,
+        "v02": {
+          "full": {
+            "appearance": 0.38242080731611644,
+            "naming": 0.3422647134363397
+          },
+          "half": {
+            "appearance": 0.2959529738919337,
+            "naming": 0.3308720420568322
+          },
+          "overall": {
+            "appearance": 0.32693728086893253,
+            "naming": 0.33495089971122366
+          }
+        },
+        "v02_name": "consol-h0mn2x-s1600",
+        "v0_name": "consol-h0mn2x-step1600"
+      },
+      {
+        "appearance": 0.394351,
+        "failed": 0,
+        "family": "Consol h0/mn SME 2x",
+        "naming": 0.2471704267219127,
+        "run_id": "60d573c3-7aee-51e4-bbbf-9056910ded20",
+        "scored": 20,
+        "step": 2000,
+        "v02": {
+          "full": {
+            "appearance": 0.35708652652277345,
+            "naming": 0.34423027200706546
+          },
+          "half": {
+            "appearance": 0.29863086527683697,
+            "naming": 0.26065175412525393
+          },
+          "overall": {
+            "appearance": 0.31957747722329743,
+            "naming": 0.2905749271940507
+          }
+        },
+        "v02_name": "consol-h0mn2x-s2000",
+        "v0_name": "consol-h0mn2x-step2000"
+      },
+      {
+        "appearance": 0.329682,
+        "failed": 1,
+        "family": "Soccer LVReason MCQ",
+        "naming": 0.22454578256660396,
+        "run_id": "656abe33-2d76-588e-8a4b-7543622e0409",
+        "scored": 19,
+        "step": 400,
+        "v02": {
+          "full": {
+            "appearance": 0.3361130775027956,
+            "naming": 0.3332983115340669
+          },
+          "half": {
+            "appearance": 0.3043429896636012,
+            "naming": 0.21182174674410378
+          },
+          "overall": {
+            "appearance": 0.3157272711393125,
+            "naming": 0.25531335636026337
+          }
+        },
+        "v02_name": "soccer-lvreason-mcq-s400",
+        "v0_name": "soccer-lvreason-mcq-step400"
+      },
+      {
+        "appearance": 0.300037,
+        "failed": 3,
+        "family": "Soccer LVReason MCQ",
+        "naming": 0.1829931734371763,
+        "run_id": "b0b64842-9528-5155-a386-c9f2cbdfd8f4",
+        "scored": 17,
+        "step": 800,
+        "v02": {
+          "full": {
+            "appearance": 0.26740174573687453,
+            "naming": 0.3220278471637225
+          },
+          "half": {
+            "appearance": 0.24629499635825108,
+            "naming": 0.24773685657799488
+          },
+          "overall": {
+            "appearance": 0.2538582482189245,
+            "naming": 0.2743348655531319
+          }
+        },
+        "v02_name": "soccer-lvreason-mcq-s800",
+        "v0_name": "soccer-lvreason-mcq-step800"
+      },
+      {
+        "appearance": 0.321497,
+        "failed": 0,
+        "family": "Soccer LVReason MCQ",
+        "naming": 0.22703671063441344,
+        "run_id": "7371ed63-dbc9-54d7-862b-b387726f5b00",
+        "scored": 20,
+        "step": 1200,
+        "v02": {
+          "full": {
+            "appearance": 0.24059765539902325,
+            "naming": 0.29712345165524484
+          },
+          "half": {
+            "appearance": 0.31302870415382655,
+            "naming": 0.2726158706726324
+          },
+          "overall": {
+            "appearance": 0.2870742450166887,
+            "naming": 0.281390189789864
+          }
+        },
+        "v02_name": "soccer-lvreason-mcq-s1200",
+        "v0_name": "soccer-lvreason-mcq-step1200"
+      }
+    ],
+    "source": "https://github.com/twelvelabs-io/pegasus/blob/github_pages/docs/lia/260720_eval_db_leaderboard_inventory.html",
+    "source_commit": "3582a8ff25b47f43af9908451fc74892e3389ea4"
+  },
   "dataset": {
     "dataset_rows": [
       {

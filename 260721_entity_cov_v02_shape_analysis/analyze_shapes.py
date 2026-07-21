@@ -16,6 +16,7 @@ from typing import Any, Callable
 ROOT = Path(__file__).resolve().parent
 COLLECTED_RUNS_PATH = ROOT / "collected_runs.json"
 INFERENCE_METADATA_PATH = ROOT / "inference_metadata.json"
+ENTITY_V0_CANDIDATES_PATH = ROOT / "entity_v0_candidates.json"
 ANALYSIS_PATH = ROOT / "analysis.json"
 REPORT_PATH = ROOT / "report.html"
 
@@ -225,6 +226,7 @@ def rounded(value: float | None, digits: int = 6) -> float | None:
 def calculate_analysis() -> dict[str, Any]:
     collected = json.loads(COLLECTED_RUNS_PATH.read_text())
     inference_records = json.loads(INFERENCE_METADATA_PATH.read_text())["records"]
+    entity_v0_snapshot = json.loads(ENTITY_V0_CANDIDATES_PATH.read_text())
     runs = collected["runs"]
     first_run = runs[0]
     first_samples = first_run["benchmark"]["entity_coverage"]["samples"]
@@ -634,6 +636,89 @@ def calculate_analysis() -> dict[str, Any]:
             "max_absolute_difference": rounded(max(differences)),
         }
 
+    v02_run_by_name = {run["name"]: run for run in runs}
+    cross_benchmark_rows: list[dict[str, Any]] = []
+    for checkpoint in entity_v0_snapshot["checkpoints"]:
+        v02_run = v02_run_by_name[checkpoint["v02_name"]]
+        benchmark = v02_run["benchmark"]
+        cross_benchmark_rows.append(
+            {
+                **checkpoint,
+                "v02": {
+                    "overall": {
+                        "naming": benchmark["overall"]["naming_iou"],
+                        "appearance": benchmark["overall"]["name_appearance_iou"],
+                    },
+                    "full": {
+                        "naming": benchmark["by_shape"]["full"]["naming_iou"],
+                        "appearance": benchmark["by_shape"]["full"][
+                            "name_appearance_iou"
+                        ],
+                    },
+                    "half": {
+                        "naming": benchmark["by_shape"]["half"]["naming_iou"],
+                        "appearance": benchmark["by_shape"]["half"][
+                            "name_appearance_iou"
+                        ],
+                    },
+                },
+            }
+        )
+
+    cross_benchmark_correlations: dict[str, Any] = {}
+    comparison_groups = {
+        "all": cross_benchmark_rows,
+        "without_pegasus": [
+            row for row in cross_benchmark_rows if row["step"] is not None
+        ],
+        "v0_complete": [
+            row
+            for row in cross_benchmark_rows
+            if row["scored"] == 20 and row["failed"] == 0
+        ],
+    }
+    for group_name, group_rows in comparison_groups.items():
+        cross_benchmark_correlations[group_name] = {
+            "count": len(group_rows),
+            "metrics": {},
+        }
+        for metric_name in ("naming", "appearance"):
+            v0_values = [row[metric_name] for row in group_rows]
+            cross_benchmark_correlations[group_name]["metrics"][metric_name] = {}
+            for shape in ("overall", "full", "half"):
+                v02_values = [row["v02"][shape][metric_name] for row in group_rows]
+                cross_benchmark_correlations[group_name]["metrics"][metric_name][
+                    shape
+                ] = {
+                    "pearson": rounded(pearson(v0_values, v02_values)),
+                    "spearman": rounded(spearman(v0_values, v02_values)),
+                }
+
+    cross_benchmark_family_trends: list[dict[str, Any]] = []
+    for family in sorted(
+        {row["family"] for row in cross_benchmark_rows if row["step"] is not None}
+    ):
+        family_rows = sorted(
+            (row for row in cross_benchmark_rows if row["family"] == family),
+            key=lambda row: row["step"],
+        )
+        family_result: dict[str, Any] = {
+            "family": family,
+            "steps": [row["step"] for row in family_rows],
+            "metrics": {},
+        }
+        for metric_name in ("naming", "appearance"):
+            v0_values = [row[metric_name] for row in family_rows]
+            family_result["metrics"][metric_name] = {}
+            for shape in ("overall", "full", "half"):
+                v02_values = [row["v02"][shape][metric_name] for row in family_rows]
+                family_result["metrics"][metric_name][shape] = {
+                    "spearman": rounded(spearman(v0_values, v02_values)),
+                    "v0_change": rounded(v0_values[-1] - v0_values[0]),
+                    "v02_change": rounded(v02_values[-1] - v02_values[0]),
+                }
+        cross_benchmark_family_trends.append(family_result)
+
     return {
         "dataset": {
             "url": "https://huggingface.co/datasets/twelvelabs/entity_cov_v02_tdf",
@@ -650,6 +735,14 @@ def calculate_analysis() -> dict[str, Any]:
         "family_trends": family_trends,
         "duration_bucket_analysis": duration_bucket_analysis,
         "sport_control": sport_control,
+        "cross_benchmark": {
+            "source": entity_v0_snapshot["source"],
+            "source_commit": entity_v0_snapshot["source_commit"],
+            "dataset": entity_v0_snapshot["dataset"],
+            "rows": cross_benchmark_rows,
+            "correlations": cross_benchmark_correlations,
+            "family_trends": cross_benchmark_family_trends,
+        },
     }
 
 
@@ -950,6 +1043,77 @@ def render_report(analysis: dict[str, Any]) -> str:
         duration_family_rows,
     )
 
+    cross_benchmark = analysis["cross_benchmark"]
+    cross_correlation_table = render_table(
+        ["Checkpoint set", "N", "Metric", "v0.2 shape", "Pearson", "Spearman rank"],
+        [
+            [
+                group_name.replace("_", " "),
+                str(group["count"]),
+                metric_name,
+                shape,
+                format_score(values["pearson"]),
+                format_score(values["spearman"]),
+            ]
+            for group_name, group in cross_benchmark["correlations"].items()
+            for metric_name, shapes in group["metrics"].items()
+            for shape, values in shapes.items()
+        ],
+    )
+    cross_checkpoint_table = render_table(
+        [
+            "Checkpoint",
+            "v0 naming",
+            "v0.2 overall naming",
+            "v0.2 full naming",
+            "v0.2 half naming",
+            "v0 appearance",
+            "v0.2 overall appearance",
+            "v0.2 full appearance",
+            "v0.2 half appearance",
+            "v0 scored",
+        ],
+        [
+            [
+                f'<span class="code">{html.escape(row["v02_name"])}</span>',
+                format_score(row["naming"]),
+                format_score(row["v02"]["overall"]["naming"]),
+                format_score(row["v02"]["full"]["naming"]),
+                format_score(row["v02"]["half"]["naming"]),
+                format_score(row["appearance"]),
+                format_score(row["v02"]["overall"]["appearance"]),
+                format_score(row["v02"]["full"]["appearance"]),
+                format_score(row["v02"]["half"]["appearance"]),
+                f"{row['scored']}/20",
+            ]
+            for row in cross_benchmark["rows"]
+        ],
+    )
+    cross_family_table = render_table(
+        [
+            "Family",
+            "Metric",
+            "Overall rank corr.",
+            "Full rank corr.",
+            "Half rank corr.",
+            "v0 endpoint change",
+            "v0.2 overall change",
+        ],
+        [
+            [
+                html.escape(row["family"]),
+                metric_name,
+                format_score(metric["overall"]["spearman"]),
+                format_score(metric["full"]["spearman"]),
+                format_score(metric["half"]["spearman"]),
+                format_score(metric["overall"]["v0_change"]),
+                format_score(metric["overall"]["v02_change"]),
+            ]
+            for row in cross_benchmark["family_trends"]
+            for metric_name, metric in row["metrics"].items()
+        ],
+    )
+
     chart_data = json.dumps(
         {
             "runs": [
@@ -977,6 +1141,7 @@ def render_report(analysis: dict[str, Any]) -> str:
                 ]
                 for bucket_name, bucket in duration_20["buckets"].items()
             },
+            "crossBenchmark": cross_benchmark["rows"],
         }
     ).replace("</", "<\\/")
 
@@ -1085,11 +1250,26 @@ def render_report(analysis: dict[str, Any]) -> str:
   <p>Each value is the last checkpoint minus the first checkpoint within a training family. The at-most-20 columns describe only <code>sport-01</code>.</p>
   {duration_family_table}
 
-  <h2>6. Training-step trends</h2>
+  <h2>6. Correlation with the original entity leaderboard</h2>
+  <div class="note"><b>Checkpoint-level answer.</b> Across all 15 shared checkpoints, original-v0 appearance has moderate agreement with v0.2 overall: Pearson {format_score(cross_benchmark["correlations"]["all"]["metrics"]["appearance"]["overall"]["pearson"])} and rank correlation {format_score(cross_benchmark["correlations"]["all"]["metrics"]["appearance"]["overall"]["spearman"])}. Excluding Pegasus-15 reduces them to {format_score(cross_benchmark["correlations"]["without_pegasus"]["metrics"]["appearance"]["overall"]["pearson"])} and {format_score(cross_benchmark["correlations"]["without_pegasus"]["metrics"]["appearance"]["overall"]["spearman"])}, so agreement among the fine-tuned checkpoints is weak-to-moderate rather than strong.</div>
+  <div class="note warn"><b>Naming does not transfer to full.</b> Original-v0 naming versus v0.2 full naming has Pearson {format_score(cross_benchmark["correlations"]["all"]["metrics"]["naming"]["full"]["pearson"])} and rank correlation {format_score(cross_benchmark["correlations"]["all"]["metrics"]["naming"]["full"]["spearman"])}. The two benchmarks should not be treated as interchangeable naming leaderboards.</div>
+  <p>The original leaderboard is <a href="{cross_benchmark["source"]}">the GitHub Pages snapshot</a> for <a href="{cross_benchmark["dataset"]}">https://huggingface.co/datasets/twelvelabs/entity_cov_v0_tdf</a>, config <code>chunk_10m</code>. Nine of the 15 matching v0 runs scored 20/20 samples; the others scored 17-19/20, so the complete-only row is a useful sensitivity check but also a selected subset.</p>
+  {cross_correlation_table}
+  <div class="chart-grid">
+    <div class="chart-wrap"><h3>Original v0 vs v0.2 naming</h3><canvas id="cross-naming-scatter"></canvas></div>
+    <div class="chart-wrap"><h3>Original v0 vs v0.2 name + appearance</h3><canvas id="cross-appearance-scatter"></canvas></div>
+  </div>
+  <h3>Shared checkpoint values</h3>
+  {cross_checkpoint_table}
+  <h3>Within-family checkpoint trends</h3>
+  <p>These correlations use only 3-5 checkpoints per family, so they describe the observed sweep but are too small for a stable statistical estimate.</p>
+  {cross_family_table}
+
+  <h2>7. Training-step trends</h2>
   <p>These are endpoint changes, last checkpoint minus first checkpoint. Opposite signs between full and half mean the apparent training conclusion depends on the shape selected.</p>
   {trend_table}
 
-  <h2>7. Recommended reporting</h2>
+  <h2>8. Recommended reporting</h2>
   <ol>
     <li>Keep <b>full</b> and <b>half</b> as separate stress tests; do not interpret either as a drop-in proxy for the other.</li>
     <li>Add a <b>source-balanced</b> metric: combine both halves back into one source, average repeated character labels, then weight each of the seven sources equally.</li>
@@ -1122,6 +1302,12 @@ scatter("naming-scatter", "fullNaming", "halfNaming");
 scatter("appearance-scatter", "fullAppearance", "halfAppearance");
 scatter("short-duration-scatter", "fullAppearance", "matchedHalfAppearance", DATA.duration20.at_most, "Full at most 20 min", "Matched half");
 scatter("long-duration-scatter", "fullAppearance", "matchedHalfAppearance", DATA.duration20.over, "Full over 20 min", "Matched half");
+function crossScatter(canvasId, metric) {{
+  const colors = {{overall:"#111827", full:"#0b62d6", half:"#137333"}};
+  new Chart(document.getElementById(canvasId), {{type:"scatter", data:{{datasets:["overall", "full", "half"].map(shape => ({{label:`v0.2 ${{shape}}`, data:DATA.crossBenchmark.map(row => ({{x:row[metric], y:row.v02[shape][metric], name:row.v02_name}})), backgroundColor:colors[shape], pointRadius:5}}))}}, options:{{maintainAspectRatio:false, parsing:false, scales:{{x:{{title:{{display:true,text:`Original v0 ${{metric}}`}}}},y:{{title:{{display:true,text:`v0.2 ${{metric}}`}}}}}}, plugins:{{tooltip:{{callbacks:{{label:context => `${{context.dataset.label}} - ${{context.raw.name}}: (${{context.raw.x.toFixed(3)}}, ${{context.raw.y.toFixed(3)}})`}}}}}}}}}});
+}}
+crossScatter("cross-naming-scatter", "naming");
+crossScatter("cross-appearance-scatter", "appearance");
 new Chart(document.getElementById("source-gap"), {{type:"bar", data:{{labels:DATA.sources.map(row => row.source), datasets:[{{label:"Naming",data:DATA.sources.map(row => row.naming.mean_full_minus_half),backgroundColor:"#0b62d6"}},{{label:"Name + appearance",data:DATA.sources.map(row => row.appearance.mean_full_minus_half),backgroundColor:"#137333"}},{{label:"Delta",data:DATA.sources.map(row => row.delta.mean_full_minus_half),backgroundColor:"#8a5a00"}}]}}, options:{{maintainAspectRatio:false, scales:{{y:{{title:{{display:true,text:"Full minus half"}}}}}}}}}});
 </script>
 </body>
