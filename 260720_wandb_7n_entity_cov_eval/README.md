@@ -45,3 +45,15 @@ lookup and was replaced.
 
 CPU handoff monitor: PID `1726652`, polling every 60 seconds and notifying
 `#fun-lia-trashcan`.
+
+## Requested v0.2 follow-up runs
+
+`requested_eval_state.json` tracks the inference-ready Pegasus 1.5 SFT,
+Pegasus 1.5 RL, and A1790 step-1600 checkpoints. The existing completed Kian
+SOCE run is reused rather than submitted again.
+
+A1790 step 1800 was available only as a DCP training checkpoint, so
+`exports/a1790-entity-sme4x-step1800.yaml` exports it to safetensors first.
+`a1790_step1800_submission.json` is then consumed by `monitor_and_submit.py`,
+which automatically submits the evaluation against
+https://huggingface.co/datasets/twelvelabs/entity_cov_v02_tdf after export.

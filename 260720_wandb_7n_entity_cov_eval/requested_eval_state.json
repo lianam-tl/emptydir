@@ -1,0 +1,41 @@
+[
+  {
+    "family": "pegasus-15-sft",
+    "step": 1000,
+    "output_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/ablation_260416_soccer_clean_filter_low_aug-highres_lr2e-6_qwen3_5_27b_soccer_dc_sme_low_filter_mtp_0513-base/checkpoint-1000-safetensors",
+    "dataset": "twelvelabs/entity_cov_v02_tdf",
+    "config": "default",
+    "split": "test",
+    "eval_tag": "v02-64k",
+    "max_tokens": 65536,
+    "enable_tensor_cache": true,
+    "wandb_run_id": "",
+    "wandb_url": ""
+  },
+  {
+    "family": "pegasus-15-rl",
+    "step": 60,
+    "output_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/rl_rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7_ckpt1000-base/global_step_60/actor/huggingface",
+    "dataset": "twelvelabs/entity_cov_v02_tdf",
+    "config": "default",
+    "split": "test",
+    "eval_tag": "v02-64k",
+    "max_tokens": 65536,
+    "enable_tensor_cache": true,
+    "wandb_run_id": "",
+    "wandb_url": ""
+  },
+  {
+    "family": "a1790-entity-sme4x",
+    "step": 1600,
+    "output_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-1600-safetensors",
+    "dataset": "twelvelabs/entity_cov_v02_tdf",
+    "config": "default",
+    "split": "test",
+    "eval_tag": "v02-64k-rerun",
+    "max_tokens": 65536,
+    "enable_tensor_cache": true,
+    "wandb_run_id": "kp1ju1r1",
+    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1"
+  }
+]
