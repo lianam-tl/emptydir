@@ -1,0 +1,37 @@
+[
+  {
+    "family": "a1790-entity-sme4x",
+    "step": 1900,
+    "checkpoint_format": "DCP",
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-1900-safetensors/",
+    "status": "awaiting export"
+  },
+  {
+    "family": "a1790-entity-sme4x",
+    "step": 2000,
+    "checkpoint_format": "DCP",
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-2000-safetensors/",
+    "status": "awaiting export"
+  },
+  {
+    "family": "a1790-entity-sme4x",
+    "step": 2100,
+    "checkpoint_format": "DCP",
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-2100-safetensors/",
+    "status": "awaiting export"
+  },
+  {
+    "family": "sft-lvreason-mcq",
+    "step": 1600,
+    "checkpoint_format": "safetensors",
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-1600-safetensors/",
+    "status": "ready to submit"
+  },
+  {
+    "family": "sft-lvreason-mcq",
+    "step": 2000,
+    "checkpoint_format": "safetensors",
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-2000-safetensors/",
+    "status": "ready to submit"
+  }
+]
