@@ -72,3 +72,8 @@ to the same evaluation setup.
 soccer-lvreason and consol-h0mn2x runs. The original consol step-400 run lost
 12 tasks to GPU reservation contention; retry `b0b7a57b-bbc7-546f-bf6e-fb9d30fe2dcb`
 is tracked by CPU-node poller PID `1305159`.
+
+The report also includes a denominator-matched diagnostic. Naming scores only
+81 known-name characters, while naming + appearance includes those 81 plus 39
+unnamed characters. Restricted to the same 81 characters, appearance improves
+IoU by 4.6 to 9.7 percentage points in every completed run.

@@ -39,6 +39,20 @@
     </tbody>
   </table>
   <p class="note">Malformed nested outputs are included as zero-score samples. Consol step 400 is omitted from ranking until its infrastructure-only retry finishes.</p>
+  <h2>Same-character comparison</h2>
+  <p>The headline metrics use different denominators: naming scores 81 known-name characters, while naming + appearance also includes 39 unnamed characters. On the same 81 characters, appearance improves every completed run.</p>
+  <table>
+    <thead><tr><th>Family</th><th>Step</th><th>Known-character naming</th><th>Known-character naming + appearance</th><th>Appearance gain</th><th>Unnamed-character appearance</th></tr></thead>
+    <tbody>
+      <tr><td>soccer-lvreason</td><td>400</td><td>25.53%</td><td>35.25%</td><td class="best">+9.71 pp</td><td>23.94%</td></tr>
+      <tr><td>soccer-lvreason</td><td>800</td><td>27.43%</td><td>31.99%</td><td class="best">+4.56 pp</td><td>11.67%</td></tr>
+      <tr><td>soccer-lvreason</td><td>1200</td><td>28.14%</td><td>34.73%</td><td class="best">+6.59 pp</td><td>16.19%</td></tr>
+      <tr><td>consol-h0mn2x</td><td>800</td><td>30.18%</td><td>36.33%</td><td class="best">+6.15 pp</td><td>23.02%</td></tr>
+      <tr><td>consol-h0mn2x</td><td>1200</td><td>28.01%</td><td>34.81%</td><td class="best">+6.80 pp</td><td>23.88%</td></tr>
+      <tr><td>consol-h0mn2x</td><td>1600</td><td>33.50%</td><td>38.41%</td><td class="best">+4.91 pp</td><td>20.82%</td></tr>
+      <tr><td>consol-h0mn2x</td><td>2000</td><td>29.06%</td><td>37.76%</td><td class="best">+8.70 pp</td><td>19.92%</td></tr>
+    </tbody>
+  </table>
 </main>
 </body>
 </html>

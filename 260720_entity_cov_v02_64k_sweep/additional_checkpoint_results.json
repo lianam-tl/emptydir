@@ -23,5 +23,19 @@
     "run_id": "b0b7a57b-bbc7-546f-bf6e-fb9d30fe2dcb",
     "batch_id": "batch-735238ac-ed96-4000-9aaf-50498b3c7a3d",
     "status": "processing"
+  },
+  "denominator_diagnostic": {
+    "known_characters": 81,
+    "unknown_characters": 39,
+    "explanation": "Naming averages only known-name characters; naming plus appearance averages both known and unknown characters.",
+    "results": [
+      {"family":"soccer-lvreason","step":400,"known_naming":0.25531335636026337,"known_appearance":0.3524611602810471,"known_delta":0.09714780392078376,"unknown_appearance":0.23943380907570982},
+      {"family":"soccer-lvreason","step":800,"known_naming":0.2743348655531319,"known_appearance":0.31988652700960185,"known_delta":0.045551661456469904,"unknown_appearance":0.11672259226905621},
+      {"family":"soccer-lvreason","step":1200,"known_naming":0.281390189789864,"known_appearance":0.3473220286031739,"known_delta":0.06593183881330986,"unknown_appearance":0.16194423295245036},
+      {"family":"consol-h0mn2x","step":800,"known_naming":0.3017828924780145,"known_appearance":0.36329338474470657,"known_delta":0.06151049226669196,"unknown_appearance":0.23018336446218862},
+      {"family":"consol-h0mn2x","step":1200,"known_naming":0.28012882258655786,"known_appearance":0.34808191742974665,"known_delta":0.06795309484318876,"unknown_appearance":0.23883512476794125},
+      {"family":"consol-h0mn2x","step":1600,"known_naming":0.33495089971122366,"known_appearance":0.384099369571312,"known_delta":0.04914846986008828,"unknown_appearance":0.20821601971783657},
+      {"family":"consol-h0mn2x","step":2000,"known_naming":0.2905749271940507,"known_appearance":0.3775556491855845,"known_delta":0.08698072199153375,"unknown_appearance":0.19916127391700902}
+    ]
   }
 }
