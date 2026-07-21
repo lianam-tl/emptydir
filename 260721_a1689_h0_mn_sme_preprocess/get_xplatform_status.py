@@ -7,15 +7,26 @@ import sys
 job_id = sys.argv[1]
 response = subprocess.run(
     [
-        "curl",
-        "--fail",
-        "--silent",
-        "--show-error",
-        f"http://xplatform-training.twelve.labs/api/k8s-jobs/{job_id}",
+        "kubectl",
+        "--namespace",
+        "pegasus-platform",
+        "get",
+        "job",
+        f"job-{job_id}",
+        "--output",
+        "json",
     ],
     check=True,
     capture_output=True,
     text=True,
 )
 payload = json.loads(response.stdout)
-print(payload.get("job", {}).get("status", "Unknown"))
+status = payload.get("status", {})
+if status.get("succeeded", 0):
+    print("succeeded")
+elif status.get("failed", 0):
+    print("failed")
+elif status.get("active", 0):
+    print("running")
+else:
+    print("pending")
