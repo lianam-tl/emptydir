@@ -4,21 +4,24 @@
     "step": 1900,
     "checkpoint_format": "DCP",
     "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-1900-safetensors/",
-    "status": "awaiting export"
+    "status": "processing",
+    "eval_run_id": "a520e232-a4e9-5640-b666-48a023b84ed0"
   },
   {
     "family": "a1790-entity-sme4x",
     "step": 2000,
     "checkpoint_format": "DCP",
     "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-2000-safetensors/",
-    "status": "awaiting export"
+    "status": "processing",
+    "eval_run_id": "0790b212-c060-52f8-acd9-a0cf2709c276"
   },
   {
     "family": "a1790-entity-sme4x",
     "step": 2100,
     "checkpoint_format": "DCP",
     "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-2100-safetensors/",
-    "status": "awaiting export"
+    "status": "processing",
+    "eval_run_id": "962dadcc-abe3-50bd-bf44-38fab5d4a8e4"
   },
   {
     "family": "sft-lvreason-mcq",

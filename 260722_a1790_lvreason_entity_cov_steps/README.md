@@ -27,9 +27,9 @@ See `status.html` for the compact visual summary.
 
 | Family | Step | Export/Eval ID | State |
 |---|---:|---|---|
-| A1790 Entity-SME-4x | 1900 | `export-a1790-entity-sme4x-s1900-tijsfi` | Export running; eval auto-submit enabled |
-| A1790 Entity-SME-4x | 2000 | `export-a1790-entity-sme4x-s2000-tijsfr` | Export running; eval auto-submit enabled |
-| A1790 Entity-SME-4x | 2100 | `export-a1790-entity-sme4x-s2100-tijsg4` | Export running; eval auto-submit enabled |
+| A1790 Entity-SME-4x | 1900 | `a520e232-a4e9-5640-b666-48a023b84ed0` | Processing |
+| A1790 Entity-SME-4x | 2000 | `0790b212-c060-52f8-acd9-a0cf2709c276` | Processing |
+| A1790 Entity-SME-4x | 2100 | `962dadcc-abe3-50bd-bf44-38fab5d4a8e4` | Processing |
 | SFT LVReason MCQ | 1600 | `918e01d5-cd55-501d-bfc2-09b53e5d5f34` | Processing |
 | SFT LVReason MCQ | 2000 | `d10c50da-66a2-59e7-b81a-21ac4a26fafd` | Processing |
 

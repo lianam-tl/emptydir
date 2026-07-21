@@ -18,7 +18,11 @@
     "expected_sample_count": 18,
     "enable_tensor_cache": true,
     "wandb_run_id": "kp1ju1r1",
-    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1"
+    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1",
+    "export_status": "Succeeded",
+    "eval_run_id": "a520e232-a4e9-5640-b666-48a023b84ed0",
+    "eval_status": "processing",
+    "batch_id": "batch-4394c6b7-0ee0-4d8b-98d6-5693cd7816a4"
   },
   {
     "family": "a1790-entity-sme4x",
@@ -39,7 +43,11 @@
     "expected_sample_count": 18,
     "enable_tensor_cache": true,
     "wandb_run_id": "kp1ju1r1",
-    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1"
+    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1",
+    "export_status": "Succeeded",
+    "eval_run_id": "0790b212-c060-52f8-acd9-a0cf2709c276",
+    "eval_status": "processing",
+    "batch_id": "batch-0281cb1b-e836-4ca3-a01a-be8b897eb49c"
   },
   {
     "family": "a1790-entity-sme4x",
@@ -60,6 +68,10 @@
     "expected_sample_count": 18,
     "enable_tensor_cache": true,
     "wandb_run_id": "kp1ju1r1",
-    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1"
+    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1",
+    "export_status": "Succeeded",
+    "eval_run_id": "962dadcc-abe3-50bd-bf44-38fab5d4a8e4",
+    "eval_status": "processing",
+    "batch_id": "batch-02c2c38e-350d-4928-b4fc-19a4bee895fb"
   }
 ]
