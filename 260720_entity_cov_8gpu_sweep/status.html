@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entity Coverage 8-GPU Sweep</title>
+  <style>
+    :root { font-family: ui-sans-serif, system-ui, sans-serif; color: #182026; }
+    body { margin: 0; background: #f5f7f8; }
+    main { width: min(1200px, calc(100% - 32px)); margin: 40px auto; }
+    h1 { font-size: 28px; margin: 0 0 8px; letter-spacing: 0; }
+    p { line-height: 1.5; }
+    table { width: 100%; border-collapse: collapse; background: white; border: 1px solid #d8dee2; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid #e4e8eb; text-align: left; vertical-align: top; }
+    th { background: #eef2f3; }
+    code { overflow-wrap: anywhere; }
+    a { color: #0563c1; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Entity Coverage 8-GPU Sweep</h1>
+    <p><a href="https://huggingface.co/datasets/twelvelabs/entity_cov_v0_tdf">twelvelabs/entity_cov_v0_tdf</a>, <code>chunk_10m/test</code>. Each run uses TP=1 and eight replicas.</p>
+    <table>
+      <thead><tr><th>Family</th><th>Step</th><th>Status</th><th>Progress</th><th>Run ID</th><th>Batch ID</th><th>Model path</th></tr></thead>
+      <tbody><tr><td>consol-h0mn2x</td><td>400</td><td>processing</td><td>0/20</td><td><code>a128c528-3620-53ab-b53e-c3aa37a8f58b</code></td><td><code>batch-9f7fdfcc-53b2-40e6-89db-f92f0632b7bd</code></td><td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-400-safetensors/</code></td></tr><tr><td>consol-h0mn2x</td><td>800</td><td>processing</td><td>0/20</td><td><code>88a45684-f8c8-5d38-99a1-b8fa78f6a0f9</code></td><td><code>batch-c6671673-307e-4a99-a718-4c40050b5543</code></td><td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-800-safetensors/</code></td></tr><tr><td>consol-h0mn2x</td><td>1200</td><td>processing</td><td>0/20</td><td><code>e7baf9e8-2266-5430-9baa-5a99da5f44cf</code></td><td><code>batch-7c23cc2f-aaa1-44e9-8505-68065bc7325a</code></td><td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-1200-safetensors/</code></td></tr><tr><td>consol-h0mn2x</td><td>1600</td><td>processing</td><td>0/20</td><td><code>711f778c-e7ee-5246-9253-8761cce853e3</code></td><td><code>batch-4b289b7f-13e5-413b-ad02-863a29174fe6</code></td><td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-1600-safetensors/</code></td></tr><tr><td>consol-h0mn2x</td><td>2000</td><td>processing</td><td>0/20</td><td><code>60d573c3-7aee-51e4-bbbf-9056910ded20</code></td><td><code>batch-358c7c56-1db8-4c2b-a5a1-c323ad0f36b7</code></td><td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-2000-safetensors/</code></td></tr><tr><td>soccer-lvreason-mcq</td><td>400</td><td>processing</td><td>0/20</td><td><code>656abe33-2d76-588e-8a4b-7543622e0409</code></td><td><code>batch-cdd01826-5555-44d9-b8d5-7de8a6b4b6f1</code></td><td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-400-safetensors/</code></td></tr><tr><td>soccer-lvreason-mcq</td><td>800</td><td>processing</td><td>0/20</td><td><code>b0b64842-9528-5155-a386-c9f2cbdfd8f4</code></td><td><code>batch-ae6cdbc1-aefb-48bc-bcfe-917cd0729054</code></td><td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-800-safetensors/</code></td></tr><tr><td>soccer-lvreason-mcq</td><td>1200</td><td>processing</td><td>0/20</td><td><code>7371ed63-dbc9-54d7-862b-b387726f5b00</code></td><td><code>batch-06f9aee4-a089-4e70-a396-f4b934ec8624</code></td><td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-1200-safetensors/</code></td></tr><tr><td>soccer-lvreason-mcq</td><td>1600</td><td>processing</td><td>0/20</td><td><code>d053e0b5-70c0-50bd-8a15-ecb692981fd7</code></td><td><code>batch-96ca3b1a-5ac8-4cd0-8db3-6f231acca836</code></td><td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-1600-safetensors/</code></td></tr><tr><td>soccer-lvreason-mcq</td><td>2000</td><td>processing</td><td>0/20</td><td><code>0b646e48-4f81-59ca-a383-7249d41ce92c</code></td><td><code>batch-cf0f1ac0-70e3-488e-b92d-8d23e3b1830b</code></td><td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-2000-safetensors/</code></td></tr></tbody>
+    </table>
+  </main>
+</body>
+</html>

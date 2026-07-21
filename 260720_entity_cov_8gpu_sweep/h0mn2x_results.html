@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>h0_mn_sme_2x Entity Coverage Results</title>
+  <style>
+    :root { font-family: ui-sans-serif, system-ui, sans-serif; color: #182026; background: #f5f7f8; }
+    body { margin: 0; }
+    main { width: min(820px, calc(100% - 32px)); margin: 40px auto; }
+    h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+    p { margin: 0 0 24px; color: #53606a; }
+    table { width: 100%; border-collapse: collapse; background: white; border: 1px solid #d8dee2; }
+    th, td { padding: 11px 14px; border-bottom: 1px solid #e4e8eb; text-align: right; }
+    th:first-child, td:first-child { text-align: left; }
+    th { background: #eef2f3; }
+    tr.best td { background: #eaf6ee; font-weight: 700; }
+    .warning { color: #9a5b00; }
+    a { color: #0563c1; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>h0_mn_sme_2x Entity Coverage</h1>
+    <p><a href="https://huggingface.co/datasets/twelvelabs/entity_cov_v0_tdf">entity_cov_v0_tdf</a>, chunk_10m/test.</p>
+    <table>
+      <thead><tr><th>Checkpoint</th><th>Naming IoU</th><th>Name appearance IoU</th><th>Scored</th><th>Failed</th></tr></thead>
+      <tbody>
+        <tr><td>400</td><td>0.2220</td><td>0.3543</td><td>20/20</td><td>0</td></tr>
+        <tr><td>800</td><td>0.2025</td><td>0.3181</td><td>20/20</td><td>0</td></tr>
+        <tr><td>1200</td><td>0.1572</td><td>0.3222</td><td>20/20</td><td>0</td></tr>
+        <tr><td>1600</td><td>0.1749</td><td>0.3305</td><td class="warning">19/20</td><td class="warning">1</td></tr>
+        <tr class="best"><td>2000</td><td>0.2472</td><td>0.3944</td><td>20/20</td><td>0</td></tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>
