@@ -137,7 +137,13 @@ To use this persistent worker, submit jobs directly to orchestrator and set:
 
 ```text
 legacy_model_register.json  # Register the persistent legacy model in spec-center.
+legacy_model_register_node2.json # Register the second node-pinned model.
+legacy_model_register_tp8_node1.json # Register the first 8-GPU worker.
+legacy_model_register_tp8_node2.json # Register the second 8-GPU worker.
+legacy_model_register_tp1_dp8_ck1000_node1.json # Register checkpoint-1000 DP=8 node 1.
+legacy_model_register_tp1_dp8_ck1000_node2.json # Register checkpoint-1000 DP=8 node 2.
 status_active.json          # Mark the model active.
+status_active_node2.json    # Mark the second node-pinned model active.
 scale_one.json              # Scale the deployment to 1 replica.
 orchestrator_smoke_job.json # Example pegasus15-sme job routed to this worker.
 ```
@@ -199,6 +205,30 @@ aws s3 cp --profile training \
 ## Recreate The Persistent Worker
 
 Only do this if the worker was torn down or disappeared.
+
+### Two-node variant
+
+To guarantee two independent `TP=2` workers on different nodes, register and
+activate both `legacy_model_register.json` and
+`legacy_model_register_node2.json`. Scale each model ID to one replica with
+`scale_one.json`. Both records advertise the same
+`worker_type: lia-soccer-mtp-ck2000-persistent`, so loadbalancer calls use them
+as one worker pool. Each worker uses two GPUs, for four GPUs total.
+
+For 16 GPUs across two nodes, register
+`legacy_model_register_tp8_node1.json` and
+`legacy_model_register_tp8_node2.json`, then activate both records with the
+same status payloads. Each node-pinned worker uses `TP=8`, `DP=1`, and eight
+GPUs; the two workers still share one loadbalancer `worker_type`.
+
+For checkpoint-1000 with `TP=1` and `DP=8`, register
+`legacy_model_register_tp1_dp8_ck1000_node1.json` and
+`legacy_model_register_tp1_dp8_ck1000_node2.json`. Activate them with their
+matching `status_active_ck1000_dp8_node*.json` payloads. Each worker advertises
+eight request slots and both use
+`worker_type: lia-soccer-mtp-ck1000-persistent`. These payloads target the
+`b300-pegasus` pool without fixed node names, so Kueue can use the first two
+nodes that have all eight GPUs available.
 
 Open two port-forwards:
 
