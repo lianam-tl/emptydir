@@ -2,15 +2,21 @@
   "job_id": "6c8c8dcc",
   "job_name": "pp-a1689-allcfg-r3-260721-tl-h0-movies-and-news-sme-default-sft",
   "attempt": 3,
-  "status": "running",
+  "status": "succeeded",
   "runtime_validation": {
     "configured_max_video_duration_seconds": 6000,
     "overwrite": true,
     "image_verified": true,
     "cleanup_map_started": true,
-    "checked_at": "2026-07-21T11:17:00Z"
+    "rows_after_loader_cleanup": 97434,
+    "rows_after_max_video_duration_filter": 97434,
+    "final_rows": 78201,
+    "artifact_objects": 68,
+    "artifact_bytes": 6945723254,
+    "checked_at": "2026-07-21T12:45:19Z"
   },
   "submitted_at": "2026-07-21T11:13:29Z",
+  "completed_at": "2026-07-21T12:43:36Z",
   "dataset": "twelvelabs/tl_h0_movies_and_news_sme_tdf",
   "dataset_revision": "533ef69c0ab5067503d0a861f371e92c36e287a0",
   "dataset_rows": 99057,

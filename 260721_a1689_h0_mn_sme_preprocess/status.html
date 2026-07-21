@@ -21,7 +21,7 @@
 </head>
 <body>
   <h1>A-1689 non-2× H0 SME base preprocessing</h1>
-  <div class="muted">6,000-second retry submitted 2026-07-21 20:13 KST · job <code>6c8c8dcc</code> · status: running</div>
+  <div class="muted">Completed 2026-07-21 21:43 KST · job <code>6c8c8dcc</code> · status: succeeded</div>
 
   <div class="cards">
     <div class="card"><div class="muted">Previous source rows</div><div class="value">3,809</div></div>
@@ -34,8 +34,10 @@
   <p>Attempt 1 (<code>a249ade7</code>) exposed incompatible old/new nested message schemas.
     Attempt 2 (<code>d1dd4e0d</code>) used the schema fix, but was cancelled before publishing because its
     maximum video duration was still 1,200 seconds. Its filter evidence was preserved.</p>
-  <p><strong>Current runtime validation:</strong> attempt 3 uses image <code>8fe98c9</code>, has
-    <code>max_duration=6000</code> and <code>overwrite=True</code>, and its 99,057-row cleanup map is running.</p>
+  <p><strong>Final runtime validation:</strong> attempt 3 used image <code>8fe98c9</code>,
+    <code>max_duration=6000</code>, and <code>overwrite=True</code>. All 97,434 rows surviving loader cleanup
+    passed the 6,000-second duration filter (zero removed), and the completed artifact contains 78,201 rows
+    in 64 Arrow shards (6.95 GB).</p>
 
   <h2>Attempt 2 filter attrition (1,200-second threshold)</h2>
   <table>
