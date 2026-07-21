@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A-1689 H0 movies/news SME preprocessing</title>
+  <style>
+    body { font: 15px/1.5 system-ui, sans-serif; margin: 32px auto; max-width: 980px; padding: 0 20px; color: #172033; }
+    h1 { margin-bottom: 4px; }
+    .muted { color: #667085; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 24px 0; }
+    .card { background: #f5f7fb; border-radius: 10px; padding: 16px; }
+    .value { font-size: 28px; font-weight: 700; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border-bottom: 1px solid #d9deea; padding: 8px 10px; text-align: left; }
+    th { background: #f5f7fb; }
+    td:last-child, th:last-child { text-align: right; }
+    .added { color: #067647; font-weight: 600; }
+    code { background: #f1f3f7; padding: 2px 5px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>A-1689 non-2× H0 SME base preprocessing</h1>
+  <div class="muted">Submitted 2026-07-21 18:40 KST · job <code>a249ade7</code> · status: running</div>
+
+  <div class="cards">
+    <div class="card"><div class="muted">Previous source rows</div><div class="value">3,809</div></div>
+    <div class="card"><div class="muted">Current source rows</div><div class="value">99,057</div></div>
+    <div class="card"><div class="muted">Source growth</div><div class="value">26.0×</div></div>
+  </div>
+
+  <p>The Pegasus loader enumerates every published config dynamically. This job uses
+    <code>default_sft_sme_h0_highres</code>, not the entity-dropout 2× template.</p>
+
+  <table>
+    <thead><tr><th>Hugging Face config</th><th>Relative to previous base</th><th>Source rows</th></tr></thead>
+    <tbody>
+      <tr><td>movie_visual</td><td>previous</td><td>1,444</td></tr>
+      <tr><td>news_visual</td><td>previous</td><td>2,365</td></tr>
+      <tr><td>movie_duration_diverse</td><td class="added">added</td><td>2,407</td></tr>
+      <tr><td>news_duration_diverse</td><td class="added">added</td><td>3,205</td></tr>
+      <tr><td>baseball_v1_2_duration_diverse</td><td class="added">added</td><td>24,517</td></tr>
+      <tr><td>basketball_v1_2_duration_diverse</td><td class="added">added</td><td>441</td></tr>
+      <tr><td>movie_v1_2_duration_diverse</td><td class="added">added</td><td>28,788</td></tr>
+      <tr><td>news_v1_2_duration_diverse</td><td class="added">added</td><td>22,854</td></tr>
+      <tr><td>soccer_v1_2_duration_diverse</td><td class="added">added</td><td>3,813</td></tr>
+      <tr><td>tvshow_v1_2_duration_diverse</td><td class="added">added</td><td>9,223</td></tr>
+    </tbody>
+  </table>
+
+  <p><strong>Output:</strong><br>
+    <code>s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/base/tl_h0_movies_and_news_sme/default_sft_sme_h0_highres/sft_sme/</code>
+  </p>
+  <p class="muted">Source dataset: https://huggingface.co/datasets/twelvelabs/tl_h0_movies_and_news_sme_tdf</p>
+</body>
+</html>

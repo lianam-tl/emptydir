@@ -39,7 +39,10 @@ HEARTBEAT_SEC="${HEARTBEAT_SEC:-1200}"
 LOG="$HOME/poll_${JOB_ID}.log"
 
 export JOB_ID
-SLACK_TOKEN="$(cat "$TOKEN_FILE")"
+SLACK_TOKEN="${SLACK_BOT_TOKEN:-}"
+if [ -z "$SLACK_TOKEN" ]; then
+  SLACK_TOKEN="$(cat "$TOKEN_FILE")"
+fi
 
 slack() {
   local msg="$1"

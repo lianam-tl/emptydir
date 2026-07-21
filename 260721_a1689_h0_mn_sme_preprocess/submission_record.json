@@ -1,0 +1,24 @@
+{
+  "job_id": "a249ade7",
+  "job_name": "pp-a1689-allcfg-260721-tl-h0-movies-and-news-sme-default-sft-sm",
+  "status": "running",
+  "submitted_at": "2026-07-21T09:40:15Z",
+  "dataset": "twelvelabs/tl_h0_movies_and_news_sme_tdf",
+  "dataset_revision": "533ef69c0ab5067503d0a861f371e92c36e287a0",
+  "dataset_rows": 99057,
+  "image_tag": "26c6f9d",
+  "args": [
+    "pipeline-base",
+    "--dataset",
+    "tl_h0_movies_and_news_sme",
+    "--template",
+    "default_sft_sme_h0_highres",
+    "--config",
+    "sft_sme"
+  ],
+  "resources": {
+    "cpu": "64",
+    "memory": "64Gi"
+  },
+  "output": "s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/base/tl_h0_movies_and_news_sme/default_sft_sme_h0_highres/sft_sme/"
+}

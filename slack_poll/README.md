@@ -22,6 +22,7 @@ Optional:
 | `LABEL` | `$JOB_ID` |
 | `ARTIFACT_URL` | (empty) — mentioned in success message |
 | `CHANNEL` | `fun-lia-trashcan` |
+| `SLACK_BOT_TOKEN` | preferred token source; falls back to `TOKEN_FILE` |
 | `TOKEN_FILE` | `~/tmp/.slack_bot_token` |
 | `POLL_SEC` | 120 |
 | `HEARTBEAT_SEC` | 1200 (20 min) |
