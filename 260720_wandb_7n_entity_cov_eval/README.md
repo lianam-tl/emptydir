@@ -33,3 +33,8 @@ python3 monitor_and_submit.py \
   --state monitor_state.json \
   --eval-api-base http://eval-v3-api-lia.pegasus-eval.svc.cluster.local:8090
 ```
+
+Step 1600 is tracked separately in `a1790_step1600_submission.json`. Its export
+manifest converts the DCP checkpoint to `checkpoint-1600-safetensors`; the
+monitor then submits https://huggingface.co/datasets/twelvelabs/entity_cov_v02_tdf
+with 65,536 output tokens, TP=1, and eight replicas.

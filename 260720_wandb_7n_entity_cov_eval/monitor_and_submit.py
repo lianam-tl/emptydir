@@ -106,15 +106,16 @@ def export_ready(output_path: str) -> bool:
 
 def eval_payload(item: dict) -> dict:
     submission_tag = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    name = f"lia-entcov-v0-{item['family']}-s{item['step']}-tp1-r8-{submission_tag}"
+    eval_tag = item.get("eval_tag", "v0")
+    name = f"lia-entcov-{eval_tag}-{item['family']}-s{item['step']}-tp1-r8-{submission_tag}"
     return {
         "name": name,
         "experimentName": name,
         "batchNamePrefix": f"lia-entcov-{item['family']}-s{item['step']}",
         "idempotencyKey": name,
-        "dataset": "twelvelabs/entity_cov_v0_tdf",
-        "config": "chunk_10m",
-        "split": "test",
+        "dataset": item.get("dataset", "twelvelabs/entity_cov_v0_tdf"),
+        "config": item.get("config", "chunk_10m"),
+        "split": item.get("split", "test"),
         "pipelineId": "vllm-direct",
         "workerType": "vllm-video-v1",
         "modelPath": item["output_path"].rstrip("/") + "/",
@@ -125,13 +126,17 @@ def eval_payload(item: dict) -> dict:
         "maxInFlight": 20,
         "tp": 1,
         "dp": 1,
-        "maxTokens": 16384,
+        "maxTokens": item.get("max_tokens", 16384),
         "temperature": 0.0,
         "convertIfNeeded": False,
+        "enableTensorCache": item.get("enable_tensor_cache", False),
     }
 
 
 def render_html(items: list[dict]) -> str:
+    dataset = items[0].get("dataset", "twelvelabs/entity_cov_v0_tdf")
+    config = items[0].get("config", "chunk_10m")
+    max_tokens = items[0].get("max_tokens", 16384)
     rows = []
     for item in items:
         rows.append(
@@ -153,7 +158,7 @@ table {{ width: 100%; border-collapse: collapse; background: white; border: 1px 
 th, td {{ padding: 10px 12px; border-bottom: 1px solid #e4e8eb; text-align: left; }} th {{ background: #eef2f3; }}
 code {{ overflow-wrap: anywhere; }} a {{ color: #0563c1; }}</style></head><body><main>
 <h1>W&amp;B 7-node Entity Coverage Eval</h1>
-<p><a href="https://huggingface.co/datasets/twelvelabs/entity_cov_v0_tdf">entity_cov_v0_tdf</a>, chunk_10m/test, TP=1, 8 replicas.</p>
+<p><a href="https://huggingface.co/datasets/{html.escape(dataset)}">{html.escape(dataset)}</a>, {html.escape(config)}/test, TP=1, 8 replicas, max tokens={max_tokens:,}.</p>
 <table><thead><tr><th>Family</th><th>Step</th><th>Export</th><th>Eval</th><th>Progress</th><th>Run ID</th><th>W&amp;B</th></tr></thead>
 <tbody>{"".join(rows)}</tbody></table></main></body></html>"""
 
