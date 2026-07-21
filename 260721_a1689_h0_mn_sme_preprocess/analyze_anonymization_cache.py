@@ -41,6 +41,27 @@ def load_group(cache_files: list[Path]) -> Dataset:
     return datasets[0] if len(datasets) == 1 else concatenate_datasets(datasets)
 
 
+def load_indexed_rows(cache_files: list[Path], indices: list[int]) -> list[dict]:
+    """Read selected global row indices without opening every record shard together."""
+    rows = []
+    sorted_indices = sorted(indices)
+    index_position = 0
+    shard_offset = 0
+    for cache_file in sorted(cache_files):
+        shard = Dataset.from_file(str(cache_file))
+        shard_end = shard_offset + len(shard)
+        local_indices = []
+        while index_position < len(sorted_indices) and sorted_indices[index_position] < shard_end:
+            local_indices.append(sorted_indices[index_position] - shard_offset)
+            index_position += 1
+        if local_indices:
+            rows.extend(shard.select(local_indices))
+        shard_offset = shard_end
+    if index_position != len(sorted_indices):
+        raise RuntimeError(f"Resolved {index_position} of {len(sorted_indices)} requested indices")
+    return rows
+
+
 def find_rejection(messages: list[dict]) -> dict | None:
     text = anonymization._extract_all_text(messages)
     for pattern_name, pattern in PATTERNS:
@@ -160,12 +181,13 @@ def main() -> None:
         if not candidates:
             raise RuntimeError(f"No full-record cache group can resolve index {minimum_base_rows - 1}")
         _, base_fingerprint, base_files = min(candidates)
-        dataset = load_group(base_files).select(rejected_indices)
+        rows_to_analyze = load_indexed_rows(base_files, rejected_indices)
     else:
         kept_fingerprint = None
+        rows_to_analyze = list(dataset)
 
     rejected_rows = []
-    for row in dataset:
+    for row in rows_to_analyze:
         rejection = find_rejection(row["messages"])
         if rejection is None:
             continue
