@@ -1,0 +1,61 @@
+# DCP checkpoint to sharded safetensors for Eval V3.
+name: export-a1790-entity-sme4x-s800
+image: 476114115052.dkr.ecr.us-west-2.amazonaws.com/pegasus-training:b300-sft-latest
+nodes: 1
+gpus: 1
+cpu: "24"
+memory: "240Gi"
+instanceGroup: b300-pegasus
+sharedStorage:
+  enabled: true
+  claimName: fsx-shared
+env:
+  TOKENIZERS_PARALLELISM: "false"
+  HF_HUB_DISABLE_PROGRESS_BARS: "1"
+  HDF5_USE_FILE_LOCKING: "false"
+  AWS_REGION: "us-west-2"
+  TZ: "Asia/Seoul"
+  PYTORCH_CUDA_ALLOC_CONF: "expandable_segments:True"
+  GH_BRANCH: "main"
+  S3_SOURCE_PATH: "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-800"
+  S3_OUTPUT_PATH: "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-800-safetensors"
+command: |
+  set -euo pipefail
+
+  S3_LOG_URI="s3://tl-data-training-pegasus-us-west-2/logs/${JOB_NAME}/${POD_NAME}/export.log"
+  LOCAL_LOG="${EPHEMERAL_ROOT}/export.log"
+  upload_logs() {
+    if command -v aws >/dev/null 2>&1 && [[ -f "${LOCAL_LOG}" ]]; then
+      aws s3 cp "${LOCAL_LOG}" "${S3_LOG_URI}" --region us-west-2 || true
+    fi
+  }
+  trap upload_logs EXIT
+  exec > >(tee -a "${LOCAL_LOG}") 2>&1
+
+  REPOSITORY_ROOT="${EPHEMERAL_ROOT}/project"
+  PROJECT_ROOT="${REPOSITORY_ROOT}/training"
+  git clone --filter=blob:none -b "${GH_BRANCH}" \
+    git@github.com:twelvelabs-io/pegasus.git "${REPOSITORY_ROOT}"
+  export GH_SHA="$(git -C "${REPOSITORY_ROOT}" rev-parse HEAD)"
+  export GH_REF="refs/experiments/runs/${JOB_NAME}"
+  if [[ "${NODE_RANK:-0}" == "0" ]]; then
+    if ! git -C "${REPOSITORY_ROOT}" push --quiet origin "${GH_SHA}:${GH_REF}" 2>&1; then
+      REMOTE_SHA="$(git -C "${REPOSITORY_ROOT}" ls-remote origin "${GH_REF}" | awk '{print $1}')"
+      if [[ "${REMOTE_SHA}" != "${GH_SHA}" ]]; then
+        echo "ERROR: failed to push ${GH_REF}; remote=${REMOTE_SHA:-<none>}, local=${GH_SHA}" >&2
+        exit 1
+      fi
+    fi
+  fi
+
+  LOCAL_CHECKPOINT="${EPHEMERAL_ROOT}/remote_checkpoint_dcp"
+  mkdir -p "${LOCAL_CHECKPOINT}/model"
+  s5cmd sync "${S3_SOURCE_PATH}/model/*" "${LOCAL_CHECKPOINT}/model/"
+  cd "${PROJECT_ROOT}"
+  bash export/dcp_to_safetensors.sh "${LOCAL_CHECKPOINT}"
+  s5cmd cp "${LOCAL_CHECKPOINT}/model.safetensors" "${S3_OUTPUT_PATH}/model.safetensors"
+  for filename in chat_template.jinja config.json processing_pegasus_qwen3_vl.py processor_config.json tokenizer.json tokenizer_config.json vision_process.py; do
+    s5cmd cp "${S3_SOURCE_PATH}/${filename}" "${S3_OUTPUT_PATH}/${filename}"
+  done
+
+  echo "Done. Safetensors checkpoint uploaded to ${S3_OUTPUT_PATH}/"
