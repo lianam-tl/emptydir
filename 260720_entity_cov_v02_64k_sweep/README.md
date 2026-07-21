@@ -67,3 +67,8 @@ to the same evaluation setup.
 - step 1200: `239cf441-25eb-591c-ab32-32bdfaa91241`
 - step 1600: `78542b3b-6142-5487-80eb-2be8006ce1f9`
 - CPU-node Slack poller: PID `763251`
+
+`additional_checkpoint_results.html` compares the seven completed
+soccer-lvreason and consol-h0mn2x runs. The original consol step-400 run lost
+12 tasks to GPU reservation contention; retry `b0b7a57b-bbc7-546f-bf6e-fb9d30fe2dcb`
+is tracked by CPU-node poller PID `1305159`.

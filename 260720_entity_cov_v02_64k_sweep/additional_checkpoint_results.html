@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Additional entity coverage v0.2 results</title>
+  <style>
+    body { margin: 0; color: #202124; font: 14px system-ui, sans-serif; }
+    main { max-width: 1120px; margin: 0 auto; padding: 32px 24px 56px; }
+    h1 { margin: 0 0 8px; font-size: 26px; letter-spacing: 0; }
+    p { line-height: 1.5; }
+    a { color: #1769aa; }
+    .summary { border-left: 4px solid #188038; padding-left: 14px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 24px; font-size: 13px; }
+    th, td { padding: 10px 8px; border-bottom: 1px solid #dadce0; text-align: right; font-variant-numeric: tabular-nums; }
+    th:first-child, td:first-child { text-align: left; }
+    .best { color: #137333; font-weight: 700; background: #e6f4ea; }
+    .failed { color: #b3261e; }
+    .note { color: #5f6368; font-size: 13px; }
+    @media (max-width: 760px) { table { display: block; overflow-x: auto; white-space: nowrap; } }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Additional entity coverage v0.2 results</h1>
+  <p><a href="https://huggingface.co/datasets/twelvelabs/entity_cov_v02_tdf">twelvelabs/entity_cov_v02_tdf</a>, 20 samples per run.</p>
+  <p class="summary"><strong>Best completed checkpoint:</strong> consol-h0mn2x step 1600, with 33.50% overall naming IoU and 32.69% overall naming + appearance IoU.</p>
+  <table>
+    <thead><tr><th>Family</th><th>Step</th><th>Overall naming</th><th>Overall naming + appearance</th><th>Full naming</th><th>Full naming + appearance</th><th>Half naming</th><th>Half naming + appearance</th><th>Parse errors</th></tr></thead>
+    <tbody>
+      <tr><td>soccer-lvreason</td><td>400</td><td>25.53%</td><td>31.57%</td><td>33.33%</td><td>33.61%</td><td>21.18%</td><td>30.43%</td><td>1</td></tr>
+      <tr><td>soccer-lvreason</td><td>800</td><td>27.43%</td><td>25.39%</td><td>32.20%</td><td>26.74%</td><td>24.77%</td><td>24.63%</td><td>1</td></tr>
+      <tr><td>soccer-lvreason</td><td>1200</td><td>28.14%</td><td>28.71%</td><td>29.71%</td><td>24.06%</td><td>27.26%</td><td>31.30%</td><td>2</td></tr>
+      <tr class="failed"><td>consol-h0mn2x</td><td>400</td><td colspan="6">Retrying: 12/20 jobs cancelled by GPU reservation contention</td><td>-</td></tr>
+      <tr><td>consol-h0mn2x</td><td>800</td><td>30.18%</td><td>32.00%</td><td>27.02%</td><td>31.37%</td><td>31.94%</td><td>32.36%</td><td>1</td></tr>
+      <tr><td>consol-h0mn2x</td><td>1200</td><td>28.01%</td><td>31.26%</td><td>35.57%</td><td>36.94%</td><td>23.80%</td><td>28.08%</td><td>2</td></tr>
+      <tr><td>consol-h0mn2x</td><td>1600</td><td class="best">33.50%</td><td class="best">32.69%</td><td>34.23%</td><td class="best">38.24%</td><td class="best">33.09%</td><td>29.60%</td><td>2</td></tr>
+      <tr><td>consol-h0mn2x</td><td>2000</td><td>29.06%</td><td>31.96%</td><td>34.42%</td><td>35.71%</td><td>26.07%</td><td>29.86%</td><td>2</td></tr>
+    </tbody>
+  </table>
+  <p class="note">Malformed nested outputs are included as zero-score samples. Consol step 400 is omitted from ranking until its infrastructure-only retry finishes.</p>
+</main>
+</body>
+</html>

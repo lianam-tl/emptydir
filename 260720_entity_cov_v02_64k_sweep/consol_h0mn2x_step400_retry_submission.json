@@ -1,0 +1,10 @@
+[
+  {
+    "family": "consol-h0mn2x-retry",
+    "step": 400,
+    "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/consol_260416_clean_filter_less_aug_highres_h0_mn_sme_2x_lr2e-6_qwen3_5_27b-base/checkpoint-400-safetensors/",
+    "run_id": "b0b7a57b-bbc7-546f-bf6e-fb9d30fe2dcb",
+    "batch_id": "batch-735238ac-ed96-4000-9aaf-50498b3c7a3d",
+    "http_status": 202
+  }
+]
