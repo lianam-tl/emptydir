@@ -1,0 +1,2706 @@
+{
+  "source": "collected_runs.json",
+  "metric_note": "Aggregates pool scored character rows, matching the evaluator denominator. Per-sample cells use the evaluator's sample metrics.",
+  "runs": [
+    {
+      "name": "pegasus-15-kian-soce",
+      "half_all": {
+        "naming": 0.3928270413268126,
+        "appearance": 0.38804815650979246,
+        "delta": 0.04281209613481484,
+        "characters": 77,
+        "samples": 13,
+        "failures": 0
+      },
+      "films_only": {
+        "naming": 0.36063971021253194,
+        "appearance": 0.3771824040321252,
+        "delta": 0.047366574447029186,
+        "characters": 70,
+        "samples": 12,
+        "failures": 0
+      },
+      "film_first": {
+        "naming": 0.3193743081192024,
+        "appearance": 0.365595588470821,
+        "delta": 0.06324340638454172,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "film_second": {
+        "naming": 0.4001857205519727,
+        "appearance": 0.38876921959342936,
+        "delta": 0.03215127717357967,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "samples": {
+        "film-01:000": {
+          "sample_id": "entity_coverage_v0__film-01__half__000",
+          "source": "film-01",
+          "half_index": "000",
+          "naming": 0.45124187441334707,
+          "appearance": 0.45124187441334707,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-01:001": {
+          "sample_id": "entity_coverage_v0__film-01__half__001",
+          "source": "film-01",
+          "half_index": "001",
+          "naming": 0.47740422929436194,
+          "appearance": 0.47740422929436194,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-02:000": {
+          "sample_id": "entity_coverage_v0__film-02__half__000",
+          "source": "film-02",
+          "half_index": "000",
+          "naming": 0.44599987712557326,
+          "appearance": 0.5763144521859257,
+          "delta": 0.0,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-02:001": {
+          "sample_id": "entity_coverage_v0__film-02__half__001",
+          "source": "film-02",
+          "half_index": "001",
+          "naming": 0.4490317516146091,
+          "appearance": 0.5404957385643162,
+          "delta": 0.20112477140520688,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-03:000": {
+          "sample_id": "entity_coverage_v0__film-03__half__000",
+          "source": "film-03",
+          "half_index": "000",
+          "naming": 0.17556386240497243,
+          "appearance": 0.4360028032347746,
+          "delta": 0.2784275437976425,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-03:001": {
+          "sample_id": "entity_coverage_v0__film-03__half__001",
+          "source": "film-03",
+          "half_index": "001",
+          "naming": 0.39268187955056694,
+          "appearance": 0.4485178129943166,
+          "delta": 0.04206408448757287,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "film-04:000": {
+          "sample_id": "entity_coverage_v0__film-04__half__000",
+          "source": "film-04",
+          "half_index": "000",
+          "naming": 0.18894486295228619,
+          "appearance": 0.21506550812382264,
+          "delta": 0.15482892886288296,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-04:001": {
+          "sample_id": "entity_coverage_v0__film-04__half__001",
+          "source": "film-04",
+          "half_index": "001",
+          "naming": 0.17007816028002032,
+          "appearance": 0.08503908014001016,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-05:000": {
+          "sample_id": "entity_coverage_v0__film-05__half__000",
+          "source": "film-05",
+          "half_index": "000",
+          "naming": 0.3414437299529571,
+          "appearance": 0.39907548169139373,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-05:001": {
+          "sample_id": "entity_coverage_v0__film-05__half__001",
+          "source": "film-05",
+          "half_index": "001",
+          "naming": 0.44719798395217736,
+          "appearance": 0.49905057368139083,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-06:000": {
+          "sample_id": "entity_coverage_v0__film-06__half__000",
+          "source": "film-06",
+          "half_index": "000",
+          "naming": 0.2483389950004802,
+          "appearance": 0.16555933000032014,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-06:001": {
+          "sample_id": "entity_coverage_v0__film-06__half__001",
+          "source": "film-06",
+          "half_index": "001",
+          "naming": 0.45007563786461624,
+          "appearance": 0.40798462784728307,
+          "delta": 0.0,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "sport-01:000": {
+          "sample_id": "entity_coverage_v0__sport-01__half__000",
+          "source": "sport-01",
+          "half_index": "000",
+          "naming": 0.695387953801051,
+          "appearance": 0.49670568128646503,
+          "delta": 0.0,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        }
+      }
+    },
+    {
+      "name": "a1740-h0-duration-s400",
+      "half_all": {
+        "naming": 0.30371907726335967,
+        "appearance": 0.3399012240242389,
+        "delta": 0.054904932801301536,
+        "characters": 77,
+        "samples": 13,
+        "failures": 1
+      },
+      "films_only": {
+        "naming": 0.2617212598144893,
+        "appearance": 0.3239985920493241,
+        "delta": 0.060745883099312344,
+        "characters": 70,
+        "samples": 12,
+        "failures": 1
+      },
+      "film_first": {
+        "naming": 0.2767616570548629,
+        "appearance": 0.3683763237616442,
+        "delta": 0.084046127853644,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "film_second": {
+        "naming": 0.2473075457924646,
+        "appearance": 0.27962086033700395,
+        "delta": 0.03841648187641116,
+        "characters": 35,
+        "samples": 6,
+        "failures": 1
+      },
+      "samples": {
+        "film-01:000": {
+          "sample_id": "entity_coverage_v0__film-01__half__000",
+          "source": "film-01",
+          "half_index": "000",
+          "naming": 0.4005720182777052,
+          "appearance": 0.34523353339397395,
+          "delta": -0.05533848488373123,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-01:001": {
+          "sample_id": "entity_coverage_v0__film-01__half__001",
+          "source": "film-01",
+          "half_index": "001",
+          "naming": 0.06382579960123543,
+          "appearance": 0.06382579960123543,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-02:000": {
+          "sample_id": "entity_coverage_v0__film-02__half__000",
+          "source": "film-02",
+          "half_index": "000",
+          "naming": 0.20333285991573166,
+          "appearance": 0.5267359257480192,
+          "delta": 0.17826216781128726,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-02:001": {
+          "sample_id": "entity_coverage_v0__film-02__half__001",
+          "source": "film-02",
+          "half_index": "001",
+          "naming": 0.4431465088762418,
+          "appearance": 0.4414785483988727,
+          "delta": 0.09393671053569062,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-03:000": {
+          "sample_id": "entity_coverage_v0__film-03__half__000",
+          "source": "film-03",
+          "half_index": "000",
+          "naming": 0.02420686422957671,
+          "appearance": 0.25557293275331117,
+          "delta": 0.18239263084751536,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-03:001": {
+          "sample_id": "entity_coverage_v0__film-03__half__001",
+          "source": "film-03",
+          "half_index": "001",
+          "naming": 0.0,
+          "appearance": 0.1780847470345249,
+          "delta": 0.160046358356699,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "film-04:000": {
+          "sample_id": "entity_coverage_v0__film-04__half__000",
+          "source": "film-04",
+          "half_index": "000",
+          "naming": 0.17510007947683964,
+          "appearance": 0.29238296958687443,
+          "delta": 0.13712714685044033,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-04:001": {
+          "sample_id": "entity_coverage_v0__film-04__half__001",
+          "source": "film-04",
+          "half_index": "001",
+          "naming": 0.0,
+          "appearance": 0.0,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": true,
+          "error": "prediction: model output dict does not contain nested coverage JSON"
+        },
+        "film-05:000": {
+          "sample_id": "entity_coverage_v0__film-05__half__000",
+          "source": "film-05",
+          "half_index": "000",
+          "naming": 0.19163216438420802,
+          "appearance": 0.36004623181658224,
+          "delta": 0.21153962218601,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-05:001": {
+          "sample_id": "entity_coverage_v0__film-05__half__001",
+          "source": "film-05",
+          "half_index": "001",
+          "naming": 0.47815123676888,
+          "appearance": 0.5350606713485833,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-06:000": {
+          "sample_id": "entity_coverage_v0__film-06__half__000",
+          "source": "film-06",
+          "half_index": "000",
+          "naming": 0.5010425047749268,
+          "appearance": 0.3888463726804998,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-06:001": {
+          "sample_id": "entity_coverage_v0__film-06__half__001",
+          "source": "film-06",
+          "half_index": "001",
+          "naming": 0.6971332661190933,
+          "appearance": 0.6565518109657321,
+          "delta": 0.0,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "sport-01:000": {
+          "sample_id": "entity_coverage_v0__sport-01__half__000",
+          "source": "sport-01",
+          "half_index": "000",
+          "naming": 0.6984985612827412,
+          "appearance": 0.4989275437733866,
+          "delta": 0.0,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        }
+      }
+    },
+    {
+      "name": "a1740-h0-duration-s800",
+      "half_all": {
+        "naming": 0.23431225054533644,
+        "appearance": 0.22837854854962722,
+        "delta": 0.03702035623819957,
+        "characters": 77,
+        "samples": 13,
+        "failures": 1
+      },
+      "films_only": {
+        "naming": 0.18580568111163454,
+        "appearance": 0.20191111746015175,
+        "delta": 0.0409586920082208,
+        "characters": 70,
+        "samples": 12,
+        "failures": 1
+      },
+      "film_first": {
+        "naming": 0.17833141501995287,
+        "appearance": 0.18307114148787915,
+        "delta": 0.0448880932400978,
+        "characters": 35,
+        "samples": 6,
+        "failures": 1
+      },
+      "film_second": {
+        "naming": 0.1929685194494961,
+        "appearance": 0.22075109343242438,
+        "delta": 0.03719301582767202,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "samples": {
+        "film-01:000": {
+          "sample_id": "entity_coverage_v0__film-01__half__000",
+          "source": "film-01",
+          "half_index": "000",
+          "naming": 0.3731835331193926,
+          "appearance": 0.2894962645385928,
+          "delta": -0.08368726858079983,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-01:001": {
+          "sample_id": "entity_coverage_v0__film-01__half__001",
+          "source": "film-01",
+          "half_index": "001",
+          "naming": 0.0860377644200403,
+          "appearance": 0.0860377644200403,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-02:000": {
+          "sample_id": "entity_coverage_v0__film-02__half__000",
+          "source": "film-02",
+          "half_index": "000",
+          "naming": 0.11550772044599204,
+          "appearance": 0.1473126766468472,
+          "delta": 0.06659465501582643,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-02:001": {
+          "sample_id": "entity_coverage_v0__film-02__half__001",
+          "source": "film-02",
+          "half_index": "001",
+          "naming": 0.20259785786576776,
+          "appearance": 0.25390524553944027,
+          "delta": 0.058716499700317004,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-03:000": {
+          "sample_id": "entity_coverage_v0__film-03__half__000",
+          "source": "film-03",
+          "half_index": "000",
+          "naming": 0.17070136272731443,
+          "appearance": 0.5638182234004472,
+          "delta": 0.41703558828964615,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-03:001": {
+          "sample_id": "entity_coverage_v0__film-03__half__001",
+          "source": "film-03",
+          "half_index": "001",
+          "naming": 0.0,
+          "appearance": 0.189067002147195,
+          "delta": 0.17912072019079434,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "film-04:000": {
+          "sample_id": "entity_coverage_v0__film-04__half__000",
+          "source": "film-04",
+          "half_index": "000",
+          "naming": 0.0,
+          "appearance": 0.0,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": true,
+          "error": "prediction: model output dict does not contain nested coverage JSON"
+        },
+        "film-04:001": {
+          "sample_id": "entity_coverage_v0__film-04__half__001",
+          "source": "film-04",
+          "half_index": "001",
+          "naming": 0.1557220803749431,
+          "appearance": 0.07786104018747154,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-05:000": {
+          "sample_id": "entity_coverage_v0__film-05__half__000",
+          "source": "film-05",
+          "half_index": "000",
+          "naming": 0.03580193445936192,
+          "appearance": 0.12189061021748468,
+          "delta": 0.027886342030210214,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-05:001": {
+          "sample_id": "entity_coverage_v0__film-05__half__001",
+          "source": "film-05",
+          "half_index": "001",
+          "naming": 0.36227685240205226,
+          "appearance": 0.44716477054899956,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-06:000": {
+          "sample_id": "entity_coverage_v0__film-06__half__000",
+          "source": "film-06",
+          "half_index": "000",
+          "naming": 0.22412207346113894,
+          "appearance": 0.14941471564075928,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-06:001": {
+          "sample_id": "entity_coverage_v0__film-06__half__001",
+          "source": "film-06",
+          "half_index": "001",
+          "naming": 0.44937635699110823,
+          "appearance": 0.41516851008135697,
+          "delta": 0.0,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "sport-01:000": {
+          "sample_id": "entity_coverage_v0__sport-01__half__000",
+          "source": "sport-01",
+          "half_index": "000",
+          "naming": 0.6902740032221343,
+          "appearance": 0.4930528594443816,
+          "delta": 0.0,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        }
+      }
+    },
+    {
+      "name": "a1740-h0-duration-s1200",
+      "half_all": {
+        "naming": 0.26979298324112444,
+        "appearance": 0.26798203860496583,
+        "delta": 0.048625626030574125,
+        "characters": 77,
+        "samples": 13,
+        "failures": 1
+      },
+      "films_only": {
+        "naming": 0.22506095983888935,
+        "appearance": 0.26911432765228344,
+        "delta": 0.08900613899527658,
+        "characters": 70,
+        "samples": 12,
+        "failures": 1
+      },
+      "film_first": {
+        "naming": 0.2596259575845788,
+        "appearance": 0.27965947680338094,
+        "delta": 0.08125017269780285,
+        "characters": 35,
+        "samples": 6,
+        "failures": 1
+      },
+      "film_second": {
+        "naming": 0.19193617033260366,
+        "appearance": 0.2585691785011859,
+        "delta": 0.09643894003035558,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "samples": {
+        "film-01:000": {
+          "sample_id": "entity_coverage_v0__film-01__half__000",
+          "source": "film-01",
+          "half_index": "000",
+          "naming": 0.5445120878576386,
+          "appearance": 0.5445120878576386,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-01:001": {
+          "sample_id": "entity_coverage_v0__film-01__half__001",
+          "source": "film-01",
+          "half_index": "001",
+          "naming": 0.048190500795220505,
+          "appearance": 0.048190500795220505,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-02:000": {
+          "sample_id": "entity_coverage_v0__film-02__half__000",
+          "source": "film-02",
+          "half_index": "000",
+          "naming": 0.21547565766572188,
+          "appearance": 0.35489881984887844,
+          "delta": 0.21683929168058816,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-02:001": {
+          "sample_id": "entity_coverage_v0__film-02__half__001",
+          "source": "film-02",
+          "half_index": "001",
+          "naming": 0.19712621689410378,
+          "appearance": 0.2908823985140166,
+          "delta": 0.20655854783738126,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-03:000": {
+          "sample_id": "entity_coverage_v0__film-03__half__000",
+          "source": "film-03",
+          "half_index": "000",
+          "naming": 0.16494764280257013,
+          "appearance": 0.5557632783379765,
+          "delta": 0.40607869900256705,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-03:001": {
+          "sample_id": "entity_coverage_v0__film-03__half__001",
+          "source": "film-03",
+          "half_index": "001",
+          "naming": 0.0,
+          "appearance": 0.3325575244502367,
+          "delta": 0.34711165061850896,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "film-04:000": {
+          "sample_id": "entity_coverage_v0__film-04__half__000",
+          "source": "film-04",
+          "half_index": "000",
+          "naming": 0.0,
+          "appearance": 0.0,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": true,
+          "error": "prediction: model output dict does not contain nested coverage JSON"
+        },
+        "film-04:001": {
+          "sample_id": "entity_coverage_v0__film-04__half__001",
+          "source": "film-04",
+          "half_index": "001",
+          "naming": 0.10542243415039637,
+          "appearance": 0.11082790569981388,
+          "delta": 0.07660307868558855,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-05:000": {
+          "sample_id": "entity_coverage_v0__film-05__half__000",
+          "source": "film-05",
+          "half_index": "000",
+          "naming": 0.19395376265869213,
+          "appearance": 0.2081177501899796,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-05:001": {
+          "sample_id": "entity_coverage_v0__film-05__half__001",
+          "source": "film-05",
+          "half_index": "001",
+          "naming": 0.49478571427913326,
+          "appearance": 0.5313334570595529,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-06:000": {
+          "sample_id": "entity_coverage_v0__film-06__half__000",
+          "source": "film-06",
+          "half_index": "000",
+          "naming": 0.24529832697963197,
+          "appearance": 0.1635322179864213,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-06:001": {
+          "sample_id": "entity_coverage_v0__film-06__half__001",
+          "source": "film-06",
+          "half_index": "001",
+          "naming": 0.4549748882724671,
+          "appearance": 0.40997135141683244,
+          "delta": 0.0,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "sport-01:000": {
+          "sample_id": "entity_coverage_v0__sport-01__half__000",
+          "source": "sport-01",
+          "half_index": "000",
+          "naming": 0.6902740032221343,
+          "appearance": 0.2566591481317895,
+          "delta": -0.3309511958376289,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        }
+      }
+    },
+    {
+      "name": "a1790-entity-sme4x-s400",
+      "half_all": {
+        "naming": 0.3030366138394337,
+        "appearance": 0.30739627359683097,
+        "delta": 0.04717775473386983,
+        "characters": 77,
+        "samples": 13,
+        "failures": 1
+      },
+      "films_only": {
+        "naming": 0.27597926448755644,
+        "appearance": 0.2983233511174369,
+        "delta": 0.05219666481194109,
+        "characters": 70,
+        "samples": 12,
+        "failures": 1
+      },
+      "film_first": {
+        "naming": 0.29050811242211305,
+        "appearance": 0.2676501435578934,
+        "delta": 0.03157543259267831,
+        "characters": 35,
+        "samples": 6,
+        "failures": 1
+      },
+      "film_second": {
+        "naming": 0.2620557852169397,
+        "appearance": 0.3289965586769804,
+        "delta": 0.07195867902206791,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "samples": {
+        "film-01:000": {
+          "sample_id": "entity_coverage_v0__film-01__half__000",
+          "source": "film-01",
+          "half_index": "000",
+          "naming": 0.37433156394559913,
+          "appearance": 0.3081017104657458,
+          "delta": -0.06622985347985336,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-01:001": {
+          "sample_id": "entity_coverage_v0__film-01__half__001",
+          "source": "film-01",
+          "half_index": "001",
+          "naming": 0.05870868017949447,
+          "appearance": 0.05870868017949447,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-02:000": {
+          "sample_id": "entity_coverage_v0__film-02__half__000",
+          "source": "film-02",
+          "half_index": "000",
+          "naming": 0.1818061867952946,
+          "appearance": 0.16314078561838144,
+          "delta": 0.04166068780791127,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-02:001": {
+          "sample_id": "entity_coverage_v0__film-02__half__001",
+          "source": "film-02",
+          "half_index": "001",
+          "naming": 0.4485062997151261,
+          "appearance": 0.5493834399535614,
+          "delta": 0.19605100538028317,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-03:000": {
+          "sample_id": "entity_coverage_v0__film-03__half__000",
+          "source": "film-03",
+          "half_index": "000",
+          "naming": 0.48184319732016984,
+          "appearance": 0.7208995434378241,
+          "delta": 0.2340252122535876,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-03:001": {
+          "sample_id": "entity_coverage_v0__film-03__half__001",
+          "source": "film-03",
+          "half_index": "001",
+          "naming": 0.005579092030776148,
+          "appearance": 0.31619262364743644,
+          "delta": 0.28471382009719515,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "film-04:000": {
+          "sample_id": "entity_coverage_v0__film-04__half__000",
+          "source": "film-04",
+          "half_index": "000",
+          "naming": 0.0,
+          "appearance": 0.0,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": true,
+          "error": "prediction: model output dict does not contain nested coverage JSON"
+        },
+        "film-04:001": {
+          "sample_id": "entity_coverage_v0__film-04__half__001",
+          "source": "film-04",
+          "half_index": "001",
+          "naming": 0.15273118909832492,
+          "appearance": 0.07636559454916246,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-05:000": {
+          "sample_id": "entity_coverage_v0__film-05__half__000",
+          "source": "film-05",
+          "half_index": "000",
+          "naming": 0.1652346684666751,
+          "appearance": 0.3113532905334522,
+          "delta": 0.09885212344207493,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-05:001": {
+          "sample_id": "entity_coverage_v0__film-05__half__001",
+          "source": "film-05",
+          "half_index": "001",
+          "naming": 0.3996591651931161,
+          "appearance": 0.4530408464592267,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-06:000": {
+          "sample_id": "entity_coverage_v0__film-06__half__000",
+          "source": "film-06",
+          "half_index": "000",
+          "naming": 0.4872612610721466,
+          "appearance": 0.37469132108633657,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-06:001": {
+          "sample_id": "entity_coverage_v0__film-06__half__001",
+          "source": "film-06",
+          "half_index": "001",
+          "naming": 0.6898373112221133,
+          "appearance": 0.6625784264950056,
+          "delta": 0.0,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "sport-01:000": {
+          "sample_id": "entity_coverage_v0__sport-01__half__000",
+          "source": "sport-01",
+          "half_index": "000",
+          "naming": 0.5573756977470806,
+          "appearance": 0.3981254983907719,
+          "delta": 0.0,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        }
+      }
+    },
+    {
+      "name": "a1790-entity-sme4x-s800",
+      "half_all": {
+        "naming": 0.2594262559291804,
+        "appearance": 0.2832936309890881,
+        "delta": 0.0693006657307244,
+        "characters": 77,
+        "samples": 13,
+        "failures": 1
+      },
+      "films_only": {
+        "naming": 0.2279939950341574,
+        "appearance": 0.27198802920639714,
+        "delta": 0.0766730769786738,
+        "characters": 70,
+        "samples": 12,
+        "failures": 1
+      },
+      "film_first": {
+        "naming": 0.18515875126118952,
+        "appearance": 0.2165983791379658,
+        "delta": 0.08461455416018242,
+        "characters": 35,
+        "samples": 6,
+        "failures": 1
+      },
+      "film_second": {
+        "naming": 0.2690444369832516,
+        "appearance": 0.32737767927482847,
+        "delta": 0.06906249467972804,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "samples": {
+        "film-01:000": {
+          "sample_id": "entity_coverage_v0__film-01__half__000",
+          "source": "film-01",
+          "half_index": "000",
+          "naming": 0.3372227226876681,
+          "appearance": 0.2932235617651904,
+          "delta": -0.04399916092247775,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-01:001": {
+          "sample_id": "entity_coverage_v0__film-01__half__001",
+          "source": "film-01",
+          "half_index": "001",
+          "naming": 0.05873352635121252,
+          "appearance": 0.05873352635121252,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-02:000": {
+          "sample_id": "entity_coverage_v0__film-02__half__000",
+          "source": "film-02",
+          "half_index": "000",
+          "naming": 0.11445250386634426,
+          "appearance": 0.14010317478567302,
+          "delta": 0.06735368292895033,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-02:001": {
+          "sample_id": "entity_coverage_v0__film-02__half__001",
+          "source": "film-02",
+          "half_index": "001",
+          "naming": 0.45409701199732183,
+          "appearance": 0.5598012630787478,
+          "delta": 0.20593775948096985,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-03:000": {
+          "sample_id": "entity_coverage_v0__film-03__half__000",
+          "source": "film-03",
+          "half_index": "000",
+          "naming": 0.19405588705207155,
+          "appearance": 0.6586205366586239,
+          "delta": 0.4730801209237576,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-03:001": {
+          "sample_id": "entity_coverage_v0__film-03__half__001",
+          "source": "film-03",
+          "half_index": "001",
+          "naming": 0.0,
+          "appearance": 0.17316808517794657,
+          "delta": 0.13614875815236777,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "film-04:000": {
+          "sample_id": "entity_coverage_v0__film-04__half__000",
+          "source": "film-04",
+          "half_index": "000",
+          "naming": 0.0,
+          "appearance": 0.0,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": true,
+          "error": "prediction: model output dict does not contain nested coverage JSON"
+        },
+        "film-04:001": {
+          "sample_id": "entity_coverage_v0__film-04__half__001",
+          "source": "film-04",
+          "half_index": "001",
+          "naming": 0.11731572739449425,
+          "appearance": 0.058657863697247126,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-05:000": {
+          "sample_id": "entity_coverage_v0__film-05__half__000",
+          "source": "film-05",
+          "half_index": "000",
+          "naming": 0.0035635964912280687,
+          "appearance": 0.22682463711275902,
+          "delta": 0.19627609988697955,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-05:001": {
+          "sample_id": "entity_coverage_v0__film-05__half__001",
+          "source": "film-05",
+          "half_index": "001",
+          "naming": 0.48585392706799,
+          "appearance": 0.6498946342238503,
+          "delta": 0.16503052042036406,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-06:000": {
+          "sample_id": "entity_coverage_v0__film-06__half__000",
+          "source": "film-06",
+          "half_index": "000",
+          "naming": 0.32477474516310456,
+          "appearance": 0.21651649677540305,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-06:001": {
+          "sample_id": "entity_coverage_v0__film-06__half__001",
+          "source": "film-06",
+          "half_index": "001",
+          "naming": 0.7038874006792126,
+          "appearance": 0.6505053805194752,
+          "delta": 0.0,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "sport-01:000": {
+          "sample_id": "entity_coverage_v0__sport-01__half__000",
+          "source": "sport-01",
+          "half_index": "000",
+          "naming": 0.554889508342397,
+          "appearance": 0.39634964881599793,
+          "delta": 0.0,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        }
+      }
+    },
+    {
+      "name": "a1790-entity-sme4x-s1200",
+      "half_all": {
+        "naming": 0.2571836647416372,
+        "appearance": 0.25410874078320983,
+        "delta": 0.06940329384503609,
+        "characters": 77,
+        "samples": 13,
+        "failures": 0
+      },
+      "films_only": {
+        "naming": 0.21111022447775446,
+        "appearance": 0.23021432891709262,
+        "delta": 0.07678662297748673,
+        "characters": 70,
+        "samples": 12,
+        "failures": 0
+      },
+      "film_first": {
+        "naming": 0.24767184126552544,
+        "appearance": 0.26376589759688185,
+        "delta": 0.08044201715174892,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "film_second": {
+        "naming": 0.17607200838947398,
+        "appearance": 0.19666276023730336,
+        "delta": 0.0732835368938188,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "samples": {
+        "film-01:000": {
+          "sample_id": "entity_coverage_v0__film-01__half__000",
+          "source": "film-01",
+          "half_index": "000",
+          "naming": 0.3443074390937107,
+          "appearance": 0.27807758561385737,
+          "delta": -0.06622985347985336,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-01:001": {
+          "sample_id": "entity_coverage_v0__film-01__half__001",
+          "source": "film-01",
+          "half_index": "001",
+          "naming": 0.0,
+          "appearance": 0.0,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-02:000": {
+          "sample_id": "entity_coverage_v0__film-02__half__000",
+          "source": "film-02",
+          "half_index": "000",
+          "naming": 0.11445250386634426,
+          "appearance": 0.15722540555201212,
+          "delta": 0.10064396847924452,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-02:001": {
+          "sample_id": "entity_coverage_v0__film-02__half__001",
+          "source": "film-02",
+          "half_index": "001",
+          "naming": 0.0,
+          "appearance": 0.07077585772517511,
+          "delta": 0.1651436680254086,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-03:000": {
+          "sample_id": "entity_coverage_v0__film-03__half__000",
+          "source": "film-03",
+          "half_index": "000",
+          "naming": 0.10341987659821524,
+          "appearance": 0.6072976395240034,
+          "delta": 0.4692797398477941,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-03:001": {
+          "sample_id": "entity_coverage_v0__film-03__half__001",
+          "source": "film-03",
+          "half_index": "001",
+          "naming": 0.0,
+          "appearance": 0.33205006278249594,
+          "delta": 0.3158434703438563,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "film-04:000": {
+          "sample_id": "entity_coverage_v0__film-04__half__000",
+          "source": "film-04",
+          "half_index": "000",
+          "naming": 0.19648827239502228,
+          "appearance": 0.20233572301564623,
+          "delta": 0.13444359759705735,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-04:001": {
+          "sample_id": "entity_coverage_v0__film-04__half__001",
+          "source": "film-04",
+          "half_index": "001",
+          "naming": 0.11738612950331055,
+          "appearance": 0.058693064751655276,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-05:000": {
+          "sample_id": "entity_coverage_v0__film-05__half__000",
+          "source": "film-05",
+          "half_index": "000",
+          "naming": 0.18388591272290392,
+          "appearance": 0.19387674393002777,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-05:001": {
+          "sample_id": "entity_coverage_v0__film-05__half__001",
+          "source": "film-05",
+          "half_index": "001",
+          "naming": 0.39920807298211874,
+          "appearance": 0.4248528269789733,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-06:000": {
+          "sample_id": "entity_coverage_v0__film-06__half__000",
+          "source": "film-06",
+          "half_index": "000",
+          "naming": 0.40984493635058533,
+          "appearance": 0.27322995756705687,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-06:001": {
+          "sample_id": "entity_coverage_v0__film-06__half__001",
+          "source": "film-06",
+          "half_index": "001",
+          "naming": 0.6396398660969442,
+          "appearance": 0.5117118928775554,
+          "delta": 0.0,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "sport-01:000": {
+          "sample_id": "entity_coverage_v0__sport-01__half__000",
+          "source": "sport-01",
+          "half_index": "000",
+          "naming": 0.6902740032221343,
+          "appearance": 0.4930528594443816,
+          "delta": 0.0,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        }
+      }
+    },
+    {
+      "name": "consol-h0mn2x-s400",
+      "half_all": {
+        "naming": 0.2866324005654127,
+        "appearance": 0.3050761370565496,
+        "delta": 0.0682922667912659,
+        "characters": 77,
+        "samples": 13,
+        "failures": 1
+      },
+      "films_only": {
+        "naming": 0.24285998481442966,
+        "appearance": 0.28571995728901506,
+        "delta": 0.0755574015562942,
+        "characters": 70,
+        "samples": 12,
+        "failures": 1
+      },
+      "film_first": {
+        "naming": 0.31605729866913757,
+        "appearance": 0.4067835795658782,
+        "delta": 0.1195468790668446,
+        "characters": 35,
+        "samples": 6,
+        "failures": 1
+      },
+      "film_second": {
+        "naming": 0.1727125590370013,
+        "appearance": 0.164656335012152,
+        "delta": 0.03340081894201673,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "samples": {
+        "film-01:000": {
+          "sample_id": "entity_coverage_v0__film-01__half__000",
+          "source": "film-01",
+          "half_index": "000",
+          "naming": 0.5109240203050543,
+          "appearance": 0.5425516609644283,
+          "delta": 0.03162764065937391,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-01:001": {
+          "sample_id": "entity_coverage_v0__film-01__half__001",
+          "source": "film-01",
+          "half_index": "001",
+          "naming": 0.05873352635121252,
+          "appearance": 0.05873352635121252,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-02:000": {
+          "sample_id": "entity_coverage_v0__film-02__half__000",
+          "source": "film-02",
+          "half_index": "000",
+          "naming": 0.23663681017047097,
+          "appearance": 0.5899789526567873,
+          "delta": 0.21346304372134664,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-02:001": {
+          "sample_id": "entity_coverage_v0__film-02__half__001",
+          "source": "film-02",
+          "half_index": "001",
+          "naming": 0.06175186799400695,
+          "appearance": 0.057275153170441795,
+          "delta": 0.0,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-03:000": {
+          "sample_id": "entity_coverage_v0__film-03__half__000",
+          "source": "film-03",
+          "half_index": "000",
+          "naming": 0.28981445148270574,
+          "appearance": 0.7720261049825965,
+          "delta": 0.5125089540544782,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-03:001": {
+          "sample_id": "entity_coverage_v0__film-03__half__001",
+          "source": "film-03",
+          "half_index": "001",
+          "naming": 0.0,
+          "appearance": 0.2151921348771098,
+          "delta": 0.2004049136521004,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "film-04:000": {
+          "sample_id": "entity_coverage_v0__film-04__half__000",
+          "source": "film-04",
+          "half_index": "000",
+          "naming": 0.0,
+          "appearance": 0.0,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": true,
+          "error": "prediction: model output dict does not contain nested coverage JSON"
+        },
+        "film-04:001": {
+          "sample_id": "entity_coverage_v0__film-04__half__001",
+          "source": "film-04",
+          "half_index": "001",
+          "naming": 0.12971904225114225,
+          "appearance": 0.06485952112557113,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-05:000": {
+          "sample_id": "entity_coverage_v0__film-05__half__000",
+          "source": "film-05",
+          "half_index": "000",
+          "naming": 0.14960262876356403,
+          "appearance": 0.2967351112483577,
+          "delta": 0.12729879375123593,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-05:001": {
+          "sample_id": "entity_coverage_v0__film-05__half__001",
+          "source": "film-05",
+          "half_index": "001",
+          "naming": 0.33610224248387893,
+          "appearance": 0.27392396363556654,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-06:000": {
+          "sample_id": "entity_coverage_v0__film-06__half__000",
+          "source": "film-06",
+          "half_index": "000",
+          "naming": 0.5439030190774036,
+          "appearance": 0.4295362975829731,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-06:001": {
+          "sample_id": "entity_coverage_v0__film-06__half__001",
+          "source": "film-06",
+          "half_index": "001",
+          "naming": 0.5200654395856323,
+          "appearance": 0.4638223594385133,
+          "delta": 0.0,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "sport-01:000": {
+          "sample_id": "entity_coverage_v0__sport-01__half__000",
+          "source": "sport-01",
+          "half_index": "000",
+          "naming": 0.6980931086246533,
+          "appearance": 0.49863793473189527,
+          "delta": 0.0,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        }
+      }
+    },
+    {
+      "name": "consol-h0mn2x-s800",
+      "half_all": {
+        "naming": 0.31942409039946196,
+        "appearance": 0.323586863980411,
+        "delta": 0.061307834738314734,
+        "characters": 77,
+        "samples": 13,
+        "failures": 0
+      },
+      "films_only": {
+        "naming": 0.27997197201407137,
+        "appearance": 0.30664026443401393,
+        "delta": 0.06782994481685886,
+        "characters": 70,
+        "samples": 12,
+        "failures": 0
+      },
+      "film_first": {
+        "naming": 0.33914926888986674,
+        "appearance": 0.4058072757497209,
+        "delta": 0.10863993165499712,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "film_second": {
+        "naming": 0.2232603958414341,
+        "appearance": 0.20747325311830692,
+        "delta": 0.02872037409697635,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "samples": {
+        "film-01:000": {
+          "sample_id": "entity_coverage_v0__film-01__half__000",
+          "source": "film-01",
+          "half_index": "000",
+          "naming": 0.5392749465562682,
+          "appearance": 0.5392749465562682,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-01:001": {
+          "sample_id": "entity_coverage_v0__film-01__half__001",
+          "source": "film-01",
+          "half_index": "001",
+          "naming": 0.11874675671375608,
+          "appearance": 0.11874675671375608,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-02:000": {
+          "sample_id": "entity_coverage_v0__film-02__half__000",
+          "source": "film-02",
+          "half_index": "000",
+          "naming": 0.18065171236038038,
+          "appearance": 0.45184432330444757,
+          "delta": 0.1474944207750051,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-02:001": {
+          "sample_id": "entity_coverage_v0__film-02__half__001",
+          "source": "film-02",
+          "half_index": "001",
+          "naming": 0.0,
+          "appearance": 0.06876879200022792,
+          "delta": 0.1604605146671985,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-03:000": {
+          "sample_id": "entity_coverage_v0__film-03__half__000",
+          "source": "film-03",
+          "half_index": "000",
+          "naming": 0.17320958634834152,
+          "appearance": 0.41777216349620255,
+          "delta": 0.27182110397978626,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-03:001": {
+          "sample_id": "entity_coverage_v0__film-03__half__001",
+          "source": "film-03",
+          "half_index": "001",
+          "naming": 0.0,
+          "appearance": 0.06545181348608467,
+          "delta": 0.05197685858145924,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "film-04:000": {
+          "sample_id": "entity_coverage_v0__film-04__half__000",
+          "source": "film-04",
+          "half_index": "000",
+          "naming": 0.18782672319122104,
+          "appearance": 0.31577321650842805,
+          "delta": 0.15917828999727274,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-04:001": {
+          "sample_id": "entity_coverage_v0__film-04__half__001",
+          "source": "film-04",
+          "half_index": "001",
+          "naming": 0.12698406259431494,
+          "appearance": 0.06349203129715747,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-05:000": {
+          "sample_id": "entity_coverage_v0__film-05__half__000",
+          "source": "film-05",
+          "half_index": "000",
+          "naming": 0.19366235042931979,
+          "appearance": 0.3591286644422349,
+          "delta": 0.2013528979371563,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-05:001": {
+          "sample_id": "entity_coverage_v0__film-05__half__001",
+          "source": "film-05",
+          "half_index": "001",
+          "naming": 0.47251029187338994,
+          "appearance": 0.5130703808649557,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-06:000": {
+          "sample_id": "entity_coverage_v0__film-06__half__000",
+          "source": "film-06",
+          "half_index": "000",
+          "naming": 0.5427264162375791,
+          "appearance": 0.36181761082505276,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-06:001": {
+          "sample_id": "entity_coverage_v0__film-06__half__001",
+          "source": "film-06",
+          "half_index": "001",
+          "naming": 0.6800754584786131,
+          "appearance": 0.6360449867178208,
+          "delta": 0.0,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "sport-01:000": {
+          "sample_id": "entity_coverage_v0__sport-01__half__000",
+          "source": "sport-01",
+          "half_index": "000",
+          "naming": 0.6902740032221343,
+          "appearance": 0.4930528594443816,
+          "delta": 0.0,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        }
+      }
+    },
+    {
+      "name": "consol-h0mn2x-s1200",
+      "half_all": {
+        "naming": 0.23798074849458337,
+        "appearance": 0.28084272398240917,
+        "delta": 0.07192459867713277,
+        "characters": 77,
+        "samples": 13,
+        "failures": 1
+      },
+      "films_only": {
+        "naming": 0.18986444480016307,
+        "appearance": 0.2596217104362119,
+        "delta": 0.07957615172789158,
+        "characters": 70,
+        "samples": 12,
+        "failures": 1
+      },
+      "film_first": {
+        "naming": 0.18812505668846266,
+        "appearance": 0.30866668285492116,
+        "delta": 0.11146901629963996,
+        "characters": 35,
+        "samples": 6,
+        "failures": 1
+      },
+      "film_second": {
+        "naming": 0.19153135840720928,
+        "appearance": 0.21057673801750273,
+        "delta": 0.04901215651329937,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "samples": {
+        "film-01:000": {
+          "sample_id": "entity_coverage_v0__film-01__half__000",
+          "source": "film-01",
+          "half_index": "000",
+          "naming": 0.0,
+          "appearance": 0.0,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-01:001": {
+          "sample_id": "entity_coverage_v0__film-01__half__001",
+          "source": "film-01",
+          "half_index": "001",
+          "naming": 0.06161928321401949,
+          "appearance": 0.06161928321401949,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-02:000": {
+          "sample_id": "entity_coverage_v0__film-02__half__000",
+          "source": "film-02",
+          "half_index": "000",
+          "naming": 0.23083445558381951,
+          "appearance": 0.5441505561756305,
+          "delta": 0.21585804132973954,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-02:001": {
+          "sample_id": "entity_coverage_v0__film-02__half__001",
+          "source": "film-02",
+          "half_index": "001",
+          "naming": 0.20241936342629574,
+          "appearance": 0.2384259108861881,
+          "delta": 0.07706867569980129,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-03:000": {
+          "sample_id": "entity_coverage_v0__film-03__half__000",
+          "source": "film-03",
+          "half_index": "000",
+          "naming": 0.17070136272731443,
+          "appearance": 0.5606119603039657,
+          "delta": 0.41350546386636133,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-03:001": {
+          "sample_id": "entity_coverage_v0__film-03__half__001",
+          "source": "film-03",
+          "half_index": "001",
+          "naming": 0.0,
+          "appearance": 0.21216291366404633,
+          "delta": 0.23627143230494524,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "film-04:000": {
+          "sample_id": "entity_coverage_v0__film-04__half__000",
+          "source": "film-04",
+          "half_index": "000",
+          "naming": 0.0,
+          "appearance": 0.0,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": true,
+          "error": "prediction: model output dict does not contain nested coverage JSON"
+        },
+        "film-04:001": {
+          "sample_id": "entity_coverage_v0__film-04__half__001",
+          "source": "film-04",
+          "half_index": "001",
+          "naming": 0.11952197320986055,
+          "appearance": 0.059760986604930275,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-05:000": {
+          "sample_id": "entity_coverage_v0__film-05__half__000",
+          "source": "film-05",
+          "half_index": "000",
+          "naming": 0.3326566591928761,
+          "appearance": 0.5578076193132364,
+          "delta": 0.22523228643447216,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-05:001": {
+          "sample_id": "entity_coverage_v0__film-05__half__001",
+          "source": "film-05",
+          "half_index": "001",
+          "naming": 0.34838887024820503,
+          "appearance": 0.37049447419849796,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-06:000": {
+          "sample_id": "entity_coverage_v0__film-06__half__000",
+          "source": "film-06",
+          "half_index": "000",
+          "naming": 0.5310747178306527,
+          "appearance": 0.42010028137066985,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-06:001": {
+          "sample_id": "entity_coverage_v0__film-06__half__001",
+          "source": "film-06",
+          "half_index": "001",
+          "naming": 0.5241310771564903,
+          "appearance": 0.46212167943429916,
+          "delta": 0.0,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "sport-01:000": {
+          "sample_id": "entity_coverage_v0__sport-01__half__000",
+          "source": "sport-01",
+          "half_index": "000",
+          "naming": 0.6902740032221343,
+          "appearance": 0.4930528594443816,
+          "delta": 0.0,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        }
+      }
+    },
+    {
+      "name": "consol-h0mn2x-s1600",
+      "half_all": {
+        "naming": 0.3308720420568321,
+        "appearance": 0.2959529738919337,
+        "delta": 0.022441052268538073,
+        "characters": 77,
+        "samples": 13,
+        "failures": 1
+      },
+      "films_only": {
+        "naming": 0.29141658752484934,
+        "appearance": 0.2754230345198792,
+        "delta": 0.02482839825455276,
+        "characters": 70,
+        "samples": 12,
+        "failures": 1
+      },
+      "film_first": {
+        "naming": 0.29786912515351943,
+        "appearance": 0.3346927179254922,
+        "delta": 0.06296741630568513,
+        "characters": 35,
+        "samples": 6,
+        "failures": 1
+      },
+      "film_second": {
+        "naming": 0.2852329056307072,
+        "appearance": 0.2161533511142662,
+        "delta": -0.011721494044449084,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "samples": {
+        "film-01:000": {
+          "sample_id": "entity_coverage_v0__film-01__half__000",
+          "source": "film-01",
+          "half_index": "000",
+          "naming": 0.4830000554660467,
+          "appearance": 0.4830000554660467,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-01:001": {
+          "sample_id": "entity_coverage_v0__film-01__half__001",
+          "source": "film-01",
+          "half_index": "001",
+          "naming": 0.2587279545305552,
+          "appearance": 0.2587279545305552,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-02:000": {
+          "sample_id": "entity_coverage_v0__film-02__half__000",
+          "source": "film-02",
+          "half_index": "000",
+          "naming": 0.41105480246704945,
+          "appearance": 0.484724041926762,
+          "delta": 0.0,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-02:001": {
+          "sample_id": "entity_coverage_v0__film-02__half__001",
+          "source": "film-02",
+          "half_index": "001",
+          "naming": 0.3384398003280715,
+          "appearance": 0.08876640955496984,
+          "delta": -0.13131817803314194,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-03:000": {
+          "sample_id": "entity_coverage_v0__film-03__half__000",
+          "source": "film-03",
+          "half_index": "000",
+          "naming": 0.0,
+          "appearance": 0.5339512318289013,
+          "delta": 0.4827501916769193,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-03:001": {
+          "sample_id": "entity_coverage_v0__film-03__half__001",
+          "source": "film-03",
+          "half_index": "001",
+          "naming": 0.0,
+          "appearance": 0.046398062027446826,
+          "delta": 0.028159669258161945,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "film-04:000": {
+          "sample_id": "entity_coverage_v0__film-04__half__000",
+          "source": "film-04",
+          "half_index": "000",
+          "naming": 0.0,
+          "appearance": 0.0,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": true,
+          "error": "prediction: model output dict does not contain nested coverage JSON"
+        },
+        "film-04:001": {
+          "sample_id": "entity_coverage_v0__film-04__half__001",
+          "source": "film-04",
+          "half_index": "001",
+          "naming": 0.143746235615881,
+          "appearance": 0.0718731178079405,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-05:000": {
+          "sample_id": "entity_coverage_v0__film-05__half__000",
+          "source": "film-05",
+          "half_index": "000",
+          "naming": 0.3417962660342307,
+          "appearance": 0.39823380839054545,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-05:001": {
+          "sample_id": "entity_coverage_v0__film-05__half__001",
+          "source": "film-05",
+          "half_index": "001",
+          "naming": 0.47168507760689155,
+          "appearance": 0.5109224165031104,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-06:000": {
+          "sample_id": "entity_coverage_v0__film-06__half__000",
+          "source": "film-06",
+          "half_index": "000",
+          "naming": 0.4236090850577065,
+          "appearance": 0.2824060567051377,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-06:001": {
+          "sample_id": "entity_coverage_v0__film-06__half__001",
+          "source": "film-06",
+          "half_index": "001",
+          "naming": 0.5719656079213071,
+          "appearance": 0.5081939552635995,
+          "delta": 0.0,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "sport-01:000": {
+          "sample_id": "entity_coverage_v0__sport-01__half__000",
+          "source": "sport-01",
+          "half_index": "000",
+          "naming": 0.7017533146574703,
+          "appearance": 0.5012523676124788,
+          "delta": 0.0,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        }
+      }
+    },
+    {
+      "name": "consol-h0mn2x-s2000",
+      "half_all": {
+        "naming": 0.260651754125254,
+        "appearance": 0.29863086527683685,
+        "delta": 0.0974215904501429,
+        "characters": 77,
+        "samples": 13,
+        "failures": 1
+      },
+      "films_only": {
+        "naming": 0.22455417823469048,
+        "appearance": 0.2856390255547669,
+        "delta": 0.10778558943420065,
+        "characters": 70,
+        "samples": 12,
+        "failures": 1
+      },
+      "film_first": {
+        "naming": 0.26568820090247797,
+        "appearance": 0.3165761684733595,
+        "delta": 0.1032957819321586,
+        "characters": 35,
+        "samples": 6,
+        "failures": 1
+      },
+      "film_second": {
+        "naming": 0.18513407317806083,
+        "appearance": 0.2547018826361744,
+        "delta": 0.1120883216236576,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "samples": {
+        "film-01:000": {
+          "sample_id": "entity_coverage_v0__film-01__half__000",
+          "source": "film-01",
+          "half_index": "000",
+          "naming": 0.5722469015902306,
+          "appearance": 0.616391233155248,
+          "delta": 0.04414433156501744,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-01:001": {
+          "sample_id": "entity_coverage_v0__film-01__half__001",
+          "source": "film-01",
+          "half_index": "001",
+          "naming": 0.05873352635121252,
+          "appearance": 0.05873352635121252,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-02:000": {
+          "sample_id": "entity_coverage_v0__film-02__half__000",
+          "source": "film-02",
+          "half_index": "000",
+          "naming": 0.21763287984638632,
+          "appearance": 0.4583336067874941,
+          "delta": 0.19636169074371349,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-02:001": {
+          "sample_id": "entity_coverage_v0__film-02__half__001",
+          "source": "film-02",
+          "half_index": "001",
+          "naming": 0.2071216222949296,
+          "appearance": 0.36360089611347357,
+          "delta": 0.32288925459019874,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-03:000": {
+          "sample_id": "entity_coverage_v0__film-03__half__000",
+          "source": "film-03",
+          "half_index": "000",
+          "naming": 0.032275003800194574,
+          "appearance": 0.4614245939532761,
+          "delta": 0.47375659178034724,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-03:001": {
+          "sample_id": "entity_coverage_v0__film-03__half__001",
+          "source": "film-03",
+          "half_index": "001",
+          "naming": 0.0,
+          "appearance": 0.45006560412971297,
+          "delta": 0.4303629887992966,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "film-04:000": {
+          "sample_id": "entity_coverage_v0__film-04__half__000",
+          "source": "film-04",
+          "half_index": "000",
+          "naming": 0.0,
+          "appearance": 0.0,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": true,
+          "error": "prediction: model output dict does not contain nested coverage JSON"
+        },
+        "film-04:001": {
+          "sample_id": "entity_coverage_v0__film-04__half__001",
+          "source": "film-04",
+          "half_index": "001",
+          "naming": 0.14666265071378165,
+          "appearance": 0.07333132535689083,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-05:000": {
+          "sample_id": "entity_coverage_v0__film-05__half__000",
+          "source": "film-05",
+          "half_index": "000",
+          "naming": 0.03537059229400443,
+          "appearance": 0.12656827272916918,
+          "delta": 0.03352738249245365,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-05:001": {
+          "sample_id": "entity_coverage_v0__film-05__half__001",
+          "source": "film-05",
+          "half_index": "001",
+          "naming": 0.3850684335271472,
+          "appearance": 0.3035264122067051,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-06:000": {
+          "sample_id": "entity_coverage_v0__film-06__half__000",
+          "source": "film-06",
+          "half_index": "000",
+          "naming": 0.45537794584846353,
+          "appearance": 0.30358529723230904,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-06:001": {
+          "sample_id": "entity_coverage_v0__film-06__half__001",
+          "source": "film-06",
+          "half_index": "001",
+          "naming": 0.4318989569612068,
+          "appearance": 0.3931748378068001,
+          "delta": 0.0,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "sport-01:000": {
+          "sample_id": "entity_coverage_v0__sport-01__half__000",
+          "source": "sport-01",
+          "half_index": "000",
+          "naming": 0.5999689674965508,
+          "appearance": 0.42854926249753633,
+          "delta": 0.0,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        }
+      }
+    },
+    {
+      "name": "soccer-lvreason-mcq-s400",
+      "half_all": {
+        "naming": 0.21182174674410376,
+        "appearance": 0.3043429896636012,
+        "delta": 0.12685114811541987,
+        "characters": 77,
+        "samples": 13,
+        "failures": 0
+      },
+      "films_only": {
+        "naming": 0.16349504567393996,
+        "appearance": 0.2871992360011296,
+        "delta": 0.14034595110642198,
+        "characters": 70,
+        "samples": 12,
+        "failures": 0
+      },
+      "film_first": {
+        "naming": 0.1855278058419119,
+        "appearance": 0.3463859711884799,
+        "delta": 0.1838482868299603,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "film_second": {
+        "naming": 0.14238031717963356,
+        "appearance": 0.22801250081377933,
+        "delta": 0.09865621270469772,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "samples": {
+        "film-01:000": {
+          "sample_id": "entity_coverage_v0__film-01__half__000",
+          "source": "film-01",
+          "half_index": "000",
+          "naming": 0.2929182201437431,
+          "appearance": 0.2929182201437431,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-01:001": {
+          "sample_id": "entity_coverage_v0__film-01__half__001",
+          "source": "film-01",
+          "half_index": "001",
+          "naming": 0.05873352635121252,
+          "appearance": 0.05873352635121252,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-02:000": {
+          "sample_id": "entity_coverage_v0__film-02__half__000",
+          "source": "film-02",
+          "half_index": "000",
+          "naming": 0.2060640896680557,
+          "appearance": 0.6366946725303941,
+          "delta": 0.4198010542266366,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-02:001": {
+          "sample_id": "entity_coverage_v0__film-02__half__001",
+          "source": "film-02",
+          "half_index": "001",
+          "naming": 0.06267217630853993,
+          "appearance": 0.35537429258322406,
+          "delta": 0.3649037991212151,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-03:000": {
+          "sample_id": "entity_coverage_v0__film-03__half__000",
+          "source": "film-03",
+          "half_index": "000",
+          "naming": 0.0,
+          "appearance": 0.35666752246586386,
+          "delta": 0.3354150562077793,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-03:001": {
+          "sample_id": "entity_coverage_v0__film-03__half__001",
+          "source": "film-03",
+          "half_index": "001",
+          "naming": 0.08896827841752221,
+          "appearance": 0.2991594164510899,
+          "delta": 0.19239930570005087,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "film-04:000": {
+          "sample_id": "entity_coverage_v0__film-04__half__000",
+          "source": "film-04",
+          "half_index": "000",
+          "naming": 0.0,
+          "appearance": 0.22290896203278038,
+          "delta": 0.34331987064503366,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-04:001": {
+          "sample_id": "entity_coverage_v0__film-04__half__001",
+          "source": "film-04",
+          "half_index": "001",
+          "naming": 0.11279824097008548,
+          "appearance": 0.05639912048504274,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-05:000": {
+          "sample_id": "entity_coverage_v0__film-05__half__000",
+          "source": "film-05",
+          "half_index": "000",
+          "naming": 0.0034069548872180436,
+          "appearance": 0.15334478465075074,
+          "delta": 0.19652759440190135,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-05:001": {
+          "sample_id": "entity_coverage_v0__film-05__half__001",
+          "source": "film-05",
+          "half_index": "001",
+          "naming": 0.47222097816379743,
+          "appearance": 0.6351113407300386,
+          "delta": 0.16781349491629893,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-06:000": {
+          "sample_id": "entity_coverage_v0__film-06__half__000",
+          "source": "film-06",
+          "half_index": "000",
+          "naming": 0.4703042699589235,
+          "appearance": 0.3476360063821464,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-06:001": {
+          "sample_id": "entity_coverage_v0__film-06__half__001",
+          "source": "film-06",
+          "half_index": "001",
+          "naming": 0.16324522830912183,
+          "appearance": 0.13059618264729747,
+          "delta": 0.0,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "sport-01:000": {
+          "sample_id": "entity_coverage_v0__sport-01__half__000",
+          "source": "sport-01",
+          "half_index": "000",
+          "naming": 0.6660927368036431,
+          "appearance": 0.4757805262883165,
+          "delta": 0.0,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        }
+      }
+    },
+    {
+      "name": "soccer-lvreason-mcq-s800",
+      "half_all": {
+        "naming": 0.24773685657799488,
+        "appearance": 0.24629499635825108,
+        "delta": 0.04974470209025998,
+        "characters": 77,
+        "samples": 13,
+        "failures": 0
+      },
+      "films_only": {
+        "naming": 0.21910485082042647,
+        "appearance": 0.2340046595155664,
+        "delta": 0.055036691674330195,
+        "characters": 70,
+        "samples": 12,
+        "failures": 0
+      },
+      "film_first": {
+        "naming": 0.18989154358300378,
+        "appearance": 0.2320432354990898,
+        "delta": 0.07339026657422788,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "film_second": {
+        "naming": 0.24710093692295657,
+        "appearance": 0.23596608353204296,
+        "delta": 0.03744784906192824,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "samples": {
+        "film-01:000": {
+          "sample_id": "entity_coverage_v0__film-01__half__000",
+          "source": "film-01",
+          "half_index": "000",
+          "naming": 0.0,
+          "appearance": 0.0,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-01:001": {
+          "sample_id": "entity_coverage_v0__film-01__half__001",
+          "source": "film-01",
+          "half_index": "001",
+          "naming": 0.12938527817198694,
+          "appearance": 0.12938527817198694,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-02:000": {
+          "sample_id": "entity_coverage_v0__film-02__half__000",
+          "source": "film-02",
+          "half_index": "000",
+          "naming": 0.21094198926443042,
+          "appearance": 0.10329357915254797,
+          "delta": -0.029135802469135844,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-02:001": {
+          "sample_id": "entity_coverage_v0__film-02__half__001",
+          "source": "film-02",
+          "half_index": "001",
+          "naming": 0.0,
+          "appearance": 0.06880351925247229,
+          "delta": 0.16054154492243533,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-03:000": {
+          "sample_id": "entity_coverage_v0__film-03__half__000",
+          "source": "film-03",
+          "half_index": "000",
+          "naming": 0.31705408316941613,
+          "appearance": 0.42490909475756766,
+          "delta": 0.14503971291469406,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-03:001": {
+          "sample_id": "entity_coverage_v0__film-03__half__001",
+          "source": "film-03",
+          "half_index": "001",
+          "naming": 0.2657219374546461,
+          "appearance": 0.34830761794220755,
+          "delta": 0.10428093567974293,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "film-04:000": {
+          "sample_id": "entity_coverage_v0__film-04__half__000",
+          "source": "film-04",
+          "half_index": "000",
+          "naming": 0.0,
+          "appearance": 0.30153038480740707,
+          "delta": 0.33506609996764164,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-04:001": {
+          "sample_id": "entity_coverage_v0__film-04__half__001",
+          "source": "film-04",
+          "half_index": "001",
+          "naming": 0.17366938974147506,
+          "appearance": 0.08683469487073753,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-05:000": {
+          "sample_id": "entity_coverage_v0__film-05__half__000",
+          "source": "film-05",
+          "half_index": "000",
+          "naming": 0.3165150795285949,
+          "appearance": 0.36315167109725455,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-05:001": {
+          "sample_id": "entity_coverage_v0__film-05__half__001",
+          "source": "film-05",
+          "half_index": "001",
+          "naming": 0.3047843300830016,
+          "appearance": 0.38098590001000376,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-06:000": {
+          "sample_id": "entity_coverage_v0__film-06__half__000",
+          "source": "film-06",
+          "half_index": "000",
+          "naming": 0.4584930116304407,
+          "appearance": 0.3056620077536271,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-06:001": {
+          "sample_id": "entity_coverage_v0__film-06__half__001",
+          "source": "film-06",
+          "half_index": "001",
+          "naming": 0.6205481295213866,
+          "appearance": 0.6081434742210646,
+          "delta": 0.0,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "sport-01:000": {
+          "sample_id": "entity_coverage_v0__sport-01__half__000",
+          "source": "sport-01",
+          "half_index": "000",
+          "naming": 0.5168777106991375,
+          "appearance": 0.36919836478509815,
+          "delta": 0.0,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        }
+      }
+    },
+    {
+      "name": "soccer-lvreason-mcq-s1200",
+      "half_all": {
+        "naming": 0.2726158706726324,
+        "appearance": 0.3130287041538265,
+        "delta": 0.0967454864883602,
+        "characters": 77,
+        "samples": 13,
+        "failures": 1
+      },
+      "films_only": {
+        "naming": 0.24663056854215307,
+        "appearance": 0.3074117380906994,
+        "delta": 0.10703755951903683,
+        "characters": 70,
+        "samples": 12,
+        "failures": 1
+      },
+      "film_first": {
+        "naming": 0.31242361891409975,
+        "appearance": 0.39450638054929316,
+        "delta": 0.14334322324080598,
+        "characters": 35,
+        "samples": 6,
+        "failures": 1
+      },
+      "film_second": {
+        "naming": 0.18357889526903756,
+        "appearance": 0.22031709563210553,
+        "delta": 0.07224463178567471,
+        "characters": 35,
+        "samples": 6,
+        "failures": 0
+      },
+      "samples": {
+        "film-01:000": {
+          "sample_id": "entity_coverage_v0__film-01__half__000",
+          "source": "film-01",
+          "half_index": "000",
+          "naming": 0.590895895589476,
+          "appearance": 0.6607595503232734,
+          "delta": 0.06986365473379726,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-01:001": {
+          "sample_id": "entity_coverage_v0__film-01__half__001",
+          "source": "film-01",
+          "half_index": "001",
+          "naming": 0.10818291466871947,
+          "appearance": 0.10818291466871947,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-02:000": {
+          "sample_id": "entity_coverage_v0__film-02__half__000",
+          "source": "film-02",
+          "half_index": "000",
+          "naming": 0.22930315664085754,
+          "appearance": 0.6518386628671066,
+          "delta": 0.45337418904233245,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-02:001": {
+          "sample_id": "entity_coverage_v0__film-02__half__001",
+          "source": "film-02",
+          "half_index": "001",
+          "naming": 0.07174446294605287,
+          "appearance": 0.1184612546602073,
+          "delta": 0.10007490487457643,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        },
+        "film-03:000": {
+          "sample_id": "entity_coverage_v0__film-03__half__000",
+          "source": "film-03",
+          "half_index": "000",
+          "naming": 0.2272200090766978,
+          "appearance": 0.7076350393917916,
+          "delta": 0.5058632130029188,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-03:001": {
+          "sample_id": "entity_coverage_v0__film-03__half__001",
+          "source": "film-03",
+          "half_index": "001",
+          "naming": 0.0,
+          "appearance": 0.3699877670774382,
+          "delta": 0.35841161205811595,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "film-04:000": {
+          "sample_id": "entity_coverage_v0__film-04__half__000",
+          "source": "film-04",
+          "half_index": "000",
+          "naming": 0.0,
+          "appearance": 0.0,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": true,
+          "error": "prediction: model output dict does not contain nested coverage JSON"
+        },
+        "film-04:001": {
+          "sample_id": "entity_coverage_v0__film-04__half__001",
+          "source": "film-04",
+          "half_index": "001",
+          "naming": 0.15377977641930637,
+          "appearance": 0.07688988820965319,
+          "delta": 0.0,
+          "characters": 8,
+          "failure": false,
+          "error": null
+        },
+        "film-05:000": {
+          "sample_id": "entity_coverage_v0__film-05__half__000",
+          "source": "film-05",
+          "half_index": "000",
+          "naming": 0.18613652042251635,
+          "appearance": 0.1843416041453715,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-05:001": {
+          "sample_id": "entity_coverage_v0__film-05__half__001",
+          "source": "film-05",
+          "half_index": "001",
+          "naming": 0.4799700066359742,
+          "appearance": 0.5058302351374495,
+          "delta": 0.0,
+          "characters": 4,
+          "failure": false,
+          "error": null
+        },
+        "film-06:000": {
+          "sample_id": "entity_coverage_v0__film-06__half__000",
+          "source": "film-06",
+          "half_index": "000",
+          "naming": 0.4280972007668056,
+          "appearance": 0.28539813384453705,
+          "delta": 0.0,
+          "characters": 6,
+          "failure": false,
+          "error": null
+        },
+        "film-06:001": {
+          "sample_id": "entity_coverage_v0__film-06__half__001",
+          "source": "film-06",
+          "half_index": "001",
+          "naming": 0.37163337100531946,
+          "appearance": 0.34887863897514226,
+          "delta": 0.0,
+          "characters": 5,
+          "failure": false,
+          "error": null
+        },
+        "sport-01:000": {
+          "sample_id": "entity_coverage_v0__sport-01__half__000",
+          "source": "sport-01",
+          "half_index": "000",
+          "naming": 0.5168777106991375,
+          "appearance": 0.36919836478509815,
+          "delta": 0.0,
+          "characters": 7,
+          "failure": false,
+          "error": null
+        }
+      }
+    }
+  ]
+}
