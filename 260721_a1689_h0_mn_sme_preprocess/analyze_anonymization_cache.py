@@ -44,9 +44,8 @@ def load_indices(cache_files_to_read: list[Path]) -> list[int]:
     return indices
 
 
-def load_indexed_rows(cache_files_to_read: list[Path], indices: list[int]) -> list[dict]:
+def iter_indexed_rows(cache_files_to_read: list[Path], indices: list[int]):
     """Read selected global row indices without opening every record shard together."""
-    rows = []
     sorted_indices = sorted(indices)
     index_position = 0
     shard_offset = 0
@@ -58,13 +57,14 @@ def load_indexed_rows(cache_files_to_read: list[Path], indices: list[int]) -> li
             local_indices.append(sorted_indices[index_position] - shard_offset)
             index_position += 1
         if local_indices:
-            rows.extend(shard.take(pa.array(local_indices)).to_pylist())
+            selected_rows = shard.take(pa.array(local_indices)).to_pylist()
+            yield from selected_rows
+            del selected_rows
         shard_offset = shard_end
         del shard
         gc.collect()
     if index_position != len(sorted_indices):
         raise RuntimeError(f"Resolved {index_position} of {len(sorted_indices)} requested indices")
-    return rows
 
 
 def find_rejection(messages: list[dict]) -> dict | None:
@@ -162,7 +162,7 @@ def main() -> None:
     if len(rejected_indices) != args.expected_rejected:
         raise RuntimeError(f"Expected {args.expected_rejected} rejected indices, found {len(rejected_indices)}")
     print(f"Reading {len(rejected_indices)} rejected rows from {len(base_files)} base shards", flush=True)
-    rows_to_analyze = load_indexed_rows(base_files, rejected_indices)
+    rows_to_analyze = iter_indexed_rows(base_files, rejected_indices)
 
     rejected_rows = []
     for row in rows_to_analyze:
