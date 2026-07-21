@@ -22,9 +22,13 @@ Optional:
 | `LABEL` | `$JOB_ID` |
 | `ARTIFACT_URL` | (empty) — mentioned in success message |
 | `CHANNEL` | `fun-lia-trashcan` |
+| `ENV_FILE` | `~/pegasus/.env` — preferred source of `SLACK_BOT_TOKEN` |
 | `TOKEN_FILE` | `~/tmp/.slack_bot_token` |
 | `POLL_SEC` | 120 |
 | `HEARTBEAT_SEC` | 1200 (20 min) |
+
+The poller first uses an exported `SLACK_BOT_TOKEN`, then sources `ENV_FILE`.
+`TOKEN_FILE` remains only as a backward-compatible fallback.
 
 ## Recipes
 
