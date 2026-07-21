@@ -1,0 +1,46 @@
+{
+  "dataset_id": "twelvelabs/entity_cov_v02_tdf",
+  "config_name": "default",
+  "split": "test",
+  "rows": 20,
+  "changed_rows": 20,
+  "rows_with_schema_before": 0,
+  "rows_with_schema_after": 20,
+  "schema_summary": {
+    "present": true,
+    "name": "entity_coverage_v02",
+    "strict": true,
+    "required": [
+      "title",
+      "video_summary",
+      "work",
+      "rosters",
+      "entity_relationships",
+      "shot_metadata"
+    ],
+    "top_level_properties": [
+      "entity_relationships",
+      "rosters",
+      "shot_metadata",
+      "title",
+      "video_summary",
+      "work"
+    ],
+    "roster_entity_type_enum": [
+      "person",
+      "character",
+      "place",
+      "object",
+      "concept",
+      "thing"
+    ],
+    "shot_entity_type_enum": [
+      "person",
+      "character",
+      "place",
+      "object",
+      "concept",
+      "thing"
+    ]
+  }
+}

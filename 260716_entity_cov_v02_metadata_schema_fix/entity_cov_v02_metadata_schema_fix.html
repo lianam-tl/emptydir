@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>entity_cov_v02_tdf metadata_schema fix</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 32px;
+      color: #172026;
+      background: #f7f8fa;
+    }
+    h1 { font-size: 24px; margin-bottom: 8px; }
+    h2 { font-size: 18px; margin-top: 28px; }
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .metric {
+      background: white;
+      border: 1px solid #d9dde3;
+      border-radius: 8px;
+      padding: 14px;
+    }
+    .metric strong { display: block; font-size: 13px; color: #5b6570; }
+    .metric span { display: block; font-size: 22px; margin-top: 6px; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border: 1px solid #d9dde3;
+    }
+    th, td {
+      border: 1px solid #d9dde3;
+      padding: 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th { background: #edf1f5; }
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 12px;
+      line-height: 1.45;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>entity_cov_v02_tdf metadata_schema fix</h1>
+  <p>Dataset: twelvelabs/entity_cov_v02_tdf / config: default / split: test</p>
+  <div class="summary">
+    <div class="metric"><strong>Rows</strong><span>20</span></div>
+    <div class="metric"><strong>Changed rows</strong><span>20</span></div>
+    <div class="metric"><strong>Rows with schema before</strong><span>0</span></div>
+    <div class="metric"><strong>Rows with schema after</strong><span>20</span></div>
+  </div>
+  <h2>Schema Summary</h2>
+  <pre>{
+  &quot;present&quot;: true,
+  &quot;name&quot;: &quot;entity_coverage_v02&quot;,
+  &quot;strict&quot;: true,
+  &quot;required&quot;: [
+    &quot;title&quot;,
+    &quot;video_summary&quot;,
+    &quot;work&quot;,
+    &quot;rosters&quot;,
+    &quot;entity_relationships&quot;,
+    &quot;shot_metadata&quot;
+  ],
+  &quot;top_level_properties&quot;: [
+    &quot;entity_relationships&quot;,
+    &quot;rosters&quot;,
+    &quot;shot_metadata&quot;,
+    &quot;title&quot;,
+    &quot;video_summary&quot;,
+    &quot;work&quot;
+  ],
+  &quot;roster_entity_type_enum&quot;: [
+    &quot;person&quot;,
+    &quot;character&quot;,
+    &quot;place&quot;,
+    &quot;object&quot;,
+    &quot;concept&quot;,
+    &quot;thing&quot;
+  ],
+  &quot;shot_entity_type_enum&quot;: [
+    &quot;person&quot;,
+    &quot;character&quot;,
+    &quot;place&quot;,
+    &quot;object&quot;,
+    &quot;concept&quot;,
+    &quot;thing&quot;
+  ]
+}</pre>
+  <h2>Row Diff Samples</h2>
+  <table>
+    <thead><tr><th>ID</th><th>Before</th><th>After</th></tr></thead>
+    <tbody><tr><td>entity_coverage_v0__film-01__full__000</td><td><pre>{
+  &quot;evaluation&quot;: {
+    &quot;output_format&quot;: &quot;structured&quot;
+  },
+  &quot;metadata_schema&quot;: {
+    &quot;present&quot;: false
+  }
+}</pre></td><td><pre>{
+  &quot;evaluation&quot;: {
+    &quot;output_format&quot;: &quot;flat&quot;
+  },
+  &quot;metadata_schema&quot;: {
+    &quot;present&quot;: true,
+    &quot;name&quot;: &quot;entity_coverage_v02&quot;,
+    &quot;strict&quot;: true,
+    &quot;required&quot;: [
+      &quot;title&quot;,
+      &quot;video_summary&quot;,
+      &quot;work&quot;,
+      &quot;rosters&quot;,
+      &quot;entity_relationships&quot;,
+      &quot;shot_metadata&quot;
+    ],
+    &quot;top_level_properties&quot;: [
+      &quot;entity_relationships&quot;,
+      &quot;rosters&quot;,
+      &quot;shot_metadata&quot;,
+      &quot;title&quot;,
+      &quot;video_summary&quot;,
+      &quot;work&quot;
+    ],
+    &quot;roster_entity_type_enum&quot;: [
+      &quot;person&quot;,
+      &quot;character&quot;,
+      &quot;place&quot;,
+      &quot;object&quot;,
+      &quot;concept&quot;,
+      &quot;thing&quot;
+    ],
+    &quot;shot_entity_type_enum&quot;: [
+      &quot;person&quot;,
+      &quot;character&quot;,
+      &quot;place&quot;,
+      &quot;object&quot;,
+      &quot;concept&quot;,
+      &quot;thing&quot;
+    ]
+  }
+}</pre></td></tr><tr><td>entity_coverage_v0__film-02__full__000</td><td><pre>{
+  &quot;evaluation&quot;: {
+    &quot;output_format&quot;: &quot;structured&quot;
+  },
+  &quot;metadata_schema&quot;: {
+    &quot;present&quot;: false
+  }
+}</pre></td><td><pre>{
+  &quot;evaluation&quot;: {
+    &quot;output_format&quot;: &quot;flat&quot;
+  },
+  &quot;metadata_schema&quot;: {
+    &quot;present&quot;: true,
+    &quot;name&quot;: &quot;entity_coverage_v02&quot;,
+    &quot;strict&quot;: true,
+    &quot;required&quot;: [
+      &quot;title&quot;,
+      &quot;video_summary&quot;,
+      &quot;work&quot;,
+      &quot;rosters&quot;,
+      &quot;entity_relationships&quot;,
+      &quot;shot_metadata&quot;
+    ],
+    &quot;top_level_properties&quot;: [
+      &quot;entity_relationships&quot;,
+      &quot;rosters&quot;,
+      &quot;shot_metadata&quot;,
+      &quot;title&quot;,
+      &quot;video_summary&quot;,
+      &quot;work&quot;
+    ],
+    &quot;roster_entity_type_enum&quot;: [
+      &quot;person&quot;,
+      &quot;character&quot;,
+      &quot;place&quot;,
+      &quot;object&quot;,
+      &quot;concept&quot;,
+      &quot;thing&quot;
+    ],
+    &quot;shot_entity_type_enum&quot;: [
+      &quot;person&quot;,
+      &quot;character&quot;,
+      &quot;place&quot;,
+      &quot;object&quot;,
+      &quot;concept&quot;,
+      &quot;thing&quot;
+    ]
+  }
+}</pre></td></tr><tr><td>entity_coverage_v0__film-03__full__000</td><td><pre>{
+  &quot;evaluation&quot;: {
+    &quot;output_format&quot;: &quot;structured&quot;
+  },
+  &quot;metadata_schema&quot;: {
+    &quot;present&quot;: false
+  }
+}</pre></td><td><pre>{
+  &quot;evaluation&quot;: {
+    &quot;output_format&quot;: &quot;flat&quot;
+  },
+  &quot;metadata_schema&quot;: {
+    &quot;present&quot;: true,
+    &quot;name&quot;: &quot;entity_coverage_v02&quot;,
+    &quot;strict&quot;: true,
+    &quot;required&quot;: [
+      &quot;title&quot;,
+      &quot;video_summary&quot;,
+      &quot;work&quot;,
+      &quot;rosters&quot;,
+      &quot;entity_relationships&quot;,
+      &quot;shot_metadata&quot;
+    ],
+    &quot;top_level_properties&quot;: [
+      &quot;entity_relationships&quot;,
+      &quot;rosters&quot;,
+      &quot;shot_metadata&quot;,
+      &quot;title&quot;,
+      &quot;video_summary&quot;,
+      &quot;work&quot;
+    ],
+    &quot;roster_entity_type_enum&quot;: [
+      &quot;person&quot;,
+      &quot;character&quot;,
+      &quot;place&quot;,
+      &quot;object&quot;,
+      &quot;concept&quot;,
+      &quot;thing&quot;
+    ],
+    &quot;shot_entity_type_enum&quot;: [
+      &quot;person&quot;,
+      &quot;character&quot;,
+      &quot;place&quot;,
+      &quot;object&quot;,
+      &quot;concept&quot;,
+      &quot;thing&quot;
+    ]
+  }
+}</pre></td></tr><tr><td>entity_coverage_v0__film-04__full__000</td><td><pre>{
+  &quot;evaluation&quot;: {
+    &quot;output_format&quot;: &quot;structured&quot;
+  },
+  &quot;metadata_schema&quot;: {
+    &quot;present&quot;: false
+  }
+}</pre></td><td><pre>{
+  &quot;evaluation&quot;: {
+    &quot;output_format&quot;: &quot;flat&quot;
+  },
+  &quot;metadata_schema&quot;: {
+    &quot;present&quot;: true,
+    &quot;name&quot;: &quot;entity_coverage_v02&quot;,
+    &quot;strict&quot;: true,
+    &quot;required&quot;: [
+      &quot;title&quot;,
+      &quot;video_summary&quot;,
+      &quot;work&quot;,
+      &quot;rosters&quot;,
+      &quot;entity_relationships&quot;,
+      &quot;shot_metadata&quot;
+    ],
+    &quot;top_level_properties&quot;: [
+      &quot;entity_relationships&quot;,
+      &quot;rosters&quot;,
+      &quot;shot_metadata&quot;,
+      &quot;title&quot;,
+      &quot;video_summary&quot;,
+      &quot;work&quot;
+    ],
+    &quot;roster_entity_type_enum&quot;: [
+      &quot;person&quot;,
+      &quot;character&quot;,
+      &quot;place&quot;,
+      &quot;object&quot;,
+      &quot;concept&quot;,
+      &quot;thing&quot;
+    ],
+    &quot;shot_entity_type_enum&quot;: [
+      &quot;person&quot;,
+      &quot;character&quot;,
+      &quot;place&quot;,
+      &quot;object&quot;,
+      &quot;concept&quot;,
+      &quot;thing&quot;
+    ]
+  }
+}</pre></td></tr><tr><td>entity_coverage_v0__film-05__full__000</td><td><pre>{
+  &quot;evaluation&quot;: {
+    &quot;output_format&quot;: &quot;structured&quot;
+  },
+  &quot;metadata_schema&quot;: {
+    &quot;present&quot;: false
+  }
+}</pre></td><td><pre>{
+  &quot;evaluation&quot;: {
+    &quot;output_format&quot;: &quot;flat&quot;
+  },
+  &quot;metadata_schema&quot;: {
+    &quot;present&quot;: true,
+    &quot;name&quot;: &quot;entity_coverage_v02&quot;,
+    &quot;strict&quot;: true,
+    &quot;required&quot;: [
+      &quot;title&quot;,
+      &quot;video_summary&quot;,
+      &quot;work&quot;,
+      &quot;rosters&quot;,
+      &quot;entity_relationships&quot;,
+      &quot;shot_metadata&quot;
+    ],
+    &quot;top_level_properties&quot;: [
+      &quot;entity_relationships&quot;,
+      &quot;rosters&quot;,
+      &quot;shot_metadata&quot;,
+      &quot;title&quot;,
+      &quot;video_summary&quot;,
+      &quot;work&quot;
+    ],
+    &quot;roster_entity_type_enum&quot;: [
+      &quot;person&quot;,
+      &quot;character&quot;,
+      &quot;place&quot;,
+      &quot;object&quot;,
+      &quot;concept&quot;,
+      &quot;thing&quot;
+    ],
+    &quot;shot_entity_type_enum&quot;: [
+      &quot;person&quot;,
+      &quot;character&quot;,
+      &quot;place&quot;,
+      &quot;object&quot;,
+      &quot;concept&quot;,
+      &quot;thing&quot;
+    ]
+  }
+}</pre></td></tr></tbody>
+  </table>
+</body>
+</html>
