@@ -22,3 +22,17 @@ export them first. `monitor_and_submit.py` from
 succeeds.
 
 See `status.html` for the compact visual summary.
+
+## Current jobs
+
+| Family | Step | Export/Eval ID | State |
+|---|---:|---|---|
+| A1790 Entity-SME-4x | 1900 | `export-a1790-entity-sme4x-s1900-tijsfi` | Export running; eval auto-submit enabled |
+| A1790 Entity-SME-4x | 2000 | `export-a1790-entity-sme4x-s2000-tijsfr` | Export running; eval auto-submit enabled |
+| A1790 Entity-SME-4x | 2100 | `export-a1790-entity-sme4x-s2100-tijsg4` | Export running; eval auto-submit enabled |
+| SFT LVReason MCQ | 1600 | `918e01d5-cd55-501d-bfc2-09b53e5d5f34` | Processing |
+| SFT LVReason MCQ | 2000 | `d10c50da-66a2-59e7-b81a-21ac4a26fafd` | Processing |
+
+The CPU-node A1790 export/eval watcher is PID `1841028` and posts updates to
+`#fun-lia-trashcan`. The LVReason eval watcher is PID `1843012` and posts to
+the same channel.

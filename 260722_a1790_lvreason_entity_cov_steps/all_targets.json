@@ -25,13 +25,15 @@
     "step": 1600,
     "checkpoint_format": "safetensors",
     "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-1600-safetensors/",
-    "status": "ready to submit"
+    "status": "processing",
+    "eval_run_id": "918e01d5-cd55-501d-bfc2-09b53e5d5f34"
   },
   {
     "family": "sft-lvreason-mcq",
     "step": 2000,
     "checkpoint_format": "safetensors",
     "model_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-2000-safetensors/",
-    "status": "ready to submit"
+    "status": "processing",
+    "eval_run_id": "d10c50da-66a2-59e7-b81a-21ac4a26fafd"
   }
 ]
