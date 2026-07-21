@@ -20,6 +20,18 @@ This directory tracks four Eval V3 submissions for A1790 Entity-SME-4x.
 All four safetensors paths were verified in S3 before submission. Each path
 contains eight top-level objects totaling 54,733,665,753 bytes.
 
+## Submitted runs
+
+| Step | Eval run ID | Batch ID |
+|---:|---|---|
+| 400 | `03699e73-6bbd-5412-aff4-487c61bd08b2` | `batch-a0223f2d-9190-4903-a34d-d2b8f9cf4819` |
+| 800 | `82c18432-2844-59bf-a3b8-b6d913bd1390` | `batch-f5b1e91d-2d6f-460b-8e96-ab3dad48286e` |
+| 1200 | `a2d0ef8b-5ef2-5033-aec1-587e23a6b0a4` | `batch-1fb77893-77fa-4d19-9c5f-397246b4f432` |
+| 1600 | `a47d832e-1ee3-502a-aebd-66692900c339` | `batch-4176ee5b-ba77-461e-b6b2-630a20529738` |
+
+The CPU-node Slack monitor runs as PID `1836500` and posts to
+`#fun-lia-trashcan` every 20 minutes or whenever status changes.
+
 Submit from a host that can reach the internal Eval V3 API:
 
 ```bash
