@@ -17,7 +17,7 @@ submitted and cancelled on 2026-07-21. The template has no `eval_run_id`, so
 - Tensor parallelism: 1
 - Data parallelism: 1
 - Replicas: minimum 2, maximum 4
-- Concurrency per replica: 1
+- Concurrency per replica: 8
 - Maximum in-flight requests: 20
 - Maximum output tokens: 65,536
 - Temperature: 0
