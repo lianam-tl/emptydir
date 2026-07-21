@@ -1,0 +1,48 @@
+{
+  "checked_at": "2026-07-16T10:08:42.765112Z",
+  "dataset_url": "https://huggingface.co/datasets/twelvelabs/sme_eval_v3.1_fast",
+  "eval_run_id": "10064135-d5a7-5345-a6fc-3bb5000e4892",
+  "name": "lia-sme-v31-h13-others-pegasus-15-20260716-100837",
+  "payload": {
+    "batchNamePrefix": "lia-sme-h13-pegasus-15",
+    "concurrency": 1,
+    "config": "H13_OTHERS",
+    "convertIfNeeded": false,
+    "dataset": "twelvelabs/sme_eval_v3.1_fast",
+    "dp": 1,
+    "experimentName": "lia-sme-v31-h13-others-pegasus-15-20260716-100837",
+    "idempotencyKey": "lia-sme-v31-h13-others-pegasus-15-20260716-100837",
+    "maxInFlight": 20,
+    "maxReplicas": 1,
+    "maxTokens": 16384,
+    "minReplicas": 1,
+    "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/kian-kim/soce_rl_260516_all_pair_p15_a1mckpt1000s60_w7030/",
+    "name": "lia-sme-v31-h13-others-pegasus-15-20260716-100837",
+    "nodePool": "b300-pegasus",
+    "pipelineId": "vllm-direct",
+    "split": "test",
+    "temperature": 0.0,
+    "tp": 2,
+    "workerType": "vllm-video-v1"
+  },
+  "payload_path": "260716_sme_h13_pegasus15_eval/out_pr_1729/payload.json",
+  "response": {
+    "evalRun": {
+      "id": "10064135-d5a7-5345-a6fc-3bb5000e4892",
+      "status": "queued"
+    },
+    "replayed": false
+  },
+  "status": {
+    "batchId": null,
+    "completed": 0,
+    "completedAt": null,
+    "failed": 0,
+    "id": "10064135-d5a7-5345-a6fc-3bb5000e4892",
+    "name": "lia-sme-v31-h13-others-pegasus-15-20260716-100837",
+    "status": "processing",
+    "totalTasks": 15,
+    "updatedAt": null
+  },
+  "submitted_at": "2026-07-16T10:08:42.207657Z"
+}
