@@ -1,0 +1,239 @@
+{
+  "source": "collected_runs.json",
+  "shape": "half",
+  "mapper_model": "gpt-5.4-mini",
+  "runs": [
+    {
+      "name": "pegasus-15-kian-soce",
+      "known": 52,
+      "negative": 0,
+      "positive": 5,
+      "equal": 47,
+      "parse_failures": 0,
+      "negative_samples": [],
+      "mean_known_delta": 0.04281209613481484
+    },
+    {
+      "name": "a1740-h0-duration-s400",
+      "known": 48,
+      "negative": 1,
+      "positive": 7,
+      "equal": 40,
+      "parse_failures": 1,
+      "negative_samples": [
+        "entity_coverage_v0__film-01__half__000"
+      ],
+      "mean_known_delta": 0.059480343868076664
+    },
+    {
+      "name": "a1740-h0-duration-s800",
+      "known": 48,
+      "negative": 1,
+      "positive": 7,
+      "equal": 40,
+      "parse_failures": 1,
+      "negative_samples": [
+        "entity_coverage_v0__film-01__half__000"
+      ],
+      "mean_known_delta": 0.0401053859247162
+    },
+    {
+      "name": "a1740-h0-duration-s1200",
+      "known": 48,
+      "negative": 3,
+      "positive": 9,
+      "equal": 36,
+      "parse_failures": 1,
+      "negative_samples": [
+        "entity_coverage_v0__film-02__half__001",
+        "entity_coverage_v0__sport-01__half__000"
+      ],
+      "mean_known_delta": 0.052677761533121974
+    },
+    {
+      "name": "a1790-entity-sme4x-s400",
+      "known": 48,
+      "negative": 1,
+      "positive": 7,
+      "equal": 40,
+      "parse_failures": 1,
+      "negative_samples": [
+        "entity_coverage_v0__film-01__half__000"
+      ],
+      "mean_known_delta": 0.051109234295025646
+    },
+    {
+      "name": "a1790-entity-sme4x-s800",
+      "known": 48,
+      "negative": 1,
+      "positive": 9,
+      "equal": 38,
+      "parse_failures": 1,
+      "negative_samples": [
+        "entity_coverage_v0__film-01__half__000"
+      ],
+      "mean_known_delta": 0.07507572120828476
+    },
+    {
+      "name": "a1790-entity-sme4x-s1200",
+      "known": 52,
+      "negative": 1,
+      "positive": 10,
+      "equal": 41,
+      "parse_failures": 0,
+      "negative_samples": [
+        "entity_coverage_v0__film-01__half__000"
+      ],
+      "mean_known_delta": 0.06940329384503609
+    },
+    {
+      "name": "consol-h0mn2x-s400",
+      "known": 48,
+      "negative": 0,
+      "positive": 8,
+      "equal": 40,
+      "parse_failures": 1,
+      "negative_samples": [],
+      "mean_known_delta": 0.0739832890238714
+    },
+    {
+      "name": "consol-h0mn2x-s800",
+      "known": 52,
+      "negative": 0,
+      "positive": 10,
+      "equal": 42,
+      "parse_failures": 0,
+      "negative_samples": [],
+      "mean_known_delta": 0.061307834738314734
+    },
+    {
+      "name": "consol-h0mn2x-s1200",
+      "known": 48,
+      "negative": 0,
+      "positive": 8,
+      "equal": 40,
+      "parse_failures": 1,
+      "negative_samples": [],
+      "mean_known_delta": 0.0779183152335605
+    },
+    {
+      "name": "consol-h0mn2x-s1600",
+      "known": 48,
+      "negative": 1,
+      "positive": 4,
+      "equal": 43,
+      "parse_failures": 1,
+      "negative_samples": [
+        "entity_coverage_v0__film-02__half__001"
+      ],
+      "mean_known_delta": 0.02431113995758291
+    },
+    {
+      "name": "consol-h0mn2x-s2000",
+      "known": 48,
+      "negative": 0,
+      "positive": 11,
+      "equal": 37,
+      "parse_failures": 1,
+      "negative_samples": [],
+      "mean_known_delta": 0.10554005632098813
+    },
+    {
+      "name": "soccer-lvreason-mcq-s400",
+      "known": 52,
+      "negative": 0,
+      "positive": 13,
+      "equal": 39,
+      "parse_failures": 0,
+      "negative_samples": [],
+      "mean_known_delta": 0.12685114811541987
+    },
+    {
+      "name": "soccer-lvreason-mcq-s800",
+      "known": 52,
+      "negative": 1,
+      "positive": 7,
+      "equal": 44,
+      "parse_failures": 0,
+      "negative_samples": [
+        "entity_coverage_v0__film-02__half__000"
+      ],
+      "mean_known_delta": 0.04974470209025998
+    },
+    {
+      "name": "soccer-lvreason-mcq-s1200",
+      "known": 48,
+      "negative": 0,
+      "positive": 10,
+      "equal": 38,
+      "parse_failures": 1,
+      "negative_samples": [],
+      "mean_known_delta": 0.10480761036239022
+    }
+  ],
+  "sources": [
+    {
+      "source": "film-01",
+      "known": 180,
+      "negative": 5,
+      "positive": 5,
+      "equal": 170,
+      "parse_failures": 0
+    },
+    {
+      "source": "film-02",
+      "known": 90,
+      "negative": 3,
+      "positive": 36,
+      "equal": 51,
+      "parse_failures": 0
+    },
+    {
+      "source": "film-03",
+      "known": 105,
+      "negative": 0,
+      "positive": 64,
+      "equal": 41,
+      "parse_failures": 0
+    },
+    {
+      "source": "film-04",
+      "known": 80,
+      "negative": 0,
+      "positive": 9,
+      "equal": 71,
+      "parse_failures": 10
+    },
+    {
+      "source": "film-05",
+      "known": 90,
+      "negative": 0,
+      "positive": 11,
+      "equal": 79,
+      "parse_failures": 0
+    },
+    {
+      "source": "film-06",
+      "known": 120,
+      "negative": 0,
+      "positive": 0,
+      "equal": 120,
+      "parse_failures": 0
+    },
+    {
+      "source": "sport-01",
+      "known": 75,
+      "negative": 2,
+      "positive": 0,
+      "equal": 73,
+      "parse_failures": 0
+    }
+  ],
+  "totals": {
+    "known": 740,
+    "negative": 10,
+    "positive": 125,
+    "equal": 605,
+    "parse_failures": 10
+  }
+}
