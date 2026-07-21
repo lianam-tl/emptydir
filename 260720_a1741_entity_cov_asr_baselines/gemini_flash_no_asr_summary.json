@@ -1,0 +1,11 @@
+{
+  "chunk": "chunk_10m",
+  "model": "gemini-3-flash-preview",
+  "total": 20,
+  "completed": 20,
+  "graded_samples": 20,
+  "parse_errors": 0,
+  "naming_iou": 0.24008613242701227,
+  "name_appearance_iou": 0.3348842149462368,
+  "delta": 0.16470254492463254
+}

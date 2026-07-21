@@ -1,0 +1,588 @@
+{
+  "mapping_mode": "name_and_desc",
+  "pegasus": {
+    "entity_coverage_v0__film-01__chunk_10m__000": {
+      "predicted_to_ground_truth": {
+        "rose": "Rose",
+        "violet": "Violet",
+        "doctor": null,
+        "nun": null,
+        "igor": "Igor",
+        "kelso": "Keltzo",
+        "hector": "Hector",
+        "louis": "Louis"
+      },
+      "mapped_appearance_iou": 0.5735169644892375,
+      "expected_appearance_iou": 0.5735169644892375,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-01__chunk_10m__001": {
+      "predicted_to_ground_truth": {
+        "rose": "Rose",
+        "violet": "Violet",
+        "louis": "Louis",
+        "hector": "Hector",
+        "igor": "Igor",
+        "kelso": "Keltzo"
+      },
+      "mapped_appearance_iou": 0.5438096373485216,
+      "expected_appearance_iou": 0.5438096373485216,
+      "score_difference": 0.0,
+      "mapping_attempts": 2
+    },
+    "entity_coverage_v0__film-01__chunk_10m__002": {
+      "predicted_to_ground_truth": {
+        "pear_juggler": "Keltzo",
+        "black_cat": null,
+        "teal_creature": null,
+        "pink_creature": null,
+        "grey_creature": null,
+        "purple_announcer": "Igor",
+        "rose": "Rose",
+        "violet": "Violet",
+        "green_monster": null,
+        "strongman": null,
+        "blue_bird": null
+      },
+      "mapped_appearance_iou": 0.43796073329866664,
+      "expected_appearance_iou": 0.4379607332986666,
+      "score_difference": 5.551115123125783e-17,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-02__chunk_10m__000": {
+      "predicted_to_ground_truth": {
+        "young_man_blue_tshirt": null,
+        "young_man_denim_jacket": null,
+        "young_man_grey_shirt": null,
+        "police_officer_shabir": "Shabbir",
+        "school_girl": "Shabbir's Daughter",
+        "woman_green_dress": "Rehana",
+        "older_man_vest": "Feroz Ali Khan",
+        "police_officer_akbar": null
+      },
+      "mapped_appearance_iou": 0.404020606942229,
+      "expected_appearance_iou": 0.404020606942229,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-02__chunk_10m__001": {
+      "predicted_to_ground_truth": {
+        "man_in_blue_suit": "Feroz Ali Khan",
+        "man_in_pink_shirt": null,
+        "woman_in_orange": "Rehana",
+        "man_in_blue_shalwar": null,
+        "woman_in_purple": "Shabbir's Daughter",
+        "man_in_patterned_shirt": null,
+        "man_in_red_tshirt": null,
+        "man_in_tie_dye": null,
+        "police_officer": "Shabbir"
+      },
+      "mapped_appearance_iou": 0.2833444382674188,
+      "expected_appearance_iou": 0.2833444382674188,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-02__chunk_10m__002": {
+      "predicted_to_ground_truth": {
+        "woman_blue": null,
+        "woman_purple": null,
+        "officer_shabir": "Shabbir"
+      },
+      "mapped_appearance_iou": 0.2837240910635406,
+      "expected_appearance_iou": 0.2837240910635406,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-03__chunk_10m__000": {
+      "predicted_to_ground_truth": {
+        "mother": "Enny",
+        "child": null,
+        "curly_haired_woman": null,
+        "soldier": null,
+        "man_on_couch": null,
+        "driver": "Noah Prome",
+        "elderly_man": "Old Man George",
+        "bald_man": "Slade"
+      },
+      "mapped_appearance_iou": 0.6664559741136833,
+      "expected_appearance_iou": 0.6664559741136834,
+      "score_difference": -1.1102230246251565e-16,
+      "mapping_attempts": 2
+    },
+    "entity_coverage_v0__film-03__chunk_10m__001": {
+      "predicted_to_ground_truth": {
+        "1": "Noah Prome",
+        "2": "Enny",
+        "3": "Slade",
+        "4": "Ina",
+        "5": "Old Man George"
+      },
+      "mapped_appearance_iou": 0.5657294295812,
+      "expected_appearance_iou": 0.5657294295811999,
+      "score_difference": 1.1102230246251565e-16,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-03__chunk_10m__002": {
+      "predicted_to_ground_truth": {
+        "man_001": "Noah Prome",
+        "girl_001": "Ina"
+      },
+      "mapped_appearance_iou": 0.877758586225166,
+      "expected_appearance_iou": 0.877758586225166,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-04__chunk_10m__000": {
+      "predicted_to_ground_truth": {
+        "student_boy": "Christian",
+        "man_blue_jacket": null,
+        "man_blue_tracksuit": "OlderDealer2",
+        "child_basketball": null,
+        "woman_mother": "Crystal",
+        "man_white_tshirt": null,
+        "man_orange_scarf": null,
+        "student_friend": null,
+        "man_blue_puffer": "OlderDealer1"
+      },
+      "mapped_appearance_iou": 0.34128504512376084,
+      "expected_appearance_iou": 0.34128504512376096,
+      "score_difference": -1.1102230246251565e-16,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-04__chunk_10m__001": {
+      "predicted_to_ground_truth": {
+        "christian_001": "Christian",
+        "friend_001": null,
+        "mother_001": "Crystal",
+        "uncle_001": "ChristianUncle",
+        "jay_001": null,
+        "kira_001": null,
+        "friend_002": null,
+        "mentor_001": null
+      },
+      "mapped_appearance_iou": 0.23716370860050684,
+      "expected_appearance_iou": 0.23716370860050687,
+      "score_difference": -2.7755575615628914e-17,
+      "mapping_attempts": 11
+    },
+    "entity_coverage_v0__film-04__chunk_10m__002": {
+      "predicted_to_ground_truth": {
+        "jason_01": "CrystalFriend",
+        "mum_01": "Crystal",
+        "christian_01": "Christian",
+        "dolly_01": null,
+        "gang_member_01": null,
+        "gang_member_02": null,
+        "gang_leader_01": null,
+        "tash_01": null
+      },
+      "mapped_appearance_iou": 0.4100626270846424,
+      "expected_appearance_iou": 0.4100626270846424,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-04__chunk_10m__003": {
+      "predicted_to_ground_truth": {
+        "dealer_1": "OlderDealer1",
+        "dealer_2": "OlderDealer1",
+        "dealer_3": "OlderDealer2",
+        "boy": "Christian",
+        "mother": "Crystal"
+      },
+      "mapped_appearance_iou": 0.6385684733752157,
+      "expected_appearance_iou": 0.6385684733752158,
+      "score_difference": -1.1102230246251565e-16,
+      "mapping_attempts": 4
+    },
+    "entity_coverage_v0__film-05__chunk_10m__000": {
+      "predicted_to_ground_truth": {
+        "woman_white_dress": "Beth",
+        "man_blue_sweater": null,
+        "man_black_suit": null,
+        "man_green_polo": null
+      },
+      "mapped_appearance_iou": 0.10748324256388776,
+      "expected_appearance_iou": 0.10748324256388776,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-05__chunk_10m__001": {
+      "predicted_to_ground_truth": {
+        "friend_1": "Dan",
+        "husband": "Husband",
+        "alex": "Alex",
+        "beth": "Beth",
+        "doctor": null,
+        "waiter": null,
+        "police_1": null,
+        "police_2": null
+      },
+      "mapped_appearance_iou": 0.4425831567993048,
+      "expected_appearance_iou": 0.4425831567993048,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-05__chunk_10m__002": {
+      "predicted_to_ground_truth": {
+        "woman_01": "Beth",
+        "man_01": "Alex"
+      },
+      "mapped_appearance_iou": 0.984251968503937,
+      "expected_appearance_iou": 0.984251968503937,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-06__chunk_10m__000": {
+      "predicted_to_ground_truth": {
+        "alex_001": "Alex",
+        "alice_001": "Alice",
+        "ashley_001": "TanyaExGirlfriend",
+        "henry_001": "TanyaEx",
+        "tanya_001": "Tanya",
+        "security_001": null
+      },
+      "mapped_appearance_iou": 0.48194880877421153,
+      "expected_appearance_iou": 0.4819488087742115,
+      "score_difference": 5.551115123125783e-17,
+      "mapping_attempts": 13
+    },
+    "entity_coverage_v0__film-06__chunk_10m__001": {
+      "predicted_to_ground_truth": {
+        "tanya_001": "Tanya",
+        "alex_001": "Alex",
+        "alice_001": "Alice",
+        "waitress_001": null,
+        "priest_001": null,
+        "henry_001": "TanyaEx",
+        "manager_001": "Manager",
+        "police_001": null
+      },
+      "mapped_appearance_iou": 0.5035694155200997,
+      "expected_appearance_iou": 0.5035694155200997,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-06__chunk_10m__002": {
+      "predicted_to_ground_truth": {
+        "woman_01": "Tanya",
+        "man_01": "Alex"
+      },
+      "mapped_appearance_iou": 0.912,
+      "expected_appearance_iou": 0.912,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__sport-01__chunk_10m__000": {
+      "predicted_to_ground_truth": {
+        "jack_oloughlin": "59-on-australia",
+        "ha_seong_kim": "7-on-korea",
+        "aaron_whitefield": "2-on-australia",
+        "jung_hoo_lee": "51-on-korea",
+        "logan_wade": "4-on-australia"
+      },
+      "mapped_appearance_iou": 0.3565941400808172,
+      "expected_appearance_iou": 0.35659414008081713,
+      "score_difference": 5.551115123125783e-17,
+      "mapping_attempts": 1
+    }
+  },
+  "gemini": {
+    "entity_coverage_v0__film-01__chunk_10m__000": {
+      "predicted_to_ground_truth": {
+        "rose": "Rose",
+        "violet": "Violet",
+        "nurse": null,
+        "nun": null,
+        "igor": "Igor",
+        "hector": "Hector",
+        "louis": "Louis",
+        "kelso": null,
+        "beast": null,
+        "yellow_bug": null,
+        "brown_creature": null,
+        "pink_creature": null
+      },
+      "mapped_appearance_iou": 0.09677486017492701,
+      "expected_appearance_iou": 0.09677486017492702,
+      "score_difference": -1.3877787807814457e-17,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-01__chunk_10m__001": {
+      "predicted_to_ground_truth": {
+        "rose": "Rose",
+        "violet": "Violet",
+        "louis": "Louis",
+        "hector": "Hector",
+        "igor": "Igor",
+        "green_creature": null,
+        "blue_bird": null,
+        "yellow_creature": null,
+        "blue_creature": null,
+        "kelso": "Keltzo"
+      },
+      "mapped_appearance_iou": 0.60578139275424,
+      "expected_appearance_iou": 0.60578139275424,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-01__chunk_10m__002": {
+      "predicted_to_ground_truth": {
+        "keltzo": "Keltzo",
+        "hector": null,
+        "ringmaster": "Igor",
+        "rose": "Rose",
+        "black_cat": null,
+        "violet": "Violet",
+        "igor": "Igor",
+        "blue_bird": null
+      },
+      "mapped_appearance_iou": 0.14333813622165706,
+      "expected_appearance_iou": 0.1433381362216571,
+      "score_difference": -2.7755575615628914e-17,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-02__chunk_10m__000": {
+      "predicted_to_ground_truth": {
+        "zohaib": "Zohaib",
+        "shabir": "Shabbir",
+        "rehana": null,
+        "shabir_wife": "Rehana",
+        "feroz_ali_khan": "Feroz Ali Khan",
+        "akbar": null,
+        "zohaib_friend_1": null,
+        "zohaib_friend_2": null
+      },
+      "mapped_appearance_iou": 0.38070716641482205,
+      "expected_appearance_iou": 0.38070716641482205,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-02__chunk_10m__001": {
+      "predicted_to_ground_truth": {
+        "feroz_sahab": "Feroz Ali Khan",
+        "zoheb": "Zohaib",
+        "shabbir": "Shabbir",
+        "rehana": "Rehana",
+        "shabbirs_daughter": "Shabbir's Daughter",
+        "friend_red": null,
+        "friend_pattern": null
+      },
+      "mapped_appearance_iou": 0.4694154165627142,
+      "expected_appearance_iou": 0.4694154165627142,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-02__chunk_10m__002": {
+      "predicted_to_ground_truth": {
+        "woman_blue": null,
+        "woman_purple": null,
+        "shabir": "Shabbir"
+      },
+      "mapped_appearance_iou": 0.30100574712643674,
+      "expected_appearance_iou": 0.30100574712643674,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-03__chunk_10m__000": {
+      "predicted_to_ground_truth": {
+        "mother": "Enny",
+        "elliot": null,
+        "george": null,
+        "old_man": "Old Man George",
+        "bald_man": "Slade",
+        "compliance_personnel": null,
+        "man_in_sweater": null
+      },
+      "mapped_appearance_iou": 0.5176876797585633,
+      "expected_appearance_iou": 0.5176876797585633,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-03__chunk_10m__001": {
+      "predicted_to_ground_truth": {
+        "rome": "Noah Prome",
+        "woman": "Enny",
+        "bald_man": "Slade",
+        "little_girl": "Ina",
+        "george": "Old Man George"
+      },
+      "mapped_appearance_iou": 0.14321498502898794,
+      "expected_appearance_iou": 0.14321498502898794,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-03__chunk_10m__002": {
+      "predicted_to_ground_truth": {
+        "george": "Noah Prome",
+        "enny": "Ina"
+      },
+      "mapped_appearance_iou": 0.6884647970122414,
+      "expected_appearance_iou": 0.6884647970122414,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-04__chunk_10m__000": {
+      "predicted_to_ground_truth": {
+        "jay": null,
+        "older_associate_1": null,
+        "older_associate_2": null,
+        "girl_basketball": null,
+        "mother": "Crystal",
+        "buyer_1": null,
+        "buyer_2": null,
+        "school_friend": null,
+        "man_durag": "CrystalFriend",
+        "associate_blue_jacket": null
+      },
+      "mapped_appearance_iou": 0.21657886893173237,
+      "expected_appearance_iou": 0.21657886893173237,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-04__chunk_10m__001": {
+      "predicted_to_ground_truth": {
+        "char_1": "Christian",
+        "char_5": "ChristianFriend",
+        "char_2": "Crystal",
+        "char_3": "ChristianUncle",
+        "char_6": null,
+        "char_4": null
+      },
+      "mapped_appearance_iou": 0.10886128999113308,
+      "expected_appearance_iou": 0.10886128999113308,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-04__chunk_10m__002": {
+      "predicted_to_ground_truth": {
+        "jason": "CrystalFriend",
+        "crystal": "Crystal",
+        "christian": "Christian",
+        "christian_friend": "ChristianFriend",
+        "gang_member_1": null,
+        "gang_member_2": null,
+        "driver": null,
+        "tash": null,
+        "tash_brother": null
+      },
+      "mapped_appearance_iou": 0.4487886482301718,
+      "expected_appearance_iou": 0.4487886482301718,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-04__chunk_10m__003": {
+      "predicted_to_ground_truth": {
+        "christians_friend": null,
+        "older_dealer_1": "OlderDealer1",
+        "christian": "Christian",
+        "older_dealer_2": "OlderDealer2",
+        "andre": null,
+        "christians_mum": "Crystal"
+      },
+      "mapped_appearance_iou": 0.5334923946441539,
+      "expected_appearance_iou": 0.5334923946441539,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-05__chunk_10m__000": {
+      "predicted_to_ground_truth": {
+        "woman": null,
+        "alex": "Alex",
+        "husband": "Husband",
+        "dan": "Dan"
+      },
+      "mapped_appearance_iou": 0.021345159669202852,
+      "expected_appearance_iou": 0.021345159669202852,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-05__chunk_10m__001": {
+      "predicted_to_ground_truth": {
+        "man_denim": null,
+        "bald_man": null,
+        "beth": "Beth",
+        "alex": "Alex",
+        "man_hoodie": null,
+        "husband": "Husband",
+        "woman_green_shirt": null,
+        "woman_blue_shirt": null,
+        "clone_white": "Beth",
+        "doctor": null,
+        "clone_floral": "Beth",
+        "police": null
+      },
+      "mapped_appearance_iou": 0.1740041162967233,
+      "expected_appearance_iou": 0.1740041162967233,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-05__chunk_10m__002": {
+      "predicted_to_ground_truth": {
+        "woman_1": "Beth",
+        "man_1": "Alex"
+      },
+      "mapped_appearance_iou": 0.8858267716535433,
+      "expected_appearance_iou": 0.8858267716535433,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-06__chunk_10m__000": {
+      "predicted_to_ground_truth": {
+        "alex": "Alex",
+        "alice": "Alice",
+        "tanya": "Tanya",
+        "ashley": "TanyaExGirlfriend",
+        "henry": "TanyaEx",
+        "security_guard": "Manager"
+      },
+      "mapped_appearance_iou": 0.602514231814484,
+      "expected_appearance_iou": 0.602514231814484,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-06__chunk_10m__001": {
+      "predicted_to_ground_truth": {
+        "tanya_wilson": "Tanya",
+        "alex": "Alex",
+        "alice": "Alice",
+        "natalie": null,
+        "priest": null,
+        "henry": "TanyaEx",
+        "store_manager": "Manager",
+        "police_officer": null
+      },
+      "mapped_appearance_iou": 0.25790049457047115,
+      "expected_appearance_iou": 0.25790049457047115,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__film-06__chunk_10m__002": {
+      "predicted_to_ground_truth": {
+        "woman_1": "Tanya",
+        "man_1": "Alex"
+      },
+      "mapped_appearance_iou": 0.9868421052631582,
+      "expected_appearance_iou": 0.9868421052631582,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    },
+    "entity_coverage_v0__sport-01__chunk_10m__000": {
+      "predicted_to_ground_truth": {
+        "jack_oloughlin": "59-on-australia",
+        "ha_seong_kim": "7-on-korea",
+        "robbie_perkins": "catcher-on-australia",
+        "aaron_whitefield": "2-on-australia",
+        "jung_hoo_lee": "51-on-korea",
+        "umpire": null,
+        "logan_wade": "4-on-australia",
+        "darryl_george": null,
+        "bixon_wingrove": "60-on-australia"
+      },
+      "mapped_appearance_iou": 0.09395412917593395,
+      "expected_appearance_iou": 0.09395412917593395,
+      "score_difference": 0.0,
+      "mapping_attempts": 1
+    }
+  }
+}
