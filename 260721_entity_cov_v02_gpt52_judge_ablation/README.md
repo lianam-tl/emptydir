@@ -97,3 +97,23 @@ This pair does flip:
 
 Both judge choice and GPT-5.4-mini replay variance can change the relative
 ranking of these two checkpoints.
+
+## Full 14-checkpoint leaderboard rerank
+
+`build_full_leaderboard_rank.py` compares every train checkpoint in the
+“Entity coverage v0.2 results” table. The `pegasus-15-kian-soce` reference row
+is excluded, leaving exactly 14 checkpoints. The comparison uses half
+name+appearance IoU and the stored production score on the GPT-5.4-mini side.
+
+```bash
+/Users/long8v/.venv/bin/python build_full_leaderboard_rank.py \
+  --input-directory . \
+  --output-json full_14_checkpoint_gpt52_rank.json \
+  --output-html full_14_checkpoint_gpt52_rank.html
+```
+
+The overall ordering is similar (Spearman 0.947, Kendall 0.824), but 8 of 14
+checkpoints change rank and 8 of 91 checkpoint pairs invert. The largest moves
+are `a1790-entity-sme4x-s800` from #9 to #6 and
+`soccer-lvreason-mcq-s400` from #6 to #9. The top two checkpoints remain
+`a1740-h0-duration-s400` and `consol-h0mn2x-s800`.
