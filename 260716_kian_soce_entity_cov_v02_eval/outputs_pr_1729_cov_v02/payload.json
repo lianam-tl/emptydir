@@ -1,0 +1,23 @@
+{
+  "batchNamePrefix": "lia-entcov-v02-kian-soce",
+  "concurrency": 1,
+  "config": "default",
+  "convertIfNeeded": false,
+  "dataset": "twelvelabs/entity_cov_v02_tdf",
+  "dp": 1,
+  "experimentName": "lia-entity-cov-v02-kian-soce-rl-ck1000s60-20260716-112025",
+  "idempotencyKey": "lia-entity-cov-v02-kian-soce-rl-ck1000s60-20260716-112025",
+  "maxInFlight": 20,
+  "maxReplicas": 1,
+  "maxSamples": 20,
+  "maxTokens": 16384,
+  "minReplicas": 1,
+  "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/kian-kim/soce_rl_260516_all_pair_p15_a1mckpt1000s60_w7030/",
+  "name": "lia-entity-cov-v02-kian-soce-rl-ck1000s60-20260716-112025",
+  "nodePool": "b300-pegasus",
+  "pipelineId": "vllm-direct",
+  "split": "test",
+  "temperature": 0.0,
+  "tp": 2,
+  "workerType": "vllm-video-v1"
+}

@@ -1,0 +1,77 @@
+{
+  "benchmark_payload": null,
+  "checked_at": "2026-07-16T08:12:03.769347Z",
+  "dataset_url": "https://huggingface.co/datasets/twelvelabs/entity_cov_v02_tdf",
+  "eval_run_id": "9afccf88-fd15-5e1d-b730-03104fb71fc1",
+  "evaluation": {
+    "evaluation": {
+      "attemptCount": 0,
+      "completedAt": null,
+      "createdAt": "2026-07-16T08:11:48.427457+00:00",
+      "denominator": null,
+      "errorMessage": null,
+      "errorType": null,
+      "failed": null,
+      "id": "c0d20a0a-f73e-4fb0-8c2c-51070d92d678",
+      "lastErrorCode": null,
+      "lastErrorMessage": null,
+      "missing": null,
+      "nextAttemptAt": null,
+      "phase": "scoring",
+      "primaryMetric": null,
+      "runId": "9afccf88-fd15-5e1d-b730-03104fb71fc1",
+      "scored": null,
+      "scorer": {
+        "name": "entity_coverage",
+        "version": ""
+      },
+      "scoringConfigHash": "scoring_config_44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "startedAt": null,
+      "status": "queued"
+    }
+  },
+  "host": "http://localhost:18090",
+  "name": "lia-entity-cov-v02-kian-soce-rl-ck1000s60-20260716-080753",
+  "payload": {
+    "batchNamePrefix": "lia-entcov-v02-kian-soce",
+    "concurrency": 1,
+    "config": "default",
+    "convertIfNeeded": false,
+    "dataset": "twelvelabs/entity_cov_v02_tdf",
+    "dp": 1,
+    "experimentName": "lia-entity-cov-v02-kian-soce-rl-ck1000s60-20260716-080753",
+    "idempotencyKey": "lia-entity-cov-v02-kian-soce-rl-ck1000s60-20260716-080753",
+    "maxInFlight": 20,
+    "maxReplicas": 1,
+    "maxSamples": 20,
+    "maxTokens": 16384,
+    "minReplicas": 1,
+    "modelPath": "s3://tl-data-training-pegasus-us-west-2/checkpoints/kian-kim/soce_rl_260516_all_pair_p15_a1mckpt1000s60_w7030/",
+    "name": "lia-entity-cov-v02-kian-soce-rl-ck1000s60-20260716-080753",
+    "nodePool": "b300-pegasus",
+    "pipelineId": "vllm-direct",
+    "split": "test",
+    "temperature": 0.0,
+    "tp": 2,
+    "workerType": "vllm-video-v1"
+  },
+  "payload_path": "/Users/long8v/emptydir-worktrees/kian-soce-entity-cov-v02-eval-260716/260716_kian_soce_entity_cov_v02_eval/outputs/payload.json",
+  "response": {
+    "evalRun": {
+      "id": "9afccf88-fd15-5e1d-b730-03104fb71fc1",
+      "status": "queued"
+    },
+    "replayed": false
+  },
+  "status": {
+    "batchId": "batch-fa497c3a-bfbd-4a6f-8a0b-b934c3d7d17b",
+    "completed": 0,
+    "failed": 0,
+    "id": "9afccf88-fd15-5e1d-b730-03104fb71fc1",
+    "name": "lia-entity-cov-v02-kian-soce-rl-ck1000s60-20260716-080753",
+    "status": "processing",
+    "totalTasks": 20,
+    "updatedAt": null
+  },
+  "submitted_at": "2026-07-16T08:11:49.462498Z"
+}
