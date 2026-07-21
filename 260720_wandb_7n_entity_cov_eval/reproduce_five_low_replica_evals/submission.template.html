@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reproducible Entity Coverage Eval Submissions</title>
+  <style>
+    :root { font-family: ui-sans-serif, system-ui, sans-serif; color: #182026; }
+    body { margin: 0; background: #f5f7f8; }
+    main { width: min(1500px, calc(100% - 32px)); margin: 36px auto; }
+    h1 { font-size: 26px; }
+    .summary { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+    .chip { padding: 6px 9px; border: 1px solid #ccd6db; border-radius: 6px; background: white; }
+    .table-wrap { overflow-x: auto; border: 1px solid #d8dee2; background: white; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid #e4e8eb; text-align: left; vertical-align: top; }
+    th { background: #eef2f3; white-space: nowrap; }
+    code { overflow-wrap: anywhere; }
+    a { color: #0563c1; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Five reproducible low-replica entity coverage submissions</h1>
+    <p>
+      Dataset:
+      <a href="https://huggingface.co/datasets/twelvelabs/entity_cov_v02_tdf">twelvelabs/entity_cov_v02_tdf</a>,
+      revision <code>5caf5ebd1ce03b6b6bb28a50504a8c36542d9433</code>,
+      <code>default/test</code>, 18 samples.
+    </p>
+    <div class="summary">
+      <span class="chip">Pipeline: vllm-direct</span>
+      <span class="chip">Worker: vllm-video-v1</span>
+      <span class="chip">Node pool: b300-pegasus</span>
+      <span class="chip">TP: 1</span>
+      <span class="chip">DP: 1</span>
+      <span class="chip">Replicas: 2–4</span>
+      <span class="chip">Concurrency: 1</span>
+      <span class="chip">Max in flight: 20</span>
+      <span class="chip">Max tokens: 65,536</span>
+      <span class="chip">Temperature: 0</span>
+      <span class="chip">Tensor cache: enabled</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Family</th><th>Step</th><th>Complete model path</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>a1790-entity-sme4x</td>
+            <td>1800</td>
+            <td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-1800-safetensors/</code></td>
+          </tr>
+          <tr>
+            <td>pegasus-15-sft</td>
+            <td>1000</td>
+            <td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/ablation_260416_soccer_clean_filter_low_aug-highres_lr2e-6_qwen3_5_27b_soccer_dc_sme_low_filter_mtp_0513-base/checkpoint-1000-safetensors/</code></td>
+          </tr>
+          <tr>
+            <td>pegasus-15-rl</td>
+            <td>60</td>
+            <td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/rl_rl_consol_0516_mtp_alpha1_bs_224_8k_lr5e_7_ckpt1000-base/global_step_60/actor/huggingface/</code></td>
+          </tr>
+          <tr>
+            <td>pegasus-15-kian-soce</td>
+            <td>60</td>
+            <td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/kian-kim/soce_rl_260516_all_pair_p15_a1mckpt1000s60_w7030/</code></td>
+          </tr>
+          <tr>
+            <td>a1790-entity-sme4x</td>
+            <td>100</td>
+            <td><code>s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-100-safetensors/</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</body>
+</html>
