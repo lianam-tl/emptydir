@@ -13,6 +13,9 @@
     "expected_sample_count": 18,
     "enable_tensor_cache": true,
     "wandb_run_id": "kp1ju1r1",
-    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1"
+    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1",
+    "export_status": "Succeeded",
+    "eval_run_id": "b92b572e-59e4-53d1-8015-ba0a7671e767",
+    "eval_status": "processing"
   }
 ]
