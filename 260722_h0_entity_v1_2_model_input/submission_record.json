@@ -8,5 +8,6 @@
   "image_tag": "b2abd3c",
   "args": ["model-input", "--config", "h0_entity_v1_2"],
   "resources": {"cpu": "16", "memory": "64Gi"},
-  "output": "s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/model_input/h0_entity_v1_2/"
+  "output": "s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/model_input/h0_entity_v1_2/",
+  "mixture_stats": "s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/model_input/h0_entity_v1_2/mixture_stats.json"
 }
