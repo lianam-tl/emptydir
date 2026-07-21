@@ -36,9 +36,9 @@ def main() -> None:
         run_id = tracked_run["run_id"]
         run = request_json(f"{api_base}/eval/runs/{run_id}")["evalRun"]
         tasks = request_json(f"{api_base}/eval/runs/{run_id}/tasks")["tasks"]
-        evaluation = request_json(
-            f"{api_base}/eval/runs/{run_id}/evaluations/latest"
-        )["evaluation"]
+        evaluation = request_json(f"{api_base}/eval/runs/{run_id}/evaluations/latest")[
+            "evaluation"
+        ]
         if evaluation["status"] != "completed":
             raise RuntimeError(
                 f"{tracked_run['name']} scorer is {evaluation['status']}"
@@ -59,9 +59,7 @@ def main() -> None:
         )
         print(f"collected {tracked_run['name']}", flush=True)
 
-    arguments.output.write_text(
-        json.dumps({"runs": collected_runs}, indent=2) + "\n"
-    )
+    arguments.output.write_text(json.dumps({"runs": collected_runs}, indent=2) + "\n")
 
 
 if __name__ == "__main__":
