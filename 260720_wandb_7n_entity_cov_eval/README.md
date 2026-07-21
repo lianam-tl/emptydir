@@ -38,3 +38,5 @@ Step 1600 is tracked separately in `a1790_step1600_submission.json`. Its export
 manifest converts the DCP checkpoint to `checkpoint-1600-safetensors`; the
 monitor then submits https://huggingface.co/datasets/twelvelabs/entity_cov_v02_tdf
 with 65,536 output tokens, TP=1, and eight replicas.
+
+Export job: `export-a1790-entity-sme4x-s1600-tiici0`.

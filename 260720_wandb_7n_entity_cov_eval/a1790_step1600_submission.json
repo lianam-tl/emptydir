@@ -6,7 +6,7 @@
     "output_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-1600-safetensors",
     "export_name": "export-a1790-entity-sme4x-s1600",
     "manifest": "exports/a1790-entity-sme4x-step1600.yaml",
-    "job_name": "pending-submission",
+    "job_name": "export-a1790-entity-sme4x-s1600-tiici0",
     "dataset": "twelvelabs/entity_cov_v02_tdf",
     "config": "default",
     "split": "test",
