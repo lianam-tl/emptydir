@@ -1,0 +1,52 @@
+{
+  "generated_at": "2026-07-21T09:21:47.010959+00:00",
+  "metric": "entity_coverage::by_shape::half::name_appearance_iou",
+  "rank_stable": false,
+  "rows": [
+    {
+      "name": "consol-h0mn2x-s1600",
+      "run_id": "78542b3b-6142-5487-80eb-2be8006ce1f9",
+      "stored_gpt54": 0.2959529738919337,
+      "replayed_gpt54": 0.3030234497929452,
+      "gpt52": 0.24983172020932884,
+      "mapping_decisions": 246,
+      "changed_mappings": 30,
+      "stored_rank": 2,
+      "gpt54_rank": 1,
+      "gpt52_rank": 2
+    },
+    {
+      "name": "consol-h0mn2x-s2000",
+      "run_id": "55ccccf4-87a9-576f-acb7-45adac7e8fdb",
+      "stored_gpt54": 0.29863086527683697,
+      "replayed_gpt54": 0.2953563126319512,
+      "gpt52": 0.26603596219896614,
+      "mapping_decisions": 226,
+      "changed_mappings": 30,
+      "stored_rank": 1,
+      "gpt54_rank": 2,
+      "gpt52_rank": 1
+    }
+  ],
+  "stored_comparison": {
+    "winner": "consol-h0mn2x-s2000",
+    "loser": "consol-h0mn2x-s1600",
+    "winner_score": 0.29863086527683697,
+    "loser_score": 0.2959529738919337,
+    "margin": 0.0026778913849032637
+  },
+  "gpt54_comparison": {
+    "winner": "consol-h0mn2x-s1600",
+    "loser": "consol-h0mn2x-s2000",
+    "winner_score": 0.3030234497929452,
+    "loser_score": 0.2953563126319512,
+    "margin": 0.0076671371609939865
+  },
+  "gpt52_comparison": {
+    "winner": "consol-h0mn2x-s2000",
+    "loser": "consol-h0mn2x-s1600",
+    "winner_score": 0.26603596219896614,
+    "loser_score": 0.24983172020932884,
+    "margin": 0.016204241989637297
+  }
+}

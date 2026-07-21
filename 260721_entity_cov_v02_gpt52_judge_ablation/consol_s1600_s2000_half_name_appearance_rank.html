@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Consol s1600 vs s2000 entity judge rank inversion</title><style>
+:root{--ink:#172033;--muted:#64748b;--line:#dbe3ee;--panel:#f7f9fc;--red:#c23934;--green:#087a55}
+body{font:14px/1.5 system-ui,-apple-system,sans-serif;color:var(--ink);margin:0}main{max-width:1200px;margin:auto;padding:32px}h1,h2,h3{line-height:1.2}.lede{font-size:17px;max-width:900px}.verdict{background:#fff4e5;border:1px solid #f1c887;border-radius:12px;padding:18px;font-size:18px;font-weight:650;margin:22px 0}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:24px 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}.winner{font-size:20px;font-weight:700;color:var(--green)}
+table{width:100%;border-collapse:collapse}th,td{border-bottom:1px solid var(--line);padding:10px;text-align:left}th{background:#fff}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:10px}code{background:#eef2f7;padding:2px 5px;border-radius:4px}.note{color:var(--muted)}
+@media(max-width:800px){main{padding:18px}.cards{grid-template-columns:1fr}}
+</style></head><body><main><h1>Consol h0mn2x · s1600 vs s2000</h1>
+<p class="lede">Metric: half name+appearance IoU. The Pegasus inference outputs are fixed; only the text-only entity matching judge changes.</p>
+<div class="verdict">The relative rank is not stable. Fresh GPT-5.4-mini ranks s1600 first, while GPT-5.2 ranks s2000 first. Even the stored and replayed GPT-5.4-mini results disagree.</div>
+<div class="cards"><section class='card'><h3>Stored GPT-5.4-mini</h3><div class='winner'>consol-h0mn2x-s2000</div><p>29.86% vs 29.60%</p><strong>Margin: 0.27%</strong></section><section class='card'><h3>Replayed GPT-5.4-mini</h3><div class='winner'>consol-h0mn2x-s1600</div><p>30.30% vs 29.54%</p><strong>Margin: 0.77%</strong></section><section class='card'><h3>GPT-5.2</h3><div class='winner'>consol-h0mn2x-s2000</div><p>26.60% vs 24.98%</p><strong>Margin: 1.62%</strong></section></div>
+<h2>Detailed comparison</h2><div class="table-wrap"><table><thead><tr><th>Checkpoint</th><th>Stored rank</th><th>Stored 5.4</th><th>Replay rank</th><th>Replay 5.4</th><th>5.2 rank</th><th>GPT-5.2</th><th>5.2 − 5.4</th><th>Changed mappings</th></tr></thead><tbody><tr><td><strong>consol-h0mn2x-s1600</strong><br><code>78542b3b</code></td><td>#2</td><td>29.60%</td><td>#1</td><td>30.30%</td><td>#2</td><td>24.98%</td><td>-5.32%</td><td>30 / 246</td></tr><tr><td><strong>consol-h0mn2x-s2000</strong><br><code>55ccccf4</code></td><td>#1</td><td>29.86%</td><td>#2</td><td>29.54%</td><td>#1</td><td>26.60%</td><td>-2.93%</td><td>30 / 226</td></tr></tbody></table></div>
+<p class="note">Stored GPT-5.4-mini: s2000 wins by 0.27%. Replayed GPT-5.4-mini: s1600 wins by 0.77%. GPT-5.2: s2000 wins by 1.62%.</p>
+<p class="note">Generated 2026-07-21T09:21:47.010959+00:00.</p></main></body></html>

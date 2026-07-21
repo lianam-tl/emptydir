@@ -84,3 +84,16 @@ The order is unchanged between the fresh judge replays:
 The GPT-5.4-mini replay places ranks 3 and 4 only 0.075pp apart, so that pair
 is not robust to the observed judge replay variance even though it did not flip
 in this experiment.
+
+## Consol step 1600 vs 2000
+
+This pair does flip:
+
+| Judge | Winner | s1600 | s2000 |
+|---|---|---:|---:|
+| Stored GPT-5.4-mini | s2000 | 29.60% | 29.86% |
+| Replayed GPT-5.4-mini | s1600 | 30.30% | 29.54% |
+| GPT-5.2 | s2000 | 24.98% | 26.60% |
+
+Both judge choice and GPT-5.4-mini replay variance can change the relative
+ranking of these two checkpoints.
