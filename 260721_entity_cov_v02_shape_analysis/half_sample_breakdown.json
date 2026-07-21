@@ -12,6 +12,14 @@
         "samples": 13,
         "failures": 0
       },
+      "without_film_04": {
+        "naming": 0.43161168309238707,
+        "appearance": 0.45047330074005504,
+        "delta": 0.03652075644451908,
+        "characters": 61,
+        "samples": 11,
+        "failures": 0
+      },
       "films_only": {
         "naming": 0.36063971021253194,
         "appearance": 0.3771824040321252,
@@ -191,6 +199,14 @@
         "characters": 77,
         "samples": 13,
         "failures": 1
+      },
+      "without_film_04": {
+        "naming": 0.3430225386315306,
+        "appearance": 0.3907103359536294,
+        "delta": 0.0524215435969527,
+        "characters": 61,
+        "samples": 11,
+        "failures": 0
       },
       "films_only": {
         "naming": 0.2617212598144893,
@@ -372,6 +388,14 @@
         "samples": 13,
         "failures": 1
       },
+      "without_film_04": {
+        "naming": 0.26275792515585733,
+        "appearance": 0.2780698347019922,
+        "delta": 0.0437513300996904,
+        "characters": 61,
+        "samples": 11,
+        "failures": 0
+      },
       "films_only": {
         "naming": 0.18580568111163454,
         "appearance": 0.20191111746015175,
@@ -551,6 +575,14 @@
         "characters": 77,
         "samples": 13,
         "failures": 1
+      },
+      "without_film_04": {
+        "naming": 0.3092623952712929,
+        "appearance": 0.3237376020817026,
+        "delta": 0.050502732701079564,
+        "characters": 61,
+        "samples": 11,
+        "failures": 0
       },
       "films_only": {
         "naming": 0.22506095983888935,
@@ -732,6 +764,14 @@
         "samples": 13,
         "failures": 1
       },
+      "without_film_04": {
+        "naming": 0.3442495264376649,
+        "appearance": 0.3780096444354539,
+        "delta": 0.05575552832184616,
+        "characters": 61,
+        "samples": 11,
+        "failures": 0
+      },
       "films_only": {
         "naming": 0.27597926448755644,
         "appearance": 0.2983233511174369,
@@ -912,6 +952,14 @@
         "samples": 13,
         "failures": 1
       },
+      "without_film_04": {
+        "naming": 0.2959295999713501,
+        "appearance": 0.34990732256691487,
+        "delta": 0.08190078677267429,
+        "characters": 61,
+        "samples": 11,
+        "failures": 0
+      },
       "films_only": {
         "naming": 0.2279939950341574,
         "appearance": 0.27198802920639714,
@@ -1090,6 +1138,14 @@
         "delta": 0.06940329384503609,
         "characters": 77,
         "samples": 13,
+        "failures": 0
+      },
+      "without_film_04": {
+        "naming": 0.2754102945220864,
+        "appearance": 0.2865269301339138,
+        "delta": 0.06979992930803743,
+        "characters": 61,
+        "samples": 11,
         "failures": 0
       },
       "films_only": {
@@ -1272,6 +1328,14 @@
         "samples": 13,
         "failures": 1
       },
+      "without_film_04": {
+        "naming": 0.32695474228174753,
+        "appearance": 0.3765899407270451,
+        "delta": 0.08070904257149608,
+        "characters": 61,
+        "samples": 11,
+        "failures": 0
+      },
       "films_only": {
         "naming": 0.24285998481442966,
         "appearance": 0.28571995728901506,
@@ -1450,6 +1514,14 @@
         "delta": 0.061307834738314734,
         "characters": 77,
         "samples": 13,
+        "failures": 0
+      },
+      "without_film_04": {
+        "naming": 0.3488820354006791,
+        "appearance": 0.3587224023614256,
+        "delta": 0.057983960145528986,
+        "characters": 61,
+        "samples": 11,
         "failures": 0
       },
       "films_only": {
@@ -1632,6 +1704,14 @@
         "samples": 13,
         "failures": 1
       },
+      "without_film_04": {
+        "naming": 0.2703843415654294,
+        "appearance": 0.3466688828492797,
+        "delta": 0.08500179843661146,
+        "characters": 61,
+        "samples": 11,
+        "failures": 0
+      },
       "films_only": {
         "naming": 0.18986444480016307,
         "appearance": 0.2596217104362119,
@@ -1811,6 +1891,14 @@
         "characters": 77,
         "samples": 13,
         "failures": 1
+      },
+      "without_film_04": {
+        "naming": 0.37796275555663067,
+        "appearance": 0.3641540007740225,
+        "delta": 0.02652124359009045,
+        "characters": 61,
+        "samples": 11,
+        "failures": 0
       },
       "films_only": {
         "naming": 0.29141658752484934,
@@ -1992,6 +2080,14 @@
         "samples": 13,
         "failures": 1
       },
+      "without_film_04": {
+        "naming": 0.29471001390132,
+        "appearance": 0.3673430495649395,
+        "delta": 0.11513460689562342,
+        "characters": 61,
+        "samples": 11,
+        "failures": 0
+      },
       "films_only": {
         "naming": 0.22455417823469048,
         "appearance": 0.2856390255547669,
@@ -2170,6 +2266,14 @@
         "delta": 0.12685114811541987,
         "characters": 77,
         "samples": 13,
+        "failures": 0
+      },
+      "without_film_04": {
+        "naming": 0.24008040606393302,
+        "appearance": 0.3475400908845034,
+        "delta": 0.11870409589594767,
+        "characters": 61,
+        "samples": 11,
         "failures": 0
       },
       "films_only": {
@@ -2352,6 +2456,14 @@
         "samples": 13,
         "failures": 0
       },
+      "without_film_04": {
+        "naming": 0.2769917950702234,
+        "appearance": 0.25996383741246193,
+        "delta": 0.02832863883688528,
+        "characters": 61,
+        "samples": 11,
+        "failures": 0
+      },
       "films_only": {
         "naming": 0.21910485082042647,
         "appearance": 0.2340046595155664,
@@ -2531,6 +2643,14 @@
         "characters": 77,
         "samples": 13,
         "failures": 1
+      },
+      "without_film_04": {
+        "naming": 0.30820241293862854,
+        "appearance": 0.38505067400274456,
+        "delta": 0.11433557494078933,
+        "characters": 61,
+        "samples": 11,
+        "failures": 0
       },
       "films_only": {
         "naming": 0.24663056854215307,

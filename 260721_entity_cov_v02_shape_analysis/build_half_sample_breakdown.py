@@ -79,10 +79,16 @@ def build_breakdown(collected_runs_path: Path) -> dict[str, Any]:
             for sample in half_samples
             if sample_parts(sample["sample_id"])[0].startswith("film-")
         ]
+        samples_without_film_04 = [
+            sample
+            for sample in half_samples
+            if sample_parts(sample["sample_id"])[0] != "film-04"
+        ]
         output_runs.append(
             {
                 "name": run["name"],
                 "half_all": pooled_metrics(half_samples),
+                "without_film_04": pooled_metrics(samples_without_film_04),
                 "films_only": pooled_metrics(film_samples),
                 "film_first": pooled_metrics(
                     [
@@ -127,6 +133,7 @@ def render_html(breakdown: dict[str, Any]) -> str:
             "<tr>"
             f"<th>{html.escape(run['name'])}</th>"
             f"<td>{run['half_all']['appearance']:.4f}</td>"
+            f"<td>{run['without_film_04']['appearance']:.4f}</td>"
             f"<td>{run['films_only']['appearance']:.4f}</td>"
             f"{sample_cells}"
             f"<td>{run['half_all']['failures']}</td>"
@@ -142,13 +149,19 @@ def render_html(breakdown: dict[str, Any]) -> str:
 <style>body{{font:14px/1.5 system-ui;margin:24px;color:#1f2933}}.wrap{{overflow:auto;border:1px solid #d9dee7}}table{{border-collapse:collapse;width:100%}}th,td{{padding:7px 9px;border-bottom:1px solid #d9dee7;text-align:right;white-space:nowrap}}th{{background:#eef2f7}}th:first-child{{text-align:left;position:sticky;left:0}}p{{color:#687385}}</style>
 </head><body><h1>Entity coverage v0.2 Half sample breakdown</h1>
 <p>{html.escape(breakdown["metric_note"])} Values below are Name + appearance IoU.</p>
-<div class="wrap"><table><thead><tr><th rowspan="2">Model</th><th rowspan="2">Half all</th><th rowspan="2">Films only</th>{grouped_headers}<th rowspan="2">sport-01</th><th rowspan="2">Failures</th></tr><tr>{child_headers}</tr></thead>
+<div class="wrap"><table><thead><tr><th rowspan="2">Model</th><th rowspan="2">Half all</th><th rowspan="2">Without film-04</th><th rowspan="2">Films only</th>{grouped_headers}<th rowspan="2">sport-01</th><th rowspan="2">Failures</th></tr><tr>{child_headers}</tr></thead>
 <tbody>{"".join(rows)}</tbody></table></div></body></html>"""
 
 
 def render_javascript(breakdown: dict[str, Any]) -> str:
     compact_runs = []
-    aggregate_keys = ("half_all", "films_only", "film_first", "film_second")
+    aggregate_keys = (
+        "half_all",
+        "without_film_04",
+        "films_only",
+        "film_first",
+        "film_second",
+    )
     metric_keys = ("naming", "appearance", "delta", "failures")
     for run in breakdown["runs"]:
         compact_runs.append(
