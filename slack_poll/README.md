@@ -22,6 +22,7 @@ Optional:
 | `LABEL` | `$JOB_ID` |
 | `ARTIFACT_URL` | (empty) — mentioned in success message |
 | `CHANNEL` | `fun-lia-trashcan` |
+| `SLACK_BOT_TOKEN` | preferred token source; falls back to `ENV_FILE`, then `TOKEN_FILE` |
 | `ENV_FILE` | `~/pegasus/.env` — preferred source of `SLACK_BOT_TOKEN` |
 | `TOKEN_FILE` | `~/tmp/.slack_bot_token` |
 | `POLL_SEC` | 120 |
