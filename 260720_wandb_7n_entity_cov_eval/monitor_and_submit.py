@@ -91,19 +91,6 @@ def export_status(job_name: str) -> str:
     return "Pending"
 
 
-def export_ready(output_path: str) -> bool:
-    result = subprocess.run(
-        ["s5cmd", "ls", output_path.rstrip("/") + "/*"],
-        check=False,
-        capture_output=True,
-        text=True,
-    )
-    return result.returncode == 0 and any(
-        line.rstrip().endswith(("model.safetensors.index.json", "model.safetensors"))
-        for line in result.stdout.splitlines()
-    )
-
-
 def eval_payload(item: dict) -> dict:
     submission_tag = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     eval_tag = item.get("eval_tag", "v0")
@@ -199,17 +186,16 @@ def main() -> None:
             key = item["family"] + str(item["step"])
             item["export_status"] = export_status(item["job_name"])
             if item["export_status"] == "Succeeded" and not item.get("eval_run_id"):
-                if export_ready(item["output_path"]):
-                    status, response = request_json(
-                        f"{arguments.eval_api_base.rstrip('/')}/eval/runs",
-                        eval_payload(item),
+                status, response = request_json(
+                    f"{arguments.eval_api_base.rstrip('/')}/eval/runs",
+                    eval_payload(item),
+                )
+                if status != 202:
+                    raise RuntimeError(
+                        f"Eval submission failed for {key}: HTTP {status} {response}"
                     )
-                    if status != 202:
-                        raise RuntimeError(
-                            f"Eval submission failed for {key}: HTTP {status} {response}"
-                        )
-                    item["eval_run_id"] = response["evalRun"]["id"]
-                    item["eval_status"] = response["evalRun"]["status"]
+                item["eval_run_id"] = response["evalRun"]["id"]
+                item["eval_status"] = response["evalRun"]["status"]
             if item.get("eval_run_id"):
                 status, response = request_json(
                     f"{arguments.eval_api_base.rstrip('/')}/eval/runs/{item['eval_run_id']}"
