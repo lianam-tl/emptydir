@@ -1,0 +1,17 @@
+[
+  {
+    "family": "pegasus-15-sft-r2-r4",
+    "step": 1000,
+    "run_id": "5d2f7772-0dfd-565e-87ff-76cd4e990e8d"
+  },
+  {
+    "family": "pegasus-15-rl-r2-r4",
+    "step": 60,
+    "run_id": "60db6ce4-2392-52b5-b5a3-a14a598de027"
+  },
+  {
+    "family": "pegasus-15-kian-soce-r2-r4",
+    "step": 60,
+    "run_id": "677db295-983d-578c-9fde-5574c5775347"
+  }
+]
