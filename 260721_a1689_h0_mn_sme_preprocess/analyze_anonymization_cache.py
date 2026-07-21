@@ -68,7 +68,7 @@ def source_hint(row: dict) -> str:
         for key in ("config", "source_config", "dataset_config", "dataset_name", "domain", "source"):
             if metadata.get(key):
                 return f"{key}={metadata[key]}"
-    media_path = row.get("media_path") or row.get("video") or ""
+    media_path = row.get("media_path") or row.get("media") or row.get("video") or ""
     return f"media={str(media_path).split('/')[-2] if '/' in str(media_path) else 'unknown'}"
 
 
@@ -120,6 +120,8 @@ def main() -> None:
     selected_fingerprint = None
     selected_files = None
     full_record_groups = []
+    kept_index_groups = []
+    expected_kept = args.target_rows - args.expected_rejected
     for fingerprint, cache_files in sorted(cache_groups(args.cache_root).items()):
         first_shard = Dataset.from_file(str(sorted(cache_files)[0]))
         row_count = sum(len(Dataset.from_file(str(path))) for path in cache_files)
@@ -130,6 +132,8 @@ def main() -> None:
             selected_files = cache_files
         if "messages" in columns:
             full_record_groups.append((row_count, fingerprint, cache_files))
+        if columns == ["indices"] and row_count == expected_kept:
+            kept_index_groups.append((fingerprint, cache_files))
 
     if selected_files is None:
         raise RuntimeError(f"No cache group has exactly {args.target_rows} rows")
@@ -137,13 +141,28 @@ def main() -> None:
     dataset = load_group(selected_files)
     base_fingerprint = selected_fingerprint
     if dataset.column_names == ["indices"]:
-        indices = dataset["indices"]
-        minimum_base_rows = max(indices) + 1
+        input_indices = dataset["indices"]
+        kept_fingerprint = None
+        kept_indices = None
+        input_index_set = set(input_indices)
+        for candidate_fingerprint, candidate_files in kept_index_groups:
+            candidate_indices = load_group(candidate_files)["indices"]
+            if set(candidate_indices).issubset(input_index_set):
+                kept_fingerprint = candidate_fingerprint
+                kept_indices = candidate_indices
+                break
+        if kept_indices is None:
+            raise RuntimeError(f"No {expected_kept}-row index group is a subset of the input stage")
+        kept_index_set = set(kept_indices)
+        rejected_indices = [index for index in input_indices if index not in kept_index_set]
+        minimum_base_rows = max(rejected_indices) + 1
         candidates = [group for group in full_record_groups if group[0] >= minimum_base_rows]
         if not candidates:
             raise RuntimeError(f"No full-record cache group can resolve index {minimum_base_rows - 1}")
         _, base_fingerprint, base_files = min(candidates)
-        dataset = load_group(base_files).select(indices)
+        dataset = load_group(base_files).select(rejected_indices)
+    else:
+        kept_fingerprint = None
 
     rejected_rows = []
     for row in dataset:
@@ -166,11 +185,12 @@ def main() -> None:
     source_counts = Counter(row["source_hint"] for row in rejected_rows)
     summary = {
         "cache_fingerprint": selected_fingerprint,
+        "kept_fingerprint": kept_fingerprint,
         "base_fingerprint": base_fingerprint,
         "cache_files": len(selected_files),
-        "input_rows": len(dataset),
+        "input_rows": args.target_rows,
         "rejected_rows": len(rejected_rows),
-        "kept_rows": len(dataset) - len(rejected_rows),
+        "kept_rows": expected_kept,
         "pattern_counts": dict(pattern_counts.most_common()),
         "source_hint_counts": dict(source_counts.most_common()),
         "examples": rejected_rows[:200],
