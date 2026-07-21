@@ -1,0 +1,45 @@
+{
+  "completed_configs": 6,
+  "configs": [
+    {
+      "name": "baseball_v1_2_duration_diverse",
+      "path": "/fsx/jeongyeon-nam/a1814-entity-sme-v1-2-k8s/a1814-full-b300-20260721135119/output/baseball_v1_2_duration_diverse.parquet",
+      "rows": 24517,
+      "state": "published"
+    },
+    {
+      "name": "basketball_v1_2_duration_diverse",
+      "path": "/fsx/jeongyeon-nam/a1814-entity-sme-v1-2-k8s/a1814-full-b300-20260721135119/output/basketball_v1_2_duration_diverse.parquet",
+      "rows": 441,
+      "state": "published"
+    },
+    {
+      "name": "movie_v1_2_duration_diverse",
+      "path": "/fsx/jeongyeon-nam/a1814-entity-sme-v1-2-k8s/a1814-full-b300-20260721135119/output/movie_v1_2_duration_diverse.parquet",
+      "rows": 28788,
+      "state": "published"
+    },
+    {
+      "name": "news_v1_2_duration_diverse",
+      "path": "/fsx/jeongyeon-nam/a1814-entity-sme-v1-2-k8s/a1814-full-b300-20260721135119/output/news_v1_2_duration_diverse.parquet",
+      "rows": 22854,
+      "state": "published"
+    },
+    {
+      "name": "soccer_v1_2_duration_diverse",
+      "path": "/fsx/jeongyeon-nam/a1814-entity-sme-v1-2-k8s/a1814-full-b300-20260721135119/output/soccer_v1_2_duration_diverse.parquet",
+      "rows": 3813,
+      "state": "published"
+    },
+    {
+      "name": "tvshow_v1_2_duration_diverse",
+      "path": "/fsx/jeongyeon-nam/a1814-entity-sme-v1-2-k8s/a1814-full-b300-20260721135119/output/tvshow_v1_2_duration_diverse.parquet",
+      "rows": 9223,
+      "state": "published"
+    }
+  ],
+  "repo_id": "twelvelabs/tl_h0_movies_and_news_sme_tdf",
+  "state": "completed",
+  "total_rows": 89636,
+  "updated_at": "2026-07-21T07:03:55.657483+00:00"
+}

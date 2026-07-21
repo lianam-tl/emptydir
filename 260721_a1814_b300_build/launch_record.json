@@ -1,0 +1,12 @@
+{
+  "branch": "lia/a-1814-scale-entity-sme-v1-2",
+  "commit": "5f3a99d43",
+  "cpu_build_stopped_at_sources": 10796,
+  "job_name": "a1814-full-b300-20260721135119",
+  "kubernetes_namespace": "research",
+  "launched_at": "2026-07-21T04:51:19Z",
+  "node": "hyperpod-i-0c0f716baee19205e",
+  "output_dir": "/fsx/jeongyeon-nam/a1814-entity-sme-v1-2-k8s/a1814-full-b300-20260721135119",
+  "slack_channel": "C0ATJME17EK",
+  "workers": 128
+}
