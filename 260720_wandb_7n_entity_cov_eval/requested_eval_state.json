@@ -10,7 +10,10 @@
     "max_tokens": 65536,
     "enable_tensor_cache": true,
     "wandb_run_id": "",
-    "wandb_url": ""
+    "wandb_url": "",
+    "export_status": "Succeeded",
+    "eval_run_id": "968ce189-f02c-5c4f-9b91-2172edd43714",
+    "eval_status": "queued"
   },
   {
     "family": "pegasus-15-rl",
@@ -23,7 +26,10 @@
     "max_tokens": 65536,
     "enable_tensor_cache": true,
     "wandb_run_id": "",
-    "wandb_url": ""
+    "wandb_url": "",
+    "export_status": "Succeeded",
+    "eval_run_id": "d84e4056-2195-57b9-889f-b4655e2461f4",
+    "eval_status": "queued"
   },
   {
     "family": "a1790-entity-sme4x",
@@ -36,6 +42,25 @@
     "max_tokens": 65536,
     "enable_tensor_cache": true,
     "wandb_run_id": "kp1ju1r1",
-    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1"
+    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1",
+    "export_status": "Succeeded",
+    "eval_run_id": "5a38f661-4868-55ef-89f6-2d1e6d037915",
+    "eval_status": "queued"
+  },
+  {
+    "family": "pegasus-15-kian-soce",
+    "step": 60,
+    "output_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/kian-kim/soce_rl_260516_all_pair_p15_a1mckpt1000s60_w7030",
+    "dataset": "twelvelabs/entity_cov_v02_tdf",
+    "config": "default",
+    "split": "test",
+    "eval_tag": "v02-64k",
+    "max_tokens": 65536,
+    "enable_tensor_cache": true,
+    "wandb_run_id": "",
+    "wandb_url": "",
+    "export_status": "Succeeded",
+    "eval_run_id": "8f941a94-0cd6-5243-b3e9-f56f83423631",
+    "eval_status": "queued"
   }
 ]
