@@ -45,24 +45,27 @@ def load_indices(cache_files_to_read: list[Path]) -> list[int]:
 
 
 def iter_indexed_rows(cache_files_to_read: list[Path], indices: list[int]):
-    """Read selected global row indices without opening every record shard together."""
+    """Read selected global row indices one Arrow record batch at a time."""
     sorted_indices = sorted(indices)
     index_position = 0
-    shard_offset = 0
+    row_offset = 0
     for cache_file in cache_files_to_read:
-        shard = read_arrow_table(cache_file)
-        shard_end = shard_offset + len(shard)
-        local_indices = []
-        while index_position < len(sorted_indices) and sorted_indices[index_position] < shard_end:
-            local_indices.append(sorted_indices[index_position] - shard_offset)
-            index_position += 1
-        if local_indices:
-            selected_rows = shard.take(pa.array(local_indices)).to_pylist()
-            yield from selected_rows
-            del selected_rows
-        shard_offset = shard_end
-        del shard
-        gc.collect()
+        with pa.memory_map(str(cache_file), "r") as source:
+            for batch in ipc.open_stream(source):
+                batch_end = row_offset + len(batch)
+                local_indices = []
+                while index_position < len(sorted_indices) and sorted_indices[index_position] < batch_end:
+                    local_indices.append(sorted_indices[index_position] - row_offset)
+                    index_position += 1
+                if local_indices:
+                    selected = pa.Table.from_batches([batch]).select(["id", "messages", "metadata"])
+                    selected_rows = selected.take(pa.array(local_indices)).to_pylist()
+                    yield from selected_rows
+                    del selected_rows, selected
+                row_offset = batch_end
+                del batch
+                gc.collect()
+                pa.default_memory_pool().release_unused()
     if index_position != len(sorted_indices):
         raise RuntimeError(f"Resolved {index_position} of {len(sorted_indices)} requested indices")
 
