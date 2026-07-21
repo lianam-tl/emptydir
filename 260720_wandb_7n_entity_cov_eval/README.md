@@ -42,3 +42,6 @@ with 65,536 output tokens, TP=1, and eight replicas.
 Export job: `export-a1790-entity-sme4x-s1600-tiicoj`. The first attempt,
 `export-a1790-entity-sme4x-s1600-tiici0`, failed during a transient GitHub DNS
 lookup and was replaced.
+
+CPU handoff monitor: PID `1726652`, polling every 60 seconds and notifying
+`#fun-lia-trashcan`.
