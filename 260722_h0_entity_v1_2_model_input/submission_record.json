@@ -1,0 +1,12 @@
+{
+  "job_id": "d853007e",
+  "job_name": "pp-a1689-h0-entity-v1-2-mi-h0-entity-v1-2",
+  "status": "running",
+  "submitted_at": "2026-07-21T22:25:52Z",
+  "config": "h0_entity_v1_2",
+  "source_count": 36,
+  "image_tag": "b2abd3c",
+  "args": ["model-input", "--config", "h0_entity_v1_2"],
+  "resources": {"cpu": "16", "memory": "64Gi"},
+  "output": "s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/model_input/h0_entity_v1_2/"
+}
