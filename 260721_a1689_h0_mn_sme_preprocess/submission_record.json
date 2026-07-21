@@ -7,6 +7,16 @@
     "config_casts_completed": 10,
     "concatenated_rows": 99057,
     "cleanup_map_started": true,
+    "filter_attrition": {
+      "loader_cleanup": 1623,
+      "max_video_duration_filter": 890,
+      "chapter_repetition_filter": 1070,
+      "text_repeat_filter": 11255,
+      "sme_chapter_quality_filter": 153,
+      "anonymization_filter": 6313,
+      "total_dropped": 21304,
+      "rows_after_filters": 77753
+    },
     "checked_at": "2026-07-21T09:59:39Z"
   },
   "submitted_at": "2026-07-21T09:55:53Z",

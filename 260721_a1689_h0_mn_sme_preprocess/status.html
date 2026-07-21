@@ -36,6 +36,23 @@
   <p><strong>Runtime validation:</strong> all 10 config casts completed, the combined dataset has 99,057 rows,
     and the cleanup map has started successfully.</p>
 
+  <h2>Filter attrition</h2>
+  <table>
+    <thead><tr><th>Stage</th><th>Rows before</th><th>Rows after</th><th>Dropped</th></tr></thead>
+    <tbody>
+      <tr><td>Loader segment cleanup</td><td>99,057</td><td>97,434</td><td>1,623</td></tr>
+      <tr><td>max_video_duration_filter</td><td>97,434</td><td>96,544</td><td>890</td></tr>
+      <tr><td>chapter_repetition_filter</td><td>96,544</td><td>95,474</td><td>1,070</td></tr>
+      <tr><td>text_repeat_filter</td><td>95,474</td><td>84,219</td><td>11,255</td></tr>
+      <tr><td>sme_chapter_quality_filter</td><td>84,219</td><td>84,066</td><td>153</td></tr>
+      <tr><td>anonymization_filter</td><td>84,066</td><td>77,753</td><td>6,313</td></tr>
+      <tr><th>Total</th><th>99,057</th><th>77,753</th><th>21,304</th></tr>
+    </tbody>
+  </table>
+  <p><code>text_repeat_filter</code> and <code>anonymization_filter</code> account for
+    17,568 rows, or 82.5% of all removed rows. The other configured filters removed zero rows.</p>
+
+  <h2>Source configs</h2>
   <table>
     <thead><tr><th>Hugging Face config</th><th>Relative to previous base</th><th>Source rows</th></tr></thead>
     <tbody>
