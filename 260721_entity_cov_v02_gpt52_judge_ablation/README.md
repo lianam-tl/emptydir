@@ -1,0 +1,64 @@
+# Entity coverage v0.2 GPT-5.2 judge ablation
+
+This experiment keeps the `consol-h0mn2x-s1600` Pegasus inference outputs fixed
+and changes only the entity-matching judge from the stored `gpt-5.4-mini`
+result to `gpt-5.2`.
+
+- Dataset: https://huggingface.co/datasets/twelvelabs/entity_cov_v02_tdf
+- Source run: `78542b3b-6142-5487-80eb-2be8006ce1f9`
+- Samples: 20 (`full`: 7, `half`: 13)
+- Expected GPT calls: at most 40 (two matching modes per parseable sample)
+
+Run from this directory:
+
+```bash
+set -a
+source ../.env
+set +a
+
+/Users/long8v/.venv/bin/python compare_judge_models.py \
+  --pegasus-root /Users/long8v/pegasus \
+  --collected-runs /Users/long8v/emptydir-worktrees/a-1797-entity-cov-v02-64k-sweep/260721_entity_cov_v02_shape_analysis/collected_runs.json \
+  --inference-directory /Users/long8v/Downloads/entity_cov_v02_shape_analysis/inference_outputs/consol-h0mn2x-s1600 \
+  --output-json comparison.json \
+  --output-html comparison.html
+```
+
+The JSON keeps the GPT-5.2 structured mappings and evidence. The HTML shows
+aggregate, sample-level, and character-level score changes. The original
+GPT-5.4-mini mapping evidence is unavailable because the production evaluator
+does not persist it.
+
+For a controlled A/B, rerun the same command with `--model gpt-5.4-mini` and
+different output filenames, then combine both fresh replays:
+
+```bash
+/Users/long8v/.venv/bin/python combine_results.py \
+  --gpt54 gpt54_reproduction.json \
+  --gpt52 comparison.json \
+  --output-json judge_ab_comparison.json \
+  --output-html judge_ab_comparison.html
+```
+
+## Result
+
+Against the fresh `gpt-5.4-mini` replay, `gpt-5.2` changed 30 of 246 mapping
+decisions and was substantially more conservative:
+
+| Metric | GPT-5.4-mini replay | GPT-5.2 | Difference |
+|---|---:|---:|---:|
+| Overall naming IoU | 33.67% | 30.45% | -3.22pp |
+| Overall name + appearance IoU | 33.55% | 25.70% | -7.85pp |
+| Full name + appearance IoU | 39.37% | 26.98% | -12.39pp |
+| Half name + appearance IoU | 30.30% | 24.98% | -5.32pp |
+
+Of the 30 changed decisions, GPT-5.2 rejected 28 mappings accepted by
+GPT-5.4-mini, added one, and selected a different label once. The largest
+single-sample change was `film-02/full`, where GPT-5.2 rejected fuzzy mappings
+such as `Shahid -> Shabbir` and `Zubair -> Zohaib`; name + appearance IoU fell
+from 69.06% to 0%.
+
+The production `gpt-5.4-mini` result was not perfectly reproducible: the fresh
+replay changed overall naming IoU by +0.18pp and name + appearance IoU by
++0.86pp even with temperature zero. Use the fresh replay, not the stored score,
+for the controlled model comparison.
