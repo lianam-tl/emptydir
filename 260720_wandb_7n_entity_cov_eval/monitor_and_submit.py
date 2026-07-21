@@ -94,7 +94,12 @@ def export_status(job_name: str) -> str:
 def eval_payload(item: dict) -> dict:
     submission_tag = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     eval_tag = item.get("eval_tag", "v0")
-    name = f"lia-entcov-{eval_tag}-{item['family']}-s{item['step']}-tp1-r8-{submission_tag}"
+    min_replicas = item.get("min_replicas", 8)
+    max_replicas = item.get("max_replicas", 8)
+    name = (
+        f"lia-entcov-{eval_tag}-{item['family']}-s{item['step']}-"
+        f"tp1-r{min_replicas}-{max_replicas}-{submission_tag}"
+    )
     return {
         "name": name,
         "experimentName": name,
@@ -107,8 +112,8 @@ def eval_payload(item: dict) -> dict:
         "workerType": "vllm-video-v1",
         "modelPath": item["output_path"].rstrip("/") + "/",
         "nodePool": "b300-pegasus",
-        "minReplicas": 8,
-        "maxReplicas": 8,
+        "minReplicas": min_replicas,
+        "maxReplicas": max_replicas,
         "concurrency": 1,
         "maxInFlight": 20,
         "tp": 1,
@@ -124,6 +129,8 @@ def render_html(items: list[dict]) -> str:
     dataset = items[0].get("dataset", "twelvelabs/entity_cov_v0_tdf")
     config = items[0].get("config", "chunk_10m")
     max_tokens = items[0].get("max_tokens", 16384)
+    min_replicas = items[0].get("min_replicas", 8)
+    max_replicas = items[0].get("max_replicas", 8)
     rows = []
     for item in items:
         rows.append(
@@ -131,7 +138,7 @@ def render_html(items: list[dict]) -> str:
             f"<td>{html.escape(item['family'])}</td><td>{item['step']}</td>"
             f"<td>{html.escape(item.get('export_status', 'unknown'))}</td>"
             f"<td>{html.escape(item.get('eval_status', 'not submitted'))}</td>"
-            f"<td>{item.get('eval_completed', 0)}/20</td>"
+            f"<td>{item.get('eval_completed', 0)}/{item.get('expected_sample_count', 20)}</td>"
             f"<td><code>{html.escape(item.get('eval_run_id', ''))}</code></td>"
             f'<td><a href="{html.escape(item["wandb_url"])}">{html.escape(item["wandb_run_id"])}</a></td>'
             "</tr>"
@@ -145,7 +152,7 @@ table {{ width: 100%; border-collapse: collapse; background: white; border: 1px 
 th, td {{ padding: 10px 12px; border-bottom: 1px solid #e4e8eb; text-align: left; }} th {{ background: #eef2f3; }}
 code {{ overflow-wrap: anywhere; }} a {{ color: #0563c1; }}</style></head><body><main>
 <h1>W&amp;B 7-node Entity Coverage Eval</h1>
-<p><a href="https://huggingface.co/datasets/{html.escape(dataset)}">{html.escape(dataset)}</a>, {html.escape(config)}/test, TP=1, 8 replicas, max tokens={max_tokens:,}.</p>
+<p><a href="https://huggingface.co/datasets/{html.escape(dataset)}">{html.escape(dataset)}</a>, {html.escape(config)}/test, TP=1, replicas={min_replicas}-{max_replicas}, max tokens={max_tokens:,}.</p>
 <table><thead><tr><th>Family</th><th>Step</th><th>Export</th><th>Eval</th><th>Progress</th><th>Run ID</th><th>W&amp;B</th></tr></thead>
 <tbody>{"".join(rows)}</tbody></table></main></body></html>"""
 
