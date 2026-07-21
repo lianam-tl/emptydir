@@ -21,7 +21,7 @@
 </head>
 <body>
   <h1>A-1689 non-2× H0 SME base preprocessing</h1>
-  <div class="muted">Retry submitted 2026-07-21 18:55 KST · job <code>d1dd4e0d</code> · status: running, schema concatenation passed</div>
+  <div class="muted">6,000-second retry submitted 2026-07-21 20:13 KST · job <code>6c8c8dcc</code> · status: running</div>
 
   <div class="cards">
     <div class="card"><div class="muted">Previous source rows</div><div class="value">3,809</div></div>
@@ -32,11 +32,12 @@
   <p>The Pegasus loader enumerates every published config dynamically. This job uses
     <code>default_sft_sme_h0_highres</code>, not the entity-dropout 2× template.</p>
   <p>Attempt 1 (<code>a249ade7</code>) exposed incompatible old/new nested message schemas.
-    Retry 2 uses image <code>fc7451e</code>, which casts every config to the common TDF v2 schema before concatenation.</p>
-  <p><strong>Runtime validation:</strong> all 10 config casts completed, the combined dataset has 99,057 rows,
-    and the cleanup map has started successfully.</p>
+    Attempt 2 (<code>d1dd4e0d</code>) used the schema fix, but was cancelled before publishing because its
+    maximum video duration was still 1,200 seconds. Its filter evidence was preserved.</p>
+  <p><strong>Current runtime validation:</strong> attempt 3 uses image <code>8fe98c9</code>, has
+    <code>max_duration=6000</code> and <code>overwrite=True</code>, and its 99,057-row cleanup map is running.</p>
 
-  <h2>Filter attrition</h2>
+  <h2>Attempt 2 filter attrition (1,200-second threshold)</h2>
   <table>
     <thead><tr><th>Stage</th><th>Rows before</th><th>Rows after</th><th>Dropped</th></tr></thead>
     <tbody>
@@ -51,6 +52,14 @@
   </table>
   <p><code>text_repeat_filter</code> and <code>anonymization_filter</code> account for
     17,568 rows, or 82.5% of all removed rows. The other configured filters removed zero rows.</p>
+
+  <h2>Anonymization rejection analysis</h2>
+  <p>The 6,313 rejected IDs were recovered exactly from the attempt-2 Arrow cache. By first rejecting pattern:
+    role+number 5,688; role+letter 252; transcript label 178; ordinal person 62; placeholder name 54;
+    standalone XXX 38; bracket placeholder 26; anonymization keyword 10; player+letter 4; no-space ID 1.</p>
+  <p>By domain: movie 2,444; soccer 1,464; baseball 1,317; news 841; TV show 226; basketball 21.
+    <a href="anonymization_analysis.html">Open the HTML analysis</a>; the complete compact row list is
+    <a href="anonymization_rejected_rows.jsonl">anonymization_rejected_rows.jsonl</a>.</p>
 
   <h2>Source configs</h2>
   <table>

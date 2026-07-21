@@ -1,30 +1,27 @@
 {
-  "job_id": "d1dd4e0d",
-  "job_name": "pp-a1689-allcfg-r2-260721-tl-h0-movies-and-news-sme-default-sft",
-  "attempt": 2,
+  "job_id": "6c8c8dcc",
+  "job_name": "pp-a1689-allcfg-r3-260721-tl-h0-movies-and-news-sme-default-sft",
+  "attempt": 3,
   "status": "running",
   "runtime_validation": {
-    "config_casts_completed": 10,
-    "concatenated_rows": 99057,
+    "configured_max_video_duration_seconds": 6000,
+    "overwrite": true,
+    "image_verified": true,
     "cleanup_map_started": true,
-    "filter_attrition": {
-      "loader_cleanup": 1623,
-      "max_video_duration_filter": 890,
-      "chapter_repetition_filter": 1070,
-      "text_repeat_filter": 11255,
-      "sme_chapter_quality_filter": 153,
-      "anonymization_filter": 6313,
-      "total_dropped": 21304,
-      "rows_after_filters": 77753
-    },
-    "checked_at": "2026-07-21T09:59:39Z"
+    "checked_at": "2026-07-21T11:17:00Z"
   },
-  "submitted_at": "2026-07-21T09:55:53Z",
+  "submitted_at": "2026-07-21T11:13:29Z",
   "dataset": "twelvelabs/tl_h0_movies_and_news_sme_tdf",
   "dataset_revision": "533ef69c0ab5067503d0a861f371e92c36e287a0",
   "dataset_rows": 99057,
-  "image_tag": "fc7451e",
+  "image_tag": "8fe98c9",
   "previous_attempt": {
+    "job_id": "d1dd4e0d",
+    "status": "cancelled",
+    "reason": "Replaced before publish because its max video duration was 1200 seconds",
+    "anonymization_analysis": "anonymization_analysis.html"
+  },
+  "earlier_attempt": {
     "job_id": "a249ade7",
     "status": "failed",
     "reason": "Hugging Face config message schemas could not be concatenated"
