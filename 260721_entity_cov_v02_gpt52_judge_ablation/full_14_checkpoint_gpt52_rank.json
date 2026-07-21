@@ -1,0 +1,281 @@
+{
+  "generated_at": "2026-07-21T09:33:43.705644+00:00",
+  "metric": "entity_coverage::by_shape::half::name_appearance_iou",
+  "reference_excluded": "pegasus-15-kian-soce",
+  "checkpoint_count": 14,
+  "statistics": {
+    "spearman": 0.9472527472527472,
+    "kendall": 0.8241758241758241,
+    "changed_rank_count": 8,
+    "inversion_count": 8,
+    "total_pairs": 91,
+    "inversions": [
+      {
+        "left": "soccer-lvreason-mcq-s1200",
+        "right": "a1790-entity-sme4x-s400",
+        "stored_order": [
+          3,
+          4
+        ],
+        "gpt52_order": [
+          4,
+          3
+        ]
+      },
+      {
+        "left": "soccer-lvreason-mcq-s400",
+        "right": "consol-h0mn2x-s2000",
+        "stored_order": [
+          6,
+          7
+        ],
+        "gpt52_order": [
+          9,
+          7
+        ]
+      },
+      {
+        "left": "soccer-lvreason-mcq-s400",
+        "right": "consol-h0mn2x-s1600",
+        "stored_order": [
+          6,
+          8
+        ],
+        "gpt52_order": [
+          9,
+          8
+        ]
+      },
+      {
+        "left": "soccer-lvreason-mcq-s400",
+        "right": "a1790-entity-sme4x-s800",
+        "stored_order": [
+          6,
+          9
+        ],
+        "gpt52_order": [
+          9,
+          6
+        ]
+      },
+      {
+        "left": "consol-h0mn2x-s2000",
+        "right": "a1790-entity-sme4x-s800",
+        "stored_order": [
+          7,
+          9
+        ],
+        "gpt52_order": [
+          7,
+          6
+        ]
+      },
+      {
+        "left": "consol-h0mn2x-s1600",
+        "right": "a1790-entity-sme4x-s800",
+        "stored_order": [
+          8,
+          9
+        ],
+        "gpt52_order": [
+          8,
+          6
+        ]
+      },
+      {
+        "left": "consol-h0mn2x-s1200",
+        "right": "a1740-h0-duration-s1200",
+        "stored_order": [
+          10,
+          11
+        ],
+        "gpt52_order": [
+          11,
+          10
+        ]
+      },
+      {
+        "left": "soccer-lvreason-mcq-s800",
+        "right": "a1740-h0-duration-s800",
+        "stored_order": [
+          13,
+          14
+        ],
+        "gpt52_order": [
+          14,
+          13
+        ]
+      }
+    ]
+  },
+  "rows": [
+    {
+      "name": "a1740-h0-duration-s400",
+      "family": "A1740 h0-duration",
+      "run_id": "34e63948-7068-5c19-9d49-4a14eaf44341",
+      "stored_gpt54": 0.3399012240242388,
+      "gpt52": 0.2994672827041308,
+      "mapping_calls": 36,
+      "stored_rank": 1,
+      "gpt52_rank": 1,
+      "rank_change": 0,
+      "score_delta": -0.04043394132010797
+    },
+    {
+      "name": "consol-h0mn2x-s800",
+      "family": "Consol h0mn2x",
+      "run_id": "a7ed23df-4db0-5ef1-ab05-ca51a995264f",
+      "stored_gpt54": 0.3235868639804109,
+      "gpt52": 0.29568214033635715,
+      "mapping_calls": 38,
+      "stored_rank": 2,
+      "gpt52_rank": 2,
+      "rank_change": 0,
+      "score_delta": -0.027904723644053775
+    },
+    {
+      "name": "soccer-lvreason-mcq-s1200",
+      "family": "Soccer LVReason",
+      "run_id": "fca2533a-a6fc-550e-8c58-a49d8363626a",
+      "stored_gpt54": 0.31302870415382655,
+      "gpt52": 0.27431818392904844,
+      "mapping_calls": 36,
+      "stored_rank": 3,
+      "gpt52_rank": 4,
+      "rank_change": -1,
+      "score_delta": -0.03871052022477811
+    },
+    {
+      "name": "a1790-entity-sme4x-s400",
+      "family": "A1790 entity-sme4x",
+      "run_id": "bea5f764-eb67-59c9-901f-acc92b3866df",
+      "stored_gpt54": 0.3073962735968309,
+      "gpt52": 0.27642264988205695,
+      "mapping_calls": 34,
+      "stored_rank": 4,
+      "gpt52_rank": 3,
+      "rank_change": 1,
+      "score_delta": -0.030973623714773968
+    },
+    {
+      "name": "consol-h0mn2x-s400",
+      "family": "Consol h0mn2x",
+      "run_id": "b0b7a57b-bbc7-546f-bf6e-fb9d30fe2dcb",
+      "stored_gpt54": 0.30507613705654957,
+      "gpt52": 0.2736197974737672,
+      "mapping_calls": 36,
+      "stored_rank": 5,
+      "gpt52_rank": 5,
+      "rank_change": 0,
+      "score_delta": -0.03145633958278238
+    },
+    {
+      "name": "soccer-lvreason-mcq-s400",
+      "family": "Soccer LVReason",
+      "run_id": "29162be7-08eb-569f-babd-fe4ce9b5bbfa",
+      "stored_gpt54": 0.3043429896636012,
+      "gpt52": 0.24091047097787818,
+      "mapping_calls": 38,
+      "stored_rank": 6,
+      "gpt52_rank": 9,
+      "rank_change": -3,
+      "score_delta": -0.063432518685723
+    },
+    {
+      "name": "consol-h0mn2x-s2000",
+      "family": "Consol h0mn2x",
+      "run_id": "55ccccf4-87a9-576f-acb7-45adac7e8fdb",
+      "stored_gpt54": 0.29863086527683697,
+      "gpt52": 0.26603596219896614,
+      "mapping_calls": 36,
+      "stored_rank": 7,
+      "gpt52_rank": 7,
+      "rank_change": 0,
+      "score_delta": -0.03259490307787083
+    },
+    {
+      "name": "consol-h0mn2x-s1600",
+      "family": "Consol h0mn2x",
+      "run_id": "78542b3b-6142-5487-80eb-2be8006ce1f9",
+      "stored_gpt54": 0.2959529738919337,
+      "gpt52": 0.24983172020932884,
+      "mapping_calls": 36,
+      "stored_rank": 8,
+      "gpt52_rank": 8,
+      "rank_change": 0,
+      "score_delta": -0.04612125368260486
+    },
+    {
+      "name": "a1790-entity-sme4x-s800",
+      "family": "A1790 entity-sme4x",
+      "run_id": "081b8752-d98a-54a1-b225-d00f94a6c754",
+      "stored_gpt54": 0.28329363098908816,
+      "gpt52": 0.2698751567381908,
+      "mapping_calls": 36,
+      "stored_rank": 9,
+      "gpt52_rank": 6,
+      "rank_change": 3,
+      "score_delta": -0.013418474250897372
+    },
+    {
+      "name": "consol-h0mn2x-s1200",
+      "family": "Consol h0mn2x",
+      "run_id": "239cf441-25eb-591c-ab32-32bdfaa91241",
+      "stored_gpt54": 0.2808427239824092,
+      "gpt52": 0.23709840101651852,
+      "mapping_calls": 34,
+      "stored_rank": 10,
+      "gpt52_rank": 11,
+      "rank_change": -1,
+      "score_delta": -0.0437443229658907
+    },
+    {
+      "name": "a1740-h0-duration-s1200",
+      "family": "A1740 h0-duration",
+      "run_id": "36ff2578-3a7d-51c9-a555-ca8958929a30",
+      "stored_gpt54": 0.26798203860496583,
+      "gpt52": 0.24087467822422828,
+      "mapping_calls": 34,
+      "stored_rank": 11,
+      "gpt52_rank": 10,
+      "rank_change": 1,
+      "score_delta": -0.02710736038073755
+    },
+    {
+      "name": "a1790-entity-sme4x-s1200",
+      "family": "A1790 entity-sme4x",
+      "run_id": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43",
+      "stored_gpt54": 0.25410874078320983,
+      "gpt52": 0.22371156004385317,
+      "mapping_calls": 36,
+      "stored_rank": 12,
+      "gpt52_rank": 12,
+      "rank_change": 0,
+      "score_delta": -0.030397180739356655
+    },
+    {
+      "name": "soccer-lvreason-mcq-s800",
+      "family": "Soccer LVReason",
+      "run_id": "5287cdbb-2fbf-5b13-8f4a-95aaf59401b4",
+      "stored_gpt54": 0.24629499635825108,
+      "gpt52": 0.21919461386493427,
+      "mapping_calls": 36,
+      "stored_rank": 13,
+      "gpt52_rank": 14,
+      "rank_change": -1,
+      "score_delta": -0.02710038249331681
+    },
+    {
+      "name": "a1740-h0-duration-s800",
+      "family": "A1740 h0-duration",
+      "run_id": "254e310b-e99f-5e1c-8ef3-816062a54cab",
+      "stored_gpt54": 0.22837854854962722,
+      "gpt52": 0.22069463049197477,
+      "mapping_calls": 36,
+      "stored_rank": 14,
+      "gpt52_rank": 13,
+      "rank_change": 1,
+      "score_delta": -0.00768391805765245
+    }
+  ]
+}
