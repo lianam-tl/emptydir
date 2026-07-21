@@ -2,13 +2,14 @@
 """Explain rows rejected by Pegasus's anonymization filter from an HF cache."""
 
 import argparse
+import gc
 import html
 import json
-import re
-from collections import Counter, defaultdict
+from collections import Counter
 from pathlib import Path
 
-from datasets import Dataset, concatenate_datasets
+import pyarrow as pa
+import pyarrow.ipc as ipc
 from preprocessing.base.stages.common import anonymization_filter as anonymization
 
 
@@ -27,36 +28,40 @@ PATTERNS = [
 ]
 
 
-def cache_groups(cache_root: Path) -> dict[str, list[Path]]:
-    groups = defaultdict(list)
-    for cache_file in cache_root.rglob("cache-*.arrow"):
-        match = re.match(r"cache-([0-9a-f]+)(?:_\d+_of_\d+)?\.arrow$", cache_file.name)
-        if match:
-            groups[match.group(1)].append(cache_file)
-    return groups
+def cache_files(cache_root: Path, fingerprint: str) -> list[Path]:
+    return sorted(cache_root.rglob(f"cache-{fingerprint}*.arrow"))
 
 
-def load_group(cache_files: list[Path]) -> Dataset:
-    datasets = [Dataset.from_file(str(path)) for path in sorted(cache_files)]
-    return datasets[0] if len(datasets) == 1 else concatenate_datasets(datasets)
+def read_arrow_table(cache_file: Path) -> pa.Table:
+    with pa.memory_map(str(cache_file), "r") as source:
+        return ipc.open_stream(source).read_all()
 
 
-def load_indexed_rows(cache_files: list[Path], indices: list[int]) -> list[dict]:
+def load_indices(cache_files_to_read: list[Path]) -> list[int]:
+    indices = []
+    for cache_file in cache_files_to_read:
+        indices.extend(read_arrow_table(cache_file)["indices"].to_pylist())
+    return indices
+
+
+def load_indexed_rows(cache_files_to_read: list[Path], indices: list[int]) -> list[dict]:
     """Read selected global row indices without opening every record shard together."""
     rows = []
     sorted_indices = sorted(indices)
     index_position = 0
     shard_offset = 0
-    for cache_file in sorted(cache_files):
-        shard = Dataset.from_file(str(cache_file))
+    for cache_file in cache_files_to_read:
+        shard = read_arrow_table(cache_file)
         shard_end = shard_offset + len(shard)
         local_indices = []
         while index_position < len(sorted_indices) and sorted_indices[index_position] < shard_end:
             local_indices.append(sorted_indices[index_position] - shard_offset)
             index_position += 1
         if local_indices:
-            rows.extend(shard.select(local_indices))
+            rows.extend(shard.take(pa.array(local_indices)).to_pylist())
         shard_offset = shard_end
+        del shard
+        gc.collect()
     if index_position != len(sorted_indices):
         raise RuntimeError(f"Resolved {index_position} of {len(sorted_indices)} requested indices")
     return rows
@@ -135,56 +140,29 @@ def main() -> None:
     parser.add_argument("--cache-root", type=Path, required=True)
     parser.add_argument("--target-rows", type=int, default=84066)
     parser.add_argument("--expected-rejected", type=int, default=6313)
+    parser.add_argument("--input-fingerprint", default="80c6c3f049e57697")
+    parser.add_argument("--kept-fingerprint", default="4296096fedc81772")
+    parser.add_argument("--base-fingerprint", default="0bfae4a5e1feea98")
     parser.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
 
-    selected_fingerprint = None
-    selected_files = None
-    full_record_groups = []
-    kept_index_groups = []
     expected_kept = args.target_rows - args.expected_rejected
-    for fingerprint, cache_files in sorted(cache_groups(args.cache_root).items()):
-        first_shard = Dataset.from_file(str(sorted(cache_files)[0]))
-        row_count = sum(len(Dataset.from_file(str(path))) for path in cache_files)
-        columns = first_shard.column_names
-        print(f"{fingerprint}: {len(cache_files)} files, {row_count} rows, columns={columns}", flush=True)
-        if row_count == args.target_rows:
-            selected_fingerprint = fingerprint
-            selected_files = cache_files
-        if "messages" in columns:
-            full_record_groups.append((row_count, fingerprint, cache_files))
-        if columns == ["indices"] and row_count == expected_kept:
-            kept_index_groups.append((fingerprint, cache_files))
+    input_files = cache_files(args.cache_root, args.input_fingerprint)
+    kept_files = cache_files(args.cache_root, args.kept_fingerprint)
+    base_files = cache_files(args.cache_root, args.base_fingerprint)
+    if not input_files or not kept_files or not base_files:
+        raise RuntimeError("One or more requested cache fingerprints were not found")
 
-    if selected_files is None:
-        raise RuntimeError(f"No cache group has exactly {args.target_rows} rows")
-
-    dataset = load_group(selected_files)
-    base_fingerprint = selected_fingerprint
-    if dataset.column_names == ["indices"]:
-        input_indices = dataset["indices"]
-        kept_fingerprint = None
-        kept_indices = None
-        input_index_set = set(input_indices)
-        for candidate_fingerprint, candidate_files in kept_index_groups:
-            candidate_indices = load_group(candidate_files)["indices"]
-            if set(candidate_indices).issubset(input_index_set):
-                kept_fingerprint = candidate_fingerprint
-                kept_indices = candidate_indices
-                break
-        if kept_indices is None:
-            raise RuntimeError(f"No {expected_kept}-row index group is a subset of the input stage")
-        kept_index_set = set(kept_indices)
-        rejected_indices = [index for index in input_indices if index not in kept_index_set]
-        minimum_base_rows = max(rejected_indices) + 1
-        candidates = [group for group in full_record_groups if group[0] >= minimum_base_rows]
-        if not candidates:
-            raise RuntimeError(f"No full-record cache group can resolve index {minimum_base_rows - 1}")
-        _, base_fingerprint, base_files = min(candidates)
-        rows_to_analyze = load_indexed_rows(base_files, rejected_indices)
-    else:
-        kept_fingerprint = None
-        rows_to_analyze = list(dataset)
+    input_indices = load_indices(input_files)
+    kept_indices = load_indices(kept_files)
+    if len(input_indices) != args.target_rows or len(kept_indices) != expected_kept:
+        raise RuntimeError(f"Unexpected index counts: input={len(input_indices)}, kept={len(kept_indices)}")
+    kept_index_set = set(kept_indices)
+    rejected_indices = [index for index in input_indices if index not in kept_index_set]
+    if len(rejected_indices) != args.expected_rejected:
+        raise RuntimeError(f"Expected {args.expected_rejected} rejected indices, found {len(rejected_indices)}")
+    print(f"Reading {len(rejected_indices)} rejected rows from {len(base_files)} base shards", flush=True)
+    rows_to_analyze = load_indexed_rows(base_files, rejected_indices)
 
     rejected_rows = []
     for row in rows_to_analyze:
@@ -206,10 +184,10 @@ def main() -> None:
     pattern_counts = Counter(row["pattern"] for row in rejected_rows)
     source_counts = Counter(row["source_hint"] for row in rejected_rows)
     summary = {
-        "cache_fingerprint": selected_fingerprint,
-        "kept_fingerprint": kept_fingerprint,
-        "base_fingerprint": base_fingerprint,
-        "cache_files": len(selected_files),
+        "cache_fingerprint": args.input_fingerprint,
+        "kept_fingerprint": args.kept_fingerprint,
+        "base_fingerprint": args.base_fingerprint,
+        "cache_files": len(input_files),
         "input_rows": args.target_rows,
         "rejected_rows": len(rejected_rows),
         "kept_rows": expected_kept,
