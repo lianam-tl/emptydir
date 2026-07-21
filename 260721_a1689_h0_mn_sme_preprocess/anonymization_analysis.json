@@ -1,0 +1,1631 @@
+{
+  "cache_fingerprint": "80c6c3f049e57697",
+  "kept_fingerprint": "4296096fedc81772",
+  "base_fingerprint": "0bfae4a5e1feea98",
+  "cache_files": 64,
+  "input_rows": 84066,
+  "rejected_rows": 6313,
+  "kept_rows": 77753,
+  "pattern_counts": {
+    "role_number": 5688,
+    "role_letter": 252,
+    "transcript_label": 178,
+    "ordinal_person": 62,
+    "placeholder_name": 54,
+    "xxx_redaction": 38,
+    "bracket_placeholder": 26,
+    "anonymization_keyword": 10,
+    "player_letter": 4,
+    "nospace_identifier": 1
+  },
+  "source_hint_counts": {
+    "domain=movie": 2444,
+    "domain=soccer": 1464,
+    "domain=baseball": 1317,
+    "domain=news": 841,
+    "domain=tvshow": 226,
+    "domain=basketball": 21
+  },
+  "examples": [
+    {
+      "id": "d96be8b40a33ea43",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": "d a black cap with orange sunglasses. - Narrator 1: commentator. Off-screen male color ana",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "0688f4c8b5f89fd4",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": "d a black cap with orange sunglasses. - Narrator 1: commentator. Off-screen male color ana",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "0f1a812d3252fb5e",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": "you.  People appearing in this video: - Narrator 1: Narrator. Male voice, color commentato",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "296a16094eb9a1b7",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "tion  People appearing in this video: - Commentator 1: Narrator. Male color commentator provi",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "a9e7d43997350ce7",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ple.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Off-screen male c",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "3cd71593db08d1b1",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ion.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Off-screen male c",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "2613eff9eac92b46",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ple.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Off-screen male c",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "99c6a78c4ded28db",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Off-screen male c",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "415cc60aeeca446d",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Off-screen male c",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "35d939e1a4570fef",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ded.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Off-screen male c",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "35b2a5f74fef23e6",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "you.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Off-screen male c",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "4cb53599bf2648bc",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ple.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Off-screen male c",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "0286581186fb6cf1",
+      "pattern": "role_number",
+      "match": "Narrator 2",
+      "context": "ing stats. - Bengals Offensive Identity Narrator 2: Narrator. Off-screen male voice sharin",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "5a9633ff3938e2a3",
+      "pattern": "role_number",
+      "match": "Narrator 2",
+      "context": "ing stats. - Bengals Offensive Identity Narrator 2: Narrator. Off-screen male voice sharin",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "04ac92e006da437f",
+      "pattern": "role_number",
+      "match": "Narrator 2",
+      "context": "ing stats. - Bengals Offensive Identity Narrator 2: Narrator. Off-screen male voice sharin",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "a7d2933dafed3abe",
+      "pattern": "role_number",
+      "match": "Narrator 2",
+      "context": "ing stats. - Bengals Offensive Identity Narrator 2: Narrator. Off-screen male voice sharin",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "fabf6946f44b4d22",
+      "pattern": "role_number",
+      "match": "Narrator 2",
+      "context": "ing stats. - Bengals Offensive Identity Narrator 2: Narrator. Off-screen male voice sharin",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "94e2b7b7799ac116",
+      "pattern": "role_number",
+      "match": "Narrator 2",
+      "context": "ing stats. - Bengals Offensive Identity Narrator 2: Narrator. Off-screen male voice sharin",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "ef209c014822cbb6",
+      "pattern": "role_number",
+      "match": "Narrator 2",
+      "context": "ing stats. - Bengals Offensive Identity Narrator 2: Narrator. Off-screen male voice sharin",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "6026ae22910097fd",
+      "pattern": "role_number",
+      "match": "Narrator 2",
+      "context": "ing stats. - Bengals Offensive Identity Narrator 2: Narrator. Off-screen male voice sharin",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "c8dfe4719e55be64",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": "tlanta Braves jersey and cap. - Skyrizi Narrator 1: Narrator. Female narrator with a serio",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "b396253b1e9e5a95",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": "tlanta Braves jersey and cap. - Skyrizi Narrator 1: Narrator. Female narrator with a serio",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "7519167430280b7d",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": "tlanta Braves jersey and cap. - Skyrizi Narrator 1: Narrator. Female narrator with a serio",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "d83083fb87163f44",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": "tlanta Braves jersey and cap. - Skyrizi Narrator 1: Narrator. Female narrator with a serio",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "c9dae70a7e8f5b61",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": "tlanta Braves jersey and cap. - Skyrizi Narrator 1: Narrator. Female narrator with a serio",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "2250119d53fcc648",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": "tlanta Braves jersey and cap. - Skyrizi Narrator 1: Narrator. Female narrator with a serio",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "b0288dd13225e4db",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": "tlanta Braves jersey and cap. - Skyrizi Narrator 1: Narrator. Female narrator with a serio",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "8f8f1e51e4a90d85",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": "tlanta Braves jersey and cap. - Skyrizi Narrator 1: Narrator. Female narrator with a serio",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "cfda8c491cbbfab6",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": "tlanta Braves jersey and cap. - Skyrizi Narrator 1: Narrator. Female narrator with a serio",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "e4aae529586be4a5",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": "tlanta Braves jersey and cap. - Skyrizi Narrator 1: Narrator. Female narrator with a serio",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "862d08c4f949044d",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": "tlanta Braves jersey and cap. - Skyrizi Narrator 1: Narrator. Female narrator with a serio",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "daa963b4384dff08",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": " hitting in a white throwback jersey. - Commentator 1: Narrator. Off-screen male color analys",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "ca9df717887a8128",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": " hitting in a white throwback jersey. - Commentator 1: Narrator. Off-screen male color analys",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "6911dce60b048d4c",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": " hitting in a white throwback jersey. - Commentator 1: Narrator. Off-screen male color analys",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "1c039b5651ca2634",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": " hitting in a white throwback jersey. - Commentator 1: Narrator. Off-screen male color analys",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "f90c5e37d4b5e7bf",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": " hitting in a white throwback jersey. - Commentator 1: Narrator. Off-screen male color analys",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "83cb82da6e26ab37",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": " hitting in a white throwback jersey. - Commentator 1: Narrator. Off-screen male color analys",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "f481f20e8a7b383f",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": " hitting in a white throwback jersey. - Commentator 1: Narrator. Off-screen male color analys",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "43659e1dec2441cf",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": " hitting in a white throwback jersey. - Commentator 1: Narrator. Off-screen male color analys",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "83a4395b460f0b57",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": " hitting in a white throwback jersey. - Commentator 1: Narrator. Off-screen male color analys",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "f69a7d2335122553",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "and reassuring tone. - British Cannabis Woman 1: Actor. Older man with short gray hair,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "95df6d8e6a0a6b97",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "and reassuring tone. - British Cannabis Woman 1: Actor. Older man with short gray hair,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "85cfa5284e12094f",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "and reassuring tone. - British Cannabis Woman 1: Actor. Older man with short gray hair,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "062b7e139e5bcecb",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "and reassuring tone. - British Cannabis Woman 1: Actor. Older man with short gray hair,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "5b91eab0ead10f66",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "and reassuring tone. - British Cannabis Woman 1: Actor. Older man with short gray hair,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "7851f8089810207a",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "and reassuring tone. - British Cannabis Woman 1: Actor. Older man with short gray hair,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "b7bc541880c7f4d4",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "and reassuring tone. - British Cannabis Woman 1: Actor. Older man with short gray hair,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "41479bec7ff417ca",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "and reassuring tone. - British Cannabis Woman 1: Actor. Older man with short gray hair,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "dbe5765073e9fc2b",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "and reassuring tone. - British Cannabis Woman 1: Actor. Older man with short gray hair,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "8e088af67c4fcc0e",
+      "pattern": "role_number",
+      "match": "Character 1",
+      "context": "s uniform with jersey #10. - Commercial Character 1: Customer in Verizon commercial. Black ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "27764dead14887a3",
+      "pattern": "role_number",
+      "match": "Character 1",
+      "context": "s uniform with jersey #10. - Commercial Character 1: Customer in Verizon commercial. Black ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "7ec40659734f3404",
+      "pattern": "role_number",
+      "match": "Character 1",
+      "context": "s uniform with jersey #10. - Commercial Character 1: Customer in Verizon commercial. Black ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "af4e600d6f29efd9",
+      "pattern": "role_number",
+      "match": "Character 1",
+      "context": "s uniform with jersey #10. - Commercial Character 1: Customer in Verizon commercial. Black ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "3ef2d5c8d718552e",
+      "pattern": "role_number",
+      "match": "Character 1",
+      "context": "s uniform with jersey #10. - Commercial Character 1: Customer in Verizon commercial. Black ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "e01007211680d416",
+      "pattern": "role_number",
+      "match": "Character 1",
+      "context": "s uniform with jersey #10. - Commercial Character 1: Customer in Verizon commercial. Black ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "205c1d38512ab228",
+      "pattern": "role_number",
+      "match": "Character 1",
+      "context": "s uniform with jersey #10. - Commercial Character 1: Customer in Verizon commercial. Black ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "f07ebadf19afa4de",
+      "pattern": "role_number",
+      "match": "Character 1",
+      "context": "s uniform with jersey #10. - Commercial Character 1: Customer in Verizon commercial. Black ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "3ebdca09f3e239af",
+      "pattern": "role_number",
+      "match": "Character 1",
+      "context": "s uniform with jersey #10. - Commercial Character 1: Customer in Verizon commercial. Black ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "ceab78562f6860ef",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "boys jersey #18 and a helmet. - Stelara Woman 1: Ad Character. White woman with brown h",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "0d88d20463e3b70f",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "boys jersey #18 and a helmet. - Stelara Woman 1: Ad Character. White woman with brown h",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "80e752e75782e603",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "boys jersey #18 and a helmet. - Stelara Woman 1: Ad Character. White woman with brown h",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "2a90a961ed202427",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "boys jersey #18 and a helmet. - Stelara Woman 1: Ad Character. White woman with brown h",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "29442c8dad92cebd",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "boys jersey #18 and a helmet. - Stelara Woman 1: Ad Character. White woman with brown h",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "6be78bfd3fa971e4",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "boys jersey #18 and a helmet. - Stelara Woman 1: Ad Character. White woman with brown h",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "ea936f7b32fdd071",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "boys jersey #18 and a helmet. - Stelara Woman 1: Ad Character. White woman with brown h",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "9eb1015afbec0588",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "boys jersey #18 and a helmet. - Stelara Woman 1: Ad Character. White woman with brown h",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "a32adeae58cb18f9",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "boys jersey #18 and a helmet. - Stelara Woman 1: Ad Character. White woman with brown h",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "941e52c7a54de1d3",
+      "pattern": "role_letter",
+      "match": "female U",
+      "context": "e\": 106.06,         \"description\": \"Two female U.S. Marines in camouflage uniforms, Kaba",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "1ccf448603795ec3",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "boys jersey #18 and a helmet. - Stelara Woman 1: Ad Character. White woman with brown h",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "79ef8b3dc50b4660",
+      "pattern": "role_letter",
+      "match": "HOST A",
+      "context": "PORTING: LISA SALTERS | \u2022 68th VENUE TO HOST A MONDAY NIGHT FOOTBALL GAME].\",         ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "da459ba18a6e17fc",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "form #17, maroon cap, and sunglasses. - Commentator 1: Narrator. Male voice providing color a",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "4b0e474154f43cee",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Male, analytical ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "0d7a8c92a873ec79",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Male, analytical ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "a6a6899f94a47a00",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "you.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Male, analytical ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "7aab169d337714b4",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ple.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Male, analytical ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "b2dcde19544b688d",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Male, analytical ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "ffe6ceaa94abea5a",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ded.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Male, analytical ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "61c9fa9f2a1be03e",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "tion  People appearing in this video: - Commentator 1 (Narrator): Narrator. Male, analytical ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "bc61f5080c27f64d",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Male, analytical ",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "3e663bb202f771f3",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ded.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Male sports analy",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "bf365f679c649116",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Male sports analy",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "6423fa73ffc9faba",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Male sports analy",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "472f6feb7bddc3e4",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ded.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Male sports analy",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "e130ac2ca8c5c96d",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "you.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Male sports analy",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "04ab2b0b260bcfc5",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ded.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Male sports analy",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "4aba5f050c1f5f02",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Male sports analy",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "08dbf2556ef1ce40",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "tion  People appearing in this video: - Commentator 1 (Narrator): Narrator. Male sports analy",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "2907153ad0a34156",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Male sports analy",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "d98346b269ef3d9b",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "n hair, wearing a dark suit. - Campfire Woman 1: Subject. Man with long curly dark hair",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "32071b3d908a6694",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "n hair, wearing a dark suit. - Campfire Woman 1: Subject. Man with long curly dark hair",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "cc19a30c009d67dd",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "n hair, wearing a dark suit. - Campfire Woman 1: Subject. Man with long curly dark hair",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "77188e836cac35d1",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "n hair, wearing a dark suit. - Campfire Woman 1: Subject. Man with long curly dark hair",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "9a1a08f4d714b059",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "n hair, wearing a dark suit. - Campfire Woman 1: Subject. Man with long curly dark hair",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "baf696e921f306c2",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "n hair, wearing a dark suit. - Campfire Woman 1: Subject. Man with long curly dark hair",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "a3bb365a098ac8a2",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "n hair, wearing a dark suit. - Campfire Woman 1: Subject. Man with long curly dark hair",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "4cf7e58c175abb4e",
+      "pattern": "role_number",
+      "match": "Woman 1",
+      "context": "n hair, wearing a dark suit. - Campfire Woman 1: Subject. Man with long curly dark hair",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "be11e17aa1a5ed90",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Off-screen male n",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "762964bccb38f366",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Off-screen male n",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "d0166600d5d1b61d",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "you.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Off-screen male n",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "90df9d1b622ae89a",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Off-screen male n",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "2e77c87343362d2f",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ple.  People appearing in this video: - Commentator 1 (Narrator): Narrator. Off-screen male n",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "c1eca7164a489a5b",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "you.  People appearing in this video: - Commentator 1: Narrator. Male voice, analytical, prov",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "4c57998d947fe111",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ded.  People appearing in this video: - Commentator 1: Narrator. Male voice, analytical, prov",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "cc6a3551c3c7bc92",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1: Narrator. Male voice, analytical, prov",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "53d05cb698c63798",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ion.  People appearing in this video: - Commentator 1: Narrator. Male voice, analytical, prov",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "73e4fb394677d4ac",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1: Narrator. Male voice, analytical, prov",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "f222387c20be1d5a",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ded.  People appearing in this video: - Commentator 1: Narrator. Male voice, analytical, prov",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "a8a0a9fa7be28417",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "you.  People appearing in this video: - Commentator 1: Narrator. Male voice, analytical, prov",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "e9f0e3639933112a",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ded.  People appearing in this video: - Commentator 1: Narrator. Male voice, analytical, prov",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "d9f6668ad7abc9bd",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "a navy blue chest protector and mask. - Commentator 1: Narrator. Off-screen male color commen",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "5dc91e1e6aeab68e",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": " white and green London Irish jersey. - Narrator 1: Narrator. Male sports commentator with",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "72e4d4ea56d83820",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": " white and green London Irish jersey. - Narrator 1: Narrator. Male sports commentator with",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "61c0ef66a22be1b7",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": " white and green London Irish jersey. - Narrator 1: Narrator. Male sports commentator with",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "7cb9eed517e0b981",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": " white and green London Irish jersey. - Narrator 1: Narrator. Male sports commentator with",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "426acfec5b5136e7",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": " white and green London Irish jersey. - Narrator 1: Narrator. Male sports commentator with",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "7bf30032698ffba7",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": " white and green London Irish jersey. - Narrator 1: Narrator. Male sports commentator with",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "6b33272f3faab3b7",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": " white and green London Irish jersey. - Narrator 1: Narrator. Male sports commentator with",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "441591676b1f4156",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1: Narrator. Male color commentator provi",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "9953bd8a87679757",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "yer in a blue jersey and blue helmet. - Commentator 1: Narrator. Off-screen male sports comme",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "e04e0213ac6bbc50",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "-knit sweater and white pants. - Tennis Commentator 1: Actor. White male with short brown hai",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "71546243924eacae",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "-knit sweater and white pants. - Tennis Commentator 1: Actor. White male with short brown hai",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "a21e1ce13771afcd",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "-knit sweater and white pants. - Tennis Commentator 1: Actor. White male with short brown hai",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "718cad622695728d",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "-knit sweater and white pants. - Tennis Commentator 1: Actor. White male with short brown hai",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "d73e484aeb73b800",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "-knit sweater and white pants. - Tennis Commentator 1: Actor. White male with short brown hai",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "e6f9dc44bc2e6c5a",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "-knit sweater and white pants. - Tennis Commentator 1: Actor. White male with short brown hai",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "427f14f42e324676",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "-knit sweater and white pants. - Tennis Commentator 1: Actor. White male with short brown hai",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "bf2a3e8f75c09800",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "-knit sweater and white pants. - Tennis Commentator 1: Actor. White male with short brown hai",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "cc9d64c993cce8c6",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "-knit sweater and white pants. - Tennis Commentator 1: Actor. White male with short brown hai",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "cad6f1e79d6ac30d",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "-knit sweater and white pants. - Tennis Commentator 1: Actor. White male with short brown hai",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "09df9d15105b79d3",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "-knit sweater and white pants. - Tennis Commentator 1: Actor. White male with short brown hai",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "3d69dc2940677214",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ded.  People appearing in this video: - Commentator 1: Commentator. Male voice providing play",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "30bd317962f97a85",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1: Commentator. Male voice providing play",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "55016b0b799e7989",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ded.  People appearing in this video: - Commentator 1: Commentator. Male voice providing play",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "146872af0899b237",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1: Commentator. Male voice providing play",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "f44b2d50d8f1cc12",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ple.  People appearing in this video: - Commentator 1: Commentator. Male voice providing play",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "9d7d20f35ef725b6",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "tion  People appearing in this video: - Commentator 1: Commentator. Male voice providing play",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "9472f149e88e71ae",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1: Commentator. Male voice providing play",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "1db3472e603e04df",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1: Commentator. Male voice providing play",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "dd1d097d7204b2a2",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1: Commentator. Male voice providing play",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "20d22a6e3a908e84",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ded.  People appearing in this video: - Commentator 1: Commentator. Male voice providing play",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "da88461cc1d69fdc",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ded.  People appearing in this video: - Commentator 1: Commentator. Male voice providing play",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "9a71746d837891a7",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "lear, steady professional tone. - Color Commentator 1: Narrator. Off-screen male voice with a",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "02e89e48620e2461",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "lear, steady professional tone. - Color Commentator 1: Narrator. Off-screen male voice with a",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "efde5a07a525d4df",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "lear, steady professional tone. - Color Commentator 1: Narrator. Off-screen male voice with a",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "6c280022bfcdea5e",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "lear, steady professional tone. - Color Commentator 1: Narrator. Off-screen male voice with a",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "27d834d4de65cff9",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "lear, steady professional tone. - Color Commentator 1: Narrator. Off-screen male voice with a",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "4bf911e6a21111e9",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "lear, steady professional tone. - Color Commentator 1: Narrator. Off-screen male voice with a",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "5ca59f841e2ac2c2",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "lear, steady professional tone. - Color Commentator 1: Narrator. Off-screen male voice with a",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "a2bcd3393e1e5b13",
+      "pattern": "role_number",
+      "match": "Speaker 1",
+      "context": "y with number 42, seen in the dugout. - Speaker 1: Narrator. Child's voice acting as a ju",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "8dd53ba6a6017e3f",
+      "pattern": "role_number",
+      "match": "Speaker 1",
+      "context": "y with number 42, seen in the dugout. - Speaker 1: Narrator. Child's voice acting as a ju",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "9325fa1cf87c476a",
+      "pattern": "role_number",
+      "match": "Speaker 1",
+      "context": "y with number 42, seen in the dugout. - Speaker 1: Narrator. Child's voice acting as a ju",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "88fbca49715b9804",
+      "pattern": "role_number",
+      "match": "Speaker 1",
+      "context": "y with number 42, seen in the dugout. - Speaker 1: Narrator. Child's voice acting as a ju",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "8ae0369fda0f8f5d",
+      "pattern": "role_number",
+      "match": "Speaker 1",
+      "context": "y with number 42, seen in the dugout. - Speaker 1: Narrator. Child's voice acting as a ju",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "e38d8c3065393a56",
+      "pattern": "role_number",
+      "match": "Speaker 1",
+      "context": "y with number 42, seen in the dugout. - Speaker 1: Narrator. Child's voice acting as a ju",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "7c2233e45dab77af",
+      "pattern": "role_number",
+      "match": "Speaker 1",
+      "context": "y with number 42, seen in the dugout. - Speaker 1: Narrator. Child's voice acting as a ju",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "f72ddbb88aefd3f0",
+      "pattern": "role_number",
+      "match": "Speaker 1",
+      "context": "y with number 42, seen in the dugout. - Speaker 1: Narrator. Child's voice acting as a ju",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "8add244266f3e3e7",
+      "pattern": "role_number",
+      "match": "Speaker 1",
+      "context": "y with number 42, seen in the dugout. - Speaker 1: Narrator. Child's voice acting as a ju",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "6cec885224b6547a",
+      "pattern": "role_number",
+      "match": "Speaker 1",
+      "context": "y with number 42, seen in the dugout. - Speaker 1: Narrator. Child's voice acting as a ju",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "13818940d81fac59",
+      "pattern": "role_number",
+      "match": "Speaker 1",
+      "context": "y with number 42, seen in the dugout. - Speaker 1: Narrator. Child's voice acting as a ju",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "0c6da264071c8f77",
+      "pattern": "role_number",
+      "match": "Speaker 1",
+      "context": "y with number 42, seen in the dugout. - Speaker 1: Narrator. Child's voice acting as a ju",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "c8d488c7167ee43e",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ion.  People appearing in this video: - Commentator 1: Commentator. Voice-over color commenta",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "2416b538807a1f43",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "you.  People appearing in this video: - Commentator 1: Commentator. Voice-over color commenta",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "4cbf04f722112e34",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1: Commentator. Voice-over color commenta",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "77ecca83200f6344",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ion.  People appearing in this video: - Commentator 1: Commentator. Voice-over color commenta",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "a85fd1cc372dfe43",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "you.  People appearing in this video: - Commentator 1: Commentator. Voice-over color commenta",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "b1b99dd13ceaa65c",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "ion.  People appearing in this video: - Commentator 1: Commentator. Voice-over color commenta",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "6f4483c2466ed02f",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "low.  People appearing in this video: - Commentator 1: Commentator. Voice-over color commenta",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "ac4f63c62ba0be6c",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "tion  People appearing in this video: - Commentator 1: Commentator. Voice-over color commenta",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "7fd08676b98a987c",
+      "pattern": "role_number",
+      "match": "Narrator 1",
+      "context": "lue polo shirt and a chest protector. - Narrator 1: Play-by-play Commentator. Off-screen m",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "76fef6506699336f",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "eople appearing in this video: - French Commentator 1 (Narrator): Narrator. Male voice, Frenc",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "36bfc55f0a0731ed",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "eople appearing in this video: - French Commentator 1 (Narrator): Narrator. Male voice, Frenc",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "9c944e8a3bc5bdca",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "eople appearing in this video: - French Commentator 1 (Narrator): Narrator. Male voice, Frenc",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "dddaf3126dece6fe",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "eople appearing in this video: - French Commentator 1 (Narrator): Narrator. Male voice, Frenc",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "52e7d0d66032c458",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "eople appearing in this video: - French Commentator 1 (Narrator): Narrator. Male voice, Frenc",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "c62b2f8927b24454",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "eople appearing in this video: - French Commentator 1 (Narrator): Narrator. Male voice, Frenc",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "ea58a0b86eacb56e",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "eople appearing in this video: - French Commentator 1 (Narrator): Narrator. Male voice, Frenc",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "e2211927ecd71a19",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "eople appearing in this video: - French Commentator 1 (Narrator): Narrator. Male voice, Frenc",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "c4edca46cace00eb",
+      "pattern": "role_number",
+      "match": "Speaker 6",
+      "context": "earing a green jacket, hat, and mask. - Speaker 6: Narrator. Off-screen technical comment",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "2b8440a6f8a21fe0",
+      "pattern": "role_number",
+      "match": "Speaker 6",
+      "context": "earing a green jacket, hat, and mask. - Speaker 6: Narrator. Off-screen technical comment",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "177aef8c2de3067d",
+      "pattern": "role_number",
+      "match": "Speaker 6",
+      "context": "earing a green jacket, hat, and mask. - Speaker 6: Narrator. Off-screen technical comment",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "5ee096ffb6f503c7",
+      "pattern": "role_number",
+      "match": "Speaker 6",
+      "context": "earing a green jacket, hat, and mask. - Speaker 6: Narrator. Off-screen technical comment",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "4775d1c890fd3e6a",
+      "pattern": "role_number",
+      "match": "Speaker 6",
+      "context": "earing a green jacket, hat, and mask. - Speaker 6: Narrator. Off-screen technical comment",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "ca9ebb2ecbf21de2",
+      "pattern": "role_number",
+      "match": "Speaker 6",
+      "context": "earing a green jacket, hat, and mask. - Speaker 6: Narrator. Off-screen technical comment",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "b45f2016bb5ed9e5",
+      "pattern": "role_number",
+      "match": "Speaker 6",
+      "context": "earing a green jacket, hat, and mask. - Speaker 6: Narrator. Off-screen technical comment",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "ab8f5fbad787a40b",
+      "pattern": "role_number",
+      "match": "Speaker 6",
+      "context": "earing a green jacket, hat, and mask. - Speaker 6: Narrator. Off-screen technical comment",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "9192eb43df80edb0",
+      "pattern": "role_number",
+      "match": "Speaker 6",
+      "context": "earing a green jacket, hat, and mask. - Speaker 6: Narrator. Off-screen technical comment",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "2c83b40faf62ccec",
+      "pattern": "role_number",
+      "match": "Speaker 6",
+      "context": "earing a green jacket, hat, and mask. - Speaker 6: Narrator. Off-screen technical comment",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "4600fa77c0c08eed",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "e uniform and a protective face mask. - Commentator 1: Narrator. Calm, analytical male voice,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "6610008ce39c8f84",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "e uniform and a protective face mask. - Commentator 1: Narrator. Calm, analytical male voice,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "72ccc468b4a75871",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "e uniform and a protective face mask. - Commentator 1: Narrator. Calm, analytical male voice,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "bd77dc637c8d5ee2",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "e uniform and a protective face mask. - Commentator 1: Narrator. Calm, analytical male voice,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "7b3b873354cd08e2",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "e uniform and a protective face mask. - Commentator 1: Narrator. Calm, analytical male voice,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "cf4a13b089a3770d",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "e uniform and a protective face mask. - Commentator 1: Narrator. Calm, analytical male voice,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "8114de3dd46242ae",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "e uniform and a protective face mask. - Commentator 1: Narrator. Calm, analytical male voice,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "a5aa359eccd024a2",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "e uniform and a protective face mask. - Commentator 1: Narrator. Calm, analytical male voice,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "f4aa8ef6b60b08e7",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "e uniform and a protective face mask. - Commentator 1: Narrator. Calm, analytical male voice,",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "c9970c585fd760e3",
+      "pattern": "role_number",
+      "match": "Commentator 1",
+      "context": "e jersey number 42 and a navy helmet. - Commentator 1: play-by-play announcer. A male comment",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "8b054e2e0663339d",
+      "pattern": "role_number",
+      "match": "Character 1",
+      "context": "g wearing casual clothing. - Commercial Character 1: Actor. Middle-aged man with a dark bea",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "5358c07d6359fde6",
+      "pattern": "role_number",
+      "match": "Character 1",
+      "context": "g wearing casual clothing. - Commercial Character 1: Actor. Middle-aged man with a dark bea",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    },
+    {
+      "id": "43bbfd45e221f4cf",
+      "pattern": "role_number",
+      "match": "Character 1",
+      "context": "g wearing casual clothing. - Commercial Character 1: Actor. Middle-aged man with a dark bea",
+      "source_hint": "domain=baseball",
+      "media_path": ""
+    }
+  ]
+}
