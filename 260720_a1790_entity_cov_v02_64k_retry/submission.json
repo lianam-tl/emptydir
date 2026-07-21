@@ -1,0 +1,15 @@
+{
+  "evalRun": {
+    "id": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43",
+    "batchId": "batch-e22f5141-ad07-4a91-a38b-b745ebea7af1",
+    "status": "processing",
+    "totalTasks": 20,
+    "completed": 0,
+    "failed": 0,
+    "createdAt": "2026-07-20T13:28:43.909110+00:00",
+    "startedAt": "2026-07-20T13:28:44.213781+00:00"
+  },
+  "replayed": false,
+  "verifiedRequestCount": 20,
+  "verifiedMaxTokens": [65536]
+}
