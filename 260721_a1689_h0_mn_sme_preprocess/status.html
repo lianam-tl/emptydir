@@ -21,7 +21,7 @@
 </head>
 <body>
   <h1>A-1689 non-2× H0 SME base preprocessing</h1>
-  <div class="muted">Submitted 2026-07-21 18:40 KST · job <code>a249ade7</code> · status: running</div>
+  <div class="muted">Retry submitted 2026-07-21 18:55 KST · job <code>d1dd4e0d</code> · status: running</div>
 
   <div class="cards">
     <div class="card"><div class="muted">Previous source rows</div><div class="value">3,809</div></div>
@@ -31,6 +31,8 @@
 
   <p>The Pegasus loader enumerates every published config dynamically. This job uses
     <code>default_sft_sme_h0_highres</code>, not the entity-dropout 2× template.</p>
+  <p>Attempt 1 (<code>a249ade7</code>) exposed incompatible old/new nested message schemas.
+    Retry 2 uses image <code>fc7451e</code>, which casts every config to the common TDF v2 schema before concatenation.</p>
 
   <table>
     <thead><tr><th>Hugging Face config</th><th>Relative to previous base</th><th>Source rows</th></tr></thead>
