@@ -1,0 +1,47 @@
+[
+  {
+    "name": "a1790-entity-sme4x-s400",
+    "run_id": "03699e73-6bbd-5412-aff4-487c61bd08b2",
+    "path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-400-safetensors"
+  },
+  {
+    "name": "a1790-entity-sme4x-s800",
+    "run_id": "82c18432-2844-59bf-a3b8-b6d913bd1390",
+    "path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-800-safetensors"
+  },
+  {
+    "name": "a1790-entity-sme4x-s1200",
+    "run_id": "a2d0ef8b-5ef2-5033-aec1-587e23a6b0a4",
+    "path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-1200-safetensors"
+  },
+  {
+    "name": "a1790-entity-sme4x-s1600",
+    "run_id": "a47d832e-1ee3-502a-aebd-66692900c339",
+    "path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-1600-safetensors"
+  },
+  {
+    "name": "a1790-entity-sme4x-s1900",
+    "run_id": "a520e232-a4e9-5640-b666-48a023b84ed0",
+    "path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-1900-safetensors/"
+  },
+  {
+    "name": "a1790-entity-sme4x-s2000",
+    "run_id": "0790b212-c060-52f8-acd9-a0cf2709c276",
+    "path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-2000-safetensors/"
+  },
+  {
+    "name": "a1790-entity-sme4x-s2100",
+    "run_id": "962dadcc-abe3-50bd-bf44-38fab5d4a8e4",
+    "path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-2100-safetensors/"
+  },
+  {
+    "name": "soccer-lvreason-mcq-s1600",
+    "run_id": "918e01d5-cd55-501d-bfc2-09b53e5d5f34",
+    "path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-1600-safetensors/"
+  },
+  {
+    "name": "soccer-lvreason-mcq-s2000",
+    "run_id": "d10c50da-66a2-59e7-b81a-21ac4a26fafd",
+    "path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-2000-safetensors/"
+  }
+]
