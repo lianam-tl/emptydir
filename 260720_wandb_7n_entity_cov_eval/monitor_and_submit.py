@@ -97,9 +97,10 @@ def eval_payload(item: dict) -> dict:
     min_replicas = item.get("min_replicas", 8)
     max_replicas = item.get("max_replicas", 8)
     concurrency = item.get("concurrency", 8)
+    tensor_parallelism = item.get("tp", 1)
     name = (
         f"lia-entcov-{eval_tag}-{item['family']}-s{item['step']}-"
-        f"tp1-r{min_replicas}-{max_replicas}-{submission_tag}"
+        f"tp{tensor_parallelism}-r{min_replicas}-{max_replicas}-{submission_tag}"
     )
     return {
         "name": name,
@@ -117,7 +118,7 @@ def eval_payload(item: dict) -> dict:
         "maxReplicas": max_replicas,
         "concurrency": concurrency,
         "maxInFlight": 20,
-        "tp": 1,
+        "tp": tensor_parallelism,
         "dp": 1,
         "maxTokens": item.get("max_tokens", 16384),
         "temperature": 0.0,
@@ -133,6 +134,7 @@ def render_html(items: list[dict]) -> str:
     min_replicas = items[0].get("min_replicas", 8)
     max_replicas = items[0].get("max_replicas", 8)
     concurrency = items[0].get("concurrency", 8)
+    tensor_parallelism = items[0].get("tp", 1)
     rows = []
     for item in items:
         rows.append(
@@ -154,7 +156,7 @@ table {{ width: 100%; border-collapse: collapse; background: white; border: 1px 
 th, td {{ padding: 10px 12px; border-bottom: 1px solid #e4e8eb; text-align: left; }} th {{ background: #eef2f3; }}
 code {{ overflow-wrap: anywhere; }} a {{ color: #0563c1; }}</style></head><body><main>
 <h1>W&amp;B 7-node Entity Coverage Eval</h1>
-<p><a href="https://huggingface.co/datasets/{html.escape(dataset)}">{html.escape(dataset)}</a>, {html.escape(config)}/test, TP=1, replicas={min_replicas}-{max_replicas}, concurrency={concurrency}, max tokens={max_tokens:,}.</p>
+<p><a href="https://huggingface.co/datasets/{html.escape(dataset)}">{html.escape(dataset)}</a>, {html.escape(config)}/test, TP={tensor_parallelism}, replicas={min_replicas}-{max_replicas}, concurrency={concurrency}, max tokens={max_tokens:,}.</p>
 <table><thead><tr><th>Family</th><th>Step</th><th>Export</th><th>Eval</th><th>Progress</th><th>Run ID</th><th>W&amp;B</th></tr></thead>
 <tbody>{"".join(rows)}</tbody></table></main></body></html>"""
 

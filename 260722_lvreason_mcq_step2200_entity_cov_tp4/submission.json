@@ -1,0 +1,26 @@
+[
+  {
+    "family": "sft-lvreason-mcq",
+    "step": 2200,
+    "source_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-2200",
+    "output_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-2200-safetensors",
+    "export_name": "export-sft-lvreason-mcq-s2200",
+    "manifest": "260722_lvreason_mcq_step2200_entity_cov_tp4/export.yaml",
+    "dataset": "twelvelabs/entity_cov_v02_tdf",
+    "dataset_revision": "5caf5ebd1ce03b6b6bb28a50504a8c36542d9433",
+    "config": "default",
+    "split": "test",
+    "eval_tag": "v02-64k-c8",
+    "max_tokens": 65536,
+    "min_replicas": 2,
+    "max_replicas": 4,
+    "concurrency": 8,
+    "tp": 4,
+    "expected_sample_count": 18,
+    "enable_tensor_cache": true,
+    "wandb_run_id": "v876swwd",
+    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/v876swwd",
+    "export_status": "not submitted",
+    "eval_status": "not submitted"
+  }
+]
