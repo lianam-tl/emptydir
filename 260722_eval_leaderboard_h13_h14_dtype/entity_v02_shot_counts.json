@@ -1,0 +1,268 @@
+{
+  "rows": [
+    {
+      "name": "pegasus-15-kian-soce",
+      "run_id": "2708c7ac-820c-5aa4-b298-3705871c7e1d",
+      "media_count": 18,
+      "parsed_media_count": 18,
+      "parse_failures": 0,
+      "total_shot_segments": 1975,
+      "average_shot_segments_per_parsed_media": 109.72222222222223,
+      "minimum_shot_segments": 23,
+      "maximum_shot_segments": 304
+    },
+    {
+      "name": "a1740-h0-duration-s400",
+      "run_id": "34e63948-7068-5c19-9d49-4a14eaf44341",
+      "media_count": 18,
+      "parsed_media_count": 16,
+      "parse_failures": 2,
+      "total_shot_segments": 2089,
+      "average_shot_segments_per_parsed_media": 130.5625,
+      "minimum_shot_segments": 5,
+      "maximum_shot_segments": 379
+    },
+    {
+      "name": "a1790-entity-sme4x-s400",
+      "run_id": "bea5f764-eb67-59c9-901f-acc92b3866df",
+      "media_count": 18,
+      "parsed_media_count": 16,
+      "parse_failures": 2,
+      "total_shot_segments": 1484,
+      "average_shot_segments_per_parsed_media": 92.75,
+      "minimum_shot_segments": 0,
+      "maximum_shot_segments": 280
+    },
+    {
+      "name": "a1790-entity-sme4x-s1200",
+      "run_id": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43",
+      "media_count": 18,
+      "parsed_media_count": 17,
+      "parse_failures": 1,
+      "total_shot_segments": 2036,
+      "average_shot_segments_per_parsed_media": 119.76470588235294,
+      "minimum_shot_segments": 0,
+      "maximum_shot_segments": 266
+    },
+    {
+      "name": "a1740-h0-duration-s800",
+      "run_id": "254e310b-e99f-5e1c-8ef3-816062a54cab",
+      "media_count": 18,
+      "parsed_media_count": 16,
+      "parse_failures": 2,
+      "total_shot_segments": 1697,
+      "average_shot_segments_per_parsed_media": 106.0625,
+      "minimum_shot_segments": 16,
+      "maximum_shot_segments": 252
+    },
+    {
+      "name": "a1740-h0-duration-s1200",
+      "run_id": "36ff2578-3a7d-51c9-a555-ca8958929a30",
+      "media_count": 18,
+      "parsed_media_count": 16,
+      "parse_failures": 2,
+      "total_shot_segments": 1882,
+      "average_shot_segments_per_parsed_media": 117.625,
+      "minimum_shot_segments": 0,
+      "maximum_shot_segments": 304
+    },
+    {
+      "name": "consol-h0mn2x-s400",
+      "run_id": "b0b7a57b-bbc7-546f-bf6e-fb9d30fe2dcb",
+      "media_count": 18,
+      "parsed_media_count": 16,
+      "parse_failures": 2,
+      "total_shot_segments": 1995,
+      "average_shot_segments_per_parsed_media": 124.6875,
+      "minimum_shot_segments": 1,
+      "maximum_shot_segments": 251
+    },
+    {
+      "name": "consol-h0mn2x-s800",
+      "run_id": "a7ed23df-4db0-5ef1-ab05-ca51a995264f",
+      "media_count": 18,
+      "parsed_media_count": 17,
+      "parse_failures": 1,
+      "total_shot_segments": 2305,
+      "average_shot_segments_per_parsed_media": 135.58823529411765,
+      "minimum_shot_segments": 8,
+      "maximum_shot_segments": 388
+    },
+    {
+      "name": "consol-h0mn2x-s1200",
+      "run_id": "239cf441-25eb-591c-ab32-32bdfaa91241",
+      "media_count": 18,
+      "parsed_media_count": 16,
+      "parse_failures": 2,
+      "total_shot_segments": 1659,
+      "average_shot_segments_per_parsed_media": 103.6875,
+      "minimum_shot_segments": 0,
+      "maximum_shot_segments": 251
+    },
+    {
+      "name": "consol-h0mn2x-s1600",
+      "run_id": "78542b3b-6142-5487-80eb-2be8006ce1f9",
+      "media_count": 18,
+      "parsed_media_count": 16,
+      "parse_failures": 2,
+      "total_shot_segments": 1702,
+      "average_shot_segments_per_parsed_media": 106.375,
+      "minimum_shot_segments": 15,
+      "maximum_shot_segments": 216
+    },
+    {
+      "name": "consol-h0mn2x-s2000",
+      "run_id": "55ccccf4-87a9-576f-acb7-45adac7e8fdb",
+      "media_count": 18,
+      "parsed_media_count": 16,
+      "parse_failures": 2,
+      "total_shot_segments": 1336,
+      "average_shot_segments_per_parsed_media": 83.5,
+      "minimum_shot_segments": 15,
+      "maximum_shot_segments": 209
+    },
+    {
+      "name": "soccer-lvreason-mcq-s400",
+      "run_id": "29162be7-08eb-569f-babd-fe4ce9b5bbfa",
+      "media_count": 18,
+      "parsed_media_count": 17,
+      "parse_failures": 1,
+      "total_shot_segments": 2401,
+      "average_shot_segments_per_parsed_media": 141.23529411764707,
+      "minimum_shot_segments": 5,
+      "maximum_shot_segments": 431
+    },
+    {
+      "name": "soccer-lvreason-mcq-s800",
+      "run_id": "5287cdbb-2fbf-5b13-8f4a-95aaf59401b4",
+      "media_count": 18,
+      "parsed_media_count": 17,
+      "parse_failures": 1,
+      "total_shot_segments": 1755,
+      "average_shot_segments_per_parsed_media": 103.23529411764706,
+      "minimum_shot_segments": 0,
+      "maximum_shot_segments": 287
+    },
+    {
+      "name": "soccer-lvreason-mcq-s1200",
+      "run_id": "fca2533a-a6fc-550e-8c58-a49d8363626a",
+      "media_count": 18,
+      "parsed_media_count": 16,
+      "parse_failures": 2,
+      "total_shot_segments": 2087,
+      "average_shot_segments_per_parsed_media": 130.4375,
+      "minimum_shot_segments": 16,
+      "maximum_shot_segments": 252
+    },
+    {
+      "name": "pegasus-15-rl-s60",
+      "run_id": "1a46966b-378a-5a43-87a4-fdbe018a4cbe",
+      "media_count": 18,
+      "parsed_media_count": 18,
+      "parse_failures": 0,
+      "total_shot_segments": 1946,
+      "average_shot_segments_per_parsed_media": 108.11111111111111,
+      "minimum_shot_segments": 12,
+      "maximum_shot_segments": 404
+    },
+    {
+      "name": "a1790-entity-sme4x-s1800",
+      "run_id": "7ce6f636-0e36-5cfc-9aea-013e1bc8a9fb",
+      "media_count": 18,
+      "parsed_media_count": 16,
+      "parse_failures": 2,
+      "total_shot_segments": 1879,
+      "average_shot_segments_per_parsed_media": 117.4375,
+      "minimum_shot_segments": 16,
+      "maximum_shot_segments": 304
+    },
+    {
+      "name": "pegasus-15-sft-s1000",
+      "run_id": "d15291a5-ac78-544a-a2c6-0a52779da66c",
+      "media_count": 18,
+      "parsed_media_count": 16,
+      "parse_failures": 2,
+      "total_shot_segments": 1914,
+      "average_shot_segments_per_parsed_media": 119.625,
+      "minimum_shot_segments": 15,
+      "maximum_shot_segments": 399
+    },
+    {
+      "name": "a1790-entity-sme4x-s800",
+      "run_id": "82c18432-2844-59bf-a3b8-b6d913bd1390",
+      "media_count": 18,
+      "parsed_media_count": 17,
+      "parse_failures": 1,
+      "total_shot_segments": 1865,
+      "average_shot_segments_per_parsed_media": 109.70588235294117,
+      "minimum_shot_segments": 0,
+      "maximum_shot_segments": 304
+    },
+    {
+      "name": "a1790-entity-sme4x-s1600",
+      "run_id": "a47d832e-1ee3-502a-aebd-66692900c339",
+      "media_count": 18,
+      "parsed_media_count": 16,
+      "parse_failures": 2,
+      "total_shot_segments": 1633,
+      "average_shot_segments_per_parsed_media": 102.0625,
+      "minimum_shot_segments": 16,
+      "maximum_shot_segments": 304
+    },
+    {
+      "name": "a1790-entity-sme4x-s1900",
+      "run_id": "a520e232-a4e9-5640-b666-48a023b84ed0",
+      "media_count": 18,
+      "parsed_media_count": 17,
+      "parse_failures": 1,
+      "total_shot_segments": 2092,
+      "average_shot_segments_per_parsed_media": 123.05882352941177,
+      "minimum_shot_segments": 15,
+      "maximum_shot_segments": 304
+    },
+    {
+      "name": "a1790-entity-sme4x-s2000",
+      "run_id": "0790b212-c060-52f8-acd9-a0cf2709c276",
+      "media_count": 18,
+      "parsed_media_count": 17,
+      "parse_failures": 1,
+      "total_shot_segments": 1329,
+      "average_shot_segments_per_parsed_media": 78.17647058823529,
+      "minimum_shot_segments": 0,
+      "maximum_shot_segments": 252
+    },
+    {
+      "name": "a1790-entity-sme4x-s2100",
+      "run_id": "962dadcc-abe3-50bd-bf44-38fab5d4a8e4",
+      "media_count": 18,
+      "parsed_media_count": 18,
+      "parse_failures": 0,
+      "total_shot_segments": 1931,
+      "average_shot_segments_per_parsed_media": 107.27777777777777,
+      "minimum_shot_segments": 2,
+      "maximum_shot_segments": 222
+    },
+    {
+      "name": "soccer-lvreason-mcq-s1600",
+      "run_id": "918e01d5-cd55-501d-bfc2-09b53e5d5f34",
+      "media_count": 18,
+      "parsed_media_count": 17,
+      "parse_failures": 1,
+      "total_shot_segments": 2080,
+      "average_shot_segments_per_parsed_media": 122.3529411764706,
+      "minimum_shot_segments": 9,
+      "maximum_shot_segments": 304
+    },
+    {
+      "name": "soccer-lvreason-mcq-s2000",
+      "run_id": "d10c50da-66a2-59e7-b81a-21ac4a26fafd",
+      "media_count": 18,
+      "parsed_media_count": 16,
+      "parse_failures": 2,
+      "total_shot_segments": 2132,
+      "average_shot_segments_per_parsed_media": 133.25,
+      "minimum_shot_segments": 15,
+      "maximum_shot_segments": 304
+    }
+  ]
+}
