@@ -19,3 +19,6 @@ The source is a DCP checkpoint. `export.yaml` converts it to safetensors.
 posts updates and 20-minute heartbeats to `#fun-lia-trashcan`.
 
 Export job: `export-a1790-entity-sme4x-s2200-tikl46`
+
+CPU monitor: PID `1903180` under
+`/home/jeongyeon-nam/eval-monitor-export-a1790-entity-sme4x-s2200-tikl46`.
