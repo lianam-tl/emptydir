@@ -1,0 +1,2 @@
+streamlit>=1.47,<2
+json-repair>=0.44,<1
