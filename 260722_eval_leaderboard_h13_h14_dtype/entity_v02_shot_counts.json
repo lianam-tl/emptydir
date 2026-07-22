@@ -389,6 +389,21 @@
       "average_shot_duration_seconds": 5.483333215046132,
       "minimum_shot_duration_seconds": 0.009999999999990905,
       "maximum_shot_duration_seconds": 118.0
+    },
+    {
+      "name": "h0-entity-v1-2-s100",
+      "run_id": "57a8e294-4faf-5613-8f83-c93effa4e7cd",
+      "media_count": 18,
+      "parsed_media_count": 17,
+      "parse_failures": 1,
+      "total_shot_segments": 882,
+      "average_shot_segments_per_parsed_media": 51.88235294117647,
+      "minimum_shot_segments": 4,
+      "maximum_shot_segments": 277,
+      "total_shot_duration_seconds": 13501.883,
+      "average_shot_duration_seconds": 15.308257369614513,
+      "minimum_shot_duration_seconds": 0.01999999999998181,
+      "maximum_shot_duration_seconds": 176.0
     }
   ]
 }

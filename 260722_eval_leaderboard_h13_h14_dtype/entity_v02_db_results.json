@@ -197,6 +197,24 @@
       "datasetRevision": "5caf5ebd1ce03b6b6bb28a50504a8c36542d9433",
       "run": "5858d88a-d81e-574f-81a9-ccb73f9f4c95",
       "path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-2200-safetensors/"
+    },
+    {
+      "name": "h0-entity-v1-2-s100",
+      "naming": 0.3077370697214896,
+      "score": 0.31631503817800816,
+      "delta": 0.049078857692099,
+      "fullNaming": 0.24826583872699892,
+      "fullScore": 0.21984539718493612,
+      "fullDelta": 0.01549849119287224,
+      "halfNaming": 0.338105357888889,
+      "halfScore": 0.36592799640301654,
+      "halfDelta": 0.06622627888319352,
+      "scored": 18,
+      "failed": 0,
+      "parseFailures": 1,
+      "datasetRevision": "5caf5ebd1ce03b6b6bb28a50504a8c36542d9433",
+      "run": "57a8e294-4faf-5613-8f83-c93effa4e7cd",
+      "path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_h0_entity_v1_2_7n_qwen3_5_27b-base/checkpoint-100-safetensors/"
     }
   ],
   "half_sample_rows": [
@@ -385,6 +403,23 @@
         "film-05:001": 0.30567853595027006,
         "film-06:000": 0.18395734671426422,
         "film-06:001": 0.5479493094330333
+      }
+    },
+    {
+      "name": "h0-entity-v1-2-s100",
+      "samples": {
+        "film-01:000": 0.4445427459823364,
+        "film-01:001": 0.3227750857324228,
+        "film-02:000": 0.1310776770932931,
+        "film-02:001": 0.5600319034082367,
+        "film-03:000": 0.22536859970148154,
+        "film-03:001": 0.46272389408343023,
+        "film-04:000": 0.33147023019705063,
+        "film-04:001": 0.0655274089740168,
+        "film-05:000": 0.5531838946077071,
+        "film-05:001": 0.4954655360739505,
+        "film-06:000": 0.39335734798544775,
+        "film-06:001": 0.6454937802361924
       }
     }
   ]
