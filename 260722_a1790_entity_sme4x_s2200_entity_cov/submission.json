@@ -21,7 +21,14 @@
     "enable_tensor_cache": true,
     "wandb_run_id": "kp1ju1r1",
     "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1",
-    "export_status": "Created",
-    "eval_status": "not submitted"
+    "export_status": "Succeeded",
+    "eval_run_id": "9076d70b-c407-5004-b9b9-a32f99fc8c65",
+    "eval_status": "processing",
+    "eval_completed": 0,
+    "eval_failed": 0,
+    "reported_status": "export=Succeeded eval=processing",
+    "previous_failed_eval_run_id": "e69c7e97-7a9a-53ac-839d-267ebf505ef8",
+    "previous_failed_batch_execution_id": "eddba674-9185-5cd4-b866-08a994a2e872",
+    "previous_failure_reason": "submitter lease expired before external_request_id was durable"
   }
 ]
