@@ -5,6 +5,7 @@
     "source_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-2200",
     "output_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_a1790_entity_sme_4x_consol_7n_qwen3_5_27b-base/checkpoint-2200-safetensors",
     "export_name": "export-a1790-entity-sme4x-s2200",
+    "job_name": "export-a1790-entity-sme4x-s2200-tikl46",
     "manifest": "260722_a1790_entity_sme4x_s2200_entity_cov/export.yaml",
     "dataset": "twelvelabs/entity_cov_v02_tdf",
     "dataset_revision": "5caf5ebd1ce03b6b6bb28a50504a8c36542d9433",
@@ -20,7 +21,7 @@
     "enable_tensor_cache": true,
     "wandb_run_id": "kp1ju1r1",
     "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1",
-    "export_status": "not submitted",
+    "export_status": "Created",
     "eval_status": "not submitted"
   }
 ]
