@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Collect average valid shot_metadata segment counts for Entity v0.2 runs."""
+"""Collect valid shot_metadata segment counts and durations for Entity v0.2 runs."""
 
 from __future__ import annotations
 
@@ -79,6 +79,7 @@ def collect_run(
     )
 
     segment_counts = []
+    shot_durations = []
     for sample_id, sample in displayed_samples.items():
         tasks = sample.get("tasks") or []
         if len(tasks) != 1:
@@ -90,7 +91,9 @@ def collect_run(
             parsed_output = parse_nested_output(normalized_output)
         except ValueError:
             continue
-        segment_counts.append(len(parsed_output["shot_metadata"]))
+        shots = parsed_output["shot_metadata"]
+        segment_counts.append(len(shots))
+        shot_durations.extend(shot["end_time"] - shot["start_time"] for shot in shots)
 
     parse_failures = len(displayed_samples) - len(segment_counts)
     if parse_failures != expected_parse_failures:
@@ -98,6 +101,8 @@ def collect_run(
             f"{tracked_run['name']} raw parse failures={parse_failures}, "
             f"benchmark parse failures={expected_parse_failures}"
         )
+    if not shot_durations:
+        raise ValueError(f"{tracked_run['name']} has no valid shot durations")
     return {
         **tracked_run,
         "media_count": len(displayed_samples),
@@ -107,6 +112,10 @@ def collect_run(
         "average_shot_segments_per_parsed_media": statistics.fmean(segment_counts),
         "minimum_shot_segments": min(segment_counts),
         "maximum_shot_segments": max(segment_counts),
+        "total_shot_duration_seconds": sum(shot_durations),
+        "average_shot_duration_seconds": statistics.fmean(shot_durations),
+        "minimum_shot_duration_seconds": min(shot_durations),
+        "maximum_shot_duration_seconds": max(shot_durations),
     }
 
 
@@ -142,7 +151,8 @@ def main() -> None:
             rows[index] = row
             print(
                 f"collected {row['name']}: "
-                f"{row['average_shot_segments_per_parsed_media']:.2f}",
+                f"{row['average_shot_segments_per_parsed_media']:.2f} shots/media, "
+                f"{row['average_shot_duration_seconds']:.2f} seconds/shot",
                 flush=True,
             )
 

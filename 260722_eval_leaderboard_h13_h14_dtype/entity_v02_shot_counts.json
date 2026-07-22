@@ -9,7 +9,11 @@
       "total_shot_segments": 1975,
       "average_shot_segments_per_parsed_media": 109.72222222222223,
       "minimum_shot_segments": 23,
-      "maximum_shot_segments": 304
+      "maximum_shot_segments": 304,
+      "total_shot_duration_seconds": 16972.273,
+      "average_shot_duration_seconds": 8.593555949367088,
+      "minimum_shot_duration_seconds": 1.0,
+      "maximum_shot_duration_seconds": 1094.659
     },
     {
       "name": "a1740-h0-duration-s400",
@@ -20,7 +24,11 @@
       "total_shot_segments": 2089,
       "average_shot_segments_per_parsed_media": 130.5625,
       "minimum_shot_segments": 5,
-      "maximum_shot_segments": 379
+      "maximum_shot_segments": 379,
+      "total_shot_duration_seconds": 12771.324,
+      "average_shot_duration_seconds": 6.113606510292006,
+      "minimum_shot_duration_seconds": 0.009999999999990905,
+      "maximum_shot_duration_seconds": 274.33000000000004
     },
     {
       "name": "a1790-entity-sme4x-s400",
@@ -31,7 +39,11 @@
       "total_shot_segments": 1484,
       "average_shot_segments_per_parsed_media": 92.75,
       "minimum_shot_segments": 0,
-      "maximum_shot_segments": 280
+      "maximum_shot_segments": 280,
+      "total_shot_duration_seconds": 12101.545,
+      "average_shot_duration_seconds": 8.154679919137466,
+      "minimum_shot_duration_seconds": 0.009999999999990905,
+      "maximum_shot_duration_seconds": 274.33000000000004
     },
     {
       "name": "a1790-entity-sme4x-s1200",
@@ -42,7 +54,11 @@
       "total_shot_segments": 2036,
       "average_shot_segments_per_parsed_media": 119.76470588235294,
       "minimum_shot_segments": 0,
-      "maximum_shot_segments": 266
+      "maximum_shot_segments": 266,
+      "total_shot_duration_seconds": 13970.177,
+      "average_shot_duration_seconds": 6.861580058939096,
+      "minimum_shot_duration_seconds": 0.009999999999990905,
+      "maximum_shot_duration_seconds": 232.0
     },
     {
       "name": "a1740-h0-duration-s800",
@@ -53,7 +69,11 @@
       "total_shot_segments": 1697,
       "average_shot_segments_per_parsed_media": 106.0625,
       "minimum_shot_segments": 16,
-      "maximum_shot_segments": 252
+      "maximum_shot_segments": 252,
+      "total_shot_duration_seconds": 14071.456,
+      "average_shot_duration_seconds": 8.291959929286977,
+      "minimum_shot_duration_seconds": 0.009999999999990905,
+      "maximum_shot_duration_seconds": 138.0
     },
     {
       "name": "a1740-h0-duration-s1200",
@@ -64,7 +84,11 @@
       "total_shot_segments": 1882,
       "average_shot_segments_per_parsed_media": 117.625,
       "minimum_shot_segments": 0,
-      "maximum_shot_segments": 304
+      "maximum_shot_segments": 304,
+      "total_shot_duration_seconds": 12485.86,
+      "average_shot_duration_seconds": 6.634357066950053,
+      "minimum_shot_duration_seconds": 0.01999999999998181,
+      "maximum_shot_duration_seconds": 138.0
     },
     {
       "name": "consol-h0mn2x-s400",
@@ -75,7 +99,11 @@
       "total_shot_segments": 1995,
       "average_shot_segments_per_parsed_media": 124.6875,
       "minimum_shot_segments": 1,
-      "maximum_shot_segments": 251
+      "maximum_shot_segments": 251,
+      "total_shot_duration_seconds": 12768.549,
+      "average_shot_duration_seconds": 6.400275187969926,
+      "minimum_shot_duration_seconds": 0.009999999999990905,
+      "maximum_shot_duration_seconds": 197.33000000000004
     },
     {
       "name": "consol-h0mn2x-s800",
@@ -86,7 +114,11 @@
       "total_shot_segments": 2305,
       "average_shot_segments_per_parsed_media": 135.58823529411765,
       "minimum_shot_segments": 8,
-      "maximum_shot_segments": 388
+      "maximum_shot_segments": 388,
+      "total_shot_duration_seconds": 13043.769,
+      "average_shot_duration_seconds": 5.658901952277658,
+      "minimum_shot_duration_seconds": 0.009999999999990905,
+      "maximum_shot_duration_seconds": 194.33000000000004
     },
     {
       "name": "consol-h0mn2x-s1200",
@@ -97,7 +129,11 @@
       "total_shot_segments": 1659,
       "average_shot_segments_per_parsed_media": 103.6875,
       "minimum_shot_segments": 0,
-      "maximum_shot_segments": 251
+      "maximum_shot_segments": 251,
+      "total_shot_duration_seconds": 12995.839,
+      "average_shot_duration_seconds": 7.833537673297167,
+      "minimum_shot_duration_seconds": 0.009999999999990905,
+      "maximum_shot_duration_seconds": 232.0
     },
     {
       "name": "consol-h0mn2x-s1600",
@@ -108,7 +144,11 @@
       "total_shot_segments": 1702,
       "average_shot_segments_per_parsed_media": 106.375,
       "minimum_shot_segments": 15,
-      "maximum_shot_segments": 216
+      "maximum_shot_segments": 216,
+      "total_shot_duration_seconds": 13557.57,
+      "average_shot_duration_seconds": 7.965669800235017,
+      "minimum_shot_duration_seconds": 0.009999999999990905,
+      "maximum_shot_duration_seconds": 138.0
     },
     {
       "name": "consol-h0mn2x-s2000",
@@ -119,7 +159,11 @@
       "total_shot_segments": 1336,
       "average_shot_segments_per_parsed_media": 83.5,
       "minimum_shot_segments": 15,
-      "maximum_shot_segments": 209
+      "maximum_shot_segments": 209,
+      "total_shot_duration_seconds": 14075.094000000001,
+      "average_shot_duration_seconds": 10.535250000000001,
+      "minimum_shot_duration_seconds": 1.0,
+      "maximum_shot_duration_seconds": 1095.21
     },
     {
       "name": "soccer-lvreason-mcq-s400",
@@ -130,7 +174,11 @@
       "total_shot_segments": 2401,
       "average_shot_segments_per_parsed_media": 141.23529411764707,
       "minimum_shot_segments": 5,
-      "maximum_shot_segments": 431
+      "maximum_shot_segments": 431,
+      "total_shot_duration_seconds": 14263.73,
+      "average_shot_duration_seconds": 5.940745522698875,
+      "minimum_shot_duration_seconds": 0.010000000000047748,
+      "maximum_shot_duration_seconds": 274.33000000000004
     },
     {
       "name": "soccer-lvreason-mcq-s800",
@@ -141,7 +189,11 @@
       "total_shot_segments": 1755,
       "average_shot_segments_per_parsed_media": 103.23529411764706,
       "minimum_shot_segments": 0,
-      "maximum_shot_segments": 287
+      "maximum_shot_segments": 287,
+      "total_shot_duration_seconds": 13977.915,
+      "average_shot_duration_seconds": 7.964623931623932,
+      "minimum_shot_duration_seconds": 0.6050000000000182,
+      "maximum_shot_duration_seconds": 156.6590000000001
     },
     {
       "name": "soccer-lvreason-mcq-s1200",
@@ -152,7 +204,11 @@
       "total_shot_segments": 2087,
       "average_shot_segments_per_parsed_media": 130.4375,
       "minimum_shot_segments": 16,
-      "maximum_shot_segments": 252
+      "maximum_shot_segments": 252,
+      "total_shot_duration_seconds": 14085.748,
+      "average_shot_duration_seconds": 6.749280306660277,
+      "minimum_shot_duration_seconds": 0.009999999999990905,
+      "maximum_shot_duration_seconds": 138.0
     },
     {
       "name": "pegasus-15-rl-s60",
@@ -163,7 +219,11 @@
       "total_shot_segments": 1946,
       "average_shot_segments_per_parsed_media": 108.11111111111111,
       "minimum_shot_segments": 12,
-      "maximum_shot_segments": 404
+      "maximum_shot_segments": 404,
+      "total_shot_duration_seconds": 16959.035,
+      "average_shot_duration_seconds": 8.71481757451182,
+      "minimum_shot_duration_seconds": 1.0,
+      "maximum_shot_duration_seconds": 199.0
     },
     {
       "name": "a1790-entity-sme4x-s1800",
@@ -174,7 +234,11 @@
       "total_shot_segments": 1879,
       "average_shot_segments_per_parsed_media": 117.4375,
       "minimum_shot_segments": 16,
-      "maximum_shot_segments": 304
+      "maximum_shot_segments": 304,
+      "total_shot_duration_seconds": 14064.384,
+      "average_shot_duration_seconds": 7.485036721660458,
+      "minimum_shot_duration_seconds": 0.009999999999990905,
+      "maximum_shot_duration_seconds": 138.0
     },
     {
       "name": "pegasus-15-sft-s1000",
@@ -185,7 +249,11 @@
       "total_shot_segments": 1914,
       "average_shot_segments_per_parsed_media": 119.625,
       "minimum_shot_segments": 15,
-      "maximum_shot_segments": 399
+      "maximum_shot_segments": 399,
+      "total_shot_duration_seconds": 14052.346,
+      "average_shot_duration_seconds": 7.341873563218391,
+      "minimum_shot_duration_seconds": 0.009999999999990905,
+      "maximum_shot_duration_seconds": 156.6590000000001
     },
     {
       "name": "a1790-entity-sme4x-s800",
@@ -196,7 +264,11 @@
       "total_shot_segments": 1865,
       "average_shot_segments_per_parsed_media": 109.70588235294117,
       "minimum_shot_segments": 0,
-      "maximum_shot_segments": 304
+      "maximum_shot_segments": 304,
+      "total_shot_duration_seconds": 13708.417,
+      "average_shot_duration_seconds": 7.35035764075067,
+      "minimum_shot_duration_seconds": 0.01999999999998181,
+      "maximum_shot_duration_seconds": 232.0
     },
     {
       "name": "a1790-entity-sme4x-s1600",
@@ -207,7 +279,11 @@
       "total_shot_segments": 1633,
       "average_shot_segments_per_parsed_media": 102.0625,
       "minimum_shot_segments": 16,
-      "maximum_shot_segments": 304
+      "maximum_shot_segments": 304,
+      "total_shot_duration_seconds": 14089.314,
+      "average_shot_duration_seconds": 8.627871402327006,
+      "minimum_shot_duration_seconds": 0.009999999999990905,
+      "maximum_shot_duration_seconds": 138.0
     },
     {
       "name": "a1790-entity-sme4x-s1900",
@@ -218,7 +294,11 @@
       "total_shot_segments": 2092,
       "average_shot_segments_per_parsed_media": 123.05882352941177,
       "minimum_shot_segments": 15,
-      "maximum_shot_segments": 304
+      "maximum_shot_segments": 304,
+      "total_shot_duration_seconds": 14397.742,
+      "average_shot_duration_seconds": 6.882285850860421,
+      "minimum_shot_duration_seconds": 0.009999999999990905,
+      "maximum_shot_duration_seconds": 148.0
     },
     {
       "name": "a1790-entity-sme4x-s2000",
@@ -229,7 +309,11 @@
       "total_shot_segments": 1329,
       "average_shot_segments_per_parsed_media": 78.17647058823529,
       "minimum_shot_segments": 0,
-      "maximum_shot_segments": 252
+      "maximum_shot_segments": 252,
+      "total_shot_duration_seconds": 12212.738,
+      "average_shot_duration_seconds": 9.189419112114372,
+      "minimum_shot_duration_seconds": 1.0,
+      "maximum_shot_duration_seconds": 76.33999999999999
     },
     {
       "name": "a1790-entity-sme4x-s2100",
@@ -240,7 +324,11 @@
       "total_shot_segments": 1931,
       "average_shot_segments_per_parsed_media": 107.27777777777777,
       "minimum_shot_segments": 2,
-      "maximum_shot_segments": 222
+      "maximum_shot_segments": 222,
+      "total_shot_duration_seconds": 16974.733,
+      "average_shot_duration_seconds": 8.790643707923357,
+      "minimum_shot_duration_seconds": 1.0,
+      "maximum_shot_duration_seconds": 1180.659
     },
     {
       "name": "soccer-lvreason-mcq-s1600",
@@ -251,7 +339,11 @@
       "total_shot_segments": 2080,
       "average_shot_segments_per_parsed_media": 122.3529411764706,
       "minimum_shot_segments": 9,
-      "maximum_shot_segments": 304
+      "maximum_shot_segments": 304,
+      "total_shot_duration_seconds": 15030.031,
+      "average_shot_duration_seconds": 7.225976442307693,
+      "minimum_shot_duration_seconds": 0.54,
+      "maximum_shot_duration_seconds": 232.0
     },
     {
       "name": "soccer-lvreason-mcq-s2000",
@@ -262,7 +354,11 @@
       "total_shot_segments": 2132,
       "average_shot_segments_per_parsed_media": 133.25,
       "minimum_shot_segments": 15,
-      "maximum_shot_segments": 304
+      "maximum_shot_segments": 304,
+      "total_shot_duration_seconds": 13803.192000000001,
+      "average_shot_duration_seconds": 6.47429268292683,
+      "minimum_shot_duration_seconds": 0.009999999999990905,
+      "maximum_shot_duration_seconds": 156.6590000000001
     },
     {
       "name": "soccer-lvreason-mcq-s2100",
@@ -273,7 +369,11 @@
       "total_shot_segments": 1682,
       "average_shot_segments_per_parsed_media": 105.125,
       "minimum_shot_segments": 7,
-      "maximum_shot_segments": 315
+      "maximum_shot_segments": 315,
+      "total_shot_duration_seconds": 14072.362000000001,
+      "average_shot_duration_seconds": 8.366445897740785,
+      "minimum_shot_duration_seconds": 0.6050000000000182,
+      "maximum_shot_duration_seconds": 195.33000000000004
     }
   ]
 }
