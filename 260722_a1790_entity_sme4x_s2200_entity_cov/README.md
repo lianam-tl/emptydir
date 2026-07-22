@@ -25,7 +25,14 @@ inference because its submitter lease expired before the XPlatform request ID
 was saved. No matching request was found among the latest 1,000 XPlatform
 batches, so it was resubmitted with a new idempotency key.
 
-Retry Eval V3 run: `9076d70b-c407-5004-b9b9-a32f99fc8c65`
+The second Eval V3 run, `9076d70b-c407-5004-b9b9-a32f99fc8c65`, also failed
+before inference because XPlatform's batch-request service refused the
+connection. After the service restarted and passed its health check, a third
+run received a durable XPlatform batch ID.
 
-CPU monitor: PID `1906164` under
-`/home/jeongyeon-nam/eval-retry-a1790-entity-sme4x-s2200-260722`.
+Current Eval V3 run: `4edcdc3a-bac5-523e-b6bc-fdbde7144a03`
+
+XPlatform batch: `batch-f1ac9c1e-ed4a-4e9e-8296-9a1b1d3061e1`
+
+CPU monitor: PID `1911379` under
+`/home/jeongyeon-nam/eval-retry3-a1790-entity-sme4x-s2200-260722`.
