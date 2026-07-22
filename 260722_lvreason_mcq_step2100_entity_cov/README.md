@@ -23,3 +23,9 @@ Export job `export-sft-lvreason-mcq-s2100-tik5wl` produced and uploaded the
 manifest requested nonexistent `vision_process.py` after the upload. The four
 LVReason-specific metadata files were copied from the source checkpoint, and
 `export.yaml` now lists the correct files for reproduction.
+
+Eval run: `9d185735-eb19-5463-b86b-3959ab619f27`  
+Batch: `batch-2498e936-1e29-40cb-b5fa-c9d5b77cd034`
+
+The CPU-node Slack monitor is PID `1876233` and posts status changes and
+20-minute heartbeats to `#fun-lia-trashcan`.

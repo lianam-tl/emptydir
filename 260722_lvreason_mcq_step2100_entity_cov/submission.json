@@ -19,6 +19,9 @@
     "enable_tensor_cache": true,
     "wandb_run_id": "v876swwd",
     "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/v876swwd",
-    "export_status": "Succeeded"
+    "export_status": "Succeeded",
+    "eval_run_id": "9d185735-eb19-5463-b86b-3959ab619f27",
+    "eval_status": "processing",
+    "batch_id": "batch-2498e936-1e29-40cb-b5fa-c9d5b77cd034"
   }
 ]
