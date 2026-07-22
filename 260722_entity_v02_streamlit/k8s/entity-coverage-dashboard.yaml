@@ -1,0 +1,138 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: entity-coverage-dashboard
+  namespace: pegasus-platform
+  labels:
+    app: entity-coverage-dashboard
+    twelvelabs.io/managed-by: tlab
+    twelvelabs.io/user: jeongyeon-nam
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: entity-coverage-dashboard
+  template:
+    metadata:
+      labels:
+        app: entity-coverage-dashboard
+        twelvelabs.io/managed-by: tlab
+        twelvelabs.io/user: jeongyeon-nam
+    spec:
+      nodeSelector:
+        karpenter.sh/nodepool: pegasus-cpu
+      tolerations:
+        - key: pegasus
+          operator: Equal
+          value: "true"
+          effect: NoSchedule
+      securityContext:
+        fsGroup: 10001
+        runAsNonRoot: true
+        runAsUser: 10001
+      containers:
+        - name: dashboard
+          image: 476114115052.dkr.ecr.us-west-2.amazonaws.com/tl-data-training-pegasus-leaderboard:__IMAGE_TAG__
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8501
+          env:
+            - name: ENTITY_V02_API_BASE
+              value: http://eval-v3-api-owen-2.pegasus-eval.svc.cluster.local:8090
+            - name: ENTITY_V02_DYNAMIC_CACHE_PATH
+              value: /data/dynamic_rows.json
+            - name: ENTITY_V02_SYNC_SECONDS
+              value: "60"
+          resources:
+            requests:
+              cpu: 250m
+              memory: 512Mi
+            limits:
+              cpu: "1"
+              memory: 2Gi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+          startupProbe:
+            httpGet:
+              path: /_stcore/health
+              port: http
+            periodSeconds: 5
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /_stcore/health
+              port: http
+            periodSeconds: 10
+            timeoutSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /_stcore/health
+              port: http
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: temporary-files
+              mountPath: /tmp
+      volumes:
+        - name: data
+          emptyDir: {}
+        - name: temporary-files
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: entity-coverage-dashboard
+  namespace: pegasus-platform
+  labels:
+    app: entity-coverage-dashboard
+    twelvelabs.io/managed-by: tlab
+    twelvelabs.io/user: jeongyeon-nam
+spec:
+  type: ClusterIP
+  selector:
+    app: entity-coverage-dashboard
+  ports:
+    - name: http
+      port: 8501
+      targetPort: http
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: entity-coverage-dashboard
+  namespace: pegasus-platform
+  labels:
+    app: entity-coverage-dashboard
+    twelvelabs.io/managed-by: tlab
+    twelvelabs.io/user: jeongyeon-nam
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+spec:
+  ingressClassName: nginx-standalone
+  rules:
+    - host: entity-coverage.training.twelve.labs
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: entity-coverage-dashboard
+                port:
+                  name: http

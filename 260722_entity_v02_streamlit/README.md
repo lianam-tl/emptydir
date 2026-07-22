@@ -12,22 +12,28 @@ uv pip install --python .venv/bin/python -r requirements.txt
 ENTITY_V02_API_BASE=http://127.0.0.1:18090 .venv/bin/streamlit run app.py
 ```
 
-## Run on the CPU node
+## Company deployment
 
-The CPU node can resolve the Owen-2 Kubernetes service directly:
+The checked-in Kubernetes manifest runs one read-only replica in
+`pegasus-platform` and exposes it through the private training ingress:
+
+```bash
+image_tag=entity-v02-<git-sha>
+sed "s/__IMAGE_TAG__/${image_tag}/g" k8s/entity-coverage-dashboard.yaml | \
+  kubectl --context training apply -f -
+```
+
+Visit http://entity-coverage.training.twelve.labs from the company network.
+
+## CPU-node fallback
+
+The CPU node can resolve the Owen-2 Kubernetes service directly. To run a
+temporary fallback:
 
 ```bash
 uv venv --python 3.12 .venv
 uv pip install --python .venv/bin/python -r requirements.txt
 nohup ./start_server.sh > streamlit.log 2>&1 & echo $! > streamlit.pid
 ```
-
-Open it from macOS through an SSH tunnel:
-
-```bash
-ssh -N -L 8501:127.0.0.1:8501 cpu
-```
-
-Then visit http://127.0.0.1:8501.
 
 Set `ENTITY_V02_SYNC_SECONDS` to change the default interval. The UI also exposes a 10–3,600 second interval control and a manual **Sync now** button.
