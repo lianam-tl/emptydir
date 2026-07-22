@@ -464,6 +464,30 @@ def chart_dataframe(rows: list[dict[str, Any]], metric: str) -> pd.DataFrame:
     return pd.DataFrame.from_records(records)
 
 
+def half_sample_dataframe(rows: list[dict[str, Any]]) -> pd.DataFrame:
+    sample_ids = sorted(
+        {sample_id for row in rows for sample_id in (row.get("half_samples") or {})}
+    )
+    records = [
+        {
+            "Model": row["name"],
+            **{
+                sample_id: (row.get("half_samples") or {}).get(sample_id)
+                for sample_id in sample_ids
+            },
+        }
+        for row in rows
+    ]
+    return pd.DataFrame.from_records(records).set_index("Model")
+
+
+def sample_score_style(value: Any) -> str:
+    if pd.isna(value):
+        return "color: #888"
+    hue = 120 * min(max(float(value), 0.0), 1.0)
+    return f"background-color: hsla({hue:.0f}, 70%, 45%, 0.30); font-weight: 600"
+
+
 def render_chart(rows: list[dict[str, Any]], metric: str, title: str) -> None:
     chart_rows = chart_dataframe(rows, metric)
     if chart_rows.empty:
@@ -567,17 +591,20 @@ def render_dashboard(api_base: str) -> None:
         render_chart(rows, "full_naming", "Full naming IoU")
 
     st.subheader("Half sample scores")
-    selected_name = st.selectbox("Checkpoint", [row["name"] for row in rows])
-    selected_row = next(row for row in rows if row["name"] == selected_name)
-    sample_rows = [
-        {"Sample": sample_id, "IoU": score}
-        for sample_id, score in sorted((selected_row.get("half_samples") or {}).items())
-    ]
+    sample_scores = half_sample_dataframe(rows)
+    sample_score_style_table = sample_scores.style.map(sample_score_style)
     st.dataframe(
-        sample_rows,
-        hide_index=True,
+        sample_score_style_table,
+        hide_index=False,
         width="stretch",
-        column_config={"IoU": st.column_config.NumberColumn(format="%.6f")},
+        height=900,
+        column_config={
+            "_index": st.column_config.TextColumn("Model", width="large"),
+            **{
+                sample_id: st.column_config.NumberColumn(format="%.3f", width="small")
+                for sample_id in sample_scores.columns
+            },
+        },
     )
 
 
