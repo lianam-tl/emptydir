@@ -20,3 +20,6 @@ The source is a DCP checkpoint. `export.yaml` converts it to safetensors.
 posts updates to `#fun-lia-trashcan`.
 
 Export job: `export-sft-lvreason-mcq-s2200-tikim3`
+
+CPU monitor: PID `1897349` under
+`/home/jeongyeon-nam/eval-monitor-export-sft-lvreason-mcq-s2200-tikim3`.
