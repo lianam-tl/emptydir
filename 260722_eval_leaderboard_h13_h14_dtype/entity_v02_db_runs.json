@@ -43,5 +43,10 @@
     "name": "soccer-lvreason-mcq-s2000",
     "run_id": "d10c50da-66a2-59e7-b81a-21ac4a26fafd",
     "path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-2000-safetensors/"
+  },
+  {
+    "name": "soccer-lvreason-mcq-s2100",
+    "run_id": "9d185735-eb19-5463-b86b-3959ab619f27",
+    "path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-2100-safetensors/"
   }
 ]

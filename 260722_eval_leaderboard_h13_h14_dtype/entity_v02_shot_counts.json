@@ -263,6 +263,17 @@
       "average_shot_segments_per_parsed_media": 133.25,
       "minimum_shot_segments": 15,
       "maximum_shot_segments": 304
+    },
+    {
+      "name": "soccer-lvreason-mcq-s2100",
+      "run_id": "9d185735-eb19-5463-b86b-3959ab619f27",
+      "media_count": 18,
+      "parsed_media_count": 16,
+      "parse_failures": 2,
+      "total_shot_segments": 1682,
+      "average_shot_segments_per_parsed_media": 105.125,
+      "minimum_shot_segments": 7,
+      "maximum_shot_segments": 315
     }
   ]
 }
