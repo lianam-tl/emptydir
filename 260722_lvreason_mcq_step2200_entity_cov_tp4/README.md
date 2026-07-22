@@ -23,3 +23,7 @@ Export job: `export-sft-lvreason-mcq-s2200-tikim3`
 
 CPU monitor: PID `1897349` under
 `/home/jeongyeon-nam/eval-monitor-export-sft-lvreason-mcq-s2200-tikim3`.
+
+Eval run: `5858d88a-d81e-574f-81a9-ccb73f9f4c95`
+
+Batch: `batch-1bf99832-a12b-49af-a52f-79ae37451217`
