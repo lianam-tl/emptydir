@@ -526,8 +526,12 @@ def render_dashboard(api_base: str) -> None:
         st.warning(error)
 
     st.subheader("Entity coverage v0.2 results")
+    leaderboard = table_dataframe(rows)
+    leaderboard_style = leaderboard.style.set_properties(
+        subset=["Half name + appearance IoU"], **{"font-weight": "700"}
+    )
     st.dataframe(
-        table_dataframe(rows),
+        leaderboard_style,
         hide_index=True,
         width="stretch",
         height=780,
@@ -545,15 +549,22 @@ def render_dashboard(api_base: str) -> None:
     )
 
     st.subheader("Scores by checkpoint step")
-    half_tab, full_tab, naming_tab = st.tabs(
-        ["Half name + appearance", "Full name + appearance", "Half naming"]
+    half_appearance_tab, half_name_tab, full_appearance_tab, full_name_tab = st.tabs(
+        [
+            "Half name + appearance",
+            "Half name",
+            "Full name + appearance",
+            "Full name",
+        ]
     )
-    with half_tab:
+    with half_appearance_tab:
         render_chart(rows, "half_score", "Half name + appearance IoU")
-    with full_tab:
-        render_chart(rows, "full_score", "Full name + appearance IoU")
-    with naming_tab:
+    with half_name_tab:
         render_chart(rows, "half_naming", "Half naming IoU")
+    with full_appearance_tab:
+        render_chart(rows, "full_score", "Full name + appearance IoU")
+    with full_name_tab:
+        render_chart(rows, "full_naming", "Full naming IoU")
 
     st.subheader("Half sample scores")
     selected_name = st.selectbox("Checkpoint", [row["name"] for row in rows])
