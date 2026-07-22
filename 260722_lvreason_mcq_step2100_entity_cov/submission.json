@@ -6,6 +6,7 @@
     "output_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-2100-safetensors",
     "export_name": "export-sft-lvreason-mcq-s2100",
     "manifest": "260722_lvreason_mcq_step2100_entity_cov/export.yaml",
+    "job_name": "export-sft-lvreason-mcq-s2100-tik5wl",
     "dataset": "twelvelabs/entity_cov_v02_tdf",
     "config": "default",
     "split": "test",

@@ -17,3 +17,5 @@ step 2100.
 The source is a DCP checkpoint. `export.yaml` converts it to safetensors;
 `monitor_and_submit.py` under `260720_wandb_7n_entity_cov_eval/` submits the
 evaluation after the export succeeds.
+
+Export job: `export-sft-lvreason-mcq-s2100-tik5wl`.
