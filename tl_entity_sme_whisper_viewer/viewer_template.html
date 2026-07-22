@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Entity SME Whisper · dataset inspector</title>
+<style>
+  :root {
+    --ink: #16211b; --muted: #657169; --line: #dce3dd; --paper: #fbfcfa;
+    --panel: #ffffff; --green: #176b45; --green-soft: #eaf6ef; --blue: #2a5da8;
+    --blue-soft: #edf4ff; --amber: #98610b; --amber-soft: #fff6df; --red: #a43b35;
+    --shadow: 0 8px 28px rgba(28, 50, 36, .08); --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; color: var(--ink); background: var(--paper); font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+  button, input, select { font: inherit; }
+  button { cursor: pointer; }
+  code, pre, .mono { font-family: var(--mono); }
+  header { padding: 26px 30px 20px; color: white; background: linear-gradient(125deg, #123d2b, #176b45 60%, #2b8060); }
+  header h1 { margin: 0 0 5px; font-size: 25px; letter-spacing: -.4px; }
+  header p { margin: 0; color: #d7eee2; }
+  .header-row { display: flex; justify-content: space-between; align-items: start; gap: 24px; }
+  .header-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: end; }
+  .header-actions button { color: white; border: 1px solid rgba(255,255,255,.35); background: rgba(255,255,255,.1); border-radius: 7px; padding: 7px 10px; }
+  .source { margin-top: 12px; padding: 8px 10px; max-width: 1100px; overflow-wrap: anywhere; border-radius: 6px; background: rgba(0,0,0,.16); color: #e3f4ea; font: 11px/1.45 var(--mono); }
+  .stats { display: grid; grid-template-columns: repeat(6, minmax(120px, 1fr)); gap: 10px; padding: 16px 30px; border-bottom: 1px solid var(--line); background: #f1f6f2; }
+  .stat { padding: 10px 12px; border: 1px solid #d7e5dc; border-radius: 8px; background: white; }
+  .stat .label { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .55px; }
+  .stat .value { margin-top: 1px; font-size: 19px; font-weight: 700; }
+  .stat .sub { color: var(--muted); font-size: 11px; }
+  .layout { display: grid; grid-template-columns: 340px minmax(0, 1fr); min-height: calc(100vh - 220px); }
+  aside { border-right: 1px solid var(--line); background: #f6f8f5; }
+  .filters { position: sticky; top: 0; z-index: 2; padding: 14px; border-bottom: 1px solid var(--line); background: rgba(246,248,245,.96); backdrop-filter: blur(8px); }
+  .filters input, .filters select { width: 100%; border: 1px solid #cbd5cd; border-radius: 7px; background: white; padding: 9px 10px; color: var(--ink); }
+  .filters select { margin-top: 8px; }
+  .filter-count { margin-top: 7px; color: var(--muted); font-size: 11px; }
+  .sample-list { max-height: calc(100vh - 170px); overflow: auto; }
+  .sample-item { width: 100%; padding: 12px 14px; text-align: left; color: inherit; border: 0; border-bottom: 1px solid #e1e6e2; background: transparent; }
+  .sample-item:hover { background: white; }
+  .sample-item.active { background: var(--green-soft); box-shadow: inset 4px 0 var(--green); }
+  .sample-title { display: flex; justify-content: space-between; gap: 8px; align-items: center; font-weight: 650; }
+  .sample-id { margin: 5px 0; overflow: hidden; color: #536159; font: 11px var(--mono); text-overflow: ellipsis; white-space: nowrap; }
+  .sample-meta { color: var(--muted); font-size: 11px; }
+  .pill { display: inline-flex; align-items: center; border-radius: 999px; padding: 2px 7px; background: #e9eeea; color: #445149; font-size: 11px; }
+  .pill.movie { color: #6d408e; background: #f4ebfa; }
+  .pill.news { color: #1d5797; background: #eaf3ff; }
+  main { min-width: 0; padding: 22px 28px 60px; }
+  .empty { padding: 70px 20px; text-align: center; color: var(--muted); }
+  .sample-header { display: flex; justify-content: space-between; align-items: start; gap: 16px; }
+  .sample-header h2 { margin: 0 0 3px; font-size: 21px; }
+  .sample-header .mono { color: var(--muted); font-size: 11px; overflow-wrap: anywhere; }
+  .navigation { display: flex; gap: 5px; }
+  .navigation button, .copy-button, .small-button { padding: 6px 9px; border: 1px solid #ccd6cf; border-radius: 6px; color: #344039; background: white; }
+  .navigation button:disabled { cursor: default; opacity: .4; }
+  .tabs { display: flex; gap: 3px; margin: 18px 0; border-bottom: 1px solid var(--line); }
+  .tab { padding: 9px 13px; border: 0; border-bottom: 3px solid transparent; color: var(--muted); background: transparent; }
+  .tab.active { color: var(--green); border-bottom-color: var(--green); font-weight: 650; }
+  .section { margin-bottom: 18px; padding: 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); box-shadow: 0 1px 2px rgba(0,0,0,.025); }
+  .section h3 { margin: 0 0 12px; font-size: 15px; }
+  .section-note { margin: -7px 0 12px; color: var(--muted); font-size: 12px; }
+  .key-grid { display: grid; grid-template-columns: repeat(4, minmax(120px, 1fr)); gap: 9px; }
+  .key-value { min-width: 0; padding: 9px 10px; border-radius: 7px; background: #f5f7f5; }
+  .key-value .key { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .45px; }
+  .key-value .val { margin-top: 2px; overflow-wrap: anywhere; font-weight: 600; }
+  .path-box { display: flex; align-items: start; gap: 8px; padding: 10px; border: 1px solid #dbe5dd; border-radius: 7px; background: #f7faf8; }
+  .path-box code { flex: 1; min-width: 0; overflow-wrap: anywhere; color: #315241; font-size: 11px; }
+  .message { margin-bottom: 16px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: white; box-shadow: var(--shadow); }
+  .message-head { display: flex; justify-content: space-between; padding: 9px 13px; border-bottom: 1px solid var(--line); font-weight: 700; }
+  .message.user .message-head { color: var(--blue); background: var(--blue-soft); }
+  .message.assistant .message-head { color: var(--green); background: var(--green-soft); }
+  .content-item { padding: 13px; border-bottom: 1px solid #edf0ed; }
+  .content-item:last-child { border-bottom: 0; }
+  .content-type { display: inline-block; margin-bottom: 8px; padding: 2px 7px; border-radius: 5px; color: #525e57; background: #edf0ed; font: 11px var(--mono); }
+  .text-content { margin: 0; padding: 12px; max-height: 600px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; border: 1px solid #e1e6e2; border-radius: 7px; background: #fbfcfb; font: 12px/1.55 var(--mono); }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 7px 9px; text-align: left; vertical-align: top; border-bottom: 1px solid #e5e9e6; }
+  th { color: #536159; background: #f5f7f5; font-size: 11px; }
+  td { font-size: 12px; }
+  .table-wrap { max-height: 620px; overflow: auto; border: 1px solid #dfe5e0; border-radius: 7px; }
+  .table-wrap thead { position: sticky; top: 0; z-index: 1; }
+  .time { white-space: nowrap; font-family: var(--mono); }
+  details { border-radius: 7px; }
+  details > summary { cursor: pointer; color: #385447; }
+  .metadata-group { margin-bottom: 8px; border: 1px solid var(--line); background: white; }
+  .metadata-group > summary { padding: 10px 12px; font-weight: 650; background: #f6f8f6; }
+  .metadata-group > .tree-wrap { padding: 12px; border-top: 1px solid var(--line); }
+  .tree { font: 12px/1.55 var(--mono); overflow-wrap: anywhere; }
+  .tree details { margin-left: 14px; }
+  .tree summary { color: #35473d; }
+  .tree-key { color: #7c3f8f; }
+  .tree-string { color: #0b6e45; white-space: pre-wrap; }
+  .tree-number { color: #1e5da8; }
+  .tree-boolean { color: #a15c05; }
+  .tree-null { color: #8b9290; font-style: italic; }
+  .tree-row { margin-left: 16px; }
+  .chips { display: flex; gap: 5px; flex-wrap: wrap; }
+  .chip { padding: 3px 7px; border: 1px solid #d7e1da; border-radius: 999px; color: #3d5247; background: #f3f7f4; font-size: 11px; }
+  .distribution { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .distribution table { border: 1px solid var(--line); }
+  .warning { padding: 10px 12px; border-left: 4px solid var(--amber); background: var(--amber-soft); color: #6d4b12; }
+  dialog { width: min(1050px, calc(100vw - 40px)); max-height: calc(100vh - 50px); padding: 0; border: 0; border-radius: 11px; box-shadow: 0 22px 80px rgba(0,0,0,.28); }
+  dialog::backdrop { background: rgba(16, 30, 22, .55); }
+  .dialog-head { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; align-items: center; padding: 13px 16px; border-bottom: 1px solid var(--line); background: white; }
+  .dialog-head h3 { margin: 0; }
+  .dialog-body { padding: 16px; max-height: calc(100vh - 115px); overflow: auto; }
+  @media (max-width: 1000px) { .stats { grid-template-columns: repeat(3, 1fr); } .key-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 760px) { header, main { padding-left: 16px; padding-right: 16px; } .header-row { display: block; } .header-actions { margin-top: 12px; justify-content: start; } .stats { padding: 12px 16px; grid-template-columns: repeat(2, 1fr); } .layout { display: block; } aside { border-right: 0; } .sample-list { max-height: 290px; } .distribution { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-row">
+    <div><h1>Entity SME Whisper · dataset inspector</h1><p>Readable messages, Whisper ASR, media settings, targets, and nested metadata.</p></div>
+    <div class="header-actions">
+      <button id="show-summary">Dataset statistics</button>
+      <button id="show-manifest">Manifest JSON</button>
+      <button id="show-info">Dataset info</button>
+    </div>
+  </div>
+  <div class="source" id="source-uri"></div>
+</header>
+<section class="stats" id="stats"></section>
+<div class="layout">
+  <aside>
+    <div class="filters">
+      <input id="search" type="search" placeholder="Search ID, source, entity, text, ASR…">
+      <select id="domain-filter"><option value="">All domains</option></select>
+      <div class="filter-count" id="filter-count"></div>
+    </div>
+    <div class="sample-list" id="sample-list"></div>
+  </aside>
+  <main id="detail"><div class="empty">Choose a sample.</div></main>
+</div>
+<dialog id="json-dialog">
+  <div class="dialog-head"><h3 id="dialog-title"></h3><button class="small-button" id="dialog-close">Close</button></div>
+  <div class="dialog-body" id="dialog-body"></div>
+</dialog>
+<script>
+const SUMMARY = __SUMMARY_JSON__;
+const SAMPLES = __SAMPLES_JSON__;
+
+const state = { filtered: [], selectedIndex: null, activeTab: 'overview' };
+const elements = {
+  stats: document.getElementById('stats'), source: document.getElementById('source-uri'),
+  search: document.getElementById('search'), domain: document.getElementById('domain-filter'),
+  count: document.getElementById('filter-count'), list: document.getElementById('sample-list'),
+  detail: document.getElementById('detail'), dialog: document.getElementById('json-dialog'),
+  dialogTitle: document.getElementById('dialog-title'), dialogBody: document.getElementById('dialog-body')
+};
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+}
+
+function formatNumber(value, digits = 0) {
+  if (value === null || value === undefined || Number.isNaN(Number(value))) return '—';
+  return Number(value).toLocaleString(undefined, { maximumFractionDigits: digits });
+}
+
+function formatDuration(seconds) {
+  if (seconds === null || seconds === undefined) return '—';
+  const value = Number(seconds);
+  const hours = Math.floor(value / 3600);
+  const minutes = Math.floor((value % 3600) / 60);
+  const remaining = value % 60;
+  return hours ? `${hours}:${String(minutes).padStart(2,'0')}:${remaining.toFixed(1).padStart(4,'0')}` : `${minutes}:${remaining.toFixed(1).padStart(4,'0')}`;
+}
+
+function statCard(label, value, sub = '') {
+  return `<div class="stat"><div class="label">${escapeHtml(label)}</div><div class="value">${escapeHtml(value)}</div><div class="sub">${escapeHtml(sub)}</div></div>`;
+}
+
+function renderHeader() {
+  elements.source.textContent = SUMMARY.source_uri;
+  elements.stats.innerHTML = [
+    statCard('Rows', formatNumber(SUMMARY.rows), `${SUMMARY.shards} Arrow shards`),
+    statCard('Viewer samples', formatNumber(SUMMARY.embedded_samples), `${SUMMARY.samples_per_shard} per shard`),
+    statCard('Training tokens', formatNumber(SUMMARY.final_tokens), 'Qwen3.5-27B processor count'),
+    statCard('Median tokens', formatNumber(SUMMARY.length_quantiles.p50), `p95 ${formatNumber(SUMMARY.length_quantiles.p95)}`),
+    statCard('Median duration', formatDuration(SUMMARY.duration_quantiles.p50), `p95 ${formatDuration(SUMMARY.duration_quantiles.p95)}`),
+    statCard('Run status', SUMMARY.run_status, String(SUMMARY.completed_at || '').replace('T',' ').replace('+00:00',' UTC'))
+  ].join('');
+  Object.keys(SUMMARY.domains).forEach(domain => {
+    const option = document.createElement('option'); option.value = domain; option.textContent = `${domain} (${SUMMARY.domains[domain].toLocaleString()})`; elements.domain.appendChild(option);
+  });
+}
+
+function createTree(value, depth = 0, label = null) {
+  const wrapper = document.createElement('div');
+  if (value !== null && typeof value === 'object') {
+    const isArray = Array.isArray(value); const entries = Object.entries(value);
+    const details = document.createElement('details'); details.open = depth < 1;
+    const summary = document.createElement('summary');
+    if (label !== null) { const key = document.createElement('span'); key.className = 'tree-key'; key.textContent = `${label}: `; summary.appendChild(key); }
+    summary.appendChild(document.createTextNode(`${isArray ? 'Array' : 'Object'}(${entries.length})`));
+    details.appendChild(summary);
+    entries.forEach(([key, child]) => details.appendChild(createTree(child, depth + 1, isArray ? `[${key}]` : key)));
+    wrapper.appendChild(details); return wrapper;
+  }
+  wrapper.className = 'tree-row';
+  if (label !== null) { const key = document.createElement('span'); key.className = 'tree-key'; key.textContent = `${label}: `; wrapper.appendChild(key); }
+  const atom = document.createElement('span');
+  if (value === null) { atom.className = 'tree-null'; atom.textContent = 'null'; }
+  else if (typeof value === 'string') { atom.className = 'tree-string'; atom.textContent = JSON.stringify(value); }
+  else if (typeof value === 'number') { atom.className = 'tree-number'; atom.textContent = String(value); }
+  else if (typeof value === 'boolean') { atom.className = 'tree-boolean'; atom.textContent = String(value); }
+  else { atom.textContent = String(value); }
+  wrapper.appendChild(atom); return wrapper;
+}
+
+function treeBlock(value) {
+  const container = document.createElement('div'); container.className = 'tree'; container.appendChild(createTree(value)); return container;
+}
+
+async function copyText(value, button) {
+  try { await navigator.clipboard.writeText(value); button.textContent = 'Copied'; setTimeout(() => button.textContent = 'Copy', 1000); }
+  catch (_) { button.textContent = 'Copy failed'; }
+}
+
+function copyButton(value) {
+  const button = document.createElement('button'); button.className = 'copy-button'; button.textContent = 'Copy'; button.onclick = () => copyText(value, button); return button;
+}
+
+function showDialog(title, value) {
+  elements.dialogTitle.textContent = title; elements.dialogBody.replaceChildren(treeBlock(value)); elements.dialog.showModal();
+}
+
+function quantileTable(title, values, formatter = value => formatNumber(value, 1)) {
+  const names = ['min','p25','p50','p75','p95','max','mean'];
+  return `<div><table><thead><tr><th colspan="2">${escapeHtml(title)}</th></tr></thead><tbody>${names.map(name => `<tr><td>${name}</td><td class="mono">${escapeHtml(formatter(values[name]))}</td></tr>`).join('')}</tbody></table></div>`;
+}
+
+function countsTable(title, counts) {
+  return `<div><table><thead><tr><th>${escapeHtml(title)}</th><th>Rows/items</th></tr></thead><tbody>${Object.entries(counts).map(([key,value]) => `<tr><td>${escapeHtml(key)}</td><td class="mono">${formatNumber(value)}</td></tr>`).join('')}</tbody></table></div>`;
+}
+
+function showStatistics() {
+  elements.dialogTitle.textContent = 'Whole-dataset statistics';
+  elements.dialogBody.innerHTML = `<div class="warning">Statistics use all ${formatNumber(SUMMARY.rows)} rows. Sample detail pages embed ${formatNumber(SUMMARY.embedded_samples)} stratified rows, one from each shard.</div><div class="distribution" style="margin-top:14px">${countsTable('Domain', SUMMARY.domains)}${countsTable('Source dataset', SUMMARY.source_datasets)}${countsTable('Message roles', SUMMARY.role_patterns)}${countsTable('Content blocks', SUMMARY.content_types)}${quantileTable('Total tokens per row', SUMMARY.length_quantiles)}${quantileTable('Vision tokens per row', SUMMARY.vision_length_quantiles)}${quantileTable('Video duration', SUMMARY.duration_quantiles, formatDuration)}${quantileTable('Whisper segments per row', SUMMARY.asr_count_quantiles)}${quantileTable('Entities per row', SUMMARY.entity_count_quantiles)}</div>`;
+  elements.dialog.showModal();
+}
+
+function applyFilters() {
+  const query = elements.search.value.trim().toLowerCase(); const domain = elements.domain.value;
+  state.filtered = SAMPLES.map((sample,index) => ({sample,index})).filter(({sample}) => (!domain || sample.domain === domain) && (!query || sample.searchable.includes(query))).map(({index}) => index);
+  elements.count.textContent = `${state.filtered.length} of ${SAMPLES.length} embedded samples · aggregate stats cover all ${SUMMARY.rows.toLocaleString()} rows`;
+  renderSampleList();
+  if (!state.filtered.length) { state.selectedIndex = null; elements.detail.innerHTML = '<div class="empty">No samples match the filters.</div>'; return; }
+  if (!state.filtered.includes(state.selectedIndex)) selectSample(state.filtered[0]);
+  else if (!document.getElementById('tab-content')) selectSample(state.selectedIndex);
+}
+
+function renderSampleList() {
+  elements.list.innerHTML = state.filtered.map(index => {
+    const sample = SAMPLES[index];
+    return `<button class="sample-item ${index === state.selectedIndex ? 'active' : ''}" data-index="${index}"><div class="sample-title"><span>#${sample.global_index + 1}</span><span class="pill ${escapeHtml(sample.domain)}">${escapeHtml(sample.domain)}</span></div><div class="sample-id">${escapeHtml(sample.id)}</div><div class="sample-meta">${escapeHtml(sample.source_id || 'no source')} · ${formatDuration(sample.duration)} · ${formatNumber(sample.length)} tokens</div></button>`;
+  }).join('');
+  elements.list.querySelectorAll('.sample-item').forEach(button => button.addEventListener('click', () => selectSample(Number(button.dataset.index))));
+}
+
+function keyValue(key, value) {
+  return `<div class="key-value"><div class="key">${escapeHtml(key)}</div><div class="val">${escapeHtml(value ?? '—')}</div></div>`;
+}
+
+function section(title, body, note = '') {
+  return `<section class="section"><h3>${escapeHtml(title)}</h3>${note ? `<div class="section-note">${escapeHtml(note)}</div>` : ''}${body}</section>`;
+}
+
+function renderOverview(sample) {
+  const media = findContent(sample.messages, 'video') || {};
+  const mediaMetadata = media.metadata || {};
+  const entities = sample.entity_names.length ? sample.entity_names.map(name => `<span class="chip">${escapeHtml(name)}</span>`).join('') : '<span class="section-note">No entity name field found in the top-level entity records.</span>';
+  const path = sample.video_path || '';
+  const roles = Array.isArray(sample.messages) ? sample.messages.map(message => message.role).join(' → ') : '—';
+  return section('Training row at a glance', `<div class="key-grid">${keyValue('Global row', sample.global_index)}${keyValue('Shard row', `${sample.shard} · row ${sample.row_in_shard}`)}${keyValue('Domain', sample.domain)}${keyValue('Source dataset', sample.source_dataset)}${keyValue('Duration', `${formatDuration(sample.duration)} (${formatNumber(sample.duration,1)} s)`)}${keyValue('Total tokens', formatNumber(sample.length))}${keyValue('Vision tokens', formatNumber(sample.vision_length))}${keyValue('Message roles', roles)}${keyValue('Whisper segments', formatNumber(sample.asr_segment_count))}${keyValue('Entities', formatNumber(sample.entity_count))}${keyValue('Assistant chars', formatNumber(sample.assistant_character_count))}${keyValue('Source ID', sample.source_id)}</div>`)
+    + section('Video input', `<div class="path-box"><code>${escapeHtml(path)}</code><button class="copy-button" data-copy="video">Copy</button></div><div class="key-grid" style="margin-top:10px">${keyValue('Resolution', mediaMetadata.width && mediaMetadata.height ? `${mediaMetadata.width} × ${mediaMetadata.height}` : '—')}${keyValue('Codec', mediaMetadata.codec_name)}${keyValue('FPS', formatNumber(mediaMetadata.video_fps,3))}${keyValue('Original frames', formatNumber(mediaMetadata.total_frames))}${keyValue('Model nframes', formatNumber(media.nframes))}${keyValue('max_pixels', formatNumber(media.max_pixels))}${keyValue('min_pixels', formatNumber(media.min_pixels))}${keyValue('Region', media.region)}</div>`)
+    + section(`Entity names (${sample.entity_names.length})`, `<div class="chips">${entities}</div>`)
+    + section('What is embedded in this HTML', `<div class="warning">This page contains exact parsed messages and metadata for ${formatNumber(SUMMARY.embedded_samples)} rows. It does not contain video bytes. Use the Messages tab for rendered ASR and targets, Metadata for every nested field, and Raw JSON for the combined parsed row.</div>`);
+}
+
+function findContent(messages, type) {
+  if (!Array.isArray(messages)) return null;
+  for (const message of messages) if (Array.isArray(message.content)) for (const item of message.content) if (item && item.type === type) return item;
+  return null;
+}
+
+function tryJson(value) {
+  if (typeof value !== 'string') return null;
+  try { return JSON.parse(value); } catch (_) { return null; }
+}
+
+function contentNode(item) {
+  const wrapper = document.createElement('div'); wrapper.className = 'content-item';
+  if (!item || typeof item !== 'object') { const pre = document.createElement('pre'); pre.className = 'text-content'; pre.textContent = String(item); wrapper.appendChild(pre); return wrapper; }
+  const type = item.type || 'unknown'; const badge = document.createElement('span'); badge.className = 'content-type'; badge.textContent = type; wrapper.appendChild(badge);
+  if (type === 'video') {
+    const pathBox = document.createElement('div'); pathBox.className = 'path-box'; const code = document.createElement('code'); code.textContent = item.video || ''; pathBox.append(code, copyButton(item.video || '')); wrapper.appendChild(pathBox);
+    if (item.metadata) wrapper.appendChild(treeBlock({region:item.region, max_pixels:item.max_pixels, min_pixels:item.min_pixels, nframes:item.nframes, metadata:item.metadata}));
+  } else if (type === 'asr_data') {
+    wrapper.appendChild(renderAsr(item.asr_data || {}));
+  } else if (type === 'text') {
+    const parsed = tryJson(item.text); if (parsed !== null) wrapper.appendChild(treeBlock(parsed)); else { const pre = document.createElement('pre'); pre.className = 'text-content'; pre.textContent = item.text || ''; wrapper.appendChild(pre); }
+  } else if (type === 'json_schema') {
+    wrapper.appendChild(treeBlock(item.json_schema || item));
+  } else {
+    wrapper.appendChild(treeBlock(item));
+  }
+  return wrapper;
+}
+
+function renderAsr(asrData) {
+  const container = document.createElement('div'); const segments = Array.isArray(asrData.segments) ? asrData.segments : [];
+  const note = document.createElement('div'); note.className = 'section-note'; note.textContent = `sample_rate=${asrData.sample_rate ?? '—'} · ${segments.length} segments · word chunks are available inside each row's details`; container.appendChild(note);
+  const tableWrap = document.createElement('div'); tableWrap.className = 'table-wrap';
+  const table = document.createElement('table'); table.innerHTML = '<thead><tr><th>#</th><th>Time</th><th>Speaker</th><th>Language / confidence</th><th>Transcript</th><th>Words</th></tr></thead>';
+  const tbody = document.createElement('tbody');
+  segments.forEach((segment,index) => {
+    const asr = segment.asr || {}; const chunks = Array.isArray(asr.chunks) ? asr.chunks : []; const row = document.createElement('tr');
+    row.innerHTML = `<td class="mono">${segment.index ?? index}</td><td class="time">${escapeHtml(formatDuration(segment.start))} – ${escapeHtml(formatDuration(segment.end))}</td><td>${escapeHtml(segment.speaker_id || '—')}</td><td>${escapeHtml(asr.language || '—')}<br><span class="sample-meta">${formatNumber(asr.language_probability,4)}</span></td><td>${escapeHtml(asr.text || '')}</td><td></td>`;
+    const details = document.createElement('details'); const summary = document.createElement('summary'); summary.textContent = `${chunks.length} chunks`; details.append(summary, treeBlock(chunks)); row.lastElementChild.appendChild(details); tbody.appendChild(row);
+  });
+  table.appendChild(tbody); tableWrap.appendChild(table); container.appendChild(tableWrap); return container;
+}
+
+function renderMessageContent(message) {
+  const body = document.createElement('div'); const content = message.content;
+  if (Array.isArray(content)) content.forEach(item => body.appendChild(contentNode(item)));
+  else if (typeof content === 'string') {
+    const item = {type: 'text', text: content}; body.appendChild(contentNode(item));
+  } else body.appendChild(contentNode(content));
+  return body;
+}
+
+function renderMessages(sample) {
+  const fragment = document.createDocumentFragment();
+  sample.messages.forEach((message,index) => {
+    const card = document.createElement('article'); card.className = `message ${message.role || ''}`;
+    const head = document.createElement('div'); head.className = 'message-head'; head.innerHTML = `<span>${escapeHtml(message.role || 'unknown')}</span><span class="mono">message ${index}</span>`;
+    card.append(head, renderMessageContent(message)); fragment.appendChild(card);
+  });
+  return fragment;
+}
+
+function renderMetadata(sample) {
+  const container = document.createElement('div');
+  Object.entries(sample.metadata).forEach(([key,value]) => {
+    const details = document.createElement('details'); details.className = 'metadata-group'; details.open = ['source_metadata','entity_sme_render'].includes(key);
+    const summary = document.createElement('summary'); const count = value && typeof value === 'object' ? ` · ${Array.isArray(value) ? 'Array' : 'Object'}(${Object.keys(value).length})` : '';
+    summary.textContent = `${key}${count}`; const treeWrap = document.createElement('div'); treeWrap.className = 'tree-wrap'; treeWrap.append(copyButton(JSON.stringify(value,null,2)), treeBlock(value)); details.append(summary, treeWrap); container.appendChild(details);
+  });
+  return container;
+}
+
+function renderRaw(sample) {
+  const container = document.createElement('section'); container.className = 'section';
+  const heading = document.createElement('h3'); heading.textContent = 'Parsed raw row'; const note = document.createElement('div'); note.className = 'section-note'; note.textContent = 'The original Arrow messages and metadata columns are JSON strings. This view shows their lossless parsed values.';
+  const raw = {id: sample.id, messages: sample.messages, metadata: sample.metadata}; container.append(heading, note, copyButton(JSON.stringify(raw,null,2)), treeBlock(raw)); return container;
+}
+
+function renderActiveTab(sample) {
+  const target = document.getElementById('tab-content'); target.replaceChildren();
+  if (state.activeTab === 'overview') { target.innerHTML = renderOverview(sample); const videoButton = target.querySelector('[data-copy="video"]'); if (videoButton) videoButton.onclick = () => copyText(sample.video_path || '', videoButton); }
+  else if (state.activeTab === 'messages') target.appendChild(renderMessages(sample));
+  else if (state.activeTab === 'metadata') target.appendChild(renderMetadata(sample));
+  else target.appendChild(renderRaw(sample));
+}
+
+function selectSample(index) {
+  state.selectedIndex = index; state.activeTab = 'overview'; renderSampleList(); const sample = SAMPLES[index];
+  const filteredPosition = state.filtered.indexOf(index); const previous = state.filtered[filteredPosition - 1]; const next = state.filtered[filteredPosition + 1];
+  elements.detail.innerHTML = `<div class="sample-header"><div><h2>Row #${sample.global_index + 1} <span class="pill ${escapeHtml(sample.domain)}">${escapeHtml(sample.domain)}</span></h2><div class="mono">${escapeHtml(sample.id)} · ${escapeHtml(sample.shard)}:${sample.row_in_shard}</div></div><div class="navigation"><button id="previous" ${previous === undefined ? 'disabled' : ''}>← Previous</button><button id="next" ${next === undefined ? 'disabled' : ''}>Next →</button></div></div><div class="tabs"><button class="tab active" data-tab="overview">Overview</button><button class="tab" data-tab="messages">Messages</button><button class="tab" data-tab="metadata">Metadata</button><button class="tab" data-tab="raw">Raw JSON</button></div><div id="tab-content"></div>`;
+  document.getElementById('previous').onclick = () => previous !== undefined && selectSample(previous); document.getElementById('next').onclick = () => next !== undefined && selectSample(next);
+  elements.detail.querySelectorAll('.tab').forEach(button => button.onclick = () => { state.activeTab = button.dataset.tab; elements.detail.querySelectorAll('.tab').forEach(tab => tab.classList.toggle('active', tab === button)); renderActiveTab(sample); });
+  renderActiveTab(sample); location.hash = sample.id;
+}
+
+document.getElementById('show-summary').onclick = showStatistics;
+document.getElementById('show-manifest').onclick = () => showDialog('Preprocessing manifest', SUMMARY.manifest);
+document.getElementById('show-info').onclick = () => showDialog('Dataset info', SUMMARY.dataset_info);
+document.getElementById('dialog-close').onclick = () => elements.dialog.close();
+elements.dialog.addEventListener('click', event => { if (event.target === elements.dialog) elements.dialog.close(); });
+elements.search.addEventListener('input', applyFilters); elements.domain.addEventListener('change', applyFilters);
+
+renderHeader();
+const hashIndex = SAMPLES.findIndex(sample => sample.id === location.hash.slice(1));
+state.selectedIndex = hashIndex >= 0 ? hashIndex : 0;
+applyFilters();
+</script>
+</body>
+</html>
