@@ -172,6 +172,7 @@ def main() -> None:
     parser.add_argument("--state", type=Path, required=True)
     parser.add_argument("--eval-api-base", required=True)
     parser.add_argument("--poll-seconds", type=int, default=60)
+    parser.add_argument("--heartbeat-seconds", type=int, default=1200)
     parser.add_argument(
         "--env-file", type=Path, default=Path.home() / "lia-ooo-bot" / ".env"
     )
@@ -186,6 +187,7 @@ def main() -> None:
         item["family"] + str(item["step"]): item.get("reported_status")
         for item in items
     }
+    last_heartbeat = 0.0
     post_slack(
         arguments.slack_channel,
         f"[cc-generated] Monitoring {len(items)} W&B checkpoint exports and evals.",
@@ -235,6 +237,17 @@ def main() -> None:
                 item["reported_status"] = current
         persist(arguments.state, items)
         print(json.dumps(items, sort_keys=True), flush=True)
+        current_time = time.time()
+        if current_time - last_heartbeat >= arguments.heartbeat_seconds:
+            summary = " | ".join(
+                f"{item['family']} s{item['step']}: "
+                f"export={item['export_status']} "
+                f"eval={item.get('eval_status', 'not-submitted')} "
+                f"{item.get('eval_completed', 0)}/{item.get('expected_sample_count', 20)}"
+                for item in items
+            )
+            post_slack(arguments.slack_channel, summary)
+            last_heartbeat = current_time
         if all_terminal:
             post_slack(
                 arguments.slack_channel,
