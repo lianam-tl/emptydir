@@ -179,6 +179,24 @@
       "datasetRevision": "5caf5ebd1ce03b6b6bb28a50504a8c36542d9433",
       "run": "9d185735-eb19-5463-b86b-3959ab619f27",
       "path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-2100-safetensors/"
+    },
+    {
+      "name": "soccer-lvreason-mcq-s2200",
+      "naming": 0.21719054051280437,
+      "score": 0.2285093990348255,
+      "delta": 0.06269680168674463,
+      "fullNaming": 0.20336921814994013,
+      "fullScore": 0.21330082920526883,
+      "fullDelta": 0.06833445256299853,
+      "halfNaming": 0.2242482370385223,
+      "halfScore": 0.23633094923288342,
+      "halfDelta": 0.05981800123929586,
+      "scored": 18,
+      "failed": 0,
+      "parseFailures": 1,
+      "datasetRevision": "5caf5ebd1ce03b6b6bb28a50504a8c36542d9433",
+      "run": "5858d88a-d81e-574f-81a9-ccb73f9f4c95",
+      "path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node-base/checkpoint-2200-safetensors/"
     }
   ],
   "half_sample_rows": [
@@ -350,6 +368,23 @@
         "film-05:001": 0.32773237899693225,
         "film-06:000": 0.36203917872457686,
         "film-06:001": 0.19283335216455505
+      }
+    },
+    {
+      "name": "soccer-lvreason-mcq-s2200",
+      "samples": {
+        "film-01:000": 0.4796346265983331,
+        "film-01:001": 0.13977142075367308,
+        "film-02:000": 0.3261624543774846,
+        "film-02:001": 0.06669165431272117,
+        "film-03:000": 0.7301248737406278,
+        "film-03:001": 0.22756951359600158,
+        "film-04:000": 0.0,
+        "film-04:001": 0.052711217075198186,
+        "film-05:000": 0.13262745764060518,
+        "film-05:001": 0.30567853595027006,
+        "film-06:000": 0.18395734671426422,
+        "film-06:001": 0.5479493094330333
       }
     }
   ]

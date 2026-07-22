@@ -374,6 +374,21 @@
       "average_shot_duration_seconds": 8.366445897740785,
       "minimum_shot_duration_seconds": 0.6050000000000182,
       "maximum_shot_duration_seconds": 195.33000000000004
+    },
+    {
+      "name": "soccer-lvreason-mcq-s2200",
+      "run_id": "5858d88a-d81e-574f-81a9-ccb73f9f4c95",
+      "media_count": 18,
+      "parsed_media_count": 17,
+      "parse_failures": 1,
+      "total_shot_segments": 2818,
+      "average_shot_segments_per_parsed_media": 165.76470588235293,
+      "minimum_shot_segments": 25,
+      "maximum_shot_segments": 447,
+      "total_shot_duration_seconds": 15452.033,
+      "average_shot_duration_seconds": 5.483333215046132,
+      "minimum_shot_duration_seconds": 0.009999999999990905,
+      "maximum_shot_duration_seconds": 118.0
     }
   ]
 }
