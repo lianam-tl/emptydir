@@ -1,0 +1,27 @@
+[
+  {
+    "family": "sft-h0-entity-v1-2",
+    "step": 200,
+    "source_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_h0_entity_v1_2_7n_qwen3_5_27b-base/checkpoint-200",
+    "output_path": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_h0_entity_v1_2_7n_qwen3_5_27b-base/checkpoint-200-safetensors",
+    "export_name": "export-h0-entity-v1-2-s200",
+    "job_name": "export-h0-entity-v1-2-s200-tikx2m",
+    "manifest": "260722_h0_entity_v1_2_s200_entity_cov/export.yaml",
+    "dataset": "twelvelabs/entity_cov_v02_tdf",
+    "dataset_revision": "5caf5ebd1ce03b6b6bb28a50504a8c36542d9433",
+    "config": "default",
+    "split": "test",
+    "eval_tag": "v02-64k-c8",
+    "max_tokens": 65536,
+    "min_replicas": 8,
+    "max_replicas": 8,
+    "concurrency": 8,
+    "tp": 1,
+    "expected_sample_count": 18,
+    "enable_tensor_cache": true,
+    "wandb_run_id": "z6g0dfmq",
+    "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/z6g0dfmq",
+    "export_status": "Created",
+    "eval_status": "not submitted"
+  }
+]
