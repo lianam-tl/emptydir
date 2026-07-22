@@ -8,8 +8,9 @@ The default HTML embeds one deterministic sample from every Arrow shard (64
 samples total) and calculates aggregate statistics from all 3,389 rows. It
 shows rendered messages, video/media settings, Whisper segment tables,
 assistant JSON, nested metadata, raw rows, the preprocessing manifest, search,
-and domain filters. One 29 MB H.264 sample video is downloaded separately; its
-assistant intervals form a clickable timeline that seeks the video player.
+and domain filters. One 33 MB AV1 sample video is downloaded separately; its
+31 assistant intervals cover 15 distinct entities and form a clickable
+timeline that seeks the video player.
 
 ## Build
 

@@ -17,8 +17,8 @@ SOURCE_URI = (
     "s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/"
     "base/tl_entity_sme_whisper/default_sft_entity_sme_whisper_asr/sft_sme"
 )
-VIDEO_SAMPLE_ID = "beaa3eba-bcd6-428a-964b-5e7d779b7d9a"
-VIDEO_FILENAME = "260722_tl_entity_sme_whisper_sample_f304a153.mp4"
+VIDEO_SAMPLE_ID = "b102bbec-2d91-47ae-b49a-aa5353872488"
+VIDEO_FILENAME = "260722_tl_entity_sme_whisper_sample_7681b797.mp4"
 
 
 def parse_arguments() -> argparse.Namespace:
