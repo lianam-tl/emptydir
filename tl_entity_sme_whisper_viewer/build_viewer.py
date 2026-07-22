@@ -17,6 +17,8 @@ SOURCE_URI = (
     "s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/"
     "base/tl_entity_sme_whisper/default_sft_entity_sme_whisper_asr/sft_sme"
 )
+VIDEO_SAMPLE_ID = "beaa3eba-bcd6-428a-964b-5e7d779b7d9a"
+VIDEO_FILENAME = "260722_tl_entity_sme_whisper_sample_f304a153.mp4"
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -29,6 +31,8 @@ def parse_arguments() -> argparse.Namespace:
         default=1,
         help="Rows embedded from each Arrow shard (default: 1)",
     )
+    parser.add_argument("--video-sample-id", default=VIDEO_SAMPLE_ID)
+    parser.add_argument("--video-filename", default=VIDEO_FILENAME)
     return parser.parse_args()
 
 
@@ -48,6 +52,20 @@ def parse_json_field(value: Any, field_name: str, row_id: str) -> Any:
         return json.loads(value)
     except json.JSONDecodeError as error:
         raise ValueError(f"Invalid {field_name} JSON in row {row_id}: {error}") from error
+
+
+def parse_embedded_json(value: Any) -> Any:
+    if not isinstance(value, str):
+        return None
+    text = value.strip()
+    if text.startswith("```") and "\n" in text:
+        text = text.split("\n", 1)[1]
+        if text.rstrip().endswith("```"):
+            text = text.rstrip()[:-3].rstrip()
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        return None
 
 
 def numeric(value: Any) -> float | None:
@@ -150,6 +168,36 @@ def find_video(messages: Any) -> dict[str, Any]:
     return {}
 
 
+def find_assistant_intervals(messages: Any) -> list[dict[str, Any]]:
+    intervals: list[dict[str, Any]] = []
+
+    def visit(value: Any) -> None:
+        if isinstance(value, dict):
+            start_time = numeric(value.get("start_time"))
+            end_time = numeric(value.get("end_time"))
+            if start_time is not None and end_time is not None and end_time > start_time:
+                intervals.append(value)
+            for child in value.values():
+                visit(child)
+        elif isinstance(value, list):
+            for child in value:
+                visit(child)
+
+    if not isinstance(messages, list):
+        return intervals
+    for message in messages:
+        if not isinstance(message, dict) or message.get("role") != "assistant":
+            continue
+        content = message.get("content")
+        if isinstance(content, str):
+            visit(parse_embedded_json(content))
+        elif isinstance(content, list):
+            for item in content:
+                if isinstance(item, dict):
+                    visit(parse_embedded_json(item.get("text")))
+    return intervals
+
+
 def entity_names(metadata: Any) -> list[str]:
     if not isinstance(metadata, dict):
         return []
@@ -171,7 +219,12 @@ def compact_count(value: Any) -> int:
     return len(value) if isinstance(value, (list, dict)) else 0
 
 
-def build_payload(data_dir: Path, samples_per_shard: int) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+def build_payload(
+    data_dir: Path,
+    samples_per_shard: int,
+    video_sample_id: str = VIDEO_SAMPLE_ID,
+    video_filename: str = VIDEO_FILENAME,
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
     arrow_paths = sorted(data_dir.glob("*.arrow"))
     if not arrow_paths:
         raise FileNotFoundError(f"No Arrow shards found in {data_dir}")
@@ -236,7 +289,7 @@ def build_payload(data_dir: Path, samples_per_shard: int) -> tuple[dict[str, Any
             entity_counts.append(float(compact_count(entities)))
             total_rows += 1
 
-            if row_index not in selected_indexes:
+            if row_index not in selected_indexes and row_id != video_sample_id:
                 continue
 
             video = find_video(messages)
@@ -280,11 +333,16 @@ def build_payload(data_dir: Path, samples_per_shard: int) -> tuple[dict[str, Any
                     "entity_names": names,
                     "assistant_character_count": len(assistant_text),
                     "video_path": video.get("video"),
+                    "local_video_filename": video_filename if row_id == video_sample_id else None,
+                    "assistant_intervals": find_assistant_intervals(messages),
                     "searchable": searchable,
                     "messages": messages,
                     "metadata": metadata,
                 }
             )
+
+    if video_sample_id and not any(sample["id"] == video_sample_id for sample in sampled_rows):
+        raise ValueError(f"Video sample {video_sample_id} was not found")
 
     run_stats = manifest.get("run_stats", {})
     summary = {
@@ -297,6 +355,8 @@ def build_payload(data_dir: Path, samples_per_shard: int) -> tuple[dict[str, Any
         "run_status": run_stats.get("status"),
         "completed_at": run_stats.get("completed_at"),
         "git_sha": manifest.get("git_sha"),
+        "video_sample_id": video_sample_id,
+        "video_filename": video_filename,
         "domains": dict(domains.most_common()),
         "source_datasets": dict(source_datasets.most_common()),
         "role_patterns": dict(role_patterns.most_common()),
@@ -325,7 +385,12 @@ def main() -> None:
     arguments = parse_arguments()
     if arguments.samples_per_shard < 1:
         raise ValueError("--samples-per-shard must be at least 1")
-    summary, samples = build_payload(arguments.data_dir, arguments.samples_per_shard)
+    summary, samples = build_payload(
+        arguments.data_dir,
+        arguments.samples_per_shard,
+        arguments.video_sample_id,
+        arguments.video_filename,
+    )
     template_path = Path(__file__).with_name("viewer_template.html")
     html = (
         template_path.read_text()

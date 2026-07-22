@@ -8,12 +8,14 @@ The default HTML embeds one deterministic sample from every Arrow shard (64
 samples total) and calculates aggregate statistics from all 3,389 rows. It
 shows rendered messages, video/media settings, Whisper segment tables,
 assistant JSON, nested metadata, raw rows, the preprocessing manifest, search,
-and domain filters.
+and domain filters. One 29 MB H.264 sample video is downloaded separately; its
+assistant intervals form a clickable timeline that seeks the video player.
 
 ## Build
 
 ```bash
 ./download_data.sh
+./download_video.sh
 ~/.venv/bin/python build_viewer.py
 open ~/Desktop/html/260722_tl_entity_sme_whisper_viewer.html
 ```
@@ -25,4 +27,5 @@ To embed more rows per shard:
 ```
 
 The complete Arrow download is about 1.6 GB. The generated HTML contains
-sampled row contents but no video binary data.
+sampled row contents but no video binary data; keep the downloaded MP4 beside
+the HTML file.

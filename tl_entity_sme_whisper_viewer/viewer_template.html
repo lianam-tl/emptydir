@@ -64,6 +64,17 @@
   .key-value .val { margin-top: 2px; overflow-wrap: anywhere; font-weight: 600; }
   .path-box { display: flex; align-items: start; gap: 8px; padding: 10px; border: 1px solid #dbe5dd; border-radius: 7px; background: #f7faf8; }
   .path-box code { flex: 1; min-width: 0; overflow-wrap: anywhere; color: #315241; font-size: 11px; }
+  .video-player { display: block; width: 100%; max-height: 560px; border-radius: 9px; background: #0e1511; }
+  .timeline-wrap { margin-top: 14px; }
+  .timeline { position: relative; height: 46px; overflow: hidden; border: 1px solid #cad5cd; border-radius: 7px; background: #e8ede9; }
+  .interval-block { position: absolute; top: 0; height: 100%; min-width: 2px; padding: 0; overflow: hidden; border: 0; border-right: 1px solid rgba(255,255,255,.7); color: white; background: #2a7a56; font: 9px var(--mono); opacity: .82; }
+  .interval-block:nth-child(even) { background: #3468a4; }
+  .interval-block:hover, .interval-block.active { z-index: 2; outline: 2px solid #f3b63f; outline-offset: -2px; opacity: 1; }
+  .playhead { position: absolute; z-index: 3; top: 0; bottom: 0; width: 2px; pointer-events: none; background: #e22d2d; box-shadow: 0 0 0 1px rgba(255,255,255,.7); }
+  .timeline-axis { display: flex; justify-content: space-between; margin-top: 3px; color: var(--muted); font: 10px var(--mono); }
+  .interval-detail { margin-top: 10px; padding: 11px 12px; min-height: 62px; border-left: 4px solid var(--green); border-radius: 5px; background: #f3f8f5; }
+  .interval-detail .interval-title { margin-bottom: 5px; color: var(--green); font: 600 12px var(--mono); }
+  .video-badge { color: #8b5705; background: #fff0c7; }
   .message { margin-bottom: 16px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: white; box-shadow: var(--shadow); }
   .message-head { display: flex; justify-content: space-between; padding: 9px 13px; border-bottom: 1px solid var(--line); font-weight: 700; }
   .message.user .message-head { color: var(--blue); background: var(--blue-soft); }
@@ -253,7 +264,8 @@ function applyFilters() {
 function renderSampleList() {
   elements.list.innerHTML = state.filtered.map(index => {
     const sample = SAMPLES[index];
-    return `<button class="sample-item ${index === state.selectedIndex ? 'active' : ''}" data-index="${index}"><div class="sample-title"><span>#${sample.global_index + 1}</span><span class="pill ${escapeHtml(sample.domain)}">${escapeHtml(sample.domain)}</span></div><div class="sample-id">${escapeHtml(sample.id)}</div><div class="sample-meta">${escapeHtml(sample.source_id || 'no source')} · ${formatDuration(sample.duration)} · ${formatNumber(sample.length)} tokens</div></button>`;
+    const badges = `${sample.local_video_filename ? '<span class="pill video-badge">▶ video</span>' : ''}<span class="pill ${escapeHtml(sample.domain)}">${escapeHtml(sample.domain)}</span>`;
+    return `<button class="sample-item ${index === state.selectedIndex ? 'active' : ''}" data-index="${index}"><div class="sample-title"><span>#${sample.global_index + 1}</span><span>${badges}</span></div><div class="sample-id">${escapeHtml(sample.id)}</div><div class="sample-meta">${escapeHtml(sample.source_id || 'no source')} · ${formatDuration(sample.duration)} · ${formatNumber(sample.length)} tokens</div></button>`;
   }).join('');
   elements.list.querySelectorAll('.sample-item').forEach(button => button.addEventListener('click', () => selectSample(Number(button.dataset.index))));
 }
@@ -272,10 +284,11 @@ function renderOverview(sample) {
   const entities = sample.entity_names.length ? sample.entity_names.map(name => `<span class="chip">${escapeHtml(name)}</span>`).join('') : '<span class="section-note">No entity name field found in the top-level entity records.</span>';
   const path = sample.video_path || '';
   const roles = Array.isArray(sample.messages) ? sample.messages.map(message => message.role).join(' → ') : '—';
-  return section('Training row at a glance', `<div class="key-grid">${keyValue('Global row', sample.global_index)}${keyValue('Shard row', `${sample.shard} · row ${sample.row_in_shard}`)}${keyValue('Domain', sample.domain)}${keyValue('Source dataset', sample.source_dataset)}${keyValue('Duration', `${formatDuration(sample.duration)} (${formatNumber(sample.duration,1)} s)`)}${keyValue('Total tokens', formatNumber(sample.length))}${keyValue('Vision tokens', formatNumber(sample.vision_length))}${keyValue('Message roles', roles)}${keyValue('Whisper segments', formatNumber(sample.asr_segment_count))}${keyValue('Entities', formatNumber(sample.entity_count))}${keyValue('Assistant chars', formatNumber(sample.assistant_character_count))}${keyValue('Source ID', sample.source_id)}</div>`)
+  const interactiveVideo = sample.local_video_filename ? section('Video + assistant interval timeline', '<div id="interactive-video-root"></div>', 'Click an assistant interval bar to seek the video to its start time.') : '';
+  return interactiveVideo + section('Training row at a glance', `<div class="key-grid">${keyValue('Global row', sample.global_index)}${keyValue('Shard row', `${sample.shard} · row ${sample.row_in_shard}`)}${keyValue('Domain', sample.domain)}${keyValue('Source dataset', sample.source_dataset)}${keyValue('Duration', `${formatDuration(sample.duration)} (${formatNumber(sample.duration,1)} s)`)}${keyValue('Total tokens', formatNumber(sample.length))}${keyValue('Vision tokens', formatNumber(sample.vision_length))}${keyValue('Message roles', roles)}${keyValue('Whisper segments', formatNumber(sample.asr_segment_count))}${keyValue('Entities', formatNumber(sample.entity_count))}${keyValue('Assistant chars', formatNumber(sample.assistant_character_count))}${keyValue('Source ID', sample.source_id)}</div>`)
     + section('Video input', `<div class="path-box"><code>${escapeHtml(path)}</code><button class="copy-button" data-copy="video">Copy</button></div><div class="key-grid" style="margin-top:10px">${keyValue('Resolution', mediaMetadata.width && mediaMetadata.height ? `${mediaMetadata.width} × ${mediaMetadata.height}` : '—')}${keyValue('Codec', mediaMetadata.codec_name)}${keyValue('FPS', formatNumber(mediaMetadata.video_fps,3))}${keyValue('Original frames', formatNumber(mediaMetadata.total_frames))}${keyValue('Model nframes', formatNumber(media.nframes))}${keyValue('max_pixels', formatNumber(media.max_pixels))}${keyValue('min_pixels', formatNumber(media.min_pixels))}${keyValue('Region', media.region)}</div>`)
     + section(`Entity names (${sample.entity_names.length})`, `<div class="chips">${entities}</div>`)
-    + section('What is embedded in this HTML', `<div class="warning">This page contains exact parsed messages and metadata for ${formatNumber(SUMMARY.embedded_samples)} rows. It does not contain video bytes. Use the Messages tab for rendered ASR and targets, Metadata for every nested field, and Raw JSON for the combined parsed row.</div>`);
+    + section('What is embedded in this HTML', `<div class="warning">This page contains exact parsed messages and metadata for ${formatNumber(SUMMARY.embedded_samples)} rows. One local MP4 sits beside the HTML and is available only on the row marked “▶ video”. Use the Messages tab for rendered ASR and targets, Metadata for every nested field, and Raw JSON for the combined parsed row.</div>`);
 }
 
 function findContent(messages, type) {
@@ -286,7 +299,9 @@ function findContent(messages, type) {
 
 function tryJson(value) {
   if (typeof value !== 'string') return null;
-  try { return JSON.parse(value); } catch (_) { return null; }
+  let text = value.trim();
+  if (text.startsWith('```') && text.includes('\n')) { text = text.slice(text.indexOf('\n') + 1); if (text.trimEnd().endsWith('```')) text = text.trimEnd().slice(0,-3).trimEnd(); }
+  try { return JSON.parse(text); } catch (_) { return null; }
 }
 
 function contentNode(item) {
@@ -320,6 +335,60 @@ function renderAsr(asrData) {
     const details = document.createElement('details'); const summary = document.createElement('summary'); summary.textContent = `${chunks.length} chunks`; details.append(summary, treeBlock(chunks)); row.lastElementChild.appendChild(details); tbody.appendChild(row);
   });
   table.appendChild(tbody); tableWrap.appendChild(table); container.appendChild(tableWrap); return container;
+}
+
+function intervalEntityNames(interval) {
+  const entities = interval.entity ?? interval.entities ?? [];
+  if (!Array.isArray(entities)) return [];
+  return entities.map(entity => {
+    if (typeof entity === 'string') return entity;
+    if (entity && typeof entity === 'object') return entity.name || entity.description || JSON.stringify(entity);
+    return String(entity);
+  }).filter(Boolean);
+}
+
+function renderInteractiveVideo(sample) {
+  const container = document.createElement('div');
+  const video = document.createElement('video'); video.className = 'video-player'; video.controls = true; video.preload = 'metadata'; video.src = sample.local_video_filename;
+  const timelineWrap = document.createElement('div'); timelineWrap.className = 'timeline-wrap';
+  const timeline = document.createElement('div'); timeline.className = 'timeline';
+  const duration = Number(sample.duration) || 1;
+  const intervals = Array.isArray(sample.assistant_intervals) ? sample.assistant_intervals : [];
+  const blocks = [];
+  intervals.forEach((interval,index) => {
+    const start = Math.max(0, Number(interval.start_time) || 0); const end = Math.min(duration, Number(interval.end_time) || start);
+    const block = document.createElement('button'); block.className = 'interval-block'; block.type = 'button';
+    block.style.left = `${start / duration * 100}%`; block.style.width = `${Math.max(.25, (end - start) / duration * 100)}%`; block.textContent = String(index + 1);
+    block.title = `#${index + 1} · ${formatDuration(start)}–${formatDuration(end)}`; block.setAttribute('aria-label', block.title);
+    block.onclick = () => seekToInterval(index, true); blocks.push(block); timeline.appendChild(block);
+  });
+  const playhead = document.createElement('div'); playhead.className = 'playhead'; playhead.style.left = '0%'; timeline.appendChild(playhead);
+  const axis = document.createElement('div'); axis.className = 'timeline-axis'; axis.innerHTML = `<span>0:00</span><span>${formatDuration(duration * .25)}</span><span>${formatDuration(duration * .5)}</span><span>${formatDuration(duration * .75)}</span><span>${formatDuration(duration)}</span>`;
+  const detail = document.createElement('div'); detail.className = 'interval-detail';
+
+  function showInterval(index) {
+    const interval = intervals[index]; if (!interval) return;
+    blocks.forEach((block,blockIndex) => block.classList.toggle('active', blockIndex === index));
+    detail.replaceChildren(); const title = document.createElement('div'); title.className = 'interval-title'; title.textContent = `Assistant interval #${index + 1} · ${formatDuration(interval.start_time)}–${formatDuration(interval.end_time)}`; detail.appendChild(title);
+    const entities = intervalEntityNames(interval); if (entities.length) { const chips = document.createElement('div'); chips.className = 'chips'; entities.forEach(name => { const chip = document.createElement('span'); chip.className = 'chip'; chip.textContent = name; chips.appendChild(chip); }); detail.appendChild(chips); }
+    const description = interval.description || interval.appearance || interval.summary; if (description) { const paragraph = document.createElement('div'); paragraph.style.marginTop = '7px'; paragraph.textContent = description; detail.appendChild(paragraph); }
+  }
+
+  function seekToInterval(index, shouldPlay) {
+    const interval = intervals[index]; if (!interval) return;
+    video.currentTime = Math.max(0, Number(interval.start_time) || 0); showInterval(index);
+    if (shouldPlay) video.play().catch(() => {});
+  }
+
+  video.addEventListener('timeupdate', () => {
+    playhead.style.left = `${Math.min(100, Math.max(0, video.currentTime / duration * 100))}%`;
+    const activeIndex = intervals.findIndex(interval => video.currentTime >= Number(interval.start_time) && video.currentTime < Number(interval.end_time));
+    if (activeIndex >= 0 && !blocks[activeIndex].classList.contains('active')) showInterval(activeIndex);
+  });
+  video.addEventListener('error', () => { detail.textContent = `Could not load ${sample.local_video_filename}. Keep the MP4 in the same directory as this HTML file.`; });
+  timelineWrap.append(timeline, axis, detail); container.append(video, timelineWrap);
+  if (intervals.length) showInterval(0); else detail.textContent = 'No assistant start_time/end_time intervals were parsed.';
+  return container;
 }
 
 function renderMessageContent(message) {
@@ -359,7 +428,11 @@ function renderRaw(sample) {
 
 function renderActiveTab(sample) {
   const target = document.getElementById('tab-content'); target.replaceChildren();
-  if (state.activeTab === 'overview') { target.innerHTML = renderOverview(sample); const videoButton = target.querySelector('[data-copy="video"]'); if (videoButton) videoButton.onclick = () => copyText(sample.video_path || '', videoButton); }
+  if (state.activeTab === 'overview') {
+    target.innerHTML = renderOverview(sample);
+    const videoButton = target.querySelector('[data-copy="video"]'); if (videoButton) videoButton.onclick = () => copyText(sample.video_path || '', videoButton);
+    const videoRoot = target.querySelector('#interactive-video-root'); if (videoRoot) videoRoot.appendChild(renderInteractiveVideo(sample));
+  }
   else if (state.activeTab === 'messages') target.appendChild(renderMessages(sample));
   else if (state.activeTab === 'metadata') target.appendChild(renderMetadata(sample));
   else target.appendChild(renderRaw(sample));
@@ -383,7 +456,8 @@ elements.search.addEventListener('input', applyFilters); elements.domain.addEven
 
 renderHeader();
 const hashIndex = SAMPLES.findIndex(sample => sample.id === location.hash.slice(1));
-state.selectedIndex = hashIndex >= 0 ? hashIndex : 0;
+const videoIndex = SAMPLES.findIndex(sample => sample.local_video_filename);
+state.selectedIndex = hashIndex >= 0 ? hashIndex : (videoIndex >= 0 ? videoIndex : 0);
 applyFilters();
 </script>
 </body>
