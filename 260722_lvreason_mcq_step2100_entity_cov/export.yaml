@@ -54,7 +54,7 @@ command: |
   cd "${PROJECT_ROOT}"
   bash export/dcp_to_safetensors.sh "${LOCAL_CHECKPOINT}"
   s5cmd cp "${LOCAL_CHECKPOINT}/model.safetensors" "${S3_OUTPUT_PATH}/model.safetensors"
-  for filename in chat_template.jinja config.json processing_pegasus_qwen3_vl.py processor_config.json tokenizer.json tokenizer_config.json vision_process.py; do
+  for filename in chat_template.jinja config.json eval_payload.json ffmpeg_fetch_video.py processing_pegasus_qwen3_vl.py processor_config.json sft_260416_soccer_lvreason_mcq_lr2e-6_qwen3_5_27b_mtp_14node_resolved.yaml tokenizer.json tokenizer_config.json wandb_run.json; do
     s5cmd cp "${S3_SOURCE_PATH}/${filename}" "${S3_OUTPUT_PATH}/${filename}"
   done
 

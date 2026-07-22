@@ -14,8 +14,12 @@ step 2100.
 - Maximum output tokens: 65,536
 - Tensor cache: enabled
 
-The source is a DCP checkpoint. `export.yaml` converts it to safetensors;
-`monitor_and_submit.py` under `260720_wandb_7n_entity_cov_eval/` submits the
-evaluation after the export succeeds.
+The source is a DCP checkpoint. `export.yaml` converts it to safetensors.
+After the model path is verified, `submit_verified_evals.py` under
+`260720_wandb_7n_entity_cov_eval/` submits the evaluation.
 
-Export job: `export-sft-lvreason-mcq-s2100-tik5wl`.
+Export job `export-sft-lvreason-mcq-s2100-tik5wl` produced and uploaded the
+55,563,009,392-byte model. It was marked failed only because the generic
+manifest requested nonexistent `vision_process.py` after the upload. The four
+LVReason-specific metadata files were copied from the source checkpoint, and
+`export.yaml` now lists the correct files for reproduction.
