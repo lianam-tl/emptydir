@@ -19,3 +19,4 @@ The source is a DCP checkpoint. `export.yaml` converts it to safetensors.
 `monitor_and_submit.py` waits for the export, submits the evaluation, and
 posts updates to `#fun-lia-trashcan`.
 
+Export job: `export-sft-lvreason-mcq-s2200-tikim3`
