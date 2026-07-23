@@ -156,6 +156,11 @@
       "run_id": "5cdf3747-2fe4-550a-be26-38787e46612a",
       "entity_duration_micro_ratio": 0.8418387237044528,
       "missing_ground_truth_entity_fraction": 0.3584905660377358
+    },
+    {
+      "run_id": "b44f8811-87f8-5f92-b3b4-b3f712c104c3",
+      "entity_duration_micro_ratio": 1.1503697471359124,
+      "missing_ground_truth_entity_fraction": 0.25471698113207547
     }
   ]
 }

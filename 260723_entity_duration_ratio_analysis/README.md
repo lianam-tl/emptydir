@@ -17,17 +17,17 @@ Ground truth: https://huggingface.co/datasets/twelvelabs/entity_cov_v02_tdf at r
 
 ## Results
 
-The snapshot contains 31 checkpoints, 18 samples per checkpoint, 106 GT entity/sample entries per checkpoint, and 3,286 total entity/checkpoint pairs.
+The snapshot contains 32 checkpoints, 18 samples per checkpoint, 106 GT entity/sample entries per checkpoint, and 3,392 total entity/checkpoint pairs.
 
 | Statistic across checkpoints | Result |
 |---|---:|
 | Median macro union ratio | 1.336 |
 | Macro union ratio range | 0.690–1.733 |
-| Checkpoints with macro ratio above 1 | 24/31 |
-| Median micro union ratio | 0.882 |
+| Checkpoints with macro ratio above 1 | 25/32 |
+| Median micro union ratio | 0.886 |
 | Micro union ratio range | 0.759–1.312 |
-| Mean missing-GT-entity fraction | 34.7% |
-| Mean fraction of entity ratios above 1 | 38.6% |
+| Mean missing-GT-entity fraction | 34.4% |
+| Mean fraction of entity ratios above 1 | 39.1% |
 
 The macro mean is very sensitive to short GT entities. The largest example is `CrystalFriend` / Jay: 9.1 seconds of GT duration and 546 seconds of predicted duration, producing a 60.0 ratio. This is why a checkpoint can have a macro ratio far above 1 while its micro ratio remains below 1.
 
@@ -43,7 +43,7 @@ For a dashboard diagnostic, show the micro ratio together with the missing-entit
 
 ## Validation
 
-Re-running the GPT mapper can change an ambiguous entity assignment. The scripts therefore reconstruct the mapping and repair it against two values already saved by the original evaluator for every GT entity: Name + appearance IoU and predicted span count. All 31 checkpoints have `0` remaining IoU mismatches and `0` unresolved mapping errors.
+Re-running the GPT mapper can change an ambiguous entity assignment. The scripts therefore reconstruct the mapping and repair it against two values already saved by the original evaluator for every GT entity: Name + appearance IoU and predicted span count. All 32 checkpoints have `0` remaining IoU mismatches and `0` unresolved mapping errors.
 
 - `report.html`: inspection-friendly checkpoint table and largest entity-level outliers
 - `results.json`: complete per-checkpoint, per-sample, and per-entity data

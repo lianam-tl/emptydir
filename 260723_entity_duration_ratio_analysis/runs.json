@@ -29,5 +29,6 @@
   {"name": "a1790-entity-sme4x-s2200", "run_id": "0532f336-bff9-5451-a00f-4a4670a9b73c"},
   {"name": "h0-entity-v1-2-s200", "run_id": "368487fc-51c1-5f11-a1a0-297d833c092a"},
   {"name": "lia-entcov-v02-64k-c8-r2-a1865-entity-sme-whisper-s400-tp1-r2-2-20260723T090330Z", "run_id": "f6631367-1f85-5b77-b947-fd073a0cab9a"},
-  {"name": "lia-entcov-v02-64k-c8-r2-a1865-entity-sme-whisper-s800-tp1-r2-2-20260723T091040Z", "run_id": "5cdf3747-2fe4-550a-be26-38787e46612a"}
+  {"name": "lia-entcov-v02-64k-c8-r2-a1865-entity-sme-whisper-s800-tp1-r2-2-20260723T091040Z", "run_id": "5cdf3747-2fe4-550a-be26-38787e46612a"},
+  {"name": "lia-entcov-v02-64k-c8-r8-sequential-a1865-entity-sme-whisper-s100-tp1-r8-8-20260723T100154Z", "run_id": "b44f8811-87f8-5f92-b3b4-b3f712c104c3"}
 ]
