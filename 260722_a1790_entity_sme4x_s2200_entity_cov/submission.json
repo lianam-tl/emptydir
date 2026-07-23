@@ -22,8 +22,8 @@
     "wandb_run_id": "kp1ju1r1",
     "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1",
     "export_status": "Succeeded",
-    "eval_run_id": "4edcdc3a-bac5-523e-b6bc-fdbde7144a03",
-    "batch_id": "batch-f1ac9c1e-ed4a-4e9e-8296-9a1b1d3061e1",
+    "eval_run_id": "52fe74d6-fc14-5b31-acc0-2346cdcb9e51",
+    "batch_id": "batch-87e69ca1-aecb-417f-9bad-90d32b528266",
     "eval_status": "processing",
     "eval_completed": 0,
     "eval_failed": 0,
@@ -33,6 +33,9 @@
     "previous_failure_reason": "submitter lease expired before external_request_id was durable",
     "second_failed_eval_run_id": "9076d70b-c407-5004-b9b9-a32f99fc8c65",
     "second_failed_batch_execution_id": "44c8507f-2374-5f5c-ad70-f00e19425554",
-    "second_failure_reason": "XPlatform batch-request connection refused"
+    "second_failure_reason": "XPlatform batch-request connection refused",
+    "third_failed_eval_run_id": "4edcdc3a-bac5-523e-b6bc-fdbde7144a03",
+    "third_failed_batch_id": "batch-f1ac9c1e-ed4a-4e9e-8296-9a1b1d3061e1",
+    "third_failure_reason": "GPU reservation contention after 4 of 18 predictions"
   }
 ]

@@ -30,9 +30,12 @@ before inference because XPlatform's batch-request service refused the
 connection. After the service restarted and passed its health check, a third
 run received a durable XPlatform batch ID.
 
-Current Eval V3 run: `4edcdc3a-bac5-523e-b6bc-fdbde7144a03`
+The third Eval V3 run, `4edcdc3a-bac5-523e-b6bc-fdbde7144a03`, produced 4 of
+18 predictions before GPU reservation contention terminated the batch.
 
-XPlatform batch: `batch-f1ac9c1e-ed4a-4e9e-8296-9a1b1d3061e1`
+Current Eval V3 run: `52fe74d6-fc14-5b31-acc0-2346cdcb9e51`
 
-CPU monitor: PID `1911379` under
-`/home/jeongyeon-nam/eval-retry3-a1790-entity-sme4x-s2200-260722`.
+XPlatform batch: `batch-87e69ca1-aecb-417f-9bad-90d32b528266`
+
+CPU monitor: PID `1929340` under
+`/home/jeongyeon-nam/eval-retry4-a1790-entity-sme4x-s2200-260723`.
