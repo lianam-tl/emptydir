@@ -34,3 +34,6 @@ the export completes, `monitor_sequential.py` submits evaluations in that exact
 order and waits for each one to finish before submitting the next.
 
 Sequential export job: `export-a1865-entity-sme-whisper-sequential-timezn`
+
+Sequential CPU monitor: PID `1955225` under
+`/home/jeongyeon-nam/eval-a1865-entity-sme-whisper-sequential-260723`.
