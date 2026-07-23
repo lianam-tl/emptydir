@@ -20,5 +20,12 @@ posts updates and 20-minute heartbeats to `#fun-lia-trashcan`.
 
 Export job: `export-h0-entity-v1-2-s200-tikx2m`
 
-CPU monitor: PID `1911674` under
-`/home/jeongyeon-nam/eval-monitor-export-h0-entity-v1-2-s200-tikx2m`.
+The first Eval V3 run, `2b95ae9d-bd6e-546e-ac51-43e1a5dece6c`, produced 8 of
+18 predictions before GPU reservation contention terminated the batch.
+
+Current Eval V3 run: `368487fc-51c1-5f11-a1a0-297d833c092a`
+
+XPlatform batch: `batch-7039effa-6b4b-4217-bb82-ad7033d49193`
+
+CPU monitor: PID `1929341` under
+`/home/jeongyeon-nam/eval-retry2-h0-entity-v1-2-s200-260723`.
