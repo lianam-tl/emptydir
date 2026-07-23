@@ -26,8 +26,14 @@ Step 400 XPlatform batch: `batch-84a6a11c-2762-402e-b9e5-810d6b875062`
 Step 400 CPU monitor: PID `1953939` under
 `/home/jeongyeon-nam/eval-a1865-entity-sme-whisper-s400-260723`.
 
+Step 400 completed 18 of 18 predictions. Overall naming + appearance IoU is
+`0.276020`; half naming + appearance IoU is `0.343128`.
+
 Step 800 CPU monitor: PID `1954090` under
 `/home/jeongyeon-nam/eval-a1865-entity-sme-whisper-s800-260723`.
+
+Step 800 completed 18 of 18 predictions. Overall naming + appearance IoU is
+`0.263756`; half naming + appearance IoU is `0.297342`.
 
 Steps 100, 200, 300, 500, 600, and 700 use one sequential export job. After
 the export completes, `monitor_sequential.py` submits fixed-8-replica
@@ -38,3 +44,7 @@ Sequential export job: `export-a1865-entity-sme-whisper-sequential-timezn`
 
 Sequential CPU monitor: PID `1957209` under
 `/home/jeongyeon-nam/eval-a1865-entity-sme-whisper-sequential-260723`.
+
+Step 100 Eval V3 run: `b44f8811-87f8-5f92-b3b4-b3f712c104c3`
+
+Step 100 XPlatform batch: `batch-a44a1a01-9e0b-42bd-a0b6-127fb7209b03`

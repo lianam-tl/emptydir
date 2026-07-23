@@ -21,10 +21,18 @@
     "training_git_sha": "3d52392097e448b8d4b4c9872c5d59c156f5e388",
     "training_git_branch": "feat/a-1865-entity-sme-whisper-preprocessing",
     "export_status": "Succeeded",
-    "eval_status": "processing",
+    "eval_status": "completed",
     "eval_run_id": "f6631367-1f85-5b77-b947-fd073a0cab9a",
     "batch_id": "batch-84a6a11c-2762-402e-b9e5-810d6b875062",
-    "eval_completed": 0,
-    "eval_failed": 0
+    "eval_completed": 18,
+    "eval_failed": 0,
+    "metrics": {
+      "overall_naming_iou": 0.22847037096022105,
+      "overall_name_appearance_iou": 0.27601979565065193,
+      "full_naming_iou": 0.1636397326352981,
+      "full_name_appearance_iou": 0.14553210774547198,
+      "half_naming_iou": 0.2615753777644371,
+      "half_name_appearance_iou": 0.3431277494304588
+    }
   }
 ]

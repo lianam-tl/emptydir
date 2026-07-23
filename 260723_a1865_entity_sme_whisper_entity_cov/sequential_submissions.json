@@ -23,8 +23,12 @@
     "wandb_url": "",
     "training_git_sha": "3d52392097e448b8d4b4c9872c5d59c156f5e388",
     "training_git_branch": "feat/a-1865-entity-sme-whisper-preprocessing",
-    "export_status": "Created",
-    "eval_status": "not submitted"
+    "export_status": "Succeeded",
+    "eval_status": "processing",
+    "eval_run_id": "b44f8811-87f8-5f92-b3b4-b3f712c104c3",
+    "batch_id": "batch-a44a1a01-9e0b-42bd-a0b6-127fb7209b03",
+    "eval_completed": 0,
+    "eval_failed": 0
   },
   {
     "family": "a1865-entity-sme-whisper",
