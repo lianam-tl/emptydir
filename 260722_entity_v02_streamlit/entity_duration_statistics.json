@@ -1,0 +1,161 @@
+{
+  "dataset": "https://huggingface.co/datasets/twelvelabs/entity_cov_v02_tdf",
+  "revision": "5caf5ebd1ce03b6b6bb28a50504a8c36542d9433",
+  "rows": [
+    {
+      "run_id": "2708c7ac-820c-5aa4-b298-3705871c7e1d",
+      "entity_duration_micro_ratio": 0.9516437526429619,
+      "missing_ground_truth_entity_fraction": 0.20754716981132076
+    },
+    {
+      "run_id": "34e63948-7068-5c19-9d49-4a14eaf44341",
+      "entity_duration_micro_ratio": 0.8330293146216209,
+      "missing_ground_truth_entity_fraction": 0.3113207547169811
+    },
+    {
+      "run_id": "bea5f764-eb67-59c9-901f-acc92b3866df",
+      "entity_duration_micro_ratio": 0.8520572489842478,
+      "missing_ground_truth_entity_fraction": 0.36792452830188677
+    },
+    {
+      "run_id": "6a75028e-b51d-5b44-a07c-21d2d3b0ff43",
+      "entity_duration_micro_ratio": 0.9608304117345775,
+      "missing_ground_truth_entity_fraction": 0.42452830188679247
+    },
+    {
+      "run_id": "254e310b-e99f-5e1c-8ef3-816062a54cab",
+      "entity_duration_micro_ratio": 0.9399714983510955,
+      "missing_ground_truth_entity_fraction": 0.37735849056603776
+    },
+    {
+      "run_id": "36ff2578-3a7d-51c9-a555-ca8958929a30",
+      "entity_duration_micro_ratio": 0.7592499553661215,
+      "missing_ground_truth_entity_fraction": 0.39622641509433965
+    },
+    {
+      "run_id": "b0b7a57b-bbc7-546f-bf6e-fb9d30fe2dcb",
+      "entity_duration_micro_ratio": 0.841457724365599,
+      "missing_ground_truth_entity_fraction": 0.41509433962264153
+    },
+    {
+      "run_id": "a7ed23df-4db0-5ef1-ab05-ca51a995264f",
+      "entity_duration_micro_ratio": 0.8050256947066287,
+      "missing_ground_truth_entity_fraction": 0.37735849056603776
+    },
+    {
+      "run_id": "239cf441-25eb-591c-ab32-32bdfaa91241",
+      "entity_duration_micro_ratio": 0.8816610745478879,
+      "missing_ground_truth_entity_fraction": 0.36792452830188677
+    },
+    {
+      "run_id": "78542b3b-6142-5487-80eb-2be8006ce1f9",
+      "entity_duration_micro_ratio": 0.7850203226328015,
+      "missing_ground_truth_entity_fraction": 0.3867924528301887
+    },
+    {
+      "run_id": "55ccccf4-87a9-576f-acb7-45adac7e8fdb",
+      "entity_duration_micro_ratio": 0.8518900878413272,
+      "missing_ground_truth_entity_fraction": 0.32075471698113206
+    },
+    {
+      "run_id": "29162be7-08eb-569f-babd-fe4ce9b5bbfa",
+      "entity_duration_micro_ratio": 0.9836093612599169,
+      "missing_ground_truth_entity_fraction": 0.25471698113207547
+    },
+    {
+      "run_id": "5287cdbb-2fbf-5b13-8f4a-95aaf59401b4",
+      "entity_duration_micro_ratio": 0.9574381105668174,
+      "missing_ground_truth_entity_fraction": 0.37735849056603776
+    },
+    {
+      "run_id": "fca2533a-a6fc-550e-8c58-a49d8363626a",
+      "entity_duration_micro_ratio": 0.8594915386045773,
+      "missing_ground_truth_entity_fraction": 0.3584905660377358
+    },
+    {
+      "run_id": "1a46966b-378a-5a43-87a4-fdbe018a4cbe",
+      "entity_duration_micro_ratio": 1.0462593607923036,
+      "missing_ground_truth_entity_fraction": 0.22641509433962265
+    },
+    {
+      "run_id": "7ce6f636-0e36-5cfc-9aea-013e1bc8a9fb",
+      "entity_duration_micro_ratio": 0.9047339884016793,
+      "missing_ground_truth_entity_fraction": 0.36792452830188677
+    },
+    {
+      "run_id": "d15291a5-ac78-544a-a2c6-0a52779da66c",
+      "entity_duration_micro_ratio": 0.9089556919338094,
+      "missing_ground_truth_entity_fraction": 0.42452830188679247
+    },
+    {
+      "run_id": "82c18432-2844-59bf-a3b8-b6d913bd1390",
+      "entity_duration_micro_ratio": 0.9291335753181854,
+      "missing_ground_truth_entity_fraction": 0.32075471698113206
+    },
+    {
+      "run_id": "a47d832e-1ee3-502a-aebd-66692900c339",
+      "entity_duration_micro_ratio": 0.8894577432386311,
+      "missing_ground_truth_entity_fraction": 0.3584905660377358
+    },
+    {
+      "run_id": "a520e232-a4e9-5640-b666-48a023b84ed0",
+      "entity_duration_micro_ratio": 0.8778782111432283,
+      "missing_ground_truth_entity_fraction": 0.37735849056603776
+    },
+    {
+      "run_id": "0790b212-c060-52f8-acd9-a0cf2709c276",
+      "entity_duration_micro_ratio": 0.770346624301203,
+      "missing_ground_truth_entity_fraction": 0.42452830188679247
+    },
+    {
+      "run_id": "962dadcc-abe3-50bd-bf44-38fab5d4a8e4",
+      "entity_duration_micro_ratio": 1.3121484529126695,
+      "missing_ground_truth_entity_fraction": 0.24528301886792453
+    },
+    {
+      "run_id": "918e01d5-cd55-501d-bfc2-09b53e5d5f34",
+      "entity_duration_micro_ratio": 0.8747679101495378,
+      "missing_ground_truth_entity_fraction": 0.3584905660377358
+    },
+    {
+      "run_id": "d10c50da-66a2-59e7-b81a-21ac4a26fafd",
+      "entity_duration_micro_ratio": 0.8565804997595797,
+      "missing_ground_truth_entity_fraction": 0.4056603773584906
+    },
+    {
+      "run_id": "9d185735-eb19-5463-b86b-3959ab619f27",
+      "entity_duration_micro_ratio": 0.8428284204611646,
+      "missing_ground_truth_entity_fraction": 0.4056603773584906
+    },
+    {
+      "run_id": "5858d88a-d81e-574f-81a9-ccb73f9f4c95",
+      "entity_duration_micro_ratio": 0.7651410797076401,
+      "missing_ground_truth_entity_fraction": 0.36792452830188677
+    },
+    {
+      "run_id": "57a8e294-4faf-5613-8f83-c93effa4e7cd",
+      "entity_duration_micro_ratio": 0.9410917476234095,
+      "missing_ground_truth_entity_fraction": 0.2358490566037736
+    },
+    {
+      "run_id": "0532f336-bff9-5451-a00f-4a4670a9b73c",
+      "entity_duration_micro_ratio": 0.9043895976901432,
+      "missing_ground_truth_entity_fraction": 0.3018867924528302
+    },
+    {
+      "run_id": "368487fc-51c1-5f11-a1a0-297d833c092a",
+      "entity_duration_micro_ratio": 1.1112594319874478,
+      "missing_ground_truth_entity_fraction": 0.27358490566037735
+    },
+    {
+      "run_id": "f6631367-1f85-5b77-b947-fd073a0cab9a",
+      "entity_duration_micro_ratio": 0.9174213000873637,
+      "missing_ground_truth_entity_fraction": 0.3584905660377358
+    },
+    {
+      "run_id": "5cdf3747-2fe4-550a-be26-38787e46612a",
+      "entity_duration_micro_ratio": 0.8418387237044528,
+      "missing_ground_truth_entity_fraction": 0.3584905660377358
+    }
+  ]
+}

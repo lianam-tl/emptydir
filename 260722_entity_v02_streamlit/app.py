@@ -26,6 +26,7 @@ APP_DIRECTORY = Path(__file__).resolve().parent
 SEED_PATH = APP_DIRECTORY / "seed_rows.json"
 REFERENCE_PATH = APP_DIRECTORY / "reference_rows.json"
 GROUND_TRUTH_SHOT_STATISTICS_PATH = APP_DIRECTORY / "ground_truth_shot_statistics.json"
+ENTITY_DURATION_STATISTICS_PATH = APP_DIRECTORY / "entity_duration_statistics.json"
 DYNAMIC_CACHE_PATH = Path(
     os.environ.get("ENTITY_V02_DYNAMIC_CACHE_PATH", APP_DIRECTORY / "dynamic_rows.json")
 )
@@ -85,6 +86,13 @@ def load_json_rows(path: Path) -> list[dict[str, Any]]:
         return []
     payload = json.loads(path.read_text())
     return payload["rows"] if isinstance(payload, dict) else payload
+
+
+def load_entity_duration_statistics() -> dict[str, dict[str, Any]]:
+    payload = json.loads(ENTITY_DURATION_STATISTICS_PATH.read_text())
+    if payload.get("revision") != CURRENT_DATASET_REVISION:
+        raise ValueError("entity duration statistics use a different dataset revision")
+    return {str(row["run_id"]): row for row in payload["rows"]}
 
 
 def save_dynamic_rows(rows: list[dict[str, Any]]) -> None:
@@ -440,21 +448,31 @@ def synchronize_rows(api_base: str) -> tuple[list[dict[str, Any]], int, list[str
 
 
 def table_dataframe(rows: list[dict[str, Any]]) -> pd.DataFrame:
+    entity_duration_statistics = load_entity_duration_statistics()
     records = []
     for rank, row in enumerate(rows, start=1):
         sample_count = int(row.get("sample_count") or 18)
         parse_success = sample_count - int(row.get("parse_failures") or 0)
+        duration_statistics = entity_duration_statistics.get(str(row["run_id"]), {})
+        missing_entity_fraction = duration_statistics.get(
+            "missing_ground_truth_entity_fraction"
+        )
         records.append(
             {
                 "Rank": rank,
                 "Name": row["name"],
                 "Scored": f"{row['scored']}/{sample_count}",
                 "Parse success": f"{parse_success}/{sample_count}",
+                "Entity duration ratio (micro)": duration_statistics.get(
+                    "entity_duration_micro_ratio"
+                ),
+                "Missing GT entities (%)": (
+                    100 * float(missing_entity_fraction)
+                    if missing_entity_fraction is not None
+                    else None
+                ),
                 "Avg(predicted / GT shots)": row.get(
                     "average_predicted_to_ground_truth_shot_count_ratio"
-                ),
-                "Avg(Σ shot duration / video duration)": row.get(
-                    "average_predicted_shot_duration_coverage_ratio"
                 ),
                 "Half name + appearance IoU": row["half_score"],
                 "Half naming IoU": row["half_naming"],
@@ -653,12 +671,19 @@ def render_dashboard(api_base: str) -> None:
                     "GT shot count. 1.0 means the counts match."
                 ),
             ),
-            "Avg(Σ shot duration / video duration)": st.column_config.NumberColumn(
+            "Entity duration ratio (micro)": st.column_config.NumberColumn(
                 format="%.3f",
                 help=(
-                    "Mean across parsed media of total predicted shot duration "
-                    "divided by video duration. 1.0 means one video-length of "
-                    "coverage; values above 1.0 indicate overlap or overextension."
+                    "Total overlap-deduplicated duration of mapped predicted entity "
+                    "spans divided by total GT entity duration. 1.0 means equal "
+                    "duration volume, not necessarily correct temporal localization."
+                ),
+            ),
+            "Missing GT entities (%)": st.column_config.NumberColumn(
+                format="%.1f%%",
+                help=(
+                    "Percentage of GT entity/sample entries with no mapped predicted "
+                    "spans. Lower is better. Parse-failed samples count as missing."
                 ),
             ),
         },

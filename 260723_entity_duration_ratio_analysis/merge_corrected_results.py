@@ -18,10 +18,16 @@ def main() -> None:
     corrected_by_run_id = {
         result["run_id"]: result for result in corrections["results"]
     }
+    primary_run_ids = {result["run_id"] for result in payload["results"]}
     payload["results"] = [
         corrected_by_run_id.get(result["run_id"], result)
         for result in payload["results"]
     ]
+    payload["results"].extend(
+        result
+        for run_id, result in corrected_by_run_id.items()
+        if run_id not in primary_run_ids
+    )
 
     invalid_results = [
         result["name"]

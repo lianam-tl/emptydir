@@ -28,5 +28,6 @@
   {"name": "h0-entity-v1-2-s100", "run_id": "57a8e294-4faf-5613-8f83-c93effa4e7cd"},
   {"name": "a1790-entity-sme4x-s2200", "run_id": "0532f336-bff9-5451-a00f-4a4670a9b73c"},
   {"name": "h0-entity-v1-2-s200", "run_id": "368487fc-51c1-5f11-a1a0-297d833c092a"},
-  {"name": "lia-entcov-v02-64k-c8-r2-a1865-entity-sme-whisper-s400-tp1-r2-2-20260723T090330Z", "run_id": "f6631367-1f85-5b77-b947-fd073a0cab9a"}
+  {"name": "lia-entcov-v02-64k-c8-r2-a1865-entity-sme-whisper-s400-tp1-r2-2-20260723T090330Z", "run_id": "f6631367-1f85-5b77-b947-fd073a0cab9a"},
+  {"name": "lia-entcov-v02-64k-c8-r2-a1865-entity-sme-whisper-s800-tp1-r2-2-20260723T091040Z", "run_id": "5cdf3747-2fe4-550a-be26-38787e46612a"}
 ]
