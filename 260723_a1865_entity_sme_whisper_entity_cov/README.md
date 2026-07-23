@@ -8,7 +8,7 @@ of `sft_a1865_entity_sme_whisper_lr2e-6_qwen3_5_27b-base`.
 - Dataset revision: `5caf5ebd1ce03b6b6bb28a50504a8c36542d9433`
 - Config and split: `default/test` (18 samples)
 - Eval sandbox: `owen-2`
-- Replicas: fixed at 2
+- Replicas: steps 400 and 800 fixed at 2; remaining steps fixed at 8
 - Concurrency per replica: 8
 - Maximum output tokens: 65,536
 - Tensor cache: enabled
@@ -30,8 +30,9 @@ Step 800 CPU monitor: PID `1954090` under
 `/home/jeongyeon-nam/eval-a1865-entity-sme-whisper-s800-260723`.
 
 Steps 100, 200, 300, 500, 600, and 700 use one sequential export job. After
-the export completes, `monitor_sequential.py` submits evaluations in that exact
-order and waits for each one to finish before submitting the next.
+the export completes, `monitor_sequential.py` submits fixed-8-replica
+evaluations in that exact order and waits for each one to finish before
+submitting the next.
 
 Sequential export job: `export-a1865-entity-sme-whisper-sequential-timezn`
 
