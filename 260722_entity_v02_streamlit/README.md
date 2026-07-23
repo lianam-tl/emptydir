@@ -6,6 +6,11 @@ The app starts from `seed_rows.json`, polls the Eval V3 run list every 60 second
 
 The `duration` entity-duration micro ratio comes from `entity_duration_statistics.json`. It requires the evaluator's `name_and_desc` mapping and is validated against the saved per-entity IoU and span-count fingerprints. Regenerate that compact file with `260723_entity_duration_ratio_analysis/build_dashboard_statistics.py` after backfilling a new run; rows without a backfill remain blank. The leaderboard heatmap colors IoU by higher-is-better, ratios by closeness to 1.0, and Half delta by lower-is-better.
 
+`training_token_mixtures.json` stores the token ratios from each training family's
+S3 `mixture_stats.json`. The dashboard expands family-defining components and
+collapses the remaining similar rows into `Other/base`; checkpoints in one family
+reuse the same mixture.
+
 ## Run locally
 
 ```bash

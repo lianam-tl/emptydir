@@ -27,6 +27,7 @@ SEED_PATH = APP_DIRECTORY / "seed_rows.json"
 REFERENCE_PATH = APP_DIRECTORY / "reference_rows.json"
 GROUND_TRUTH_SHOT_STATISTICS_PATH = APP_DIRECTORY / "ground_truth_shot_statistics.json"
 ENTITY_DURATION_STATISTICS_PATH = APP_DIRECTORY / "entity_duration_statistics.json"
+TRAINING_TOKEN_MIXTURES_PATH = APP_DIRECTORY / "training_token_mixtures.json"
 DYNAMIC_CACHE_PATH = Path(
     os.environ.get("ENTITY_V02_DYNAMIC_CACHE_PATH", APP_DIRECTORY / "dynamic_rows.json")
 )
@@ -48,6 +49,30 @@ FAMILY_COLORS = {
     "Gemini 3.5 Flash": "#ed8936",
     "Gemini 3.1 Pro": "#c05621",
     "Other": "#5f6368",
+}
+MIXTURE_COMPONENTS = [
+    "Other/base",
+    "H0 standard",
+    "H0 duration",
+    "H0 2x",
+    "Entity SME 4x",
+    "Entity SME v1.2",
+    "Entity Whisper",
+    "Soccer LVReason",
+    "P1.5 SFT mix",
+    "P1.5 RL mix",
+]
+MIXTURE_COMPONENT_HELP = {
+    "Other/base": "All mixture rows that are similar across these runs or are not expanded separately.",
+    "H0 standard": "tl_h0_movies_and_news_sme with the standard H0 template.",
+    "H0 duration": "tl_h0_movies_and_news_sme with the A-1740 duration-diverse template.",
+    "H0 2x": "tl_h0_movies_and_news_sme with the Consol H0 2x template.",
+    "Entity SME 4x": "tl_entity_sme with the A-1790 ASR 4x template.",
+    "Entity SME v1.2": "tl_entity_sme_v1_2.",
+    "Entity Whisper": "tl_entity_sme_whisper with its ASR 2x template.",
+    "Soccer LVReason": "longvideo_reason with the soccer MCQ template.",
+    "P1.5 SFT mix": "All 35 rows of the Pegasus 1.5 SFT reference mixture.",
+    "P1.5 RL mix": "All 6 rows of the Pegasus 1.5 RL reference mixture.",
 }
 REFERENCE_NAMES = {
     "pegasus-15-rl-s60",
@@ -94,6 +119,10 @@ def load_entity_duration_statistics() -> dict[str, dict[str, Any]]:
     if payload.get("revision") != CURRENT_DATASET_REVISION:
         raise ValueError("entity duration statistics use a different dataset revision")
     return {str(row["run_id"]): row for row in payload["rows"]}
+
+
+def load_training_token_mixtures() -> list[dict[str, Any]]:
+    return json.loads(TRAINING_TOKEN_MIXTURES_PATH.read_text())["rows"]
 
 
 def save_dynamic_rows(rows: list[dict[str, Any]]) -> None:
@@ -552,6 +581,23 @@ def half_sample_dataframe(rows: list[dict[str, Any]]) -> pd.DataFrame:
     return pd.DataFrame.from_records(records).set_index("Model")
 
 
+def training_mixture_dataframe() -> pd.DataFrame:
+    records = []
+    for row in load_training_token_mixtures():
+        components = row["components"]
+        records.append(
+            {
+                "Family": row["family"],
+                "Tokens": f"{row['total_tokens'] / 1_000_000_000:.1f}B",
+                **{
+                    component: 100.0 * float(components.get(component, 0.0))
+                    for component in MIXTURE_COMPONENTS
+                },
+            }
+        )
+    return pd.DataFrame.from_records(records)
+
+
 def sample_score_style(value: Any) -> str:
     if pd.isna(value):
         return "color: #888"
@@ -577,6 +623,29 @@ def lower_gap_style(value: Any) -> str:
 def leaderboard_row_style(row: pd.Series) -> list[str]:
     style = "background-color: #fff3e0; color: #5d3a00"
     return [style if str(row["Name"]).startswith("gemini-") else ""] * len(row)
+
+
+def training_mixture_row_style(row: pd.Series) -> list[str]:
+    color = FAMILY_COLORS.get(str(row["Family"]), FAMILY_COLORS["Other"])
+    red, green, blue = (int(color[index : index + 2], 16) for index in (1, 3, 5))
+    styles = []
+    for column, value in row.items():
+        if column == "Family":
+            styles.append(
+                f"border-left: 8px solid {color}; background-color: "
+                f"rgba({red}, {green}, {blue}, 0.16); font-weight: 700"
+            )
+        elif column in MIXTURE_COMPONENTS and float(value) > 0:
+            alpha = min(0.46, 0.08 + 0.38 * float(value) / 100.0)
+            styles.append(
+                f"background-color: rgba({red}, {green}, {blue}, {alpha:.3f}); "
+                "font-weight: 600"
+            )
+        elif column in MIXTURE_COMPONENTS:
+            styles.append("color: #9aa0a6")
+        else:
+            styles.append("")
+    return styles
 
 
 def render_chart(rows: list[dict[str, Any]], metric: str, title: str) -> None:
@@ -728,6 +797,31 @@ def render_dashboard(api_base: str) -> None:
         render_chart(rows, "full_score", "Full name + appearance IoU")
     with full_name_tab:
         render_chart(rows, "full_naming", "Full naming IoU")
+
+    st.subheader("Training token mixture by model family")
+    st.caption(
+        "Token share within each family's mixture_stats.json. Checkpoints in the "
+        "same family share one mixture; similar rows are collapsed into Other/base."
+    )
+    mixture_table = training_mixture_dataframe()
+    st.dataframe(
+        mixture_table.style.apply(training_mixture_row_style, axis=1),
+        hide_index=True,
+        width="stretch",
+        height=390,
+        column_config={
+            "Family": st.column_config.TextColumn(width="medium"),
+            "Tokens": st.column_config.TextColumn(width="small"),
+            **{
+                component: st.column_config.NumberColumn(
+                    format="%.2f%%",
+                    width="small",
+                    help=MIXTURE_COMPONENT_HELP[component],
+                )
+                for component in MIXTURE_COMPONENTS
+            },
+        },
+    )
 
     st.subheader("Half sample scores")
     st.caption(
