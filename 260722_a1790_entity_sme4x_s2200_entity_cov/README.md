@@ -46,3 +46,7 @@ The fixed-2-replica retry is tracked in `retry_2replica_submission.json`.
 - XPlatform batch: `batch-b61c6761-7430-44c5-9bce-59cbee4fbc6d`
 - CPU monitor: PID `1940099` under
   `/home/jeongyeon-nam/eval-retry5-a1790-entity-sme4x-s2200-r2-260723`
+- Result: 18 of 18 predictions and scores completed
+- Overall naming IoU: `0.206926`
+- Overall naming + appearance IoU: `0.300410`
+- Half naming + appearance IoU: `0.276287`

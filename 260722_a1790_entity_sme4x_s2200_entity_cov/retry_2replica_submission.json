@@ -24,9 +24,17 @@
     "export_status": "Succeeded",
     "eval_run_id": "0532f336-bff9-5451-a00f-4a4670a9b73c",
     "batch_id": "batch-b61c6761-7430-44c5-9bce-59cbee4fbc6d",
-    "eval_status": "processing",
-    "eval_completed": 0,
+    "eval_status": "completed",
+    "eval_completed": 18,
     "eval_failed": 0,
-    "reported_status": "export=Succeeded eval=processing"
+    "reported_status": "export=Succeeded eval=completed",
+    "metrics": {
+      "overall_naming_iou": 0.206925593317549,
+      "overall_name_appearance_iou": 0.30040977644840605,
+      "full_naming_iou": 0.2086035523721755,
+      "full_name_appearance_iou": 0.34731508217001283,
+      "half_naming_iou": 0.20606876316199513,
+      "half_name_appearance_iou": 0.27628704779157964
+    }
   }
 ]
