@@ -24,6 +24,7 @@ from json_repair import repair_json
 
 APP_DIRECTORY = Path(__file__).resolve().parent
 SEED_PATH = APP_DIRECTORY / "seed_rows.json"
+REFERENCE_PATH = APP_DIRECTORY / "reference_rows.json"
 DYNAMIC_CACHE_PATH = Path(
     os.environ.get("ENTITY_V02_DYNAMIC_CACHE_PATH", APP_DIRECTORY / "dynamic_rows.json")
 )
@@ -40,12 +41,21 @@ FAMILY_COLORS = {
     "Pegasus 1.5 RL": "#00838f",
     "Pegasus 1.5 SFT": "#6d4c41",
     "Pegasus 1.5 / Kian SOCE": "#137333",
+    "Gemini 3 Flash": "#7e57c2",
+    "Gemini 3.5 Flash": "#3949ab",
+    "Gemini 3.1 Pro": "#1e88e5",
     "Other": "#5f6368",
 }
 REFERENCE_NAMES = {
     "pegasus-15-rl-s60",
     "pegasus-15-sft-s1000",
     "pegasus-15-kian-soce",
+    "gemini-3-flash-preview-whole",
+    "gemini-3-flash-preview-chunked-5m",
+    "gemini-3.5-flash-whole",
+    "gemini-3.5-flash-chunked-5m",
+    "gemini-3.1-pro-preview-whole",
+    "gemini-3.1-pro-preview-chunked-5m",
 }
 
 
@@ -143,6 +153,12 @@ def family_name(name: str) -> str:
         return "Pegasus 1.5 SFT"
     if name == "pegasus-15-kian-soce":
         return "Pegasus 1.5 / Kian SOCE"
+    if name.startswith("gemini-3-flash-preview-"):
+        return "Gemini 3 Flash"
+    if name.startswith("gemini-3.5-flash-"):
+        return "Gemini 3.5 Flash"
+    if name.startswith("gemini-3.1-pro-preview-"):
+        return "Gemini 3.1 Pro"
     return "Other"
 
 
@@ -365,7 +381,7 @@ def collect_completed_run(api_base: str, run: dict[str, Any]) -> dict[str, Any]:
 
 
 def synchronize_rows(api_base: str) -> tuple[list[dict[str, Any]], int, list[str]]:
-    seed_rows = load_json_rows(SEED_PATH)
+    seed_rows = load_json_rows(SEED_PATH) + load_json_rows(REFERENCE_PATH)
     dynamic_rows = load_json_rows(DYNAMIC_CACHE_PATH)
     known_run_ids = {str(row.get("run_id")) for row in [*seed_rows, *dynamic_rows]}
     new_count = 0
@@ -516,7 +532,7 @@ def render_chart(rows: list[dict[str, Any]], metric: str, title: str) -> None:
             x=alt.X("step:Q", scale=alt.Scale(zero=False)),
             y=alt.Y("score:Q", scale=alt.Scale(zero=False)),
             color=alt.Color("family:N", scale=color_scale),
-            detail="family:N",
+            detail="name:N",
             tooltip=["name:N", alt.Tooltip("score:Q", format=".6f")],
         )
     )
@@ -532,7 +548,11 @@ def render_dashboard(api_base: str) -> None:
     except (
         Exception
     ) as error:  # keep the last seed/cache visible on transient API failure
-        rows = load_json_rows(SEED_PATH) + load_json_rows(DYNAMIC_CACHE_PATH)
+        rows = (
+            load_json_rows(SEED_PATH)
+            + load_json_rows(REFERENCE_PATH)
+            + load_json_rows(DYNAMIC_CACHE_PATH)
+        )
         rows.sort(key=lambda row: float(row["half_score"]), reverse=True)
         new_count = 0
         errors = [f"sync failed: {error}"]
@@ -591,6 +611,12 @@ def render_dashboard(api_base: str) -> None:
         render_chart(rows, "full_naming", "Full naming IoU")
 
     st.subheader("Half sample scores")
+    st.caption(
+        "[Gemini A-1797 rows](https://linear.app/twelve-labs/issue/A-1797/"
+        "port-entity-coverage-v02-event-coverage-v0-evals-into-pegasus-eval"
+        "#comment-2524ef27) are aggregate-only references; the Linear comment "
+        "does not include per-sample scores, so those cells are blank."
+    )
     sample_scores = half_sample_dataframe(rows)
     sample_score_style_table = sample_scores.style.map(sample_score_style)
     st.dataframe(
