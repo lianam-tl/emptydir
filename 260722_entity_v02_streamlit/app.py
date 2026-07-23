@@ -659,19 +659,23 @@ def render_dashboard(api_base: str) -> None:
 
     st.subheader("Entity coverage v0.2 results")
     st.markdown(
-        r"""
+        """
 **EDR (Entity Duration Ratio)** measures predicted entity-duration volume against
-ground truth after the evaluator's `name_and_desc` entity mapping. For every GT
+ground truth after the evaluator's **name_and_desc** entity mapping. For every GT
 entity (e) in sample (s), overlapping intervals are merged before measuring
 their duration:
-
-\[
+"""
+    )
+    st.latex(
+        r"""
 \mathrm{EDR} =
 \frac{\sum_{(s,e)} \left|\bigcup \mathrm{MappedPredictedSpans}_{s,e}\right|}
      {\sum_{(s,e)} \left|\bigcup \mathrm{GroundTruthSpans}_{s,e}\right|}
-\]
-
-- ((s,e)) ranges over all 106 GT entity/sample pairs, \(\bigcup\) merges
+"""
+    )
+    st.markdown(
+        r"""
+- \((s,e)\) ranges over all 106 GT entity/sample pairs, \(\bigcup\) merges
   overlapping intervals, and \(|\cdot|\) is their duration in seconds.
 - A missing entity or parse-failed sample contributes **0** to the numerator,
   while its GT duration remains in the denominator.
