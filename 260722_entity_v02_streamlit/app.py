@@ -25,6 +25,7 @@ from botocore.exceptions import ClientError
 from json_repair import repair_json
 
 from training_mixtures import discover_training_mixture, experiment_metadata_uri
+from timeline_data import timeline_records
 
 
 APP_DIRECTORY = Path(__file__).resolve().parent
@@ -33,6 +34,7 @@ REFERENCE_PATH = APP_DIRECTORY / "reference_rows.json"
 GROUND_TRUTH_SHOT_STATISTICS_PATH = APP_DIRECTORY / "ground_truth_shot_statistics.json"
 ENTITY_DURATION_STATISTICS_PATH = APP_DIRECTORY / "entity_duration_statistics.json"
 TRAINING_TOKEN_MIXTURES_PATH = APP_DIRECTORY / "training_token_mixtures.json"
+GEMINI_TIMELINE_DATA_PATH = APP_DIRECTORY / "gemini_timeline_data.json"
 DYNAMIC_CACHE_PATH = Path(
     os.environ.get("ENTITY_V02_DYNAMIC_CACHE_PATH", APP_DIRECTORY / "dynamic_rows.json")
 )
@@ -146,6 +148,11 @@ def load_training_token_mixture_cache() -> dict[str, Any]:
     if not TRAINING_MIXTURE_CACHE_PATH.exists():
         return {"rows": [], "missing_model_paths": []}
     return json.loads(TRAINING_MIXTURE_CACHE_PATH.read_text())
+
+
+@st.cache_data
+def load_gemini_timeline_data() -> dict[str, Any]:
+    return json.loads(GEMINI_TIMELINE_DATA_PATH.read_text())
 
 
 def save_training_token_mixture_cache(payload: dict[str, Any]) -> None:
@@ -675,6 +682,122 @@ def half_sample_dataframe(rows: list[dict[str, Any]]) -> pd.DataFrame:
     return pd.DataFrame.from_records(records).set_index("Model")
 
 
+def external_half_sample_id(short_sample_id: str) -> str:
+    media_id, chunk_index = short_sample_id.split(":", maxsplit=1)
+    return f"entity_coverage_v0__{media_id}__half__{chunk_index}"
+
+
+@st.cache_data(ttl=900, show_spinner=False)
+def collect_native_timeline_inputs(
+    api_base: str, run_id: str, short_sample_id: str
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    sample_id = external_half_sample_id(short_sample_id)
+    results = request_json(api_base, f"/eval/runs/{run_id}/results")
+    sample_result = (results.get("samples") or {}).get(sample_id)
+    if sample_result is None:
+        raise ValueError(f"prediction is missing for {sample_id}")
+    tasks = sample_result.get("tasks") or []
+    if len(tasks) != 1:
+        raise ValueError(f"prediction has {len(tasks)} tasks")
+    prediction = find_nested_payload(normalize_model_output(tasks[0].get("result")))
+
+    evaluation = request_json(api_base, f"/eval/runs/{run_id}/evaluations/latest")[
+        "evaluation"
+    ]
+    benchmark = request_json(
+        api_base,
+        f"/eval/runs/{run_id}/evaluations/{evaluation['id']}/payloads/benchmark_scores_json",
+    )["payload"]["payload"]
+    benchmark_sample = next(
+        (
+            sample
+            for sample in benchmark["entity_coverage"]["samples"]
+            if sample["sample_id"] == sample_id
+        ),
+        None,
+    )
+    if benchmark_sample is None:
+        raise ValueError(f"benchmark details are missing for {sample_id}")
+    return prediction, benchmark_sample["character_scores"]
+
+
+def render_sample_timeline(
+    api_base: str,
+    leaderboard_rows: list[dict[str, Any]],
+    model_name: str,
+    short_sample_id: str,
+) -> None:
+    gemini_data = load_gemini_timeline_data()
+    ground_truth = gemini_data["ground_truth"].get(short_sample_id)
+    if ground_truth is None:
+        st.error(f"Ground truth is missing for {short_sample_id}.")
+        return
+    static_model = gemini_data["models"].get(model_name)
+    if static_model is not None:
+        static_sample = static_model["samples"].get(short_sample_id)
+        if static_sample is None:
+            st.info("A-1797 has no attached prediction for this Gemini configuration.")
+            return
+        prediction = static_sample["prediction"]
+        character_scores = static_sample["character_scores"]
+        mapping = static_sample["mapping"]
+    else:
+        row = next(row for row in leaderboard_rows if row["name"] == model_name)
+        prediction, character_scores = collect_native_timeline_inputs(
+            api_base, str(row["run_id"]), short_sample_id
+        )
+        mapping = None
+
+    records, video_duration = timeline_records(
+        prediction, ground_truth, character_scores, mapping=mapping
+    )
+    st.markdown(f"#### {model_name} · {short_sample_id}")
+    st.caption(
+        "Matched prediction names are recovered from the evaluator's saved "
+        "span-count and IoU fingerprints. The x-axis covers the complete "
+        f"{video_duration:.1f}s clip."
+    )
+    if not records:
+        st.info("No scored entity spans are available for this sample.")
+        return
+    timeline = pd.DataFrame.from_records(records)
+    lane_order = list(dict.fromkeys(timeline["lane"]))
+    chart = (
+        alt.Chart(timeline)
+        .mark_bar(size=11, cornerRadius=2)
+        .encode(
+            x=alt.X(
+                "start:Q",
+                title="Time (seconds)",
+                scale=alt.Scale(domain=[0, video_duration]),
+            ),
+            x2="end:Q",
+            y=alt.Y(
+                "lane:N",
+                title=None,
+                sort=lane_order,
+                axis=alt.Axis(labelOverlap=False, labelLimit=280),
+            ),
+            color=alt.Color(
+                "source:N",
+                scale=alt.Scale(
+                    domain=["GT", "Prediction"], range=["#1769aa", "#d95f02"]
+                ),
+                legend=alt.Legend(title=None, orient="top"),
+            ),
+            tooltip=[
+                alt.Tooltip("ground_truth_name:N", title="GT name"),
+                alt.Tooltip("predicted_names:N", title="Matched prediction"),
+                alt.Tooltip("source:N", title="Source"),
+                alt.Tooltip("start:Q", title="Start", format=".2f"),
+                alt.Tooltip("end:Q", title="End", format=".2f"),
+            ],
+        )
+        .properties(height=max(180, len(lane_order) * 24))
+    )
+    st.altair_chart(chart, width="stretch")
+
+
 def training_mixture_dataframe(
     mixture_rows: list[dict[str, Any]],
 ) -> tuple[pd.DataFrame, list[str]]:
@@ -941,15 +1064,19 @@ def render_dashboard(api_base: str) -> None:
 
     st.subheader("Half sample scores")
     st.caption(
-        "[Gemini A-1797 rows](https://linear.app/twelve-labs/issue/A-1797/"
+        "Select a score cell to compare its matched GT and prediction spans. "
+        "[A-1797](https://linear.app/twelve-labs/issue/A-1797/"
         "port-entity-coverage-v02-event-coverage-v0-evals-into-pegasus-eval"
-        "#comment-2524ef27) are aggregate-only references; the Linear comment "
-        "does not include per-sample scores, so those cells are blank."
+        ") includes raw attachments for the three chunked Gemini rows; "
+        "whole-clip Gemini rows remain aggregate-only."
     )
     sample_scores = half_sample_dataframe(rows)
     sample_score_style_table = sample_scores.style.map(sample_score_style)
-    st.dataframe(
+    sample_selection = st.dataframe(
         sample_score_style_table,
+        key="half_sample_scores",
+        on_select="rerun",
+        selection_mode="single-cell",
         hide_index=False,
         width="stretch",
         height=900,
@@ -961,6 +1088,21 @@ def render_dashboard(api_base: str) -> None:
             },
         },
     )
+    selected_cells = sample_selection.selection.cells
+    if selected_cells:
+        selected_row, selected_column = selected_cells[0]
+        model_name = str(sample_scores.index[selected_row])
+        try:
+            render_sample_timeline(api_base, rows, model_name, selected_column)
+        except (
+            KeyError,
+            StopIteration,
+            TypeError,
+            ValueError,
+            OSError,
+            urllib.error.URLError,
+        ) as error:
+            st.error(f"Could not build this timeline: {error}")
 
 
 st.set_page_config(

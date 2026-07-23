@@ -46,12 +46,27 @@
       "half_naming": 0.3587,
       "half_score": 0.3853,
       "half_delta": null,
-      "average_shots": null,
-      "average_shot_duration": null,
-      "parsed_media_count": null,
-      "total_shot_segments": null,
-      "half_samples": {},
-      "created_at": "2026-07-22T23:52:04.356Z"
+      "average_shots": 241.66666666666666,
+      "average_shot_duration": 3.7450574712643676,
+      "parsed_media_count": 18,
+      "total_shot_segments": 4350,
+      "half_samples": {
+        "film-01:000": 0.5376457158461091,
+        "film-01:001": 0.33001295522229046,
+        "film-02:000": 0.4816005731186956,
+        "film-02:001": 0.23565924302891403,
+        "film-03:000": 0.3679357926896642,
+        "film-03:001": 0.3645193174576037,
+        "film-04:000": 0.20887602722721985,
+        "film-04:001": 0.3409685084504917,
+        "film-05:000": 0.5781686354703606,
+        "film-05:001": 0.43329807166817014,
+        "film-06:000": 0.47072815608007185,
+        "film-06:001": 0.4361778745292188
+      },
+      "created_at": "2026-07-22T23:52:04.356Z",
+      "average_predicted_to_ground_truth_shot_count_ratio": 1.567182608990239,
+      "average_predicted_shot_duration_coverage_ratio": 0.9565278846771447
     },
     {
       "name": "gemini-3.5-flash-whole",
@@ -98,12 +113,27 @@
       "half_naming": 0.3407,
       "half_score": 0.3713,
       "half_delta": null,
-      "average_shots": null,
-      "average_shot_duration": null,
-      "parsed_media_count": null,
-      "total_shot_segments": null,
-      "half_samples": {},
-      "created_at": "2026-07-22T23:52:04.356Z"
+      "average_shots": 228.0,
+      "average_shot_duration": 3.9417641325536064,
+      "parsed_media_count": 18,
+      "total_shot_segments": 4104,
+      "half_samples": {
+        "film-01:000": 0.5121715881049306,
+        "film-01:001": 0.35072309617609476,
+        "film-02:000": 0.5573516478076963,
+        "film-02:001": 0.29774766660165924,
+        "film-03:000": 0.47925330803189775,
+        "film-03:001": 0.19440434451844282,
+        "film-04:000": 0.31510002857797925,
+        "film-04:001": 0.1297116124088665,
+        "film-05:000": 0.5124079122248277,
+        "film-05:001": 0.33985943240790983,
+        "film-06:000": 0.4595874625858094,
+        "film-06:001": 0.4426116367081791
+      },
+      "created_at": "2026-07-22T23:52:04.356Z",
+      "average_predicted_to_ground_truth_shot_count_ratio": 1.5297116194452267,
+      "average_predicted_shot_duration_coverage_ratio": 0.9746065362052843
     },
     {
       "name": "gemini-3.1-pro-preview-whole",
@@ -150,12 +180,27 @@
       "half_naming": 0.2733,
       "half_score": 0.4083,
       "half_delta": null,
-      "average_shots": null,
-      "average_shot_duration": null,
-      "parsed_media_count": null,
-      "total_shot_segments": null,
-      "half_samples": {},
-      "created_at": "2026-07-22T23:52:04.356Z"
+      "average_shots": 170.11111111111111,
+      "average_shot_duration": 5.383082952318746,
+      "parsed_media_count": 18,
+      "total_shot_segments": 3062,
+      "half_samples": {
+        "film-01:000": 0.44996157204925913,
+        "film-01:001": 0.2949363066153093,
+        "film-02:000": 0.5065503643626097,
+        "film-02:001": 0.2861002204359128,
+        "film-03:000": 0.4809086275825797,
+        "film-03:001": 0.43794436417634175,
+        "film-04:000": 0.3982284890686149,
+        "film-04:001": 0.42368929189782534,
+        "film-05:000": 0.39902549774471985,
+        "film-05:001": 0.5281250034437643,
+        "film-06:000": 0.304874358982365,
+        "film-06:001": 0.46798508463564065
+      },
+      "created_at": "2026-07-22T23:52:04.356Z",
+      "average_predicted_to_ground_truth_shot_count_ratio": 1.1278646084561015,
+      "average_predicted_shot_duration_coverage_ratio": 0.9772989592180532
     }
   ]
 }

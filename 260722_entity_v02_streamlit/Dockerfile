@@ -10,7 +10,7 @@ WORKDIR /app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app.py training_mixtures.py seed_rows.json reference_rows.json ground_truth_shot_statistics.json entity_duration_statistics.json training_token_mixtures.json ./
+COPY app.py timeline_data.py training_mixtures.py seed_rows.json reference_rows.json ground_truth_shot_statistics.json entity_duration_statistics.json training_token_mixtures.json gemini_timeline_data.json ./
 
 RUN useradd --no-create-home --uid 10001 dashboard
 USER 10001

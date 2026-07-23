@@ -13,6 +13,12 @@ the model-input directory, and caches its `mixture_stats.json` summary in
 `ENTITY_V02_TRAINING_MIXTURE_CACHE_PATH`. The dashboard expands family-defining
 components and collapses the remaining similar rows into `Other/base`.
 
+Select a model/sample cell in **Half sample scores** to render evaluator-matched
+GT and prediction spans over the complete clip duration. Native rows are loaded
+on demand from Eval V3. `gemini_timeline_data.json` contains the compact raw
+predictions, scores, and validated mappings from the chunked Gemini attachments
+on https://linear.app/twelve-labs/issue/A-1797/port-entity-coverage-v02-event-coverage-v0-evals-into-pegasus-eval.
+
 ## Run locally
 
 ```bash

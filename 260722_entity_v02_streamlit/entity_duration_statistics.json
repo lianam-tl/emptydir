@@ -161,6 +161,16 @@
       "run_id": "b44f8811-87f8-5f92-b3b4-b3f712c104c3",
       "entity_duration_micro_ratio": 1.1503697471359124,
       "missing_ground_truth_entity_fraction": 0.25471698113207547
+    },
+    {
+      "run_id": "linear:A-1797:2524ef27:flash3:chunked-5m",
+      "entity_duration_micro_ratio": 0.7624620780539745,
+      "missing_ground_truth_entity_fraction": null
+    },
+    {
+      "run_id": "linear:A-1797:2524ef27:flash35:chunked-5m",
+      "entity_duration_micro_ratio": 0.7371856955559146,
+      "missing_ground_truth_entity_fraction": null
     }
   ]
 }
