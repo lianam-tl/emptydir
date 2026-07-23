@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>W&amp;B config comparison: qsxse0lv vs 5pwnlcgj</title>
+  <style>
+    :root { color-scheme: light; --ink: #172033; --muted: #64748b; --line: #dbe3ee; --a: #e8f2ff; --b: #fff1e7; --good: #eaf8ef; }
+    body { margin: 0; background: #f6f8fb; color: var(--ink); font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    main { max-width: 1180px; margin: 32px auto; padding: 0 20px 48px; }
+    h1 { margin-bottom: 6px; font-size: 28px; }
+    h2 { margin-top: 30px; font-size: 20px; }
+    p { margin: 8px 0; }
+    .muted { color: var(--muted); }
+    .verdict { margin: 22px 0; padding: 16px 18px; border: 1px solid #a9dfba; border-radius: 10px; background: var(--good); font-size: 17px; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: white; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    tr:last-child td { border-bottom: 0; }
+    th { position: sticky; top: 0; background: #eef2f7; font-size: 13px; }
+    td:nth-child(2) { background: var(--a); }
+    td:nth-child(3) { background: var(--b); }
+    code { overflow-wrap: anywhere; font: 13px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .formula { padding: 12px 14px; border-left: 4px solid #5179b8; background: white; }
+    a { color: #1558a6; }
+    ul { margin-top: 8px; }
+  </style>
+</head>
+<body>
+<main>
+  <h1>W&amp;B config comparison</h1>
+  <p class="muted">Compared from each run's stored W&amp;B config and embedded <code>resolved_config_yaml</code> on 2026-07-24.</p>
+  <p>
+    <a href="https://wandb.ai/twelvelabs/pegasus-sme/runs/qsxse0lv">qsxse0lv</a>
+    versus
+    <a href="https://wandb.ai/twelvelabs/pegasus-sme/runs/5pwnlcgj">5pwnlcgj</a>
+  </p>
+
+  <div class="verdict"><strong>Verdict:</strong> yes, the effective batch differs by 2×. <code>qsxse0lv</code> uses 224 packed bins per optimizer step; <code>5pwnlcgj</code> uses 112.</div>
+
+  <h2>Batch calculation</h2>
+  <p class="formula"><code>global batch = nodes × GPUs/node × per-device batch × gradient accumulation</code></p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Field</th><th>qsxse0lv</th><th>5pwnlcgj</th><th>Impact</th></tr></thead>
+      <tbody>
+        <tr><td>Nodes × GPUs/node</td><td>14 × 8 = 112 GPUs</td><td>14 × 8 = 112 GPUs</td><td>Same world size</td></tr>
+        <tr><td><code>per_device_train_batch_size</code></td><td>1</td><td>1</td><td>Same micro-batch per GPU</td></tr>
+        <tr><td><code>gradient_accumulation_steps</code></td><td><strong>2</strong></td><td><strong>1</strong></td><td>Main cause of the batch difference</td></tr>
+        <tr><td>Effective global batch</td><td><strong>224 packed bins</strong></td><td><strong>112 packed bins</strong></td><td>qsxse0lv is 2× larger</td></tr>
+        <tr><td><code>packing_length</code></td><td>128,000 tokens</td><td>160,000 tokens</td><td>Different maximum tokens per packed bin</td></tr>
+        <tr><td>Nominal token cap / optimizer step</td><td>224 × 128k = <strong>28.672M</strong></td><td>112 × 160k = <strong>17.920M</strong></td><td>qsxse0lv is 1.6× larger by nominal cap</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">A “packed bin” can contain multiple original examples, so this is not necessarily 224 versus 112 original videos. The token figures are nominal caps, not measured non-padding token counts.</p>
+
+  <h2>Meaningful training and model differences</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Config</th><th>qsxse0lv</th><th>5pwnlcgj</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>Training role</td><td>PT / omni audio-video continuation</td><td>SFT / entity-SME-whisper mix</td><td>These are not like-for-like runs</td></tr>
+        <tr><td>Initialization</td><td><code>.../sft_260626_audio_q3o_proj_highlr-7n/checkpoint-604</code></td><td><code>.../hf_models/Qwen/Qwen3.5-27B</code></td><td>Continuation checkpoint versus pretrained Qwen3.5-27B</td></tr>
+        <tr><td><code>learning_rate</code></td><td><strong>2e-5</strong></td><td><strong>2e-6</strong></td><td>qsxse0lv is 10× higher</td></tr>
+        <tr><td>Stopping</td><td><code>max_steps=200</code>, 1 epoch</td><td><code>max_steps=-1</code>, 2 epochs</td><td>Fixed 200 steps versus epoch-driven training</td></tr>
+        <tr><td><code>warmup_ratio</code></td><td>0.10</td><td>0.03</td><td>Different LR warmup fraction</td></tr>
+        <tr><td><code>save_steps</code></td><td>200</td><td>100</td><td>Different checkpoint cadence</td></tr>
+        <tr><td><code>hsdp_replicate_degree</code></td><td>7</td><td>14</td><td>With 112 GPUs: shard degree 16 versus 8; communication/memory topology differs, but this does not cause the global-batch difference</td></tr>
+        <tr><td>FSDP wrapped layer</td><td><code>Pegasus1_6DecoderLayer</code></td><td><code>Qwen3_5DecoderLayer</code></td><td>Different model wrapper path</td></tr>
+        <tr><td>Audio sequence parallel patch</td><td>Enabled</td><td>Absent</td><td>qsxse0lv enables audio sequence parallelism</td></tr>
+        <tr><td><code>freeze_modules</code></td><td><code>[]</code></td><td><code>null</code></td><td>Recorded differently; likely no semantic difference because both freeze nothing</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Dataset, packing, and evaluation differences</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Config</th><th>qsxse0lv</th><th>5pwnlcgj</th></tr></thead>
+      <tbody>
+        <tr><td><code>dataset_path</code></td><td><code>.../model_input/pt_260721_omni</code></td><td><code>.../model_input/sft_consol_260416_clean_filter_less_aug_highres_soccer_h0_mn_sme_a1865_entity_whisper_added_manifest</code></td></tr>
+        <tr><td><code>dataset_type</code></td><td><code>pegasus1_6_map</code></td><td><code>pegasus_qwen3_vl_map</code></td></tr>
+        <tr><td><code>processor_type</code></td><td><code>pegasus1_6</code></td><td><code>pegasus_qwen3_vl</code></td></tr>
+        <tr><td>Audio in video</td><td><code>use_audio_in_video=true</code></td><td>Not set</td></tr>
+        <tr><td><code>packing_strategy</code></td><td><code>window_500</code></td><td><code>window_100</code></td></tr>
+        <tr><td><code>packing_length</code></td><td>128,000</td><td>160,000</td></tr>
+        <tr><td>Evaluation block</td><td><code>eval_args=null</code></td><td>Enabled: 4 nodes, TP=4, eval batch=10, <code>twelvelabs/sme_eval_v2</code>, remote checkpoint</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Operational-only differences</h2>
+  <ul>
+    <li>Run/config names, output/log/checkpoint destinations, users' S3 prefixes, git branches, commits, release IDs, and creation timestamps differ.</li>
+    <li>The runtime processor/model cache hashes differ because the source model paths differ.</li>
+  </ul>
+
+  <h2>Important matching settings</h2>
+  <p>Both use 14 nodes, Qwen3.5-27B, per-device train batch 1, MTP enabled with loss weight 0.1, FSDP2, sequence-parallel degree 1, FlashAttention 2, bf16, gradient checkpointing, Liger, rmpad, AdamW fused, weight decay 0.05, and the same video frame/pixel sampling limits.</p>
+</main>
+</body>
+</html>
