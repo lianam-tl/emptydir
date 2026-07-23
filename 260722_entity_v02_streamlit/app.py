@@ -39,6 +39,7 @@ FAMILY_COLORS = {
     "Soccer LVReason MCQ": "#d97706",
     "A-1740 h0 duration": "#0b62d6",
     "A-1790 entity SME 4x": "#c62828",
+    "Entity SME v1.2 Whisper": "#5e35b1",
     "H0 Entity v1.2": "#ad1457",
     "Pegasus 1.5 RL": "#00838f",
     "Pegasus 1.5 SFT": "#6d4c41",
@@ -133,6 +134,7 @@ def list_completed_runs(api_base: str) -> list[dict[str, Any]]:
 def friendly_name(run_name: str, model_path: str) -> str:
     searchable = f"{run_name} {model_path}"
     patterns = (
+        (r"a1865-entity-sme-whisper-s(\d+)", "entity_sme_v1_2-whisper-s{}"),
         (r"a1790-entity-sme4x-s(\d+)", "a1790-entity-sme4x-s{}"),
         (r"(?:sft-)?lvreason-mcq-s(\d+)", "soccer-lvreason-mcq-s{}"),
         (r"h0-entity-v1-2-s(\d+)", "h0-entity-v1-2-s{}"),
@@ -154,6 +156,8 @@ def family_name(name: str) -> str:
         return "A-1740 h0 duration"
     if name.startswith("a1790-"):
         return "A-1790 entity SME 4x"
+    if name.startswith("entity_sme_v1_2-whisper-"):
+        return "Entity SME v1.2 Whisper"
     if name.startswith("h0-entity-v1-2-"):
         return "H0 Entity v1.2"
     if name == "pegasus-15-rl-s60":
@@ -415,6 +419,8 @@ def collect_completed_run(api_base: str, run: dict[str, Any]) -> dict[str, Any]:
 def synchronize_rows(api_base: str) -> tuple[list[dict[str, Any]], int, list[str]]:
     seed_rows = load_json_rows(SEED_PATH) + load_json_rows(REFERENCE_PATH)
     dynamic_rows = load_json_rows(DYNAMIC_CACHE_PATH)
+    for row in [*seed_rows, *dynamic_rows]:
+        row["name"] = friendly_name(row["name"], str(row.get("path") or ""))
     known_run_ids = {str(row.get("run_id")) for row in [*seed_rows, *dynamic_rows]}
     new_count = 0
     errors: list[str] = []
