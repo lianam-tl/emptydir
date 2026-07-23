@@ -298,7 +298,7 @@ def collect_shot_statistics(
     segment_counts: list[int] = []
     shot_durations: list[float] = []
     shot_count_ratios: list[float] = []
-    average_shot_duration_differences: list[float] = []
+    shot_duration_coverage_ratios: list[float] = []
     for sample_id, sample in displayed_samples.items():
         tasks = sample.get("tasks") or []
         if len(tasks) != 1:
@@ -319,13 +319,9 @@ def collect_shot_statistics(
         segment_counts.append(len(shots))
         shot_durations.extend(predicted_shot_durations)
         shot_count_ratios.append(len(shots) / int(ground_truth["shot_count"]))
-        if predicted_shot_durations:
-            average_shot_duration_differences.append(
-                abs(
-                    statistics.fmean(predicted_shot_durations)
-                    - float(ground_truth["average_shot_duration"])
-                )
-            )
+        shot_duration_coverage_ratios.append(
+            sum(predicted_shot_durations) / float(ground_truth["video_duration"])
+        )
 
     parse_failures = len(displayed_samples) - len(segment_counts)
     if parse_failures != expected_parse_failures:
@@ -343,12 +339,11 @@ def collect_shot_statistics(
         "average_predicted_to_ground_truth_shot_count_ratio": (
             statistics.fmean(shot_count_ratios) if shot_count_ratios else None
         ),
-        "mean_absolute_average_shot_duration_difference": (
-            statistics.fmean(average_shot_duration_differences)
-            if average_shot_duration_differences
+        "average_predicted_shot_duration_coverage_ratio": (
+            statistics.fmean(shot_duration_coverage_ratios)
+            if shot_duration_coverage_ratios
             else None
         ),
-        "shot_duration_comparison_media_count": len(average_shot_duration_differences),
     }
 
 
@@ -458,8 +453,8 @@ def table_dataframe(rows: list[dict[str, Any]]) -> pd.DataFrame:
                 "Avg(predicted / GT shots)": row.get(
                     "average_predicted_to_ground_truth_shot_count_ratio"
                 ),
-                "Avg(|predicted − GT mean duration|)": row.get(
-                    "mean_absolute_average_shot_duration_difference"
+                "Avg(Σ shot duration / video duration)": row.get(
+                    "average_predicted_shot_duration_coverage_ratio"
                 ),
                 "Half name + appearance IoU": row["half_score"],
                 "Half naming IoU": row["half_naming"],
@@ -658,12 +653,12 @@ def render_dashboard(api_base: str) -> None:
                     "GT shot count. 1.0 means the counts match."
                 ),
             ),
-            "Avg(|predicted − GT mean duration|)": st.column_config.NumberColumn(
-                format="%.2f s",
+            "Avg(Σ shot duration / video duration)": st.column_config.NumberColumn(
+                format="%.3f",
                 help=(
-                    "Mean across parsed media with at least one predicted shot of "
-                    "the absolute difference between predicted and GT mean shot "
-                    "duration. Lower is better."
+                    "Mean across parsed media of total predicted shot duration "
+                    "divided by video duration. 1.0 means one video-length of "
+                    "coverage; values above 1.0 indicate overlap or overextension."
                 ),
             ),
         },

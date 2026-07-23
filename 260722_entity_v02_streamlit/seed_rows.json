@@ -39,8 +39,7 @@
         "film-06:001": 0.40798462784728307
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.7408634027751414,
-      "mean_absolute_average_shot_duration_difference": 6.3338952165867415,
-      "shot_duration_comparison_media_count": 18
+      "average_predicted_shot_duration_coverage_ratio": 0.9987065228161985
     },
     {
       "name": "a1740-h0-duration-s400",
@@ -80,8 +79,7 @@
         "film-06:001": 0.6565518109657321
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.7862147020827503,
-      "mean_absolute_average_shot_duration_difference": 16.593837578566404,
-      "shot_duration_comparison_media_count": 16
+      "average_predicted_shot_duration_coverage_ratio": 0.9398660153891989
     },
     {
       "name": "a1790-entity-sme4x-s400",
@@ -121,8 +119,7 @@
         "film-06:001": 0.6625784264950056
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.6946718935508339,
-      "mean_absolute_average_shot_duration_difference": 23.054719930665716,
-      "shot_duration_comparison_media_count": 15
+      "average_predicted_shot_duration_coverage_ratio": 0.9165690717936253
     },
     {
       "name": "a1790-entity-sme4x-s1200",
@@ -162,8 +159,7 @@
         "film-06:001": 0.5117118928775554
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.9649220357033996,
-      "mean_absolute_average_shot_duration_difference": 14.750896830882764,
-      "shot_duration_comparison_media_count": 16
+      "average_predicted_shot_duration_coverage_ratio": 0.9233885107180272
     },
     {
       "name": "a1740-h0-duration-s800",
@@ -203,8 +199,7 @@
         "film-06:001": 0.41516851008135697
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.7997770613338304,
-      "mean_absolute_average_shot_duration_difference": 12.898934443977254,
-      "shot_duration_comparison_media_count": 16
+      "average_predicted_shot_duration_coverage_ratio": 0.9987460528816456
     },
     {
       "name": "a1740-h0-duration-s1200",
@@ -244,8 +239,7 @@
         "film-06:001": 0.40997135141683244
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.8345318246652091,
-      "mean_absolute_average_shot_duration_difference": 10.030350079623783,
-      "shot_duration_comparison_media_count": 15
+      "average_predicted_shot_duration_coverage_ratio": 0.9362646520139992
     },
     {
       "name": "consol-h0mn2x-s400",
@@ -285,8 +279,7 @@
         "film-06:001": 0.4638223594385133
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.9491290537294282,
-      "mean_absolute_average_shot_duration_difference": 15.013494715540682,
-      "shot_duration_comparison_media_count": 16
+      "average_predicted_shot_duration_coverage_ratio": 0.9322306418388042
     },
     {
       "name": "consol-h0mn2x-s800",
@@ -326,8 +319,7 @@
         "film-06:001": 0.6360449867178208
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.942926996307651,
-      "mean_absolute_average_shot_duration_difference": 13.115435283272808,
-      "shot_duration_comparison_media_count": 17
+      "average_predicted_shot_duration_coverage_ratio": 0.8824188697983654
     },
     {
       "name": "consol-h0mn2x-s1200",
@@ -367,8 +359,7 @@
         "film-06:001": 0.46212167943429916
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.7807995830604388,
-      "mean_absolute_average_shot_duration_difference": 14.728386060353689,
-      "shot_duration_comparison_media_count": 15
+      "average_predicted_shot_duration_coverage_ratio": 0.9180655217518856
     },
     {
       "name": "consol-h0mn2x-s1600",
@@ -408,8 +399,7 @@
         "film-06:001": 0.5081939552635995
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.7800844398431919,
-      "mean_absolute_average_shot_duration_difference": 9.861245421966068,
-      "shot_duration_comparison_media_count": 16
+      "average_predicted_shot_duration_coverage_ratio": 0.9487237562870007
     },
     {
       "name": "consol-h0mn2x-s2000",
@@ -449,8 +439,7 @@
         "film-06:001": 0.3931748378068001
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.5961588458499556,
-      "mean_absolute_average_shot_duration_difference": 10.063276921587498,
-      "shot_duration_comparison_media_count": 16
+      "average_predicted_shot_duration_coverage_ratio": 0.9989758898520139
     },
     {
       "name": "soccer-lvreason-mcq-s400",
@@ -490,8 +479,7 @@
         "film-06:001": 0.13059618264729747
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.9420939150973231,
-      "mean_absolute_average_shot_duration_difference": 20.69805585837699,
-      "shot_duration_comparison_media_count": 17
+      "average_predicted_shot_duration_coverage_ratio": 0.9658723659378792
     },
     {
       "name": "soccer-lvreason-mcq-s800",
@@ -531,8 +519,7 @@
         "film-06:001": 0.6081434742210646
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.6923697326828467,
-      "mean_absolute_average_shot_duration_difference": 11.392067373726187,
-      "shot_duration_comparison_media_count": 16
+      "average_predicted_shot_duration_coverage_ratio": 0.9300095230145005
     },
     {
       "name": "soccer-lvreason-mcq-s1200",
@@ -572,8 +559,7 @@
         "film-06:001": 0.34887863897514226
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.9462685788656918,
-      "mean_absolute_average_shot_duration_difference": 7.502106278120393,
-      "shot_duration_comparison_media_count": 16
+      "average_predicted_shot_duration_coverage_ratio": 0.999770018408914
     },
     {
       "name": "pegasus-15-rl-s60",
@@ -613,8 +599,7 @@
         "film-06:001": 0.4391766652072094
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.6923212985141576,
-      "mean_absolute_average_shot_duration_difference": 13.833700631257141,
-      "shot_duration_comparison_media_count": 18
+      "average_predicted_shot_duration_coverage_ratio": 0.9982148212083845
     },
     {
       "name": "a1790-entity-sme4x-s1800",
@@ -654,8 +639,7 @@
         "film-06:001": 0.5210002527215287
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.8715785674131395,
-      "mean_absolute_average_shot_duration_difference": 10.275561697371234,
-      "shot_duration_comparison_media_count": 16
+      "average_predicted_shot_duration_coverage_ratio": 0.9980389143313544
     },
     {
       "name": "pegasus-15-sft-s1000",
@@ -695,8 +679,7 @@
         "film-06:001": 0.41194638858931387
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.7960424701889008,
-      "mean_absolute_average_shot_duration_difference": 10.550869445399623,
-      "shot_duration_comparison_media_count": 16
+      "average_predicted_shot_duration_coverage_ratio": 0.9975863177397987
     },
     {
       "name": "a1790-entity-sme4x-s800",
@@ -736,8 +719,7 @@
         "film-06:001": 0.6585427751097728
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.7838007669403447,
-      "mean_absolute_average_shot_duration_difference": 14.241088112927212,
-      "shot_duration_comparison_media_count": 16
+      "average_predicted_shot_duration_coverage_ratio": 0.9056375555395606
     },
     {
       "name": "a1790-entity-sme4x-s1600",
@@ -777,8 +759,7 @@
         "film-06:001": 0.651822717043537
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.6960160807410867,
-      "mean_absolute_average_shot_duration_difference": 11.998939225857038,
-      "shot_duration_comparison_media_count": 16
+      "average_predicted_shot_duration_coverage_ratio": 1.0002181641910985
     },
     {
       "name": "a1790-entity-sme4x-s1900",
@@ -818,8 +799,7 @@
         "film-06:001": 0.20605369903332038
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.907419032652662,
-      "mean_absolute_average_shot_duration_difference": 11.878472169691083,
-      "shot_duration_comparison_media_count": 17
+      "average_predicted_shot_duration_coverage_ratio": 0.9680612513435034
     },
     {
       "name": "a1790-entity-sme4x-s2000",
@@ -859,8 +839,7 @@
         "film-06:001": 0.2066122210643877
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.5428833422894176,
-      "mean_absolute_average_shot_duration_difference": 6.14447964333075,
-      "shot_duration_comparison_media_count": 16
+      "average_predicted_shot_duration_coverage_ratio": 0.858489088941951
     },
     {
       "name": "a1790-entity-sme4x-s2100",
@@ -900,8 +879,7 @@
         "film-06:001": 0.6439022917257307
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.7093711610988421,
-      "mean_absolute_average_shot_duration_difference": 39.698582372813604,
-      "shot_duration_comparison_media_count": 18
+      "average_predicted_shot_duration_coverage_ratio": 0.999031202498619
     },
     {
       "name": "soccer-lvreason-mcq-s1600",
@@ -941,8 +919,7 @@
         "film-06:001": 0.6426304388893405
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.8540924239857552,
-      "mean_absolute_average_shot_duration_difference": 12.170797613941822,
-      "shot_duration_comparison_media_count": 17
+      "average_predicted_shot_duration_coverage_ratio": 0.998127268848745
     },
     {
       "name": "soccer-lvreason-mcq-s2000",
@@ -982,8 +959,7 @@
         "film-06:001": 0.301515435956616
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 1.0149860919443967,
-      "mean_absolute_average_shot_duration_difference": 11.201804606025043,
-      "shot_duration_comparison_media_count": 16
+      "average_predicted_shot_duration_coverage_ratio": 0.9813608393181458
     },
     {
       "name": "soccer-lvreason-mcq-s2100",
@@ -1023,8 +999,7 @@
         "film-06:001": 0.19283335216455505
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.7841616351245432,
-      "mean_absolute_average_shot_duration_difference": 14.86238805347202,
-      "shot_duration_comparison_media_count": 16
+      "average_predicted_shot_duration_coverage_ratio": 0.9988389929754194
     },
     {
       "name": "soccer-lvreason-mcq-s2200",
@@ -1064,8 +1039,7 @@
         "film-06:001": 0.5479493094330333
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 1.0809761269926124,
-      "mean_absolute_average_shot_duration_difference": 4.755981663662617,
-      "shot_duration_comparison_media_count": 17
+      "average_predicted_shot_duration_coverage_ratio": 0.9771621601522149
     },
     {
       "name": "h0-entity-v1-2-s100",
@@ -1105,8 +1079,7 @@
         "film-06:001": 0.6454937802361924
       },
       "average_predicted_to_ground_truth_shot_count_ratio": 0.3401604237610827,
-      "mean_absolute_average_shot_duration_difference": 25.69500655631905,
-      "shot_duration_comparison_media_count": 17
+      "average_predicted_shot_duration_coverage_ratio": 0.9176240251632367
     }
   ]
 }

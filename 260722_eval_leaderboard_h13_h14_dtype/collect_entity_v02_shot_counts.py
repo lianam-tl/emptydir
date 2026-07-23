@@ -82,7 +82,7 @@ def collect_run(
     segment_counts = []
     shot_durations = []
     shot_count_ratios = []
-    average_shot_duration_differences = []
+    shot_duration_coverage_ratios = []
     for sample_id, sample in displayed_samples.items():
         tasks = sample.get("tasks") or []
         if len(tasks) != 1:
@@ -104,13 +104,9 @@ def collect_run(
         segment_counts.append(len(shots))
         shot_durations.extend(predicted_shot_durations)
         shot_count_ratios.append(len(shots) / int(ground_truth["shot_count"]))
-        if predicted_shot_durations:
-            average_shot_duration_differences.append(
-                abs(
-                    statistics.fmean(predicted_shot_durations)
-                    - float(ground_truth["average_shot_duration"])
-                )
-            )
+        shot_duration_coverage_ratios.append(
+            sum(predicted_shot_durations) / float(ground_truth["video_duration"])
+        )
 
     parse_failures = len(displayed_samples) - len(segment_counts)
     if parse_failures != expected_parse_failures:
@@ -134,10 +130,9 @@ def collect_run(
         "average_predicted_to_ground_truth_shot_count_ratio": statistics.fmean(
             shot_count_ratios
         ),
-        "mean_absolute_average_shot_duration_difference": statistics.fmean(
-            average_shot_duration_differences
+        "average_predicted_shot_duration_coverage_ratio": statistics.fmean(
+            shot_duration_coverage_ratios
         ),
-        "shot_duration_comparison_media_count": len(average_shot_duration_differences),
         "minimum_shot_duration_seconds": min(shot_durations),
         "maximum_shot_duration_seconds": max(shot_durations),
     }

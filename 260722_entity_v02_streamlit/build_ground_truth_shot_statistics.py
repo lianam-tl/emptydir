@@ -76,9 +76,14 @@ def main() -> None:
         durations = valid_shot_durations(nested_payload(assistant_text))
         if not durations:
             raise ValueError(f"{row['id']} has no valid GT shots")
+        metadata = json.loads(row["metadata"])
+        video_duration = float(metadata["media_metadata"][0]["duration"])
+        if not math.isfinite(video_duration) or video_duration <= 0:
+            raise ValueError(f"{row['id']} has invalid video duration")
         samples[str(row["id"])] = {
             "shot_count": len(durations),
             "average_shot_duration": sum(durations) / len(durations),
+            "video_duration": video_duration,
         }
 
     arguments.output.write_text(

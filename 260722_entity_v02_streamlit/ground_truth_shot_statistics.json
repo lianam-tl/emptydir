@@ -4,75 +4,93 @@
   "samples": {
     "entity_coverage_v0__film-01__full__000": {
       "average_shot_duration": 7.17756928838951,
-      "shot_count": 267
+      "shot_count": 267,
+      "video_duration": 1585.750833
     },
     "entity_coverage_v0__film-01__half__000": {
       "average_shot_duration": 8.23884027777778,
-      "shot_count": 144
+      "shot_count": 144,
+      "video_duration": 793.000542
     },
     "entity_coverage_v0__film-01__half__001": {
       "average_shot_duration": 5.9351056910569095,
-      "shot_count": 123
+      "shot_count": 123,
+      "video_duration": 795.04425
     },
     "entity_coverage_v0__film-02__full__000": {
       "average_shot_duration": 8.025992217898832,
-      "shot_count": 257
+      "shot_count": 257,
+      "video_duration": 1256.96
     },
     "entity_coverage_v0__film-02__half__000": {
       "average_shot_duration": 7.3682167832167815,
-      "shot_count": 143
+      "shot_count": 143,
+      "video_duration": 628.56
     },
     "entity_coverage_v0__film-02__half__001": {
       "average_shot_duration": 8.774130434782611,
-      "shot_count": 115
+      "shot_count": 115,
+      "video_duration": 633.76
     },
     "entity_coverage_v0__film-03__full__000": {
       "average_shot_duration": 8.336966887417217,
-      "shot_count": 151
+      "shot_count": 151,
+      "video_duration": 1277.651375
     },
     "entity_coverage_v0__film-03__half__000": {
       "average_shot_duration": 6.716092105263155,
-      "shot_count": 76
+      "shot_count": 76,
+      "video_duration": 638.929958
     },
     "entity_coverage_v0__film-03__half__001": {
       "average_shot_duration": 9.979453333333336,
-      "shot_count": 75
+      "shot_count": 75,
+      "video_duration": 641.766125
     },
     "entity_coverage_v0__film-04__full__000": {
       "average_shot_duration": 12.941560747663555,
-      "shot_count": 214
+      "shot_count": 214,
+      "video_duration": 1934.4
     },
     "entity_coverage_v0__film-04__half__000": {
       "average_shot_duration": 10.874392307692306,
-      "shot_count": 130
+      "shot_count": 130,
+      "video_duration": 967.266667
     },
     "entity_coverage_v0__film-04__half__001": {
       "average_shot_duration": 15.76538372093023,
-      "shot_count": 86
+      "shot_count": 86,
+      "video_duration": 971.033333
     },
     "entity_coverage_v0__film-05__full__000": {
       "average_shot_duration": 6.961679389312976,
-      "shot_count": 262
+      "shot_count": 262,
+      "video_duration": 1215.12
     },
     "entity_coverage_v0__film-05__half__000": {
       "average_shot_duration": 5.997134146341463,
-      "shot_count": 164
+      "shot_count": 164,
+      "video_duration": 607.64
     },
     "entity_coverage_v0__film-05__half__001": {
       "average_shot_duration": 8.404300000000001,
-      "shot_count": 100
+      "shot_count": 100,
+      "video_duration": 608.8
     },
     "entity_coverage_v0__film-06__full__000": {
       "average_shot_duration": 7.302365591397849,
-      "shot_count": 279
+      "shot_count": 279,
+      "video_duration": 1214.6
     },
     "entity_coverage_v0__film-06__half__000": {
       "average_shot_duration": 6.9340361445783145,
-      "shot_count": 166
+      "shot_count": 166,
+      "video_duration": 607.4
     },
     "entity_coverage_v0__film-06__half__001": {
       "average_shot_duration": 7.774649122807018,
-      "shot_count": 114
+      "shot_count": 114,
+      "video_duration": 609.68
     }
   }
 }
