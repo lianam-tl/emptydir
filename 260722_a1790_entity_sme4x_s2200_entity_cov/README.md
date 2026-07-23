@@ -39,3 +39,10 @@ XPlatform batch: `batch-87e69ca1-aecb-417f-9bad-90d32b528266`
 
 CPU monitor: PID `1929340` under
 `/home/jeongyeon-nam/eval-retry4-a1790-entity-sme4x-s2200-260723`.
+
+The fixed-2-replica retry is tracked in `retry_2replica_submission.json`.
+
+- Eval V3 run: `0532f336-bff9-5451-a00f-4a4670a9b73c`
+- XPlatform batch: `batch-b61c6761-7430-44c5-9bce-59cbee4fbc6d`
+- CPU monitor: PID `1940099` under
+  `/home/jeongyeon-nam/eval-retry5-a1790-entity-sme4x-s2200-r2-260723`
