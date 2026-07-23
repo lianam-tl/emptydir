@@ -41,9 +41,9 @@ FAMILY_COLORS = {
     "Pegasus 1.5 RL": "#00838f",
     "Pegasus 1.5 SFT": "#6d4c41",
     "Pegasus 1.5 / Kian SOCE": "#137333",
-    "Gemini 3 Flash": "#7e57c2",
-    "Gemini 3.5 Flash": "#3949ab",
-    "Gemini 3.1 Pro": "#1e88e5",
+    "Gemini 3 Flash": "#f6ad55",
+    "Gemini 3.5 Flash": "#ed8936",
+    "Gemini 3.1 Pro": "#c05621",
     "Other": "#5f6368",
 }
 REFERENCE_NAMES = {
@@ -452,9 +452,22 @@ def chart_dataframe(rows: list[dict[str, Any]], metric: str) -> pd.DataFrame:
         return pd.DataFrame()
     minimum_step = min(numeric_steps)
     maximum_step = max(numeric_steps)
+    best_gemini_references: dict[str, dict[str, Any]] = {}
+    for row in rows:
+        family = family_name(row["name"])
+        if row["name"] not in REFERENCE_NAMES or not family.startswith("Gemini "):
+            continue
+        current_best = best_gemini_references.get(family)
+        if current_best is None or float(row[metric]) > float(current_best[metric]):
+            best_gemini_references[family] = row
+
     for row in rows:
         family = family_name(row["name"])
         if row["name"] in REFERENCE_NAMES:
+            if family.startswith("Gemini ") and row is not best_gemini_references.get(
+                family
+            ):
+                continue
             for step in (minimum_step, maximum_step):
                 records.append(
                     {
@@ -504,6 +517,11 @@ def sample_score_style(value: Any) -> str:
     return f"background-color: hsla({hue:.0f}, 70%, 45%, 0.30); font-weight: 600"
 
 
+def leaderboard_row_style(row: pd.Series) -> list[str]:
+    style = "background-color: #fff3e0; color: #5d3a00"
+    return [style if str(row["Name"]).startswith("gemini-") else ""] * len(row)
+
+
 def render_chart(rows: list[dict[str, Any]], metric: str, title: str) -> None:
     chart_rows = chart_dataframe(rows, metric)
     if chart_rows.empty:
@@ -514,6 +532,14 @@ def render_chart(rows: list[dict[str, Any]], metric: str, title: str) -> None:
     )
     regular_rows = chart_rows[~chart_rows["reference"]]
     reference_rows = chart_rows[chart_rows["reference"]]
+    hidden_families = alt.selection_point(
+        name=f"hidden_{metric}",
+        fields=["family"],
+        bind="legend",
+        toggle=True,
+        empty=False,
+    )
+    visible_opacity = alt.condition(hidden_families, alt.value(0), alt.value(1))
     line_chart = (
         alt.Chart(regular_rows)
         .mark_line(point=alt.OverlayMarkDef(filled=True, size=65))
@@ -522,6 +548,7 @@ def render_chart(rows: list[dict[str, Any]], metric: str, title: str) -> None:
             y=alt.Y("score:Q", title=title, scale=alt.Scale(zero=False)),
             color=alt.Color("family:N", scale=color_scale, title="family"),
             detail="family:N",
+            opacity=visible_opacity,
             tooltip=["name:N", "step:Q", alt.Tooltip("score:Q", format=".6f")],
         )
     )
@@ -533,11 +560,15 @@ def render_chart(rows: list[dict[str, Any]], metric: str, title: str) -> None:
             y=alt.Y("score:Q", scale=alt.Scale(zero=False)),
             color=alt.Color("family:N", scale=color_scale),
             detail="name:N",
+            opacity=visible_opacity,
             tooltip=["name:N", alt.Tooltip("score:Q", format=".6f")],
         )
     )
     st.altair_chart(
-        (line_chart + reference_chart).properties(height=430), width="stretch"
+        (line_chart + reference_chart)
+        .add_params(hidden_families)
+        .properties(height=430),
+        width="stretch",
     )
 
 
@@ -571,9 +602,9 @@ def render_dashboard(api_base: str) -> None:
 
     st.subheader("Entity coverage v0.2 results")
     leaderboard = table_dataframe(rows)
-    leaderboard_style = leaderboard.style.set_properties(
-        subset=["Half name + appearance IoU"], **{"font-weight": "700"}
-    )
+    leaderboard_style = leaderboard.style.apply(
+        leaderboard_row_style, axis=1
+    ).set_properties(subset=["Half name + appearance IoU"], **{"font-weight": "700"})
     st.dataframe(
         leaderboard_style,
         hide_index=True,
@@ -593,6 +624,7 @@ def render_dashboard(api_base: str) -> None:
     )
 
     st.subheader("Scores by checkpoint step")
+    st.caption("Click a family in the legend to hide or restore its line.")
     half_appearance_tab, half_name_tab, full_appearance_tab, full_name_tab = st.tabs(
         [
             "Half name + appearance",
