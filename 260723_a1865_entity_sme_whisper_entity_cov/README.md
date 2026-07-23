@@ -28,3 +28,9 @@ Step 400 CPU monitor: PID `1953939` under
 
 Step 800 CPU monitor: PID `1954090` under
 `/home/jeongyeon-nam/eval-a1865-entity-sme-whisper-s800-260723`.
+
+Steps 100, 200, 300, 500, 600, and 700 use one sequential export job. After
+the export completes, `monitor_sequential.py` submits evaluations in that exact
+order and waits for each one to finish before submitting the next.
+
+Sequential export job: `export-a1865-entity-sme-whisper-sequential-timezn`
