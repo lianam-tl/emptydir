@@ -675,8 +675,8 @@ their duration:
     )
     st.markdown(
         r"""
-- \((s,e)\) ranges over all 106 GT entity/sample pairs, \(\bigcup\) merges
-  overlapping intervals, and \(|\cdot|\) is their duration in seconds.
+- `(s,e)` ranges over all 106 GT entity/sample pairs, `∪` merges overlapping
+  intervals, and `|...|` is their duration in seconds.
 - A missing entity or parse-failed sample contributes **0** to the numerator,
   while its GT duration remains in the denominator.
 - Unmatched predicted entities are excluded because they have no GT entity
