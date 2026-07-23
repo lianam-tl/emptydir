@@ -47,7 +47,8 @@ def is_displayed_sample(sample_id: str) -> bool:
 
 def collect_run(
     api_base: str,
-    tracked_run: dict[str, str],
+    tracked_run: dict[str, Any],
+    ground_truth_samples: dict[str, dict[str, float | int]],
     normalize_output_for_evaluation: Callable[[Any], Any],
     parse_nested_output: Callable[[Any], dict[str, Any]],
 ) -> dict[str, Any]:
@@ -80,6 +81,8 @@ def collect_run(
 
     segment_counts = []
     shot_durations = []
+    shot_count_ratios = []
+    average_shot_duration_differences = []
     for sample_id, sample in displayed_samples.items():
         tasks = sample.get("tasks") or []
         if len(tasks) != 1:
@@ -92,8 +95,22 @@ def collect_run(
         except ValueError:
             continue
         shots = parsed_output["shot_metadata"]
+        ground_truth = ground_truth_samples.get(sample_id)
+        if ground_truth is None:
+            raise ValueError(f"GT shot statistics are missing for {sample_id}")
+        predicted_shot_durations = [
+            shot["end_time"] - shot["start_time"] for shot in shots
+        ]
         segment_counts.append(len(shots))
-        shot_durations.extend(shot["end_time"] - shot["start_time"] for shot in shots)
+        shot_durations.extend(predicted_shot_durations)
+        shot_count_ratios.append(len(shots) / int(ground_truth["shot_count"]))
+        if predicted_shot_durations:
+            average_shot_duration_differences.append(
+                abs(
+                    statistics.fmean(predicted_shot_durations)
+                    - float(ground_truth["average_shot_duration"])
+                )
+            )
 
     parse_failures = len(displayed_samples) - len(segment_counts)
     if parse_failures != expected_parse_failures:
@@ -114,6 +131,13 @@ def collect_run(
         "maximum_shot_segments": max(segment_counts),
         "total_shot_duration_seconds": sum(shot_durations),
         "average_shot_duration_seconds": statistics.fmean(shot_durations),
+        "average_predicted_to_ground_truth_shot_count_ratio": statistics.fmean(
+            shot_count_ratios
+        ),
+        "mean_absolute_average_shot_duration_difference": statistics.fmean(
+            average_shot_duration_differences
+        ),
+        "shot_duration_comparison_media_count": len(average_shot_duration_differences),
         "minimum_shot_duration_seconds": min(shot_durations),
         "maximum_shot_duration_seconds": max(shot_durations),
     }
@@ -123,6 +147,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--api-base", required=True)
     parser.add_argument("--runs", type=Path, required=True)
+    parser.add_argument("--ground-truth", type=Path, required=True)
     parser.add_argument("--pegasus-root", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--output-javascript", type=Path, required=True)
@@ -132,7 +157,13 @@ def main() -> None:
         arguments.pegasus_root
     )
     api_base = arguments.api_base.rstrip("/")
-    tracked_runs = json.loads(arguments.runs.read_text())
+    tracked_run_payload = json.loads(arguments.runs.read_text())
+    tracked_runs = (
+        tracked_run_payload["rows"]
+        if isinstance(tracked_run_payload, dict)
+        else tracked_run_payload
+    )
+    ground_truth_samples = json.loads(arguments.ground_truth.read_text())["samples"]
     rows: list[dict[str, Any] | None] = [None] * len(tracked_runs)
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
         future_indexes = {
@@ -140,6 +171,7 @@ def main() -> None:
                 collect_run,
                 api_base,
                 tracked_run,
+                ground_truth_samples,
                 normalize_output_for_evaluation,
                 parse_nested_output,
             ): index
@@ -160,7 +192,12 @@ def main() -> None:
     if len(completed_rows) != len(tracked_runs):
         raise RuntimeError("not all runs were collected")
 
-    arguments.output.write_text(json.dumps({"rows": completed_rows}, indent=2) + "\n")
+    output_payload = (
+        {**tracked_run_payload, "rows": completed_rows}
+        if isinstance(tracked_run_payload, dict)
+        else {"rows": completed_rows}
+    )
+    arguments.output.write_text(json.dumps(output_payload, indent=2) + "\n")
     arguments.output_javascript.write_text(
         "const ENTITY_V02_SHOT_COUNTS="
         + json.dumps(completed_rows, separators=(",", ":"))

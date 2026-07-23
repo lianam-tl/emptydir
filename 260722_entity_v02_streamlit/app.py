@@ -25,6 +25,7 @@ from json_repair import repair_json
 APP_DIRECTORY = Path(__file__).resolve().parent
 SEED_PATH = APP_DIRECTORY / "seed_rows.json"
 REFERENCE_PATH = APP_DIRECTORY / "reference_rows.json"
+GROUND_TRUTH_SHOT_STATISTICS_PATH = APP_DIRECTORY / "ground_truth_shot_statistics.json"
 DYNAMIC_CACHE_PATH = Path(
     os.environ.get("ENTITY_V02_DYNAMIC_CACHE_PATH", APP_DIRECTORY / "dynamic_rows.json")
 )
@@ -291,9 +292,14 @@ def collect_shot_statistics(
     if len(displayed_samples) != 18:
         raise ValueError(f"run {run_id} has {len(displayed_samples)} displayed samples")
 
+    ground_truth_samples = json.loads(GROUND_TRUTH_SHOT_STATISTICS_PATH.read_text())[
+        "samples"
+    ]
     segment_counts: list[int] = []
     shot_durations: list[float] = []
-    for sample in displayed_samples.values():
+    shot_count_ratios: list[float] = []
+    average_shot_duration_differences: list[float] = []
+    for sample_id, sample in displayed_samples.items():
         tasks = sample.get("tasks") or []
         if len(tasks) != 1:
             raise ValueError(f"run {run_id} has a sample with {len(tasks)} tasks")
@@ -304,8 +310,22 @@ def collect_shot_statistics(
         except ValueError:
             continue
         shots = valid_shots(payload)
+        ground_truth = ground_truth_samples.get(sample_id)
+        if ground_truth is None:
+            raise ValueError(f"GT shot statistics are missing for {sample_id}")
+        predicted_shot_durations = [
+            shot["end_time"] - shot["start_time"] for shot in shots
+        ]
         segment_counts.append(len(shots))
-        shot_durations.extend(shot["end_time"] - shot["start_time"] for shot in shots)
+        shot_durations.extend(predicted_shot_durations)
+        shot_count_ratios.append(len(shots) / int(ground_truth["shot_count"]))
+        if predicted_shot_durations:
+            average_shot_duration_differences.append(
+                abs(
+                    statistics.fmean(predicted_shot_durations)
+                    - float(ground_truth["average_shot_duration"])
+                )
+            )
 
     parse_failures = len(displayed_samples) - len(segment_counts)
     if parse_failures != expected_parse_failures:
@@ -320,6 +340,15 @@ def collect_shot_statistics(
         ),
         "parsed_media_count": len(segment_counts),
         "total_shot_segments": sum(segment_counts),
+        "average_predicted_to_ground_truth_shot_count_ratio": (
+            statistics.fmean(shot_count_ratios) if shot_count_ratios else None
+        ),
+        "mean_absolute_average_shot_duration_difference": (
+            statistics.fmean(average_shot_duration_differences)
+            if average_shot_duration_differences
+            else None
+        ),
+        "shot_duration_comparison_media_count": len(average_shot_duration_differences),
     }
 
 
@@ -426,8 +455,12 @@ def table_dataframe(rows: list[dict[str, Any]]) -> pd.DataFrame:
                 "Name": row["name"],
                 "Scored": f"{row['scored']}/{sample_count}",
                 "Parse success": f"{parse_success}/{sample_count}",
-                "Avg(# of shots)": row.get("average_shots"),
-                "Avg(shot duration)": row.get("average_shot_duration"),
+                "Avg(predicted / GT shots)": row.get(
+                    "average_predicted_to_ground_truth_shot_count_ratio"
+                ),
+                "Avg(|predicted − GT mean duration|)": row.get(
+                    "mean_absolute_average_shot_duration_difference"
+                ),
                 "Half name + appearance IoU": row["half_score"],
                 "Half naming IoU": row["half_naming"],
                 "Half delta": row["half_delta"],
@@ -618,8 +651,21 @@ def render_dashboard(api_base: str) -> None:
                 format="%.6f"
             ),
             "Full name + appearance IoU": st.column_config.NumberColumn(format="%.6f"),
-            "Avg(# of shots)": st.column_config.NumberColumn(format="%.2f"),
-            "Avg(shot duration)": st.column_config.NumberColumn(format="%.2f s"),
+            "Avg(predicted / GT shots)": st.column_config.NumberColumn(
+                format="%.3f",
+                help=(
+                    "Mean across parsed media of predicted shot count divided by "
+                    "GT shot count. 1.0 means the counts match."
+                ),
+            ),
+            "Avg(|predicted − GT mean duration|)": st.column_config.NumberColumn(
+                format="%.2f s",
+                help=(
+                    "Mean across parsed media with at least one predicted shot of "
+                    "the absolute difference between predicted and GT mean shot "
+                    "duration. Lower is better."
+                ),
+            ),
         },
     )
 
