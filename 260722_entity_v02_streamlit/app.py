@@ -466,7 +466,7 @@ def table_dataframe(rows: list[dict[str, Any]]) -> pd.DataFrame:
                 "Name": row["name"],
                 "Scored": f"{row['scored']}/{sample_count}",
                 "Parse success": f"{parse_success}/{sample_count}",
-                "EDR": duration_statistics.get("entity_duration_micro_ratio"),
+                "duration": duration_statistics.get("entity_duration_micro_ratio"),
                 "Avg(predicted / GT shots)": row.get(
                     "average_predicted_to_ground_truth_shot_count_ratio"
                 ),
@@ -658,36 +658,7 @@ def render_dashboard(api_base: str) -> None:
         st.warning(error)
 
     st.subheader("Entity coverage v0.2 results")
-    st.markdown(
-        """
-**EDR (Entity Duration Ratio)** measures predicted entity-duration volume against
-ground truth after the evaluator's **name_and_desc** entity mapping. For every GT
-entity (e) in sample (s), overlapping intervals are merged before measuring
-their duration:
-"""
-    )
-    st.latex(
-        r"""
-\mathrm{EDR} =
-\frac{\sum_{(s,e)} \left|\bigcup \mathrm{MappedPredictedSpans}_{s,e}\right|}
-     {\sum_{(s,e)} \left|\bigcup \mathrm{GroundTruthSpans}_{s,e}\right|}
-"""
-    )
-    st.markdown(
-        r"""
-- `(s,e)` ranges over all 106 GT entity/sample pairs, `∪` merges overlapping
-  intervals, and `|...|` is their duration in seconds.
-- A missing entity or parse-failed sample contributes **0** to the numerator,
-  while its GT duration remains in the denominator.
-- Unmatched predicted entities are excluded because they have no GT entity
-  denominator.
-- **1.0** means equal total duration volume, **above 1.0** means over-production,
-  and **below 1.0** means under-production. It does not measure whether the
-  predicted timestamps are correct; use Name + appearance IoU for localization.
-- Heatmap: greener is higher for IoU, closer to 1.0 for ratios, and lower for
-  Half delta. Gray cells have no available value.
-"""
-    )
+    st.caption("Hover over the duration column for its definition.")
     leaderboard = table_dataframe(rows)
     leaderboard_style = (
         leaderboard.style.apply(leaderboard_row_style, axis=1)
@@ -700,7 +671,7 @@ their duration:
                 "Full name + appearance IoU",
             ],
         )
-        .map(balanced_ratio_style, subset=["EDR", "Avg(predicted / GT shots)"])
+        .map(balanced_ratio_style, subset=["duration", "Avg(predicted / GT shots)"])
         .map(lower_gap_style, subset=["Half delta"])
         .set_properties(subset=["Half name + appearance IoU"], **{"font-weight": "700"})
     )
@@ -724,9 +695,17 @@ their duration:
                     "GT shot count. 1.0 means the counts match."
                 ),
             ),
-            "EDR": st.column_config.NumberColumn(
+            "duration": st.column_config.NumberColumn(
                 format="%.3f",
-                help="Entity Duration Ratio. See the formula above the table.",
+                help=(
+                    "Total overlap-deduplicated duration of predicted spans mapped "
+                    "to GT entities, divided by total GT entity duration across all "
+                    "106 entity/sample pairs. Missing entities and parse failures "
+                    "contribute 0 predicted duration; unmatched predictions are "
+                    "excluded. 1.0 means equal duration volume, above 1.0 means "
+                    "over-production, and below 1.0 means under-production. This is "
+                    "not a temporal-localization accuracy score."
+                ),
             ),
         },
     )
