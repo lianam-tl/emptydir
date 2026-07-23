@@ -36,5 +36,5 @@ submitting the next.
 
 Sequential export job: `export-a1865-entity-sme-whisper-sequential-timezn`
 
-Sequential CPU monitor: PID `1955225` under
+Sequential CPU monitor: PID `1957209` under
 `/home/jeongyeon-nam/eval-a1865-entity-sme-whisper-sequential-260723`.
