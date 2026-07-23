@@ -1,2 +1,4 @@
 streamlit>=1.47,<2
 json-repair>=0.44,<1
+boto3>=1.40,<2
+PyYAML>=6,<7

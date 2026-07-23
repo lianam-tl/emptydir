@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import math
 import os
@@ -17,9 +18,13 @@ from pathlib import Path
 from typing import Any
 
 import altair as alt
+import boto3
 import pandas as pd
 import streamlit as st
+from botocore.exceptions import ClientError
 from json_repair import repair_json
+
+from training_mixtures import discover_training_mixture, experiment_metadata_uri
 
 
 APP_DIRECTORY = Path(__file__).resolve().parent
@@ -30,6 +35,12 @@ ENTITY_DURATION_STATISTICS_PATH = APP_DIRECTORY / "entity_duration_statistics.js
 TRAINING_TOKEN_MIXTURES_PATH = APP_DIRECTORY / "training_token_mixtures.json"
 DYNAMIC_CACHE_PATH = Path(
     os.environ.get("ENTITY_V02_DYNAMIC_CACHE_PATH", APP_DIRECTORY / "dynamic_rows.json")
+)
+TRAINING_MIXTURE_CACHE_PATH = Path(
+    os.environ.get(
+        "ENTITY_V02_TRAINING_MIXTURE_CACHE_PATH",
+        APP_DIRECTORY / "dynamic_training_token_mixtures.json",
+    )
 )
 DEFAULT_API_BASE = "http://eval-v3-api-owen-2.pegasus-eval.svc.cluster.local:8090"
 DATASET = "twelvelabs/entity_cov_v02_tdf"
@@ -50,8 +61,7 @@ FAMILY_COLORS = {
     "Gemini 3.1 Pro": "#c05621",
     "Other": "#5f6368",
 }
-MIXTURE_COMPONENTS = [
-    "Other/base",
+PREFERRED_MIXTURE_COMPONENTS = [
     "H0 standard",
     "H0 duration",
     "H0 2x",
@@ -61,6 +71,7 @@ MIXTURE_COMPONENTS = [
     "Soccer LVReason",
     "P1.5 SFT mix",
     "P1.5 RL mix",
+    "Other/base",
 ]
 MIXTURE_COMPONENT_HELP = {
     "Other/base": "All mixture rows that are similar across these runs or are not expanded separately.",
@@ -74,6 +85,16 @@ MIXTURE_COMPONENT_HELP = {
     "P1.5 SFT mix": "All 35 rows of the Pegasus 1.5 SFT reference mixture.",
     "P1.5 RL mix": "All 6 rows of the Pegasus 1.5 RL reference mixture.",
 }
+AUTOMATIC_FAMILY_COLORS = [
+    "#1565c0",
+    "#2e7d32",
+    "#6a1b9a",
+    "#ef6c00",
+    "#00838f",
+    "#c62828",
+    "#4e342e",
+    "#283593",
+]
 REFERENCE_NAMES = {
     "pegasus-15-rl-s60",
     "pegasus-15-sft-s1000",
@@ -121,8 +142,16 @@ def load_entity_duration_statistics() -> dict[str, dict[str, Any]]:
     return {str(row["run_id"]): row for row in payload["rows"]}
 
 
-def load_training_token_mixtures() -> list[dict[str, Any]]:
-    return json.loads(TRAINING_TOKEN_MIXTURES_PATH.read_text())["rows"]
+def load_training_token_mixture_cache() -> dict[str, Any]:
+    if not TRAINING_MIXTURE_CACHE_PATH.exists():
+        return {"rows": [], "missing_model_paths": []}
+    return json.loads(TRAINING_MIXTURE_CACHE_PATH.read_text())
+
+
+def save_training_token_mixture_cache(payload: dict[str, Any]) -> None:
+    temporary_path = TRAINING_MIXTURE_CACHE_PATH.with_suffix(".tmp")
+    temporary_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
+    temporary_path.replace(TRAINING_MIXTURE_CACHE_PATH)
 
 
 def save_dynamic_rows(rows: list[dict[str, Any]]) -> None:
@@ -201,7 +230,17 @@ def family_name(name: str) -> str:
         return "Gemini 3.5 Flash"
     if name.startswith("gemini-3.1-pro-preview-"):
         return "Gemini 3.1 Pro"
-    return "Other"
+    generic_family = re.sub(r"(?:-|_)(?:checkpoint|step|ck|s)[-_]?\d+.*$", "", name)
+    return generic_family or name
+
+
+def family_color(family: str) -> str:
+    if family in FAMILY_COLORS:
+        return FAMILY_COLORS[family]
+    color_index = int(hashlib.sha256(family.encode()).hexdigest()[:8], 16) % len(
+        AUTOMATIC_FAMILY_COLORS
+    )
+    return AUTOMATIC_FAMILY_COLORS[color_index]
 
 
 def checkpoint_step(row: dict[str, Any]) -> int | None:
@@ -482,6 +521,61 @@ def synchronize_rows(api_base: str) -> tuple[list[dict[str, Any]], int, list[str
     return displayed_rows, new_count, errors
 
 
+@st.cache_resource
+def training_mixture_s3_client() -> Any:
+    return boto3.client("s3", region_name="us-west-2")
+
+
+def synchronize_training_token_mixtures(
+    leaderboard_rows: list[dict[str, Any]],
+) -> tuple[list[dict[str, Any]], list[str]]:
+    cache = load_training_token_mixture_cache()
+    seed_rows = json.loads(TRAINING_TOKEN_MIXTURES_PATH.read_text())["rows"]
+    known_families = {
+        str(row["family"]) for row in [*seed_rows, *cache.get("rows", [])]
+    }
+    missing_metadata = set(cache.get("missing_model_paths", []))
+    errors: list[str] = []
+
+    for leaderboard_row in leaderboard_rows:
+        family = family_name(str(leaderboard_row["name"]))
+        model_path = str(leaderboard_row.get("path") or "")
+        if (
+            family in known_families
+            or leaderboard_row["name"] in REFERENCE_NAMES
+            or not model_path.startswith("s3://")
+        ):
+            continue
+        try:
+            metadata_uri = experiment_metadata_uri(model_path)
+            if metadata_uri in missing_metadata:
+                continue
+            mixture = discover_training_mixture(
+                family, model_path, training_mixture_s3_client()
+            )
+            cache.setdefault("rows", []).append(mixture)
+            known_families.add(family)
+            save_training_token_mixture_cache(cache)
+        except ClientError as error:
+            error_code = str(error.response.get("Error", {}).get("Code") or "")
+            if error_code in {"404", "NoSuchKey", "NotFound"}:
+                missing_metadata.add(metadata_uri)
+                cache["missing_model_paths"] = sorted(missing_metadata)
+                save_training_token_mixture_cache(cache)
+            else:
+                errors.append(f"{family} mixture: {error}")
+        except (
+            KeyError,
+            TypeError,
+            ValueError,
+            OSError,
+            json.JSONDecodeError,
+        ) as error:
+            errors.append(f"{family} mixture: {error}")
+
+    return seed_rows + cache.get("rows", []), errors
+
+
 def table_dataframe(rows: list[dict[str, Any]]) -> pd.DataFrame:
     entity_duration_statistics = load_entity_duration_statistics()
     records = []
@@ -581,21 +675,34 @@ def half_sample_dataframe(rows: list[dict[str, Any]]) -> pd.DataFrame:
     return pd.DataFrame.from_records(records).set_index("Model")
 
 
-def training_mixture_dataframe() -> pd.DataFrame:
+def training_mixture_dataframe(
+    mixture_rows: list[dict[str, Any]],
+) -> tuple[pd.DataFrame, list[str]]:
+    available_components = {
+        component for row in mixture_rows for component in (row.get("components") or {})
+    }
+    components = [
+        component
+        for component in PREFERRED_MIXTURE_COMPONENTS
+        if component in available_components and component != "Other/base"
+    ]
+    components.extend(sorted(available_components - set(PREFERRED_MIXTURE_COMPONENTS)))
+    if "Other/base" in available_components:
+        components.append("Other/base")
     records = []
-    for row in load_training_token_mixtures():
-        components = row["components"]
+    for row in mixture_rows:
+        component_ratios = row["components"]
         records.append(
             {
                 "Family": row["family"],
                 "Tokens": f"{row['total_tokens'] / 1_000_000_000:.1f}B",
                 **{
-                    component: 100.0 * float(components.get(component, 0.0))
-                    for component in MIXTURE_COMPONENTS
+                    component: 100.0 * float(component_ratios.get(component, 0.0))
+                    for component in components
                 },
             }
         )
-    return pd.DataFrame.from_records(records)
+    return pd.DataFrame.from_records(records), components
 
 
 def sample_score_style(value: Any) -> str:
@@ -626,7 +733,7 @@ def leaderboard_row_style(row: pd.Series) -> list[str]:
 
 
 def training_mixture_row_style(row: pd.Series) -> list[str]:
-    color = FAMILY_COLORS.get(str(row["Family"]), FAMILY_COLORS["Other"])
+    color = family_color(str(row["Family"]))
     red, green, blue = (int(color[index : index + 2], 16) for index in (1, 3, 5))
     styles = []
     for column, value in row.items():
@@ -635,13 +742,13 @@ def training_mixture_row_style(row: pd.Series) -> list[str]:
                 f"border-left: 8px solid {color}; background-color: "
                 f"rgba({red}, {green}, {blue}, 0.16); font-weight: 700"
             )
-        elif column in MIXTURE_COMPONENTS and float(value) > 0:
+        elif column not in {"Family", "Tokens"} and float(value) > 0:
             alpha = min(0.46, 0.08 + 0.38 * float(value) / 100.0)
             styles.append(
                 f"background-color: rgba({red}, {green}, {blue}, {alpha:.3f}); "
                 "font-weight: 600"
             )
-        elif column in MIXTURE_COMPONENTS:
+        elif column not in {"Family", "Tokens"}:
             styles.append("color: #9aa0a6")
         else:
             styles.append("")
@@ -653,8 +760,10 @@ def render_chart(rows: list[dict[str, Any]], metric: str, title: str) -> None:
     if chart_rows.empty:
         st.info("No checkpoint steps are available.")
         return
+    chart_families = list(dict.fromkeys(chart_rows["family"].tolist()))
     color_scale = alt.Scale(
-        domain=list(FAMILY_COLORS), range=list(FAMILY_COLORS.values())
+        domain=chart_families,
+        range=[family_color(family) for family in chart_families],
     )
     regular_rows = chart_rows[~chart_rows["reference"]]
     reference_rows = chart_rows[chart_rows["reference"]]
@@ -713,6 +822,9 @@ def render_dashboard(api_base: str) -> None:
         rows.sort(key=lambda row: float(row["half_score"]), reverse=True)
         new_count = 0
         errors = [f"sync failed: {error}"]
+
+    mixture_rows, mixture_errors = synchronize_training_token_mixtures(rows)
+    errors.extend(mixture_errors)
 
     first, second, third, fourth = st.columns(4)
     first.metric("Displayed checkpoints", len(rows))
@@ -801,9 +913,10 @@ def render_dashboard(api_base: str) -> None:
     st.subheader("Training token mixture by model family")
     st.caption(
         "Token share within each family's mixture_stats.json. Checkpoints in the "
-        "same family share one mixture; similar rows are collapsed into Other/base."
+        "same family share one mixture; new families are discovered from "
+        "experiment_metadata.yaml and similar rows are collapsed into Other/base."
     )
-    mixture_table = training_mixture_dataframe()
+    mixture_table, mixture_components = training_mixture_dataframe(mixture_rows)
     st.dataframe(
         mixture_table.style.apply(training_mixture_row_style, axis=1),
         hide_index=True,
@@ -816,9 +929,12 @@ def render_dashboard(api_base: str) -> None:
                 component: st.column_config.NumberColumn(
                     format="%.2f%%",
                     width="small",
-                    help=MIXTURE_COMPONENT_HELP[component],
+                    help=MIXTURE_COMPONENT_HELP.get(
+                        component,
+                        f"Automatically discovered dataset component: {component}.",
+                    ),
                 )
-                for component in MIXTURE_COMPONENTS
+                for component in mixture_components
             },
         },
     )

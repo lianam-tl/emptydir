@@ -48,6 +48,8 @@ spec:
               value: http://eval-v3-api-owen-2.pegasus-eval.svc.cluster.local:8090
             - name: ENTITY_V02_DYNAMIC_CACHE_PATH
               value: /data/dynamic_rows.json
+            - name: ENTITY_V02_TRAINING_MIXTURE_CACHE_PATH
+              value: /data/dynamic_training_token_mixtures.json
             - name: ENTITY_V02_SYNC_SECONDS
               value: "60"
           resources:
