@@ -24,10 +24,18 @@
     "export_status": "Succeeded",
     "eval_run_id": "368487fc-51c1-5f11-a1a0-297d833c092a",
     "batch_id": "batch-7039effa-6b4b-4217-bb82-ad7033d49193",
-    "eval_status": "processing",
-    "eval_completed": 0,
+    "eval_status": "completed",
+    "eval_completed": 18,
     "eval_failed": 0,
-    "reported_status": "export=Succeeded eval=processing",
+    "reported_status": "export=Succeeded eval=completed",
+    "metrics": {
+      "overall_naming_iou": 0.29693444926673146,
+      "overall_name_appearance_iou": 0.32297745899541297,
+      "full_naming_iou": 0.2547022344773942,
+      "full_name_appearance_iou": 0.22128063078187654,
+      "half_naming_iou": 0.3184998355421379,
+      "half_name_appearance_iou": 0.37527868493380306
+    },
     "previous_failed_eval_run_id": "2b95ae9d-bd6e-546e-ac51-43e1a5dece6c",
     "previous_failed_batch_id": "batch-8f79123a-f31f-4ff4-9c2f-89f284b7ad6f",
     "previous_failure_reason": "GPU reservation contention after 8 of 18 predictions"

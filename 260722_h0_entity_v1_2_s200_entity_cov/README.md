@@ -29,3 +29,9 @@ XPlatform batch: `batch-7039effa-6b4b-4217-bb82-ad7033d49193`
 
 CPU monitor: PID `1929341` under
 `/home/jeongyeon-nam/eval-retry2-h0-entity-v1-2-s200-260723`.
+
+Result: 18 of 18 predictions and scores completed.
+
+- Overall naming IoU: `0.296934`
+- Overall naming + appearance IoU: `0.322977`
+- Half naming + appearance IoU: `0.375279`
