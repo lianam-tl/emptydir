@@ -460,23 +460,13 @@ def table_dataframe(rows: list[dict[str, Any]]) -> pd.DataFrame:
         sample_count = int(row.get("sample_count") or 18)
         parse_success = sample_count - int(row.get("parse_failures") or 0)
         duration_statistics = entity_duration_statistics.get(str(row["run_id"]), {})
-        missing_entity_fraction = duration_statistics.get(
-            "missing_ground_truth_entity_fraction"
-        )
         records.append(
             {
                 "Rank": rank,
                 "Name": row["name"],
                 "Scored": f"{row['scored']}/{sample_count}",
                 "Parse success": f"{parse_success}/{sample_count}",
-                "Entity duration ratio (micro)": duration_statistics.get(
-                    "entity_duration_micro_ratio"
-                ),
-                "Missing GT entities (%)": (
-                    100 * float(missing_entity_fraction)
-                    if missing_entity_fraction is not None
-                    else None
-                ),
+                "EDR": duration_statistics.get("entity_duration_micro_ratio"),
                 "Avg(predicted / GT shots)": row.get(
                     "average_predicted_to_ground_truth_shot_count_ratio"
                 ),
@@ -569,6 +559,21 @@ def sample_score_style(value: Any) -> str:
     return f"background-color: hsla({hue:.0f}, 70%, 45%, 0.30); font-weight: 600"
 
 
+def balanced_ratio_style(value: Any) -> str:
+    if pd.isna(value):
+        return "color: #888"
+    balance = 1.0 - min(abs(float(value) - 1.0), 1.0)
+    hue = 120 * balance
+    return f"background-color: hsla({hue:.0f}, 70%, 45%, 0.30); font-weight: 600"
+
+
+def lower_gap_style(value: Any) -> str:
+    if pd.isna(value):
+        return "color: #888"
+    hue = 120 * (1.0 - min(max(float(value), 0.0) / 0.2, 1.0))
+    return f"background-color: hsla({hue:.0f}, 70%, 45%, 0.30); font-weight: 600"
+
+
 def leaderboard_row_style(row: pd.Series) -> list[str]:
     style = "background-color: #fff3e0; color: #5d3a00"
     return [style if str(row["Name"]).startswith("gemini-") else ""] * len(row)
@@ -653,10 +658,48 @@ def render_dashboard(api_base: str) -> None:
         st.warning(error)
 
     st.subheader("Entity coverage v0.2 results")
+    st.markdown(
+        r"""
+**EDR (Entity Duration Ratio)** measures predicted entity-duration volume against
+ground truth after the evaluator's `name_and_desc` entity mapping. For every GT
+entity (e) in sample (s), overlapping intervals are merged before measuring
+their duration:
+
+\[
+\mathrm{EDR} =
+\frac{\sum_{(s,e)} \left|\bigcup \mathrm{MappedPredictedSpans}_{s,e}\right|}
+     {\sum_{(s,e)} \left|\bigcup \mathrm{GroundTruthSpans}_{s,e}\right|}
+\]
+
+- ((s,e)) ranges over all 106 GT entity/sample pairs, \(\bigcup\) merges
+  overlapping intervals, and \(|\cdot|\) is their duration in seconds.
+- A missing entity or parse-failed sample contributes **0** to the numerator,
+  while its GT duration remains in the denominator.
+- Unmatched predicted entities are excluded because they have no GT entity
+  denominator.
+- **1.0** means equal total duration volume, **above 1.0** means over-production,
+  and **below 1.0** means under-production. It does not measure whether the
+  predicted timestamps are correct; use Name + appearance IoU for localization.
+- Heatmap: greener is higher for IoU, closer to 1.0 for ratios, and lower for
+  Half delta. Gray cells have no available value.
+"""
+    )
     leaderboard = table_dataframe(rows)
-    leaderboard_style = leaderboard.style.apply(
-        leaderboard_row_style, axis=1
-    ).set_properties(subset=["Half name + appearance IoU"], **{"font-weight": "700"})
+    leaderboard_style = (
+        leaderboard.style.apply(leaderboard_row_style, axis=1)
+        .map(
+            sample_score_style,
+            subset=[
+                "Half name + appearance IoU",
+                "Half naming IoU",
+                "Overall name + appearance IoU",
+                "Full name + appearance IoU",
+            ],
+        )
+        .map(balanced_ratio_style, subset=["EDR", "Avg(predicted / GT shots)"])
+        .map(lower_gap_style, subset=["Half delta"])
+        .set_properties(subset=["Half name + appearance IoU"], **{"font-weight": "700"})
+    )
     st.dataframe(
         leaderboard_style,
         hide_index=True,
@@ -677,20 +720,9 @@ def render_dashboard(api_base: str) -> None:
                     "GT shot count. 1.0 means the counts match."
                 ),
             ),
-            "Entity duration ratio (micro)": st.column_config.NumberColumn(
+            "EDR": st.column_config.NumberColumn(
                 format="%.3f",
-                help=(
-                    "Total overlap-deduplicated duration of mapped predicted entity "
-                    "spans divided by total GT entity duration. 1.0 means equal "
-                    "duration volume, not necessarily correct temporal localization."
-                ),
-            ),
-            "Missing GT entities (%)": st.column_config.NumberColumn(
-                format="%.1f%%",
-                help=(
-                    "Percentage of GT entity/sample entries with no mapped predicted "
-                    "spans. Lower is better. Parse-failed samples count as missing."
-                ),
+                help="Entity Duration Ratio. See the formula above the table.",
             ),
         },
     )

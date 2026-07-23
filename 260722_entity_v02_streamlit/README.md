@@ -4,7 +4,7 @@ Read-only dashboard for completed `twelvelabs/entity_cov_v02_tdf` runs in the Ow
 
 The app starts from `seed_rows.json`, polls the Eval V3 run list every 60 seconds by default, and computes full metrics only for previously unseen completed run IDs. Completed runs and their parsed shot statistics are persisted in `dynamic_rows.json`, so restarts do not repeat expensive work.
 
-The entity-duration micro ratio and missing-GT-entity rate come from `entity_duration_statistics.json`. They require the evaluator's `name_and_desc` mapping and are validated against the saved per-entity IoU and span-count fingerprints. Regenerate that compact file with `260723_entity_duration_ratio_analysis/build_dashboard_statistics.py` after backfilling a new run; rows without a backfill remain blank.
+The EDR entity-duration micro ratio comes from `entity_duration_statistics.json`. It requires the evaluator's `name_and_desc` mapping and is validated against the saved per-entity IoU and span-count fingerprints. Regenerate that compact file with `260723_entity_duration_ratio_analysis/build_dashboard_statistics.py` after backfilling a new run; rows without a backfill remain blank. The leaderboard heatmap colors IoU by higher-is-better, ratios by closeness to 1.0, and Half delta by lower-is-better.
 
 ## Run locally
 
