@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mixture JSON diff: h0_entity_v1_2 vs A-1865 entity additions</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #172033;
+      --muted: #657086;
+      --line: #dce2ea;
+      --panel: #f6f8fb;
+      --added: #067647;
+      --added-bg: #ecfdf3;
+      --blue: #175cd3;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #fff;
+      color: var(--ink);
+      font: 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    main { max-width: 1120px; margin: 0 auto; padding: 44px 24px 72px; }
+    h1 { margin: 0 0 8px; font-size: 30px; line-height: 1.2; }
+    h2 { margin: 36px 0 14px; font-size: 20px; }
+    p { margin: 8px 0; }
+    .muted { color: var(--muted); }
+    .verdict {
+      margin: 24px 0;
+      padding: 18px 20px;
+      border: 1px solid #abefc6;
+      border-radius: 12px;
+      background: var(--added-bg);
+      color: #05603a;
+      font-size: 17px;
+      font-weight: 650;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .card { padding: 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+    .card .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .05em; }
+    .card .value { margin-top: 4px; font-size: 22px; font-weight: 700; }
+    .delta { color: var(--added); font-size: 13px; font-weight: 650; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 11px 12px; border-bottom: 1px solid var(--line); text-align: right; vertical-align: top; }
+    th { color: var(--muted); background: var(--panel); font-size: 12px; text-transform: uppercase; letter-spacing: .03em; }
+    th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) { text-align: left; }
+    tr.added td { background: var(--added-bg); }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; overflow-wrap: anywhere; }
+    .paths { padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+    .paths div + div { margin-top: 8px; }
+    .checklist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 20px; }
+    .check { color: var(--added); font-weight: 650; }
+    @media (max-width: 760px) {
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .checklist { grid-template-columns: 1fr; }
+      .table-wrap { overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Mixture JSON difference</h1>
+  <p class="muted">Compared from the two S3 <code>mixture_stats.json</code> files on 2026-07-23 KST.</p>
+
+  <div class="verdict">
+    The A-1865 mixture is exactly <strong>h0_entity_v1_2 + two entity sources</strong>. No existing source was removed or modified.
+  </div>
+
+  <div class="cards">
+    <div class="card"><div class="label">Source rows</div><div class="value">36 → 38</div><div class="delta">+2 rows</div></div>
+    <div class="card"><div class="label">Samples</div><div class="value">1,198,293</div><div class="delta">+54,979 (+4.81%)</div></div>
+    <div class="card"><div class="label">Tokens</div><div class="value">53.354B</div><div class="delta">+3.877B (+7.84%)</div></div>
+    <div class="card"><div class="label">Added-data density</div><div class="value">70,525</div><div class="delta">tokens / added sample</div></div>
+  </div>
+
+  <h2>Only added rows</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Dataset</th><th>Template</th><th>Fraction</th><th>Samples</th><th>Tokens</th><th>Share of new mixture</th></tr>
+      </thead>
+      <tbody>
+        <tr class="added">
+          <td><code>tl_entity_sme_whisper</code></td>
+          <td><code>default_sft_entity_sme_whisper_asr_2x</code></td>
+          <td>1.0</td><td>6,778</td><td>503,973,076</td><td>0.57% samples<br>0.94% tokens</td>
+        </tr>
+        <tr class="added">
+          <td><code>tl_entity_sme_v1_2</code></td>
+          <td><code>default_sft_entity_sme_v1_2</code></td>
+          <td>1.0</td><td>48,201</td><td>3,373,444,044</td><td>4.02% samples<br>6.32% tokens</td>
+        </tr>
+        <tr>
+          <td><strong>Combined addition</strong></td><td>—</td><td>—</td><td><strong>54,979</strong></td><td><strong>3,877,417,120</strong></td><td><strong>4.59% samples<br>7.27% tokens</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Total comparison</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Mixture</th><th>Generated at (UTC)</th><th>Rows</th><th>Samples</th><th>Tokens</th><th>Tokens / sample</th></tr></thead>
+      <tbody>
+        <tr><td><code>h0_entity_v1_2</code></td><td>2026-07-21 22:34:05</td><td>36</td><td>1,143,314</td><td>49,476,136,780</td><td>43,274</td></tr>
+        <tr><td><code>…a1865_entity_whisper_added_manifest</code></td><td>2026-07-22 13:50:48</td><td>38</td><td>1,198,293</td><td>53,353,553,900</td><td>44,525</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Unchanged checks</h2>
+  <div class="checklist">
+    <div><span class="check">✓</span> All 36 shared rows are identical</div>
+    <div><span class="check">✓</span> No removed rows</div>
+    <div><span class="check">✓</span> <code>do_packing = false</code></div>
+    <div><span class="check">✓</span> <code>final_sample_n_or_frac = 1.0</code></div>
+    <div><span class="check">✓</span> <code>pack_budget = 20000</code></div>
+    <div><span class="check">✓</span> Additive totals reconcile exactly</div>
+  </div>
+
+  <h2>Compared S3 objects</h2>
+  <div class="paths">
+    <div><code>s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/model_input/h0_entity_v1_2/mixture_stats.json</code></div>
+    <div><code>s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/model_input/sft_consol_260416_clean_filter_less_aug_highres_soccer_h0_mn_sme_a1865_entity_whisper_added_manifest/mixture_stats.json</code></div>
+  </div>
+</main>
+</body>
+</html>
