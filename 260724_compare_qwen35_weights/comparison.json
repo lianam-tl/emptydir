@@ -1,0 +1,1858 @@
+{
+  "checkpoint_source": "s3://tl-data-training-pegasus-us-west-2/checkpoints/jeongyeon-nam/sft_h0_entity_v1_2_7n_qwen3_5_27b-base/checkpoint-200-safetensors/model.safetensors",
+  "base_source": "s3://tl-data-training-pegasus-us-west-2/hf_models/Qwen/Qwen3.5-27B/",
+  "base_revision": "b7ca741b86de18df552fd2cc952861e04621a4bd",
+  "models_exact_equal": false,
+  "checkpoint_tensor_count": 1184,
+  "base_tensor_count": 1199,
+  "common_tensor_count": 1184,
+  "equal_tensor_count": 1088,
+  "different_tensor_count": 96,
+  "cast_equivalent_tensor_count": 96,
+  "checkpoint_only_tensors": [],
+  "base_only_tensors": [
+    "mtp.fc.weight",
+    "mtp.layers.0.input_layernorm.weight",
+    "mtp.layers.0.mlp.down_proj.weight",
+    "mtp.layers.0.mlp.gate_proj.weight",
+    "mtp.layers.0.mlp.up_proj.weight",
+    "mtp.layers.0.post_attention_layernorm.weight",
+    "mtp.layers.0.self_attn.k_norm.weight",
+    "mtp.layers.0.self_attn.k_proj.weight",
+    "mtp.layers.0.self_attn.o_proj.weight",
+    "mtp.layers.0.self_attn.q_norm.weight",
+    "mtp.layers.0.self_attn.q_proj.weight",
+    "mtp.layers.0.self_attn.v_proj.weight",
+    "mtp.norm.weight",
+    "mtp.pre_fc_norm_embedding.weight",
+    "mtp.pre_fc_norm_hidden.weight"
+  ],
+  "different_tensor_details": [
+    {
+      "name": "model.language_model.layers.0.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "e06f962df276687a51b3e4e5a69c35b7d29c33e3a9a17e68744e9dc9ad2e42ec",
+      "base_sha256": "a9b5d52cb7e81d447d33159593985836f4c8e010e170f42b1e66f80618dbef1f",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.0.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "af0cc16022e2575cdad73bc425a16b6ba600d5691cba3bd51110820c462c21b9",
+      "base_sha256": "ecef590ae21b72d215457f32feac41799798a596aa2abde140bdcb71f1a8718a",
+      "max_abs_difference": 0.001953125,
+      "mean_abs_difference": 0.0010051727294921875,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.1.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "e436789ac05bb6559bb92609e766c8bd08d25e7175e6c511acf342521f81a433",
+      "base_sha256": "6dd542ed0fff14b5c06f62fe3924f3d6e040c2672e0ebe899096725aaf50d6b5",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.1.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "dde2d5f339865211402870659f5963ebb23ec5c86ab4b02b40eb7f24f9327df9",
+      "base_sha256": "0230a6c0269e371617203ecc8d8c23f3f3f261593c15046c14659fcb608ab3cd",
+      "max_abs_difference": 0.001953125,
+      "mean_abs_difference": 0.0009136199951171875,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.10.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "afc6cc2c1f76bce51725b973e808816e6973e4879227874e692985422d62eddb",
+      "base_sha256": "a5b2b51cf0c0857274c4f50c8d7d77d543bd0f8ac02757dde03bb880b768b6bb",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.10.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "6114200d951f994ea30d2192affa77e6bf7358dbd51a6845f953ec5839084e38",
+      "base_sha256": "a74dae9df07e54b7203c8d3cf99e6ee39d7247db38e0a3d3797dcd2ef7e0ce7d",
+      "max_abs_difference": 0.001953125,
+      "mean_abs_difference": 0.0009975433349609375,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.12.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "d5da9d5487466d14ec5982c89d1cc2e17f7c2e3cc96ccc1215112ce76a39afb2",
+      "base_sha256": "572849c008496a49b39489c79fe6bd90c0dab9bc65f0f648d20cd666d45d41c1",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.12.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "03ee46931e79ed95c50cc7a266fbd59a63fce30530d27559be9c4a1d1a1acb78",
+      "base_sha256": "2f309adfb7d652ed1e5695d4a24e5fd2b1a412ae1d9d09281c4a52b418cc7fb0",
+      "max_abs_difference": 0.0027618408203125,
+      "mean_abs_difference": 0.0009833574295043945,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.13.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "06c1b9f5b4391e6c8bf04130671ca7fc0fd96407059599216764ed0a51cc24ac",
+      "base_sha256": "772d70a97eee1b6521255d466fe31a7ec62f1a8af4aa5d61c0e92c703e4a4017",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.13.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "811c481cdceb22a3cb59c3773f2f4e03203dfa24c9ca819bd03d4c43deac7b2e",
+      "base_sha256": "a70ba61758cd737d52f167bf78a27478c6c65d939dd385304b98fb5305b86fb3",
+      "max_abs_difference": 0.003662109375,
+      "mean_abs_difference": 0.001003071665763855,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.14.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "2ec653e185386f71f2c4cdcce7874fbabc915d634ec359c8b9fedf927c51eaa3",
+      "base_sha256": "129bccf48adaeaa4e8a0b8aa1962a27b11d1953758a82e3532efb66ebdb2543f",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.14.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "446a3106a12a4a25d885c9ed954904ee11f0aec527989c8dbbb7c8b7be1e9af1",
+      "base_sha256": "0a6b3996cc1741241703c2294be27c6590c02e33dc6ee939d6f8e8c23f2ad39e",
+      "max_abs_difference": 0.001953125,
+      "mean_abs_difference": 0.0010380744934082031,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.16.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "94d642ce7455e01ebb4cb53694aecf6757cc9a03cf54d5696f7460959b92844d",
+      "base_sha256": "e5a80a601278cb3c4ab06e12ba6e4d042dc03e299cdce02a529621ab58d97e70",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.16.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "a8a583425108f7d6bf09467bab95b60709ac039291f928c9913624222904b64a",
+      "base_sha256": "9d0c32880d828e7d710f84ed19a10bda3e75e1b21ec0d8eeb57dc178469e48e8",
+      "max_abs_difference": 0.0036773681640625,
+      "mean_abs_difference": 0.001080632209777832,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.17.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "9993964a27fe93a71ec5f6a6ae3836bf56bca6d71037b7049d1423fc94bd2032",
+      "base_sha256": "565f9624d34bbd5f7d30a6a4c3220dac0b3b624cd5a2ce7524a7eef96a9c6091",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.17.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "c8eccc89cd00efc323e214a7eaf8f51adc7037493fb2b397ac6c384135e99816",
+      "base_sha256": "eedcd606cb2d798a7d2004d2b56dc97a677b815e40b6c67a24c73e76dc95cb62",
+      "max_abs_difference": 0.001953125,
+      "mean_abs_difference": 0.0009937286376953125,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.18.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "de92fd0012bf904b7e1efbe16fe51cfc240e1b5506c5011f5d599b1587adfa50",
+      "base_sha256": "253fc3af3e5ee749355d50a994d95b8d527cf7db79c4d9845a5179d3e56fe08a",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.18.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "6ef9310a5c66cf2548ae2aa9cd71a97ebc0c8067ea59d805232670d76c6f384f",
+      "base_sha256": "f8947aca043877e6ad269da8202b63c9033509ac0fa2d28250282b22412f4be2",
+      "max_abs_difference": 0.001953125,
+      "mean_abs_difference": 0.0010421276092529297,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.2.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "07988c1c8707b1e3f32c1260de806c495f05666662e660cdf0cdac3d35b54101",
+      "base_sha256": "1578770f3a2dddd6cdc5d1fbc2289e1d62601dc7af032a4f2526c5b537f56ef9",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.2.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "c75c0570558bf277150a9f14bf364d7dd0cb06e6001bb7a4ef11d7b50aea3367",
+      "base_sha256": "b003b87fd7b247b43226a61172f8f011ba8d827efeaf810b706f8dbd7b96e459",
+      "max_abs_difference": 0.001953125,
+      "mean_abs_difference": 0.0009968280792236328,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.20.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "73450927846d3170b86071ce21911e515f4b4ffb7edb075c9d8a91b7ae194269",
+      "base_sha256": "7444e95dfde2e69ea8de8927d5b224ab144c00aa7534860786ecdb6f5a1fd283",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.20.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "7a399377961744d293ac68f69f375c3efc8ce0f0dbdbe00d10ba0d29a66485c1",
+      "base_sha256": "691702b281c3c1e54179699b4e971b1a5e7fd803a5cb57b5fa2b32eb79441ed4",
+      "max_abs_difference": 0.0036468505859375,
+      "mean_abs_difference": 0.0009866952896118164,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.21.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "35282b27e5869e0f9b803ae0ada2a6a3dba0e14969e205e85dc84791810e47ec",
+      "base_sha256": "f266f296c12b0df1071decec4e2a0388fd5f90779d95290cf3c7e5d891aad32c",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.21.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "03a85259b437812c745393fbf8bead84cd57f904747bb9664b1eea099cbac9e8",
+      "base_sha256": "c52a7be020a586b3734658f851e7a893c3d5e3737223d977c347aeb9b3494cd9",
+      "max_abs_difference": 0.0024566650390625,
+      "mean_abs_difference": 0.0010671764612197876,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.22.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "39506bfead18f9e4862e802f53773b0d3572dbc990ab75f475f7bc961edf201f",
+      "base_sha256": "cbddeceaab6dc34c2dd114267999cfb2c1faac198daefa5bdddd1288888f73cd",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.22.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "075b558eab3dd2e48eb7e40a5f8746fcad5a1a4cfac3169c40ed849a784230f5",
+      "base_sha256": "c8f7d6c152747c7e3dfe138dd5fe6ca00961aa0ab8b436592428d5f818ae2c78",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0011707544326782227,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.24.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "205fb311dc1dcd56d09d2dfe2363e331273292cb46062443bb1609d31847c862",
+      "base_sha256": "77304961c63df61b58110e071a0fb6abedd16b81fa159c8dcc0ced3945a77713",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.24.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "34525017d0048ca4ff44c7876b7fb5c99213c63a2dde258f99e036c18cc4187a",
+      "base_sha256": "6e7629bc7669e33af46c72f87bf01712d1ec72d9c161d733e559525d7cac3ca9",
+      "max_abs_difference": 0.00384521484375,
+      "mean_abs_difference": 0.0011576414108276367,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.25.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "948f4abb90a06c3ebeac4fa2cf0c2b474b171af6883b28b107d0d6a24c486ef3",
+      "base_sha256": "48713be5a62b7b6ad839f90e2304db9031c2ac4cacb5029e258509dfcc90900a",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.25.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "d9517b161bfc8554f194ddb95eb89ddc45431aa5500a0d77134f8fdbaa097b8f",
+      "base_sha256": "c3d810213cb2e53438e5326fa9246140bc3879ce489b358c4f1491de16a635b7",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0012468695640563965,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.26.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "62f2c8e89bacd48b6cb180ecc13f0a9a469ebf03ddba13b6c891e5d231a84599",
+      "base_sha256": "09648593bdb2f2afc9751bc6c123fc94e2f9a79488319bc6556c1461f6026c01",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.26.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "f3c14b775d6f429c21f7e9cb549cccdad6197e5fbbbddbea681e6822f11db0cb",
+      "base_sha256": "08004bc30396807ff825892462747c2f45f6f77a192b88eec453ef61680d49f3",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0011228322982788086,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.28.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "43873aefbddd518135c82175ece7d68f275c1e490164a29d9aee80e183ce8c5e",
+      "base_sha256": "0f7c18fed591b4b0c88df251b827e98a16323afc43c6e587cbc0394586dfdf23",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.28.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "dc82b2998ba8b6e516ecb10b3607b336f612d134acc030f2cf7912678479a1d8",
+      "base_sha256": "8bd9d427f93392c785857447d703adb1585b7b671568bbc9eca3417a83e9e2b3",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0014247894287109375,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.29.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "8982827877b78a2fe62807f398bae79f7eec7e16646fa0f6379a70a47a46496f",
+      "base_sha256": "38d833fd22b09c70ca726b6bc6954c983e531dc2ad535818872ac912e29d7910",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.29.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "7e38837926978096e4a191186b8747ac223da59f9f7726ced4628088a477fb3f",
+      "base_sha256": "769ac389b2c3bf8f304ecf8a2bee43f4cf2be926e749f2a7b11aba83bf2921ae",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0019420385360717773,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.30.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "5ae3a3cefcd584a86a9e4d5b88f7422560a53ca003c34a46d75cd005640b0724",
+      "base_sha256": "6186880a5266acf7519367084e0ec4bbc6d9ca577e348f5ee5a9931123c69b77",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.30.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "c6a52b104954887d9c747b777b25017209fa5c0eb46124900dbae69e20bdde6b",
+      "base_sha256": "60745831e5bb5ca35594408fa1f138eca08190b109ab4d6b497a3143d4520e2e",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0015181154012680054,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.32.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "3c0e6f69729ddab8ecb2fbc404c4e3692617376c6f399b5ef6cecebed734e4e7",
+      "base_sha256": "08a3382ddd284b51b197865995dcd274a4d8d701119c398586c957563601438f",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.32.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "13feab14edce9540196d98c3bfc90da3b57db08d6481883f42e606f0832443c1",
+      "base_sha256": "d12ba8575df79f55329b6cd4af3abb078433056cf20838a1df067ebe8ff3ed55",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0015378892421722412,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.33.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "d28580e10cd5e2f9cd1b87cd16210a14a8cf1cadaceb618dabbe226548157b04",
+      "base_sha256": "802a273449ee4088a6039077543d71050cdaaa2b745e30fc82e657aae336bb26",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.33.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "22aea2e3ccecaae917e184e4651dc0ca68b3b1361d3c5beae9faa63e7a2629e3",
+      "base_sha256": "e778a7e74b23c7150b4be2f59ea67927da68eac674b20e6a230414a859f2a56d",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0017139315605163574,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.34.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "278c212248f17a31cc81ca4cf20b964ab43bb40aee3e892b9d8f7d79266ae239",
+      "base_sha256": "2ca1244be03bb27b36ead8b541cc9ee8115ea2859239d9ea829916632cc45ea2",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.34.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "74538118db902f08181dceeecdf513add758a7e441d495bd44b7b7925e667426",
+      "base_sha256": "4097f15339e37f47ec7634d8eaf32989ac6ac5de914183a1eab0b9ea925d17ed",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0013353079557418823,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.36.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "7ead39ff55d2f8f1ae6a04f0b4c65fa586d26f6181ffb4a8947a50ed5cc2836c",
+      "base_sha256": "efe077c4bff7e19e733d3c43062fbd04789066a453403f9c703f191b46be8f1c",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.36.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "4363fc5d169e46b0dcfc1226c475d82f0f46025e235b3d66d114adc3131dbe64",
+      "base_sha256": "52d3ae22dd3bebb8951abf43b1be353adf239bbeec9701ac44d388c17df3504e",
+      "max_abs_difference": 0.002899169921875,
+      "mean_abs_difference": 0.0011553764343261719,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.37.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "0ebf6ec2101198e1ad7739ac22f66f9e9a4f44525c4f3a3a8cc5646274aee056",
+      "base_sha256": "2f43603b2aa314529f119a77aa477014ce44e5e9acaf4d3335596d33f87b015a",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.37.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "785768265b43dfedc75f9187f24087fd39af5f69a8ef89b80026cdfb374d6be1",
+      "base_sha256": "922af55e131431e32c4d72f7204b785d3b0d71a71c99d37e69f193daedab4c6f",
+      "max_abs_difference": 0.002899169921875,
+      "mean_abs_difference": 0.001023411750793457,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.38.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "c8eeda6ad32aec9f3a3bec7613355ed3a07d833db8488013c189e8eb41d88975",
+      "base_sha256": "5f1c76f3e04be87b244f711e312f203800cb41e3530c725ee9f50c6e07827d50",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.38.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "a7700c38c82842ef0c87d6f555f04991ce5e12c72a1285901b13d331e5f2c783",
+      "base_sha256": "2b5eb8abf6d4ffdc29083fa6d7a755be4a99e41d89154dc258649215478f3faf",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0013304203748703003,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.4.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "a344a87aab37f76acc127db7a76397a179af048896859db651f69bbd3eb77201",
+      "base_sha256": "1bbf3761a37041c6689bf55f0d3d77d6331558f2fe91976125ee556e0f3d6f14",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.4.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "068a2b4d39468099186d1edc58634e8b15e095c059a377c209ed6830593ae32f",
+      "base_sha256": "197855e21ae219751ba6ad61475eee6ba913407025641bc83c80dcbd1ec52d96",
+      "max_abs_difference": 0.00384521484375,
+      "mean_abs_difference": 0.0012094257399439812,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.40.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "1f91e8f0aa5d0a6d425fde4c251bf0150e3243ebdbd9bc82ef693f8ce1bbe967",
+      "base_sha256": "03a240082efd783cab5763091196dec5390e6b079b9671288bc906a9963b4c44",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.40.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "4da2f2def97582feba655f25c6047461ed3d3cc011c8517bf34523218500a524",
+      "base_sha256": "c1d834fe6d8f31f33e1032a18a1f40cd10b20d24c5fc3a84eab7baf1f8fa9e64",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.001410067081451416,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.41.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "584f68aa3829226951bc9a7a51cc25520a7b062b8d9afcf0f20afa44d2d2509c",
+      "base_sha256": "0e7cd25bffc7b05f618cae894f9c5d38e512a4cd01125541f681459f5933f2f2",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.41.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "51687b64e31bf0b40ef090a722783f7d2dd859e11a84198a872b856f333102e8",
+      "base_sha256": "40740ddde7368175fee729a301d8e32c7f821fc9c191700f915255fc3f1cd43f",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.00188402459025383,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.42.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "e863146da9730d0a9aef56d496d3a35078e6ab822005bdd427044abe347258a3",
+      "base_sha256": "148c10295093c39b804b4f8f72ec2a4b0893874f5207fb4515cae634883d809a",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.42.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "5d9bcc3b217870f5ce8cbec2c3b1f1678fa99b27548bc337818cbd2244702228",
+      "base_sha256": "ba1861767484ac8735712a56bef5fbc28a2bb4385772bdd343df82989dbe97b2",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0015371441841125488,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.44.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "860fbfe8ed22d33e8f6c580f4748d2de823e766365b190bc71df9577663d4ec7",
+      "base_sha256": "8b699f99b5567a5be42d41386337fae28004162f5ea4f33a050193661a04143e",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.44.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "8577b6d511eb897a870c3b52805ab71d125b997e40fdf83611c4d190d176d8af",
+      "base_sha256": "29d1fc820445c49ca7d2c809ae790466184abec35b48082f7ae73ccf6ed0aa74",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.001748446375131607,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.45.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "165a0abb3313423be574b5cab8d6ea273ee8bb1e5e26a2035fedc8e8b268921b",
+      "base_sha256": "03b6aebd26fe3fd67dd7c9638bc3a18209a1f2f3fc4e2ca2f2e0ebd1a158b510",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.45.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "1db292a8a55632b726598f80a6796dc499b9e6c4145fbfd85d66445b36f28b27",
+      "base_sha256": "6034396645b8c1705315d66f1fec22268e167868807a20da445e4a87e5763094",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0020494461059570312,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.46.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "c67d45f4cf47b3412094b6b1f04cb5cede136e2893ea6844ef1d04c1c99e4af8",
+      "base_sha256": "2bd2831c9c6cdab3470712b78fd3b2e80efd05947aa33c0a78e2fb0a1839f6d1",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.46.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "5e55bd37c5f69843dd462364ff6329943b794d32e2f83062d076d5f7ec29019e",
+      "base_sha256": "97a26ae680f72f3c3cb704ffd5ea56b361f09344bda855b37b466f38c45a6eee",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0015164613723754883,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.48.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "ed272e61e6ec7876fd5ba61910707b414c6e2e2c993e6009f3f238f692cbe93b",
+      "base_sha256": "ff30c2d7cfa45ed347535fea7d3984cf801903e6391ba50970f6bb9976b76dc9",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.48.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "012a2e2931b19d5e77946661828bb0525c1d8a5557048f37f99ec6d547c63ad0",
+      "base_sha256": "3f46c6fa8369725bdbd9d23f490df1123357f8ee2fd58f5465e7a8d03f56471c",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0015640556812286377,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.49.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "327758b47710820fafaaa40a18687e895abcecae8d8e82505e6a30f819799959",
+      "base_sha256": "3762c0ba7ecf86de0e6ec53fce67ec81571febea409cec29f8d18624fcd25c25",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.49.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "b0acfb4e7b296674fd596ec581b44df67070d267c4c59f81be156f63e854e42d",
+      "base_sha256": "628b0955ec46af56e0d6be5a76f63dea5165f1c634e2ef091d6cb9f62b8ca942",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.001870378851890564,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.5.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "9fe802171ebede9fbadbb38f25411efb5d2272fe98c45e25c813d719a4697aa5",
+      "base_sha256": "0224807a5afc1357c494ab7feabcf7dafb8d01acd86efd2a7867ff568697aca8",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.5.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "e1569da66288855e627a418f426bd0688b99b7473e3aebc2205e354a2112e925",
+      "base_sha256": "e185312a4bd2c0fd117fb640d547765d3399e92aaaaf5b32287ddf0e9eca9b1c",
+      "max_abs_difference": 0.002899169921875,
+      "mean_abs_difference": 0.0010881423950195312,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.50.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "3ba85a35ec94fb12862e41d4aadcebab1c88db52ff2010f1f988bb3f49629046",
+      "base_sha256": "6d9473f705f6f33e5b0d4a4778ae2945634369651b5b826cdeee99f3b313a0f6",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.50.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "889b72e19ed648103b9db28c595df288fd39c197cae688b135afddb548b14b6f",
+      "base_sha256": "8673ebdcf185db4c3ebab42ebcdd243a6b8dabb5fd489814df89aef391fec0b7",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0013350248336791992,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.52.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "01296d3479bfe20029657c10dcb6417d8b6d90eb2c27cd8a2905d2604524eb67",
+      "base_sha256": "6bdbe9d57c51ea469323de3dfccc2b143c7c7f42d33c79153fa9a75b7e0a97f2",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.52.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "82aa7498646bfd5b3e7f0b7842708018e371ee5b8da8b1cc100fb7bdf85f8eae",
+      "base_sha256": "ec0bd5ebe6507cfe700bf078c0166e5327cb103dda9cee8ea515b1e8cb7ebfd1",
+      "max_abs_difference": 0.0037841796875,
+      "mean_abs_difference": 0.0010983943939208984,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.53.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "490dc5d1b50e5cba128c0c38b9fd5dc0075ca954f07f059d0ffe0682b0ec410c",
+      "base_sha256": "be9b94dfd0c2bd55149b23caee6041d69a1dc717015b8cef730de74e505e400e",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.53.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "a5e44f57b75f902c70bcc1accc6deb47dfddccb414e67d44ae40de46abb54be3",
+      "base_sha256": "8a7ef71f71458560bf04702e4c63e1a0aa3e357130c2a72208b047b06bbb7b21",
+      "max_abs_difference": 0.00250244140625,
+      "mean_abs_difference": 0.001131296157836914,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.54.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "c65a9c1cfc599e065ccd69cb7970eb1a4cbec5e3f0c2bc855c2d1f2be4b9dcfb",
+      "base_sha256": "85ce44c07030b97b23ebb6b574fa16c5373ce7d280147b901f813cd9bca6fb7c",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.54.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "320607530a37ba987221bc6451e3141783f901ff0660cdca92592f8e882baec5",
+      "base_sha256": "b14e06fd5a73a07bb33eff359a2cc6097c9b376eb54ee131e8377fc232348291",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0013149678707122803,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.56.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "2dfdc0c204183825187cdbac3484adce1b7ddc0347f3e93bb105a9622c9944ef",
+      "base_sha256": "7938580c9a9c3e0119d82f7dc77599eebd77208159fb6c7ca2a236e907c566e4",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.56.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "7cccc8dc320d96bade3ef6df68853c5148b39841c9081de6d848c38edcb24bd5",
+      "base_sha256": "a48902a9b0f58b277e5882a8839c82730762a474f158c2485bf82a2e19cf0b4b",
+      "max_abs_difference": 0.0035400390625,
+      "mean_abs_difference": 0.0011047124862670898,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.57.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "c8e980a8977509431eb0964842f6d2a0c606d491b325255b5215c03c56f74686",
+      "base_sha256": "92b8a4f9ddb1f2825920d0ec5fb3d16f287708d14e427b4e0d380374d6ee7e6f",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.57.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "b7d797c2cf86d66bd4da0648fb53f430a9a29f97bd99f651323456f1ae340027",
+      "base_sha256": "66b4d7ed1402f243227a646b651a6176062e346537b82f5b73a4bf3b5815c2dc",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.00130365788936615,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.58.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "2ae57bfcdd8997e9fa7ba0a90f183092fa8ae3afdc57e70ded7749bdc635fe40",
+      "base_sha256": "be24773083bedf2edebcd7efa16debec5585bb6ba349e0fa96e244bba15e67dc",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.58.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "63607b3315c30ff21dfbf2d87b36d253aaae1c76b43c7bdab4b991b250b4fc01",
+      "base_sha256": "7e64bd7fa6df65adf7a6f70fd1be199bf18039edd898f8625d1c82a549443a6c",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0018551796674728394,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.6.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "956b92faff382260c6d44621caf9c0a4222f11be34cf80388272f967288c5bf3",
+      "base_sha256": "37f8c082905e0ed6ced5633bc4d0730122ed2541f9d883ce092d72735f19854f",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.6.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "15396b40b94eb16d55f341fa780b465cf6cc885b3a2a6dc981f5ea84d57c5e80",
+      "base_sha256": "ee1bbad7db0789a1cda373a5dc5287b7b61b14b992b558c4d54203c3bcb3b233",
+      "max_abs_difference": 0.001953125,
+      "mean_abs_difference": 0.0010162144899368286,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.60.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "92ca810073e803ff79332d682d3840b50a8c3288f4ad998a39a5af69fefb8aca",
+      "base_sha256": "58bb7005d8a8487e699bc6663e080a77483fc35fecb668aa033d14ae0cf434d4",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.60.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "477dd65f4413fd0f511b2bf7c77433f3ab458a3873c84c2d94a2627150981600",
+      "base_sha256": "ac456335f305908366f73bc84c5a29f9becec5016ec1a3f645c608fa725a2abf",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0019828155636787415,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.61.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "833b38be335620c29dae8846ba9308a28337b659adc944b8deec0f869f141e2d",
+      "base_sha256": "91fb1a69e80df88f0b9bf14b717e975b729ec58e3c66384893ab4d17447761da",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.61.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "cd2c1b8a257eba7138cdf8c8c003f4d4fe9574d328a199a07fed8c28affc0fa3",
+      "base_sha256": "564fbae0c7e645b2a9e325f0957147f2927a60db4470eea78ff21f1af10e7767",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0022139549255371094,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.62.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "81f50777cda378a21cdcd2893b57846616c869ccf2902b52bbc13f1dde631bbb",
+      "base_sha256": "dbabb3baaffbffc1b8f1789790c23222884bc8f4ba748da41b094cc2ec97e092",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.62.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "a9812ea6746eb9ef8050ff15a5bd83e389af925ab8da1044632b4f121f2f7d43",
+      "base_sha256": "19434df1104caaf634b7a9106e51f3922888199363a6bec980e4fc022650ae11",
+      "max_abs_difference": 0.00390625,
+      "mean_abs_difference": 0.0020105838775634766,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.8.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "f6365d220dacc8b42fc4d43ff83f1b75e8b9024d57adbc23608f4f43de8e3cb4",
+      "base_sha256": "3e2c1eaea6edead2a59a9a622ea10cca007d6bd9199a29bdc454125141cb0b48",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.8.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "4af5381fc70ab49f2f56d95abcf01432332c2fc8854d41c6f7a1d5d413cd0d9b",
+      "base_sha256": "e19e8efd58aaa3dbd3e88746c18312a415ab1dbce720df7707adf34572f6d304",
+      "max_abs_difference": 0.001953125,
+      "mean_abs_difference": 0.0009398460388183594,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.9.linear_attn.A_log",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        48
+      ],
+      "byte_count": 96,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "c70bbd2e7649930ac650117dc698759dfd967bbe3ac1e639b54e175ab8783b51",
+      "base_sha256": "3df03664d6b706cb1925a49ad42c4ab5a83425941e91bf689237c37457987e4b",
+      "max_abs_difference": 0.0,
+      "mean_abs_difference": 0.0,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    },
+    {
+      "name": "model.language_model.layers.9.linear_attn.norm.weight",
+      "checkpoint_dtype": "BF16",
+      "base_dtype": "F32",
+      "shape": [
+        128
+      ],
+      "byte_count": 256,
+      "metadata_equal": {
+        "dtype": false,
+        "shape": true,
+        "byte_count": false
+      },
+      "checkpoint_sha256": "0348b599eaf396641541dde3fedf5f35e6e72cd2facb8873d115ecb0b1210409",
+      "base_sha256": "022d2003ac2d25bdd2855de0f9095c572bf614e9d824071bf8687e441a656c54",
+      "max_abs_difference": 0.001953125,
+      "mean_abs_difference": 0.0010251998901367188,
+      "equal_after_base_f32_to_checkpoint_bf16_cast": true
+    }
+  ],
+  "value_equivalent_tensor_count": 1184,
+  "common_values_equivalent_at_checkpoint_dtype": true
+}
