@@ -9,6 +9,37 @@ APP_DIRECTORY = Path(__file__).resolve().parent
 
 
 class TimelineDataTest(unittest.TestCase):
+    def test_attached_gemini_runs_have_dashboard_ratios(self) -> None:
+        reference_rows = json.loads((APP_DIRECTORY / "reference_rows.json").read_text())[
+            "rows"
+        ]
+        duration_rows = json.loads(
+            (APP_DIRECTORY / "entity_duration_statistics.json").read_text()
+        )["rows"]
+        duration_by_run = {row["run_id"]: row for row in duration_rows}
+        timeline_models = json.loads(
+            (APP_DIRECTORY / "gemini_timeline_data.json").read_text()
+        )["models"]
+        attached_rows = [
+            row for row in reference_rows if row["name"].endswith("chunked-5m")
+        ]
+
+        self.assertEqual(len(attached_rows), 3)
+        for row in attached_rows:
+            with self.subTest(model=row["name"]):
+                self.assertIsNotNone(
+                    row["average_predicted_to_ground_truth_shot_count_ratio"]
+                )
+                self.assertIsNotNone(
+                    duration_by_run[row["run_id"]]["entity_duration_micro_ratio"]
+                )
+                self.assertEqual(
+                    timeline_models[row["name"]]["statistics"][
+                        "entity_duration_micro_ratio"
+                    ],
+                    duration_by_run[row["run_id"]]["entity_duration_micro_ratio"],
+                )
+
     def test_temporal_iou_merges_overlapping_spans(self) -> None:
         self.assertAlmostEqual(
             temporal_iou([(0, 5), (4, 10)], [(5, 15)]),

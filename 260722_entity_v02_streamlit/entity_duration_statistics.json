@@ -171,6 +171,11 @@
       "run_id": "linear:A-1797:2524ef27:flash35:chunked-5m",
       "entity_duration_micro_ratio": 0.7371856955559146,
       "missing_ground_truth_entity_fraction": null
+    },
+    {
+      "run_id": "linear:A-1797:2524ef27:pro:chunked-5m",
+      "entity_duration_micro_ratio": 0.8683279934166817,
+      "missing_ground_truth_entity_fraction": null
     }
   ]
 }

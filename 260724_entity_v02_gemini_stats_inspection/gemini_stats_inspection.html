@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Gemini dashboard statistics inspection</title>
+<style>
+  body { font: 14px system-ui; margin: 32px; color: #252525; }
+  table { border-collapse: collapse; }
+  th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: right; }
+  th:first-child, td:first-child { text-align: left; }
+  th { background: #f4f4f4; }
+  .filled { background: #fff0df; font-weight: 650; }
+</style>
+<h1>Attached Gemini inference statistics</h1>
+<p>Both ratios use all 18 attached predictions (6 full + 12 half).</p>
+<table>
+  <thead><tr><th>Model</th><th>Duration</th><th>Avg(predicted / GT shots)</th></tr></thead>
+  <tbody>
+    <tr><td>gemini-3-flash-preview-chunked-5m</td><td>0.762</td><td>1.567</td></tr>
+    <tr><td>gemini-3.5-flash-chunked-5m</td><td>0.737</td><td>1.530</td></tr>
+    <tr><td>gemini-3.1-pro-preview-chunked-5m</td><td class="filled">0.868</td><td>1.128</td></tr>
+  </tbody>
+</table>
+</html>
