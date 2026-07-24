@@ -1,0 +1,24 @@
+[project]
+name = "ifstruct"
+version = "0.1.0"
+description = "Standalone IFStruct evaluator with a frozen 2k-example test set."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "PyYAML>=6.0",
+  "python-dotenv>=1.0.1",
+  "requests>=2.31.0",
+]
+
+[project.scripts]
+ifstruct-eval = "ifstruct.eval:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["ifstruct"]
+
+[tool.uv]
+package = true
