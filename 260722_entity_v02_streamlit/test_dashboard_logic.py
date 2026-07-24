@@ -4,12 +4,29 @@ from app import (
     H0_ENTITY_V12_BASELINE_RUN,
     family_name,
     friendly_name,
+    half_sample_dataframe,
     pegasus_history_dataframe,
 )
 from training_mixtures import wandb_url
 
 
 class DashboardLogicTest(unittest.TestCase):
+    def test_half_sample_table_starts_with_authoritative_half_average(self) -> None:
+        table = half_sample_dataframe(
+            [
+                {
+                    "name": "model-a",
+                    "half_score": 0.42,
+                    "half_samples": {"film-01:000": 0.1, "film-01:001": 0.9},
+                }
+            ]
+        )
+
+        self.assertEqual(
+            table.columns.tolist(), ["Half avg", "film-01:000", "film-01:001"]
+        )
+        self.assertEqual(table.loc["model-a", "Half avg"], 0.42)
+
     def test_h0_entity_v12_names_replace_obsolete_family(self) -> None:
         self.assertEqual(
             friendly_name(H0_ENTITY_V12_BASELINE_RUN, "s3://example/checkpoint-100"),

@@ -738,6 +738,7 @@ def half_sample_dataframe(rows: list[dict[str, Any]]) -> pd.DataFrame:
     records = [
         {
             "Model": row["name"],
+            "Half avg": row["half_score"],
             **{
                 sample_id: (row.get("half_samples") or {}).get(sample_id)
                 for sample_id in sample_ids
@@ -1210,15 +1211,23 @@ def render_dashboard(api_base: str) -> None:
         height=900,
         column_config={
             "_index": st.column_config.TextColumn("Model", width="large"),
+            "Half avg": st.column_config.NumberColumn(
+                format="%.6f",
+                width="small",
+                help="Half name + appearance IoU from the main leaderboard.",
+            ),
             **{
                 sample_id: st.column_config.NumberColumn(format="%.3f", width="small")
                 for sample_id in sample_scores.columns
+                if sample_id != "Half avg"
             },
         },
     )
     selected_cells = sample_selection.selection.cells
     if selected_cells:
         selected_row, selected_column = selected_cells[0]
+        if selected_column == "Half avg":
+            return
         model_name = str(sample_scores.index[selected_row])
         try:
             render_sample_timeline(api_base, rows, model_name, selected_column)

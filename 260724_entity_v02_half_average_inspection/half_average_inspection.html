@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Half average column inspection</title>
+<style>
+  body { font: 14px system-ui; margin: 32px; color: #252525; }
+  table { border-collapse: collapse; }
+  th, td { border: 1px solid #ddd; padding: 8px 11px; text-align: right; }
+  th:first-child, td:first-child { text-align: left; }
+  th { background: #f4f4f4; }
+  .average { background: #dff3df; font-weight: 700; }
+</style>
+<h1>Half sample scores</h1>
+<table>
+  <thead><tr><th>Model</th><th class="average">Half avg</th><th>film-01:000</th><th>film-01:001</th><th>film-02:000</th></tr></thead>
+  <tbody>
+    <tr><td>gemini-3.1-pro-preview-chunked-5m</td><td class="average">0.408300</td><td>0.450</td><td>0.295</td><td>0.507</td></tr>
+    <tr><td>pegasus-15-kian-soce</td><td class="average">0.377182</td><td>0.451</td><td>0.477</td><td>0.576</td></tr>
+  </tbody>
+</table>
+<p><b>Half avg</b> is the main leaderboard's Half name + appearance IoU.</p>
+</html>
