@@ -54,7 +54,7 @@ FAMILY_COLORS = {
     "A-1740 h0 duration": "#0b62d6",
     "A-1790 entity SME 4x": "#c62828",
     "Entity SME v1.2 Whisper": "#5e35b1",
-    "H0 Entity v1.2": "#ad1457",
+    "h0_entity_v1.2": "#ad1457",
     "Pegasus 1.5 RL": "#00838f",
     "Pegasus 1.5 SFT": "#6d4c41",
     "Pegasus 1.5 / Kian SOCE": "#137333",
@@ -108,6 +108,11 @@ REFERENCE_NAMES = {
     "gemini-3.1-pro-preview-whole",
     "gemini-3.1-pro-preview-chunked-5m",
 }
+OBSOLETE_FAMILY = "H0 Entity v1.2"
+H0_ENTITY_V12_EVAL_PREFIX = "lia-entcov-v02-64k-c8-h0-entity-v1-2-base-timmiu-"
+H0_ENTITY_V12_BASELINE_RUN = (
+    f"{H0_ENTITY_V12_EVAL_PREFIX}s100-tp1-r8-8-20260723T215700Z"
+)
 
 
 def request_json(
@@ -190,13 +195,17 @@ def list_completed_runs(api_base: str) -> list[dict[str, Any]]:
     return [
         run
         for run in runs
-        if run.get("dataset") == DATASET
-        and run.get("status") == "completed"
-        and int(run.get("totalTasks") or 0) == 18
+        if run.get("dataset") == DATASET and run.get("status") == "completed"
     ]
 
 
 def friendly_name(run_name: str, model_path: str) -> str:
+    if run_name == H0_ENTITY_V12_BASELINE_RUN:
+        return "h0_entity_v1.2"
+    if run_name.startswith(H0_ENTITY_V12_EVAL_PREFIX):
+        step_match = re.search(r"-s(\d+)-", run_name)
+        if step_match:
+            return f"h0_entity_v1.2-s{step_match.group(1)}"
     searchable = f"{run_name} {model_path}"
     patterns = (
         (r"a1865-entity-sme-whisper-s(\d+)", "entity_sme_v1_2-whisper-s{}"),
@@ -225,6 +234,8 @@ def family_name(name: str) -> str:
         return "Entity SME v1.2 Whisper"
     if name.startswith("h0-entity-v1-2-"):
         return "H0 Entity v1.2"
+    if name == "h0_entity_v1.2" or name.startswith("h0_entity_v1.2-s"):
+        return "h0_entity_v1.2"
     if name == "pegasus-15-rl-s60":
         return "Pegasus 1.5 RL"
     if name == "pegasus-15-sft-s1000":
@@ -494,12 +505,19 @@ def collect_completed_run(api_base: str, run: dict[str, Any]) -> dict[str, Any]:
 def synchronize_rows(api_base: str) -> tuple[list[dict[str, Any]], int, list[str]]:
     seed_rows = load_json_rows(SEED_PATH) + load_json_rows(REFERENCE_PATH)
     dynamic_rows = load_json_rows(DYNAMIC_CACHE_PATH)
+    completed_runs = list_completed_runs(api_base)
+    completed_runs_by_id = {str(run["id"]): run for run in completed_runs}
     for row in [*seed_rows, *dynamic_rows]:
         row["name"] = friendly_name(row["name"], str(row.get("path") or ""))
+        completed_run = completed_runs_by_id.get(str(row.get("run_id") or ""))
+        if completed_run is not None:
+            row["created_at"] = completed_run.get("createdAt")
     known_run_ids = {str(row.get("run_id")) for row in [*seed_rows, *dynamic_rows]}
     new_count = 0
     errors: list[str] = []
-    for run in list_completed_runs(api_base):
+    for run in completed_runs:
+        if int(run.get("totalTasks") or 0) != 18:
+            continue
         run_id = str(run.get("id") or "")
         if not run_id or run_id in known_run_ids:
             continue
@@ -522,7 +540,10 @@ def synchronize_rows(api_base: str) -> tuple[list[dict[str, Any]], int, list[str
         if int(row.get("parse_failures") or 0) < 18:
             rows_by_name[row["name"]] = row
     displayed_rows = [
-        row for row in rows_by_name.values() if int(row.get("parse_failures") or 0) < 18
+        row
+        for row in rows_by_name.values()
+        if int(row.get("parse_failures") or 0) < 18
+        and family_name(str(row["name"])) != OBSOLETE_FAMILY
     ]
     displayed_rows.sort(key=lambda row: float(row["half_score"]), reverse=True)
     return displayed_rows, new_count, errors
@@ -537,7 +558,14 @@ def synchronize_training_token_mixtures(
     leaderboard_rows: list[dict[str, Any]],
 ) -> tuple[list[dict[str, Any]], list[str]]:
     cache = load_training_token_mixture_cache()
-    seed_rows = json.loads(TRAINING_TOKEN_MIXTURES_PATH.read_text())["rows"]
+    seed_rows = [
+        row
+        for row in json.loads(TRAINING_TOKEN_MIXTURES_PATH.read_text())["rows"]
+        if row["family"] != OBSOLETE_FAMILY
+    ]
+    cache["rows"] = [
+        row for row in cache.get("rows", []) if row["family"] != OBSOLETE_FAMILY
+    ]
     known_families = {
         str(row["family"]) for row in [*seed_rows, *cache.get("rows", [])]
     }
@@ -583,8 +611,13 @@ def synchronize_training_token_mixtures(
     return seed_rows + cache.get("rows", []), errors
 
 
-def table_dataframe(rows: list[dict[str, Any]]) -> pd.DataFrame:
+def table_dataframe(
+    rows: list[dict[str, Any]], mixture_rows: list[dict[str, Any]]
+) -> pd.DataFrame:
     entity_duration_statistics = load_entity_duration_statistics()
+    wandb_by_family = {
+        str(row["family"]): str(row.get("wandb_url") or "") for row in mixture_rows
+    }
     records = []
     for rank, row in enumerate(rows, start=1):
         sample_count = int(row.get("sample_count") or 18)
@@ -594,6 +627,7 @@ def table_dataframe(rows: list[dict[str, Any]]) -> pd.DataFrame:
             {
                 "Rank": rank,
                 "Name": row["name"],
+                "W&B": wandb_by_family.get(family_name(str(row["name"])), ""),
                 "Scored": f"{row['scored']}/{sample_count}",
                 "Parse success": f"{parse_success}/{sample_count}",
                 "duration": duration_statistics.get("entity_duration_micro_ratio"),
@@ -662,6 +696,38 @@ def chart_dataframe(rows: list[dict[str, Any]], metric: str) -> pd.DataFrame:
                     "reference": False,
                 }
             )
+    return pd.DataFrame.from_records(records)
+
+
+def pegasus_history_dataframe(rows: list[dict[str, Any]]) -> pd.DataFrame:
+    daily_best: dict[Any, dict[str, Any]] = {}
+    for row in rows:
+        if family_name(str(row["name"])).startswith("Gemini "):
+            continue
+        created_at = pd.to_datetime(row.get("created_at"), utc=True, errors="coerce")
+        if pd.isna(created_at):
+            continue
+        date = created_at.date()
+        if date not in daily_best or float(row["half_score"]) > float(
+            daily_best[date]["half_score"]
+        ):
+            daily_best[date] = row
+
+    records = []
+    running_best: dict[str, Any] | None = None
+    for date in sorted(daily_best):
+        candidate = daily_best[date]
+        if running_best is None or float(candidate["half_score"]) > float(
+            running_best["half_score"]
+        ):
+            running_best = candidate
+        records.append(
+            {
+                "date": pd.Timestamp(date),
+                "score": float(running_best["half_score"]),
+                "name": str(running_best["name"]),
+            }
+        )
     return pd.DataFrame.from_records(records)
 
 
@@ -819,6 +885,7 @@ def training_mixture_dataframe(
             {
                 "Family": row["family"],
                 "Tokens": f"{row['total_tokens'] / 1_000_000_000:.1f}B",
+                "W&B": str(row.get("wandb_url") or ""),
                 **{
                     component: 100.0 * float(component_ratios.get(component, 0.0))
                     for component in components
@@ -865,13 +932,13 @@ def training_mixture_row_style(row: pd.Series) -> list[str]:
                 f"border-left: 8px solid {color}; background-color: "
                 f"rgba({red}, {green}, {blue}, 0.16); font-weight: 700"
             )
-        elif column not in {"Family", "Tokens"} and float(value) > 0:
+        elif column not in {"Family", "Tokens", "W&B"} and float(value) > 0:
             alpha = min(0.46, 0.08 + 0.38 * float(value) / 100.0)
             styles.append(
                 f"background-color: rgba({red}, {green}, {blue}, {alpha:.3f}); "
                 "font-weight: 600"
             )
-        elif column not in {"Family", "Tokens"}:
+        elif column not in {"Family", "Tokens", "W&B"}:
             styles.append("color: #9aa0a6")
         else:
             styles.append("")
@@ -930,6 +997,64 @@ def render_chart(rows: list[dict[str, Any]], metric: str, title: str) -> None:
     )
 
 
+def render_pegasus_history(rows: list[dict[str, Any]]) -> None:
+    history = pegasus_history_dataframe(rows)
+    if history.empty:
+        st.caption("No dated Pegasus evaluations are available yet.")
+        return
+    chart = (
+        alt.Chart(history)
+        .mark_line(point=alt.OverlayMarkDef(filled=True, size=45), color="#137333")
+        .encode(
+            x=alt.X("date:T", title=None, axis=alt.Axis(format="%b %d")),
+            y=alt.Y(
+                "score:Q",
+                title="Top Half IoU",
+                scale=alt.Scale(zero=False),
+            ),
+            tooltip=[
+                alt.Tooltip("date:T", title="Date", format="%Y-%m-%d"),
+                alt.Tooltip("score:Q", title="Top Half IoU", format=".6f"),
+                alt.Tooltip("name:N", title="Model"),
+            ],
+        )
+        .properties(height=150)
+    )
+    st.altair_chart(chart, width="stretch")
+
+
+def render_training_mixture_table(mixture_rows: list[dict[str, Any]]) -> None:
+    st.subheader("Training token mixture by model family")
+    st.caption(
+        "Token share within each family's mixture_stats.json. Checkpoints in the "
+        "same family share one mixture; new families are discovered from "
+        "experiment_metadata.yaml and similar rows are collapsed into Other/base."
+    )
+    mixture_table, mixture_components = training_mixture_dataframe(mixture_rows)
+    st.dataframe(
+        mixture_table.style.apply(training_mixture_row_style, axis=1),
+        hide_index=True,
+        width="stretch",
+        height=390,
+        column_config={
+            "Family": st.column_config.TextColumn(width="medium"),
+            "Tokens": st.column_config.TextColumn(width="small"),
+            "W&B": st.column_config.LinkColumn(display_text="run", width="small"),
+            **{
+                component: st.column_config.NumberColumn(
+                    format="%.2f%%",
+                    width="small",
+                    help=MIXTURE_COMPONENT_HELP.get(
+                        component,
+                        f"Automatically discovered dataset component: {component}.",
+                    ),
+                )
+                for component in mixture_components
+            },
+        },
+    )
+
+
 def render_dashboard(api_base: str) -> None:
     synchronization_started_at = time.monotonic()
     try:
@@ -942,6 +1067,9 @@ def render_dashboard(api_base: str) -> None:
             + load_json_rows(REFERENCE_PATH)
             + load_json_rows(DYNAMIC_CACHE_PATH)
         )
+        for row in rows:
+            row["name"] = friendly_name(row["name"], str(row.get("path") or ""))
+        rows = [row for row in rows if family_name(str(row["name"])) != OBSOLETE_FAMILY]
         rows.sort(key=lambda row: float(row["half_score"]), reverse=True)
         new_count = 0
         errors = [f"sync failed: {error}"]
@@ -949,11 +1077,34 @@ def render_dashboard(api_base: str) -> None:
     mixture_rows, mixture_errors = synchronize_training_token_mixtures(rows)
     errors.extend(mixture_errors)
 
-    first, second, third, fourth = st.columns(4)
+    top_gemini_pro = max(
+        (row for row in rows if family_name(str(row["name"])) == "Gemini 3.1 Pro"),
+        key=lambda row: float(row["half_score"]),
+        default=None,
+    )
+    top_pegasus = max(
+        (
+            row
+            for row in rows
+            if not family_name(str(row["name"])).startswith("Gemini ")
+        ),
+        key=lambda row: float(row["half_score"]),
+        default=None,
+    )
+    first, second, third, fourth, fifth = st.columns(5)
     first.metric("Displayed checkpoints", len(rows))
     second.metric("New this sync", new_count)
-    third.metric("Top Half IoU", f"{rows[0]['half_score']:.6f}" if rows else "—")
-    fourth.metric("Sync time", f"{time.monotonic() - synchronization_started_at:.1f}s")
+    third.metric(
+        "Top Gemini Pro",
+        f"{top_gemini_pro['half_score']:.6f}" if top_gemini_pro else "—",
+        help=str(top_gemini_pro["name"]) if top_gemini_pro else None,
+    )
+    fourth.metric(
+        "Top Pegasus",
+        f"{top_pegasus['half_score']:.6f}" if top_pegasus else "—",
+        help=str(top_pegasus["name"]) if top_pegasus else None,
+    )
+    fifth.metric("Sync time", f"{time.monotonic() - synchronization_started_at:.1f}s")
     st.caption(
         f"Last checked {datetime.now(timezone.utc).astimezone().strftime('%Y-%m-%d %H:%M:%S %Z')} · "
         "completed runs are immutable and cached by run ID"
@@ -961,9 +1112,14 @@ def render_dashboard(api_base: str) -> None:
     for error in errors:
         st.warning(error)
 
+    st.caption("Top Pegasus Half IoU by evaluation date")
+    render_pegasus_history(rows)
+
+    render_training_mixture_table(mixture_rows)
+
     st.subheader("Entity coverage v0.2 results")
     st.caption("Hover over the duration column for its definition.")
-    leaderboard = table_dataframe(rows)
+    leaderboard = table_dataframe(rows, mixture_rows)
     leaderboard_style = (
         leaderboard.style.apply(leaderboard_row_style, axis=1)
         .map(
@@ -985,6 +1141,7 @@ def render_dashboard(api_base: str) -> None:
         width="stretch",
         height=780,
         column_config={
+            "W&B": st.column_config.LinkColumn(display_text="run", width="small"),
             "Half name + appearance IoU": st.column_config.NumberColumn(format="%.6f"),
             "Half naming IoU": st.column_config.NumberColumn(format="%.6f"),
             "Half delta": st.column_config.NumberColumn(format="%.6f"),
@@ -1033,35 +1190,6 @@ def render_dashboard(api_base: str) -> None:
     with full_name_tab:
         render_chart(rows, "full_naming", "Full naming IoU")
 
-    st.subheader("Training token mixture by model family")
-    st.caption(
-        "Token share within each family's mixture_stats.json. Checkpoints in the "
-        "same family share one mixture; new families are discovered from "
-        "experiment_metadata.yaml and similar rows are collapsed into Other/base."
-    )
-    mixture_table, mixture_components = training_mixture_dataframe(mixture_rows)
-    st.dataframe(
-        mixture_table.style.apply(training_mixture_row_style, axis=1),
-        hide_index=True,
-        width="stretch",
-        height=390,
-        column_config={
-            "Family": st.column_config.TextColumn(width="medium"),
-            "Tokens": st.column_config.TextColumn(width="small"),
-            **{
-                component: st.column_config.NumberColumn(
-                    format="%.2f%%",
-                    width="small",
-                    help=MIXTURE_COMPONENT_HELP.get(
-                        component,
-                        f"Automatically discovered dataset component: {component}.",
-                    ),
-                )
-                for component in mixture_components
-            },
-        },
-    )
-
     st.subheader("Half sample scores")
     st.caption(
         "Select a score cell to compare its matched GT and prediction spans. "
@@ -1105,35 +1233,38 @@ def render_dashboard(api_base: str) -> None:
             st.error(f"Could not build this timeline: {error}")
 
 
-st.set_page_config(
-    page_title="Entity Coverage v0.2",
-    page_icon="📊",
-    layout="wide",
-)
-st.title("Entity Coverage v0.2")
-st.caption(
-    "Owen-2 Eval V3 · primary metric: Half name + appearance IoU · 18 film samples"
-)
-
-api_base = os.environ.get("ENTITY_V02_API_BASE", DEFAULT_API_BASE).rstrip("/")
-default_sync_seconds = int(os.environ.get("ENTITY_V02_SYNC_SECONDS", "60"))
-sync_seconds = int(
-    st.sidebar.number_input(
-        "Sync every N seconds",
-        min_value=10,
-        max_value=3600,
-        value=default_sync_seconds,
-        step=10,
+def main() -> None:
+    st.set_page_config(
+        page_title="Entity Coverage v0.2",
+        page_icon="📊",
+        layout="wide",
     )
-)
-if st.sidebar.button("Sync now", type="primary", width="stretch"):
-    st.rerun()
-st.sidebar.caption(f"API: {api_base}")
+    st.title("Entity Coverage v0.2")
+    st.caption(
+        "Owen-2 Eval V3 · primary metric: Half name + appearance IoU · 18 film samples"
+    )
+
+    api_base = os.environ.get("ENTITY_V02_API_BASE", DEFAULT_API_BASE).rstrip("/")
+    default_sync_seconds = int(os.environ.get("ENTITY_V02_SYNC_SECONDS", "60"))
+    sync_seconds = int(
+        st.sidebar.number_input(
+            "Sync every N seconds",
+            min_value=10,
+            max_value=3600,
+            value=default_sync_seconds,
+            step=10,
+        )
+    )
+    if st.sidebar.button("Sync now", type="primary", width="stretch"):
+        st.rerun()
+    st.sidebar.caption(f"API: {api_base}")
+
+    @st.fragment(run_every=timedelta(seconds=sync_seconds))
+    def auto_refreshing_dashboard() -> None:
+        render_dashboard(api_base)
+
+    auto_refreshing_dashboard()
 
 
-@st.fragment(run_every=timedelta(seconds=sync_seconds))
-def auto_refreshing_dashboard() -> None:
-    render_dashboard(api_base)
-
-
-auto_refreshing_dashboard()
+if __name__ == "__main__":
+    main()

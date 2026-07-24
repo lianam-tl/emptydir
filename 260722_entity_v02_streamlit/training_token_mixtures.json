@@ -3,6 +3,7 @@
   "rows": [
     {
       "family": "Consol h0/mn SME 2x",
+      "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/06h8x4z6",
       "mixture_stats": "s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/model_input/sft_consol_260416_clean_filter_less_aug_highres_soccer_h0_mn_sme_2x_added_manifest/mixture_stats.json",
       "total_tokens": 40248651781,
       "components": {
@@ -12,6 +13,7 @@
     },
     {
       "family": "Soccer LVReason MCQ",
+      "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/v876swwd",
       "mixture_stats": "s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/model_input/sft_consol_260416_clean_filter_less_aug_highres_soccer_lvreason_mcq_added_manifest/mixture_stats.json",
       "total_tokens": 44396175655,
       "components": {
@@ -21,6 +23,7 @@
     },
     {
       "family": "A-1740 h0 duration",
+      "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/bqm74hdf",
       "mixture_stats": "s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/model_input/sft_consol_260416_clean_filter_less_aug_highres_soccer_h0_mn_sme_a1740_duration_added_manifest/mixture_stats.json",
       "total_tokens": 40276453407,
       "components": {
@@ -31,6 +34,7 @@
     },
     {
       "family": "A-1790 entity SME 4x",
+      "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1",
       "mixture_stats": "s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/model_input/sft_consol_260416_clean_filter_less_aug_highres_soccer_entity_sme_4x_added_manifest/mixture_stats.json",
       "total_tokens": 40816989143,
       "components": {
@@ -40,6 +44,7 @@
     },
     {
       "family": "Entity SME v1.2 Whisper",
+      "wandb_url": "",
       "mixture_stats": "s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/model_input/sft_consol_260416_clean_filter_less_aug_highres_soccer_h0_mn_sme_a1865_entity_whisper_added_manifest/mixture_stats.json",
       "total_tokens": 53353553900,
       "components": {
@@ -50,7 +55,8 @@
       }
     },
     {
-      "family": "H0 Entity v1.2",
+      "family": "h0_entity_v1.2",
+      "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/5emc913j",
       "mixture_stats": "s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/model_input/h0_entity_v1_2/mixture_stats.json",
       "total_tokens": 49476136780,
       "components": {
@@ -60,6 +66,7 @@
     },
     {
       "family": "Pegasus 1.5 RL",
+      "wandb_url": "https://wandb.ai/twelvelabs/pegasus-rl/runs/2mv70yb4",
       "mixture_stats": "s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/model_input/260515_rl_ablation_clean_filter_less_aug_highres/mixture_stats.json",
       "total_tokens": 21968116214,
       "components": {
@@ -68,6 +75,7 @@
     },
     {
       "family": "Pegasus 1.5 SFT",
+      "wandb_url": "https://wandb.ai/twelvelabs/pegasus-sme/runs/51dff6go",
       "mixture_stats": "s3://tl-data-training-pegasus-us-west-2/annotation/preprocessed_datasets/model_input/260416_ablation_clean_filter_less_aug_highres_soccer_added_0513/mixture_stats.json",
       "total_tokens": 39814276913,
       "components": {

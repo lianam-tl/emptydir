@@ -11,7 +11,10 @@ family's S3 `mixture_stats.json`. For a new family, the dashboard derives the
 training root from its checkpoint path, reads `experiment_metadata.yaml`, resolves
 the model-input directory, and caches its `mixture_stats.json` summary in
 `ENTITY_V02_TRAINING_MIXTURE_CACHE_PATH`. The dashboard expands family-defining
-components and collapses the remaining similar rows into `Other/base`.
+components and collapses the remaining similar rows into `Other/base`. The same
+metadata supplies the W&B run link shown in the mixture and leaderboard tables.
+The compact history chart takes each UTC evaluation date's best non-Gemini Half
+IoU and plots its running maximum.
 
 Select a model/sample cell in **Half sample scores** to render evaluator-matched
 GT and prediction spans over the complete clip duration. Native rows are loaded

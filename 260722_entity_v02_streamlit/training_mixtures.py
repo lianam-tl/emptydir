@@ -92,6 +92,12 @@ def mixture_stats_uri(metadata_text: str) -> str:
     return f"{model_input.rstrip('/')}/mixture_stats.json"
 
 
+def wandb_url(metadata_text: str) -> str:
+    metadata = yaml.safe_load(metadata_text) or {}
+    url = str((metadata.get("wandb") or {}).get("url") or "")
+    return url if url.startswith("https://wandb.ai/") else ""
+
+
 def read_s3_text(s3_client: Any, uri: str) -> str:
     bucket, key = split_s3_uri(uri)
     response = s3_client.get_object(Bucket=bucket, Key=key)
@@ -147,12 +153,14 @@ def discover_training_mixture(
     family: str, model_path: str, s3_client: Any
 ) -> dict[str, Any]:
     metadata_uri = experiment_metadata_uri(model_path)
-    statistics_uri = mixture_stats_uri(read_s3_text(s3_client, metadata_uri))
+    metadata_text = read_s3_text(s3_client, metadata_uri)
+    statistics_uri = mixture_stats_uri(metadata_text)
     payload = json.loads(read_s3_text(s3_client, statistics_uri))
     return {
         "family": family,
         "model_path": model_path,
         "experiment_metadata": metadata_uri,
+        "wandb_url": wandb_url(metadata_text),
         "mixture_stats": statistics_uri,
         "total_tokens": int(payload["total_tokens"]),
         "components": summarize_mixture(family, payload),

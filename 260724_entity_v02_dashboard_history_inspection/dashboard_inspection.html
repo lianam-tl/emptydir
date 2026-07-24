@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Entity v0.2 dashboard inspection</title>
+<style>
+  body { font: 14px system-ui; margin: 32px; color: #252525; }
+  .metrics { display: flex; gap: 12px; margin: 18px 0; }
+  .metric { border: 1px solid #ddd; border-radius: 8px; padding: 12px; min-width: 130px; }
+  .metric strong { display: block; font-size: 22px; margin-top: 5px; }
+  table { border-collapse: collapse; margin: 10px 0 24px; }
+  th, td { border: 1px solid #ddd; padding: 7px 10px; text-align: left; }
+  th { background: #f4f4f4; }
+  .new { background: #fff0df; font-weight: 650; }
+  svg { border: 1px solid #ddd; border-radius: 8px; }
+</style>
+<h1>Entity Coverage v0.2 — inspection snapshot</h1>
+<div class="metrics">
+  <div class="metric">Displayed checkpoints<strong>44</strong></div>
+  <div class="metric">Top Gemini Pro<strong>0.469400</strong></div>
+  <div class="metric">Top Pegasus<strong>0.377182</strong></div>
+</div>
+<p><b>Top Pegasus Half IoU by evaluation date</b></p>
+<svg width="620" height="120" viewBox="0 0 620 120" role="img" aria-label="Flat running-best line at 0.377182 from July 20 to July 23">
+  <line x1="55" y1="55" x2="575" y2="55" stroke="#137333" stroke-width="3"/>
+  <g fill="#137333"><circle cx="55" cy="55" r="5"/><circle cx="228" cy="55" r="5"/><circle cx="401" cy="55" r="5"/><circle cx="575" cy="55" r="5"/></g>
+  <g fill="#555" text-anchor="middle"><text x="55" y="92">Jul 20</text><text x="228" y="92">Jul 21</text><text x="401" y="92">Jul 22</text><text x="575" y="92">Jul 23</text></g>
+  <text x="55" y="35" fill="#137333">pegasus-15-kian-soce · 0.377182</text>
+</svg>
+<h2>Training token mixture by model family</h2>
+<table><thead><tr><th>Family</th><th>W&amp;B</th><th>Expected result</th></tr></thead><tbody>
+  <tr class="new"><td>h0_entity_v1.2</td><td><a href="https://wandb.ai/twelvelabs/pegasus-sme/runs/5emc913j">run</a></td><td>replaces H0 Entity v1.2</td></tr>
+  <tr><td>A-1790 entity SME 4x</td><td><a href="https://wandb.ai/twelvelabs/pegasus-sme/runs/kp1ju1r1">run</a></td><td>linked</td></tr>
+</tbody></table>
+<h2>Entity coverage v0.2 results</h2>
+<table><thead><tr><th>Name</th><th>W&amp;B</th><th>Half IoU</th></tr></thead><tbody>
+  <tr class="new"><td>h0_entity_v1.2</td><td><a href="https://wandb.ai/twelvelabs/pegasus-sme/runs/5emc913j">run</a></td><td>0.332681</td></tr>
+  <tr><td>h0_entity_v1.2-s200</td><td><a href="https://wandb.ai/twelvelabs/pegasus-sme/runs/5emc913j">run</a></td><td>0.309410</td></tr>
+  <tr><td>h0_entity_v1.2-s300</td><td><a href="https://wandb.ai/twelvelabs/pegasus-sme/runs/5emc913j">run</a></td><td>0.351673</td></tr>
+</tbody></table>
+<p>Verified against the live Owen-2 database. The two obsolete H0 Entity v1.2 rows are absent.</p>
+</html>
